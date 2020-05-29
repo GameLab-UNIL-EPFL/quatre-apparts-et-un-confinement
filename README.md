@@ -1,14 +1,12 @@
-# Phaser3 mobile template
+# Covidou
 
-A template with two scenes using assets from a previous game.
+Free Open-Source Web-based mobile game.
 
 ### Development
 
 * `npm install`
 
-* `npm run dev`
-
-(`npm run start`: for CI)
+* `npm start`
 
 ### Build
 
