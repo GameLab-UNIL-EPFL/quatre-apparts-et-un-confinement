@@ -8,11 +8,11 @@ export class Player {
     this.plugged = false;
   }
   
-  didPlug(){
+  didPlug() {
     this.plugged = true;
   }
   
-  reset(x, y){
+  reset(x, y) {
     this.plugged = false;
     this.x = x;
     this.y = y;
