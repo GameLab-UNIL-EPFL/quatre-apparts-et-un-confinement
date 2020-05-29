@@ -5,7 +5,8 @@
   "main": "src/index.js",
   "scripts": {
     "build": "webpack --config webpack/prod.js ",
-    "test": "jest",
+    "test": "jest --coverage",
+    "lint": "standard",
     "dev": "webpack-dev-server --config webpack/base.js --open",
     "start": "node ./server_for_heroku.js"
   },
