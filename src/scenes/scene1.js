@@ -19,20 +19,23 @@ export class Scene1 extends Phaser.Scene {
   constructor(){
     super({ key: 'Scene1' });
   }
-  
+
   preload() {
     this.load.scenePlugin({
       key: 'rexuiplugin',
       url: 'https://raw.githubusercontent.com/rexrainbow/phaser3-rex-notes/master/dist/rexuiplugin.min.js',
       sceneKey: 'rexUI'
-    });  
-        
+    });
+
     // sound
     this.load.audio('music', [ 'sound/game_jam_v2.mp3' ]);
-    this.load.audio('switch', [ 'sound/interrupteur.wav' ]);    
-    
+    this.load.audio('switch', [ 'sound/interrupteur.wav' ]);
+
     // ugly bg
     this.load.image('background', 'sprites/background.png');
+
+    // characters
+    this.load.image('character1', 'sprites/characters/test_personnage_1.png');
 
     this.tweenTimeout = null;
     this.eventTimeout = null;
@@ -45,10 +48,26 @@ export class Scene1 extends Phaser.Scene {
     background.alpha = 0.5;
     background.depth = -15;
 
+    const character = this.add.sprite(this.cameras.main.centerX, this.cameras.main.centerY, 'character1').setInteractive();
+    let theScene = this;
+
+    character.on('pointerdown', function(){
+      console.log('touch')
+      theScene.tweens.add({
+        targets: character,
+        x: character.x + 100 * (Math.random()-1),
+        y: character.y + 100 * (Math.random()-1),
+        duration: 800,
+        ease: "Power2",
+        yoyo: false,
+        loop: 0
+      });
+    });
+
     // Music
     this.music = this.sound.add('music', {loop: true});
     if(!debug) this.music.play();
-    
+
     // Quick UI using rexUI plugin
     // Example from: https://codepen.io/rexrainbow/pen/ePoRVz
     let createLabel = function (scene, text, backgroundColor) {
@@ -67,11 +86,11 @@ export class Scene1 extends Phaser.Scene {
             }
         });
     }
-    
+
     this.add.text(20, 20, "Scene 1", {
         fontSize: '24px'
     });
-    
+
     let dialog = this.rexUI.add.dialog({
       x: this.cameras.main.centerX,
       y: this.cameras.main.centerY,
@@ -119,7 +138,7 @@ export class Scene1 extends Phaser.Scene {
     .layout()
     //.drawBounds(this.add.graphics(), 0xff0000)
     .popUp(1000);
-    
+
     dialog
     .on('button.click', function (button, groupName, index) {
       this.scene.start('Scene2');
@@ -130,15 +149,15 @@ export class Scene1 extends Phaser.Scene {
     .on('button.out', function (button, groupName, index) {
         button.getElement('background').setStrokeStyle();
     });
-    
-    
+
+
     // Listen to events
     let scene = this;
     this.input.keyboard.on('keydown', function(e){
       scene.keyDown(e);
     });
   }
-  
+
   keyDown(e, scene){
     if(!listensToKeyboard){
       return;
