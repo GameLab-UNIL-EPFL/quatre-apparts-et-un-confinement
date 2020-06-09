@@ -14,7 +14,7 @@
             "pyjama": {
                 "text": "Je suis encore en pyjama lol",
                 "goto": "repPyjama"
-            },
+            }
         },
         "goto": ["repBof", "repTrql", "repPyjama"]
     },
