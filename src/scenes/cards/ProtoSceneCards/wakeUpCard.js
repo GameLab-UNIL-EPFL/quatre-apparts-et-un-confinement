@@ -54,8 +54,7 @@ export class WakeUpCard {
 
         //Check if it's time to move to the next scene
         if(this.parent_scene.dialogue.getState() == DialogueState.DONE) {
-            //TODO: go to the next scene
-            this.destroy();
+            this.parent_scene.nextCard();
         }
     }
 

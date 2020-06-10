@@ -68,7 +68,7 @@ export class DialogueController {
 
         //Create background
         let bg = new Phaser.Geom.Rectangle(0, 1900, 2200, 2000);
-        this.background = this.parent_scene.add.graphics({ fillStyle: { color: 0xffffff } });
+        this.background = this.parent_scene.add.graphics({ fillStyle: { color: 0xffffff, alpha: 50 } });
         this.background.fillRectShape(bg);
 
         //Add name text
@@ -96,7 +96,7 @@ export class DialogueController {
             'gameobjectdown',
             (pointer, gameObject) => {
                 //Check that we clicked on the text
-                if(gameObject === this.content) {
+                if(pointer.x >= this.background.x && pointer.y >= this.background.y) {
 
                     this.textIdx++;
 

@@ -7,6 +7,7 @@ const CARDS = {
     CHOSE_TODO: 1,
     CLOTHES: 2
 };
+const NUM_CARDS = 3
 
 export class ProtoScene extends Phaser.Scene {
     /**
@@ -44,6 +45,35 @@ export class ProtoScene extends Phaser.Scene {
      */
     update() {
         this.current_card.update();
+    }
+
+    /**
+     * @brief moves to the next card
+     */
+    nextCard() {
+
+        if(this.cardIdx < NUM_CARDS - 1) {
+            this.cardIdx += 1;
+            this.current_card.destroy();
+
+            switch(this.cardIdx) {
+                case CARDS.CHOSE_TODO:
+                    //TODO create next card
+                    break;
+                case CARDS.CLOTHES:
+                    //TODO create next card
+                    break;
+                default:
+                    break;
+            }
+        }
+    }
+
+    /**
+     * @brief destroys the scene
+     */
+    destroy() {
+        this.current_card.destroy();
     }
 
 

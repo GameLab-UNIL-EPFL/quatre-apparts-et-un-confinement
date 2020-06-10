@@ -64,7 +64,7 @@ export class ProtoGuy {
     }
 
     update() {
-        //TODO
+        //TODO animate stuff
     }
 
     destroy() {
