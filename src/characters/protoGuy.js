@@ -8,7 +8,6 @@ const ProtoGuyState = {
 
 const ProtoGuyCard = {
     WAKE_UP: 'wake_up_card'
-
 };
 
 /**
@@ -60,9 +59,15 @@ export class ProtoGuy {
         this.base_sprite = this.parent_scene.add.image(this.x, this.y, this.base_name);
         this.arm_sprite = this.parent_scene.add.image(this.x + 213, this.y - 740,this.arm_name);
         this.head_sprite = this.parent_scene.add.image(this.x - 85, this.y - 890, this.head_name);
+
+        this.sprites = [this.base_sprite, this.arm_sprite, this.head_sprite];
     }
 
     update() {
         //TODO
+    }
+
+    destroy() {
+        this.sprites.forEach(sprite => sprite.destroy());
     }
 }

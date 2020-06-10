@@ -1,5 +1,12 @@
 import Phaser from "phaser";
 import {WakeUpCard} from "./cards/ProtoSceneCards/wakeUpCard.js";
+import { DialogueController } from "../core/dialogueController.js";
+
+const CARDS = {
+    WAKE_UP: 0,
+    CHOSE_TODO: 1,
+    CLOTHES: 2
+};
 
 export class ProtoScene extends Phaser.Scene {
     /**
@@ -11,8 +18,8 @@ export class ProtoScene extends Phaser.Scene {
         super({key: 'Prototype'});
 
         this.wakeUpCard = new WakeUpCard(this);
-        this.cardIdx = 0;
-
+        this.cardIdx = CARDS.WAKE_UP;
+        this.dialogue = new DialogueController(this);
         this.current_card = this.wakeUpCard;
     }
 

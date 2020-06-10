@@ -32,4 +32,8 @@ export class Background {
     }
 
     update() {}
+
+    destroy() {
+        this.sprite.destroy();
+    }
 }

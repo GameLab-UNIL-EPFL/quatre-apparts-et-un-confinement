@@ -1,7 +1,10 @@
 {
 	"reveil": {
 		"name": "Damien",
-		"text": "Aaah purée j’ai oublié de désactiver mon réveil hier soir, pourtant j’ai plus besoin de me dépêcher pour aller prendre le bus ou me préparer.",
+		"text": [
+			"Aaah purée j’ai oublié de désactiver mon\nréveil hier soir!",
+			"Pourtant j’ai plus besoin de me dépêcher\npour aller prendre le bus ou me préparer."
+		],
 		"choices": {},
 		"goto": ["habit", "frigo", "dodo"]
 	},

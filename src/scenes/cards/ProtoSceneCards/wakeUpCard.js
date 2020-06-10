@@ -2,6 +2,7 @@ import Phaser from "phaser";
 import { Background } from "../../objects/background";
 import { Phone } from "../../objects/ProtoSceneObjects/phone";
 import { ProtoGuy } from "../../../characters/protoGuy";
+import { DialogueController, DialogueState } from "../../../core/dialogueController";
 
 /**
  * @brief Models a "Card" inside of a scene.
@@ -9,7 +10,6 @@ import { ProtoGuy } from "../../../characters/protoGuy";
  * a given interactive moment in a scene
  */
 export class WakeUpCard {
-
     /**
      * @brief Constructs a group of objects in the scene
      * @param parent_scene, the Scene which this card belongs to
@@ -48,10 +48,21 @@ export class WakeUpCard {
 
     /**
      * @brief Updates the sate of the card
-     * @return the ID of the next card, -1 if it's not time to change cards yet
      */
     update() {
         this.children.forEach(child => child.update());
-        return -1;
+
+        //Check if it's time to move to the next scene
+        if(this.parent_scene.dialogue.getState() == DialogueState.DONE) {
+            //TODO: go to the next scene
+            this.destroy();
+        }
+    }
+
+    /**
+     * @breif Unloads all the different elements of the card from memory
+     */
+    destroy() {
+        this.children.forEach(child => child.destroy());
     }
 }

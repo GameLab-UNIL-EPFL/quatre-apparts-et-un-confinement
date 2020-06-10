@@ -12,6 +12,8 @@ const phoneState = {
 
 const PHONE_MOVEMENT = 10;
 
+const WAKE_UP_ID = "reveil";
+
 /**
  * @brief Models the ProtoGuy's phone as a custom sprite
  */
@@ -54,7 +56,13 @@ export class Phone {
         this.parent_scene.input.on(
             'gameobjectdown',
             (pointer, gameObject) => {
-                this.cur_state = phoneState.DONE;
+                //Check that we clicked on the phone
+                if(gameObject === this.sprite) {
+                    this.cur_state = phoneState.DONE;
+
+                    //Trigger the dialogue
+                    this.parent_scene.dialogue.display(WAKE_UP_ID);
+                }
             },
             this.parent_scene
         );
@@ -89,5 +97,9 @@ export class Phone {
             default:
                 break;
         }
+    }
+
+    destroy() {
+        this.sprite.destroy();
     }
 }
