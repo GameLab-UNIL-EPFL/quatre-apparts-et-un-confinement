@@ -1,3 +1,8 @@
+import Phaser from "phaser";
+import { Background } from "../../objects/background";
+import { Phone } from "../../objects/ProtoSceneObjects/phone";
+import { ProtoGuy } from "../../../characters/protoGuy";
+
 /**
  * @brief Models a "Card" inside of a scene.
  * A card can be seen as a set of images that represent 
@@ -12,11 +17,14 @@ export class WakeUpCard {
      * represented as an array of pairs (name, imageurl)
      */
     constructor(parent_scene) {
+        //Initialize children array
         let children = [
-            ("girl", "/sprites/characters/test_personnage_1.png"),
-            ("bgBed", "/sprites/characters/BGProtoBed.jpg")
+            new Background(parent_scene, "/sprites/ProtoScene/WakeUpCard/bg.jpg", "WakeUpBG"),
+            new Phone(parent_scene, 630, 1400),
+            new ProtoGuy(parent_scene, 1528, 1750)
         ];
 
+        //Initialize attributes
         this.id = 0;
         this.children = children;
         this.parent_scene = parent_scene;
@@ -27,7 +35,7 @@ export class WakeUpCard {
      * Assumes that all objects are images
      */
     preload() {
-        this.parent_scene.load.image("bgBed", "/sprites/BGProtoBed.jpg");
+        this.children.forEach(child => child.preload());
     }
 
     /**
@@ -35,11 +43,7 @@ export class WakeUpCard {
      * Assumes that all objects are images
      */
     create() {
-        this.bg = this.parent_scene.add.image(0, 0, "bgBed");
-        this.bg.setOrigin(0, 0);
-     
-     
-        this.bg.setScale(1);
+        this.children.forEach(child => child.create());
     }
 
     /**
@@ -47,6 +51,7 @@ export class WakeUpCard {
      * @return the ID of the next card, -1 if it's not time to change cards yet
      */
     update() {
+        this.children.forEach(child => child.update());
         return -1;
     }
 }

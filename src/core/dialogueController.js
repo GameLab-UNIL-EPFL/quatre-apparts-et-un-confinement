@@ -7,7 +7,7 @@ export class DialogueController {
      * directly from JSON.
      */
     constructor() {
-        this.dialogueJSON = require("../dialogue/example.json");
+        this.dialogueJSON = require("../dialogue/dialogData.json");
         this.current_conv_id = "";
     }
 
