@@ -1,9 +1,9 @@
 import Phaser from "phaser";
 import { Background } from "../../objects/background";
 import { Bureau } from "../../objects/ProtoSceneObjects/bureau";
-import { ProtoGuy } from "../../../characters/protoGuy";
+import { ProtoGuy, ProtoGuyCard } from "../../../characters/protoGuy";
 import { DialogueController, DialogueState } from "../../../core/dialogueController";
-import { Food } from "../../objects/ProtoSceneObjects/food";
+import { Food, FoodType } from "../../objects/ProtoSceneObjects/food";
 
 /**
  * @brief Models a "Card" inside of a scene.
@@ -21,9 +21,9 @@ export class ComputerCard {
         //Initialize children array
         let children = [
             new Background(parent_scene, "/sprites/ProtoScene/ComputerCard/base.jpg", "ComputerBG"),
+            new ProtoGuy(parent_scene, 1345, 1530, ProtoGuyCard.COMPUTER),
             new Bureau(parent_scene, 1025, 1610),
-            new ProtoGuy(parent_scene, 1528, 1750),
-            new Food(parent_scene, 1700, 2550)
+            new Food(parent_scene, 1700, 2550, FoodType.NONE)
         ];
 
         //Initialize attributes

@@ -96,7 +96,7 @@ export class DialogueController {
             'gameobjectdown',
             (pointer, gameObject) => {
                 //Check that we clicked on the text
-                if(gameObject === this.content) {
+                if(gameObject === this.content && this.cur_state != DialogueState.DONE) {
 
                     this.textIdx++;
 

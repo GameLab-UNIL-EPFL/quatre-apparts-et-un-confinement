@@ -20,10 +20,31 @@ export class Food {
      */
     constructor(parent_scene, x, y, foodType) {
         this.parent_scene = parent_scene;
+        this.foodType = foodType;
 
-        this.name = "toast";
-        this.url = "/sprites/ProtoScene/ComputerCard/toast.png";
+        switch(foodType) {
+            case FoodType.TOAST:
+                this.name = "toast";
+                this.url = "/sprites/ProtoScene/ComputerCard/toast.png";
+                break;
 
+            case FoodType.YOGHURT:
+                this.name = "yogourt";
+                this.url = "/sprites/ProtoScene/ComputerCard/yogourt.png";
+                break;
+
+            case FoodType.WATER:
+                this.name = "verre";
+                this.url = "/sprites/ProtoScene/ComputerCard/verre.png";
+                break;
+
+            case FoodType.NONE:
+                break;
+
+            default:
+                break;
+        }
+        
         this.x = x;
         this.y = y;
     }
@@ -32,7 +53,10 @@ export class Food {
      * @brief Loads up the correct sprite depending on the player's previous choice
      */
     preload() {
-        this.parent_scene.load.image(this.name, this.url);
+        //Only load an image if there is one
+        if(this.foodType != FoodType.NONE) {
+            this.parent_scene.load.image(this.name, this.url);
+        }
     }
 
     /**
@@ -40,7 +64,19 @@ export class Food {
      * from the kitchen in the previous card
      */
     create() {
-        this.sprite = this.parent_scene.add.image(this.x, this.y, this.name);
+        //Only create a sprite if an image has been loaded
+        if(this.foodType != FoodType.NONE) {
+            this.sprite = this.parent_scene.add.image(this.x, this.y, this.name);
+        }
+    }
+
+    /**
+     * @brief Makes the current item invisible
+     */
+    invisible() {
+        if(this.foodType != FoodType.NONE) {
+            this.sprite.visible = false;
+        }
     }
 
     /**

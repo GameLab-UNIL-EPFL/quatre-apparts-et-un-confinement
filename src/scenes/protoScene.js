@@ -4,6 +4,7 @@ import { DialogueController } from "../core/dialogueController.js";
 import {ChosePathCard} from "./cards/ProtoSceneCards/chosePathCard.js";
 import { IntroCard } from "./cards/ProtoSceneCards/introCard.js";
 import { ClothesCard } from "./cards/ProtoSceneCards/clothesCard.js";
+import { ComputerCard } from "./cards/ProtoSceneCards/computerCard.js";
 
 const CARDS = {
     INTRO: 0,
@@ -17,7 +18,7 @@ const CARDS = {
 };
 const NUM_CARDS = 8
 
-const ProtoGuyClothes = {
+export const ProtoGuyClothes = {
     PYJAMAS: 0,
     CLEAN_CLOTHES: 1,
     YESTERDAY_CLOTHES: 2
@@ -37,12 +38,14 @@ export class ProtoScene extends Phaser.Scene {
         this.wakeUpCard = new WakeUpCard(this);
         this.chosePathCard = new ChosePathCard(this);
         this.clothesCard = new ClothesCard(this);
+        this.computerCard = new ComputerCard(this);
 
         this.cards = [
             this.introCard,
             this.wakeUpCard,
             this.chosePathCard,
-            this.clothesCard
+            this.clothesCard,
+            this.computerCard
         ];
 
         //Keep track of wich card is displayed
@@ -57,7 +60,7 @@ export class ProtoScene extends Phaser.Scene {
     }
 
     /**
-     * @brief preload all of the elements of the first card 
+     * @brief preload all of the elements of all of the cards 
      * that will be shown in the scene
      */
     preload() {
@@ -143,14 +146,26 @@ export class ProtoScene extends Phaser.Scene {
                     switch(choice) {
                         //The clean clothes were selected
                         case 0:
+                            this.clothes = ProtoGuyClothes.CLEAN_CLOTHES;
+                            this.cardIdx = CARDS.COMPUTER;
+                            this.current_card = this.computerCard;
+                            this.current_card.create();
                             break;
                         
                         //The chair was selected
                         case 1:
+                            this.clothes = ProtoGuyClothes.YESTERDAY_CLOTHES;
+                            this.cardIdx = CARDS.COMPUTER;
+                            this.current_card = this.computerCard;
+                            this.current_card.create();
                             break;
                         
                         //Proto guy was selected (pyjamas)
                         case 2:
+                            this.clothes = ProtoGuyClothes.PYJAMAS;
+                            this.cardIdx = CARDS.COMPUTER;
+                            this.current_card = this.computerCard;
+                            this.current_card.create();
                             break;
                         
                         default:

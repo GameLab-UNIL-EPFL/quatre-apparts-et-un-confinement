@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import {ProtoGuyClothes} from "../scenes/protoScene.js"
 
 const ProtoGuyState = {
     IDLE: 'idle',
@@ -68,18 +69,30 @@ export class ProtoGuy {
                 this.name = "clothesProtoGuy";
                 this.url = "/sprites/ProtoScene/ClothesCard/protoGuy.png";
                 break;
+
             case ProtoGuyCard.KITCHEN:
                 //TODO Set url and names for each sprite 
                 break;
+
             case ProtoGuyCard.COMPUTER:
-                //TODO Set url and names for each sprite 
+                this.dirty_name = "computeProtoGuyDirty";
+                this.dirty_url = "/sprites/ProtoScene/ComputerCard/habits-sales.png";
+
+                this.clean_name = "computeProtoGuyClean";
+                this.clean_url = "/sprites/ProtoScene/ComputerCard/habits-propres.png";
+
+                this.pj_name = "computeProtoGuyPJ";
+                this.pj_url = "/sprites/ProtoScene/ComputerCard/habits-pyjama.png";
                 break;
+
             case ProtoGuyCard.MINI_GAME:
                 //TODO Set url and names for each sprite 
                 break;
+
             case ProtoGuyCard.BED:
                 //TODO Set url and names for each sprite 
                 break;
+
             default:
                 break;
         }
@@ -107,15 +120,21 @@ export class ProtoGuy {
             case ProtoGuyCard.KITCHEN:
                 //TODO Set url and names for each sprite 
                 break;
+
             case ProtoGuyCard.COMPUTER:
-                //TODO Set url and names for each sprite 
+                this.parent_scene.load.image(this.dirty_name, this.dirty_url);
+                this.parent_scene.load.image(this.clean_name, this.clean_url);
+                this.parent_scene.load.image(this.pj_name, this.pj_url);
                 break;
+
             case ProtoGuyCard.MINI_GAME:
                 //TODO Set url and names for each sprite 
                 break;
+
             case ProtoGuyCard.BED:
                 //TODO Set url and names for each sprite 
                 break;
+
             default:
                 break;
         }
@@ -180,15 +199,34 @@ export class ProtoGuy {
             case ProtoGuyCard.KITCHEN:
                 //TODO Set url and names for each sprite 
                 break;
+
             case ProtoGuyCard.COMPUTER:
-                //TODO Set url and names for each sprite 
+                //Show the version of the character wearing the selected clothes
+                switch(this.parent_scene.clothes) {
+                    case ProtoGuyClothes.PYJAMAS:
+                        this.sprite = this.parent_scene.add.image(this.x, this.y, this.pj_name);
+                        break;
+
+                    case ProtoGuyClothes.CLEAN_CLOTHES:
+                        this.sprite = this.parent_scene.add.image(this.x, this.y, this.clean_name);
+                        break;
+
+                    case ProtoGuyClothes.YESTERDAY_CLOTHES:
+                        this.sprite = this.parent_scene.add.image(this.x, this.y, this.dirty_name);
+                        break;
+                }
+
+                this.sprites = [this.sprite];
                 break;
+
             case ProtoGuyCard.MINI_GAME:
                 //TODO Set url and names for each sprite 
                 break;
+
             case ProtoGuyCard.BED:
                 //TODO Set url and names for each sprite 
                 break;
+
             default:
                 break;
         }

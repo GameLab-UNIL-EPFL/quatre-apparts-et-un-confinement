@@ -26,6 +26,7 @@ export class Chair {
 
     create() {
         this.sprite = this.parent_scene.add.image(this.x, this.y, this.name);
+        console.log("created clothes");
 
         //Make the clothes interactive
         this.sprite.setInteractive();
@@ -34,7 +35,8 @@ export class Chair {
             (pointer, gameObject) => {
                 //Check that we clicked the clothes
                 if(gameObject === this.sprite) {
-                    
+                    console.log("clicked chair");
+
                     //TODO change the character's clothes
                     this.parent_scene.cardIsDone();
                     this.parent_scene.nextCard(1);
