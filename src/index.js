@@ -13,7 +13,6 @@ const config = {
         mode: Phaser.Scale.FIT,
         autoCenter: Phaser.Scale.CENTER_HORIZONTALLY,
         height: 2732,
-        //Limit the ratio to 1:1
         width: 2048
     },
     plugins: {

@@ -1,7 +1,7 @@
 import Phaser from "phaser";
 import { Background } from "../../objects/background";
 import { Phone } from "../../objects/ProtoSceneObjects/phone";
-import { ProtoGuy } from "../../../characters/protoGuy";
+import { ProtoGuy, ProtoGuyCard } from "../../../characters/protoGuy";
 import { DialogueController, DialogueState } from "../../../core/dialogueController";
 import { TiredBubbles } from "../../objects/ProtoSceneObjects/tiredBubbles";
 
@@ -22,7 +22,7 @@ export class WakeUpCard {
         let children = [
             new Background(parent_scene, "/sprites/ProtoScene/WakeUpCard/bg.jpg", "WakeUpBG"),
             new Phone(parent_scene, 630, 1400),
-            new ProtoGuy(parent_scene, 1528, 1750),
+            new ProtoGuy(parent_scene, 1528, 1750, ProtoGuyCard.WAKE_UP),
             new TiredBubbles(parent_scene, 1455, 550)
         ];
 
