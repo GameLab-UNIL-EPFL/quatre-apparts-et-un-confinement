@@ -40,6 +40,7 @@ export class ProtoGuy {
         //Initialize the different FSMs
         this.cur_card = ProtoGuyCard.WAKE_UP;
         this.cur_state = ProtoGuyState.IDLE;
+        this.rotate = 0;
     }
 
     /**
@@ -57,14 +58,47 @@ export class ProtoGuy {
     create() {
         //Create the different sprites that make up the character
         this.base_sprite = this.parent_scene.add.image(this.x, this.y, this.base_name);
-        this.arm_sprite = this.parent_scene.add.image(this.x + 213, this.y - 740,this.arm_name);
+        this.arm_sprite = this.parent_scene.add.image(this.x + 505, this.y - 554,this.arm_name);
         this.head_sprite = this.parent_scene.add.image(this.x - 85, this.y - 890, this.head_name);
 
         this.sprites = [this.base_sprite, this.arm_sprite, this.head_sprite];
+
+        this.arm_sprite.setOrigin(0, 0); 
+        this.arm_sprite.angle += 190;
+        this.arm_sprite.x -= 10; 
+        this.arm_sprite.y += 10;
+        this.cur_state = ProtoGuyState.SCRATCH_DOWN;
     }
 
     update() {
-        //TODO animate stuff
+        switch(this.cur_state) {
+            case ProtoGuyState.SCRATCH_DOWN:
+                this.arm_sprite.angle -= 0.3;
+                this.arm_sprite.x += 0.3;
+                this.arm_sprite.y -= 0.3;
+                this.rotate++;
+
+                if(this.rotate >= 30) {
+                    this.cur_state = ProtoGuyState.SCRATCH_UP;
+                }
+                break;
+
+            case ProtoGuyState.SCRATCH_UP:
+                this.arm_sprite.angle += 0.3;
+                this.arm_sprite.x -= 0.3;
+                this.arm_sprite.y += 0.3;
+                this.rotate--;
+
+                if(this.rotate <= 0) {
+                    this.cur_state = ProtoGuyState.SCRATCH_DOWN;
+                }
+                break;
+
+            case ProtoGuyState.IDLE:
+                break;
+            default:
+                break;
+        }
     }
 
     destroy() {

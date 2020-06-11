@@ -1,6 +1,7 @@
 import Phaser from "phaser";
 import {WakeUpCard} from "./cards/ProtoSceneCards/wakeUpCard.js";
 import { DialogueController } from "../core/dialogueController.js";
+import {ChosePathCard} from "./cards/ProtoSceneCards/chosePathCard.js";
 
 const CARDS = {
     WAKE_UP: 0,
@@ -18,7 +19,10 @@ export class ProtoScene extends Phaser.Scene {
     constructor() {
         super({key: 'Prototype'});
 
+        //Create all of the cards
         this.wakeUpCard = new WakeUpCard(this);
+        this.chosePathCard = new ChosePathCard(this);
+
         this.cardIdx = CARDS.WAKE_UP;
         this.dialogue = new DialogueController(this);
         this.current_card = this.wakeUpCard;
@@ -53,10 +57,14 @@ export class ProtoScene extends Phaser.Scene {
     nextCard() {
 
         if(this.cardIdx < NUM_CARDS - 1) {
-            this.cardIdx += 1;
             this.current_card.destroy();
 
             switch(this.cardIdx) {
+                case CARDS.WAKE_UP:
+                    this.cardIdx = CARDS.CHOSE_TODO;
+                    this.current_card = this.chosePathCard;
+                    this.chosePathCard.preload();
+                    break;
                 case CARDS.CHOSE_TODO:
                     //TODO create next card
                     break;

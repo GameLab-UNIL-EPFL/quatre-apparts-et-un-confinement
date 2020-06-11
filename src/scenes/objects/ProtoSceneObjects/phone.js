@@ -11,6 +11,7 @@ const phoneState = {
 };
 
 const PHONE_MOVEMENT = 10;
+const RING_MOVEMENT = 20;
 
 const WAKE_UP_ID = "reveil";
 
@@ -29,6 +30,13 @@ export class Phone {
         this.parent_scene = parent_scene;
         this.name = "phone";
         this.url = "/sprites/ProtoScene/WakeUpCard/phone.png";
+
+        this.ring_urls = [
+            "/sprites/ProtoScene/WakeUpCard/ring1.png",
+            "sprites/ProtoScene/WakeUpCard/ring2.png",
+            "sprites/ProtoScene/WakeUpCard/ring3.png"
+        ];
+
         this.x = x;
         this.y = y;
         this.cur_state = phoneState.IDLE;
@@ -39,6 +47,10 @@ export class Phone {
      */
     preload() {
         this.parent_scene.load.image(this.name, this.url);
+        let i = 1;
+        this.ring_urls.forEach(url => {
+            this.parent_scene.load.image("ring" + i++, url);
+        });
     }
 
     /**
@@ -48,6 +60,13 @@ export class Phone {
         this.sprite = this.parent_scene.add.image(this.x, this.y, this.name);
         this.sprite.setOrigin(0, 0);
         this.sprite.setScale(1);
+
+        //Create ring sprites
+        let ring1_sprite = this.parent_scene.add.image(this.x + 130, this.y - 70, "ring1");
+        let ring2_sprite = this.parent_scene.add.image(this.x + 150, this.y - 70, "ring2");
+        let ring3_sprite = this.parent_scene.add.image(this.x + 170, this.y - 10, "ring3");
+
+        this.ring_sprites = [ring1_sprite, ring2_sprite, ring3_sprite];
 
         //Make the phone interactive
         this.sprite.setInteractive();
@@ -59,6 +78,8 @@ export class Phone {
                 //Check that we clicked on the phone
                 if(gameObject === this.sprite) {
                     this.cur_state = phoneState.DONE;
+
+                    this.ring_sprites.forEach(sp => sp.destroy());
 
                     //Trigger the dialogue
                     this.parent_scene.dialogue.display(WAKE_UP_ID);
@@ -82,12 +103,14 @@ export class Phone {
             case phoneState.MOVE_LEFT:
                 //Move the phone to the left
                 this.sprite.x -= PHONE_MOVEMENT;
+                this.ring_sprites.forEach(sp => sp.x += RING_MOVEMENT);
                 this.cur_state = phoneState.MOVE_RIGHT;
                 break;
 
             case phoneState.MOVE_RIGHT:
                 //Move the phone to the right
                 this.sprite.x += PHONE_MOVEMENT;
+                this.ring_sprites.forEach(sp => sp.x -= RING_MOVEMENT);
                 this.cur_state = phoneState.MOVE_LEFT;
                 break;
 

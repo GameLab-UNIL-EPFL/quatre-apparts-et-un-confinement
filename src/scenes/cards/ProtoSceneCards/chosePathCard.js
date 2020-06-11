@@ -3,14 +3,13 @@ import { Background } from "../../objects/background";
 import { Phone } from "../../objects/ProtoSceneObjects/phone";
 import { ProtoGuy } from "../../../characters/protoGuy";
 import { DialogueController, DialogueState } from "../../../core/dialogueController";
-import { TiredBubbles } from "../../objects/ProtoSceneObjects/tiredBubbles";
 
 /**
  * @brief Models a "Card" inside of a scene.
  * A card can be seen as a set of images that represent 
  * a given interactive moment in a scene
  */
-export class WakeUpCard {
+export class ChosePathCard {
     /**
      * @brief Constructs a group of objects in the scene
      * @param parent_scene, the Scene which this card belongs to
@@ -20,10 +19,7 @@ export class WakeUpCard {
     constructor(parent_scene) {
         //Initialize children array
         let children = [
-            new Background(parent_scene, "/sprites/ProtoScene/WakeUpCard/bg.jpg", "WakeUpBG"),
-            new Phone(parent_scene, 630, 1400),
-            new ProtoGuy(parent_scene, 1528, 1750),
-            new TiredBubbles(parent_scene, 1455, 550)
+            new Background(parent_scene, "/sprites/ProtoScene/WakeUpCard/bg.png", "choseBG")
         ];
 
         //Initialize attributes
@@ -37,10 +33,14 @@ export class WakeUpCard {
      * Assumes that all objects are images
      */
     preload() {
+        console.log("PRELOAD");
         this.children.forEach(child => child.preload());
 
         //Start the image loader
-        //this.parent_scene.load.on('filecomplete', this.create, this);
+        this.parent_scene.load.start();
+
+        //Start the image loader
+        this.parent_scene.load.on('filecomplete', this.create, this);
     }
 
     /**
@@ -48,7 +48,21 @@ export class WakeUpCard {
      * Assumes that all objects are images
      */
     create() {
-        this.children.forEach(child => child.create());
+        this.children.forEach(child => {
+            let sprite = child.create();
+
+            //Create BS onclick listener 
+            this.parent_scene.input.on(
+                'gameobjectdown',
+                (pointer, gameObject) => {
+                    this.parent_scene.nextCard();
+                },
+                this.parent_scene
+            );
+
+            console.log("CREATE");
+
+        });
     }
 
     /**
@@ -56,11 +70,6 @@ export class WakeUpCard {
      */
     update() {
         this.children.forEach(child => child.update());
-
-        //Check if it's time to move to the next scene
-        if(this.parent_scene.dialogue.getState() == DialogueState.DONE) {
-            this.parent_scene.nextCard();
-        }
     }
 
     /**
