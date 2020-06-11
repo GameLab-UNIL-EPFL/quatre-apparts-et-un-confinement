@@ -10,7 +10,9 @@
 	},
 	"habit": {
 		"name": "Damien",
-		"text": "Est-ce que j'ai vraiment besoin de m'habiller? *baille*",
+		"text": [
+			"Est-ce que j'ai vraiment besoin de\nm'habiller? *baille*"
+		],
 		"choices": {},
 		"goto": ["zoom"]
 	},

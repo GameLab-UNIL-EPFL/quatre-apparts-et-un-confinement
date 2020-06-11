@@ -65,7 +65,8 @@ export class ProtoGuy {
                 break;
 
             case ProtoGuyCard.CLOTHES:
-                //TODO Set url and names for each sprite 
+                this.name = "clothesProtoGuy";
+                this.url = "/sprites/ProtoScene/ClothesCard/protoGuy.png";
                 break;
             case ProtoGuyCard.KITCHEN:
                 //TODO Set url and names for each sprite 
@@ -94,12 +95,15 @@ export class ProtoGuy {
                 this.parent_scene.load.image(this.arm_name, this.arm_url);
                 this.parent_scene.load.image(this.head_name, this.head_url);
                 break;
+
             case ProtoGuyCard.CHOSE_PATH:
                 this.parent_scene.load.image(this.name, this.url);
                 break;
+
             case ProtoGuyCard.CLOTHES:
-                //TODO Set url and names for each sprite 
+                this.parent_scene.load.image(this.name, this.url);
                 break;
+
             case ProtoGuyCard.KITCHEN:
                 //TODO Set url and names for each sprite 
                 break;
@@ -115,6 +119,32 @@ export class ProtoGuy {
             default:
                 break;
         }
+    }
+
+    /**
+     * @brief Makes protoguy a card changing trigger
+     * @param {int} choice, the choice that this trigger intells
+     */
+    setProtoGuyCardTrigger(choice) {
+        this.sprite = this.parent_scene.add.image(this.x, this.y, this.name);
+        this.sprites = [this.sprite];
+
+        //Make the sprite interactive and add an event listener
+        this.sprite.setInteractive();
+        this.parent_scene.input.on(
+            'gameobjectdown',
+            (pointer, gameObject) => {
+                //Check that we clicked on the closet
+                if(gameObject === this.sprite) {
+                    console.log("click protoGuy");
+
+                    //Go to the next scene
+                    this.parent_scene.cardIsDone();
+                    this.parent_scene.nextCard(choice);
+                }
+            },
+            this.parent_scene
+        );
     }
 
     /**
@@ -138,28 +168,15 @@ export class ProtoGuy {
                 break;
 
             case ProtoGuyCard.CHOSE_PATH:
-                this.sprite = this.parent_scene.add.image(this.x, this.y, this.name);
-                this.sprites = [this.sprite];
-
-                //Make the sprite interactive and add an event listener
-                this.sprite.setInteractive();
-                this.parent_scene.input.on(
-                    'gameobjectdown',
-                    (pointer, gameObject) => {
-                        //Check that we clicked on the closet
-                        if(gameObject === this.sprite) {
-                            console.log("click protoGuy");
-                            //Go to the next scene
-                            this.parent_scene.nextCard(2);
-                        }
-                    },
-                    this.parent_scene
-                );
+                //Make protoguy trigger a card change
+                this.setProtoGuyCardTrigger(2);
                 break;
 
             case ProtoGuyCard.CLOTHES:
-                //TODO Set url and names for each sprite 
+                //Make protoguy trigger a card change
+                this.setProtoGuyCardTrigger(2);
                 break;
+
             case ProtoGuyCard.KITCHEN:
                 //TODO Set url and names for each sprite 
                 break;
@@ -177,6 +194,9 @@ export class ProtoGuy {
         }
     }
 
+    /**
+     * @brief Handles protoguy's state animation
+     */
     update() {
         switch(this.card) {
             case ProtoGuyCard.WAKE_UP:
@@ -233,6 +253,9 @@ export class ProtoGuy {
         }
     }
 
+    /**
+     * @brief Unloads all of the sprites from memory
+     */
     destroy() {
         this.sprites.forEach(sprite => sprite.destroy());
     }

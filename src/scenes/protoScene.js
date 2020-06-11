@@ -3,6 +3,7 @@ import {WakeUpCard} from "./cards/ProtoSceneCards/wakeUpCard.js";
 import { DialogueController } from "../core/dialogueController.js";
 import {ChosePathCard} from "./cards/ProtoSceneCards/chosePathCard.js";
 import { IntroCard } from "./cards/ProtoSceneCards/introCard.js";
+import { ClothesCard } from "./cards/ProtoSceneCards/clothesCard.js";
 
 const CARDS = {
     INTRO: 0,
@@ -15,6 +16,12 @@ const CARDS = {
     BED: 7
 };
 const NUM_CARDS = 8
+
+const ProtoGuyClothes = {
+    PYJAMAS: 0,
+    CLEAN_CLOTHES: 1,
+    YESTERDAY_CLOTHES: 2
+};
 
 export class ProtoScene extends Phaser.Scene {
     /**
@@ -29,12 +36,24 @@ export class ProtoScene extends Phaser.Scene {
         this.introCard = new IntroCard(this);
         this.wakeUpCard = new WakeUpCard(this);
         this.chosePathCard = new ChosePathCard(this);
+        this.clothesCard = new ClothesCard(this);
 
-        this.cards = [this.introCard, this.wakeUpCard, this.chosePathCard];
+        this.cards = [
+            this.introCard,
+            this.wakeUpCard,
+            this.chosePathCard,
+            this.clothesCard
+        ];
 
+        //Keep track of wich card is displayed
         this.cardIdx = CARDS.INTRO;
-        this.dialogue = new DialogueController(this);
         this.current_card = this.introCard;
+
+        //Create the dialogue controller 
+        this.dialogue = new DialogueController(this);
+
+        //Keep track of the clothes that protoguy is wearing
+        this.clothes = ProtoGuyClothes.PYJAMAS;
     }
 
     /**
@@ -62,11 +81,15 @@ export class ProtoScene extends Phaser.Scene {
         }
     }
 
+    cardIsDone() {
+        this.current_card.isDone = true;
+    }
+
     /**
      * @brief moves to the next card
      * @param {int} choice the choice that was made
      */
-    nextCard(choice = -1) {
+    nextCard(choice) {
 
         if(this.cardIdx < NUM_CARDS - 1 && this.current_card.isDone) {
             this.current_card.destroy();
@@ -93,7 +116,8 @@ export class ProtoScene extends Phaser.Scene {
                         //The Closet was selected
                         case 0:
                             this.cardIdx = CARDS.CLOTHES;
-                            //TODO goto clothes card
+                            this.current_card = this.clothesCard;
+                            this.current_card.create();
                             break;
                         
                         //The kitchen was selected
@@ -115,7 +139,24 @@ export class ProtoScene extends Phaser.Scene {
                     break;
 
                 case CARDS.CLOTHES:
-                    //TODO create next card
+                    //Chose the next card depending on the user's choice
+                    switch(choice) {
+                        //The clean clothes were selected
+                        case 0:
+                            break;
+                        
+                        //The chair was selected
+                        case 1:
+                            break;
+                        
+                        //Proto guy was selected (pyjamas)
+                        case 2:
+                            break;
+                        
+                        default:
+                            break;
+                        
+                    }
                     break;
                 default:
                     break;
