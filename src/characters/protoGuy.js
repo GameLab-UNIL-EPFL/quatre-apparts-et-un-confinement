@@ -148,7 +148,7 @@ export class ProtoGuy {
                     (pointer, gameObject) => {
                         //Check that we clicked on the closet
                         if(gameObject === this.sprite) {
-                            
+                            console.log("click protoGuy");
                             //Go to the next scene
                             this.parent_scene.nextCard(2);
                         }

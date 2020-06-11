@@ -14,7 +14,7 @@ const CARDS = {
     MINI_GAME: 6,
     BED: 7
 };
-const NUM_CARDS = 3
+const NUM_CARDS = 8
 
 export class ProtoScene extends Phaser.Scene {
     /**
@@ -105,8 +105,6 @@ export class ProtoScene extends Phaser.Scene {
                         //Proto guy was selected (back to bed)
                         case 2:
                             this.cardIdx = CARDS.WAKE_UP;
-                            this.current_card = this.wakeUpCard;
-                            this.current_card.preload();
                             break;
                         
                         default:
