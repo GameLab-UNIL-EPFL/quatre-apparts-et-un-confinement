@@ -53,10 +53,17 @@ export class ProtoGuy {
                 this.arm_name = "chracter_arm";
                 this.arm_offset_x = -85;
                 this.arm_offset_y = -890;
+
+                 //Initialize the different FSMs
+                this.cur_state = ProtoGuyState.IDLE;
+                this.rotate = 0;
                 break;
+
             case ProtoGuyCard.CHOSE_PATH:
-                //TODO Set url and names for each sprite 
+                this.name = "chosePathProtoGuy";
+                this.url = "/sprites/ProtoScene/ChosePathCard/ProtoGuy.png";
                 break;
+
             case ProtoGuyCard.CLOTHES:
                 //TODO Set url and names for each sprite 
                 break;
@@ -75,11 +82,6 @@ export class ProtoGuy {
             default:
                 break;
         }
-
-        //Initialize the different FSMs
-        this.cur_card = ProtoGuyCard.WAKE_UP;
-        this.cur_state = ProtoGuyState.IDLE;
-        this.rotate = 0;
     }
 
     /**
@@ -93,7 +95,7 @@ export class ProtoGuy {
                 this.parent_scene.load.image(this.head_name, this.head_url);
                 break;
             case ProtoGuyCard.CHOSE_PATH:
-                //TODO Set url and names for each sprite 
+                this.parent_scene.load.image(this.name, this.url);
                 break;
             case ProtoGuyCard.CLOTHES:
                 //TODO Set url and names for each sprite 
@@ -134,9 +136,27 @@ export class ProtoGuy {
                 this.arm_sprite.y += 10;
                 this.cur_state = ProtoGuyState.SCRATCH_DOWN;
                 break;
+
             case ProtoGuyCard.CHOSE_PATH:
-                //TODO Set url and names for each sprite 
+                this.sprite = this.parent_scene.add.image(this.x, this.y, this.name);
+                this.sprites = [this.sprite];
+
+                //Make the sprite interactive and add an event listener
+                this.sprite.setInteractive();
+                this.parent_scene.input.on(
+                    'gameobjectdown',
+                    (pointer, gameObject) => {
+                        //Check that we clicked on the closet
+                        if(gameObject === this.sprite) {
+                            
+                            //Go to the next scene
+                            this.parent_scene.nextCard(2);
+                        }
+                    },
+                    this.parent_scene
+                );
                 break;
+
             case ProtoGuyCard.CLOTHES:
                 //TODO Set url and names for each sprite 
                 break;
@@ -189,9 +209,10 @@ export class ProtoGuy {
                         break;
                 }
                 break;
+
             case ProtoGuyCard.CHOSE_PATH:
-                //TODO Set url and names for each sprite 
                 break;
+
             case ProtoGuyCard.CLOTHES:
                 //TODO Set url and names for each sprite 
                 break;

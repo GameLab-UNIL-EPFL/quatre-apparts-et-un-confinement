@@ -1,8 +1,10 @@
 import Phaser from "phaser";
 import { Background } from "../../objects/background";
 import { Phone } from "../../objects/ProtoSceneObjects/phone";
-import { ProtoGuy } from "../../../characters/protoGuy";
+import { ProtoGuy, ProtoGuyCard } from "../../../characters/protoGuy";
 import { DialogueController, DialogueState } from "../../../core/dialogueController";
+import { Closet } from "../../objects/ProtoSceneObjects/closet";
+import { Kitchen } from "../../objects/ProtoSceneObjects/kitchen";
 
 /**
  * @brief Models a "Card" inside of a scene.
@@ -19,13 +21,18 @@ export class ChosePathCard {
     constructor(parent_scene) {
         //Initialize children array
         let children = [
-            new Background(parent_scene, "/sprites/ProtoScene/WakeUpCard/bg.png", "choseBG")
+            new Background(parent_scene, "/sprites/ProtoScene/ChosePathCard/bg.png", "choseBG"),
+            new Kitchen(parent_scene, 1418, 1260),
+            new Closet(parent_scene, 460, 1340),
+            new ProtoGuy(parent_scene, 1270, 2080, ProtoGuyCard.CHOSE_PATH)
         ];
 
         //Initialize attributes
         this.id = 0;
         this.children = children;
         this.parent_scene = parent_scene;
+        this.isLoaded = false;
+        this.isDone = false;
     }
 
     /**
@@ -35,12 +42,6 @@ export class ChosePathCard {
     preload() {
         console.log("PRELOAD");
         this.children.forEach(child => child.preload());
-
-        //Start the image loader
-        this.parent_scene.load.start();
-
-        //Start the image loader
-        this.parent_scene.load.on('filecomplete', this.create, this);
     }
 
     /**
@@ -50,19 +51,11 @@ export class ChosePathCard {
     create() {
         this.children.forEach(child => {
             let sprite = child.create();
-
-            //Create BS onclick listener 
-            this.parent_scene.input.on(
-                'gameobjectdown',
-                (pointer, gameObject) => {
-                    this.parent_scene.nextCard();
-                },
-                this.parent_scene
-            );
-
             console.log("CREATE");
-
         });
+
+        this.isLoaded = true;
+        this.isDone = true;
     }
 
     /**

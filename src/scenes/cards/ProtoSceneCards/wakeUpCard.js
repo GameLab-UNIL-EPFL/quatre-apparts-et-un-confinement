@@ -30,6 +30,8 @@ export class WakeUpCard {
         this.id = 0;
         this.children = children;
         this.parent_scene = parent_scene;
+        this.isLoaded = false;
+        this.isDone = false;
     }
 
     /**
@@ -38,9 +40,6 @@ export class WakeUpCard {
      */
     preload() {
         this.children.forEach(child => child.preload());
-
-        //Start the image loader
-        //this.parent_scene.load.on('filecomplete', this.create, this);
     }
 
     /**
@@ -49,6 +48,7 @@ export class WakeUpCard {
      */
     create() {
         this.children.forEach(child => child.create());
+        this.isLoaded = true;
     }
 
     /**
@@ -60,6 +60,7 @@ export class WakeUpCard {
         //Check if it's time to move to the next scene
         if(this.parent_scene.dialogue.getState() == DialogueState.DONE) {
             this.parent_scene.nextCard();
+            this.isDone = true;
         }
     }
 
