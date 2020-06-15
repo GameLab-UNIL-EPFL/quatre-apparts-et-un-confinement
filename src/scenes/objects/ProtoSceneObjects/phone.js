@@ -72,15 +72,14 @@ export class Phone extends CardObject {
         this.sprite.setScale(1);
         
         // Create ring sprites
-
-        let parent_scene_this_gets_really_verbose = this.parent_scene;
         this.parent_scene.anims.create({
           key: 'phone-ring',
-          frameRate: 12,
+          frameRate: 30,
           frames: this.parent_scene.anims.generateFrameNames('ring'),
-          repeat: 5
+          repeat: -1
         });
-        let ringSprite = this.parent_scene.add.sprite(this.x + 150, this.y - 70, 'ring').play('phone-ring');
+
+        let ringSprite = this.parent_scene.add.sprite(this.sprite.x + 150, this.sprite.y - 70, 'ring').play('phone-ring');
         
         // A améliorer, juste pour montrer le principe
         this.parent_scene.tweens.add({
@@ -99,6 +98,7 @@ export class Phone extends CardObject {
         let ring3_sprite = this.parent_scene.add.image(this.x + 170, this.y - 10, "ring3");
         */
         
+        this.ring_sprites = [ringSprite];
         // this.ring_sprites = [ring1_sprite, ring2_sprite, ring3_sprite];
 
         //Make the phone interactive
