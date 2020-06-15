@@ -4,15 +4,15 @@ import { CardObject } from "../cardObject";
 /**
  * @brief FSM states used for the phone's animation
  */
-const phoneState = {
+/*const phoneState = {
     IDLE: 'idle',
     MOVE_LEFT: 'left',
     MOVE_RIGHT: 'right',
     DONE: 'done'
-};
+};*/
 
 const PHONE_MOVEMENT = 10;
-const RING_MOVEMENT = 20;
+// const RING_MOVEMENT = 20;
 
 const WAKE_UP_ID = "reveil";
 
@@ -125,10 +125,10 @@ export class Phone extends CardObject {
     /**
      * @brief Updates the phone's state and handles the animation
      */
-    update() {
+    /*update() {
         super.update();
         //Check the current state of the phone
-        /*switch(this.cur_state) {
+        switch(this.cur_state) {
             case phoneState.IDLE:
                 //Start the phone's vibration
                 this.cur_state = phoneState.MOVE_LEFT;
@@ -153,6 +153,6 @@ export class Phone extends CardObject {
 
             default:
                 break;
-        }*/
-    }
+        }
+    }*/
 }
