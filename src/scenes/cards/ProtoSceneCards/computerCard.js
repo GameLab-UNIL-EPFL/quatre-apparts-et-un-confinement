@@ -1,72 +1,48 @@
 import Phaser from "phaser";
 import { Background } from "../../objects/background";
-import { Bureau } from "../../objects/ProtoSceneObjects/bureau";
 import { ProtoGuy, ProtoGuyCard } from "../../../characters/protoGuy";
-import { DialogueController, DialogueState } from "../../../core/dialogueController";
+import { DialogueState } from "../../../core/dialogueController";
 import { Food, FoodType } from "../../objects/ProtoSceneObjects/food";
+import { CardObject } from "../../objects/cardObject";
+import { Card } from "../card";
 
 /**
  * @brief Models a "Card" inside of a scene.
  * A card can be seen as a set of images that represent 
  * a given interactive moment in a scene
  */
-export class ComputerCard {
+export class ComputerCard extends Card {
     /**
      * @brief Constructs a group of objects in the scene
-     * @param parent_scene, the Scene which this card belongs to
-     * @param {array} children, the objects that are in the card
-     * represented as an array of pairs (name, imageurl)
+     * @param {Phaser.Scene} parent_scene, the Scene which this card belongs to
      */
     constructor(parent_scene) {
         //Initialize children array
         let children = [
             new Background(parent_scene, "/sprites/ProtoScene/ComputerCard/base.jpg", "ComputerBG"),
             new ProtoGuy(parent_scene, 1345, 1530, ProtoGuyCard.COMPUTER),
-            new Bureau(parent_scene, 1025, 1610),
+            new CardObject(
+                parent_scene,
+                "Bureau",
+                "/sprites/ProtoScene/ComputerCard/bureau.png",
+                new Phaser.Math.Vector2(1025, 1610),
+                false
+            ),
             new Food(parent_scene, 1700, 2550, FoodType.NONE)
         ];
 
-        //Initialize attributes
-        this.id = 0;
-        this.children = children;
-        this.parent_scene = parent_scene;
+        //Call base constructor
+        super(parent_scene, children);
     }
-
-    /**
-     * @brief Preloads all of the elements in the group
-     * Assumes that all objects are images
-     */
-    preload() {
-        this.children.forEach(child => child.preload());
-
-        //Start the image loader
-        //this.parent_scene.load.on('filecomplete', this.create, this);
-    }
-
-    /**
-     * @brief Creates all of the elements in the group
-     * Assumes that all objects are images
-     */
-    create() {
-        this.children.forEach(child => child.create());
-    }
-
     /**
      * @brief Updates the sate of the card
      */
     update() {
-        this.children.forEach(child => child.update());
+        super.update();
 
         //Check if it's time to move to the next scene
         if(this.parent_scene.dialogue.getState() == DialogueState.DONE) {
             this.parent_scene.nextCard();
         }
-    }
-
-    /**
-     * @breif Unloads all the different elements of the card from memory
-     */
-    destroy() {
-        this.children.forEach(child => child.destroy());
     }
 }

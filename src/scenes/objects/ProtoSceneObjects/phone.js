@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import { CardObject } from "../cardObject";
 
 /**
  * @brief FSM states used for the phone's animation
@@ -18,7 +19,7 @@ const WAKE_UP_ID = "reveil";
 /**
  * @brief Models the ProtoGuy's phone as a custom sprite
  */
-export class Phone {
+export class Phone extends CardObject {
     /**
      * @brief Creates the phone as a custom sprite
      * @param parent_scene, the scene in which the phone is contained 
@@ -26,19 +27,22 @@ export class Phone {
      * @param y, the phone's y position in the scene
      */
     constructor(parent_scene, x, y) {
-        //Initialize the phone's attributes
-        this.parent_scene = parent_scene;
-        this.name = "phone";
-        this.url = "/sprites/ProtoScene/WakeUpCard/phone.png";
+        //Call base contructor
+        super(
+            parent_scene,
+            new Phaser.Math.Vector2(x, y),
+            "phone",
+            "/sprites/ProtoScene/WakeUpCard/phone.png",
+            false
+        );
 
+        //All of the "ringing" sprite urls
         this.ring_urls = [
             "/sprites/ProtoScene/WakeUpCard/ring1.png",
             "sprites/ProtoScene/WakeUpCard/ring2.png",
             "sprites/ProtoScene/WakeUpCard/ring3.png"
         ];
-
-        this.x = x;
-        this.y = y;
+        
         this.cur_state = phoneState.IDLE;
     }
 
@@ -46,7 +50,9 @@ export class Phone {
      * @brief loads in the sprite needed to display the phone
      */
     preload() {
-        this.parent_scene.load.image(this.name, this.url);
+        super.preload();
+
+        //Load the ringing sprites
         let i = 1;
         this.ring_urls.forEach(url => {
             this.parent_scene.load.image("ring" + i++, url);
@@ -57,7 +63,7 @@ export class Phone {
      * @brief created the phone and places it in the scene
      */
     create() {
-        this.sprite = this.parent_scene.add.image(this.x, this.y, this.name);
+        super.create();
         this.sprite.setOrigin(0, 0);
         this.sprite.setScale(1);
 
@@ -93,6 +99,7 @@ export class Phone {
      * @brief Updates the phone's state and handles the animation
      */
     update() {
+        super.update();
         //Check the current state of the phone
         switch(this.cur_state) {
             case phoneState.IDLE:
@@ -120,9 +127,5 @@ export class Phone {
             default:
                 break;
         }
-    }
-
-    destroy() {
-        this.sprite.destroy();
     }
 }

@@ -1,10 +1,12 @@
 import Phaser from "phaser";
 import {WakeUpCard} from "./cards/ProtoSceneCards/wakeUpCard.js";
 import { DialogueController } from "../core/dialogueController.js";
-import {ChosePathCard} from "./cards/ProtoSceneCards/chosePathCard.js";
 import { IntroCard } from "./cards/ProtoSceneCards/introCard.js";
-import { ClothesCard } from "./cards/ProtoSceneCards/clothesCard.js";
 import { ComputerCard } from "./cards/ProtoSceneCards/computerCard.js";
+import { Card, CardState } from "./cards/card.js";
+import { CardObject } from "./objects/cardObject.js";
+import { Background } from "./objects/background.js";
+import { ProtoGuy, ProtoGuyCard } from "../characters/protoGuy.js";
 
 const CARDS = {
     INTRO: 0,
@@ -35,9 +37,59 @@ export class ProtoScene extends Phaser.Scene {
 
         //Create all of the cards
         this.introCard = new IntroCard(this);
+
         this.wakeUpCard = new WakeUpCard(this);
-        this.chosePathCard = new ChosePathCard(this);
-        this.clothesCard = new ClothesCard(this);
+
+        this.chosePathCard = new Card(this, [
+            new Background(
+                this,
+                "/sprites/ProtoScene/ChosePathCard/bg.png",
+                "choseBG"
+            ),
+            new CardObject(
+                this,
+                "room",
+                "/sprites/ProtoScene/ChosePathCard/room.png",
+                new Phaser.Math.Vector2(1418, 1260),
+                true,
+                1
+            ),
+            new CardObject(
+                this,
+                "closet",
+                "/sprites/ProtoScene/ChosePathCard/Closet.png",
+                new Phaser.Math.Vector2(460, 1340),
+                true,
+                0
+            ),
+            new ProtoGuy(this, 1270, 2080, ProtoGuyCard.CHOSE_PATH)
+        ]);
+
+        this.clothesCard = new Card(this, [
+            new Background(
+                this,
+                "/sprites/ProtoScene/ClothesCard/bg.jpg", 
+                "ClothesBG"
+            ),
+            new CardObject(
+                this,
+                "clothes",
+                "/sprites/ProtoScene/ClothesCard/clothes.png",
+                new Phaser.Math.Vector2(1545, 1376),
+                true,
+                0
+            ),
+            new CardObject(
+                this,
+                "chair",
+                "/sprites/ProtoScene/ClothesCard/chair.png",
+                new Phaser.Math.Vector2(650, 2070),
+                true,
+                1
+            ),
+            new ProtoGuy(this, 1125, 1515, ProtoGuyCard.CLOTHES)
+        ]);
+
         this.computerCard = new ComputerCard(this);
 
         this.cards = [
@@ -85,7 +137,7 @@ export class ProtoScene extends Phaser.Scene {
     }
 
     cardIsDone() {
-        this.current_card.isDone = true;
+        this.current_card.cur_state = CardState.DONE;
     }
 
     /**

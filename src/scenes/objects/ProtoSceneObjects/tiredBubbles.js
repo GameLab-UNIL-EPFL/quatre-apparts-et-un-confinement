@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import { CardObject } from "../cardObject";
 
 const BubbleState = {
     UP: 0,
@@ -6,33 +7,33 @@ const BubbleState = {
 }
 
 const MAX_UP = 100;
-const MAX_RIGHT = 10;
 
-export class TiredBubbles {
+export class TiredBubbles extends CardObject {
+    /**
+     * @brief Creates the tired bubbles as a custom card object
+     * @param {Phaser.Scene} parent_scene, the scene in which the phone is contained 
+     * @param {Number} x, the bubbles's x position in the scene
+     * @param {Number} y, the bubbles's y position in the scene
+     */
     constructor(parent_scene, x, y) {
-        this.parent_scene = parent_scene;
-
-        this.name = "bubbles";
-        this.url = "/sprites/ProtoScene/WakeUpCard/tired_bubbles.png";
+        //Call the base constructor
+        super(
+            parent_scene,
+            "bubbles", 
+            "/sprites/ProtoScene/WakeUpCard/tired_bubbles.png",
+            new Phaser.Math.Vector2(x, y),
+            false
+        );
 
         this.cur_state = BubbleState.UP;
-        this.x = x;
-        this.y = y;
 
         //Counter for the state animation
         this.go_up = 0;
-        this.go_right = 5;
-        this.lr = true;
     }
 
-    preload() {
-        this.parent_scene.load.image(this.name, this.url);
-    }
-
-    create() {
-        this.sprite = this.parent_scene.add.image(this.x, this.y, this.name);
-    }
-
+    /**
+     * @brief Animates the bubbles
+     */
     update() {
         switch(this.cur_state) {
             case BubbleState.UP:
@@ -55,9 +56,5 @@ export class TiredBubbles {
             default:
                 break;
         }
-    }
-
-    destroy() {
-        this.sprite.destroy();
     }
 } 
