@@ -36,16 +36,15 @@ export class Phone extends CardObject {
             false
         );
 
-        //All of the "ringing" sprite urls
-        
         // Plutot une sprite sheet!
-        // this.ring_urls = [
-        //     "sprites/ProtoScene/WakeUpCard/ring1.png",
-        //     "sprites/ProtoScene/WakeUpCard/ring2.png",
-        //     "sprites/ProtoScene/WakeUpCard/ring3.png"
-        // ];
+        //All of the "ringing" sprite urls
+        /* this.ring_urls = [
+            "sprites/ProtoScene/WakeUpCard/ring1.png",
+            "sprites/ProtoScene/WakeUpCard/ring2.png",
+            "sprites/ProtoScene/WakeUpCard/ring3.png"
+        ];
         
-        this.cur_state = phoneState.IDLE;
+        this.cur_state = phoneState.IDLE;*/
     }
 
     /**
@@ -79,7 +78,7 @@ export class Phone extends CardObject {
           repeat: -1
         });
 
-        let ringSprite = this.parent_scene.add.sprite(this.sprite.x + 150, this.sprite.y - 70, 'ring').play('phone-ring');
+        this.highlight = this.parent_scene.add.sprite(this.sprite.x + 150, this.sprite.y - 70, 'ring').play('phone-ring');
         
         // A améliorer, juste pour montrer le principe
         this.parent_scene.tweens.add({
@@ -96,10 +95,9 @@ export class Phone extends CardObject {
         let ring1_sprite = this.parent_scene.add.image(this.x + 130, this.y - 70, "ring1");
         let ring2_sprite = this.parent_scene.add.image(this.x + 150, this.y - 70, "ring2");
         let ring3_sprite = this.parent_scene.add.image(this.x + 170, this.y - 10, "ring3");
-        */
         
-        this.ring_sprites = [ringSprite];
-        // this.ring_sprites = [ring1_sprite, ring2_sprite, ring3_sprite];
+        this.ring_sprites = [ring1_sprite, ring2_sprite, ring3_sprite];
+        */
 
         //Make the phone interactive
         this.sprite.setInteractive();
@@ -114,6 +112,7 @@ export class Phone extends CardObject {
 
                     // this.ring_sprites.forEach(sp => sp.destroy());
                     this.sprite.destroy();
+                    this.highlight.destroy();
 
                     //Trigger the dialogue
                     this.parent_scene.dialogue.display(WAKE_UP_ID);
