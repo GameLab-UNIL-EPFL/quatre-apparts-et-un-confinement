@@ -184,6 +184,19 @@ export class ProtoGuy {
                 this.arm_sprite.x -= 10; 
                 this.arm_sprite.y += 10;
                 this.cur_state = ProtoGuyState.SCRATCH_DOWN;
+
+                //Set wake up card animation
+                this.parent_scene.tweens.add({
+                    targets: this.arm_sprite,
+                    angle: this.arm_sprite.angle - 10,
+                    x: this.arm_sprite.x + 10,
+                    y: this.arm_sprite.y - 10,
+                    duration: 500,
+                    ease: "Linear",
+                    yoyo: true,
+                    loop: -1
+                });
+
                 break;
 
             case ProtoGuyCard.CHOSE_PATH:
@@ -232,64 +245,64 @@ export class ProtoGuy {
         }
     }
 
-    /**
-     * @brief Handles protoguy's state animation
-     */
-    update() {
-        switch(this.card) {
-            case ProtoGuyCard.WAKE_UP:
-                switch(this.cur_state) {
-                    case ProtoGuyState.SCRATCH_DOWN:
-                        this.arm_sprite.angle -= 0.3;
-                        this.arm_sprite.x += 0.3;
-                        this.arm_sprite.y -= 0.3;
-                        this.rotate++;
+    // /**
+    //  * @brief Handles protoguy's state animation
+    //  */
+    // update() {
+    //     switch(this.card) {
+    //         case ProtoGuyCard.WAKE_UP:
+    //             switch(this.cur_state) {
+    //                 case ProtoGuyState.SCRATCH_DOWN:
+    //                     this.arm_sprite.angle -= 0.3;
+    //                     this.arm_sprite.x += 0.3;
+    //                     this.arm_sprite.y -= 0.3;
+    //                     this.rotate++;
         
-                        if(this.rotate >= 30) {
-                            this.cur_state = ProtoGuyState.SCRATCH_UP;
-                        }
-                        break;
+    //                     if(this.rotate >= 30) {
+    //                         this.cur_state = ProtoGuyState.SCRATCH_UP;
+    //                     }
+    //                     break;
         
-                    case ProtoGuyState.SCRATCH_UP:
-                        this.arm_sprite.angle += 0.3;
-                        this.arm_sprite.x -= 0.3;
-                        this.arm_sprite.y += 0.3;
-                        this.rotate--;
+    //                 case ProtoGuyState.SCRATCH_UP:
+    //                     this.arm_sprite.angle += 0.3;
+    //                     this.arm_sprite.x -= 0.3;
+    //                     this.arm_sprite.y += 0.3;
+    //                     this.rotate--;
         
-                        if(this.rotate <= 0) {
-                            this.cur_state = ProtoGuyState.SCRATCH_DOWN;
-                        }
-                        break;
+    //                     if(this.rotate <= 0) {
+    //                         this.cur_state = ProtoGuyState.SCRATCH_DOWN;
+    //                     }
+    //                     break;
         
-                    case ProtoGuyState.IDLE:
-                        break;
-                    default:
-                        break;
-                }
-                break;
+    //                 case ProtoGuyState.IDLE:
+    //                     break;
+    //                 default:
+    //                     break;
+    //             }
+    //             break;
 
-            case ProtoGuyCard.CHOSE_PATH:
-                break;
+    //         case ProtoGuyCard.CHOSE_PATH:
+    //             break;
 
-            case ProtoGuyCard.CLOTHES:
-                //TODO Set url and names for each sprite 
-                break;
-            case ProtoGuyCard.KITCHEN:
-                //TODO Set url and names for each sprite 
-                break;
-            case ProtoGuyCard.COMPUTER:
-                //TODO Set url and names for each sprite 
-                break;
-            case ProtoGuyCard.MINI_GAME:
-                //TODO Set url and names for each sprite 
-                break;
-            case ProtoGuyCard.BED:
-                //TODO Set url and names for each sprite 
-                break;
-            default:
-                break;
-        }
-    }
+    //         case ProtoGuyCard.CLOTHES:
+    //             //TODO Set url and names for each sprite 
+    //             break;
+    //         case ProtoGuyCard.KITCHEN:
+    //             //TODO Set url and names for each sprite 
+    //             break;
+    //         case ProtoGuyCard.COMPUTER:
+    //             //TODO Set url and names for each sprite 
+    //             break;
+    //         case ProtoGuyCard.MINI_GAME:
+    //             //TODO Set url and names for each sprite 
+    //             break;
+    //         case ProtoGuyCard.BED:
+    //             //TODO Set url and names for each sprite 
+    //             break;
+    //         default:
+    //             break;
+    //     }
+    // }
 
     /**
      * @brief Unloads all of the sprites from memory

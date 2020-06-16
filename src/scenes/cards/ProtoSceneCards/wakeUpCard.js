@@ -37,6 +37,8 @@ export class WakeUpCard extends Card {
 
         //Call base constructor
         super(parent_scene, children);
+
+        this.phone_ring = true;
     }
 
     preload() {
@@ -77,7 +79,7 @@ export class WakeUpCard extends Card {
         ).play('phone-ring');
 
         //Create a tween animation for the phone
-        this.parent_scene.tweens.add({
+        this.phone_tween = this.parent_scene.tweens.add({
             targets: this.children[1].sprite,
             x: this.children[1].sprite.x + PHONE_MOVEMENT,
             y: this.children[1].sprite.y,
@@ -107,8 +109,17 @@ export class WakeUpCard extends Card {
             'gameobjectdown',
             (_, gameObject) => {
                 //Check that we clicked on the phone
-                if(gameObject === this.children[1].sprite) {
+                if(gameObject === this.children[1].sprite && this.phone_ring) {
+                    this.children[1].sprite.destroy();
                     this.highlight.destroy();
+
+                    //Recreate the phone
+                    this.children[1].sprite = this.parent_scene.add.image(
+                        this.children[1].position.x,
+                        this.children[1].position.y,
+                        this.children[1].name
+                    );
+                    this.children[1].sprite.setOrigin(0, 0);
 
                     //Trigger the dialogue
                     this.parent_scene.dialogue.display(WAKE_UP_ID);
