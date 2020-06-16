@@ -56,6 +56,9 @@ export class WakeUpCard extends Card {
     create() {
         super.create();
 
+        //Reset the phone's origin
+        this.children[1].sprite.setOrigin(0, 0);
+
         //=========HANDLE_ANIMATIONS=========
 
         // Create ring sprites
@@ -105,8 +108,6 @@ export class WakeUpCard extends Card {
             (_, gameObject) => {
                 //Check that we clicked on the phone
                 if(gameObject === this.children[1].sprite) {
-
-                    this.children[1].sprite.destroy();
                     this.highlight.destroy();
 
                     //Trigger the dialogue
