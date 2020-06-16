@@ -92,8 +92,8 @@ export class WakeUpCard extends Card {
             targets: this.children[3].sprite,
             x: this.children[3].sprite.x,
             y: this.children[3].sprite.y - MAX_BUBBLE_UP,
-            duration: 1000,
-            ease: "Power2",
+            duration: 10000,
+            ease: "Linear",
             yoyo: true,
             loop: -1
         });
