@@ -94,9 +94,9 @@ export class DialogueController {
 
         this.parent_scene.input.on(
             'gameobjectdown',
-            (pointer, gameObject) => {
+            (_, gameObject) => {
                 //Check that we clicked on the text
-                if(pointer.x >= this.background.x && pointer.y >= this.background.y) {
+                if(gameObject === this.content && this.cur_state != DialogueState.DONE) {
 
                     this.textIdx++;
 
@@ -106,6 +106,7 @@ export class DialogueController {
                         this.content.destroy();
                         this.name.destroy();
                         this.background.destroy();
+                        this.content.disableInteractive();
 
                         //Update dialogue state
                         this.cur_state = DialogueState.DONE;
