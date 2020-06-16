@@ -6,6 +6,20 @@ import './style.scss';
 import {IntroScene} from "./scenes/introScene.js";
 import {ProtoScene} from "./scenes/protoScene.js";
 
+let plugins = [{
+    key: 'rexUI',
+    plugin: RexUIPlugin,
+    mapping: 'rexUI'
+}];
+const consoleSeemsOpen = window.outerHeight - window.innerHeight > 200;
+if(consoleSeemsOpen === true){
+  plugins.push({
+    key: 'debugObjects',
+    plugin: DebugObjects,
+    mapping: 'debugObjects'
+  });
+}
+
 const config = {
     type: Phaser.AUTO,
     width: window.innerWidth,
@@ -18,17 +32,7 @@ const config = {
         width: 2048
     },
     plugins: {
-        scene: [{
-            key: 'rexUI',
-            plugin: RexUIPlugin,
-            mapping: 'rexUI'
-        },
-        {
-          key: 'debugObjects',
-          plugin: DebugObjects,
-          mapping: 'debugObjects'
-        }
-      ]
+        scene: plugins
     },
     scene: [ProtoScene],
     physics: {
