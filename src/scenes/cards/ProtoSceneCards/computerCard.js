@@ -23,10 +23,8 @@ export class ComputerCard extends Card {
             new ProtoGuy(parent_scene, 1345, 1530, ProtoGuyCard.COMPUTER),
             new CardObject(
                 parent_scene,
-                "Bureau",
-                "/sprites/ProtoScene/ComputerCard/bureau.png",
-                new Phaser.Math.Vector2(1025, 1610),
-                false
+                { name: "Bureau", url: "sprites/ProtoScene/ComputerCard/bureau.png" },
+                new Phaser.Math.Vector2(1025, 1610)
             ),
             new Food(parent_scene, 1700, 2550, FoodType.NONE)
         ];

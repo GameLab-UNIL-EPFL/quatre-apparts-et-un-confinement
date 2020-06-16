@@ -7,24 +7,21 @@ export class CardObject {
     /**
      * @brief Constructs an instance of the clothes
      * @param {Phaser.Scene} parent_scene, the scene in which the clothes are contained
-     * @param {string} name, the name of the sprite that will be created
-     * @param {string} url, the url of the image that will be used for the sprite 
+     * @param {JSON} sprite, {name, url} of the sprite that will be created
      * @param {Phaser.Vector2} position the position of the object in the scene
-     * @param {bool} isTrigger, whether or not this object can trigger the passage to the next scene
-     * @param {Number} choice, the path that this item will entail (only if isTrigger)
+     * @param {Number} choice, the path that this item will entail (only if !-1)
      */
-    constructor(parent_scene, name, url, position, isTrigger, choice=-1) {
+    constructor(parent_scene, sprite, position, choice=-1) {
         this.parent_scene = parent_scene;
         
         //Sprite parameters
-        this.name = name;
-        this.url = url;
+        this.name = sprite.name;
+        this.url = sprite.url;
 
         //Position of the object
         this.position = position;
 
         //Interaction parameters
-        this.isTrigger = isTrigger;
         this.choice = choice;
     }
 
@@ -33,15 +30,29 @@ export class CardObject {
      */
     preload() {
         this.parent_scene.load.image(this.name, this.url);
+
+        //Check if the spritesheet exists
+        if(this.spriteSheet) {
+            this.parent_scene.load.spritesheet(
+                this.spriteSheet.name,
+                this.spriteSheet.url, {
+                    frameWidth: this.spriteSheet.frameWidth,
+                    frameHeight: this.spriteSheet.frameHeight 
+                }
+            );
+
+        }
     }
 
     /**
      * @brief Creates the object and makes it interactable if needed
+     * and animates it if needed
      */
     create() {
         this.sprite = this.parent_scene.add.image(this.position.x, this.position.y, this.name);
 
-        if(this.isTrigger) {
+        //Add a choice if needed
+        if(this.choice != -1) {
             //Make the clothes interactive
             this.sprite.setInteractive();
 
@@ -52,7 +63,7 @@ export class CardObject {
                     if(gameObject === this.sprite) {
 
                         this.parent_scene.cardIsDone();
-                        this.parent_scene.nextCard(choice);
+                        this.parent_scene.nextCard(this.choice);
                     }
                 },
                 this.parent_scene 

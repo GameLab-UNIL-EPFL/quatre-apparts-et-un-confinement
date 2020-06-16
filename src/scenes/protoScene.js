@@ -48,18 +48,14 @@ export class ProtoScene extends Phaser.Scene {
             ),
             new CardObject(
                 this,
-                "room",
-                "/sprites/ProtoScene/ChosePathCard/room.png",
+                { name: "room", url: "sprites/ProtoScene/ChosePathCard/room.png" },
                 new Phaser.Math.Vector2(1418, 1260),
-                true,
                 1
             ),
             new CardObject(
                 this,
-                "closet",
-                "/sprites/ProtoScene/ChosePathCard/Closet.png",
+                { name: "closet", url: "sprites/ProtoScene/ChosePathCard/Closet.png" },
                 new Phaser.Math.Vector2(460, 1340),
-                true,
                 0
             ),
             new ProtoGuy(this, 1270, 2080, ProtoGuyCard.CHOSE_PATH)
@@ -73,18 +69,14 @@ export class ProtoScene extends Phaser.Scene {
             ),
             new CardObject(
                 this,
-                "clothes",
-                "/sprites/ProtoScene/ClothesCard/clothes.png",
+                { name: "clothes", url: "sprites/ProtoScene/ClothesCard/clothes.png" },
                 new Phaser.Math.Vector2(1545, 1376),
-                true,
                 0
             ),
             new CardObject(
                 this,
-                "chair",
-                "/sprites/ProtoScene/ClothesCard/chair.png",
+                { name: "chair", url: "sprites/ProtoScene/ClothesCard/chair.png" },
                 new Phaser.Math.Vector2(650, 2070),
-                true,
                 1
             ),
             new ProtoGuy(this, 1125, 1515, ProtoGuyCard.CLOTHES)

@@ -17,7 +17,7 @@ export class IntroCard extends Card {
 
         //Initialize children array
         this.name = "Intro";
-        this.url = "/sprites/ProtoScene/IntroBg.png";
+        this.url = "sprites/ProtoScene/IntroBg.png";
     }
 
     /**
