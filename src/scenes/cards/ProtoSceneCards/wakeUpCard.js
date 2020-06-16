@@ -5,7 +5,7 @@ import { Card } from "../card";
 import { CardObject } from "../../objects/cardObject";
 
 const PHONE_MOVEMENT = 10;
-const MAX_BUBBLE_UP = 100;
+const MAX_BUBBLE_UP = 50;
 const WAKE_UP_ID = 'reveil';
 
 /**
@@ -94,8 +94,8 @@ export class WakeUpCard extends Card {
             targets: this.children[3].sprite,
             x: this.children[3].sprite.x,
             y: this.children[3].sprite.y - MAX_BUBBLE_UP,
-            duration: 10000,
-            ease: "Linear",
+            duration: 5000,
+            ease: "Circular",
             yoyo: true,
             loop: -1
         });
