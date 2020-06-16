@@ -3,6 +3,9 @@ import { Background } from "../../objects/background";
 import { ProtoGuy, ProtoGuyCard } from "../../../characters/protoGuy";
 import { CardObject } from "../../objects/cardObject";
 import { Card } from "../card";
+import { DialogueState } from "../../../core/dialogueController";
+
+const CLASS_ID = "zoom";
 
 /**
  * @brief Models a "Card" inside of a scene.
@@ -46,6 +49,16 @@ export class ComputerCard extends Card {
     }
 
     /**
+     * @brief Creates the card and shows the text
+     */
+    create() {
+        super.create();
+
+        //Show the dialogue
+        this.parent_scene.dialogue.display(CLASS_ID);
+    }
+
+    /**
      * @brief Shows one of the items
      * @param {Number} choice the choice that was made to get here
      */
@@ -79,5 +92,11 @@ export class ComputerCard extends Card {
      */
     update() {
         super.update();
+
+        //Check if it's time to move to the next scene
+        if(this.parent_scene.dialogue.getState() === DialogueState.DONE) {
+            this.endCard();
+            this.parent_scene.nextCard();
+        }
     }
 }

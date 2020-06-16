@@ -30,7 +30,7 @@
 	},
 	"zoom": {
 		"name": "Prof",
-		"text": "'Veuillez s'il vous plait éteindre vos micros'",
+		"text": ["Veuillez s'il vous plait éteindre vos micros"],
 		"choices": {},
 		"goto": ["texto"]
 	},
