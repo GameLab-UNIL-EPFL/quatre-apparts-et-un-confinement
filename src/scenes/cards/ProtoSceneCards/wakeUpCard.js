@@ -136,9 +136,9 @@ export class WakeUpCard extends Card {
         super.update();
 
         //Check if it's time to move to the next scene
-        if(this.parent_scene.dialogue.getState() == DialogueState.DONE) {
+        if(this.parent_scene.dialogue.getState() === DialogueState.DONE) {
+            this.endCard();
             this.parent_scene.nextCard();
-            this.isDone = true;
         }
     }
 }

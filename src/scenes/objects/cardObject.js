@@ -52,7 +52,7 @@ export class CardObject {
         this.sprite = this.parent_scene.add.image(this.position.x, this.position.y, this.name);
 
         //Add a choice if needed
-        if(this.choice != -1) {
+        if(this.choice !== -1) {
             //Make the clothes interactive
             this.sprite.setInteractive();
 
@@ -61,8 +61,8 @@ export class CardObject {
                 (_, gameObject) => {
                     //Check that we clicked the clothes
                     if(gameObject === this.sprite) {
-
-                        this.parent_scene.cardIsDone();
+                        
+                        this.parent_scene.endCard();
                         this.parent_scene.nextCard(this.choice);
                     }
                 },

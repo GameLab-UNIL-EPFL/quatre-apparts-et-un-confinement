@@ -245,64 +245,10 @@ export class ProtoGuy {
         }
     }
 
-    // /**
-    //  * @brief Handles protoguy's state animation
-    //  */
-    // update() {
-    //     switch(this.card) {
-    //         case ProtoGuyCard.WAKE_UP:
-    //             switch(this.cur_state) {
-    //                 case ProtoGuyState.SCRATCH_DOWN:
-    //                     this.arm_sprite.angle -= 0.3;
-    //                     this.arm_sprite.x += 0.3;
-    //                     this.arm_sprite.y -= 0.3;
-    //                     this.rotate++;
-        
-    //                     if(this.rotate >= 30) {
-    //                         this.cur_state = ProtoGuyState.SCRATCH_UP;
-    //                     }
-    //                     break;
-        
-    //                 case ProtoGuyState.SCRATCH_UP:
-    //                     this.arm_sprite.angle += 0.3;
-    //                     this.arm_sprite.x -= 0.3;
-    //                     this.arm_sprite.y += 0.3;
-    //                     this.rotate--;
-        
-    //                     if(this.rotate <= 0) {
-    //                         this.cur_state = ProtoGuyState.SCRATCH_DOWN;
-    //                     }
-    //                     break;
-        
-    //                 case ProtoGuyState.IDLE:
-    //                     break;
-    //                 default:
-    //                     break;
-    //             }
-    //             break;
-
-    //         case ProtoGuyCard.CHOSE_PATH:
-    //             break;
-
-    //         case ProtoGuyCard.CLOTHES:
-    //             //TODO Set url and names for each sprite 
-    //             break;
-    //         case ProtoGuyCard.KITCHEN:
-    //             //TODO Set url and names for each sprite 
-    //             break;
-    //         case ProtoGuyCard.COMPUTER:
-    //             //TODO Set url and names for each sprite 
-    //             break;
-    //         case ProtoGuyCard.MINI_GAME:
-    //             //TODO Set url and names for each sprite 
-    //             break;
-    //         case ProtoGuyCard.BED:
-    //             //TODO Set url and names for each sprite 
-    //             break;
-    //         default:
-    //             break;
-    //     }
-    // }
+    /**
+     * Intentionally does nothing
+     */
+    update() {}
 
     /**
      * @brief Unloads all of the sprites from memory

@@ -9,8 +9,6 @@ export class IntroCard extends Card {
     /**
      * @brief Constructs a group of objects in the scene
      * @param parent_scene, the Scene which this card belongs to
-     * @param {array} children, the objects that are in the card
-     * represented as an array of pairs (name, imageurl)
      */
     constructor(parent_scene) {
         super(parent_scene, []);
@@ -47,18 +45,18 @@ export class IntroCard extends Card {
         //Make said image interactive
         this.parent_scene.input.on(
             'gameobjectdown',
-            (pointer, gameObject) => {
-                this.parent_scene.nextCard();
+            (_, gameObject) => {
+                if(gameObject === this.sprite) {
+                    this.parent_scene.endCard();
+                    this.parent_scene.nextCard();
+                }
             },
             this.parent_scene
         );
-
-        this.isLoaded = true;
-        this.isDone = true;
     }
 
     /**
-     * @breif Unloads all the different elements of the card from memory
+     * @brief Unloads all the different elements of the card from memory
      */
     destroy() {
         super.destroy();

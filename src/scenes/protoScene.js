@@ -116,29 +116,34 @@ export class ProtoScene extends Phaser.Scene {
      * in the scene.
      */
     create() {
-        this.current_card.create();
+        if(this.current_card.isLoaded()) {
+            this.current_card.create();
+        }
     }
 
     /**
      * @brief Update the scene
      */
     update() {
-        if(this.current_card.isLoaded) {
+        if(this.current_card.isLoaded()) {
             this.current_card.update();
         }
     }
 
-    cardIsDone() {
-        this.current_card.cur_state = CardState.DONE;
+    /**
+     * @brief Ends the current card
+     */
+    endCard() {
+        this.current_card.endCard();
     }
 
     /**
      * @brief moves to the next card
-     * @param {int} choice the choice that was made
+     * @param {Number} choice the choice that was made
      */
     nextCard(choice) {
 
-        if(this.cardIdx < NUM_CARDS - 1 && this.current_card.isDone) {
+        if(this.cardIdx < NUM_CARDS - 1 && this.current_card.isDone()) {
             this.current_card.destroy();
 
             switch(this.cardIdx) {

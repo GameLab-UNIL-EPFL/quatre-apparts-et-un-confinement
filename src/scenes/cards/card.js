@@ -36,6 +36,22 @@ export class Card {
     }
 
     /**
+     * @brief Checks if the card has been loaded yet
+     * @return {boolean} Whether the card has been loaded or not
+     */
+    isLoaded() {
+        return this.cur_state !== CardState.INIT;
+    }
+
+    /**
+     * @brief Checks if the card has finished doing its thing
+     * @return {boolean} Whether the card is done or not
+     */
+    isDone() {
+        return this.cur_state === CardState.DONE;
+    }
+
+    /**
      * @brief Ends the current card
      */
     endCard() {
@@ -48,6 +64,7 @@ export class Card {
      */
     preload() {
         this.children.forEach(child => child.preload());
+        this.cur_state = CardState.LOADED;
     }
 
     /**
@@ -56,7 +73,6 @@ export class Card {
      */
     create() {
         this.children.forEach(child => child.create());
-        this.cur_state = CardState.DONE;
     }
 
     /**
