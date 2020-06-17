@@ -8,10 +8,11 @@ export class CardObject {
      * @brief Constructs an instance of the clothes
      * @param {Phaser.Scene} parent_scene, the scene in which the clothes are contained
      * @param {JSON} sprite, {name, url} of the sprite that will be created
-     * @param {Phaser.Vector2} position the position of the object in the scene
+     * @param {Phaser.Math.Vector2} position the position of the object in the scene
      * @param {Number} choice, the path that this item will entail (only if !-1)
+     * @param {JSON} highlight {name, url} of the highlighted version of the sprite (can be null)
      */
-    constructor(parent_scene, sprite, position, choice=-1) {
+    constructor(parent_scene, sprite, position, choice=-1, highlight=null) {
         this.parent_scene = parent_scene;
         
         //Sprite parameters
@@ -23,6 +24,9 @@ export class CardObject {
 
         //Interaction parameters
         this.choice = choice;
+
+        //Highlighted sprite
+        this.highlight = highlight;
     }
 
     /**
@@ -31,16 +35,9 @@ export class CardObject {
     preload() {
         this.parent_scene.load.image(this.name, this.url);
 
-        //Check if the spritesheet exists
-        if(this.spriteSheet) {
-            this.parent_scene.load.spritesheet(
-                this.spriteSheet.name,
-                this.spriteSheet.url, {
-                    frameWidth: this.spriteSheet.frameWidth,
-                    frameHeight: this.spriteSheet.frameHeight 
-                }
-            );
-
+        //Load the highlight if it exists
+        if(this.highlight) {
+            this.parent_scene.load.image(this.highlight.name, this.highlight.url);
         }
     }
 
@@ -50,6 +47,19 @@ export class CardObject {
      */
     create() {
         this.sprite = this.parent_scene.add.image(this.position.x, this.position.y, this.name);
+
+        //Create the highloght and animation if needed
+        if(this.highlight) {
+            this.highlight_sprite = this.parent_scene.add.image(this.position.x, this.position.y, this.highlight.name);
+            this.parent_scene.tweens.add({
+                targets: this.highlight_sprite,
+                alpha: 0,
+                duration: 2000,
+                ease: "Quadratic",
+                yoyo: true,
+                loop: -1
+            });
+        }
 
         //Add a choice if needed
         if(this.choice !== -1) {
@@ -82,5 +92,9 @@ export class CardObject {
      */
     destroy() {
         this.sprite.destroy();
+
+        if(this.highlight_sprite) {
+            this.highlight_sprite.destroy();
+        }
     }
 } 

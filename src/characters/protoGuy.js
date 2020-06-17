@@ -62,7 +62,7 @@ export class ProtoGuy {
 
             case ProtoGuyCard.CHOSE_PATH:
                 this.name = "chosePathProtoGuy";
-                this.url = "/sprites/ProtoScene/ChosePathCard/ProtoGuy.png";
+                this.url = "sprites/ProtoScene/ChosePathCard/ProtoGuy.png";
                 break;
 
             case ProtoGuyCard.CLOTHES:
@@ -71,18 +71,19 @@ export class ProtoGuy {
                 break;
 
             case ProtoGuyCard.KITCHEN:
-                //TODO Set url and names for each sprite 
+                this.name = "kitchenProtoGuy";
+                this.url = "sprites/ProtoScene/KitchenCard/protoGuy.png";
                 break;
 
             case ProtoGuyCard.COMPUTER:
                 this.dirty_name = "computeProtoGuyDirty";
-                this.dirty_url = "/sprites/ProtoScene/ComputerCard/habits-sales.png";
+                this.dirty_url = "sprites/ProtoScene/ComputerCard/habits-sales.png";
 
                 this.clean_name = "computeProtoGuyClean";
-                this.clean_url = "/sprites/ProtoScene/ComputerCard/habits-propres.png";
+                this.clean_url = "sprites/ProtoScene/ComputerCard/habits-propres.png";
 
                 this.pj_name = "computeProtoGuyPJ";
-                this.pj_url = "/sprites/ProtoScene/ComputerCard/habits-pyjama.png";
+                this.pj_url = "sprites/ProtoScene/ComputerCard/habits-pyjama.png";
                 break;
 
             case ProtoGuyCard.MINI_GAME:
@@ -118,7 +119,7 @@ export class ProtoGuy {
                 break;
 
             case ProtoGuyCard.KITCHEN:
-                //TODO Set url and names for each sprite 
+                this.parent_scene.load.image(this.name, this.url);
                 break;
 
             case ProtoGuyCard.COMPUTER:
@@ -210,7 +211,8 @@ export class ProtoGuy {
                 break;
 
             case ProtoGuyCard.KITCHEN:
-                //TODO Set url and names for each sprite 
+                this.sprite = this.parent_scene.add.image(this.x, this.y, this.name);
+                this.sprites = [this.sprite];
                 break;
 
             case ProtoGuyCard.COMPUTER:
