@@ -1,0 +1,107 @@
+[34mℹ[39m [90m｢wds｣[39m: Project is running at http://localhost:8080/
+[34mℹ[39m [90m｢wds｣[39m: webpack output is served from /
+[34mℹ[39m [90m｢wds｣[39m: Content not from webpack is served from /Users/rnp/Covidou
+[34mℹ[39m [90m｢wdm｣[39m: Hash: 542d4ea7e83697b09afd
+Version: webpack 4.43.0
+Time: 4733ms
+Built at: 17.06.2020 11:49:05
+                                                       Asset       Size  Chunks             Chunk Names
+                                                  index.html  726 bytes          [emitted]  
+                                    levels/sample_level.json   1.79 KiB          [emitted]  
+                                                     main.js   21.5 MiB    main  [emitted]  main
+                                          sound/decharge.wav    129 KiB          [emitted]  
+                                       sound/deplacement.wav    129 KiB          [emitted]  
+                                               sound/fin.wav    517 KiB          [emitted]  
+                                       sound/game_jam_v1.mp3   1.83 MiB          [emitted]  
+                                       sound/game_jam_v2.mp3   1.83 MiB          [emitted]  
+                                      sound/interrupteur.wav    186 KiB          [emitted]  
+                                              sound/mort.wav    388 KiB          [emitted]  
+                                                sound/up.wav    129 KiB          [emitted]  
+            sprites/ProtoScene/ChosePathCard/03_00-model.jpg    860 KiB          [emitted]  
+sprites/ProtoScene/ChosePathCard/CVD0087_Scene00_Case_03.jpg    860 KiB          [emitted]  
+                 sprites/ProtoScene/ChosePathCard/Closet.png    713 KiB          [emitted]  
+               sprites/ProtoScene/ChosePathCard/ProtoGuy.png    110 KiB          [emitted]  
+                     sprites/ProtoScene/ChosePathCard/bg.png   1.31 MiB          [emitted]  
+                   sprites/ProtoScene/ChosePathCard/room.png    293 KiB          [emitted]  
+              sprites/ProtoScene/ClothesCard/04_00-model.jpg   1.64 MiB          [emitted]  
+                       sprites/ProtoScene/ClothesCard/bg.jpg   4.08 MiB          [emitted]  
+                    sprites/ProtoScene/ClothesCard/chair.png    177 KiB          [emitted]  
+                  sprites/ProtoScene/ClothesCard/clothes.png   51.5 KiB          [emitted]  
+                 sprites/ProtoScene/ClothesCard/protoGuy.png    381 KiB          [emitted]  
+                    sprites/ProtoScene/ComputerCard/base.jpg   3.99 MiB          [emitted]  
+                  sprites/ProtoScene/ComputerCard/bureau.png    592 KiB          [emitted]  
+          sprites/ProtoScene/ComputerCard/habits-propres.png    192 KiB          [emitted]  
+           sprites/ProtoScene/ComputerCard/habits-pyjama.png    146 KiB          [emitted]  
+            sprites/ProtoScene/ComputerCard/habits-sales.png    157 KiB          [emitted]  
+                  sprites/ProtoScene/ComputerCard/modele.jpg   1.08 MiB          [emitted]  
+                   sprites/ProtoScene/ComputerCard/toast.png   27.3 KiB          [emitted]  
+                   sprites/ProtoScene/ComputerCard/verre.png   17.9 KiB          [emitted]  
+                 sprites/ProtoScene/ComputerCard/yogourt.png   20.1 KiB          [emitted]  
+                              sprites/ProtoScene/IntroBg.png   32.4 KiB          [emitted]  
+                        sprites/ProtoScene/WakeUpCard/bg.jpg    3.1 MiB          [emitted]  
+             sprites/ProtoScene/WakeUpCard/character_arm.png    144 KiB          [emitted]  
+            sprites/ProtoScene/WakeUpCard/character_body.png    410 KiB          [emitted]  
+            sprites/ProtoScene/WakeUpCard/character_head.png     73 KiB          [emitted]  
+                     sprites/ProtoScene/WakeUpCard/phone.png   5.99 KiB          [emitted]  
+                     sprites/ProtoScene/WakeUpCard/ring1.png    1.9 KiB          [emitted]  
+                     sprites/ProtoScene/WakeUpCard/ring2.png   1.57 KiB          [emitted]  
+                     sprites/ProtoScene/WakeUpCard/ring3.png   1.42 KiB          [emitted]  
+          sprites/ProtoScene/WakeUpCard/ring_spritesheet.png   6.25 KiB          [emitted]  
+             sprites/ProtoScene/WakeUpCard/tired_bubbles.png   3.98 KiB          [emitted]  
+               sprites/ProtoScene/WakeUpCard/whole_scene.jpg   3.26 MiB          [emitted]  
+                    sprites/characters/test_personnage_1.png    360 KiB          [emitted]  
+                    sprites/characters/test_personnage_2.png    394 KiB          [emitted]  
+                    sprites/icons/android-chrome-192x192.png   15.4 KiB          [emitted]  
+                    sprites/icons/android-chrome-256x256.png   21.1 KiB          [emitted]  
+                          sprites/icons/apple-touch-icon.png   12.4 KiB          [emitted]  
+                             sprites/icons/browserconfig.xml  246 bytes          [emitted]  
+                             sprites/icons/favicon-16x16.png    1.5 KiB          [emitted]  
+                             sprites/icons/favicon-32x32.png   2.56 KiB          [emitted]  
+                                   sprites/icons/favicon.ico   14.7 KiB          [emitted]  
+                            sprites/icons/mstile-150x150.png   10.7 KiB          [emitted]  
+                         sprites/icons/safari-pinned-tab.svg   3.69 KiB          [emitted]  
+                              sprites/icons/site.webmanifest  426 bytes          [emitted]  
+Entrypoint main = main.js
+[0] multi (webpack)-dev-server/client?http://localhost:8080 ./src 40 bytes {main} [built]
+    factory:0ms building:1ms dependencies:372ms = 373ms
+[./node_modules/phaser/src/phaser.js] 2.48 KiB {main} [built]
+    [./src/index.js] 567ms -> factory:433ms building:207ms dependencies:375ms = 1582ms
+[./node_modules/phaser3-rex-plugins/templates/ui/ui-plugin.js] 3.22 KiB {main} [built]
+    [./src/index.js] 567ms -> factory:433ms building:207ms dependencies:375ms = 1582ms
+[./node_modules/strip-ansi/index.js] 161 bytes {main} [built]
+    [0] 1ms -> [./node_modules/webpack-dev-server/client/index.js?http://localhost:8080] 395ms -> factory:513ms building:18ms dependencies:170ms = 1097ms
+[./node_modules/webpack-dev-server/client/index.js?http://localhost:8080] (webpack)-dev-server/client?http://localhost:8080 4.29 KiB {main} [built]
+    [0] 1ms -> factory:372ms building:23ms = 396ms
+[./node_modules/webpack-dev-server/client/overlay.js] (webpack)-dev-server/client/overlay.js 3.51 KiB {main} [built]
+    [0] 1ms -> [./node_modules/webpack-dev-server/client/index.js?http://localhost:8080] 395ms -> factory:513ms building:18ms dependencies:170ms = 1097ms
+[./node_modules/webpack-dev-server/client/socket.js] (webpack)-dev-server/client/socket.js 1.53 KiB {main} [built]
+    [0] 1ms -> [./node_modules/webpack-dev-server/client/index.js?http://localhost:8080] 395ms -> factory:513ms building:18ms dependencies:170ms = 1097ms
+[./node_modules/webpack-dev-server/client/utils/createSocketUrl.js] (webpack)-dev-server/client/utils/createSocketUrl.js 2.91 KiB {main} [built]
+    [0] 1ms -> [./node_modules/webpack-dev-server/client/index.js?http://localhost:8080] 395ms -> factory:513ms building:18ms dependencies:170ms = 1097ms
+[./node_modules/webpack-dev-server/client/utils/log.js] (webpack)-dev-server/client/utils/log.js 964 bytes {main} [built]
+    [0] 1ms -> [./node_modules/webpack-dev-server/client/index.js?http://localhost:8080] 395ms -> factory:513ms building:18ms dependencies:170ms = 1097ms
+[./node_modules/webpack-dev-server/client/utils/reloadApp.js] (webpack)-dev-server/client/utils/reloadApp.js 1.59 KiB {main} [built]
+    [0] 1ms -> [./node_modules/webpack-dev-server/client/index.js?http://localhost:8080] 395ms -> factory:513ms building:18ms dependencies:170ms = 1097ms
+[./node_modules/webpack-dev-server/client/utils/sendMessage.js] (webpack)-dev-server/client/utils/sendMessage.js 402 bytes {main} [built]
+    [0] 1ms -> [./node_modules/webpack-dev-server/client/index.js?http://localhost:8080] 395ms -> factory:513ms building:18ms dependencies:170ms = 1097ms
+[./node_modules/webpack/hot sync ^\.\/log$] (webpack)/hot sync nonrecursive ^\.\/log$ 170 bytes {main} [built]
+    [0] 1ms -> [./node_modules/webpack-dev-server/client/index.js?http://localhost:8080] 395ms -> factory:513ms building:18ms dependencies:170ms = 1097ms
+[./src/index.js] 938 bytes {main} [built]
+    factory:339ms building:228ms = 567ms
+[./src/plugins/debugObjects.js] 5.19 KiB {main} [built]
+    [./src/index.js] 567ms -> factory:433ms building:207ms dependencies:375ms = 1582ms
+[./src/scenes/introScene.js] 467 bytes {main} [built]
+    [./src/index.js] 567ms -> factory:433ms building:207ms dependencies:375ms = 1582ms
+    + 1928 hidden modules
+Child html-webpack-plugin for "index.html":
+     1 asset
+    Entrypoint undefined = index.html
+    [./node_modules/html-webpack-plugin/lib/loader.js!./index.html] 881 bytes {0} [built]
+        factory:31ms building:22ms = 53ms
+    [./node_modules/lodash/lodash.js] 528 KiB {0} [built]
+        [./node_modules/html-webpack-plugin/lib/loader.js!./index.html] 53ms -> factory:17ms building:139ms = 209ms
+    [./node_modules/webpack/buildin/global.js] (webpack)/buildin/global.js 472 bytes {0} [built]
+        [./node_modules/html-webpack-plugin/lib/loader.js!./index.html] 53ms -> [./node_modules/lodash/lodash.js] 156ms -> factory:11ms building:4ms = 224ms
+    [./node_modules/webpack/buildin/module.js] (webpack)/buildin/module.js 497 bytes {0} [built]
+        [./node_modules/html-webpack-plugin/lib/loader.js!./index.html] 53ms -> [./node_modules/lodash/lodash.js] 156ms -> factory:11ms building:4ms = 224ms
+[34mℹ[39m [90m｢wdm｣[39m: Compiled successfully.
