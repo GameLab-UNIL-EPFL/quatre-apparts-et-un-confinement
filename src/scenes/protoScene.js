@@ -7,6 +7,7 @@ import { Card, CardState } from "./cards/card.js";
 import { CardObject } from "./objects/cardObject.js";
 import { Background } from "./objects/background.js";
 import { ProtoGuy, ProtoGuyCard } from "../characters/protoGuy.js";
+import { ZoomMiniGameCard } from "./cards/ProtoSceneCards/zoomMiniGameCard.js";
 
 const CARDS = {
     INTRO: 0,
@@ -134,18 +135,21 @@ export class ProtoScene extends Phaser.Scene {
 
         this.computerCard = new ComputerCard(this);
 
+        this.zoomMiniGame = new ZoomMiniGameCard(this);
+
         this.cards = [
             this.introCard,
             this.wakeUpCard,
             this.chosePathCard,
             this.clothesCard,
             this.kitchenCard,
-            this.computerCard
+            this.computerCard,
+            this.zoomMiniGame
         ];
 
         //Keep track of wich card is displayed
         this.cardIdx = CARDS.INTRO;
-        this.current_card = this.introCard;
+        this.current_card = this.zoomMiniGame;
 
         //Create the dialogue controller 
         this.dialogue = new DialogueController(this);
@@ -282,6 +286,10 @@ export class ProtoScene extends Phaser.Scene {
                     this.current_card.showItem(choice);
                     break;
 
+                case CARDS.COMPUTER:
+                    this.cardIdx = CARDS.MINI_GAME;
+                    this.current_card = this.zoomMiniGame;
+                    this.current_card.create();
                 default:
                     break;
             }

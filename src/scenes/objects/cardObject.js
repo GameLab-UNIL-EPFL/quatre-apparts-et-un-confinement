@@ -85,7 +85,10 @@ export class CardObject {
      * @brief Update method that is called on every frame.
      * Usually used to handle object animations
      */
-    update() {}
+    update() {
+        this.x = this.sprite.x;
+        this.y = this.sprite.y;
+    }
 
     /**
      * @brief Deallocates the memory linked to the sprite
