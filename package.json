@@ -1,6 +1,6 @@
 {
   "name": "Covidou",
-  "version": "0.0.0",
+  "version": "0.0.1",
   "description": "Free Open-Source web-based mobile game.",
   "main": "src/index.js",
   "scripts": {
@@ -8,7 +8,8 @@
     "test": "jest --coverage",
     "lint": "standard",
     "dev": "webpack-dev-server --config webpack/base.js --open",
-    "start": "node ./server_for_heroku.js"
+    "start": "node ./server_for_heroku.js",
+    "stat": "webpack-dev-server --profile --config webpack/base.js --json > compilation-stats.json"
   },
   "repository": {
     "type": "git",
@@ -35,7 +36,6 @@
     "sass-loader": "^8.0.2",
     "terser-webpack-plugin": "^2.2.1",
     "webpack": "^4.43.0",
-    "webpack-cli": "^3.3.10",
     "webpack-dev-server": "^3.11.0",
     "webpack-merge": "^4.2.2"
   },

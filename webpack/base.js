@@ -63,5 +63,9 @@ module.exports = {
             to: 'sprites'
         }
     ])
-  ]
+  ],
+  stats: {
+    logging: 'verbose',
+    maxModules: 10000
+  }
 };
