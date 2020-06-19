@@ -8,8 +8,8 @@ const N_MSG = N_NOTIFICATION + N_DISTRACTIONS;
 const NOTIF_SPREAD = 1500;
 const NOTIF_OFFSET = 300;
 
-const BEG_Y_ZONE = 1500;
-const END_Y_ZONE = 3000;
+const BEG_Y_ZONE = 2200;
+const END_Y_ZONE = 2535;
 
 const INIT_FOCUS = 5;
 const SPAWN_DELAY = 500;
@@ -40,17 +40,17 @@ export class ZoomMiniGameCard extends Card {
             new CardObject(
                 parent_scene,
                 { name: "bar_bg", url: "sprites/ProtoScene/ZoomMiniGameCard/bar_bg.png" },
-                new Phaser.Math.Vector2(1020, 1300)
+                new Phaser.Math.Vector2(1039, 253)
             ),
             new CardObject(
                 parent_scene,
                 { name: "bar_fill", url: "sprites/ProtoScene/ZoomMiniGameCard/bar_fill.png" },
-                new Phaser.Math.Vector2(1020, 1300)
+                new Phaser.Math.Vector2(1039, 253)
             ),
             new CardObject(
                 parent_scene,
                 { name: "bar", url: "sprites/ProtoScene/ZoomMiniGameCard/bar.png" },
-                new Phaser.Math.Vector2(1020, 1500)
+                new Phaser.Math.Vector2(1010, 2200)
             )
         ];
 
@@ -95,19 +95,21 @@ export class ZoomMiniGameCard extends Card {
     createMessage() {
         //Select the message to show
         let msg_idx = Math.round(Math.random() * (N_MSG - 1));
-        let msg = this.messages[msg_idx];
 
         //Create the msg at a random location
-        msg.pos.x = Math.round(Math.random() * NOTIF_SPREAD) + NOTIF_OFFSET;
-        msg.sprite = this.parent_scene.add.image(msg.pos.x, msg.pos.y, msg.name);
+        this.messages[msg_idx].pos.x = Math.round(Math.random() * NOTIF_SPREAD) + NOTIF_OFFSET;
+        this.messages[msg_idx].sprite = this.parent_scene.add.image(
+            this.messages[msg_idx].pos.x, 
+            this.messages[msg_idx].pos.y, 
+            this.messages[msg_idx].name);
 
         //Animate the msg
         this.parent_scene.tweens.add({
-            targets: msg.sprite,
-            y: 3000,
-            duration: 3000,
+            targets: this.messages[msg_idx].sprite,
+            y: 2600,
+            duration: 7000,
             onComplete: () => {
-                msg.sprite.destroy();
+                this.messages[msg_idx].sprite.destroy();
                 this.focus_bar_health--;
             },
             onCompleteScope: this
@@ -118,10 +120,10 @@ export class ZoomMiniGameCard extends Card {
             'gameobjectdown',
             (pointer, gameObject) => {
                 //Check that we clicked the object
-                if(gameObject === msg.sprite) {
+                if(gameObject === this.messages[msg_idx].sprite) {
                     //Check the pointer's location
                     if(pointer.y > BEG_Y_ZONE && pointer.y < END_Y_ZONE) {
-                        msg.destroy();
+                        this.messages[msg_idx].sprite.destroy();
                     }
                 }
             },
