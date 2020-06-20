@@ -40,6 +40,12 @@
 		"choices": {},
 		"goto": []
 	},
+	"loseZoom": {
+		"name": "Prof",
+		"text": ["Damien vous n'êtes pas très\nconcentré aujourd'hui..."],
+		"choices": {},
+		"goto": []
+	},
 	"texto": {
 		"name": "Copine",
 		"text": "Hello! Ca va? :)",

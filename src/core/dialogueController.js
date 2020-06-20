@@ -59,11 +59,18 @@ export class DialogueController {
     }
 
     /**
+     * @brief Checks whether the dialogue box is still displayed or not
+     * @return {boolean} whether the dialogue state is DONE 
+     */
+    isDone() {
+        return this.cur_state === DialogueState.DONE;
+    }
+
+    /**
      * @brief displays the dialogue that has a given ID
      * @param {string} id the ID of the dialogue that we want to display 
-     * @param {Function} callback a callback that will be run when the conversation is over
      */
-    display(id, callback) {
+    display(id) {
         this.current_conv_id = id;
         this.cur_state = DialogueState.DISPLAYED;
 
@@ -111,11 +118,6 @@ export class DialogueController {
 
                         //Update dialogue state
                         this.cur_state = DialogueState.DONE;
-
-                        //Call the callback
-                        if(callback && typeof callback === "function") {
-                            callback();
-                        }
                         
                     } else {
                         this.content.text = this.text[this.textIdx];

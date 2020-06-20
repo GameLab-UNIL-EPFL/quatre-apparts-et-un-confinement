@@ -16,6 +16,7 @@ const SPAWN_DELAY = 500;
 const NUM_SPAWNS = 100;
 
 const END_ZOOM_CALL_ID = "endZoom";
+const LOSER_ID = "loseZoom";
 
 const MessageType = {
     Cours: 0,
@@ -95,6 +96,10 @@ export class ZoomMiniGameCard extends Card {
         //Used to update the bar
         this.focus_bar_health = INIT_FOCUS;
         this.num_spaws = NUM_SPAWNS;
+
+        //Mutex to avoid multiple game ends
+        this.lock = false;
+        this.final_health = INIT_FOCUS;
     }
 
     /**
@@ -114,101 +119,116 @@ export class ZoomMiniGameCard extends Card {
      * @param {Function} callback what will be done at the end of the minigame
      */
     createMessage(callback) {
-        console.log("CREATE CARD");
-
-        //Select the message to show
-        let msg_idx = Math.round(Math.random() * (N_MSG - 1));
-
-        //Make sure that the current message isn't already displayed
-        while(msg_idx in this.cur_msg) {
-            msg_idx = Math.round(Math.random() * (N_MSG - 1));
-        } 
-
-        this.cur_msg.push(msg_idx);
-
-        //Create the msg at a random location
-        this.messages[msg_idx].pos.x = Math.round(Math.random() * NOTIF_SPREAD) + NOTIF_OFFSET;
-
-        this.messages[msg_idx].sprite = this.parent_scene.add.image(
-            this.messages[msg_idx].pos.x, 
-            this.messages[msg_idx].pos.y, 
-            this.messages[msg_idx].name
-        );
-
-        //Save current idx
-        const cur_idx = this.cur_msg_idx - 1;
-
-        //Animate the msg
-        this.parent_scene.tweens.add({
-            targets: this.messages[msg_idx].sprite,
-            y: 3000,
-            duration: 7000,
-            onComplete: () => {
-                this.messages[msg_idx].sprite.destroy();
-
-                //Make sure that the player didn't miss a class notification
-                if(this.messages[msg_idx].type === MessageType.Cours) {
-
-                    //Check that the health bar doesn't drop below 0
-                    if(--this.focus_bar_health <= 0) {
+        if(!this.lock) {
+            //Select the message to show
+            let msg_idx = Math.round(Math.random() * (N_MSG - 1));
+    
+            //Make sure that the current message isn't already displayed
+            let max_loop = N_MSG;
+            while(msg_idx in this.cur_msg) {
+                //Make sure that we can't get stuck in the loop
+                if(--max_loop <= 0) {
+                    break;
+                } 
+                msg_idx = Math.round(Math.random() * (N_MSG - 1));
+            } 
+    
+            this.cur_msg.push(msg_idx);
+    
+            //Create the msg at a random location
+            this.messages[msg_idx].pos.x = Math.round(Math.random() * NOTIF_SPREAD) + NOTIF_OFFSET;
+    
+            this.messages[msg_idx].sprite = this.parent_scene.add.image(
+                this.messages[msg_idx].pos.x, 
+                this.messages[msg_idx].pos.y, 
+                this.messages[msg_idx].name
+            );
+    
+            //Animate the msg
+            this.parent_scene.tweens.add({
+                targets: this.messages[msg_idx].sprite,
+                y: 3000,
+                duration: 7000,
+                onComplete: () => {
+                    this.messages[msg_idx].sprite.destroy();
+    
+                    //Make sure that the player didn't miss a class notification
+                    if(this.messages[msg_idx].type === MessageType.Cours) {
+    
+                        //Check that the health bar doesn't drop below 0
+                        if(--this.focus_bar_health <= 0) {
+                            if(typeof callback === "function") {
+                                callback(this, true);
+                            }
+                        }
+    
+                        //Resize the health bar 
+                        this.children[3].sprite.width = this.focus_bar_width * (1./(INIT_FOCUS + 1 - this.focus_bar_health));
+                    }
+    
+                    //Remove the elelment in question
+                    this.cur_msg.filter((val, _) => val === msg_idx);
+                    
+                    //Check if the game is over
+                    if(--this.num_spaws === 0) {
                         if(typeof callback === "function") {
-                            callback();
+                            callback(this, false);
                         }
                     }
-                }
-
-                //Remove the elelment in question
-                this.cur_msg.filter((val, _) => val === msg_idx);
-                
-                //Check if the game is over
-                if(--this.num_spaws === 0) {
-                    if(typeof callback === "function") {
-                        callback();
-                    }
-                }
-            },
-            onCompleteScope: this
-        })
-
-        //Make the card interactive
-        this.parent_scene.input.on(
-            'gameobjectdown',
-            (pointer, gameObject) => {
-                //Check that we clicked the object
-                if(gameObject === this.messages[msg_idx].sprite) {
-
-                    //Check the pointer's location
-                    if(pointer.y > BEG_Y_ZONE && pointer.y < END_Y_ZONE) {
-                        gameObject.destroy();
-
-                         //Remove the elelment in question
-                        this.cur_msg.filter((val, _) => val === msg_idx);
-
-                        //Make sure that the player didn't miss a class notification
-                        if(this.messages[msg_idx].type === MessageType.Distraction) {
-
-                            //Check that the health bar doesn't drop below 0
-                            if(--this.focus_bar_health <= 0) {
-                                if(typeof callback === "function") {
-                                    callback();
+                },
+                onCompleteScope: this
+            })
+    
+            //Make the card interactive
+            this.parent_scene.input.on(
+                'gameobjectdown',
+                (pointer, gameObject) => {
+                    //Check that we clicked the object
+                    if(gameObject === this.messages[msg_idx].sprite) {
+    
+                        //Check the pointer's location
+                        if(pointer.y > BEG_Y_ZONE && pointer.y < END_Y_ZONE) {
+                            gameObject.destroy();
+    
+                             //Remove the elelment in question
+                            this.cur_msg.filter((val, _) => val === msg_idx);
+    
+                            //Make sure that the player didn't miss a class notification
+                            if(this.messages[msg_idx].type === MessageType.Distraction) {
+    
+                                //Check that the health bar doesn't drop below 0
+                                if(--this.focus_bar_health <= 0) {
+                                    if(typeof callback === "function") {
+                                        callback(this, true);
+                                    }
                                 }
                             }
                         }
                     }
-                }
-            },
-            this.parent_scene
-        );
+                },
+                this.parent_scene
+            );
+        }
     }
 
     /**
      * @brief Ends the minigame by closing the dialogue box and passing the card
      */
-    endMiniGame() {
-        this.parent_scene.dialogue.display(
-            END_ZOOM_CALL_ID, 
-            () => this.parent_scene.next_scene(this.focus_bar_health)
-        );
+    endMiniGame(card, lose) {
+        if(!card.lock) {
+            card.lock = true;
+
+            //Open the dialogue 
+            card.parent_scene.dialogue.display(
+                lose ? LOSER_ID : END_ZOOM_CALL_ID
+            );
+
+            //Save the card's health in case not all the notifications are gone
+            card.final_health = card.focus_bar_health;
+
+            //End the card
+            card.endCard();
+        }
     }
 
     /**
@@ -216,6 +236,9 @@ export class ZoomMiniGameCard extends Card {
      */
     create() {
         super.create();
+
+        //Save the bar's initial width
+        this.focus_bar_width = this.children[3].sprite.width;
 
         //Create the timer event
         this.msg_spawner = this.parent_scene.time.addEvent({
@@ -232,5 +255,10 @@ export class ZoomMiniGameCard extends Card {
      */
     update() {
         super.update();
+
+        //Check the dialogue state
+        if(this.isDone() && this.parent_scene.dialogue.isDone()) {
+            this.parent_scene.nextCard(this.final_health);
+        } 
     }
 }
