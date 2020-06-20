@@ -95,7 +95,7 @@ export class DialogueController {
             100, 
             2200,
             this.text[this.textIdx],
-            {font: "100px Arial", fill: "black"}
+            {font: "100px Arial", fill: "black", wordWrap: { width: 1900}}
         );
 
         this.content.setInteractive();

@@ -2,8 +2,8 @@
 	"reveil": {
 		"name": "Damien",
 		"text": [
-			"Aaah purée j’ai oublié de désactiver mon\nréveil hier soir!",
-			"Pourtant j’ai plus besoin de me dépêcher\npour aller prendre le bus ou me préparer."
+			"Aaah purée j’ai oublié de désactiver mon réveil hier soir!",
+			"Pourtant j’ai plus besoin de me dépêcher pour aller prendre le bus ou me préparer."
 		],
 		"choices": {},
 		"goto": ["habit", "frigo", "dodo"]
@@ -11,20 +11,26 @@
 	"habit": {
 		"name": "Damien",
 		"text": [
-			"Est-ce que j'ai vraiment besoin de\nm'habiller? *baille*"
+			"Est-ce que j'ai vraiment besoin de m'habiller? *baille*"
 		],
 		"choices": {},
-		"goto": ["zoom"]
+		"goto": ["bureau"]
 	},
 	"frigo": {
 		"name": "Damien",
-		"text": "Il reste plus grand chose... arf, j'ai vraiment pas envie d'aller faire les courses en ce moment.",
+		"text": "Bon, qu'est-ce que je vais manger?",
 		"choices": {},
-		"goto": ["zoom"]
+		"goto": ["bureau"]
 	},
 	"dodo": {
 		"name": "Damien",
 		"text": "Oh non c’est déjà midi, j’ai loupé mon premier cours... Bon, c’est pas grave, je rattraperai avec les notes de quelqu'un d'autre.",
+		"choices": {},
+		"goto": ["bureau"]
+	},
+	"bureau": {
+		"name": "Damien",
+		"text": ["Ah! Mon cours va commencer."],
 		"choices": {},
 		"goto": ["zoom"]
 	},
@@ -36,13 +42,35 @@
 	},
 	"endZoom": {
 		"name": "Prof",
-		"text": ["Merci pour votre attention\net bonne journée!"],
+		"text": ["Merci pour votre attention et bonne journée!"],
 		"choices": {},
 		"goto": []
 	},
 	"loseZoom": {
 		"name": "Prof",
-		"text": ["Damien vous n'êtes pas très\nconcentré aujourd'hui..."],
+		"text": ["Damien vous n'êtes pas très concentré aujourd'hui...", 
+			"Quels chapitres devez-vous lire pour la semaine prochaine?"],
+		"choices": {
+			"faux": {
+				"text": "12 et 13",
+				"goto": "repFausse"
+			},
+			"juste": {
+				"text": "11 et 12",
+				"goto": "repJuste"
+			}
+		},
+		"goto": ["repFausse", "repJuste"]
+	},
+	"repFausse": {
+		"name": "Prof",
+		"text": ["Non! Chapitres 11 et 12, j'espère que vous éteignerez Netflix la prochaine fois."],
+		"choices": {},
+		"goto": []
+	},
+	"repJuste": {
+		"name": "Prof",
+		"text": ["Oui c'est juste mais essayer de vous concentrer un peu plus, s'il vous plaît"],
 		"choices": {},
 		"goto": []
 	},
