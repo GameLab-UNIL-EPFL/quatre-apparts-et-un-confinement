@@ -261,4 +261,10 @@ export class ZoomMiniGameCard extends Card {
             this.parent_scene.nextCard(this.final_health);
         } 
     }
+
+    destroy() {
+        super.destroy();
+        
+        this.messages.forEach(msg => msg.sprite.destroy());
+    }
 }
