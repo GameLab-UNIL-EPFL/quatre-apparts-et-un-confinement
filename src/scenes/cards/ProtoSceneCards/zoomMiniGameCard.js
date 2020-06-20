@@ -15,6 +15,13 @@ const INIT_FOCUS = 5;
 const SPAWN_DELAY = 500;
 const NUM_SPAWNS = 100;
 
+const END_ZOOM_CALL_ID = "endZoom";
+
+const MessageType = {
+    Cours: 0,
+    Distraction: 1
+};
+
 /**
  * @brief Models a "Card" inside of a scene.
  * This card spefically handles the mechanics linked to the zoom minigame
@@ -64,8 +71,9 @@ export class ZoomMiniGameCard extends Card {
             this.messages.push({
                 name: "notification_" + i,
                 url: "sprites/ProtoScene/ZoomMiniGameCard/notif_" + i + ".png" ,
-                pos: new Phaser.Math.Vector2(0, -3000),
-                sprite: null
+                pos: new Phaser.Math.Vector2(0, -2500),
+                sprite: null,
+                type: MessageType.Cours
             });
         }
 
@@ -74,15 +82,24 @@ export class ZoomMiniGameCard extends Card {
             this.messages.push({
                 name: "distraction_" + i, 
                 url: "sprites/ProtoScene/ZoomMiniGameCard/distraction_" + i + ".png" ,
-                pos: new Phaser.Math.Vector2(0, -3000),
-                sprite: null
+                pos: new Phaser.Math.Vector2(0, -2500),
+                sprite: null,
+                type: MessageType.Distraction
             });
         }
 
+        //Array containing all of the sprites shown on the screen
+        this.cur_msg = [];
+        this.cur_msg_idx = 0;
+
         //Used to update the bar
         this.focus_bar_health = INIT_FOCUS;
+        this.num_spaws = NUM_SPAWNS;
     }
 
+    /**
+     * @brief loads in all of the images used in the scene
+     */
     preload() {
         super.preload();
 
@@ -92,25 +109,63 @@ export class ZoomMiniGameCard extends Card {
         });
     }
 
-    createMessage() {
+    /**
+     * @brief handles the creation of a single message card
+     * @param {Function} callback what will be done at the end of the minigame
+     */
+    createMessage(callback) {
+        console.log("CREATE CARD");
+
         //Select the message to show
         let msg_idx = Math.round(Math.random() * (N_MSG - 1));
 
+        //Make sure that the current message isn't already displayed
+        while(msg_idx in this.cur_msg) {
+            msg_idx = Math.round(Math.random() * (N_MSG - 1));
+        } 
+
+        this.cur_msg.push(msg_idx);
+
         //Create the msg at a random location
         this.messages[msg_idx].pos.x = Math.round(Math.random() * NOTIF_SPREAD) + NOTIF_OFFSET;
+
         this.messages[msg_idx].sprite = this.parent_scene.add.image(
             this.messages[msg_idx].pos.x, 
             this.messages[msg_idx].pos.y, 
-            this.messages[msg_idx].name);
+            this.messages[msg_idx].name
+        );
+
+        //Save current idx
+        const cur_idx = this.cur_msg_idx - 1;
 
         //Animate the msg
         this.parent_scene.tweens.add({
             targets: this.messages[msg_idx].sprite,
-            y: 2600,
+            y: 3000,
             duration: 7000,
             onComplete: () => {
                 this.messages[msg_idx].sprite.destroy();
-                this.focus_bar_health--;
+
+                //Make sure that the player didn't miss a class notification
+                if(this.messages[msg_idx].type === MessageType.Cours) {
+
+                    //Check that the health bar doesn't drop below 0
+                    if(--this.focus_bar_health <= 0) {
+                        if(typeof callback === "function") {
+                            callback();
+                        }
+                    }
+                }
+
+                //Remove the elelment in question
+                this.cur_msg.filter((val, _) => val === msg_idx);
+                
+                //Check if the game is over
+                if(--this.num_spaws === 0) {
+                    if(typeof callback === "function") {
+                        callback();
+                    }
+                }
             },
             onCompleteScope: this
         })
@@ -121,13 +176,38 @@ export class ZoomMiniGameCard extends Card {
             (pointer, gameObject) => {
                 //Check that we clicked the object
                 if(gameObject === this.messages[msg_idx].sprite) {
+
                     //Check the pointer's location
                     if(pointer.y > BEG_Y_ZONE && pointer.y < END_Y_ZONE) {
-                        this.messages[msg_idx].sprite.destroy();
+                        gameObject.destroy();
+
+                         //Remove the elelment in question
+                        this.cur_msg.filter((val, _) => val === msg_idx);
+
+                        //Make sure that the player didn't miss a class notification
+                        if(this.messages[msg_idx].type === MessageType.Distraction) {
+
+                            //Check that the health bar doesn't drop below 0
+                            if(--this.focus_bar_health <= 0) {
+                                if(typeof callback === "function") {
+                                    callback();
+                                }
+                            }
+                        }
                     }
                 }
             },
             this.parent_scene
+        );
+    }
+
+    /**
+     * @brief Ends the minigame by closing the dialogue box and passing the card
+     */
+    endMiniGame() {
+        this.parent_scene.dialogue.display(
+            END_ZOOM_CALL_ID, 
+            () => this.parent_scene.next_scene(this.focus_bar_health)
         );
     }
 
@@ -142,7 +222,8 @@ export class ZoomMiniGameCard extends Card {
             delay: SPAWN_DELAY,
             repeat: NUM_SPAWNS,
             callback: this.createMessage,
-            callbackScope: this
+            callbackScope: this,
+            args: [this.endMiniGame]
         });
     }
 

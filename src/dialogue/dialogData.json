@@ -32,7 +32,13 @@
 		"name": "Prof",
 		"text": ["Veuillez s'il vous plait éteindre vos micros"],
 		"choices": {},
-		"goto": ["texto"]
+		"goto": []
+	},
+	"endZoom": {
+		"name": "Prof",
+		"text": ["Merci pour votre attention\net bonne journée!"],
+		"choices": {},
+		"goto": []
 	},
 	"texto": {
 		"name": "Copine",

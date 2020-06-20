@@ -61,8 +61,9 @@ export class DialogueController {
     /**
      * @brief displays the dialogue that has a given ID
      * @param {string} id the ID of the dialogue that we want to display 
+     * @param {Function} callback a callback that will be run when the conversation is over
      */
-    display(id) {
+    display(id, callback) {
         this.current_conv_id = id;
         this.cur_state = DialogueState.DISPLAYED;
 
@@ -110,6 +111,11 @@ export class DialogueController {
 
                         //Update dialogue state
                         this.cur_state = DialogueState.DONE;
+
+                        //Call the callback
+                        if(callback && typeof callback === "function") {
+                            callback();
+                        }
                         
                     } else {
                         this.content.text = this.text[this.textIdx];
