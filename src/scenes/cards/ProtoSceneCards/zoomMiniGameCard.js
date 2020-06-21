@@ -190,7 +190,7 @@ export class ZoomMiniGameCard extends Card {
                         if(pointer.y > BEG_Y_ZONE && pointer.y < END_Y_ZONE) {
                             gameObject.destroy();
     
-                             //Remove the elelment in question
+                            //Remove the elelment in question
                             this.cur_msg.filter((val, _) => val === msg_idx);
     
                             //Make sure that the player didn't miss a class notification
@@ -265,6 +265,10 @@ export class ZoomMiniGameCard extends Card {
     destroy() {
         super.destroy();
         
-        this.messages.forEach(msg => msg.sprite.destroy());
+        this.messages.forEach(msg => {
+            if(msg.sprite) {
+                msg.sprite.destroy()
+            }
+        });
     }
 }

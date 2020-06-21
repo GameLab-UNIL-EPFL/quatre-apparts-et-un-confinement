@@ -165,6 +165,6 @@ export class DialogueController {
         
         //Select the next dialogue 
         this.current_conv_id = cur_dialogue.choices[choice_id].goto;
-        return this.requestDialogue(this.current_conv_id);
+        this.display(this.current_conv_id, true);
     }
 }

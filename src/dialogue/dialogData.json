@@ -11,7 +11,7 @@
 	"habit": {
 		"name": "Damien",
 		"text": [
-			"Est-ce que j'ai vraiment besoin de m'habiller?\n*baille*"
+			"Est-ce que j'ai vraiment besoin de m'habiller? *baille*"
 		],
 		"choices": {},
 		"goto": ["bureau"]

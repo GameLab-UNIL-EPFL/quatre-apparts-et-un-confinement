@@ -1,13 +1,14 @@
 import Phaser from "phaser";
-import {WakeUpCard} from "./cards/ProtoSceneCards/wakeUpCard.js";
+import { WakeUpCard } from "./cards/ProtoSceneCards/wakeUpCard.js";
 import { DialogueController, DIALOGUE_BOX_KEY } from "../core/dialogueController.js";
 import { IntroCard } from "./cards/ProtoSceneCards/introCard.js";
 import { ComputerCard } from "./cards/ProtoSceneCards/computerCard.js";
-import { Card, CardState } from "./cards/card.js";
+import { Card } from "./cards/card.js";
 import { CardObject } from "./objects/cardObject.js";
 import { Background } from "./objects/background.js";
 import { ProtoGuy, ProtoGuyCard } from "../characters/protoGuy.js";
 import { ZoomMiniGameCard } from "./cards/ProtoSceneCards/zoomMiniGameCard.js";
+import { MessageCard } from "./cards/ProtoSceneCards/messageCard.js";
 
 const CARDS = {
     INTRO: 0,
@@ -17,7 +18,7 @@ const CARDS = {
     KITCHEN: 4,
     COMPUTER: 5,
     MINI_GAME: 6,
-    BED: 7
+    MESSAGE: 7
 };
 const NUM_CARDS = 8
 
@@ -137,6 +138,8 @@ export class ProtoScene extends Phaser.Scene {
 
         this.zoomMiniGame = new ZoomMiniGameCard(this);
 
+        this.messageCard = new MessageCard(this);
+
         this.cards = [
             this.introCard,
             this.wakeUpCard,
@@ -144,12 +147,13 @@ export class ProtoScene extends Phaser.Scene {
             this.clothesCard,
             this.kitchenCard,
             this.computerCard,
-            this.zoomMiniGame
+            this.zoomMiniGame,
+            this.messageCard
         ];
 
         //Keep track of wich card is displayed
         this.cardIdx = CARDS.INTRO;
-        this.current_card = this.introCard;
+        this.current_card = this.messageCard;
 
         //Create the dialogue controller 
         this.dialogue = new DialogueController(this);
@@ -297,6 +301,13 @@ export class ProtoScene extends Phaser.Scene {
                     this.cardIdx = CARDS.MINI_GAME;
                     this.current_card = this.zoomMiniGame;
                     this.current_card.create();
+
+                case CARDS.MINI_GAME:
+                    this.cardIdx = CARDS.MESSAGE;
+                    this.current_card = this.messageCard;
+                    this.current_card.create();
+                    break;
+                    
                 default:
                     break;
             }

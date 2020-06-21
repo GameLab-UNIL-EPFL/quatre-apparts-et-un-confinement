@@ -14,7 +14,7 @@ export const ProtoGuyCard = {
     KITCHEN: 3,
     COMPUTER: 4,
     MINI_GAME: 5,
-    BED: 6
+    MESSAGE: 6
 };
 
 /**
@@ -87,11 +87,17 @@ export class ProtoGuy {
                 break;
 
             case ProtoGuyCard.MINI_GAME:
-                //TODO Set url and names for each sprite 
                 break;
 
-            case ProtoGuyCard.BED:
-                //TODO Set url and names for each sprite 
+            case ProtoGuyCard.MESSAGE:
+                this.dirty_name = "computeProtoGuyDirty_msg";
+                this.dirty_url = "sprites/ProtoScene/MessageCard/protoGuyYesterdayClothes.png";
+
+                this.clean_name = "computeProtoGuyClean_msg";
+                this.clean_url = "sprites/ProtoScene/MessageCard/protoGuyGClothes.png";
+
+                this.pj_name = "computeProtoGuyPJ_msg";
+                this.pj_url = "sprites/ProtoScene/MessageCard/protoGuyPJs.png";
                 break;
 
             default:
@@ -132,8 +138,10 @@ export class ProtoGuy {
                 //TODO Set url and names for each sprite 
                 break;
 
-            case ProtoGuyCard.BED:
-                //TODO Set url and names for each sprite 
+            case ProtoGuyCard.MESSAGE:
+                this.parent_scene.load.image(this.dirty_name, this.dirty_url);
+                this.parent_scene.load.image(this.clean_name, this.clean_url);
+                this.parent_scene.load.image(this.pj_name, this.pj_url);
                 break;
 
             default:
@@ -235,11 +243,25 @@ export class ProtoGuy {
                 break;
 
             case ProtoGuyCard.MINI_GAME:
-                //TODO Set url and names for each sprite 
                 break;
 
-            case ProtoGuyCard.BED:
-                //TODO Set url and names for each sprite 
+            case ProtoGuyCard.MESSAGE:
+                 //Show the version of the character wearing the selected clothes
+                 switch(this.parent_scene.clothes) {
+                    case ProtoGuyClothes.PYJAMAS:
+                        this.sprite = this.parent_scene.add.image(this.x, this.y, this.pj_name);
+                        break;
+
+                    case ProtoGuyClothes.CLEAN_CLOTHES:
+                        this.sprite = this.parent_scene.add.image(this.x, this.y, this.clean_name);
+                        break;
+
+                    case ProtoGuyClothes.YESTERDAY_CLOTHES:
+                        this.sprite = this.parent_scene.add.image(this.x, this.y, this.dirty_name);
+                        break;
+                }
+
+                this.sprites = [this.sprite];
                 break;
 
             default:
