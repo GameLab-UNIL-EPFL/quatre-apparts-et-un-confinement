@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 import {WakeUpCard} from "./cards/ProtoSceneCards/wakeUpCard.js";
-import { DialogueController } from "../core/dialogueController.js";
+import { DialogueController, DIALOGUE_BOX_KEY } from "../core/dialogueController.js";
 import { IntroCard } from "./cards/ProtoSceneCards/introCard.js";
 import { ComputerCard } from "./cards/ProtoSceneCards/computerCard.js";
 import { Card, CardState } from "./cards/card.js";
@@ -163,6 +163,13 @@ export class ProtoScene extends Phaser.Scene {
      * that will be shown in the scene
      */
     preload() {
+        //Load in the dialogue box
+        this.load.spritesheet(
+            DIALOGUE_BOX_KEY, 
+            "sprites/UI/dialogueBox.png",
+            { frameWidth: 1886, frameHeight: 413 }  
+        );
+
         this.cards.forEach(card => card.preload());
     }
 

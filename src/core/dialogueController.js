@@ -6,6 +6,21 @@ export const DialogueState = {
     DONE: 2
 };
 
+export const DIALOGUE_BOX_KEY = "dialogueBox";
+const D_BOX_ANIMATION_KEY = "dBoxAnim";
+
+const UP_POS = {
+    box: new Phaser.Math.Vector2(1020, 275),
+    name: new Phaser.Math.Vector2(160, 100),
+    content: new Phaser.Math.Vector2(160, 220)
+};
+
+const DOWN_POS = {
+    box: new Phaser.Math.Vector2(1020, 2410),
+    name: new Phaser.Math.Vector2(160, 2245),
+    content: new Phaser.Math.Vector2(160, 2365)
+};
+
 /**
  * @brief Handles everything that has to do with dialogue
  */
@@ -69,22 +84,36 @@ export class DialogueController {
     /**
      * @brief displays the dialogue that has a given ID
      * @param {string} id the ID of the dialogue that we want to display 
+     * @param {boolean} up_down true if the dialogue will be placed on the top, false if on the bottom
      */
-    display(id) {
+    display(id, up_down=true) {
+        this.dialogue_pos = up_down ? UP_POS : DOWN_POS;
+        
         this.current_conv_id = id;
         this.cur_state = DialogueState.DISPLAYED;
 
-        //Create background
-        let bg = new Phaser.Geom.Rectangle(0, 1900, 2200, 2000);
-        this.background = this.parent_scene.add.graphics({ fillStyle: { color: 0xffffff, alpha: 50 } });
-        this.background.fillRectShape(bg);
+        //Create background animation
+        this.parent_scene.anims.create({
+            key: D_BOX_ANIMATION_KEY,
+            frameRate: 15,
+            frames: this.parent_scene.anims.generateFrameNames(DIALOGUE_BOX_KEY),
+            repeat: -1
+        });
+
+        this.background = this.parent_scene.add.sprite(
+            this.dialogue_pos.box.x,
+            this.dialogue_pos.box.y,
+            DIALOGUE_BOX_KEY
+        ).play(D_BOX_ANIMATION_KEY);
+
+        this.background.alpha = .9;
 
         //Add name text
         this.name = this.parent_scene.add.text(
-            100,
-            2000,
+            this.dialogue_pos.name.x,
+            this.dialogue_pos.name.y,
             this.getName(id),
-            {font: "110px Arial ", fill: "black"}
+            {font: "90px OpenSans ", fill: "black"}
         );
 
         this.text = this.getText(id);
@@ -92,10 +121,10 @@ export class DialogueController {
 
         //Add dialogue content 
         this.content = this.parent_scene.add.text(
-            100, 
-            2200,
+            this.dialogue_pos.content.x, 
+            this.dialogue_pos.content.y,
             this.text[this.textIdx],
-            {font: "100px Arial", fill: "black"}
+            {font: "80px OpenSans", fill: "black"}
         );
 
         this.content.setInteractive();

@@ -2,8 +2,8 @@
 	"reveil": {
 		"name": "Damien",
 		"text": [
-			"Aaah purée j’ai oublié de désactiver mon\nréveil hier soir!",
-			"Pourtant j’ai plus besoin de me dépêcher\npour aller prendre le bus ou me préparer."
+			"Aaah purée j’ai oublié de désactiver mon réveil hier\nsoir!",
+			"Pourtant j’ai plus besoin de me dépêcher pour aller\nprendre le bus ou me préparer."
 		],
 		"choices": {},
 		"goto": ["habit", "frigo", "dodo"]
@@ -11,20 +11,23 @@
 	"habit": {
 		"name": "Damien",
 		"text": [
-			"Est-ce que j'ai vraiment besoin de\nm'habiller? *baille*"
+			"Est-ce que j'ai vraiment besoin de m'habiller?\n*baille*"
 		],
 		"choices": {},
 		"goto": ["zoom"]
 	},
 	"frigo": {
 		"name": "Damien",
-		"text": "Il reste plus grand chose... arf, j'ai vraiment pas envie d'aller faire les courses en ce moment.",
+		"text": ["Il reste plus grand chose... arf, j'ai vraiment\npas envie d'aller faire les courses en ce moment."],
 		"choices": {},
 		"goto": ["zoom"]
 	},
 	"dodo": {
 		"name": "Damien",
-		"text": "Oh non c’est déjà midi, j’ai loupé mon premier cours... Bon, c’est pas grave, je rattraperai avec les notes de quelqu'un d'autre.",
+		"text": [
+			"Oh non c’est déjà midi, j’ai loupé mon premier\ncours...",
+			"Bon, c’est pas grave, je rattraperai avec les notes\nde quelqu'un d'autre."
+		],
 		"choices": {},
 		"goto": ["zoom"]
 	},
@@ -36,13 +39,13 @@
 	},
 	"endZoom": {
 		"name": "Prof",
-		"text": ["Merci pour votre attention\net bonne journée!"],
+		"text": ["Merci pour votre attention et bonne\njournée!"],
 		"choices": {},
 		"goto": []
 	},
 	"loseZoom": {
 		"name": "Prof",
-		"text": ["Damien vous n'êtes pas très\nconcentré aujourd'hui..."],
+		"text": ["Damien vous n'êtes pas très concentré\naujourd'hui..."],
 		"choices": {},
 		"goto": []
 	},
