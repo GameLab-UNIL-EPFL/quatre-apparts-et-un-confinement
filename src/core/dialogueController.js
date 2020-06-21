@@ -124,7 +124,7 @@ export class DialogueController {
             this.dialogue_pos.content.x, 
             this.dialogue_pos.content.y,
             this.text[this.textIdx],
-            {font: "80px OpenSans", fill: "black"}
+            {font: "80px OpenSans", fill: "black", wordWrap: { width: 1800}}
         );
 
         this.content.setInteractive();
