@@ -6,7 +6,7 @@
 			"Pourtant j’ai plus besoin de me dépêcher pour aller prendre le bus ou me préparer."
 		],
 		"choices": {},
-		"goto": ["habit", "frigo", "dodo"]
+		"goto": []
 	},
 	"habit": {
 		"name": "Damien",
@@ -14,13 +14,13 @@
 			"Est-ce que j'ai vraiment besoin de m'habiller? *baille*"
 		],
 		"choices": {},
-		"goto": ["bureau"]
+		"goto": []
 	},
 	"frigo": {
 		"name": "Damien",
 		"text": ["Bon, qu'est-ce que je vais manger?"],
 		"choices": {},
-		"goto": ["bureau"]
+		"goto": []
 	},
 	"dodo": {
 		"name": "Damien",
@@ -29,13 +29,13 @@
 			"Bon, c’est pas grave, je rattraperai avec les notes de quelqu'un d'autre."
 		],
 		"choices": {},
-		"goto": ["bureau"]
+		"goto": []
 	},
 	"bureau": {
 		"name": "Damien",
 		"text": ["Ah! Mon cours va commencer."],
 		"choices": {},
-		"goto": ["zoom"]
+		"goto": []
 	},
 	"zoom": {
 		"name": "Prof",
@@ -52,19 +52,17 @@
 	"loseZoom": {
 		"name": "Prof",
 		"text": [
-			"Damien vous n'êtes pas très concentré aujourd'hui...", 
-			"Quels chapitres devez-vous lire pour la semaine prochaine?"
+			"Damien! Quels chapitres devez-vous lire pour la semaine prochaine?"
 		],
-		"choices": {
-			"faux": {
+		"choices": [
+			{
 				"text": "12 et 13",
 				"goto": "repFausse"
-			},
-			"juste": {
+			}, {
 				"text": "11 et 12",
 				"goto": "repJuste"
 			}
-		},
+		],
 		"goto": ["repFausse", "repJuste"]
 	},
 	"repFausse": {

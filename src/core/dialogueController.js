@@ -3,11 +3,15 @@ import Phaser from "phaser";
 export const DialogueState = {
     NONE: 0,
     DISPLAYED: 1,
-    DONE: 2
+    PROMPT: 2,
+    DONE: 3
 };
 
 export const DIALOGUE_BOX_KEY = "dialogueBox";
 const D_BOX_ANIMATION_KEY = "dBoxAnim";
+
+const PROMT_HEIGHT = 400;
+const SPACING = 100;
 
 const UP_POS = {
     box: new Phaser.Math.Vector2(1020, 275),
@@ -100,6 +104,18 @@ export class DialogueController {
             repeat: -1
         });
 
+        //Destroy the box if it is displayed
+        if(this.background) {
+            this.background.destroy();
+        }
+        if(this.name) {
+            this.name.destroy();
+        }
+        if(this.content) {
+            this.content.destroy();
+        }
+
+        //Create background sprite
         this.background = this.parent_scene.add.sprite(
             this.dialogue_pos.box.x,
             this.dialogue_pos.box.y,
@@ -127,6 +143,7 @@ export class DialogueController {
             {font: "80px OpenSans", fill: "black", wordWrap: { width: 1800}}
         );
 
+        //Make the text interactive
         this.content.setInteractive();
 
         this.parent_scene.input.on(
@@ -137,34 +154,95 @@ export class DialogueController {
 
                     this.textIdx++;
 
-                    //Check if we've shown all of the text
-                    if(this.textIdx === this.text.length) {
-                        //Get rid of all dialogue elements
-                        this.content.destroy();
-                        this.name.destroy();
-                        this.background.destroy();
-                        this.content.disableInteractive();
+                    //Make sure that it's not a prompt
+                    if(this.cur_state === DialogueState.DISPLAYED) {
+                        //Check if we've shown all of the text
+                        if(this.textIdx === this.text.length) {
+                            //Get rid of all dialogue elements
+                            this.content.destroy();
+                            this.name.destroy();
+                            this.background.destroy();
+                            this.content.disableInteractive();
 
-                        //Update dialogue state
-                        this.cur_state = DialogueState.DONE;
-                        
-                    } else {
-                        this.content.text = this.text[this.textIdx];
+                            //Update dialogue state
+                            this.cur_state = DialogueState.DONE;
+                            
+                        } else {
+                            this.content.text = this.text[this.textIdx];
+                        }
                     }
                 }
-            }
-        )
+            },
+            this
+        );
+
+        //Prompt user if necessary
+        if(this.requestDialogue(id).goto.length !== 0) {
+            this.promptAnswers(id);
+        }
     }
 
     /**
-     * @brief Continues the current dialogue
-     * @param choice_id, the ID of the choice that was made 
+     * @brief Shows (if any) the possible answers to a question
+     * @param {string} id, the ID of the dialogue that requires a prompt
      */
-    converse(choice_id) {
-        let cur_dialogue = this.requestDialogue(this.current_conv_id);
-        
-        //Select the next dialogue 
-        this.current_conv_id = cur_dialogue.choices[choice_id].goto;
-        this.display(this.current_conv_id, true);
+    promptAnswers(id) {
+        //Retrieve the dialogue
+        const cur_dialogue = this.requestDialogue(id);
+
+        this.prompts = [];
+
+        //Check the amount of possible answers
+        const num_answers = cur_dialogue.goto.length;
+        if(num_answers !== 0) {
+            this.cur_state = DialogueState.PROMPT;
+            cur_dialogue.choices.forEach(choice => {
+
+                //Create the prompt rectangle
+                const bg = new Phaser.Geom.Rectangle(
+                    0, 
+                    1200 - ((PROMT_HEIGHT + SPACING) * this.prompts.length), 
+                    2200, 
+                    PROMT_HEIGHT
+                );
+                const prompt_sprite = this.parent_scene.add.graphics({ fillStyle: { color: 0xffffff, alpha: 50 }});
+                prompt_sprite.fillRectShape(bg);
+
+                //Create the prompt text 
+                const prompt_text = this.parent_scene.add.text(
+                    700,
+                    1300 - ((PROMT_HEIGHT + SPACING) * this.prompts.length),
+                    choice.text,
+                    {font: "90px OpenSans ", fill: "black"}
+                );
+
+                //Activate prompt interactivity
+                prompt_text.setInteractive();
+                prompt_sprite.setInteractive();
+
+                //Make the prompt interactive
+                this.parent_scene.input.on(
+                    'gameobjectdown',
+                    (_, gameObject) => {
+                        if(prompt_text === gameObject || prompt_sprite === gameObject) {
+                            //Destroy all prompts if clicked
+                            this.prompts.forEach(prompt => {
+                                prompt.text.destroy();
+                                prompt.sprite.destroy();
+                            });
+
+                            //Update the state
+                            this.cur_state = DialogueState.DISPLAYED;
+
+                            //Make a decision
+                            this.display(choice.goto);
+                        }
+                    },
+                    this
+                );
+                
+                this.prompts.push({sprite: prompt_sprite, text: prompt_text});
+            }); 
+        }
     }
 }

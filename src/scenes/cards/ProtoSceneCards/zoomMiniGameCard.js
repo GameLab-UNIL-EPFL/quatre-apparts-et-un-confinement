@@ -124,7 +124,7 @@ export class ZoomMiniGameCard extends Card {
             let msg_idx = Math.round(Math.random() * (N_MSG - 1));
     
             //Make sure that the current message isn't already displayed
-            let max_loop = N_MSG;
+            let max_loop = N_MSG / 2;
             while(msg_idx in this.cur_msg) {
                 //Make sure that we can't get stuck in the loop
                 if(--max_loop <= 0) {
@@ -163,7 +163,7 @@ export class ZoomMiniGameCard extends Card {
                         }
     
                         //Resize the health bar 
-                        this.children[3].sprite.width = this.focus_bar_width * (1./(INIT_FOCUS + 1 - this.focus_bar_health));
+                        this.children[3].sprite.displayWidth -= this.focus_bar_width / INIT_FOCUS;
                     }
     
                     //Remove the elelment in question
@@ -177,7 +177,10 @@ export class ZoomMiniGameCard extends Card {
                     }
                 },
                 onCompleteScope: this
-            })
+            });
+
+            //Activate interactivity
+            this.messages[msg_idx].sprite.setInteractive();
     
             //Make the card interactive
             this.parent_scene.input.on(
@@ -216,6 +219,14 @@ export class ZoomMiniGameCard extends Card {
      */
     endMiniGame(card, lose) {
         if(!card.lock) {
+
+            //Destroy all remaining cards
+            card.messages.forEach(msg => {
+                if(msg.sprite) {
+                    msg.sprite.destroy();
+                }
+            })
+
             card.lock = true;
 
             //Open the dialogue 
