@@ -19,8 +19,8 @@ const END_ZOOM_CALL_ID = "endZoom";
 const LOSER_ID = "loseZoom";
 
 const MessageType = {
-    Cours: 0,
-    Distraction: 1
+    Cours: 1,
+    Distraction: 0
 };
 
 /**
@@ -74,7 +74,8 @@ export class ZoomMiniGameCard extends Card {
                 url: "sprites/ProtoScene/ZoomMiniGameCard/notif_" + i + ".png" ,
                 pos: new Phaser.Math.Vector2(0, -2500),
                 sprite: null,
-                type: MessageType.Cours
+                type: MessageType.Cours,
+                isDestroyed: false
             });
         }
 
@@ -85,7 +86,8 @@ export class ZoomMiniGameCard extends Card {
                 url: "sprites/ProtoScene/ZoomMiniGameCard/distraction_" + i + ".png" ,
                 pos: new Phaser.Math.Vector2(0, -2500),
                 sprite: null,
-                type: MessageType.Distraction
+                type: MessageType.Distraction,
+                isDestroyed: false
             });
         }
 
@@ -143,6 +145,8 @@ export class ZoomMiniGameCard extends Card {
                 this.messages[msg_idx].pos.y, 
                 this.messages[msg_idx].name
             );
+
+            this.messages[msg_idx].isDestroyed = false;
     
             //Animate the msg
             this.parent_scene.tweens.add({
@@ -150,31 +154,33 @@ export class ZoomMiniGameCard extends Card {
                 y: 3000,
                 duration: 7000,
                 onComplete: () => {
-                    this.messages[msg_idx].sprite.destroy();
+                    if(!this.messages[msg_idx].isDestroyed) {
+                        this.messages[msg_idx].sprite.destroy();
     
-                    //Make sure that the player didn't miss a class notification
-                    if(this.messages[msg_idx].type === MessageType.Cours) {
-    
-                        //Check that the health bar doesn't drop below 0
-                        if(--this.focus_bar_health <= 0) {
+                        //Make sure that the player didn't miss a class notification
+                        if(this.messages[msg_idx].type === MessageType.Cours) {
+        
+                            //Check that the health bar doesn't drop below 0
+                            if(--this.focus_bar_health <= 0) {
+                                if(typeof callback === "function") {
+                                    callback(this, true);
+                                }
+                            }
+        
+                            //Resize the health bar 
+                            this.children[3].sprite.displayWidth -= this.focus_bar_width / INIT_FOCUS;
+                        }
+        
+                        //Remove the elelment in question
+                        this.cur_msg.filter((val, _) => val === msg_idx);
+                    }
+                        
+                        //Check if the game is over
+                        if(--this.num_spaws === 0) {
                             if(typeof callback === "function") {
-                                callback(this, true);
+                                callback(this, false);
                             }
                         }
-    
-                        //Resize the health bar 
-                        this.children[3].sprite.displayWidth -= this.focus_bar_width / INIT_FOCUS;
-                    }
-    
-                    //Remove the elelment in question
-                    this.cur_msg.filter((val, _) => val === msg_idx);
-                    
-                    //Check if the game is over
-                    if(--this.num_spaws === 0) {
-                        if(typeof callback === "function") {
-                            callback(this, false);
-                        }
-                    }
                 },
                 onCompleteScope: this
             });
@@ -205,6 +211,8 @@ export class ZoomMiniGameCard extends Card {
                                         callback(this, true);
                                     }
                                 }
+                            } else {
+                                this.messages[msg_idx].isDestroyed = true;
                             }
                         }
                     }
@@ -217,7 +225,7 @@ export class ZoomMiniGameCard extends Card {
     /**
      * @brief Ends the minigame by closing the dialogue box and passing the card
      */
-    endMiniGame(card, lose) {
+    endMiniGame(card, lose=false) {
         if(!card.lock) {
 
             //Destroy all remaining cards

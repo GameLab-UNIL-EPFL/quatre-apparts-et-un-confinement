@@ -288,6 +288,7 @@ export class ProtoScene extends Phaser.Scene {
                             break;
                         
                     }
+                    this.current_card.showItem();
                     break;
 
                 case CARDS.KITCHEN:
@@ -301,6 +302,7 @@ export class ProtoScene extends Phaser.Scene {
                     this.cardIdx = CARDS.MINI_GAME;
                     this.current_card = this.zoomMiniGame;
                     this.current_card.create();
+                    break;
 
                 case CARDS.MINI_GAME:
                     this.cardIdx = CARDS.MESSAGE;

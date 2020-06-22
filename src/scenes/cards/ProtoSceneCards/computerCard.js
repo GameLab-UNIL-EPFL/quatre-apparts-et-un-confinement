@@ -62,7 +62,7 @@ export class ComputerCard extends Card {
      * @brief Shows one of the items
      * @param {Number} choice the choice that was made to get here
      */
-    showItem(choice) {
+    showItem(choice=-1) {
         let destructs = [];
         switch(choice) {
             case 0:
