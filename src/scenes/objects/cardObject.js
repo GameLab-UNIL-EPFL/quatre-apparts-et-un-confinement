@@ -59,6 +59,7 @@ export class CardObject {
                 yoyo: true,
                 loop: -1
             });
+            this.highlight_sprite.setInteractive();
         }
 
         //Add a choice if needed
@@ -70,7 +71,7 @@ export class CardObject {
                 'gameobjectdown', 
                 (_, gameObject) => {
                     //Check that we clicked the clothes
-                    if(gameObject === this.sprite) {
+                    if(gameObject === this.sprite || gameObject === this.highlight_sprite) {
                         
                         this.parent_scene.endCard();
                         this.parent_scene.nextCard(this.choice);
@@ -85,7 +86,10 @@ export class CardObject {
      * @brief Update method that is called on every frame.
      * Usually used to handle object animations
      */
-    update() {}
+    update() {
+        this.x = this.sprite.x;
+        this.y = this.sprite.y;
+    }
 
     /**
      * @brief Deallocates the memory linked to the sprite
