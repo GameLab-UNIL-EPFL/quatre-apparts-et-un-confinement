@@ -10,6 +10,7 @@ import { ProtoGuy, ProtoGuyCard } from "../characters/protoGuy.js";
 import { ZoomMiniGameCard } from "./cards/ProtoSceneCards/zoomMiniGameCard.js";
 import { MessageCard } from "./cards/ProtoSceneCards/messageCard.js";
 import { player } from "../index.js";
+import { Scenes } from "../core/player.js";
 
 export const ProtoCards = {
     INTRO: 0,
@@ -249,6 +250,9 @@ export class ProtoScene extends Phaser.Scene {
             this.current_card.create();
         }
 
+        //Update the saved data
+        player.cur_scene = Scenes.PROTOTYPE;
+
         //Handle the loaded food case
         if(this.food) {
             this.current_card.showItem(this.food);
@@ -281,7 +285,7 @@ export class ProtoScene extends Phaser.Scene {
         let savable_data = { 
             cardIdx: this.cardIdx,
             clothes: this.clothes,
-            food: null 
+            food: -1 
         };
         
         console.log("next card please");

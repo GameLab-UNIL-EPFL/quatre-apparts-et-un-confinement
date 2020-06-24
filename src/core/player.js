@@ -59,10 +59,19 @@ export class Player {
         //Split the cookie into elements
         let elems = cookie.split(";");
 
-        //Split the element into key, value
-        let game_s = elems[1].split("=");
+        //Find the cookie that has "game" as key
+        let game_d = null;
+        elems.forEach(elem => {
+            var game_s = elem.trimLeft()
+            game_s = game_s.split("=");
 
-        return {game: game_s[1]};
+            if(game_s[0] === "game") {
+                console.log("Found game");
+                game_d = game_s[1];
+            }
+        });
+
+        return {game: game_d};
     }
 
     /**
@@ -76,7 +85,7 @@ export class Player {
         };
 
         //Encode the data in base 64 before saving it
-        serialized_data = (JSON.stringify(serialized_data));
+        serialized_data = btoa(JSON.stringify(serialized_data));
 
         //Write the data to a cookie
         document.cookie = "game=" + serialized_data + "; SameSite=Lax;"
@@ -89,7 +98,7 @@ export class Player {
         //Check that the cookie exists
         if(document.cookie) {
             //Decode the data and convert it back to a JSON
-            let game_data = (this.parseCookie(document.cookie).game);
+            let game_data = atob(this.parseCookie(document.cookie).game);
             game_data = JSON.parse(game_data);
 
             //Launch the current scene
