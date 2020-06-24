@@ -70,9 +70,11 @@ export class Player {
      * @brief Loads the game state from a cookie if any
      */
     loadGame() {
-        //Check that the cookie exists -- attention, la tu checkais l’existences de cookies en general => bug chez moi
+        //Retrieve the save file
         let storedGame = localStorage.getItem('game');
         let game_data;
+
+        //Check if said file exists
         if(storedGame) {
             try{
                 game_data = JSON.parse(atob(storedGame));
