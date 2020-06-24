@@ -41,7 +41,7 @@ export class Player {
 
     /**
      * @brief Adds an entry to the stored dialogue tree
-     * @param {JSON} entry { id: 'id', goto: 'next_id' } a new entry in the dialogue tree 
+     * @param {JSON} entry { id: 'id', goto: 'next_id' } a new entry in the dialogue tree
      */
     addDialogueTreeEntry(entry) {
         //Sanity check
@@ -86,22 +86,26 @@ export class Player {
         //Encode the data in base 64 before saving it
         serialized_data = btoa(JSON.stringify(serialized_data));
 
-        //Write the data to a cookie
-        document.cookie = "game=" + serialized_data + "; SameSite=Lax;"
-    } 
+        localStorage.setItem('game', serialized_data);
+    }
 
     /**
      * @brief Loads the game state from a cookie if any
      */
     loadGame() {
-        //Check that the cookie exists
-        if(document.cookie) {
-            //Decode the data and convert it back to a JSON
-            let game_data = atob(this.parseCookie(document.cookie).game);
-            game_data = JSON.parse(game_data);
+        //Check that the cookie exists -- attention, la tu checkais l’existences de cookies en general => bug chez moi
+        let storedGame = localStorage.getItem('game');
+        let game_data;
+        if(storedGame) {
+          try{
+            let game_data = JSON.parse(atob(storedGame))
+          } catch(e) {
+            console.log('Could not get game data:', e);
+          }
 
-            //Launch the current scene
+          if(game_data) {
             game.scene.start(game_data.scene, game_data.data);
+          }
         }
     }
 }
