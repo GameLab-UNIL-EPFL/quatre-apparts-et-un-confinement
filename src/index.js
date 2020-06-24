@@ -5,6 +5,7 @@ import './style.scss';
 
 import {IntroScene} from "./scenes/introScene.js";
 import {ProtoScene} from "./scenes/protoScene.js";
+import { Player } from "./core/player.js";
 
 let plugins = [{
     key: 'rexUI',
@@ -39,4 +40,8 @@ const config = {
     }
 };
 
-const game = new Phaser.Game(config);
+export const game = new Phaser.Game(config);
+export const player = new Player();
+
+//Load the game
+player.loadGame();
