@@ -10,7 +10,7 @@ const WAKE_UP_ID = 'reveil';
 
 /**
  * @brief Models a "Card" inside of a scene.
- * A card can be seen as a set of images that represent 
+ * A card can be seen as a set of images that represent
  * a given interactive moment in a scene
  */
 export class WakeUpCard extends Card {
@@ -47,7 +47,7 @@ export class WakeUpCard extends Card {
         //Load the ring animation spritesheet
         this.parent_scene.load.spritesheet(
             'ring',
-            'sprites/ProtoScene/WakeUpCard/ring_spritesheet.png', 
+            'sprites/ProtoScene/WakeUpCard/ring_spritesheet.png',
             { frameWidth: 300, frameHeight: 99 }
         );
     }
@@ -74,7 +74,7 @@ export class WakeUpCard extends Card {
         //Play the ring animation
         this.highlight = this.parent_scene.add.sprite(
             this.children[1].sprite.x + 150,
-            this.children[1].sprite.y - 70, 
+            this.children[1].sprite.y - 70,
             'ring'
         ).play('phone-ring');
 
@@ -118,7 +118,7 @@ export class WakeUpCard extends Card {
                   this.parent_scene.tweens.add({
                       targets: this.children[1].sprite,
                       y: '+= 10',
-                      duration: 200,
+                      duration: 30,
                       ease: "Quad.easeOut",
                       yoyo: true,
                       loop: 0,
