@@ -74,15 +74,15 @@ export class Player {
         let storedGame = localStorage.getItem('game');
         let game_data;
         if(storedGame) {
-          try{
-            let game_data = JSON.parse(atob(storedGame))
-          } catch(e) {
-            console.log('Could not get game data:', e);
-          }
+            try{
+                game_data = JSON.parse(atob(storedGame));
+            } catch(e) {
+                console.log('Could not get game data:', e);
+            }
 
-          if(game_data) {
-            game.scene.start(game_data.scene, game_data.data);
-          }
+            if(game_data) {
+                game.scene.start(game_data.scene, game_data.data);
+            }
         }
     }
 }
