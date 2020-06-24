@@ -51,29 +51,6 @@ export class Player {
     }
 
     /**
-     * @brief parses a given cookie string and converts it into a JSON
-     * @param {string} cookie the cookie string to be converted
-     * @returns {JSON} a JSON version of the cookie string
-     */
-    parseCookie(cookie) {
-        //Split the cookie into elements
-        let elems = cookie.split(";");
-
-        //Find the cookie that has "game" as key
-        let game_d = null;
-        elems.forEach(elem => {
-            var game_s = elem.trimLeft()
-            game_s = game_s.split("=");
-
-            if(game_s[0] === "game") {
-                game_d = game_s[1];
-            }
-        });
-
-        return {game: game_d};
-    }
-
-    /**
      * @brief Writes the current game data to a cookie
      */
     saveGame() {
