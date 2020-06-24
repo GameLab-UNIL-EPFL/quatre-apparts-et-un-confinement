@@ -60,7 +60,7 @@ export class Player {
         let elems = cookie.split(";");
 
         //Split the element into key, value
-        let game_s = elems[0].split("=");
+        let game_s = elems[1].split("=");
 
         return {game: game_s[1]};
     }
@@ -76,7 +76,7 @@ export class Player {
         };
 
         //Encode the data in base 64 before saving it
-        serialized_data = btoa(JSON.stringify(serialized_data));
+        serialized_data = (JSON.stringify(serialized_data));
 
         //Write the data to a cookie
         document.cookie = "game=" + serialized_data + "; SameSite=Lax;"
@@ -87,13 +87,13 @@ export class Player {
      */
     loadGame() {
         //Check that the cookie exists
-        if(document.cookie.game) {
+        if(document.cookie) {
             //Decode the data and convert it back to a JSON
-            let game_data = atob(this.parseCookie(document.cookie).game);
+            let game_data = (this.parseCookie(document.cookie).game);
             game_data = JSON.parse(game_data);
 
             //Launch the current scene
-            game.scene.scene.start(game_data.scene, game_data.data);
+            game.scene.start(game_data.scene, game_data.data);
         }
     }
 }
