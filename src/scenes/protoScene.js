@@ -30,10 +30,6 @@ export const ProtoGuyClothes = {
     YESTERDAY_CLOTHES: 2
 };
 
-const Food = {
-    Yogurt: 0
-}
-
 export class ProtoScene extends Phaser.Scene {
     /**
      * @brief initializes the different cards needed in the scene
