@@ -288,8 +288,6 @@ export class ProtoScene extends Phaser.Scene {
             food: -1 
         };
         
-        console.log("next card please");
-
         if(this.cardIdx < NUM_CARDS - 1 && this.current_card.isDone()) {
             this.current_card.destroy();
 

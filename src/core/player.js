@@ -66,7 +66,6 @@ export class Player {
             game_s = game_s.split("=");
 
             if(game_s[0] === "game") {
-                console.log("Found game");
                 game_d = game_s[1];
             }
         });
