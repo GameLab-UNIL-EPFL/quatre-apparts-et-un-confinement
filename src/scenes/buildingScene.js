@@ -502,12 +502,10 @@ export class BuildingScene extends Phaser.Scene {
     destroy() {
         //Destroy all of the sprites in the scene
         for (var key in this.sprites) {
-            // check if the property/key is defined in the object itself, not in parent
+            
             if (this.sprites.hasOwnProperty(key)) {           
                 this.sprites[key].destroy();
             }
         }
     }
-
-
 }
