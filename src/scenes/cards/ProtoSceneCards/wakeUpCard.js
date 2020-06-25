@@ -10,7 +10,7 @@ const WAKE_UP_ID = 'reveil';
 
 /**
  * @brief Models a "Card" inside of a scene.
- * A card can be seen as a set of images that represent 
+ * A card can be seen as a set of images that represent
  * a given interactive moment in a scene
  */
 export class WakeUpCard extends Card {
@@ -21,7 +21,8 @@ export class WakeUpCard extends Card {
     constructor(parent_scene) {
         //Initialize children array
         let children = [
-            new Background(parent_scene, "sprites/ProtoScene/WakeUpCard/bg.jpg", "WakeUpBG"),
+            // new Background(parent_scene, "sprites/ProtoScene/WakeUpCard/bg.jpg", "WakeUpBG"),
+            new Background(parent_scene, "sprites/test-scaled-delivery/sample@x3-borders.jpg", "WakeUpBG"),
             new CardObject(
                 parent_scene,
                 { name: "phone", url: "sprites/ProtoScene/WakeUpCard/phone.png" },
@@ -47,7 +48,7 @@ export class WakeUpCard extends Card {
         //Load the ring animation spritesheet
         this.parent_scene.load.spritesheet(
             'ring',
-            'sprites/ProtoScene/WakeUpCard/ring_spritesheet.png', 
+            'sprites/ProtoScene/WakeUpCard/ring_spritesheet.png',
             { frameWidth: 300, frameHeight: 99 }
         );
     }
@@ -74,7 +75,7 @@ export class WakeUpCard extends Card {
         //Play the ring animation
         this.highlight = this.parent_scene.add.sprite(
             this.children[1].sprite.x + 150,
-            this.children[1].sprite.y - 70, 
+            this.children[1].sprite.y - 70,
             'ring'
         ).play('phone-ring');
 

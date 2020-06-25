@@ -5,13 +5,14 @@ import './style.scss';
 
 import {IntroScene} from "./scenes/introScene.js";
 import {ProtoScene} from "./scenes/protoScene.js";
+// import Boot from './scenes/boot.js';
 
 let plugins = [{
     key: 'rexUI',
     plugin: RexUIPlugin,
     mapping: 'rexUI'
 }];
-const consoleSeemsOpen = window.outerHeight - window.innerHeight > 200;
+const consoleSeemsOpen = false; //window.outerHeight - window.innerHeight > 200;
 if(consoleSeemsOpen === true){
   plugins.push({
     key: 'debugObjects',
@@ -20,15 +21,27 @@ if(consoleSeemsOpen === true){
   });
 }
 
+
+let width = window.innerWidth * window.devicePixelRatio;
+let height = window.innerHeight;
+let ratio = width / height;
+
+// Game Config reference: https://photonstorm.github.io/phaser3-docs/Phaser.Types.Core.html#.GameConfig
 const config = {
     type: Phaser.AUTO,
     width: window.innerWidth,
     height: window.innerHeight,
+    // maxWidth: window.innerWidth,
+    // resolution: 1 par defaut, on peut tester 2 sur Retina
     scale: {
-        mode: Phaser.Scale.FIT,
-        autoCenter: Phaser.Scale.CENTER_HORIZONTALLY,
+      mode: Phaser.Scale.ENVELOP,
+      autoCenter: Phaser.Scale.CENTER_BOTH,
+      height: 2732,
+      width: 2048,
+      /*min: {
         height: 2732,
-        width: 2048
+        width: 2000
+      }*/
     },
     plugins: {
         scene: plugins
