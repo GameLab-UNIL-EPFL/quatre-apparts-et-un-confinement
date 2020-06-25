@@ -1,8 +1,9 @@
 import { game } from "..";
 
 export const Scenes = {
-    INTRO: 'intro',
-    PROTOTYPE: 'Prototype'
+    INTRO: 'TitleScene',
+    PROTOTYPE: 'Prototype',
+    BUILDING: 'Building'
 };
 
 /**
@@ -48,6 +49,13 @@ export class Player {
         if(entry.id && entry.goto) {
             this.dialogue_tree[entry.id] = entry.goto;
         }
+    }
+
+    /**
+     * @brief Returns whether or not a save file exists
+     */
+    saveExists() {
+        return localStorage.getItem('game') !== null;
     }
 
     /**

@@ -33,7 +33,7 @@ export const ProtoGuyClothes = {
 export class ProtoScene extends Phaser.Scene {
     /**
      * @brief initializes the different cards needed in the scene
-     * and the index that will be used to now which card we are at
+     * and the index that will be used to know which card we are at
      * in said scene
      */
     constructor() {
@@ -227,6 +227,7 @@ export class ProtoScene extends Phaser.Scene {
      * that will be shown in the scene
      */
     preload() {
+
         //Load in the dialogue box
         this.load.spritesheet(
             DIALOGUE_BOX_KEY, 
@@ -410,6 +411,4 @@ export class ProtoScene extends Phaser.Scene {
     destroy() {
         this.current_card.destroy();
     }
-
-
 }
