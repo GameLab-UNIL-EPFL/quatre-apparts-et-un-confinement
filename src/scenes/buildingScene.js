@@ -35,7 +35,7 @@ export class BuildingScene extends Phaser.Scene {
             },
             month: Months.MARCH,
             nextScene: {
-                damien: Scenes.PROTOTYPE,
+                damien: null,
                 grandma: null,
                 family: null,
                 indep: null
