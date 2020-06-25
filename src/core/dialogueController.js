@@ -8,7 +8,7 @@ export const DialogueState = {
 };
 
 export const DIALOGUE_BOX_KEY = "dialogueBox";
-const D_BOX_ANIMATION_KEY = "dBoxAnim";
+export const D_BOX_ANIMATION_KEY = "dBoxAnim";
 
 const PROMT_HEIGHT = 400;
 const SPACING = 100;
@@ -99,7 +99,7 @@ export class DialogueController {
         //Create background animation
         this.parent_scene.anims.create({
             key: D_BOX_ANIMATION_KEY,
-            frameRate: 15,
+            frameRate: 6,
             frames: this.parent_scene.anims.generateFrameNames(DIALOGUE_BOX_KEY),
             repeat: -1
         });

@@ -5,6 +5,7 @@ import './style.scss';
 
 import {IntroScene} from "./scenes/introScene.js";
 import {ProtoScene} from "./scenes/protoScene.js";
+import { BuildingScene } from "./scenes/buildingScene.js";
 import { Player } from "./core/player.js";
 
 let plugins = [{
@@ -34,7 +35,7 @@ const config = {
     plugins: {
         scene: plugins
     },
-    scene: [ProtoScene],
+    scene: [BuildingScene, ProtoScene],
     physics: {
         default: 'arcade'
     }
@@ -44,4 +45,4 @@ export const game = new Phaser.Game(config);
 export const player = new Player();
 
 //Load the game
-player.loadGame();
+//player.loadGame();

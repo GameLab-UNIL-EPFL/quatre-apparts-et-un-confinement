@@ -1,8 +1,9 @@
 import { game } from "..";
 
 export const Scenes = {
-    INTRO: 'intro',
-    PROTOTYPE: 'Prototype'
+    INTRO: 'TitleScene',
+    PROTOTYPE: 'Prototype',
+    BUILDING: 'Building'
 };
 
 /**
@@ -51,6 +52,13 @@ export class Player {
     }
 
     /**
+     * @brief Returns whether or not a save file exists
+     */
+    saveExists() {
+        return localStorage.getItem('game') !== null;
+    }
+
+    /**
      * @brief Writes the current game data to a cookie
      */
     saveGame() {
@@ -88,3 +96,4 @@ export class Player {
         }
     }
 }
+
