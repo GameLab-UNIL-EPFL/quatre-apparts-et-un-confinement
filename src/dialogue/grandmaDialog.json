@@ -1,0 +1,262 @@
+{
+	"calendrier": {
+		"name": "Suzanne",
+		"text": [
+			"Rien de prévu...",
+            "28 Mars\nHmm, j'avais rendez-vous chez le coiffeur...",
+            "C'est mercredi, normalement je vois mes petits-enfants."
+		],
+		"choices": {},
+		"goto": []
+	},
+	"livre1": {
+		"name": "Suzanne",
+		"text": [
+			"La peste - Albert Camus"
+		],
+		"choices": {},
+		"goto": []
+	},
+	"livre2": {
+		"name": "Suzanne",
+        "text": [
+			"A La Recherche du Temps Perdu - Marcel Proust"
+		], 
+        "choices": {},
+		"goto": []
+	},
+	"livre3": {
+		"name": "Suzanne",
+        "text": [
+			"Le Misanthrope - Molière"
+		], 
+        "choices": {},
+		"goto": []
+	},
+	"radio": {
+		"name": "Radio",
+		"text": ["Que faire?"],
+		"choices": {
+            "musique": {
+				"text": "écouter de la musique",
+				"goto": "bleiben"
+			},
+			"news": {
+				"text": "écouter les nouvelles",
+				"goto": "news"
+			}
+        },
+		"goto": ["bleiben", "news"]
+	},
+	"news": {
+		"name": "Radio",
+		"text": ["17 Mars - La Suisse se trouve dans une situation extraordinaire", "Restez chez vous"],
+		"choices": {},
+		"goto": []
+	},
+	"bleiben": {
+		"name": "Radio",
+		"text": "*musique* Bleiben Sie zuhause",
+		"choices":{},
+		"goto": []
+	},
+	"telephone": {
+		"name": "Suzanne",
+		"text": "Bon, qui est-ce que je pourrais appeler?",
+		"choices": {
+            "gertrude": {
+				"text": "Gertrude",
+				"goto": "gertrude"
+			},
+			"francoise": {
+				"text": "Françoise",
+				"goto": "francoise"
+            },
+            "sophie": {
+				"text": "Sophie",
+				"goto": "sophie"
+            },
+            "marc": {
+				"text": "Marc",
+				"goto": "marc"
+			},
+		"goto": ["gertrude", "francoise", "sophie", "marc"]
+        }
+    },
+    "gertrude": {
+        "name": "Gertrude",
+        "text": "Allo?",
+        "choices": {
+            "salut1": {
+				"text": "Salut Gertrude, comment tu vas?",
+				"goto": "TODO"
+			},
+			"salut2": {
+				"text": "Bonjour Gertrude, comment allez-vous?",
+				"goto": "TODO"
+            },
+		"goto": ["TODO"]
+        }
+    },
+    "francoise": {
+        "name": "Françoise",
+        "text": "Allo? Ah Salut Suzanne! Comment vas-tu?",
+        "choices": {
+            "salut1": {
+				"text": "ça va, ça va",
+				"goto": "cava"
+			},
+			"salut2": {
+				"text": "Je m'ennuie...",
+				"goto": "ennuie"
+            },
+            "salut3": {
+				"text": "T'as écouté les nouvelles?",
+				"goto": "nouvelles"
+            },
+		"goto": ["cava", "ennuie", "nouvelles"]
+        }
+    },
+    "cava": {
+        "name": "Françoise",
+        "text": "Tu fais quoi pour t'occuper ces temps?",
+        "choices": {
+            "rep1": {
+				"text": "Je lis",
+				"goto": "lire"
+			},
+			"rep2": {
+				"text": "J'écoute la radio",
+				"goto": "nouvelles"
+            },
+            "rep3": {
+				"text": "Je passe des coups de fil",
+				"goto": "appel"
+            },
+		"goto": ["lire", "nouvelles", "appel"]
+        }
+    },
+    "lire": {
+        "name": "Françoise",
+        "text": "Qu'est-ce que tu lis?",
+        "choices": {
+            "rep1": {
+				"text": "La Peste de Camus",
+				"goto": "oui"
+			},
+			"rep2": {
+				"text": "Le Misanthrope de Molière",
+				"goto": "oui"
+            },
+            "rep3": {
+				"text": "A la Recherche du Temps Perdu - Marcel Proust",
+				"goto": "oui"
+            },
+		"goto": ["oui"]
+        }
+    },
+    "appel": {
+        "name": "Françoise",
+        "text": "Hahahah je devrais faire pareil",
+        "choices": {
+            "rep1": {
+				"text": "Oui hahaha",
+				"goto": "oui"
+			},
+		"goto": ["oui"]
+        }
+    },
+    "ennuie": {
+        "name": "Françoise",
+        "text": ["T'as pas de quoi t'occuper?", "Je te recommende de lire La Peste de Camus, c'est d'actualité."],
+        "choices": {
+            "rep1": {
+				"text": "Ah oui je dois l'avoir quelque part",
+				"goto": "oui"
+			},
+			"rep2": {
+				"text": "Oui, je l'ai déjà lu",
+				"goto": "oui"
+            },
+		"goto": ["oui"]
+        }
+    },
+    "nouvelles": {
+        "name": "Françoise",
+        "text": ["Ah oui, je suis les actualités aussi.", "Non mais on a jamais vécu ça! C'est fou!"],
+        "choices": {
+            "rep1": {
+				"text": "Oui vraiment...",
+				"goto": "oui"
+			},
+			"rep2": {
+				"text": "Bon c'est pas la première pandémie non plus",
+				"goto": "pandemie"
+            },
+		"goto": ["oui", "pandemie"]
+        }
+    },
+    "pandemie": {
+        "name": "Françoise",
+        "text": ["Oui d'accord mais pour notre époque avec les avions et tout ça, c'est différent!"],
+        "choices": {
+            "rep1": {
+				"text": "Oui oui",
+				"goto": "oui"
+			},
+		"goto": ["oui"]
+        }
+    },
+    "oui": {
+        "name": "Françoise",
+        "text": ["Sinon, je m'occupe comme je peux.", "J'ai essayé skype/zoom pour la première fois la semaine passée!", "J'ai pu voir mes petits-enfants!"],
+        "choices": {
+            "rep1": {
+				"text": "Super! Oui ma fille a réussi à m'expliquer comment l'installer aussi",
+				"goto": "malade"
+			},
+			"rep2": {
+				"text": "Oui, on en fait toutes les semaines!",
+				"goto": "malade"
+            },
+		"goto": ["malade"]
+        }
+    },
+    "malade": {
+        "name": "Françoise",
+        "text": "T'as pas peur de tomber malade'?",
+        "choices": {
+            "rep1": {
+				"text": "Non, je fais attention",
+				"goto": "non"
+			},
+			"rep2": {
+				"text": "Oui bien sûr! Je pense pas pouvoir m'en remettre...",
+				"goto": "peur"
+            },
+		"goto": ["non", "peur"]
+        }
+    },
+    "non": {
+        "name": "Françoise",
+        "text": ["Ah c'est bien, mais on sait jamais.", "Prends bien soin de toi en tout cas!"],
+        "choices": {
+            "rep1": {
+				"text": "Merci! Toi aussi, à bientôt!",
+				"goto": "non"
+			},
+		"goto": []
+        }
+    },
+    "peur": {
+        "name": "Françoise",
+        "text": ["Oui, c'est normal. On peut y passer...", "Fais bien attention et prends bien soin de toi!"],
+        "choices": {
+            "rep1": {
+				"text": "Merci! Toi aussi, à bientôt!",
+				"goto": "non"
+			},
+		"goto": []
+        }
+    }
+}
