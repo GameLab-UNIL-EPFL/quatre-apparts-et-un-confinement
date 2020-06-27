@@ -3,6 +3,10 @@ import { ProtoGuy, ProtoGuyCard } from "../../../characters/protoGuy";
 import { Card } from "../card";
 import { CardObject } from "../../objects/cardObject";
 
+const MIN_Y_POS = 2010;
+const MIN_LEFT_X = 480;
+const MIN_X_RIGHT = 1335;
+
 /**
  * @brief Models a "Card" inside of a scene.
  * A card can be seen as a set of images that represent 
@@ -31,6 +35,18 @@ export class MessageCard extends Card {
 
     preload() {
         super.preload();
+
+        //Load in the phone message sprites
+        this.parent_scene.load.image("promptBox", "sprites/UI/Messages/SelectionMessage.png");
+        this.parent_scene.load.image("sentMsg1", "sprites/UI/Messages/SendMessage_01.png");
+        this.parent_scene.load.image("sentMsg2", "sprites/UI/Messages/SendMessage_02.png");
+        this.parent_scene.load.image("sentMsg3", "sprites/UI/Messages/SendMessage_03.png");
+        this.parent_scene.load.image("sentMsg4", "sprites/UI/Messages/SendMessage_04.png");
+        this.parent_scene.load.image("recievedMsg1", "sprites/UI/Messages/ReceivedMessage_01.png");
+        this.parent_scene.load.image("recievedMsg2", "sprites/UI/Messages/ReceivedMessage_02.png");
+        this.parent_scene.load.image("recievedMsg3", "sprites/UI/Messages/ReceivedMessage_03.png");
+        this.parent_scene.load.image("recievedMsg4", "sprites/UI/Messages/ReceivedMessage_04.png");
+        this.parent_scene.load.image("typing", "sprites/UI/Messages/TappingMessage_05.png");
     }
 
     /**
@@ -39,6 +55,22 @@ export class MessageCard extends Card {
     create() {
         super.create();
 
+        //Create dialogue background
+        const bg = new Phaser.Geom.Rectangle(
+            0, 
+            0, 
+            5000, 
+            5000
+        );
+        const prompt_sprite = this.parent_scene.add.graphics({ fillStyle: { color: 0xfffaea }});
+        prompt_sprite.fillRectShape(bg);
+
+        prompt_sprite.setDepth(-1);
+
+        //Create the prompt box
+        this.parent_scene.add.image(1009, 2421, "promptBox");
+        let typing = this.parent_scene.add.image(480, 2010, "typing");
+        typing.setOrigin(0, 0);
     }
 
     /**

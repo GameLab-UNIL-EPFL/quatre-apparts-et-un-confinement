@@ -245,4 +245,23 @@ export class DialogueController {
             }); 
         }
     }
+
+    /**
+     * @brief Displays the different possible answers to a given message
+     * @param {string} id the id of the dialogue that triggered the prompt
+     * @param {Number} first_ypos the y coordinate of the top answer
+     */
+    promptMessageAnswers(id, first_ypos) {
+
+    }
+
+    /**
+     * @brief Displays a phone message in a tchat like fashion
+     * @param {string} id the id of the dialogue to display
+     * @param {Number} ypos the y coordinate of the top of the prompt area
+     * @param {boolean} lr true if the message is on the left, false otherwise 
+     */
+    displayMessage(id, ypos, lr) {
+
+    }
 }
