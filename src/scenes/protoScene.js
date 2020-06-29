@@ -11,6 +11,7 @@ import { ZoomMiniGameCard } from "./cards/ProtoSceneCards/zoomMiniGameCard.js";
 import { MessageCard } from "./cards/ProtoSceneCards/messageCard.js";
 import { player } from "../index.js";
 import { Scenes } from "../core/player.js";
+import { WindowState, Months } from "./buildingScene.js";
 
 export const ProtoCards = {
     INTRO: 0,
@@ -403,6 +404,26 @@ export class ProtoScene extends Phaser.Scene {
         //Store the saved data
         player.setData(savable_data);
         player.saveGame();
+    }
+
+    nextScene() {
+        this.scene.start("Building", {
+            mainMenu: false,
+            stage: 3,
+            windows: {
+                damien: WindowState.OFF,
+                grandma: WindowState.ON,
+                family: WindowState.OFF,
+                indep: WindowState.OFF
+            },
+            month: Months.MARCH,
+            nextScene: {
+                damien: null,
+                grandma: null,
+                family: null,
+                indep: null
+            }
+        });
     }
 
     /**

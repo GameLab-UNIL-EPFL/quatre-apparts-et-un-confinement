@@ -3,10 +3,6 @@ import { ProtoGuy, ProtoGuyCard } from "../../../characters/protoGuy";
 import { Card } from "../card";
 import { CardObject } from "../../objects/cardObject";
 
-const MIN_Y_POS = 2010;
-const MIN_LEFT_X = 480;
-const MIN_X_RIGHT = 1335;
-
 /**
  * @brief Models a "Card" inside of a scene.
  * A card can be seen as a set of images that represent 
@@ -65,12 +61,12 @@ export class MessageCard extends Card {
         const prompt_sprite = this.parent_scene.add.graphics({ fillStyle: { color: 0xf8f2df }});
         prompt_sprite.fillRectShape(bg);
 
-        prompt_sprite.setDepth(-1);
+        prompt_sprite.setDepth(-2);
 
         //Create the prompt box
         this.parent_scene.add.image(1009, 2421, "promptBox");
-        let typing = this.parent_scene.add.image(480, 2010, "typing");
-        typing.setOrigin(0, 0);
+
+        this.parent_scene.dialogue.displayMessage("sortir", true);
     }
 
     /**
@@ -78,5 +74,10 @@ export class MessageCard extends Card {
      */
     update() {
         super.update();
+
+        //Poll the dialogue state
+        if(this.parent_scene.dialogue.isDone()) {
+            this.parent_scene.nextScene();
+        }
     }
 }
