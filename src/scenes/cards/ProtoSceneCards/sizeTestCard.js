@@ -36,8 +36,15 @@ export class SizeTestCard extends Card {
         super.create();
 
         //Create and place the temp image correctly
-        this.sprite = this.parent_scene.add.image(this.parent_scene.width, this.parent_scene.height, this.name);
+        console.log(this.parent_scene.scale)
+
+        this.sprite = this.parent_scene.add.image(this.parent_scene.scale.baseSize.width/2, this.parent_scene.scale.baseSize.height/2, this.name);
+
+        // this.sprite = this.parent_scene.add.image(0, 0, this.name);
+        this.sprite.setOrigin(0.5, 0.5);
+
         this.sprite.setInteractive();
+        console.log(this.sprite)
 
         //Make said image interactive
         this.parent_scene.input.on(
