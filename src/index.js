@@ -34,7 +34,7 @@ const config = {
     // maxWidth: window.innerWidth,
     // resolution: 1 par defaut, on peut tester 2 sur Retina
     scale: {
-      mode: Phaser.Scale.ENVELOP,
+      mode: Phaser.Scale.HEIGHT_CONTROLS_WIDTH,
       autoCenter: Phaser.Scale.CENTER_BOTH,
       height: 2732,
       width: 2048,

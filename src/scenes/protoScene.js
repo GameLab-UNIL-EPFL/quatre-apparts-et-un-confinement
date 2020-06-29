@@ -7,6 +7,7 @@ import { Card } from "./cards/card.js";
 import { CardObject } from "./objects/cardObject.js";
 import { Background } from "./objects/background.js";
 import { ProtoGuy, ProtoGuyCard } from "../characters/protoGuy.js";
+import { SizeTestCard } from "./cards/ProtoSceneCards/sizeTestCard.js";
 import { ZoomMiniGameCard } from "./cards/ProtoSceneCards/zoomMiniGameCard.js";
 import { MessageCard } from "./cards/ProtoSceneCards/messageCard.js";
 
@@ -38,7 +39,8 @@ export class ProtoScene extends Phaser.Scene {
         super({key: 'Prototype'});
 
         //Create all of the cards
-        this.introCard = new IntroCard(this);
+        this.introCard = new SizeTestCard(this);
+        // this.introCard = new IntroCard(this);
 
         this.wakeUpCard = new WakeUpCard(this);
 
@@ -66,7 +68,7 @@ export class ProtoScene extends Phaser.Scene {
         this.clothesCard = new Card(this, [
             new Background(
                 this,
-                "sprites/ProtoScene/ClothesCard/bg.jpg", 
+                "sprites/ProtoScene/ClothesCard/bg.jpg",
                 "ClothesBG"
             ),
             new CardObject(
@@ -155,7 +157,7 @@ export class ProtoScene extends Phaser.Scene {
         this.cardIdx = CARDS.INTRO;
         this.current_card = this.introCard;
 
-        //Create the dialogue controller 
+        //Create the dialogue controller
         this.dialogue = new DialogueController(this);
 
         //Keep track of the clothes that protoguy is wearing
@@ -163,15 +165,15 @@ export class ProtoScene extends Phaser.Scene {
     }
 
     /**
-     * @brief preload all of the elements of all of the cards 
+     * @brief preload all of the elements of all of the cards
      * that will be shown in the scene
      */
     preload() {
         //Load in the dialogue box
         this.load.spritesheet(
-            DIALOGUE_BOX_KEY, 
+            DIALOGUE_BOX_KEY,
             "sprites/UI/dialogueBox.png",
-            { frameWidth: 1886, frameHeight: 413 }  
+            { frameWidth: 1886, frameHeight: 413 }
         );
 
         this.cards.forEach(card => card.preload());
@@ -237,24 +239,24 @@ export class ProtoScene extends Phaser.Scene {
                             this.current_card = this.clothesCard;
                             this.current_card.create();
                             break;
-                        
+
                         //The kitchen was selected
                         case 1:
                             this.cardIdx = CARDS.KITCHEN;
                             this.current_card = this.kitchenCard;
                             this.current_card.create();
                             break;
-                        
+
                         //Proto guy was selected (back to bed)
                         case 2:
                             this.cardIdx = CARDS.WAKE_UP;
                             break;
-                        
+
                         default:
                             break;
-                        
+
                     }
-                    
+
                     break;
 
                 case CARDS.CLOTHES:
@@ -267,7 +269,7 @@ export class ProtoScene extends Phaser.Scene {
                             this.current_card = this.computerCard;
                             this.current_card.create();
                             break;
-                        
+
                         //The chair was selected
                         case 1:
                             this.clothes = ProtoGuyClothes.YESTERDAY_CLOTHES;
@@ -275,7 +277,7 @@ export class ProtoScene extends Phaser.Scene {
                             this.current_card = this.computerCard;
                             this.current_card.create();
                             break;
-                        
+
                         //Proto guy was selected (pyjamas)
                         case 2:
                             this.clothes = ProtoGuyClothes.PYJAMAS;
@@ -283,10 +285,10 @@ export class ProtoScene extends Phaser.Scene {
                             this.current_card = this.computerCard;
                             this.current_card.create();
                             break;
-                        
+
                         default:
                             break;
-                        
+
                     }
                     this.current_card.showItem();
                     break;
@@ -309,7 +311,7 @@ export class ProtoScene extends Phaser.Scene {
                     this.current_card = this.messageCard;
                     this.current_card.create();
                     break;
-                    
+
                 default:
                     break;
             }
