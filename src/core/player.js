@@ -23,6 +23,7 @@ export class Player {
      * @brief Sets the internal data of the player
      * @param {JSON} data the new data of the current scene (scene dependent)
      * -- ProtoScene -- { cardIdx, clothes, food }
+     * -- BuildingScene -- { mainMenu, stage, windows: { damien, grandma, family, indep }, month, nextScene: { damien, grandma, family, indep }}
      */
     setData(data) {
         if(data) {

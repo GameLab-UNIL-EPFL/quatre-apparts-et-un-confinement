@@ -8,7 +8,7 @@ export const Months = {
     MAY: 'may'
 };
 
-const WindowState = {
+export const WindowState = {
     OFF: 0,
     ON: 1
 };

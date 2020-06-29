@@ -28,7 +28,7 @@ const config = {
     height: window.innerHeight,
     scale: {
         mode: Phaser.Scale.FIT,
-        autoCenter: Phaser.Scale.CENTER_HORIZONTALLY,
+        autoCenter: Phaser.Scale.CENTER_BOTH,
         height: 2732,
         width: 2048
     },
@@ -43,6 +43,3 @@ const config = {
 
 export const game = new Phaser.Game(config);
 export const player = new Player();
-
-//Load the game
-//player.loadGame();

@@ -4,14 +4,57 @@ export const DialogueState = {
     NONE: 0,
     DISPLAYED: 1,
     PROMPT: 2,
-    DONE: 3
+    DONE: 3,
+    MSG: 4
 };
 
 export const DIALOGUE_BOX_KEY = "dialogueBox";
 export const D_BOX_ANIMATION_KEY = "dBoxAnim";
 
+const MIN_Y_MSG_POS = {
+    prompts: [2188, 2388, 2588],
+    msg_1: {
+        text: 1680,
+        box: 1862
+    },
+    msg_2: {
+        text: 1772,
+        box: 1913
+    },
+    msg_3: {
+        text: 1900,
+        box: 1967
+    },
+    msg_4: {
+        text: 1989,
+        box: 2025
+    }
+};
+
+const MIN_LEFT_X = {
+    text: 518,
+    box: 800
+};
+
+const MIN_RIGHT_X = {
+    text: 943,
+    box: 1217
+};
+
+const MSG_HEIGHT = {
+    typing: 88,
+    msg_1: 460,
+    msg_2: 362,
+    msg_3: 253,
+    msg_4: 141,
+    msg_space: 25
+};
+
+const MSG_LINE_CHARS = 19;
+const MSG_RESP_DELAY = 1500;
 const PROMT_HEIGHT = 400;
 const SPACING = 100;
+const MAX_N_PROMPTS = 3;
 
 const UP_POS = {
     box: new Phaser.Math.Vector2(1020, 275),
@@ -33,12 +76,16 @@ export class DialogueController {
     /**
      * @brief Creates a dialogue controller by loading the dialogue 
      * directly from JSON.
+     * @param {Phaser.Scene} parent_scene the scene in which the controller is contained 
      */
     constructor(parent_scene) {
         this.parent_scene = parent_scene;
         this.dialogueJSON = require("../dialogue/dialogData.json");
         this.current_conv_id = "";
         this.cur_state = DialogueState.NONE;
+
+        this.displayed = [];
+        this.prev_height = MSG_HEIGHT.typing;
     }
 
     /**
@@ -83,6 +130,13 @@ export class DialogueController {
      */
     isDone() {
         return this.cur_state === DialogueState.DONE;
+    }
+
+    /**
+     * @brief Ends the current dialogue
+     */
+    endDialogue() {
+        this.cur_state = DialogueState.DONE;
     }
 
     /**
@@ -244,5 +298,181 @@ export class DialogueController {
                 this.prompts.push({sprite: prompt_sprite, text: prompt_text});
             }); 
         }
+    }
+
+    /**
+     * @brief Moves all of the displayed messages up to make room for a new message
+     * @param {boolean} isTyping true is the message is a typing bubble, false otherwise
+     */
+    moveDisplayedUp(isTyping=false) {
+        let move_dist = isTyping ?
+            MSG_HEIGHT.typing :
+            this.prev_height + MSG_HEIGHT.msg_space;
+
+        this.parent_scene.tweens.add({
+            targets: this.displayed,
+            y: ("-= " + move_dist),
+            duration: 100
+        });
+    }
+
+    /**
+     * @brief Displays a phone message in a tchat like fashion
+     * @param {string} id the id of the dialogue to display
+     * @param {boolean} lr true if the message is on the left, false otherwise      
+     * @param {string} choice_id the id of the choice that was made by the user (if any)
+     * @param {Number} idx the index of the text we want to display (default is the first one)
+     */
+    displayMessage(id, lr, choice_id=null, idx=0) {
+        //Set dialogue state
+        this.cur_state = DialogueState.MSG;
+
+        //Retrieve the dialogue
+        let cur_text = choice_id ?
+            this.requestDialogue(id).choices[choice_id].text :
+            this.getText(id)[idx];
+
+        let cur_dialogue = this.requestDialogue(id);
+
+        //Decide which box to use
+        let box = null;
+        let ypos = {};
+        if(cur_text.length < MSG_LINE_CHARS) {
+            box = lr ? "recievedMsg4" : "sentMsg4";
+            ypos = {
+                text: MIN_Y_MSG_POS.msg_4.text,
+                box: MIN_Y_MSG_POS.msg_4.box
+            };
+            this.prev_height = MSG_HEIGHT.msg_4;
+
+        } else if(cur_text.length < 2 * MSG_LINE_CHARS) {
+            box = lr ? "recievedMsg3" : "sentMsg3";
+            ypos = {
+                text: MIN_Y_MSG_POS.msg_3.text,
+                box: MIN_Y_MSG_POS.msg_3.box
+            };
+            this.prev_height = MSG_HEIGHT.msg_3;
+
+        } else if(cur_text.length < 3 * MSG_LINE_CHARS) {
+            box = lr ? "recievedMsg2" : "sentMsg2";
+            ypos = {
+                text: MIN_Y_MSG_POS.msg_2.text,
+                box: MIN_Y_MSG_POS.msg_2.box
+            };
+            this.prev_height = MSG_HEIGHT.msg_2;
+
+        } else {
+            box = lr ? "recievedMsg1" : "sentMsg1";
+            ypos = {
+                text: MIN_Y_MSG_POS.msg_1.text,
+                box: MIN_Y_MSG_POS.msg_1.box
+            };
+            this.prev_height = MSG_HEIGHT.msg_1;
+        }
+
+        //Move the display up to make room for the new message
+        this.moveDisplayedUp();
+
+        //Create dialogue background
+        let box_elem = this.parent_scene.add.image(
+            lr ? MIN_LEFT_X.box : MIN_RIGHT_X.box,
+            ypos.box,
+            box
+        );
+
+        let text_elem = this.parent_scene.add.text(
+            (lr ? MIN_LEFT_X.text : MIN_RIGHT_X.text),
+            ypos.text,
+            cur_text,
+            {font: "60px OpenSans ", fill: lr ? "black" : "white", wordWrap: { width: 600 }}
+        );
+
+        //Move the messages back
+        box_elem.setDepth(-1);
+        text_elem.setDepth(-1);
+
+        this.displayed.push(box_elem);
+        this.displayed.push(text_elem);
+
+        console.log("CUR_DIALOGUE_GOTO_LEN = " + cur_dialogue.goto.length)
+
+        //Show answers
+        if(cur_dialogue.goto.length > 0 && choice_id === null) {
+            //this.msg_prompts.forEach(msg => msg.destroy());
+            this.promptMessageAnswers(id);
+        } else if(cur_dialogue.goto.length === 0) {
+            //Trigger end of dialogue
+            this.parent_scene.time.addEvent({
+                delay: 3000,
+                repeat: 0,
+                callback: () => {
+                    this.endDialogue();
+                },
+                callbackScope: this,
+            });
+        }
+    }
+
+    /**
+     * @brief Displays the different possible answers to a given message
+     * @param {string} id the id of the dialogue that triggered the prompt
+     */
+    promptMessageAnswers(id) {
+        const dialogue = this.requestDialogue(id);
+        let n_prompts = 0;
+
+        this.msg_prompts = [];
+
+        //Create all of the prompts texts (max MAX_N_PROMPTS)
+        for(let choice_key in dialogue.choices) {
+
+            const text_msg_elem = this.parent_scene.add.text(
+                MIN_LEFT_X.text + SPACING,
+                MIN_Y_MSG_POS.prompts[n_prompts++],
+                dialogue.choices[choice_key].preview,
+                {font: "60px OpenSans ", fill: "white"}
+            );
+
+            this.msg_prompts.push(text_msg_elem);
+
+            //Make the element interactive
+            text_msg_elem.setInteractive();
+            this.parent_scene.input.on(
+                'gameobjectdown',
+                (_, gameObject) => {
+                    if(gameObject === text_msg_elem) {
+                        this.msg_prompts.forEach(msg => msg.destroy());
+
+                        //Show the message above
+                        this.displayMessage(id, false, choice_key);
+
+                        //Goto the next dialogue
+                        let next_id = dialogue.choices[choice_key].goto;
+
+                        //Add a timer event to trigger the next message
+                        this.parent_scene.time.addEvent({
+                            delay: MSG_RESP_DELAY,
+                            repeat: 0,
+                            callback: () => {
+                                if((next_id.length) > 0) {
+                                    this.displayMessage(next_id, true);
+                                }
+                            },
+                            callbackScope: this,
+                        });
+                    }
+                },
+                this
+            );
+        }
+
+    }
+
+    /**
+     * @brief Destroys all dialogue currently shown on screen
+     */
+    destroyAllDisplayed() {
+        this.displayed.forEach(dis => dis.destroy());
+        
     }
 }
