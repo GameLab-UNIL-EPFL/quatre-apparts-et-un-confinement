@@ -10,13 +10,13 @@ export class CardObject {
      * @param {JSON} sprite, {name, url} of the sprite that will be created
      * @param {Phaser.Math.Vector2} position the position of the object in the scene
      * @param {Function} onClickCallback callback set as an onclick response for this object
-     * @param {Array} onClickArgs arguments that will be passed to the onClick callback 
+     * @param {Array} onClickArgs arguments that will be passed to the onClick callback
      * @param {Number} choice, the path that this item will entail (only if !-1)
      * @param {JSON} highlight {name, url} of the highlighted version of the sprite (can be null)
      */
     constructor(parent_scene, sprite, position, onClickCallback=null, onClickArgs=null, choice=-1, highlight=null) {
         this.parent_scene = parent_scene;
-        
+
         //Sprite parameters
         this.name = sprite.name;
         this.url = sprite.url;
@@ -52,9 +52,9 @@ export class CardObject {
      * and animates it if needed
      */
     create() {
-        this.sprite = this.parent_scene.add.image(this.position.x, this.position.y, this.name);
+        this.sprite = this.parent_scene.add.image(this.position.x * window.horizontalRatio, this.position.y, this.name);
 
-        //Create the highloght and animation if needed
+        //Create the highlight and animation if needed
         if(this.highlight) {
             this.highlight_sprite = this.parent_scene.add.image(this.position.x, this.position.y, this.highlight.name);
             this.parent_scene.tweens.add({
@@ -74,11 +74,11 @@ export class CardObject {
             this.sprite.setInteractive();
 
             this.parent_scene.input.on(
-                'gameobjectdown', 
+                'gameobjectdown',
                 (_, gameObject) => {
                     //Check that we clicked the clothes
                     if(gameObject === this.sprite || gameObject === this.highlight_sprite) {
-                        
+
                         //Check if the callback exists
                         if(this.onClickCallback !== null) {
 
@@ -94,7 +94,7 @@ export class CardObject {
                         }
                     }
                 },
-                this.parent_scene 
+                this.parent_scene
             );
         }
     }
@@ -118,4 +118,4 @@ export class CardObject {
             this.highlight_sprite.destroy();
         }
     }
-} 
+}

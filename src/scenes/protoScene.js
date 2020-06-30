@@ -39,13 +39,13 @@ export class ProtoScene extends Phaser.Scene {
      */
     constructor() {
         super({key: 'Prototype'});
-        
+
         //Keep track of the clothes that protoguy is wearing
         this.clothes = ProtoGuyClothes.PYJAMAS;
-        
+
         //Create all of the cards
         this.introCard = new IntroCard(this);
-        
+
         this.wakeUpCard = new WakeUpCard(this);
 
         let characters = {
@@ -77,14 +77,14 @@ export class ProtoScene extends Phaser.Scene {
                     0
                 ),
                 characters['chosePath'],
-            ], 
+            ],
             characters['chosePath']
         );
 
         this.clothesCard = new Card(this, [
                 new Background(
                     this,
-                    "sprites/ProtoScene/ClothesCard/bg.jpg", 
+                    "sprites/ProtoScene/ClothesCard/bg.jpg",
                     "ClothesBG"
                 ),
                 new CardObject(
@@ -182,8 +182,8 @@ export class ProtoScene extends Phaser.Scene {
         //Keep track of wich card is displayed
         this.cardIdx = ProtoCards.INTRO;
         this.current_card = this.introCard;
-        
-        //Create the dialogue controller 
+
+        //Create the dialogue controller
         this.dialogue = new DialogueController(this);
     }
 
@@ -247,7 +247,7 @@ export class ProtoScene extends Phaser.Scene {
 
     /**
      * @brief Notifies the protoGuy that his clothes have changed
-     * @param {ProtoGuyClothes} clothes the protoguy's new clothes 
+     * @param {ProtoGuyClothes} clothes the protoguy's new clothes
      */
     changeClothes(clothes) {
         if(this.current_card.hasCharacter()) {
@@ -257,16 +257,16 @@ export class ProtoScene extends Phaser.Scene {
     }
 
     /**
-     * @brief preload all of the elements of all of the cards 
+     * @brief preload all of the elements of all of the cards
      * that will be shown in the scene
      */
     preload() {
 
         //Load in the dialogue box
         this.load.spritesheet(
-            DIALOGUE_BOX_KEY, 
+            DIALOGUE_BOX_KEY,
             "sprites/UI/dialogueBox.png",
-            { frameWidth: 1886, frameHeight: 413 }  
+            { frameWidth: 1886, frameHeight: 413 }
         );
 
         this.cards.forEach(card => card.preload());
@@ -323,12 +323,12 @@ export class ProtoScene extends Phaser.Scene {
     nextCard(choice) {
 
         //Data that will be saved
-        let savable_data = { 
+        let savable_data = {
             cardIdx: this.cardIdx,
             clothes: this.clothes,
-            food: -1 
+            food: -1
         };
-        
+
         if(this.cardIdx < NUM_CARDS - 1 && this.current_card.isDone()) {
             this.current_card.destroy();
 
@@ -359,24 +359,24 @@ export class ProtoScene extends Phaser.Scene {
                             this.current_card = this.clothesCard;
                             this.current_card.create();
                             break;
-                        
+
                         //The kitchen was selected
                         case 1:
                             this.cardIdx = ProtoCards.KITCHEN;
                             this.current_card = this.kitchenCard;
                             this.current_card.create();
                             break;
-                        
+
                         //Proto guy was selected (back to bed)
                         case 2:
                             this.cardIdx = ProtoCards.WAKE_UP;
                             break;
-                        
+
                         default:
                             break;
-                        
+
                     }
-                    
+
                     break;
 
                 case ProtoCards.CLOTHES:
@@ -408,7 +408,7 @@ export class ProtoScene extends Phaser.Scene {
                     this.current_card = this.messageCard;
                     this.current_card.create();
                     break;
-                    
+
                 default:
                     break;
             }
