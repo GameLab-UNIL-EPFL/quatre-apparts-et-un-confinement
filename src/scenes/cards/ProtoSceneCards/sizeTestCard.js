@@ -36,15 +36,16 @@ export class SizeTestCard extends Card {
         super.create();
 
         //Create and place the temp image correctly
-        console.log(this.parent_scene.scale)
+        console.log('Current horizontal ratio:', this.parent_scene.game.horizontalRatio)
 
+        // origine centrée
         this.sprite = this.parent_scene.add.image(this.parent_scene.scale.baseSize.width/2, this.parent_scene.scale.baseSize.height/2, this.name);
 
+        // ou origine à gauche
         // this.sprite = this.parent_scene.add.image(0, 0, this.name);
-        this.sprite.setOrigin(0.5, 0.5);
+        // this.sprite.setOrigin(0, 0);
 
         this.sprite.setInteractive();
-        console.log(this.sprite)
 
         //Make said image interactive
         this.parent_scene.input.on(

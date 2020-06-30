@@ -19,7 +19,7 @@ export const ProtoGuyCard = {
 
 /**
  * @brief Models the prototype guy
- * Is mostly used to keep track of the choices made with 
+ * Is mostly used to keep track of the choices made with
  * this character and his current state.
  */
 export class ProtoGuy {
@@ -135,7 +135,7 @@ export class ProtoGuy {
                 break;
 
             case ProtoGuyCard.MINI_GAME:
-                //TODO Set url and names for each sprite 
+                //TODO Set url and names for each sprite
                 break;
 
             case ProtoGuyCard.MESSAGE:
@@ -188,9 +188,9 @@ export class ProtoGuy {
 
                 this.sprites = [this.base_sprite, this.arm_sprite, this.head_sprite];
 
-                this.arm_sprite.setOrigin(0, 0); 
+                this.arm_sprite.setOrigin(0, 0);
                 this.arm_sprite.angle += 190;
-                this.arm_sprite.x -= 10; 
+                this.arm_sprite.x -= 10;
                 this.arm_sprite.y += 10;
                 this.cur_state = ProtoGuyState.SCRATCH_DOWN;
 
