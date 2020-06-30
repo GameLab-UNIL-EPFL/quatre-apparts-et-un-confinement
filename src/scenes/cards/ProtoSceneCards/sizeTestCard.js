@@ -35,9 +35,9 @@ export class SizeTestCard extends Card {
     create() {
         super.create();
 
-        //Create and place the temp image correctly
-        console.log('Current horizontal ratio:', this.parent_scene.game.horizontalRatio)
+        console.log('Current horizontal ratio:', window.horizontalRatio)
 
+        //Create and place the temp image correctly
         // origine centrée
         this.sprite = this.parent_scene.add.image(this.parent_scene.scale.baseSize.width/2, this.parent_scene.scale.baseSize.height/2, this.name);
 

@@ -14,7 +14,7 @@ const PROMT_HEIGHT = 400;
 const SPACING = 100;
 
 const UP_POS = {
-    box: new Phaser.Math.Vector2(1020, 275), // ici: multiplier par horizontalRatio, mais game et la scene sont encore en construction
+    box: new Phaser.Math.Vector2(1020, 275), // ici: multiplier par horizontalRatio
     name: new Phaser.Math.Vector2(160, 100),
     content: new Phaser.Math.Vector2(160, 220)
 };

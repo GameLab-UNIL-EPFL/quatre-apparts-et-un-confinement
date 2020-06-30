@@ -71,7 +71,12 @@ const game = new Phaser.Game(config);
 
 // We’re about to change picture width (1365 pixels wide)
 const maxPictureWidth = 2048;
+
+// si on veut le stocker dans game
 game.horizontalRatio = scale.width / maxPictureWidth;
+
+// ou betement dans window (puisque le jeu met du temps à s’instancier)
+window.horizontalRatio = scale.width / maxPictureWidth;
 
 // This resize implies we also resize scene sprites, or they’d stretch.
 // As we lack of time, the fastest workaround could be to instantiate the game again, or even worse...

@@ -46,7 +46,7 @@ export class CardObject {
      * and animates it if needed
      */
     create() {
-        this.sprite = this.parent_scene.add.image(this.position.x * this.parent_scene.game.horizontalRatio, this.position.y, this.name);
+        this.sprite = this.parent_scene.add.image(this.position.x * window.horizontalRatio, this.position.y, this.name);
 
         //Create the highlight and animation if needed
         if(this.highlight) {
