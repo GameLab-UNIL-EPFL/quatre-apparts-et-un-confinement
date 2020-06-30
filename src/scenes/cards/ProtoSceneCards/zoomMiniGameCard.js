@@ -63,7 +63,7 @@ export class ZoomMiniGameCard extends Card {
         ];
 
         //Call base constructor
-        super(parent_scene, children);
+        super(parent_scene, children, null, true);
 
         this.messages = [];
 
@@ -114,6 +114,15 @@ export class ZoomMiniGameCard extends Card {
         this.messages.forEach(msg => {
             this.parent_scene.load.image(msg.name, msg.url);
         });
+    }
+
+    /**
+     * @brief Only ends the card is both the dialogue and the game are done
+     */
+    notifyDialogueEnd() {
+        if(this.isDone()) {
+            super.notifyDialogueEnd();
+        }
     }
 
     /**
@@ -267,18 +276,6 @@ export class ZoomMiniGameCard extends Card {
             callbackScope: this,
             args: [this.endMiniGame]
         });
-    }
-
-    /**
-     * @brief Updates the sate of the card
-     */
-    update() {
-        super.update();
-
-        //Check the dialogue state
-        if(this.isDone() && this.parent_scene.dialogue.isDone()) {
-            this.parent_scene.nextCard(this.final_health);
-        } 
     }
 
     destroy() {

@@ -330,6 +330,19 @@ export class BuildingScene extends Phaser.Scene {
         //Load in everything needed no matter the month
         this.sprites['building'] = this.add.image(1023, 1667, "building");
 
+        //Load in all of the windows
+        this.sprites['empty_windows'] = this.add.image(1023, 1609, "empty_windows");
+
+        //Load in the posters
+        let poster_pos = new Phaser.Math.Vector2(1709, 2393);
+        let poster_key = 'poster_0' + this.info.stage;
+        this.sprites[poster_key] = this.add.image(poster_pos.x, poster_pos.y, poster_key);
+        
+        //Load in the cars
+        this.sprites['car_01'] = this.add.image(1070, 2550, "car_01");
+        this.sprites['car_02'] = this.add.image(1847, 2550, "car_02");
+        this.sprites['car_03'] = this.add.image(-15, 2550, "car_03");
+
         switch(this.info.windows.family) {
             case WindowState.ON:    
                 this.sprites['family_window'] = this.add.image(1023, 1648, "family_window_on");
@@ -446,19 +459,6 @@ export class BuildingScene extends Phaser.Scene {
             default:
                 break;
         }
-
-        //Load in all of the windows
-        this.sprites['empty_windows'] = this.add.image(1023, 1609, "empty_windows");
-
-        //Load in the posters
-        let poster_pos = new Phaser.Math.Vector2(1709, 2393);
-        let poster_key = 'poster_0' + this.info.stage;
-        this.sprites[poster_key] = this.add.image(poster_pos.x, poster_pos.y, poster_key);
-        
-        //Load in the cars
-        this.sprites['car_01'] = this.add.image(1070, 2550, "car_01");
-        this.sprites['car_02'] = this.add.image(1847, 2550, "car_02");
-        this.sprites['car_03'] = this.add.image(-15, 2550, "car_03");
 
         //Create cloud animations
         this.tweens.add({

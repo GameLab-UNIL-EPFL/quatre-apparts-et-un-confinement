@@ -66,8 +66,15 @@ export class ProtoGuy {
                 break;
 
             case ProtoGuyCard.CLOTHES:
-                this.name = "clothesProtoGuy";
-                this.url = "/sprites/ProtoScene/ClothesCard/protoGuy.png";
+
+                this.dirty_name = "clothesProtoGuy_dirty";
+                this.dirty_url = "/sprites/ProtoScene/ClothesCard/protoGuy_Y.png";
+
+                this.clean_name = "clothesProtoGuy_clean";
+                this.clean_url = "/sprites/ProtoScene/ClothesCard/protoGuy_G.png";
+
+                this.pj_name = "clothesProtoGuy_pj";
+                this.pj_url = "sprites/ProtoScene/ClothesCard/protoGuy.png";
                 break;
 
             case ProtoGuyCard.KITCHEN:
@@ -106,6 +113,47 @@ export class ProtoGuy {
     }
 
     /**
+     * @brief Notifies the character of a change in his clothing
+     */
+    notifyClothesChange() {
+        //Get rid of the existing protoGuy
+        this.destroy();
+
+        //Chose which clothes to wear
+        switch(this.parent_scene.clothes) {
+            case ProtoGuyClothes.PYJAMAS:
+                this.sprite = this.parent_scene.add.image(this.x, this.y, this.pj_name);
+                this.sprite.setInteractive();
+                break;
+
+            case ProtoGuyClothes.YESTERDAY_CLOTHES:
+                this.sprite = this.parent_scene.add.image(this.x, this.y, this.dirty_name);
+                this.sprite.setInteractive();
+                break;
+
+            case ProtoGuyClothes.CLEAN_CLOTHES:
+                this.sprite = this.parent_scene.add.image(this.x, this.y, this.clean_name);
+                this.sprite.setInteractive();
+                break;
+
+            default:
+                break;
+        }
+
+        //Store sprite
+        this.sprites = [this.sprite];
+    }
+
+    /**
+     * @brief Loads the three different clothes sprites in
+     */
+    loadManyClothes() {
+        this.parent_scene.load.image(this.dirty_name, this.dirty_url);
+        this.parent_scene.load.image(this.clean_name, this.clean_url);
+        this.parent_scene.load.image(this.pj_name, this.pj_url);
+    }
+
+    /**
      * @brief Loads in all of the images needed to draw the character
      */
     preload() {
@@ -121,7 +169,7 @@ export class ProtoGuy {
                 break;
 
             case ProtoGuyCard.CLOTHES:
-                this.parent_scene.load.image(this.name, this.url);
+                this.loadManyClothes();
                 break;
 
             case ProtoGuyCard.KITCHEN:
@@ -129,19 +177,14 @@ export class ProtoGuy {
                 break;
 
             case ProtoGuyCard.COMPUTER:
-                this.parent_scene.load.image(this.dirty_name, this.dirty_url);
-                this.parent_scene.load.image(this.clean_name, this.clean_url);
-                this.parent_scene.load.image(this.pj_name, this.pj_url);
+                this.loadManyClothes();
                 break;
 
             case ProtoGuyCard.MINI_GAME:
-                //TODO Set url and names for each sprite 
                 break;
 
             case ProtoGuyCard.MESSAGE:
-                this.parent_scene.load.image(this.dirty_name, this.dirty_url);
-                this.parent_scene.load.image(this.clean_name, this.clean_url);
-                this.parent_scene.load.image(this.pj_name, this.pj_url);
+                this.loadManyClothes();
                 break;
 
             default:
@@ -167,7 +210,7 @@ export class ProtoGuy {
                     console.log("click protoGuy");
 
                     //Go to the next scene
-                    this.parent_scene.cardIsDone();
+                    this.parent_scene.endCard();
                     this.parent_scene.nextCard(choice);
                 }
             },
@@ -214,8 +257,25 @@ export class ProtoGuy {
                 break;
 
             case ProtoGuyCard.CLOTHES:
+                this.sprite = this.parent_scene.add.image(this.x, this.y, this.pj_name);
+                this.sprites = [this.sprite];
+
                 //Make protoguy trigger a card change
-                this.setProtoGuyCardTrigger(2);
+                this.sprite.setInteractive();
+                this.parent_scene.input.on(
+                    'gameobjectdown',
+                    (pointer, gameObject) => {
+                        //Check that we clicked on the closet
+                        if(gameObject === this.sprite) {
+                            console.log("click protoGuy");
+        
+                            //Go to the next scene
+                            this.parent_scene.endCard();
+                            this.parent_scene.nextCard();
+                        }
+                    },
+                    this.parent_scene
+                );
                 break;
 
             case ProtoGuyCard.KITCHEN:
@@ -279,5 +339,6 @@ export class ProtoGuy {
      */
     destroy() {
         this.sprites.forEach(sprite => sprite.destroy());
+        this.sprites = [];
     }
 }
