@@ -12,7 +12,9 @@
 	"livre1": {
 		"name": "Suzanne",
 		"text": [
-			"La peste - Albert Camus"
+			"La peste - Albert Camus",
+			"Du reste, le docteur Rieux, par exemple, considérait que c'était cela le malheur, justement,", 
+			"et que l'habitude du désespoir est pire que le désespoir lui-même."
 		],
 		"choices": {},
 		"goto": []
@@ -20,7 +22,10 @@
 	"livre2": {
 		"name": "Suzanne",
         "text": [
-			"A La Recherche du Temps Perdu - Marcel Proust"
+			"A La Recherche du Temps Perdu - Marcel Proust",
+			"Certes, il y a dans ma maison toutes les choses inutiles.", 
+			"Il n'y manque que le nécessaire, un grand morceau de ciel comme ici.", 
+			"Tâchez de garder toujours un morceau de ciel au-dessus de votre vie..."
 		], 
         "choices": {},
 		"goto": []
@@ -28,14 +33,18 @@
 	"livre3": {
 		"name": "Suzanne",
         "text": [
-			"Le Misanthrope - Molière"
+			"Le Misanthrope - Molière",
+			"Je ne trouve partout que lâche flatterie,",
+			"Qu'injustice, intérêt, trahison, fourberie;",
+			"Je n'y puis plus tenir, j'enrage, et mon dessein",
+			"Est de rompre en visière à tout le genre humain."
 		], 
         "choices": {},
 		"goto": []
 	},
 	"radio": {
 		"name": "Radio",
-		"text": ["Que faire?"],
+		"text": "Que faire?",
 		"choices": {
             "musique": {
 				"text": "écouter de la musique",
@@ -50,7 +59,10 @@
 	},
 	"news": {
 		"name": "Radio",
-		"text": ["17 Mars - La Suisse se trouve dans une situation extraordinaire", "Restez chez vous"],
+		"text": [
+			"17 Mars - La Suisse se trouve dans une situation extraordinaire", 
+			"Restez chez vous"
+		],
 		"choices": {},
 		"goto": []
 	},
@@ -64,10 +76,6 @@
 		"name": "Suzanne",
 		"text": "Bon, qui est-ce que je pourrais appeler?",
 		"choices": {
-            "gertrude": {
-				"text": "Gertrude",
-				"goto": "gertrude"
-			},
 			"francoise": {
 				"text": "Françoise",
 				"goto": "francoise"
@@ -80,22 +88,7 @@
 				"text": "Marc",
 				"goto": "marc"
 			},
-		"goto": ["gertrude", "francoise", "sophie", "marc"]
-        }
-    },
-    "gertrude": {
-        "name": "Gertrude",
-        "text": "Allo?",
-        "choices": {
-            "salut1": {
-				"text": "Salut Gertrude, comment tu vas?",
-				"goto": "TODO"
-			},
-			"salut2": {
-				"text": "Bonjour Gertrude, comment allez-vous?",
-				"goto": "TODO"
-            },
-		"goto": ["TODO"]
+		"goto": ["francoise", "sophie", "marc"]
         }
     },
     "francoise": {
@@ -209,7 +202,11 @@
     },
     "oui": {
         "name": "Françoise",
-        "text": ["Sinon, je m'occupe comme je peux.", "J'ai essayé skype/zoom pour la première fois la semaine passée!", "J'ai pu voir mes petits-enfants!"],
+		"text": [
+			"Sinon, je m'occupe comme je peux.", 
+			"J'ai essayé Zoom pour la première fois la semaine passée!", 
+			"J'ai pu voir mes petits-enfants!"
+		],
         "choices": {
             "rep1": {
 				"text": "Super! Oui ma fille a réussi à m'expliquer comment l'installer aussi",
@@ -258,5 +255,99 @@
 			},
 		"goto": []
         }
-    }
+	},
+	"sophie": {
+		"name": "Sophie",
+		"text": "Allo?",
+		"choices": {
+			"rep1": {
+				"text": "Comment ça va?",
+				"goto": "comment"
+			},
+			"rep2": {
+				"text": "Les enfants vont bien?",
+				"goto": "enfants"
+			}
+		},
+		"goto": ["comment", "enfants"]
+	},
+	"comment": {
+		"name": "Sophie",
+		"text": "Oui enfin... Je suis bien occupée avec les enfants.",
+		"choices": {
+			"rep1": {
+				"text": "Les enfants vont bien?",
+				"goto": "enfants"
+			}
+		},
+		"goto": ["enfants"]
+	},
+	"enfants": {
+		"name": "Sophie",
+		"text": [
+			"Oui ils vont bien, mais c'est pas facile de les avoir à la maison toute la journée.", 
+			"Matt me demande de les sortir parce que sinon il n'arrive pas à travailler."
+		],
+		"choices": {
+			"rep1": {
+				"text": "On peut faire un appel vidéo comme ça je peux les occuper un moment.",
+				"goto": "video"
+			}
+		},
+		"goto": ["video"]
+	},
+	"video": {
+		"name": "Sophie",
+		"text": "Oui on peut faire ça ce week-end!",
+		"choices": {
+			"rep1": {
+				"text": "Super! J'ai hâte! Sinon vous êtes tous en bonne santé?",
+				"goto": "sante"
+			}
+		},
+		"goto": ["sante"]
+	},
+	"sante": {
+		"name": "Sophie",
+		"text": "Oui, ben on est pas vraiment sorti encore donc à part la fatigue, tout vas bien.",
+		"choices": {
+			"rep1": {
+				"text": "Tant mieux, mais oublie pas de boire du jus de gingembre et de curcuma!",
+				"goto": "fin"
+			},
+			"rep2": {
+				"text": "Tant mieux, mais oublie pas de manger de la soupe à l'ortie!",
+				"goto": "fin"
+			}
+		},
+		"goto": ["fin"]
+	},
+	"fin": {
+		"name": "Sophie",
+		"text": "Oui oui maman, aller je dois y aller! Bisous",
+		"choices": {
+			"rep1": {
+				"text": "D'accord! Bisous à Maxime et Liliane"
+			}
+		}
+	},
+	"marc": {
+		"name": "Marc",
+		"text": "Allo?",
+		"choices": {
+			"rep1": {
+				"text": "Allo Marc? C'est Suzanne!",
+				"goto": "desole"
+			}
+		},
+		"goto": ["desole"]
+	},
+	"desole": {
+		"name": "Marc",
+		"text": [
+			"Ah Salut Suzanne, désolé j'ai vraiment pas le temps là.", 
+			"On doit tout réorganiser pour le mariage, c'est vraiment compliqué.", 
+			"Marion est stressée comme pas possible. Je te laisse!"
+		]
+	}
 }
