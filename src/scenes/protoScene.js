@@ -436,7 +436,7 @@ export class ProtoScene extends Phaser.Scene {
             month: Months.MARCH,
             nextScene: {
                 damien: null,
-                grandma: null,
+                grandma: Scenes.GRANDMA,
                 family: null,
                 indep: null
             }

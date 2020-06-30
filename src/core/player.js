@@ -3,7 +3,8 @@ import { game } from "..";
 export const Scenes = {
     INTRO: 'TitleScene',
     PROTOTYPE: 'Prototype',
-    BUILDING: 'Building'
+    BUILDING: 'Building',
+    GRANDMA: 'Grandma'
 };
 
 /**
