@@ -14,7 +14,7 @@ export class CardObject {
      */
     constructor(parent_scene, sprite, position, choice=-1, highlight=null) {
         this.parent_scene = parent_scene;
-        
+
         //Sprite parameters
         this.name = sprite.name;
         this.url = sprite.url;
@@ -46,9 +46,9 @@ export class CardObject {
      * and animates it if needed
      */
     create() {
-        this.sprite = this.parent_scene.add.image(this.position.x, this.position.y, this.name);
+        this.sprite = this.parent_scene.add.image(this.position.x * this.parent_scene.game.horizontalRatio, this.position.y, this.name);
 
-        //Create the highloght and animation if needed
+        //Create the highlight and animation if needed
         if(this.highlight) {
             this.highlight_sprite = this.parent_scene.add.image(this.position.x, this.position.y, this.highlight.name);
             this.parent_scene.tweens.add({
@@ -68,16 +68,16 @@ export class CardObject {
             this.sprite.setInteractive();
 
             this.parent_scene.input.on(
-                'gameobjectdown', 
+                'gameobjectdown',
                 (_, gameObject) => {
                     //Check that we clicked the clothes
                     if(gameObject === this.sprite || gameObject === this.highlight_sprite) {
-                        
+
                         this.parent_scene.endCard();
                         this.parent_scene.nextCard(this.choice);
                     }
                 },
-                this.parent_scene 
+                this.parent_scene
             );
         }
     }
@@ -101,4 +101,4 @@ export class CardObject {
             this.highlight_sprite.destroy();
         }
     }
-} 
+}

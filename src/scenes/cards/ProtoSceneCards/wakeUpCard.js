@@ -21,12 +21,11 @@ export class WakeUpCard extends Card {
     constructor(parent_scene) {
         //Initialize children array
         let children = [
-            // new Background(parent_scene, "sprites/ProtoScene/WakeUpCard/bg.jpg", "WakeUpBG"),
-            new Background(parent_scene, "sprites/test-scaled-delivery/sample@x3-borders.jpg", "WakeUpBG"),
+            new Background(parent_scene, "sprites/ProtoScene/WakeUpCard/bg.jpg", "WakeUpBG"),
             new CardObject(
                 parent_scene,
                 { name: "phone", url: "sprites/ProtoScene/WakeUpCard/phone.png" },
-                new Phaser.Math.Vector2(630, 1400),
+                new Phaser.Math.Vector2(630, 1400), // ici: multiplier par horizontalRatio, mais game et la scene sont encore en construction
             ),
             new ProtoGuy(parent_scene, 1528, 1750, ProtoGuyCard.WAKE_UP),
             new CardObject(
