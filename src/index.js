@@ -14,7 +14,7 @@ let plugins = [{
     plugin: RexUIPlugin,
     mapping: 'rexUI'
 }];
-const consoleSeemsOpen = false; //window.outerHeight - window.innerHeight > 200;
+const consoleSeemsOpen = window.outerHeight - window.innerHeight > 200;
 if(consoleSeemsOpen === true){
   plugins.push({
     key: 'debugObjects',
@@ -70,6 +70,7 @@ const config = {
     }
 };
 
+// @TODO: a clean resize. Implies some changes in scene classes
 /*
 window.addEventListener('resize', function (event) {
   clearTimeout(resize);
