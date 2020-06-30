@@ -118,7 +118,7 @@ export class WakeUpCard extends Card {
                   this.parent_scene.tweens.add({
                       targets: this.children[1].sprite,
                       y: '+= 10',
-                      duration: 200,
+                      duration: 30,
                       ease: "Quad.easeOut",
                       yoyo: true,
                       loop: 0,

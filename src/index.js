@@ -5,6 +5,7 @@ import './style.scss';
 
 import {IntroScene} from "./scenes/introScene.js";
 import {ProtoScene} from "./scenes/protoScene.js";
+import { Player } from "./core/player.js";
 
 let resizeTimeout;
 let plugins = [{
@@ -67,8 +68,6 @@ const config = {
     }
 };
 
-const game = new Phaser.Game(config);
-
 // We’re about to change picture width (1365 pixels wide)
 const maxPictureWidth = 2048;
 
@@ -103,3 +102,9 @@ window.addEventListener('resize', function (event) {
   }, 200);
 }, false);
 */
+
+export const game = new Phaser.Game(config);
+export const player = new Player();
+
+//Load the game
+player.loadGame();
