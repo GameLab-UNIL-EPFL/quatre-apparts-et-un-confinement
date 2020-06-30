@@ -3,7 +3,6 @@ import { Background } from "../../objects/background";
 import { ProtoGuy, ProtoGuyCard } from "../../../characters/protoGuy";
 import { CardObject } from "../../objects/cardObject";
 import { Card } from "../card";
-import { DialogueState } from "../../../core/dialogueController";
 
 const CLASS_ID = "zoom";
 
@@ -18,10 +17,13 @@ export class ComputerCard extends Card {
      * @param {Phaser.Scene} parent_scene, the Scene which this card belongs to
      */
     constructor(parent_scene) {
+        //Store the card's character
+        let character = new ProtoGuy(parent_scene, 1345, 1535, ProtoGuyCard.COMPUTER);
+
         //Initialize children array
         let children = [
             new Background(parent_scene, "sprites/ProtoScene/ComputerCard/base.jpg", "ComputerBG"),
-            new ProtoGuy(parent_scene, 1345, 1535, ProtoGuyCard.COMPUTER),
+            character,
             new CardObject(
                 parent_scene,
                 { name: "Bureau", url: "sprites/ProtoScene/ComputerCard/bureau.png" },
@@ -45,7 +47,7 @@ export class ComputerCard extends Card {
         ];
 
         //Call base constructor
-        super(parent_scene, children);
+        super(parent_scene, children, character, true);
     }
 
     /**
@@ -84,19 +86,6 @@ export class ComputerCard extends Card {
                 destructs = [this.children[3], this.children[4], this.children[5]];
                 destructs.forEach(child => child.destroy());
                 break;
-        }
-    }
-
-    /**
-     * @brief Updates the sate of the card
-     */
-    update() {
-        super.update();
-
-        //Check if it's time to move to the next scene
-        if(this.parent_scene.dialogue.getState() === DialogueState.DONE) {
-            this.endCard();
-            this.parent_scene.nextCard();
         }
     }
 }

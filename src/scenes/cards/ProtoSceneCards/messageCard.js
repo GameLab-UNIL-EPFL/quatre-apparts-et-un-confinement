@@ -14,10 +14,13 @@ export class MessageCard extends Card {
      * @param parent_scene, the Scene which this card belongs to
      */
     constructor(parent_scene) {
+        //Store the card's character
+        let character = new ProtoGuy(parent_scene, 1035, 1350, ProtoGuyCard.MESSAGE);
+
         //Initialize children array
         let children = [
             new Background(parent_scene, "sprites/ProtoScene/MessageCard/bg.png", "MessageBG"),
-            new ProtoGuy(parent_scene, 1035, 1350, ProtoGuyCard.MESSAGE),
+            character,
             new CardObject(
                 parent_scene,
                 { name: "phone-cover", url: "sprites/ProtoScene/MessageCard/phone.png" },
@@ -26,7 +29,14 @@ export class MessageCard extends Card {
         ];
 
         //Call base constructor
-        super(parent_scene, children);
+        super(parent_scene, children, character, true);
+    }
+
+    /**
+     * @brief Ends the card by moving on to the next scene
+     */
+    notifyDialogueEnd() {
+        this.parent_scene.nextScene();
     }
 
     preload() {
@@ -67,17 +77,5 @@ export class MessageCard extends Card {
         this.parent_scene.add.image(1009, 2421, "promptBox");
 
         this.parent_scene.dialogue.displayMessage("sortir", true);
-    }
-
-    /**
-     * @brief Updates the sate of the card
-     */
-    update() {
-        super.update();
-
-        //Poll the dialogue state
-        if(this.parent_scene.dialogue.isDone()) {
-            this.parent_scene.nextScene();
-        }
     }
 }

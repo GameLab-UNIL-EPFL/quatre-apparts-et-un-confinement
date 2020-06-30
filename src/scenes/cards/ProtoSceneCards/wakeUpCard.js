@@ -19,6 +19,9 @@ export class WakeUpCard extends Card {
      * @param parent_scene, the Scene which this card belongs to
      */
     constructor(parent_scene) {
+        //Store the scene's character
+        let character = new ProtoGuy(parent_scene, 1528, 1750, ProtoGuyCard.WAKE_UP);
+
         //Initialize children array
         let children = [
             new Background(parent_scene, "sprites/ProtoScene/WakeUpCard/bg.jpg", "WakeUpBG"),
@@ -27,7 +30,7 @@ export class WakeUpCard extends Card {
                 { name: "phone", url: "sprites/ProtoScene/WakeUpCard/phone.png" },
                 new Phaser.Math.Vector2(630, 1400),
             ),
-            new ProtoGuy(parent_scene, 1528, 1750, ProtoGuyCard.WAKE_UP),
+            character,
             new CardObject(
                 parent_scene,
                 { name: "bubbles", url: "sprites/ProtoScene/WakeUpCard/tired_bubbles.png" },
@@ -36,7 +39,7 @@ export class WakeUpCard extends Card {
         ];
 
         //Call base constructor
-        super(parent_scene, children);
+        super(parent_scene, children, character, true);
 
         this.phone_ring = true;
     }
@@ -134,18 +137,5 @@ export class WakeUpCard extends Card {
             },
             this.parent_scene
         );
-    }
-
-    /**
-     * @brief Updates the sate of the card
-     */
-    update() {
-        super.update();
-
-        //Check if it's time to move to the next scene
-        if(this.parent_scene.dialogue.getState() === DialogueState.DONE) {
-            this.endCard();
-            this.parent_scene.nextCard();
-        }
     }
 }

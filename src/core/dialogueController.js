@@ -137,6 +137,9 @@ export class DialogueController {
      */
     endDialogue() {
         this.cur_state = DialogueState.DONE;
+
+        //Notify the parent scene
+        this.parent_scene.notifyDialogueEnd();
     }
 
     /**
@@ -219,7 +222,7 @@ export class DialogueController {
                             this.content.disableInteractive();
 
                             //Update dialogue state
-                            this.cur_state = DialogueState.DONE;
+                            this.endDialogue();
                             
                         } else {
                             this.content.text = this.text[this.textIdx];
@@ -393,8 +396,6 @@ export class DialogueController {
 
         this.displayed.push(box_elem);
         this.displayed.push(text_elem);
-
-        console.log("CUR_DIALOGUE_GOTO_LEN = " + cur_dialogue.goto.length)
 
         //Show answers
         if(cur_dialogue.goto.length > 0 && choice_id === null) {

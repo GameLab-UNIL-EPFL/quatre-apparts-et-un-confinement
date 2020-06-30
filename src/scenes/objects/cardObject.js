@@ -9,10 +9,12 @@ export class CardObject {
      * @param {Phaser.Scene} parent_scene, the scene in which the clothes are contained
      * @param {JSON} sprite, {name, url} of the sprite that will be created
      * @param {Phaser.Math.Vector2} position the position of the object in the scene
+     * @param {Function} onClickCallback callback set as an onclick response for this object
+     * @param {Array} onClickArgs arguments that will be passed to the onClick callback 
      * @param {Number} choice, the path that this item will entail (only if !-1)
      * @param {JSON} highlight {name, url} of the highlighted version of the sprite (can be null)
      */
-    constructor(parent_scene, sprite, position, choice=-1, highlight=null) {
+    constructor(parent_scene, sprite, position, onClickCallback=null, onClickArgs=null, choice=-1, highlight=null) {
         this.parent_scene = parent_scene;
         
         //Sprite parameters
@@ -21,6 +23,10 @@ export class CardObject {
 
         //Position of the object
         this.position = position;
+
+        //Store callback
+        this.onClickCallback = onClickCallback;
+        this.onClickArgs = onClickArgs;
 
         //Interaction parameters
         this.choice = choice;
@@ -63,7 +69,7 @@ export class CardObject {
         }
 
         //Add a choice if needed
-        if(this.choice !== -1) {
+        if(this.choice !== -1 || this.onClickCallback !== null) {
             //Make the clothes interactive
             this.sprite.setInteractive();
 
@@ -73,8 +79,19 @@ export class CardObject {
                     //Check that we clicked the clothes
                     if(gameObject === this.sprite || gameObject === this.highlight_sprite) {
                         
-                        this.parent_scene.endCard();
-                        this.parent_scene.nextCard(this.choice);
+                        //Check if the callback exists
+                        if(this.onClickCallback !== null) {
+
+                            //Check for arguments
+                            if(this.onClickArgs !== null) {
+                                this.onClickCallback(this.onClickArgs);
+                            } else {
+                                this.onClickCallback();
+                            }
+                        } else {
+                            this.parent_scene.endCard();
+                            this.parent_scene.nextCard(this.choice);
+                        }
                     }
                 },
                 this.parent_scene 

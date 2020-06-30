@@ -19,12 +19,47 @@ export class Card {
      * @brief Constructs a group of objects in the scene
      * @param {Phaser.Scene} parent_scene, the Scene which this card belongs to
      * @param {array} children, the objects that are in the card
+     * @param character, the scene's character (if any)
+     * @param {boolean} dialogueSensitive whether or not the card should end when the dialogue ends
      */
-    constructor(parent_scene, children) {
+    constructor(parent_scene, children, character=null, dialogueSensitive=null) {
         //Initialize attributes
         this.children = children;
         this.parent_scene = parent_scene;
         this.cur_state = CardState.INIT;
+
+        //Store the card's character
+        this.character = character;
+
+        //Store the dialogue sensitivity field
+        this.dialogueSensitive = dialogueSensitive;
+    }
+
+    /**
+     * @brief Tells us whether or not the current scene has a character
+     * @returns {boolean} true if there is a character, false otherwise
+     */
+    hasCharacter() {
+        return this.character !== null;
+    }
+
+    /**
+     * @brief Tells us whether or not the current card is changed by dialogue
+     * @returns {boolean} true if the current card is dialogue sensitive, false otherwise
+     */
+    isDialogueSensitive() {
+        if(this.dialogueSensitive !== null) {
+            return this.dialogueSensitive;
+        } 
+        return false;
+    }
+
+    /**
+     * @brief Handles a dialogue end notification
+     */
+    notifyDialogueEnd() {
+        this.endCard();
+        this.parent_scene.nextCard();
     }
 
     /**
