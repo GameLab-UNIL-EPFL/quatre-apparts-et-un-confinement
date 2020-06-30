@@ -41,8 +41,9 @@ export class ProtoScene extends Phaser.Scene {
         super({key: 'Prototype'});
 
         //Create all of the cards
-        this.introCard = new SizeTestCard(this);
-        // this.introCard = new IntroCard(this);
+        // For debug
+        // this.introCard = new SizeTestCard(this);
+        this.introCard = new IntroCard(this);
 
         this.wakeUpCard = new WakeUpCard(this);
 

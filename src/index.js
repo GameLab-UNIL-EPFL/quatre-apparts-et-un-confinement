@@ -3,8 +3,9 @@ import RexUIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
 import DebugObjects from './plugins/debugObjects.js';
 import './style.scss';
 
-import {IntroScene} from "./scenes/introScene.js";
-import {ProtoScene} from "./scenes/protoScene.js";
+import { IntroScene } from "./scenes/introScene.js";
+import { ProtoScene } from "./scenes/protoScene.js";
+import { BuildingScene } from "./scenes/buildingScene.js";
 import { Player } from "./core/player.js";
 
 let resizeTimeout;
@@ -31,10 +32,11 @@ if(consoleSeemsOpen === true){
 
 function getScale(innerWidth, innerHeight){
   let innerRatio = innerWidth / innerHeight;
-  const targetRatio = 2048 / 2732;
+  const height = 2732; // default height
+  let width = 2048; // default width
+  const targetRatio = width / height;
   const minRatio = 0.45;
-  const height = 2732;
-  let width = 2048;
+
 
   if(innerRatio < targetRatio){
     if(innerRatio >= minRatio){
@@ -62,7 +64,7 @@ const config = {
     plugins: {
         scene: plugins
     },
-    scene: [ProtoScene],
+    scene: [BuildingScene, ProtoScene],
     physics: {
         default: 'arcade'
     }
@@ -89,7 +91,6 @@ export const player = new Player();
 
 //Load the game
 player.loadGame();
-
 
 // We’re about to change picture width (1365 pixels wide)
 const maxPictureWidth = 2048;
