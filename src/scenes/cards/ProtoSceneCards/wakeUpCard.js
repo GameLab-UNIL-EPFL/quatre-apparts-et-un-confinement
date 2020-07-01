@@ -1,6 +1,5 @@
 import { Background } from "../../objects/background";
 import { ProtoGuy, ProtoGuyCard } from "../../../characters/protoGuy";
-import { DialogueState } from "../../../core/dialogueController";
 import { Card } from "../card";
 import { CardObject } from "../../objects/cardObject";
 

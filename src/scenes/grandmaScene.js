@@ -5,6 +5,7 @@ import { Background } from "./objects/background.js";
 import { player } from "../index.js";
 import { Scenes } from "../core/player.js";
 import { WindowState, Months } from "./buildingScene.js";
+import { LivingRoomCard } from "./cards/GrandmaScene/livingRoomCard.js";
 
 export const GrandmaCards = {
     LIVING_ROOM: 0,
@@ -23,79 +24,44 @@ export class GrandmaScene extends Phaser.Scene {
     constructor() {
         super({key: 'Grandma'});
 
-        this.grandmaCard = new Card(this, [
+        this.livingRoomCard = new LivingRoomCard(this);
+        this.radioCard = new Card(this, [
             new Background(
                 this,
-                "sprites/GrandmaScene/bg.jpg",
-                "grandmaBG"
+                "sprites/GrandmaScene/Radio/radio_bg.jpg",
+                "radio_bg"
             ),
             new CardObject(
                 this,
-                { name: "furniture", url: "sprites/GrandmaScene/furniture.png" },
-                new Phaser.Math.Vector2(1025, 1325)
+                { name: "radio_radio", url: "sprites/GrandmaScene/Radio/radio_radio.png" },
+                new Phaser.Math.Vector2(795, 900),
+                (scene) => scene.nextCard(GrandmaCards.LIVING_ROOM),
+                this
+            )
+        ]);
+
+        this.calendarCard = new Card(this, [
+            new Background(
+                this,
+                "sprites/GrandmaScene/Calendar/calendar_bg.jpg",
+                "calendar_bg"
             ),
             new CardObject(
                 this,
-                { name: "book_01", url: "sprites/GrandmaScene/books_01.png" },
-                new Phaser.Math.Vector2(799, 919),
-                () => {},
-                null,
-                -1,
-                { name: "book_01_h", url: "sprites/GrandmaScene/books_01_h.png" }
-            ),
-            new CardObject(
-                this,
-                { name: "book_02", url: "sprites/GrandmaScene/books_02.png" },
-                new Phaser.Math.Vector2(799, 1207),
-                () => {},
-                null,
-                -1,
-                { name: "book_02_h", url: "sprites/GrandmaScene/books_02_h.png" }
-            ),
-            new CardObject(
-                this,
-                { name: "book_03", url: "sprites/GrandmaScene/books_03.png" },
-                new Phaser.Math.Vector2(799, 1459),
-                () => {},
-                null,
-                -1,
-                { name: "book_03_h", url: "sprites/GrandmaScene/books_03_h.png" }
-            ),
-            new CardObject(
-                this,
-                { name: "radio", url: "sprites/GrandmaScene/radio.png" },
-                new Phaser.Math.Vector2(788, 1693),
-                () => {},
-                null,
-                -1,
-                { name: "radio_h", url: "sprites/GrandmaScene/radio_h.png" }
-            ),
-            new CardObject(
-                this,
-                { name: "calendar", url: "sprites/GrandmaScene/calendar.png" },
-                new Phaser.Math.Vector2(768, 1986),
-                () => {},
-                null,
-                -1,
-                { name: "calendar_h", url: "sprites/GrandmaScene/calendar_h.png" }
-            ),
-            new CardObject(
-                this,
-                { name: "grandma", url: "sprites/GrandmaScene/grandma_idle.png" },
-                new Phaser.Math.Vector2(1262, 1918)
-            ),
-            new CardObject(
-                this,
-                { name: "coffee_table", url: "sprites/GrandmaScene/coffee_table.png" },
-                new Phaser.Math.Vector2(1781, 2289)
+                { name: "calendar_calendar", url: "sprites/GrandmaScene/Calendar/calendar_calendar.png" },
+                new Phaser.Math.Vector2(871, 1113),
+                (scene) => scene.nextCard(GrandmaCards.LIVING_ROOM),
+                this
             )
         ]);
 
         this.cards = [
-            this.grandmaCard
+            this.livingRoomCard,
+            this.radioCard,
+            this.calendarCard
         ];
 
-        this.current_card = this.grandmaCard;
+        this.current_card = this.livingRoomCard;
         this.card_idx = GrandmaCards.LIVING_ROOM;
     }
 
@@ -148,9 +114,29 @@ export class GrandmaScene extends Phaser.Scene {
 
     /**
      * @brief moves to the next card
-     * @param {Number} choice the choice that was made
+     * @param {GrandmaCards} card the next card to show
      */
-    nextCard() {
+    nextCard(card) {
+        //Destroy the current card
+        this.current_card.destroy();
+
+        //Choose which card to show next
+        switch(card) {
+            case GrandmaCards.LIVING_ROOM:
+                this.current_card = this.livingRoomCard;
+                break;
+
+            case GrandmaCards.RADIO:
+                this.current_card = this.radioCard;
+                break;
+
+            case GrandmaCards.CALENDAR:
+                this.current_card = this.calendarCard;
+                break;
+        }
+
+        //Create the new card
+        this.current_card.create();
     }
 
     nextScene() {
