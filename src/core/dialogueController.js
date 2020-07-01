@@ -57,7 +57,7 @@ const SPACING = 100;
 const MAX_N_PROMPTS = 3;
 
 const UP_POS = {
-    box: new Phaser.Math.Vector2(1020, 275),
+    box: new Phaser.Math.Vector2(1020, 275), // ici: multiplier par horizontalRatio
     name: new Phaser.Math.Vector2(160, 100),
     content: new Phaser.Math.Vector2(160, 220)
 };
@@ -72,11 +72,11 @@ const DOWN_POS = {
  * @brief Handles everything that has to do with dialogue
  */
 export class DialogueController {
-    
+
     /**
-     * @brief Creates a dialogue controller by loading the dialogue 
+     * @brief Creates a dialogue controller by loading the dialogue
      * directly from JSON.
-     * @param {Phaser.Scene} parent_scene the scene in which the controller is contained 
+     * @param {Phaser.Scene} parent_scene the scene in which the controller is contained
      */
     constructor(parent_scene) {
         this.parent_scene = parent_scene;
@@ -126,7 +126,7 @@ export class DialogueController {
 
     /**
      * @brief Checks whether the dialogue box is still displayed or not
-     * @return {boolean} whether the dialogue state is DONE 
+     * @return {boolean} whether the dialogue state is DONE
      */
     isDone() {
         return this.cur_state === DialogueState.DONE;
@@ -144,12 +144,12 @@ export class DialogueController {
 
     /**
      * @brief displays the dialogue that has a given ID
-     * @param {string} id the ID of the dialogue that we want to display 
+     * @param {string} id the ID of the dialogue that we want to display
      * @param {boolean} up_down true if the dialogue will be placed on the top, false if on the bottom
      */
     display(id, up_down=true) {
         this.dialogue_pos = up_down ? UP_POS : DOWN_POS;
-        
+
         this.current_conv_id = id;
         this.cur_state = DialogueState.DISPLAYED;
 
@@ -192,9 +192,9 @@ export class DialogueController {
         this.text = this.getText(id);
         this.textIdx = 0;
 
-        //Add dialogue content 
+        //Add dialogue content
         this.content = this.parent_scene.add.text(
-            this.dialogue_pos.content.x, 
+            this.dialogue_pos.content.x,
             this.dialogue_pos.content.y,
             this.text[this.textIdx],
             {font: "80px OpenSans", fill: "black", wordWrap: { width: 1800}}
@@ -223,7 +223,7 @@ export class DialogueController {
 
                             //Update dialogue state
                             this.endDialogue();
-                            
+
                         } else {
                             this.content.text = this.text[this.textIdx];
                         }
@@ -257,15 +257,15 @@ export class DialogueController {
 
                 //Create the prompt rectangle
                 const bg = new Phaser.Geom.Rectangle(
-                    0, 
-                    1200 - ((PROMT_HEIGHT + SPACING) * this.prompts.length), 
-                    2200, 
+                    0,
+                    1200 - ((PROMT_HEIGHT + SPACING) * this.prompts.length),
+                    2200,
                     PROMT_HEIGHT
                 );
                 const prompt_sprite = this.parent_scene.add.graphics({ fillStyle: { color: 0xffffff, alpha: 50 }});
                 prompt_sprite.fillRectShape(bg);
 
-                //Create the prompt text 
+                //Create the prompt text
                 const prompt_text = this.parent_scene.add.text(
                     700,
                     1300 - ((PROMT_HEIGHT + SPACING) * this.prompts.length),
@@ -297,9 +297,9 @@ export class DialogueController {
                     },
                     this
                 );
-                
+
                 this.prompts.push({sprite: prompt_sprite, text: prompt_text});
-            }); 
+            });
         }
     }
 
@@ -322,7 +322,7 @@ export class DialogueController {
     /**
      * @brief Displays a phone message in a tchat like fashion
      * @param {string} id the id of the dialogue to display
-     * @param {boolean} lr true if the message is on the left, false otherwise      
+     * @param {boolean} lr true if the message is on the left, false otherwise
      * @param {string} choice_id the id of the choice that was made by the user (if any)
      * @param {Number} idx the index of the text we want to display (default is the first one)
      */
@@ -474,6 +474,6 @@ export class DialogueController {
      */
     destroyAllDisplayed() {
         this.displayed.forEach(dis => dis.destroy());
-        
+
     }
 }
