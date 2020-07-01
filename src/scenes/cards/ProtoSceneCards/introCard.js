@@ -37,10 +37,10 @@ export class IntroCard extends Card {
 
         //Create and place the temp image correctly
         this.sprite = this.parent_scene.add.image(0, 0, this.name);
+        this.sprite.y = 870;
+        this.sprite.x = 624;
         this.sprite.setInteractive();
-        this.sprite.setScale(5);
-        this.sprite.y += 1500;
-        this.sprite.x += 1000;
+        this.sprite.setScale(3);
 
         //Make said image interactive
         this.parent_scene.input.on(

@@ -49,32 +49,34 @@ export class ProtoScene extends Phaser.Scene {
         this.wakeUpCard = new WakeUpCard(this);
 
         let characters = {
-            'chosePath': new ProtoGuy(this, 1270, 2080, ProtoGuyCard.CHOSE_PATH),
-            'clothes': new ProtoGuy(this, 1125, 1615, ProtoGuyCard.CLOTHES),
+            'chosePath': new ProtoGuy(this, 733, 1222, ProtoGuyCard.CHOSE_PATH),
+            'clothes': new ProtoGuy(this, 651, 915, ProtoGuyCard.CLOTHES),
             'kitchen': new ProtoGuy(this, 660, 1290, ProtoGuyCard.KITCHEN)
         };
 
         this.chosePathCard = new Card(this, [
                 new Background(
                     this,
-                    "/sprites/ProtoScene/ChosePathCard/bg.png",
+                    "/sprites/ProtoScene/ChosePathCard/bg.jpg",
                     "choseBG"
                 ),
                 new CardObject(
                     this,
-                    { name: "room", url: "sprites/ProtoScene/ChosePathCard/room.png" },
-                    new Phaser.Math.Vector2(1418, 1260),
+                    { name: "kitchen", url: "sprites/ProtoScene/ChosePathCard/kitchen.png" },
+                    new Phaser.Math.Vector2(831, 740),
+                    () => {},
                     null,
-                    null,
-                    1
+                    1,
+                    { name: "kitchen_h", url: "sprites/ProtoScene/ChosePathCard/kitchen_h.png" }
                 ),
                 new CardObject(
                     this,
-                    { name: "closet", url: "sprites/ProtoScene/ChosePathCard/Closet.png" },
-                    new Phaser.Math.Vector2(460, 1340),
+                    { name: "closet", url: "sprites/ProtoScene/ChosePathCard/closet.png" },
+                    new Phaser.Math.Vector2(300, 783),
+                    () => {},
                     null,
-                    null,
-                    0
+                    0,
+                    { name: "closet_h", url: "sprites/ProtoScene/ChosePathCard/closet_h.png" }
                 ),
                 characters['chosePath'],
             ],
@@ -90,20 +92,20 @@ export class ProtoScene extends Phaser.Scene {
                 new CardObject(
                     this,
                     { name: "clothes", url: "sprites/ProtoScene/ClothesCard/clothes.png" },
-                    new Phaser.Math.Vector2(1545, 1376),
+                    new Phaser.Math.Vector2(893, 785),
                     (scene) => scene.changeClothes(ProtoGuyClothes.CLEAN_CLOTHES),
                     this,
                     -1,
-                    { name: "clothes_h", url: "sprites/ProtoScene/ClothesCard/clothes_highlight.png" }
+                    { name: "clothes_h", url: "sprites/ProtoScene/ClothesCard/clothes_h.png" }
                 ),
                 new CardObject(
                     this,
                     { name: "chair", url: "sprites/ProtoScene/ClothesCard/chair.png" },
-                    new Phaser.Math.Vector2(650, 2070),
+                    new Phaser.Math.Vector2(375, 1185),
                     (scene) => scene.changeClothes(ProtoGuyClothes.YESTERDAY_CLOTHES),
                     this,
                     -1,
-                    { name: "chair_h", url: "sprites/ProtoScene/ClothesCard/chair_highlight.png" }
+                    { name: "chair_h", url: "sprites/ProtoScene/ClothesCard/chair_h.png" }
                 ),
                 characters['clothes']
             ],
@@ -180,8 +182,8 @@ export class ProtoScene extends Phaser.Scene {
         ];
 
         //Keep track of wich card is displayed
-        this.cardIdx = ProtoCards.INTRO;
-        this.current_card = this.introCard;
+        this.cardIdx = ProtoCards.CLOTHES;
+        this.current_card = this.clothesCard;
 
         //Create the dialogue controller
         this.dialogue = new DialogueController(this);

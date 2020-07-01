@@ -47,13 +47,13 @@ export class ProtoGuy {
 
                 this.head_url = "/sprites/ProtoScene/WakeUpCard/character_head.png";
                 this.head_name = "character_head";
-                this.head_offset_x = 505;
-                this.head_offset_y = -554;
+                this.head_offset_x = -55;
+                this.head_offset_y = -519;
 
                 this.arm_url = "/sprites/ProtoScene/WakeUpCard/character_arm.png";
                 this.arm_name = "chracter_arm";
-                this.arm_offset_x = -85;
-                this.arm_offset_y = -890;
+                this.arm_offset_x = 1195 - this.x;
+                this.arm_offset_y = 695 - this.y;
 
                  //Initialize the different FSMs
                 this.cur_state = ProtoGuyState.IDLE;
@@ -62,19 +62,19 @@ export class ProtoGuy {
 
             case ProtoGuyCard.CHOSE_PATH:
                 this.name = "chosePathProtoGuy";
-                this.url = "sprites/ProtoScene/ChosePathCard/ProtoGuy.png";
+                this.url = "sprites/ProtoScene/ChosePathCard/damien.png";
                 break;
 
             case ProtoGuyCard.CLOTHES:
 
                 this.dirty_name = "clothesProtoGuy_dirty";
-                this.dirty_url = "/sprites/ProtoScene/ClothesCard/protoGuy_Y.png";
+                this.dirty_url = "/sprites/ProtoScene/ClothesCard/damien_Y.png";
 
                 this.clean_name = "clothesProtoGuy_clean";
-                this.clean_url = "/sprites/ProtoScene/ClothesCard/protoGuy_G.png";
+                this.clean_url = "/sprites/ProtoScene/ClothesCard/damien_G.png";
 
                 this.pj_name = "clothesProtoGuy_pj";
-                this.pj_url = "sprites/ProtoScene/ClothesCard/protoGuy.png";
+                this.pj_url = "sprites/ProtoScene/ClothesCard/damien_pj.png";
                 break;
 
             case ProtoGuyCard.KITCHEN:
@@ -204,7 +204,7 @@ export class ProtoGuy {
         this.sprite.setInteractive();
         this.parent_scene.input.on(
             'gameobjectdown',
-            (pointer, gameObject) => {
+            (_, gameObject) => {
                 //Check that we clicked on the closet
                 if(gameObject === this.sprite) {
                     console.log("click protoGuy");
@@ -226,8 +226,8 @@ export class ProtoGuy {
             case ProtoGuyCard.WAKE_UP:
                 //Create the different sprites that make up the character
                 this.base_sprite = this.parent_scene.add.image(this.x, this.y, this.base_name);
-                this.arm_sprite = this.parent_scene.add.image(this.x + this.head_offset_x, this.y + this.head_offset_y, this.arm_name);
-                this.head_sprite = this.parent_scene.add.image(this.x + this.arm_offset_x, this.y + this.arm_offset_y, this.head_name);
+                this.arm_sprite = this.parent_scene.add.image(this.x + this.arm_offset_x, this.y + this.arm_offset_y, this.arm_name);
+                this.head_sprite = this.parent_scene.add.image(this.x + this.head_offset_x, this.y + this.head_offset_y, this.head_name);
 
                 this.sprites = [this.base_sprite, this.arm_sprite, this.head_sprite];
 
@@ -241,8 +241,8 @@ export class ProtoGuy {
                 this.parent_scene.tweens.add({
                     targets: this.arm_sprite,
                     angle: this.arm_sprite.angle - 10,
-                    x: this.arm_sprite.x + 10,
-                    y: this.arm_sprite.y - 10,
+                    x: this.arm_sprite.x + 5,
+                    y: this.arm_sprite.y - 5,
                     duration: 500,
                     ease: "Linear",
                     yoyo: true,
