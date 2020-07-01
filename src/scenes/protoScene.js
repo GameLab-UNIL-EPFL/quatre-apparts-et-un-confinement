@@ -121,10 +121,10 @@ export class ProtoScene extends Phaser.Scene {
                 characters['kitchen'],
                 new CardObject(
                     this,
-                    { name: "fridge", url: "sprites/ProtoScene/KitchenCard/fridge.png" },
+                    { name: "fridge", url: "sprites/ProtoScene/KitchenCard/frigo.png" },
                     new Phaser.Math.Vector2(1350, 1100),
                     1,
-                    { name: "fridge_h", url: "sprites/ProtoScene/KitchenCard/fridge_highlight.png" }
+                    { name: "fridge_h", url: "sprites/ProtoScene/KitchenCard/frigo_h.png" }
                 ),
                 new CardObject(
                     this,
@@ -133,19 +133,19 @@ export class ProtoScene extends Phaser.Scene {
                 ),
                 new CardObject(
                     this,
-                    { name: "counter", url: "sprites/ProtoScene/KitchenCard/counter.png" },
+                    { name: "counter", url: "sprites/ProtoScene/KitchenCard/comptoire.png" },
                     new Phaser.Math.Vector2(1025, 2190)
                 ),
                 new CardObject(
                     this,
-                    { name: "sink", url: "sprites/ProtoScene/KitchenCard/sink.png" },
+                    { name: "sink", url: "sprites/ProtoScene/KitchenCard/lavabo.png" },
                     new Phaser.Math.Vector2(1430, 2430),
                     2,
-                    { name: "sink_h", url: "sprites/ProtoScene/KitchenCard/sink_highlight.png" }
+                    { name: "sink_h", url: "sprites/ProtoScene/KitchenCard/lavabo_h.png" }
                 ),
                 new CardObject(
                     this,
-                    { name: "counter_stuff", url: "sprites/ProtoScene/KitchenCard/counter_stuff.png" },
+                    { name: "counter_stuff", url: "sprites/ProtoScene/KitchenCard/objets.png" },
                     new Phaser.Math.Vector2(1300, 2550)
                 ),
                 new CardObject(
@@ -153,11 +153,11 @@ export class ProtoScene extends Phaser.Scene {
                     { name: "toaster", url: "sprites/ProtoScene/KitchenCard/toaster.png" },
                     new Phaser.Math.Vector2(390, 2520),
                     0,
-                    { name: "toaster_h", url: "sprites/ProtoScene/KitchenCard/toaster_highlight.png" }
+                    { name: "toaster_h", url: "sprites/ProtoScene/KitchenCard/toaster_h.png" }
                 ),
                 new CardObject(
                     this,
-                    { name: "lamp", url: "sprites/ProtoScene/KitchenCard/lamp.png" },
+                    { name: "lamp", url: "sprites/ProtoScene/KitchenCard/lampe.png" },
                     new Phaser.Math.Vector2(1230, 555)
                 )
             ],
@@ -182,8 +182,8 @@ export class ProtoScene extends Phaser.Scene {
         ];
 
         //Keep track of wich card is displayed
-        this.cardIdx = ProtoCards.CLOTHES;
-        this.current_card = this.clothesCard;
+        this.cardIdx = ProtoCards.KITCHEN;
+        this.current_card = this.kitchenCard;
 
         //Create the dialogue controller
         this.dialogue = new DialogueController(this);

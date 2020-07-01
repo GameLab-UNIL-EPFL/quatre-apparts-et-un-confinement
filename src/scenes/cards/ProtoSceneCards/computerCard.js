@@ -18,31 +18,31 @@ export class ComputerCard extends Card {
      */
     constructor(parent_scene) {
         //Store the card's character
-        let character = new ProtoGuy(parent_scene, 1345, 1535, ProtoGuyCard.COMPUTER);
+        let character = new ProtoGuy(parent_scene, 796, 932, ProtoGuyCard.COMPUTER);
 
         //Initialize children array
         let children = [
-            new Background(parent_scene, "sprites/ProtoScene/ComputerCard/base.jpg", "ComputerBG"),
+            new Background(parent_scene, "sprites/ProtoScene/ComputerCard/bg.jpg", "ComputerBG"),
             character,
             new CardObject(
                 parent_scene,
                 { name: "Bureau", url: "sprites/ProtoScene/ComputerCard/bureau.png" },
-                new Phaser.Math.Vector2(1025, 1610)
+                new Phaser.Math.Vector2(599, 943)
             ),
             new CardObject(
                 parent_scene,
                 { name: "toast", url: "sprites/ProtoScene/ComputerCard/toast.png" },
-                new Phaser.Math.Vector2(1700, 2550)
+                new Phaser.Math.Vector2(987, 1506)
             ),
             new CardObject(
                 parent_scene,
-                { name: "yogourt", url: "sprites/ProtoScene/ComputerCard/yogourt.png" },
-                new Phaser.Math.Vector2(1700, 2550)
+                { name: "yoghourt", url: "sprites/ProtoScene/ComputerCard/yoghourt.png" },
+                new Phaser.Math.Vector2(980, 1364)
             ),
             new CardObject(
                 parent_scene,
                 { name: "verre", url: "sprites/ProtoScene/ComputerCard/verre.png" },
-                new Phaser.Math.Vector2(1700, 2550)
+                new Phaser.Math.Vector2(741, 1441)
             )
         ];
 

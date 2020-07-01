@@ -79,18 +79,18 @@ export class ProtoGuy {
 
             case ProtoGuyCard.KITCHEN:
                 this.name = "kitchenProtoGuy";
-                this.url = "sprites/ProtoScene/KitchenCard/protoGuy.png";
+                this.url = "sprites/ProtoScene/KitchenCard/damien.png";
                 break;
 
             case ProtoGuyCard.COMPUTER:
                 this.dirty_name = "computeProtoGuyDirty";
-                this.dirty_url = "sprites/ProtoScene/ComputerCard/habits-sales.png";
+                this.dirty_url = "sprites/ProtoScene/ComputerCard/damien_Y.png";
 
                 this.clean_name = "computeProtoGuyClean";
-                this.clean_url = "sprites/ProtoScene/ComputerCard/habits-propres.png";
+                this.clean_url = "sprites/ProtoScene/ComputerCard/damien_G.png";
 
                 this.pj_name = "computeProtoGuyPJ";
-                this.pj_url = "sprites/ProtoScene/ComputerCard/habits-pyjama.png";
+                this.pj_url = "sprites/ProtoScene/ComputerCard/damien_pj.png";
                 break;
 
             case ProtoGuyCard.MINI_GAME:
