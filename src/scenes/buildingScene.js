@@ -28,15 +28,15 @@ export class BuildingScene extends Phaser.Scene {
             mainMenu: true,
             stage: 1,
             windows: {
-                damien: WindowState.OFF,
-                grandma: WindowState.OFF,
+                damien: WindowState.ON,
+                grandma: WindowState.ON,
                 family: WindowState.OFF,
                 indep: WindowState.OFF
             },
-            month: Months.MARCH,
+            month: Months.MAY,
             nextScene: {
-                damien: null,
-                grandma: null,
+                damien: Scenes.PROTOTYPE,
+                grandma: Scenes.GRANDMA,
                 family: null,
                 indep: null
             }
