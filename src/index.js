@@ -91,9 +91,6 @@ window.addEventListener('resize', function (event) {
 export const game = new Phaser.Game(config);
 export const player = new Player();
 
-//Load the game
-player.loadGame();
-
 // We’re about to change picture width (1365 pixels wide)
 const maxPictureWidth = 2048;
 
