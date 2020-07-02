@@ -188,8 +188,8 @@ export class ProtoScene extends Phaser.Scene {
         ];
 
         //Keep track of wich card is displayed
-        this.cardIdx = ProtoCards.KITCHEN;
-        this.current_card = this.kitchenCard;
+        this.cardIdx = ProtoCards.MINI_GAME;
+        this.current_card = this.zoomMiniGame;
 
         //Create the dialogue controller
         this.dialogue = new DialogueController(this);
