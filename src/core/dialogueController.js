@@ -12,45 +12,59 @@ export const DIALOGUE_BOX_KEY = "dialogueBox";
 export const D_BOX_ANIMATION_KEY = "dBoxAnim";
 
 const MIN_Y_MSG_POS = {
-    prompts: [2188, 2388, 2588],
     msg_1: {
-        text: 1680,
-        box: 1862
+        text: 1000,
+        box: 1000
     },
     msg_2: {
-        text: 1772,
-        box: 1913
+        text: 1000,
+        box: 1000
     },
     msg_3: {
-        text: 1900,
-        box: 1967
+        text: 1035,
+        box: 1115
     },
     msg_4: {
-        text: 1989,
-        box: 2025
-    }
+        text: 1070,
+        box: 1132
+    },
+    msg_5: {
+        text: 1093,
+        box: 1152
+    },
+    msg_6: {
+        text: 1130,
+        box: 1169
+    },
+    msg_7: {
+        text: 1156,
+        box: 1182
+    },
 };
 
 const MIN_LEFT_X = {
-    text: 518,
-    box: 800
+    text: 311,
+    box: 471
 };
 
 const MIN_RIGHT_X = {
-    text: 943,
-    box: 1217
+    text: 547,
+    box: 712
 };
 
 const MSG_HEIGHT = {
     typing: 88,
-    msg_1: 460,
-    msg_2: 362,
-    msg_3: 253,
-    msg_4: 141,
-    msg_space: 25
+    msg_1: 271,
+    msg_2: 237,
+    msg_3: 213,
+    msg_4: 183,
+    msg_5: 149,
+    msg_6: 119,
+    msg_7: 84,
+    msg_space: 15
 };
 
-const MSG_LINE_CHARS = 19;
+const MSG_LINE_CHARS = 18;
 const MSG_RESP_DELAY = 1500;
 const PROMT_HEIGHT = 400;
 const SPACING = 100;
@@ -270,7 +284,7 @@ export class DialogueController {
                     700,
                     1300 - ((PROMT_HEIGHT + SPACING) * this.prompts.length),
                     choice.text,
-                    {font: "90px OpenSans ", fill: "black"}
+                    {font: "54px OpenSans ", fill: "black"}
                 );
 
                 //Activate prompt interactivity
@@ -341,30 +355,51 @@ export class DialogueController {
         let box = null;
         let ypos = {};
         if(cur_text.length < MSG_LINE_CHARS) {
+            box = lr ? "recievedMsg7" : "sentMsg7";
+            ypos = {
+                text: MIN_Y_MSG_POS.msg_7.text,
+                box: MIN_Y_MSG_POS.msg_7.box
+            };
+            this.prev_height = MSG_HEIGHT.msg_7;
+
+        } else if(cur_text.length < 2 * MSG_LINE_CHARS) {
+            box = lr ? "recievedMsg6" : "sentMsg6";
+            ypos = {
+                text: MIN_Y_MSG_POS.msg_6.text,
+                box: MIN_Y_MSG_POS.msg_6.box
+            };
+            this.prev_height = MSG_HEIGHT.msg_6;
+
+        } else if(cur_text.length < 3 * MSG_LINE_CHARS) {
+            box = lr ? "recievedMsg5" : "sentMsg5";
+            ypos = {
+                text: MIN_Y_MSG_POS.msg_5.text,
+                box: MIN_Y_MSG_POS.msg_5.box
+            };
+            this.prev_height = MSG_HEIGHT.msg_5;
+
+        } else if(cur_text.length < 4 * MSG_LINE_CHARS) {
             box = lr ? "recievedMsg4" : "sentMsg4";
             ypos = {
                 text: MIN_Y_MSG_POS.msg_4.text,
                 box: MIN_Y_MSG_POS.msg_4.box
             };
             this.prev_height = MSG_HEIGHT.msg_4;
-
-        } else if(cur_text.length < 2 * MSG_LINE_CHARS) {
+        } else if(cur_text.length < 5 * MSG_LINE_CHARS) {
             box = lr ? "recievedMsg3" : "sentMsg3";
             ypos = {
                 text: MIN_Y_MSG_POS.msg_3.text,
                 box: MIN_Y_MSG_POS.msg_3.box
             };
             this.prev_height = MSG_HEIGHT.msg_3;
-
-        } else if(cur_text.length < 3 * MSG_LINE_CHARS) {
+        } else if(cur_text.length < 6 * MSG_LINE_CHARS) {
             box = lr ? "recievedMsg2" : "sentMsg2";
             ypos = {
                 text: MIN_Y_MSG_POS.msg_2.text,
                 box: MIN_Y_MSG_POS.msg_2.box
             };
             this.prev_height = MSG_HEIGHT.msg_2;
-
-        } else {
+        } else if(cur_text.length < 7 * MSG_LINE_CHARS) {
             box = lr ? "recievedMsg1" : "sentMsg1";
             ypos = {
                 text: MIN_Y_MSG_POS.msg_1.text,
@@ -387,7 +422,7 @@ export class DialogueController {
             (lr ? MIN_LEFT_X.text : MIN_RIGHT_X.text),
             ypos.text,
             cur_text,
-            {font: "60px OpenSans ", fill: lr ? "black" : "white", wordWrap: { width: 600 }}
+            {font: "36px OpenSans ", fill: lr ? "black" : "white", wordWrap: { width: 360 }}
         );
 
         //Move the messages back
@@ -424,14 +459,33 @@ export class DialogueController {
 
         this.msg_prompts = [];
 
+        console.log(dialogue.goto.length);
+        let font_size;
+        let prompt_ypos = []; 
+        let prompt_xpos = 323;
+        //Display the correct prompt box
+        if(dialogue.goto.length <= 1) {
+            this.parent_scene.add.image(593, 1416, 'promptBox1');
+            font_size = 76;
+            prompt_ypos = [1379];
+        } else if(dialogue.goto.length <= 2) {
+            this.parent_scene.add.image(593, 1416, 'promptBox2');
+            font_size = 56;
+            prompt_ypos = [1297, 1477];
+        } else {
+            this.parent_scene.add.image(593, 1416, 'promptBox3');
+            font_size = 46;
+            prompt_ypos = [1276, 1392, 1511];
+        }
+
         //Create all of the prompts texts (max MAX_N_PROMPTS)
         for(let choice_key in dialogue.choices) {
 
             const text_msg_elem = this.parent_scene.add.text(
-                MIN_LEFT_X.text + SPACING,
-                MIN_Y_MSG_POS.prompts[n_prompts++],
+                prompt_xpos,
+                prompt_ypos[n_prompts++],
                 dialogue.choices[choice_key].preview,
-                {font: "60px OpenSans ", fill: "white"}
+                {font: font_size + "px OpenSans ", fill: "white"}
             );
 
             this.msg_prompts.push(text_msg_elem);

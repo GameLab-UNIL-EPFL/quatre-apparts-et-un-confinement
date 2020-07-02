@@ -98,13 +98,13 @@ export class ProtoGuy {
 
             case ProtoGuyCard.MESSAGE:
                 this.dirty_name = "computeProtoGuyDirty_msg";
-                this.dirty_url = "sprites/ProtoScene/MessageCard/protoGuyYesterdayClothes.png";
+                this.dirty_url = "sprites/ProtoScene/MessageCard/damien_Y.png";
 
                 this.clean_name = "computeProtoGuyClean_msg";
-                this.clean_url = "sprites/ProtoScene/MessageCard/protoGuyGClothes.png";
+                this.clean_url = "sprites/ProtoScene/MessageCard/damien_G.png";
 
                 this.pj_name = "computeProtoGuyPJ_msg";
-                this.pj_url = "sprites/ProtoScene/MessageCard/protoGuyPJs.png";
+                this.pj_url = "sprites/ProtoScene/MessageCard/damien_pj.png";
                 break;
 
             default:
