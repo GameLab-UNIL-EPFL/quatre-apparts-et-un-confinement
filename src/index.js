@@ -7,6 +7,7 @@ import { IntroScene } from "./scenes/introScene.js";
 import { ProtoScene } from "./scenes/protoScene.js";
 import { BuildingScene } from "./scenes/buildingScene.js";
 import { Player } from "./core/player.js";
+import { GrandmaScene } from "./scenes/grandmaScene.js";
 
 let resizeTimeout;
 let plugins = [{
@@ -64,7 +65,7 @@ const config = {
     plugins: {
         scene: plugins
     },
-    scene: [BuildingScene, ProtoScene],
+    scene: [BuildingScene, ProtoScene, GrandmaScene],
     physics: {
         default: 'arcade'
     }
@@ -89,9 +90,6 @@ window.addEventListener('resize', function (event) {
 
 export const game = new Phaser.Game(config);
 export const player = new Player();
-
-//Load the game
-player.loadGame();
 
 // We’re about to change picture width (1365 pixels wide)
 const maxPictureWidth = 2048;
