@@ -34,7 +34,7 @@ export class GrandmaScene extends Phaser.Scene {
             new CardObject(
                 this,
                 { name: "radio_radio", url: "sprites/GrandmaScene/Radio/radio_radio.png" },
-                new Phaser.Math.Vector2(795, 900),
+                new Phaser.Math.Vector2(469, 527),
                 (scene) => scene.nextCard(GrandmaCards.LIVING_ROOM),
                 this
             )
@@ -49,7 +49,7 @@ export class GrandmaScene extends Phaser.Scene {
             new CardObject(
                 this,
                 { name: "calendar_calendar", url: "sprites/GrandmaScene/Calendar/calendar_calendar.png" },
-                new Phaser.Math.Vector2(871, 1113),
+                new Phaser.Math.Vector2(512, 638),
                 (scene) => scene.nextCard(GrandmaCards.LIVING_ROOM),
                 this
             )

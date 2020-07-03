@@ -26,7 +26,7 @@ export class BuildingScene extends Phaser.Scene {
         //Information about what's shown in the scene
         this.info = {
             mainMenu: true,
-            stage: 1,
+            stage: 3,
             windows: {
                 damien: WindowState.ON,
                 grandma: WindowState.ON,
@@ -200,7 +200,7 @@ export class BuildingScene extends Phaser.Scene {
             this.sprites['continue_text'].setInteractive();
             this.sprites['menu_continue'].setInteractive();
 
-            /*this.input.on(
+            this.input.on(
                 'gameobjectdown',
                 (_, gameObject) => {
                     //Check that we clicked on the right button
@@ -215,7 +215,7 @@ export class BuildingScene extends Phaser.Scene {
                     }
                 },
                 this
-            );*/
+            );
         }
         
         //Create new Game background sprite
@@ -240,7 +240,7 @@ export class BuildingScene extends Phaser.Scene {
         this.sprites['new_game_text'].setInteractive();
         this.sprites['menu_new_game'].setInteractive();
 
-        /*this.input.on(
+        this.input.on(
             'gameobjectdown',
             (_, gameObject) => {
                 //Check that we clicked on the right button
@@ -271,7 +271,7 @@ export class BuildingScene extends Phaser.Scene {
                 }
             },
             this
-        );*/
+        );
     }
 
     /**
@@ -317,9 +317,9 @@ export class BuildingScene extends Phaser.Scene {
         this.sprites[poster_key] = this.add.image(poster_pos.x, poster_pos.y, poster_key);
         
         //Load in the cars
-        this.sprites['car_01'] = this.add.image(464, 1530, "car_01");
-        this.sprites['car_02'] = this.add.image(1198, 1530, "car_02");
-        this.sprites['car_03'] = this.add.image(-9, 1530, "car_03");
+        this.sprites['car_01'] = this.add.image(464, 1519, "car_01");
+        this.sprites['car_02'] = this.add.image(1198, 1512, "car_02");
+        this.sprites['car_03'] = this.add.image(-9, 1514, "car_03");
 
         switch(this.info.windows.family) {
             case WindowState.ON:    
@@ -515,6 +515,13 @@ export class BuildingScene extends Phaser.Scene {
         //Add menu buttons if needed
         if(this.info.mainMenu) {
             this.createMainMenu();
+        }
+
+        //Compensate for the horizontal ratio
+        for (var key in this.sprites) {
+            if (this.sprites.hasOwnProperty(key)) {           
+                this.sprites[key].x *= window.horizontalRatio;
+            }
         }
     }
 

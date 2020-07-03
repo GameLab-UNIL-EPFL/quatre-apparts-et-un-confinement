@@ -56,7 +56,11 @@ export class CardObject {
 
         //Create the highlight and animation if needed
         if(this.highlight) {
-            this.highlight_sprite = this.parent_scene.add.image(this.position.x, this.position.y, this.highlight.name);
+            this.highlight_sprite = this.parent_scene.add.image(
+                this.position.x * window.horizontalRatio,
+                this.position.y,
+                this.highlight.name);
+                
             this.parent_scene.tweens.add({
                 targets: this.highlight_sprite,
                 alpha: 0,
