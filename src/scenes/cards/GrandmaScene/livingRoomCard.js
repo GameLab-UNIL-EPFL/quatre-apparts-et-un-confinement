@@ -128,7 +128,7 @@ export class LivingRoomCard extends Card {
         super.create();
 
         //Add in the initial grandma
-        this.grandma_sprite = this.parent_scene.add.image(GRANDMA_POS.x, GRANDMA_POS.y, "grandma_idle");
+        this.grandma_sprite = this.parent_scene.add.image(GRANDMA_POS.x * window.horizontalRatio, GRANDMA_POS.y, "grandma_idle");
 
         //Bring the phone and the 
         this.children[this.children.length - 1].sprite.setDepth(2);
@@ -147,7 +147,7 @@ export class LivingRoomCard extends Card {
 
         //Play the ring animation
         this.cat_anim = this.parent_scene.add.sprite(
-            611,
+            611 * window.horizontalRatio,
             1477,
             'cat'
         ).play('cat-tail');
@@ -161,23 +161,43 @@ export class LivingRoomCard extends Card {
 
         switch(state) {
             case GRANDMA_STATES.IDLE:
-                this.grandma_sprite = this.parent_scene.add.image(GRANDMA_POS.x, GRANDMA_POS.y, "grandma_idle");
+                this.grandma_sprite = this.parent_scene.add.image(
+                    GRANDMA_POS.x * window.horizontalRatio,
+                    GRANDMA_POS.y,
+                    "grandma_idle"
+                );
                 break;
 
             case GRANDMA_STATES.BOOK_1:
-                this.grandma_sprite = this.parent_scene.add.image(GRANDMA_POS.x, GRANDMA_POS.y, "grandma_book1");
+                this.grandma_sprite = this.parent_scene.add.image(
+                    GRANDMA_POS.x * window.horizontalRatio,
+                    GRANDMA_POS.y,
+                    "grandma_book1"
+                );
                 break;
 
             case GRANDMA_STATES.BOOK_2:
-                this.grandma_sprite = this.parent_scene.add.image(GRANDMA_POS.x, GRANDMA_POS.y, "grandma_book2");
+                this.grandma_sprite = this.parent_scene.add.image(
+                    GRANDMA_POS.x * window.horizontalRatio,
+                    GRANDMA_POS.y,
+                    "grandma_book2"
+                );
                 break;
 
             case GRANDMA_STATES.BOOK_3:
-                this.grandma_sprite = this.parent_scene.add.image(GRANDMA_POS.x, GRANDMA_POS.y, "grandma_book3");
+                this.grandma_sprite = this.parent_scene.add.image(
+                    GRANDMA_POS.x * window.horizontalRatio,
+                    GRANDMA_POS.y,
+                    "grandma_book3"
+                );
                 break;
 
             case GRANDMA_STATES.PHONE:
-                this.grandma_sprite = this.parent_scene.add.image(GRANDMA_POS.x, GRANDMA_POS.y, "grandma_phone");
+                this.grandma_sprite = this.parent_scene.add.image(
+                    GRANDMA_POS.x * window.horizontalRatio,
+                    GRANDMA_POS.y,
+                    "grandma_phone"
+                );
                 break;
 
             default:
