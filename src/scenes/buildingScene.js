@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 import { Scenes } from "../core/player";
-import { DIALOGUE_BOX_KEY, D_BOX_ANIMATION_KEY } from "../core/dialogueController";
+import { DIALOGUE_BOX_KEY, D_BOX_ANIMATION_KEY, DIALOGUE_BOX_SPRITE_SIZE } from "../core/dialogueController";
 import { player } from "..";
 
 export const Months = {
@@ -75,30 +75,30 @@ export class BuildingScene extends Phaser.Scene {
             this.load.spritesheet(
                 DIALOGUE_BOX_KEY, 
                 "sprites/UI/dialogueBox.png",
-                { frameWidth: 1886, frameHeight: 413 }  
+                DIALOGUE_BOX_SPRITE_SIZE.bg 
             );
         }
         
         //Load in all of the sprites needed for this scene
         switch(this.info.month) {
             case Months.MARCH:
-                this.load.image("building_bg_march", "sprites/BuildingScene/building_bg_march.jpg");
+                this.load.image("building_bg_march", "sprites/BuildingScene/building_bg_winter.jpg");
 
                 //Load in clouds
-                this.load.image("cloud_01_march", "sprites/BuildingScene/building_cloud01_march.png");
-                this.load.image("cloud_02_march", "sprites/BuildingScene/building_cloud02_march.png");
-                this.load.image("cloud_03_march", "sprites/BuildingScene/building_cloud03_march.png");
-                this.load.image("cloud_04_march", "sprites/BuildingScene/building_cloud04_march.png");
+                this.load.image("cloud_01_march", "sprites/BuildingScene/building_cloud01_winter.png");
+                this.load.image("cloud_02_march", "sprites/BuildingScene/building_cloud02_winter.png");
+                this.load.image("cloud_03_march", "sprites/BuildingScene/building_cloud03_winter.png");
+                this.load.image("cloud_04_march", "sprites/BuildingScene/building_cloud04_winter.png");
                 break;
 
             case Months.MAY:
-                this.load.image("building_bg_may", "sprites/BuildingScene/building_bg_may.jpg");
+                this.load.image("building_bg_may", "sprites/BuildingScene/building_bg_summer.jpg");
         
                 //Load in the clouds
-                this.load.image("cloud_01_may", "sprites/BuildingScene/building_cloud01_may.png");
-                this.load.image("cloud_02_may", "sprites/BuildingScene/building_cloud02_may.png");
-                this.load.image("cloud_03_may", "sprites/BuildingScene/building_cloud03_may.png");
-                this.load.image("cloud_04_may", "sprites/BuildingScene/building_cloud04_may.png");
+                this.load.image("cloud_01_may", "sprites/BuildingScene/building_cloud01_summer.png");
+                this.load.image("cloud_02_may", "sprites/BuildingScene/building_cloud02_summer.png");
+                this.load.image("cloud_03_may", "sprites/BuildingScene/building_cloud03_summer.png");
+                this.load.image("cloud_04_may", "sprites/BuildingScene/building_cloud04_summer.png");
                 break;
 
             default:
@@ -108,56 +108,34 @@ export class BuildingScene extends Phaser.Scene {
         //Load in everything needed no matter the month
         this.load.image("building", "sprites/BuildingScene/building.png");
 
-        switch(this.info.windows.family) {
-            case WindowState.ON:
-                this.load.image("family_window_on", "sprites/BuildingScene/family_window_on.png");
-                break;
-
-            case WindowState.OFF:
-                this.load.image("family_window_off", "sprites/BuildingScene/family_window_off.png");
-                break;
-
-            default:
-                break;
-        }
-            
-        switch(this.info.windows.damien) {
-            case WindowState.ON:    
-                this.load.image("student_window_on", "sprites/BuildingScene/student_window_on.png");
-                break;
-
-            case WindowState.OFF:
-                this.load.image("student_window_off", "sprites/BuildingScene/student_window_off.png");   
-                break;
-
-            default:
-                break;
+        //Load the different windows
+        if(this.info.windows.family === WindowState.ON) {
+            this.load.image("family_window_on", "sprites/BuildingScene/family_window_on.png");
+            this.load.image("family_window_mid", "sprites/BuildingScene/family_window_mid.png");
+        } else {
+            this.load.image("family_window_off", "sprites/BuildingScene/family_window_off.png");
         }
 
-        switch(this.info.windows.grandma) {
-            case WindowState.ON:
-                this.load.image("grandma_window_on", "sprites/BuildingScene/grandma_window_on.png");
-                break;
-
-            case WindowState.OFF:
-                this.load.image("grandma_window_off", "sprites/BuildingScene/grandma_window_off.png");
-                break;
-
-            default:
-                break;
+        if(this.info.windows.damien === WindowState.ON) {
+            this.load.image("damien_window_on", "sprites/BuildingScene/damien_window_on.png");
+            this.load.image("damien_window_mid", "sprites/BuildingScene/damien_window_mid.png");
+        } else {
+            this.load.image("damien_window_off", "sprites/BuildingScene/damien_window_off.png");
         }
 
-        switch(this.info.windows.indep) {
-            case WindowState.ON:
-                this.load.image("indep_window_on", "sprites/BuildingScene/indep_window_on.png");     
-                break;
+        if(this.info.windows.grandma === WindowState.ON) {
+            this.load.image("grandma_window_on", "sprites/BuildingScene/grandma_window_on.png");
+            this.load.image("grandma_window_mid", "sprites/BuildingScene/grandma_window_mid.png");
 
-            case WindowState.OFF:
-                this.load.image("indep_window_off", "sprites/BuildingScene/indep_window_off.png");
-                break;
+        } else {
+            this.load.image("grandma_window_off", "sprites/BuildingScene/grandma_window_off.png");
+        }
 
-            default:
-                break;
+        if(this.info.windows.indep === WindowState.ON) {
+            this.load.image("indep_window_on", "sprites/BuildingScene/indep_window_on.png");
+            this.load.image("indep_window_mid", "sprites/BuildingScene/indep_window_mid.png");
+        } else {
+            this.load.image("indep_window_off", "sprites/BuildingScene/indep_window_off.png");
         }
 
         //Load in all of the windows
@@ -179,8 +157,8 @@ export class BuildingScene extends Phaser.Scene {
         this.destroy();
 
         this.sprites['loading'] = this.add.text(
-            1000,
-            1000,
+            400,
+            800,
             "Loading...",
             {font: "80px OpenSans", fill: "white"}
         );
@@ -202,8 +180,8 @@ export class BuildingScene extends Phaser.Scene {
         if(player.saveExists()) {
             //Create continue background sprite
             this.sprites['menu_continue'] = this.add.sprite(
-                1000,
-                195,
+                600,
+                117,
                 DIALOGUE_BOX_KEY
             ).play(D_BOX_ANIMATION_KEY);
 
@@ -212,17 +190,17 @@ export class BuildingScene extends Phaser.Scene {
 
             //Add continue text
             this.sprites['continue_text'] = this.add.text(
-                802, 
-                150,
+                480, 
+                90,
                 "Continue",
-                {font: "80px OpenSans", fill: "black"}
+                {font: "54px OpenSans", fill: "black"}
             );
 
             //Make continue button interactive
             this.sprites['continue_text'].setInteractive();
             this.sprites['menu_continue'].setInteractive();
 
-            this.input.on(
+            /*this.input.on(
                 'gameobjectdown',
                 (_, gameObject) => {
                     //Check that we clicked on the right button
@@ -237,13 +215,13 @@ export class BuildingScene extends Phaser.Scene {
                     }
                 },
                 this
-            );
+            );*/
         }
         
         //Create new Game background sprite
         this.sprites['menu_new_game'] = this.add.sprite(
-            1000,
-            player.saveExists() ? 495 : 325,
+            600,
+            player.saveExists() ? 297 : 195,
             DIALOGUE_BOX_KEY
         ).play(D_BOX_ANIMATION_KEY);
 
@@ -252,17 +230,17 @@ export class BuildingScene extends Phaser.Scene {
 
         //Add new Game text
         this.sprites['new_game_text'] = this.add.text(
-            779, 
-            player.saveExists() ? 450 : 275,
+            467, 
+            player.saveExists() ? 270 : 165,
             "New Game",
-            {font: "80px OpenSans", fill: "black"}
+            {font: "54px OpenSans", fill: "black"}
         );
 
         //Make new game button start a new game
         this.sprites['new_game_text'].setInteractive();
         this.sprites['menu_new_game'].setInteractive();
 
-        this.input.on(
+        /*this.input.on(
             'gameobjectdown',
             (_, gameObject) => {
                 //Check that we clicked on the right button
@@ -293,7 +271,7 @@ export class BuildingScene extends Phaser.Scene {
                 }
             },
             this
-        );
+        );*/
     }
 
     /**
@@ -305,19 +283,19 @@ export class BuildingScene extends Phaser.Scene {
                 this.sprites['building_bg'] = this.add.image(0, 0, "building_bg_march");
 
                 //Load in clouds
-                this.sprites['cloud_01'] = this.add.image(4306, 535, "cloud_01_march");
-                this.sprites['cloud_02'] = this.add.image(2700, 1076, "cloud_02_march");
-                this.sprites['cloud_03'] = this.add.image(4442, 1064, "cloud_03_march");
-                this.sprites['cloud_04'] = this.add.image(3247, 190, "cloud_04_march");
+                this.sprites['cloud_01'] = this.add.image(2583, 321, "cloud_01_march");
+                this.sprites['cloud_02'] = this.add.image(1620, 645, "cloud_02_march");
+                this.sprites['cloud_03'] = this.add.image(2665, 638, "cloud_03_march");
+                this.sprites['cloud_04'] = this.add.image(1948, 114, "cloud_04_march");
                 break;
 
             case Months.MAY:
                 this.sprites['building_bg'] = this.add.image(0, 0, "building_bg_may");      
                 //Load in the clouds
-                this.sprites['cloud_01'] = this.add.image(4306, 535, "cloud_01_may");
-                this.sprites['cloud_02'] = this.add.image(2700, 1076, "cloud_02_may");
-                this.sprites['cloud_03'] = this.add.image(4442, 1064, "cloud_03_may");
-                this.sprites['cloud_04'] = this.add.image(3247, 190, "cloud_04_may");
+                this.sprites['cloud_01'] = this.add.image(2583, 321, "cloud_01_may");
+                this.sprites['cloud_02'] = this.add.image(1620, 645, "cloud_02_may");
+                this.sprites['cloud_03'] = this.add.image(2665, 638, "cloud_03_may");
+                this.sprites['cloud_04'] = this.add.image(1948, 114, "cloud_04_may");
                 break;
 
             default:
@@ -328,34 +306,45 @@ export class BuildingScene extends Phaser.Scene {
         this.sprites['building_bg'].setOrigin(0, 0);
 
         //Load in everything needed no matter the month
-        this.sprites['building'] = this.add.image(1023, 1667, "building");
+        this.sprites['building'] = this.add.image(613, 1000, "building");
 
         //Load in all of the windows
-        this.sprites['empty_windows'] = this.add.image(1023, 1609, "empty_windows");
+        this.sprites['empty_windows'] = this.add.image(613, 965, "empty_windows");
 
         //Load in the posters
-        let poster_pos = new Phaser.Math.Vector2(1709, 2393);
+        let poster_pos = new Phaser.Math.Vector2(1025, 1435);
         let poster_key = 'poster_0' + this.info.stage;
         this.sprites[poster_key] = this.add.image(poster_pos.x, poster_pos.y, poster_key);
         
         //Load in the cars
-        this.sprites['car_01'] = this.add.image(1070, 2550, "car_01");
-        this.sprites['car_02'] = this.add.image(1847, 2550, "car_02");
-        this.sprites['car_03'] = this.add.image(-15, 2550, "car_03");
+        this.sprites['car_01'] = this.add.image(464, 1530, "car_01");
+        this.sprites['car_02'] = this.add.image(1198, 1530, "car_02");
+        this.sprites['car_03'] = this.add.image(-9, 1530, "car_03");
 
         switch(this.info.windows.family) {
             case WindowState.ON:    
-                this.sprites['family_window'] = this.add.image(1023, 1648, "family_window_on");
+                this.sprites['family_window'] = this.add.image(613, 988, "family_window_on");
+                this.sprites['family_window_mid'] = this.add.image(613, 988, "family_window_mid");
+
+                this.tweens.add({
+                    targets: this.sprites['family_window_mid'],
+                    alpha: 0,
+                    duration: 3000,
+                    ease: 'Quadratic',
+                    yoyo: true,
+                    loop: -1
+                });
 
                 //Make window interactive
                 if(this.info.nextScene.family) {
                     this.sprites['family_window'].setInteractive();
+                    this.sprites['family_window_mid'].setInteractive();
 
                     this.input.on(
                         'gameobjectdown', 
                         (_, gameObject) => {
                             //Check that we clicked on the right window
-                            if(gameObject === this.sprites['family_window']) {
+                            if(gameObject === this.sprites['family_window'] || gameObject === this.sprites['family_window_mid']) {
                                 this.scene.start(this.info.nextScene.family);
                             }
                         },
@@ -365,7 +354,7 @@ export class BuildingScene extends Phaser.Scene {
                 break;
             
             case WindowState.OFF:
-                this.sprites['family_window'] = this.add.image(1023, 1648, "family_window_off");
+                this.sprites['family_window'] = this.add.image(613, 988, "family_window_off");
                 break;
 
             default:
@@ -374,17 +363,28 @@ export class BuildingScene extends Phaser.Scene {
 
         switch(this.info.windows.damien) {
             case WindowState.ON:
-                this.sprites['student_window'] = this.add.image(500, 940, "student_window_on");
+                this.sprites['damien_window'] = this.add.image(307, 564, "damien_window_on");
+                this.sprites['damien_window_mid'] = this.add.image(307, 564, "damien_window_mid");
+
+                this.tweens.add({
+                    targets: this.sprites['damien_window_mid'],
+                    alpha: 0,
+                    duration: 3000,
+                    ease: 'Quadratic',
+                    yoyo: true,
+                    loop: -1
+                });
 
                 //Make window interactive
                 if(this.info.nextScene.damien) {
-                    this.sprites['student_window'].setInteractive();
+                    this.sprites['damien_window'].setInteractive();
+                    this.sprites['damien_window_mid'].setInteractive();
 
                     this.input.on(
                         'gameobjectdown', 
                         (_, gameObject) => {
                             //Check that we clicked on the right window
-                            if(gameObject === this.sprites['student_window']) {
+                            if(gameObject === this.sprites['damien_window'] || gameObject === this.sprites['damien_window_mid']) {
 
                                 this.scene.start(this.info.nextScene.damien);
                             }
@@ -395,7 +395,7 @@ export class BuildingScene extends Phaser.Scene {
                 break;
             
             case WindowState.OFF:
-                this.sprites['student_window'] = this.add.image(500, 940, "student_window_off");
+                this.sprites['damien_window'] = this.add.image(307, 564, "damien_window_off");
                 break;
 
             default:
@@ -404,17 +404,28 @@ export class BuildingScene extends Phaser.Scene {
 
         switch(this.info.windows.grandma) {
             case WindowState.ON:
-                this.sprites['grandma_window'] = this.add.image(1023, 981, "grandma_window_on");
+                this.sprites['grandma_window'] = this.add.image(613, 588, "grandma_window_on");
+                this.sprites['grandma_window_mid'] = this.add.image(613, 588, "grandma_window_mid");
+
+                this.tweens.add({
+                    targets: this.sprites['grandma_window_mid'],
+                    alpha: 0,
+                    duration: 3000,
+                    ease: 'Quadratic',
+                    yoyo: true,
+                    loop: -1
+                });
 
                 //Make window interactive
                 if(this.info.nextScene.grandma) {
                     this.sprites['grandma_window'].setInteractive();
+                    this.sprites['grandma_window_mid'].setInteractive();
 
                     this.input.on(
                         'gameobjectdown', 
                         (_, gameObject) => {
                             //Check that we clicked on the right window
-                            if(gameObject === this.sprites['grandma_window']) {
+                            if(gameObject === this.sprites['grandma_window'] || gameObject === this.sprites['grandma_window_mid']) {
                                 this.scene.start(this.info.nextScene.grandma);
                             }
                         },
@@ -424,7 +435,7 @@ export class BuildingScene extends Phaser.Scene {
                 break;
             
             case WindowState.OFF:
-                this.sprites['grandma_window'] = this.add.image(1023, 981, "grandma_window_off");
+                this.sprites['grandma_window'] = this.add.image(613, 588, "grandma_window_off");
                 break;
 
             default:
@@ -433,11 +444,22 @@ export class BuildingScene extends Phaser.Scene {
 
         switch(this.info.windows.indep) {
             case WindowState.ON:
-                this.sprites['indep_window'] = this.add.image(1023, 1981, "indep_window_on");
+                this.sprites['indep_window'] = this.add.image(613, 1188, "indep_window_on");
+                this.sprites['indep_window_mid'] = this.add.image(613, 588, "indep_window_mid");
+
+                this.tweens.add({
+                    targets: this.sprites['indep_window_mid'],
+                    alpha: 0,
+                    duration: 3000,
+                    ease: 'Quadratic',
+                    yoyo: true,
+                    loop: -1
+                });
 
                 //Make window interactive
                 if(this.info.nextScene.indep) {
                     this.sprites['indep_window'].setInteractive();
+                    this.sprites['indep_window_mid'].setInteractive();
 
                     this.input.on(
                         'gameobjectdown', 
@@ -453,7 +475,7 @@ export class BuildingScene extends Phaser.Scene {
                 break;
             
             case WindowState.OFF:
-                this.sprites['indep_window'] = this.add.image(1023, 1981, "indep_window_off");
+                this.sprites['indep_window'] = this.add.image(613, 1188, "indep_window_off");
                 break;
 
             default:

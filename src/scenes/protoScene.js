@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 import { WakeUpCard } from "./cards/ProtoSceneCards/wakeUpCard.js";
-import { DialogueController, DIALOGUE_BOX_KEY } from "../core/dialogueController.js";
+import { DialogueController, DIALOGUE_BOX_KEY, DIALOGUE_BOX_SPRITE_SIZE } from "../core/dialogueController.js";
 import { IntroCard } from "./cards/ProtoSceneCards/introCard.js";
 import { ComputerCard } from "./cards/ProtoSceneCards/computerCard.js";
 import { Card } from "./cards/card.js";
@@ -64,7 +64,7 @@ export class ProtoScene extends Phaser.Scene {
                     this,
                     { name: "kitchen", url: "sprites/ProtoScene/ChosePathCard/kitchen.png" },
                     new Phaser.Math.Vector2(831, 740),
-                    () => {},
+                    null,
                     null,
                     1,
                     { name: "kitchen_h", url: "sprites/ProtoScene/ChosePathCard/kitchen_h.png" }
@@ -73,7 +73,7 @@ export class ProtoScene extends Phaser.Scene {
                     this,
                     { name: "closet", url: "sprites/ProtoScene/ChosePathCard/closet.png" },
                     new Phaser.Math.Vector2(300, 783),
-                    () => {},
+                    null,
                     null,
                     0,
                     { name: "closet_h", url: "sprites/ProtoScene/ChosePathCard/closet_h.png" }
@@ -188,8 +188,8 @@ export class ProtoScene extends Phaser.Scene {
         ];
 
         //Keep track of wich card is displayed
-        this.cardIdx = ProtoCards.MESSAGE;
-        this.current_card = this.messageCard;
+        this.cardIdx = ProtoCards.INTRO;
+        this.current_card = this.introCard;
 
         //Create the dialogue controller
         this.dialogue = new DialogueController(this);
@@ -274,7 +274,7 @@ export class ProtoScene extends Phaser.Scene {
         this.load.spritesheet(
             DIALOGUE_BOX_KEY,
             "sprites/UI/dialogueBox.png",
-            { frameWidth: 1886, frameHeight: 413 }
+            DIALOGUE_BOX_SPRITE_SIZE.bg
         );
 
         this.cards.forEach(card => card.preload());

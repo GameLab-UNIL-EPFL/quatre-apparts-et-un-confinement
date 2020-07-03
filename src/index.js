@@ -64,7 +64,7 @@ const config = {
     plugins: {
         scene: plugins
     },
-    scene: [/*BuildingScene,*/ ProtoScene],
+    scene: [BuildingScene, ProtoScene],
     physics: {
         default: 'arcade'
     }

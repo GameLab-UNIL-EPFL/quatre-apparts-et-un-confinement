@@ -8,6 +8,11 @@ export const DialogueState = {
     MSG: 4
 };
 
+export const DIALOGUE_BOX_SPRITE_SIZE = {
+    bg: { frameWidth: 1200, frameHeight: 260 },
+    prompt: { frameWidth: 1200, frameHeight: 260 }
+};
+
 export const DIALOGUE_BOX_KEY = "dialogueBox";
 export const D_BOX_ANIMATION_KEY = "dBoxAnim";
 
@@ -71,15 +76,15 @@ const SPACING = 100;
 const MAX_N_PROMPTS = 3;
 
 const UP_POS = {
-    box: new Phaser.Math.Vector2(1020, 275), // ici: multiplier par horizontalRatio
-    name: new Phaser.Math.Vector2(160, 100),
-    content: new Phaser.Math.Vector2(160, 220)
+    box: new Phaser.Math.Vector2(604, 150), // ici: multiplier par horizontalRatio
+    name: new Phaser.Math.Vector2(112, 55),
+    content: new Phaser.Math.Vector2(112, 125)
 };
 
 const DOWN_POS = {
-    box: new Phaser.Math.Vector2(1020, 2410),
-    name: new Phaser.Math.Vector2(160, 2245),
-    content: new Phaser.Math.Vector2(160, 2365)
+    box: new Phaser.Math.Vector2(604, 1446),
+    name: new Phaser.Math.Vector2(112, 1351),
+    content: new Phaser.Math.Vector2(112, 1426)
 };
 
 /**
@@ -200,7 +205,7 @@ export class DialogueController {
             this.dialogue_pos.name.x,
             this.dialogue_pos.name.y,
             this.getName(id),
-            {font: "90px OpenSans ", fill: "black"}
+            {font: "60px OpenSans ", fill: "black"}
         );
 
         this.text = this.getText(id);
@@ -211,7 +216,7 @@ export class DialogueController {
             this.dialogue_pos.content.x,
             this.dialogue_pos.content.y,
             this.text[this.textIdx],
-            {font: "80px OpenSans", fill: "black", wordWrap: { width: 1800}}
+            {font: "50px OpenSans", fill: "black", wordWrap: { width: 1000}}
         );
 
         //Make the text interactive
