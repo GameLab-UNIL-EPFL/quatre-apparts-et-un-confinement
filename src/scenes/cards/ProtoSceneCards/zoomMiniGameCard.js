@@ -4,15 +4,14 @@ import { CardObject } from "../../objects/cardObject";
 
 const N_NOTIFICATION = 10;
 const N_DISTRACTIONS = 19;
-const N_MSG = N_NOTIFICATION + N_DISTRACTIONS;
-const NOTIF_SPREAD = 1500;
-const NOTIF_OFFSET = 300;
+const N_MSG = (N_NOTIFICATION * 2) + N_DISTRACTIONS;
+const NOTIF_SPREAD = 900;
+const NOTIF_OFFSET = 180;
 
-const BEG_Y_ZONE = 2200;
-const END_Y_ZONE = 2535;
+const BEG_Y_ZONE = 1300;
 
 const INIT_FOCUS = 5;
-const SPAWN_DELAY = 500;
+const SPAWN_DELAY = 1000;
 const NUM_SPAWNS = 100;
 
 const END_ZOOM_CALL_ID = "endZoom";
@@ -37,8 +36,8 @@ export class ZoomMiniGameCard extends Card {
         let children = [
             new CardObject(
                 parent_scene,
-                { name: "zoom_bg", url: "sprites/ProtoScene/ZoomMiniGameCard/zoom_bg.jpg" },
-                new Phaser.Math.Vector2(1020, 1310)
+                { name: "zoom_bg", url: "sprites/ProtoScene/ZoomMiniGameCard/zoom_bg.png" },
+                new Phaser.Math.Vector2(600, 786)
             ),
             new Background(
                 parent_scene,
@@ -48,17 +47,17 @@ export class ZoomMiniGameCard extends Card {
             new CardObject(
                 parent_scene,
                 { name: "bar_bg", url: "sprites/ProtoScene/ZoomMiniGameCard/bar_bg.png" },
-                new Phaser.Math.Vector2(1039, 253)
+                new Phaser.Math.Vector2(612, 167)
             ),
             new CardObject(
                 parent_scene,
                 { name: "bar_fill", url: "sprites/ProtoScene/ZoomMiniGameCard/bar_fill.png" },
-                new Phaser.Math.Vector2(1039, 253)
+                new Phaser.Math.Vector2(612, 167)
             ),
             new CardObject(
                 parent_scene,
-                { name: "bar", url: "sprites/ProtoScene/ZoomMiniGameCard/bar.png" },
-                new Phaser.Math.Vector2(1010, 2200)
+                { name: "line", url: "sprites/ProtoScene/ZoomMiniGameCard/line.png" },
+                new Phaser.Math.Vector2(593, 1309)
             )
         ];
 
@@ -72,7 +71,17 @@ export class ZoomMiniGameCard extends Card {
             this.messages.push({
                 name: "notification_" + i,
                 url: "sprites/ProtoScene/ZoomMiniGameCard/notif_" + i + ".png" ,
-                pos: new Phaser.Math.Vector2(0, -2500),
+                pos: new Phaser.Math.Vector2(0, -200),
+                sprite: null,
+                type: MessageType.Cours,
+                isDestroyed: false
+            });
+
+            //Push the notif again
+            this.messages.push({
+                name: "notification_" + i,
+                url: "sprites/ProtoScene/ZoomMiniGameCard/notif_" + i + ".png" ,
+                pos: new Phaser.Math.Vector2(0, -200),
                 sprite: null,
                 type: MessageType.Cours,
                 isDestroyed: false
@@ -84,7 +93,7 @@ export class ZoomMiniGameCard extends Card {
             this.messages.push({
                 name: "distraction_" + i, 
                 url: "sprites/ProtoScene/ZoomMiniGameCard/distraction_" + i + ".png" ,
-                pos: new Phaser.Math.Vector2(0, -2500),
+                pos: new Phaser.Math.Vector2(0, -200),
                 sprite: null,
                 type: MessageType.Distraction,
                 isDestroyed: false
@@ -114,6 +123,13 @@ export class ZoomMiniGameCard extends Card {
         this.messages.forEach(msg => {
             this.parent_scene.load.image(msg.name, msg.url);
         });
+
+        //Load in the pop animation
+        this.parent_scene.load.spritesheet(
+            'notif-pop',
+            'sprites/ProtoScene/ZoomMiniGameCard/notif_pop.png',
+            { frameWidth: 460, frameHeight: 160 }
+        );
     }
 
     /**
@@ -160,8 +176,8 @@ export class ZoomMiniGameCard extends Card {
             //Animate the msg
             this.parent_scene.tweens.add({
                 targets: this.messages[msg_idx].sprite,
-                y: 3000,
-                duration: 7000,
+                y: 1800,
+                duration: 10000,
                 onComplete: () => {
                     if(!this.messages[msg_idx].isDestroyed) {
                         this.messages[msg_idx].sprite.destroy();
@@ -203,10 +219,19 @@ export class ZoomMiniGameCard extends Card {
                 (pointer, gameObject) => {
                     //Check that we clicked the object
                     if(gameObject === this.messages[msg_idx].sprite) {
-    
+                        if(this.anim) {
+                            this.anim.destroy();
+                        }
+
                         //Check the pointer's location
-                        if(pointer.y > BEG_Y_ZONE && pointer.y < END_Y_ZONE) {
+                        if(pointer.y >= BEG_Y_ZONE) {
                             gameObject.destroy();
+
+                            this.anim = this.parent_scene.add.sprite(
+                                gameObject.x,
+                                gameObject.y,
+                                "notif-pop"
+                            ).play('pop');
     
                             //Remove the elelment in question
                             this.cur_msg.filter((val, _) => val === msg_idx);
@@ -275,6 +300,18 @@ export class ZoomMiniGameCard extends Card {
             callback: this.createMessage,
             callbackScope: this,
             args: [this.endMiniGame]
+        });
+
+        //Create pop animation
+        this.parent_scene.anims.create({
+            key: 'pop',
+            frameRate: 15,
+            frames: this.parent_scene.anims.generateFrameNames('notif-pop'),
+            repeat: 0,
+            onComplete: () => {
+                this.anim.destroy();
+            },
+            onCompleteScope: this
         });
     }
 

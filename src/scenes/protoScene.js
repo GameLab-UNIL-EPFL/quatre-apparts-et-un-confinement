@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 import { WakeUpCard } from "./cards/ProtoSceneCards/wakeUpCard.js";
-import { DialogueController, DIALOGUE_BOX_KEY } from "../core/dialogueController.js";
+import { DialogueController, DIALOGUE_BOX_KEY, DIALOGUE_BOX_SPRITE_SIZE } from "../core/dialogueController.js";
 import { IntroCard } from "./cards/ProtoSceneCards/introCard.js";
 import { ComputerCard } from "./cards/ProtoSceneCards/computerCard.js";
 import { Card } from "./cards/card.js";
@@ -49,32 +49,34 @@ export class ProtoScene extends Phaser.Scene {
         this.wakeUpCard = new WakeUpCard(this);
 
         let characters = {
-            'chosePath': new ProtoGuy(this, 1270, 2080, ProtoGuyCard.CHOSE_PATH),
-            'clothes': new ProtoGuy(this, 1125, 1615, ProtoGuyCard.CLOTHES),
-            'kitchen': new ProtoGuy(this, 660, 1290, ProtoGuyCard.KITCHEN)
+            'chosePath': new ProtoGuy(this, 733, 1222, ProtoGuyCard.CHOSE_PATH),
+            'clothes': new ProtoGuy(this, 651, 915, ProtoGuyCard.CLOTHES),
+            'kitchen': new ProtoGuy(this, 382, 768, ProtoGuyCard.KITCHEN)
         };
 
         this.chosePathCard = new Card(this, [
                 new Background(
                     this,
-                    "/sprites/ProtoScene/ChosePathCard/bg.png",
+                    "/sprites/ProtoScene/ChosePathCard/bg.jpg",
                     "choseBG"
                 ),
                 new CardObject(
                     this,
-                    { name: "room", url: "sprites/ProtoScene/ChosePathCard/room.png" },
-                    new Phaser.Math.Vector2(1418, 1260),
+                    { name: "kitchen", url: "sprites/ProtoScene/ChosePathCard/kitchen.png" },
+                    new Phaser.Math.Vector2(831, 740),
                     null,
                     null,
-                    1
+                    1,
+                    { name: "kitchen_h", url: "sprites/ProtoScene/ChosePathCard/kitchen_h.png" }
                 ),
                 new CardObject(
                     this,
-                    { name: "closet", url: "sprites/ProtoScene/ChosePathCard/Closet.png" },
-                    new Phaser.Math.Vector2(460, 1340),
+                    { name: "closet", url: "sprites/ProtoScene/ChosePathCard/closet.png" },
+                    new Phaser.Math.Vector2(300, 783),
                     null,
                     null,
-                    0
+                    0,
+                    { name: "closet_h", url: "sprites/ProtoScene/ChosePathCard/closet_h.png" }
                 ),
                 characters['chosePath'],
             ],
@@ -90,20 +92,20 @@ export class ProtoScene extends Phaser.Scene {
                 new CardObject(
                     this,
                     { name: "clothes", url: "sprites/ProtoScene/ClothesCard/clothes.png" },
-                    new Phaser.Math.Vector2(1545, 1376),
+                    new Phaser.Math.Vector2(893, 785),
                     (scene) => scene.changeClothes(ProtoGuyClothes.CLEAN_CLOTHES),
                     this,
                     -1,
-                    { name: "clothes_h", url: "sprites/ProtoScene/ClothesCard/clothes_highlight.png" }
+                    { name: "clothes_h", url: "sprites/ProtoScene/ClothesCard/clothes_h.png" }
                 ),
                 new CardObject(
                     this,
                     { name: "chair", url: "sprites/ProtoScene/ClothesCard/chair.png" },
-                    new Phaser.Math.Vector2(650, 2070),
+                    new Phaser.Math.Vector2(375, 1185),
                     (scene) => scene.changeClothes(ProtoGuyClothes.YESTERDAY_CLOTHES),
                     this,
                     -1,
-                    { name: "chair_h", url: "sprites/ProtoScene/ClothesCard/chair_highlight.png" }
+                    { name: "chair_h", url: "sprites/ProtoScene/ClothesCard/chair_h.png" }
                 ),
                 characters['clothes']
             ],
@@ -119,44 +121,50 @@ export class ProtoScene extends Phaser.Scene {
                 characters['kitchen'],
                 new CardObject(
                     this,
-                    { name: "fridge", url: "sprites/ProtoScene/KitchenCard/fridge.png" },
-                    new Phaser.Math.Vector2(1350, 1100),
+                    { name: "fridge", url: "sprites/ProtoScene/KitchenCard/frigo.png" },
+                    new Phaser.Math.Vector2(794, 649),
+                    null,
+                    null,
                     1,
-                    { name: "fridge_h", url: "sprites/ProtoScene/KitchenCard/fridge_highlight.png" }
+                    { name: "fridge_h", url: "sprites/ProtoScene/KitchenCard/frigo_h.png" }
                 ),
                 new CardObject(
                     this,
                     { name: "table", url: "sprites/ProtoScene/KitchenCard/table.png" },
-                    new Phaser.Math.Vector2(980, 2020)
+                    new Phaser.Math.Vector2(571, 1188)
                 ),
                 new CardObject(
                     this,
-                    { name: "counter", url: "sprites/ProtoScene/KitchenCard/counter.png" },
-                    new Phaser.Math.Vector2(1025, 2190)
+                    { name: "counter", url: "sprites/ProtoScene/KitchenCard/comptoire.png" },
+                    new Phaser.Math.Vector2(600, 1282)
                 ),
                 new CardObject(
                     this,
-                    { name: "sink", url: "sprites/ProtoScene/KitchenCard/sink.png" },
-                    new Phaser.Math.Vector2(1430, 2430),
+                    { name: "sink", url: "sprites/ProtoScene/KitchenCard/lavabo.png" },
+                    new Phaser.Math.Vector2(824, 1407),
+                    null,
+                    null,
                     2,
-                    { name: "sink_h", url: "sprites/ProtoScene/KitchenCard/sink_highlight.png" }
+                    { name: "sink_h", url: "sprites/ProtoScene/KitchenCard/lavabo_h.png" }
                 ),
                 new CardObject(
                     this,
-                    { name: "counter_stuff", url: "sprites/ProtoScene/KitchenCard/counter_stuff.png" },
-                    new Phaser.Math.Vector2(1300, 2550)
+                    { name: "counter_stuff", url: "sprites/ProtoScene/KitchenCard/objets.png" },
+                    new Phaser.Math.Vector2(745, 1495)
                 ),
                 new CardObject(
                     this,
                     { name: "toaster", url: "sprites/ProtoScene/KitchenCard/toaster.png" },
-                    new Phaser.Math.Vector2(390, 2520),
+                    new Phaser.Math.Vector2(242, 1453),
+                    null,
+                    null,
                     0,
-                    { name: "toaster_h", url: "sprites/ProtoScene/KitchenCard/toaster_highlight.png" }
+                    { name: "toaster_h", url: "sprites/ProtoScene/KitchenCard/toaster_h.png" }
                 ),
                 new CardObject(
                     this,
-                    { name: "lamp", url: "sprites/ProtoScene/KitchenCard/lamp.png" },
-                    new Phaser.Math.Vector2(1230, 555)
+                    { name: "lamp", url: "sprites/ProtoScene/KitchenCard/lampe.png" },
+                    new Phaser.Math.Vector2(693, 322)
                 )
             ],
             characters['kitchen']
@@ -266,7 +274,7 @@ export class ProtoScene extends Phaser.Scene {
         this.load.spritesheet(
             DIALOGUE_BOX_KEY,
             "sprites/UI/dialogueBox.png",
-            { frameWidth: 1886, frameHeight: 413 }
+            DIALOGUE_BOX_SPRITE_SIZE.bg
         );
 
         this.cards.forEach(card => card.preload());

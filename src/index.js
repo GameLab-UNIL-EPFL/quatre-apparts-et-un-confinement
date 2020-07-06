@@ -33,8 +33,8 @@ if(consoleSeemsOpen === true){
 
 function getScale(innerWidth, innerHeight){
   let innerRatio = innerWidth / innerHeight;
-  const height = 2732; // default height
-  let width = 2048; // default width
+  const height = 1600; // default height
+  let width = 1200; // default width
   const targetRatio = width / height;
   const minRatio = 0.45;
 
@@ -92,7 +92,7 @@ export const game = new Phaser.Game(config);
 export const player = new Player();
 
 // We’re about to change picture width (1365 pixels wide)
-const maxPictureWidth = 2048;
+const maxPictureWidth = 1200;
 
 // si on veut le stocker dans game
 game.horizontalRatio = scale.width / maxPictureWidth;
