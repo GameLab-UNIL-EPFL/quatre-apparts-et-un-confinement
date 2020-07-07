@@ -1,0 +1,404 @@
+{
+	"calendrier": {
+		"name": "Suzanne",
+		"text": [
+			"Rien de prévu...",
+            "28 Mars\nHmm, j'avais rendez-vous chez le coiffeur...",
+            "C'est mercredi, normalement je vois mes petits-enfants."
+		],
+		"choices": {},
+		"goto": []
+	},
+	"livre1": {
+		"name": "Suzanne",
+		"text": [
+			"La peste - Albert Camus",
+			"Du reste, le docteur Rieux, par exemple, considérait que c'était cela le malheur, justement,", 
+			"et que l'habitude du désespoir est pire que le désespoir lui-même."
+		],
+		"choices": {},
+		"goto": []
+	},
+	"livre2": {
+		"name": "Suzanne",
+        "text": [
+			"A La Recherche du Temps Perdu - Marcel Proust",
+			"Certes, il y a dans ma maison toutes les choses inutiles.", 
+			"Il n'y manque que le nécessaire, un grand morceau de ciel comme ici.", 
+			"Tâchez de garder toujours un morceau de ciel au-dessus de votre vie..."
+		], 
+        "choices": {},
+		"goto": []
+	},
+	"livre3": {
+		"name": "Suzanne",
+        "text": [
+			"Le Misanthrope - Molière",
+			"Je ne trouve partout que lâche flatterie,",
+			"Qu'injustice, intérêt, trahison, fourberie;",
+			"Je n'y puis plus tenir, j'enrage, et mon dessein",
+			"Est de rompre en visière à tout le genre humain."
+		], 
+        "choices": {},
+		"goto": []
+	},
+	"radio": {
+		"name": "Radio",
+		"text": ["Que faire?"],
+		"choices": {
+            "musique": {
+				"text": ["écouter de la musique"],
+				"preview": "Musique",
+				"goto": "bleiben"
+			},
+			"news": {
+				"text": ["écouter les nouvelles"],
+				"preview": "Nouvelles",
+				"goto": "news"
+			}
+        },
+		"goto": ["bleiben", "news"]
+	},
+	"news": {
+		"name": "Radio",
+		"text": [
+			"17 Mars - La Suisse se trouve dans une situation extraordinaire", 
+			"Restez chez vous"
+		],
+		"choices": {},
+		"goto": []
+	},
+	"bleiben": {
+		"name": "Radio",
+		"text": ["*musique* Bleiben Sie zuhause"],
+		"choices":{},
+		"goto": []
+	},
+	"telephone": {
+		"name": "Suzanne",
+		"text": ["Bon, qui est-ce que je pourrais appeler?"],
+		"choices":[
+			{
+				"text": ["Françoise"],
+				"preview": "Françoise",
+				"goto": "francoise"
+            },
+            {
+				"text": ["Sophie"],
+				"preview": "Sophie",
+				"goto": "sophie"
+            },
+            {
+				"text": ["Marc"],
+				"preview": "Marc",
+				"goto": "marc"
+			}
+		],
+		"goto": ["francoise", "sophie", "marc"]
+    },
+    "francoise": {
+        "name": "Françoise",
+        "text": ["Allo? Ah Salut Suzanne! Comment vas-tu?"],
+        "choices": [
+			{
+				"text": ["ça va, ça va"],
+				"preview": "ça va, ça va",
+				"goto": "cava"
+			},
+			{
+				"text": ["Je m'ennuie..."],
+				"preview": "Je m'ennuie...",
+				"goto": "ennuie"
+            },
+            {
+				"text": ["T'as écouté les nouvelles?"],
+				"preview": "T'as écouté les nouvelles?",
+				"goto": "nouvelles"
+            }
+		],
+		"goto": ["cava", "ennuie", "nouvelles"]
+    },
+    "cava": {
+        "name": "Françoise",
+        "text": ["Tu fais quoi pour t'occuper ces temps?"],
+        "choices": [
+			{
+				"text": ["Je lis"],
+				"preview": "Je lis",
+				"goto": "lire"
+			},
+			{
+				"text": ["J'écoute la radio"],
+				"preview": "J'écoute la radio",
+				"goto": "nouvelles"
+            },
+            {
+				"text": ["Je passe des coups de fil"],
+				"preview": "Je passe des appels",
+				"goto": "appel"
+            }
+		],
+		"goto": ["lire", "nouvelles", "appel"]
+    },
+    "lire": {
+        "name": "Françoise",
+        "text": ["Qu'est-ce que tu lis?"],
+        "choices":[
+			{
+				"text": ["La Peste de Camus"],
+				"preview": "La Peste de Camus",
+				"goto": "oui"
+			},
+			{
+				"text": ["Le Misanthrope de Molière"],
+				"preview": "Le Misanthrope de Molière",
+				"goto": "oui"
+            },
+            {
+				"text": ["A la Recherche du Temps Perdu - Marcel Proust"],
+				"preview": "A la Recherche du Temps Perdu - Proust",
+				"goto": "oui"
+            }
+		],
+		"goto": ["oui"]
+    },
+    "appel": {
+        "name": "Françoise",
+        "text": ["Hahaha je devrais faire pareil"],
+        "choices":[
+			{
+				"text": ["Oui hahaha"],
+				"preview": "Oui",
+				"goto": "oui"
+			}
+		],
+		"goto": ["oui"]
+    },
+    "ennuie": {
+        "name": "Françoise",
+        "text": [
+			"T'as pas de quoi t'occuper?",
+			"Je te recommende de lire La Peste de Camus, c'est d'actualité."
+		],
+        "choices":[
+			{
+				"text": ["Ah oui je dois l'avoir quelque part"],
+				"preview": "Oui peut-être",
+				"goto": "oui"
+			},
+			{
+				"text": ["Oui, je l'ai déjà lu"],
+				"preview": "Oui",
+				"goto": "oui"
+            }
+		],
+		"goto": ["oui"]
+    },
+    "nouvelles": {
+        "name": "Françoise",
+		"text": [
+			"Ah oui, je suis les actualités aussi.",
+			"Non mais on a jamais vécu ça! C'est fou!"
+		],
+        "choices": [
+            {
+				"text": ["Oui vraiment..."],
+				"preview": "Oui",
+				"goto": "oui"
+			},
+			{
+				"text": ["Bon c'est pas la première pandémie non plus"],
+				"preview": "C'est pas la première fois",
+				"goto": "pandemie"
+            }
+		],
+		"goto": ["oui", "pandemie"]
+    },
+    "pandemie": {
+        "name": "Françoise",
+        "text": ["Oui d'accord mais pour notre époque avec les avions et tout ça, c'est différent!"],
+        "choices": [
+            {
+				"text": ["Oui oui"],
+				"preview": "Oui",
+				"goto": "oui"
+			}
+		],
+		"goto": ["oui"]
+    },
+    "oui": {
+        "name": "Françoise",
+		"text": [
+			"Sinon, je m'occupe comme je peux.", 
+			"J'ai essayé Zoom pour la première fois la semaine passée!", 
+			"J'ai pu voir mes petits-enfants!"
+		],
+        "choices":[
+			{
+				"text": ["Super! Oui ma fille a réussi à m'expliquer comment l'installer aussi"],
+				"preview": "Super",
+				"goto": "malade"
+			},
+			{
+				"text": ["Oui, on en fait toutes les semaines!"],
+				"preview": "Oui",
+				"goto": "malade"
+            }
+		],
+		"goto": ["malade"]
+    },
+    "malade": {
+        "name": "Françoise",
+        "text": ["T'as pas peur de tomber malade'?"],
+        "choices": [
+			{
+				"text": "Non, je fais attention",
+				"preview": "Non",
+				"goto": "non"
+			},
+			{
+				"text": ["Oui bien sûr! Je pense pas pouvoir m'en remettre..."],
+				"preview": "Oui",
+				"goto": "peur"
+            }
+		],
+		"goto": ["non", "peur"]
+    },
+    "non": {
+        "name": "Françoise",
+		"text": [
+			"Ah c'est bien, mais on sait jamais.",
+			"Prends bien soin de toi en tout cas!"
+		],
+        "choices": [
+			{
+				"text": ["Merci! Toi aussi, à bientôt!"],
+				"preview": "Merci!",
+				"goto": ""
+			}
+		],
+		"goto": []
+    },
+    "peur": {
+        "name": "Françoise",
+		"text": [
+			"Oui, c'est normal. On peut y passer...",
+			"Fais bien attention et prends bien soin de toi!"
+		],
+        "choices": [
+			{
+				"text": ["Merci! Toi aussi, à bientôt!"],
+				"preview": "Merci!",
+				"goto": ""
+			}
+		],
+		"goto": []
+	},
+	"sophie": {
+		"name": "Sophie",
+		"text": ["Allo?"],
+		"choices": [
+			{
+				"text": ["Comment ça va?"],
+				"preview": "ça va?",
+				"goto": "comment"
+			},
+			{
+				"text": ["Les enfants vont bien?"],
+				"preview": "Et les enfants?",
+				"goto": "enfants"
+			}
+		],
+		"goto": ["comment", "enfants"]
+	},
+	"comment": {
+		"name": "Sophie",
+		"text": ["Oui enfin... Je suis bien occupée avec les enfants."],
+		"choices": [
+			{
+				"text": ["Les enfants vont bien?"],
+				"preview": "Et les enfants?",
+				"goto": "enfants"
+			}
+		],
+		"goto": ["enfants"]
+	},
+	"enfants": {
+		"name": "Sophie",
+		"text": [
+			"Oui ils vont bien, mais c'est pas facile de les avoir à la maison toute la journée.", 
+			"Matt me demande de les sortir parce que sinon il n'arrive pas à travailler."
+		],
+		"choices": [
+			{
+				"text": ["On peut faire un appel vidéo comme ça je peux les occuper un moment."],
+				"preview": "On fait un appel vidéo?",
+				"goto": "video"
+			}
+		],
+		"goto": ["video"]
+	},
+	"video": {
+		"name": "Sophie",
+		"text": ["Oui on peut faire ça ce week-end!"],
+		"choices": [
+			{
+				"text": ["Super! J'ai hâte! Sinon vous êtes tous en bonne santé?"],
+				"preview": "Super!",
+				"goto": "sante"
+			}
+		],
+		"goto": ["sante"]
+	},
+	"sante": {
+		"name": "Sophie",
+		"text": ["Oui, ben on est pas vraiment sorti encore donc à part la fatigue, tout vas bien."],
+		"choices": [
+			{
+				"text": ["Tant mieux, mais oublie pas de boire du jus de gingembre et de curcuma!"],
+				"preview": "Tant mieux",
+				"goto": "fin"
+			},
+			{
+				"text": ["Tant mieux, mais oublie pas de manger de la soupe à l'ortie!"],
+				"preview": "Tant mieux",
+				"goto": "fin"
+			}
+		],
+		"goto": ["fin"]
+	},
+	"fin": {
+		"name": "Sophie",
+		"text": ["Oui oui maman, aller je dois y aller! Bisous"],
+		"choices": [
+			{
+				"text": ["D'accord! Bisous à Maxime et Liliane"],
+				"preview": "D'accord!",
+				"goto": ""
+			}
+		],
+		"goto": []
+	},
+	"marc": {
+		"name": "Marc",
+		"text": ["Allo?"],
+		"choices": [
+			{
+				"text": ["Allo Marc? C'est Suzanne!"],
+				"preview": "Allo?",
+				"goto": "desole"
+			}
+		],
+		"goto": ["desole"]
+	},
+	"desole": {
+		"name": "Marc",
+		"text": [
+			"Ah Salut Suzanne, désolé j'ai vraiment pas le temps là.", 
+			"On doit tout réorganiser pour le mariage, c'est vraiment compliqué.", 
+			"Marion est stressée comme pas possible. Je te laisse!"
+		],
+		"choices": [],
+		"goto": []
+	}
+}

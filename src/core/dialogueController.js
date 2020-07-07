@@ -71,7 +71,7 @@ const MSG_HEIGHT = {
 
 const MSG_LINE_CHARS = 18;
 const MSG_RESP_DELAY = 1500;
-const PROMT_HEIGHT = 400;
+const PROMT_HEIGHT = 200;
 const SPACING = 100;
 const MAX_N_PROMPTS = 3;
 
@@ -96,10 +96,11 @@ export class DialogueController {
      * @brief Creates a dialogue controller by loading the dialogue
      * directly from JSON.
      * @param {Phaser.Scene} parent_scene the scene in which the controller is contained
+     * @param {string} dialogue_name the name of the dialogue JSON that will be loading in for the scene
      */
-    constructor(parent_scene) {
+    constructor(parent_scene, dialogue_name="dialogData") {
         this.parent_scene = parent_scene;
-        this.dialogueJSON = require("../dialogue/dialogData.json");
+        this.dialogueJSON = require("../dialogue/" + dialogue_name + ".json");
         this.current_conv_id = "";
         this.cur_state = DialogueState.NONE;
 
@@ -193,19 +194,20 @@ export class DialogueController {
 
         //Create background sprite
         this.background = this.parent_scene.add.sprite(
-            this.dialogue_pos.box.x,
+            this.dialogue_pos.box.x * window.horizontalRatio,
             this.dialogue_pos.box.y,
             DIALOGUE_BOX_KEY
         ).play(D_BOX_ANIMATION_KEY);
 
         this.background.alpha = .9;
+        this.background.displayWidth *= window.horizontalRatio;
 
         //Add name text
         this.name = this.parent_scene.add.text(
-            this.dialogue_pos.name.x,
+            this.dialogue_pos.name.x * window.horizontalRatio,
             this.dialogue_pos.name.y,
             this.getName(id),
-            {font: "60px OpenSans ", fill: "black"}
+            {font: (60 * window.horizontalRatio) + "px OpenSans ", fill: "black"}
         );
 
         this.text = this.getText(id);
@@ -213,10 +215,10 @@ export class DialogueController {
 
         //Add dialogue content
         this.content = this.parent_scene.add.text(
-            this.dialogue_pos.content.x,
+            this.dialogue_pos.content.x * window.horizontalRatio,
             this.dialogue_pos.content.y,
             this.text[this.textIdx],
-            {font: "50px OpenSans", fill: "black", wordWrap: { width: 1000}}
+            {font: (50 * window.horizontalRatio) + "px OpenSans", fill: "black", wordWrap: { width: 1000 * window.horizontalRatio }}
         );
 
         //Make the text interactive
@@ -226,12 +228,13 @@ export class DialogueController {
             'gameobjectdown',
             (_, gameObject) => {
                 //Check that we clicked on the text
-                if(gameObject === this.content && this.cur_state != DialogueState.DONE) {
+                if(gameObject === this.content && this.cur_state !== DialogueState.DONE) {
 
                     this.textIdx++;
 
                     //Make sure that it's not a prompt
                     if(this.cur_state === DialogueState.DISPLAYED) {
+
                         //Check if we've shown all of the text
                         if(this.textIdx === this.text.length) {
                             //Get rid of all dialogue elements
@@ -239,6 +242,7 @@ export class DialogueController {
                             this.name.destroy();
                             this.background.destroy();
                             this.content.disableInteractive();
+                            this.textIdx = 0;
 
                             //Update dialogue state
                             this.endDialogue();
@@ -265,6 +269,15 @@ export class DialogueController {
     promptAnswers(id) {
         //Retrieve the dialogue
         const cur_dialogue = this.requestDialogue(id);
+        console.log(cur_dialogue);
+
+        //Get rid of all existing prompts
+        if(this.prompts) {
+            this.prompts.forEach(prompt => {
+                prompt.text.destroy();
+                prompt.sprite.destroy();
+            });
+        }
 
         this.prompts = [];
 
@@ -286,10 +299,10 @@ export class DialogueController {
 
                 //Create the prompt text
                 const prompt_text = this.parent_scene.add.text(
-                    700,
-                    1300 - ((PROMT_HEIGHT + SPACING) * this.prompts.length),
+                    500 * window.horizontalRatio,
+                    1200 - ((PROMT_HEIGHT + SPACING) * this.prompts.length),
                     choice.text,
-                    {font: "54px OpenSans ", fill: "black"}
+                    {font: (54 * window.horizontalRatio) + "px OpenSans ", fill: "black"}
                 );
 
                 //Activate prompt interactivity
@@ -427,7 +440,7 @@ export class DialogueController {
             (lr ? MIN_LEFT_X.text : MIN_RIGHT_X.text),
             ypos.text,
             cur_text,
-            {font: "36px OpenSans ", fill: lr ? "black" : "white", wordWrap: { width: 360 }}
+            {font: (36 * window.horizontalRatio) + "px OpenSans ", fill: lr ? "black" : "white", wordWrap: { width: 360 * window.horizontalRatio }}
         );
 
         //Move the messages back
@@ -464,22 +477,21 @@ export class DialogueController {
 
         this.msg_prompts = [];
 
-        console.log(dialogue.goto.length);
         let font_size;
         let prompt_ypos = []; 
-        let prompt_xpos = 323;
+        let prompt_xpos = 323 * window.horizontalRatio;
         //Display the correct prompt box
         if(dialogue.goto.length <= 1) {
-            this.parent_scene.add.image(593, 1416, 'promptBox1');
-            font_size = 76;
+            this.parent_scene.add.image(593 * window.horizontalRatio, 1416, 'promptBox1');
+            font_size = 76 * window.horizontalRatio;
             prompt_ypos = [1379];
         } else if(dialogue.goto.length <= 2) {
-            this.parent_scene.add.image(593, 1416, 'promptBox2');
-            font_size = 56;
+            this.parent_scene.add.image(593 * window.horizontalRatio, 1416, 'promptBox2');
+            font_size = 56 * window.horizontalRatio;
             prompt_ypos = [1297, 1477];
         } else {
-            this.parent_scene.add.image(593, 1416, 'promptBox3');
-            font_size = 46;
+            this.parent_scene.add.image(593 * window.horizontalRatio, 1416, 'promptBox3');
+            font_size = 46 * window.horizontalRatio;
             prompt_ypos = [1276, 1392, 1511];
         }
 

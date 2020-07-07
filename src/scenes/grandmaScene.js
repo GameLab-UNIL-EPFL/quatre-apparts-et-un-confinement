@@ -6,6 +6,7 @@ import { player } from "../index.js";
 import { Scenes } from "../core/player.js";
 import { WindowState, Months } from "./buildingScene.js";
 import { LivingRoomCard } from "./cards/GrandmaScene/livingRoomCard.js";
+import { DialogueController, DIALOGUE_BOX_KEY, DIALOGUE_BOX_SPRITE_SIZE } from "../core/dialogueController.js";
 
 export const GrandmaCards = {
     LIVING_ROOM: 0,
@@ -63,6 +64,9 @@ export class GrandmaScene extends Phaser.Scene {
 
         this.current_card = this.livingRoomCard;
         this.card_idx = GrandmaCards.LIVING_ROOM;
+
+        //Create the scene's dialogue controller
+        this.dialogue = new DialogueController(this, "grandmaDialogMarch");
     }
 
     /**
@@ -79,6 +83,13 @@ export class GrandmaScene extends Phaser.Scene {
      * that will be shown in the scene
      */
     preload() {
+        //Load in the dialogue box
+        this.load.spritesheet(
+            DIALOGUE_BOX_KEY,
+            "sprites/UI/dialogueBox.png",
+            DIALOGUE_BOX_SPRITE_SIZE.bg
+        );
+
         this.cards.forEach(card => card.preload());
     }
 

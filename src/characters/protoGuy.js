@@ -32,7 +32,7 @@ export class ProtoGuy {
      */
     constructor(parent_scene, x, y, card) {
         this.parent_scene = parent_scene;
-        this.x = x;
+        this.x = x * window.horizontalRatio;
         this.y = y;
 
         this.card = card;
@@ -124,7 +124,7 @@ export class ProtoGuy {
             case ProtoGuyClothes.PYJAMAS:
                 this.sprite = this.parent_scene.add.image(this.x, this.y, this.pj_name);
                 this.sprite.setInteractive();
-                break;
+                break; 
 
             case ProtoGuyClothes.YESTERDAY_CLOTHES:
                 this.sprite = this.parent_scene.add.image(this.x, this.y, this.dirty_name);

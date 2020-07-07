@@ -25,7 +25,7 @@ export class LivingRoomCard extends Card {
      */
     constructor(parent_scene) {
         //Call base constructor
-        super(parent_scene, []);
+        super(parent_scene, [], null, true);
 
         //Initialize children array
         let children = [
@@ -100,6 +100,7 @@ export class LivingRoomCard extends Card {
             )
         ];
 
+        this.grandma_state = GRANDMA_STATES.IDLE;
         this.children = children;
     }
 
@@ -153,7 +154,58 @@ export class LivingRoomCard extends Card {
         ).play('cat-tail');
     }
 
+    /**
+     * @brief Disables the correct interaction at the end of a dialogue
+     */
+    notifyDialogueEnd() {
+        switch(this.grandma_state) {
+            case GRANDMA_STATES.IDLE:
+                break;
+
+            case GRANDMA_STATES.BOOK_1:
+                //Disable book 1 interaction
+                this.children[2].sprite.disableInteractive();
+                this.children[2].highlight_sprite.destroy();
+
+                //Reset grandma
+                this.changeGrandma(GRANDMA_STATES.IDLE);
+                break;
+
+            case GRANDMA_STATES.BOOK_2:
+                //Disable book 2 interaction
+                this.children[3].sprite.disableInteractive();
+                this.children[3].highlight_sprite.destroy();
+
+                //Reset grandma
+                this.changeGrandma(GRANDMA_STATES.IDLE);
+                break;
+
+            case GRANDMA_STATES.BOOK_3:
+                //Disable book 3 interaction
+                this.children[4].sprite.disableInteractive();
+                this.children[4].highlight_sprite.destroy();
+
+                //Reset grandma
+                this.changeGrandma(GRANDMA_STATES.IDLE);
+                break;
+
+            case GRANDMA_STATES.PHONE:
+                //Disable phone interaction
+                this.children[7].sprite.disableInteractive();
+                this.children[7].highlight_sprite.destroy();
+
+                //Reset grandma
+                this.changeGrandma(GRANDMA_STATES.IDLE);
+                break;
+
+            default:
+                break;
+        }
+    }
+
     changeGrandma(state) {
+        this.grandma_state = state;
+
         //Destroy the grandma
         if(this.grandma_sprite) {
             this.grandma_sprite.destroy();
@@ -174,6 +226,9 @@ export class LivingRoomCard extends Card {
                     GRANDMA_POS.y,
                     "grandma_book1"
                 );
+
+                //Trigger the book's dialogue
+                this.parent_scene.dialogue.display("livre1");
                 break;
 
             case GRANDMA_STATES.BOOK_2:
@@ -182,6 +237,9 @@ export class LivingRoomCard extends Card {
                     GRANDMA_POS.y,
                     "grandma_book2"
                 );
+
+                //Trigger the book's dialogue
+                this.parent_scene.dialogue.display("livre2");
                 break;
 
             case GRANDMA_STATES.BOOK_3:
@@ -190,6 +248,9 @@ export class LivingRoomCard extends Card {
                     GRANDMA_POS.y,
                     "grandma_book3"
                 );
+
+                //Trigger the book's dialogue
+                this.parent_scene.dialogue.display("livre3");
                 break;
 
             case GRANDMA_STATES.PHONE:
@@ -198,6 +259,9 @@ export class LivingRoomCard extends Card {
                     GRANDMA_POS.y,
                     "grandma_phone"
                 );
+
+                //Trigger the phone's dialogue
+                this.parent_scene.dialogue.display("telephone");
                 break;
 
             default:
