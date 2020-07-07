@@ -12,7 +12,7 @@ const BEG_Y_ZONE = 1300;
 
 const INIT_FOCUS = 5;
 const SPAWN_DELAY = 1000;
-const NUM_SPAWNS = 100;
+const NUM_SPAWNS = 50;
 
 const END_ZOOM_CALL_ID = "endZoom";
 const LOSER_ID = "loseZoom";

@@ -98,6 +98,8 @@ export class GrandmaScene extends Phaser.Scene {
      * in the scene.
      */
     create() {
+        this.cameras.main.fadeIn(1000);
+        
         if(this.current_card.isLoaded()) {
             this.current_card.create();
         }

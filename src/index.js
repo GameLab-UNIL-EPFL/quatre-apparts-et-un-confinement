@@ -31,7 +31,7 @@ if(consoleSeemsOpen === true){
   * BUT: scene width shouldn't be cropped beyond a 0.45 ratio
 */
 
-function getScale(innerWidth, innerHeight){
+function getScale(innerWidth, innerHeight) {
     let innerRatio = innerWidth / innerHeight;
     const height = 1600; // default height
     let width = 1200; // default width
@@ -45,9 +45,10 @@ function getScale(innerWidth, innerHeight){
             width = Math.round(minRatio * height);
         }
     }
-    return { width: width, height: height };
+    return { width: 1200, height: 1600 };
 }
-const scale = getScale(window.innerWidth, window.innerHeight);
+
+export const scale = getScale(window.innerWidth, window.innerHeight);
 
 // Game Config reference: https://photonstorm.github.io/phaser3-docs/Phaser.Types.Core.html#.GameConfig
 const config = {
@@ -56,7 +57,7 @@ const config = {
     height: window.innerHeight,
     resolution: 1, // we could use 2 for Retina
     scale: {
-      mode: Phaser.Scale.FIT,
+      mode: Phaser.Scale.SMOOTH,
       autoCenter: Phaser.Scale.CENTER_BOTH,
       width: scale.width,
       height: scale.height
@@ -64,7 +65,7 @@ const config = {
     plugins: {
         scene: plugins
     },
-    scene: [/*BuildingScene, ProtoScene,*/ GrandmaScene],
+    scene: [BuildingScene, ProtoScene, GrandmaScene],
     physics: {
         default: 'arcade'
     }

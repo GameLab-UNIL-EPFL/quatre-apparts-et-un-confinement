@@ -2,6 +2,7 @@ import Phaser from "phaser";
 import { Scenes } from "../core/player";
 import { DIALOGUE_BOX_KEY, D_BOX_ANIMATION_KEY, DIALOGUE_BOX_SPRITE_SIZE } from "../core/dialogueController";
 import { player } from "..";
+import { scale } from "../index";
 
 export const Months = {
     MARCH: 'march',
@@ -160,7 +161,58 @@ export class BuildingScene extends Phaser.Scene {
             400 * window.horizontalRatio,
             800,
             "Loading...",
-            {font: "80px OpenSans", fill: "white"}
+            {font: (80 * window.horizontalRatio) + "px OpenSans", fill: "white"}
+        );
+    }
+
+    /**
+     * @brief Adds a continue button to the main menu
+     */
+    createContinueButton() {
+        //Create continue background sprite
+        this.sprites['menu_continue'] = this.add.sprite(
+            (scale.width / 2),
+            117,
+            DIALOGUE_BOX_KEY
+        ).play(D_BOX_ANIMATION_KEY);
+        
+        //Resize the box
+        this.sprites['menu_continue'].displayWidth *= .5;
+        this.sprites['menu_continue'].displayHeight *= .5;
+
+        //Change origin point to center
+        this.sprites['menu_continue'].setOrigin(0.5, 0.5);
+
+        //Add continue text
+        this.sprites['continue_text'] = this.add.text(
+            (scale.width / 2), 
+            this.sprites['menu_continue'].y,
+            "Continue",
+            {font: (54 * window.horizontalRatio) + "px OpenSans", fill: "black"}
+        );
+
+        //Change origin point to center
+        this.sprites['continue_text'].setOrigin(0.5, 0.5);
+
+        //Make continue button interactive
+        this.sprites['continue_text'].setInteractive();
+        this.sprites['menu_continue'].setInteractive();
+
+        this.input.on(
+            'gameobjectdown',
+            (_, gameObject) => {
+                //Check that we clicked on the right button
+                if(gameObject === this.sprites['menu_continue'] ||
+                   gameObject === this.sprites['continue_text']) 
+                {
+                    //Show a loading screen
+                    this.showLoading();
+
+                    //Load up previous save
+                    player.loadGame();
+                }
+            },
+            this
         );
     }
 
@@ -178,67 +230,41 @@ export class BuildingScene extends Phaser.Scene {
 
         //Only show continue option if there is a local save file
         if(player.saveExists()) {
-            //Create continue background sprite
-            this.sprites['menu_continue'] = this.add.sprite(
-                600 * window.horizontalRatio,
-                117,
-                DIALOGUE_BOX_KEY
-            ).play(D_BOX_ANIMATION_KEY);
-
-            this.sprites['menu_continue'].displayWidth *= .5;
-            this.sprites['menu_continue'].displayHeight *= .5;
-
-            //Add continue text
-            this.sprites['continue_text'] = this.add.text(
-                480 * window.horizontalRatio, 
-                90,
-                "Continue",
-                {font: "54px OpenSans", fill: "black"}
-            );
-
-            //Make continue button interactive
-            this.sprites['continue_text'].setInteractive();
-            this.sprites['menu_continue'].setInteractive();
-
-            this.input.on(
-                'gameobjectdown',
-                (_, gameObject) => {
-                    //Check that we clicked on the right button
-                    if(gameObject === this.sprites['menu_continue'] ||
-                       gameObject === this.sprites['continue_text']) 
-                    {
-                        //Show a loading screen
-                        this.showLoading();
-
-                        //Load up previous save
-                        player.loadGame();
-                    }
-                },
-                this
-            );
+            this.createContinueButton();
         }
         
         //Create new Game background sprite
         this.sprites['menu_new_game'] = this.add.sprite(
-            600 * window.horizontalRatio,
+            scale.width / 2,
             player.saveExists() ? 297 : 195,
             DIALOGUE_BOX_KEY
         ).play(D_BOX_ANIMATION_KEY);
 
+        //Resize the box
         this.sprites['menu_new_game'].displayWidth *= .5;
         this.sprites['menu_new_game'].displayHeight *= .5;
 
+        //Center the new game box
+        this.sprites['menu_new_game'].setOrigin(0.5, 0.5);
+
         //Add new Game text
         this.sprites['new_game_text'] = this.add.text(
-            467 * window.horizontalRatio, 
-            player.saveExists() ? 270 : 165,
+            (scale.width / 2), 
+            this.sprites['menu_new_game'].y,
             "New Game",
-            {font: "54px OpenSans", fill: "black"}
+            {font: (54 * window.horizontalRatio) + "px OpenSans", fill: "black"}
         );
+
+        //Center the new game box
+        this.sprites['new_game_text'].setOrigin(0.5, 0.5);
 
         //Make new game button start a new game
         this.sprites['new_game_text'].setInteractive();
         this.sprites['menu_new_game'].setInteractive();
+
+        //Adapt width for small ratio screens
+        this.sprites['menu_continue'].displayWidth *= window.horizontalRatio;
+        this.sprites['menu_new_game'].displayWidth *= window.horizontalRatio;
 
         this.input.on(
             'gameobjectdown',
@@ -278,6 +304,8 @@ export class BuildingScene extends Phaser.Scene {
      * @brief create all of the elements of the scene.
      */
     create() {
+        this.cameras.main.fadeIn(1000);
+
         switch(this.info.month) {
             case Months.MARCH:
                 this.sprites['building_bg'] = this.add.image(0, 0, "building_bg_march");
