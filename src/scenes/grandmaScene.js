@@ -72,10 +72,11 @@ export class GrandmaScene extends Phaser.Scene {
     /**
      * @brief Preloads the scene using saved data (if any)
      * @param {JSON} data { cardIdx, clothes, food }
+     * @todo Implement saving in grandma scene
      */
     init(data) {
         //Check if any saved data exists
-        if(data) {}
+        if(data) {/* TODO */}
     }
 
     /**
@@ -83,13 +84,10 @@ export class GrandmaScene extends Phaser.Scene {
      * that will be shown in the scene
      */
     preload() {
-        //Load in the dialogue box
-        this.load.spritesheet(
-            DIALOGUE_BOX_KEY,
-            "sprites/UI/dialogueBox.png",
-            DIALOGUE_BOX_SPRITE_SIZE.bg
-        );
+        //Preload the dialogue controller
+        this.dialogue.preload();
 
+        //Preload all of the cards
         this.cards.forEach(card => card.preload());
     }
 
@@ -99,7 +97,7 @@ export class GrandmaScene extends Phaser.Scene {
      */
     create() {
         this.cameras.main.fadeIn(1000);
-        
+
         if(this.current_card.isLoaded()) {
             this.current_card.create();
         }

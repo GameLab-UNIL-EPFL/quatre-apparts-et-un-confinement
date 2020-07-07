@@ -269,14 +269,10 @@ export class ProtoScene extends Phaser.Scene {
      * that will be shown in the scene
      */
     preload() {
+        //Preload the dialogue controller
+        this.dialogue.preload();
 
-        //Load in the dialogue box
-        this.load.spritesheet(
-            DIALOGUE_BOX_KEY,
-            "sprites/UI/dialogueBox.png",
-            DIALOGUE_BOX_SPRITE_SIZE.bg
-        );
-
+        //Preload all of the cards
         this.cards.forEach(card => card.preload());
     }
 

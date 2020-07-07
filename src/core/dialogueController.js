@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import { scale } from "..";
 
 export const DialogueState = {
     NONE: 0,
@@ -10,7 +11,7 @@ export const DialogueState = {
 
 export const DIALOGUE_BOX_SPRITE_SIZE = {
     bg: { frameWidth: 1200, frameHeight: 260 },
-    prompt: { frameWidth: 1200, frameHeight: 260 }
+    prompt: { frameWidth: 340, frameHeight: 96 }
 };
 
 export const DIALOGUE_BOX_KEY = "dialogueBox";
@@ -72,7 +73,7 @@ const MSG_HEIGHT = {
 const MSG_LINE_CHARS = 18;
 const MSG_RESP_DELAY = 1500;
 const PROMT_HEIGHT = 200;
-const SPACING = 100;
+const SPACING = 25;
 const MAX_N_PROMPTS = 3;
 
 const UP_POS = {
@@ -106,6 +107,31 @@ export class DialogueController {
 
         this.displayed = [];
         this.prev_height = MSG_HEIGHT.typing;
+    }
+
+    /**
+     * @brief loads in all of the data needed by the dialogue controller
+     */
+    preload() {
+        //Load in the dialogue box
+        this.parent_scene.load.spritesheet(
+            DIALOGUE_BOX_KEY,
+            "sprites/UI/dialogueBox.png",
+            DIALOGUE_BOX_SPRITE_SIZE.bg
+        );
+
+        //Load in prompts
+        this.parent_scene.load.spritesheet(
+            "prompts_1",
+            "sprites/UI/prompts_1.png",
+            DIALOGUE_BOX_SPRITE_SIZE.prompt 
+        );
+
+        this.parent_scene.load.spritesheet(
+            "prompts_2",
+            "sprites/UI/prompts_2.png",
+            DIALOGUE_BOX_SPRITE_SIZE.prompt
+        );
     }
 
     /**
@@ -163,6 +189,21 @@ export class DialogueController {
     }
 
     /**
+     * @brief Destroys all of the sprites used by the current dialogue box
+     */
+    destroyDialogueBox() {
+        if(this.background) {
+            this.background.destroy();
+        }
+        if(this.name) {
+            this.name.destroy();
+        }
+        if(this.content) {
+            this.content.destroy();
+        }
+    }
+
+    /**
      * @brief displays the dialogue that has a given ID
      * @param {string} id the ID of the dialogue that we want to display
      * @param {boolean} up_down true if the dialogue will be placed on the top, false if on the bottom
@@ -182,15 +223,7 @@ export class DialogueController {
         });
 
         //Destroy the box if it is displayed
-        if(this.background) {
-            this.background.destroy();
-        }
-        if(this.name) {
-            this.name.destroy();
-        }
-        if(this.content) {
-            this.content.destroy();
-        }
+        this.destroyDialogueBox();
 
         //Create background sprite
         this.background = this.parent_scene.add.sprite(
@@ -287,23 +320,58 @@ export class DialogueController {
             this.cur_state = DialogueState.PROMPT;
             cur_dialogue.choices.forEach(choice => {
 
+                //Chose which of the two spritesheets to use
+                let prompts_name = "prompts_" + ((this.prompts.length % 2) + 1);
+
+                //Create background animation
+                this.parent_scene.anims.create({
+                    key: "prompt_anim_" + this.prompts.length,
+                    frameRate: 6,
+                    frames: this.parent_scene.anims.generateFrameNames(prompts_name),
+                    repeat: -1
+                });
+
+                //Compute the prompt position
+                let prompt_position = this.background.y + this.background.displayHeight;
+
+                if(this.prompts.length > 0) {
+                    prompt_position = this.prompts[this.prompts.length - 1].sprite.y + 
+                        (this.prompts[this.prompts.length - 1].sprite.displayHeight + SPACING);
+                } 
+
                 //Create the prompt rectangle
-                const bg = new Phaser.Geom.Rectangle(
-                    0,
-                    1200 - ((PROMT_HEIGHT + SPACING) * this.prompts.length),
-                    2200,
-                    PROMT_HEIGHT
-                );
-                const prompt_sprite = this.parent_scene.add.graphics({ fillStyle: { color: 0xffffff, alpha: 50 }});
-                prompt_sprite.fillRectShape(bg);
+                const prompt_sprite = this.parent_scene.add.sprite(
+                    scale.width / 2,
+                    prompt_position,
+                    prompts_name  
+                ).play("prompt_anim_" + this.prompts.length);
+
+                //Center the box
+                prompt_sprite.setOrigin(0.5, 0.5);
 
                 //Create the prompt text
                 const prompt_text = this.parent_scene.add.text(
-                    500 * window.horizontalRatio,
-                    1200 - ((PROMT_HEIGHT + SPACING) * this.prompts.length),
+                    scale.width / 2,
+                    prompt_sprite.y,
                     choice.text,
-                    {font: (54 * window.horizontalRatio) + "px OpenSans ", fill: "black"}
+                    {
+                        font: (54 * window.horizontalRatio) + "px OpenSans ",
+                        fill: "white",
+                        wordWrap: { width: this.background.displayWidth - (4 * SPACING) }
+                    }
                 );
+
+                //Center the text
+                prompt_text.setOrigin(0.5, 0.5);
+
+                //Adapt the box size to fit the text if needed
+                if(prompt_text.displayWidth > prompt_sprite.displayWidth) {
+                    prompt_sprite.displayWidth = prompt_text.displayWidth + 100;
+                }
+
+                if(prompt_text.displayHeight > prompt_sprite.displayHeight) {
+                    prompt_sprite.displayHeight = prompt_text.displayHeight + SPACING;
+                }
 
                 //Activate prompt interactivity
                 prompt_text.setInteractive();
@@ -332,6 +400,11 @@ export class DialogueController {
 
                 this.prompts.push({sprite: prompt_sprite, text: prompt_text});
             });
+
+            //Resize the dialogue box to fit the prompts
+            /*let added_height = this.prompts.length * (this.prompts[0].sprite.height + SPACING);
+            this.background.displayHeight += added_height;
+            this.background.y += added_height/2 - SPACING;*/
         }
     }
 

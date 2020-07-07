@@ -86,12 +86,12 @@ export class LivingRoomCard extends Card {
             ),
             new CardObject(
                 parent_scene,
-                { name: "phone", url: "sprites/GrandmaScene/phone.png" },
+                { name: "phone_grandma", url: "sprites/GrandmaScene/phone.png" },
                 new Phaser.Math.Vector2(1129, 1215),
                 (card) => card.changeGrandma(GRANDMA_STATES.PHONE),
                 this,
                 -1,
-                { name: "phone_h", url: "sprites/GrandmaScene/phone_h.png" }
+                { name: "phone_grandma_h", url: "sprites/GrandmaScene/phone_h.png" }
             ),
             new CardObject(
                 parent_scene,
@@ -194,6 +194,8 @@ export class LivingRoomCard extends Card {
                 this.children[7].sprite.disableInteractive();
                 this.children[7].highlight_sprite.destroy();
 
+                this.enableAllInteractions(this.children[7]);
+
                 //Reset grandma
                 this.changeGrandma(GRANDMA_STATES.IDLE);
                 break;
@@ -201,6 +203,33 @@ export class LivingRoomCard extends Card {
             default:
                 break;
         }
+    }
+
+    disableAllInteractions() {
+        this.children.forEach(child => {
+
+            if(child.sprite) {
+                child.sprite.disableInteractive();
+            }
+
+            if(child.highlight_sprite) {
+                child.highlight_sprite.disableInteractive();
+            }
+        });
+    }
+
+    enableAllInteractions(except) {
+        this.children.forEach(child => {
+            if(child !== except) {
+                if(child.sprite) {
+                    child.sprite.setInteractive();
+                }
+                
+                if(child.highlight_sprite) {
+                    child.highlight_sprite.setInteractive();
+                }
+            }
+        });
     }
 
     changeGrandma(state) {
@@ -259,6 +288,9 @@ export class LivingRoomCard extends Card {
                     GRANDMA_POS.y,
                     "grandma_phone"
                 );
+
+                //Disable all of the scenes interactions
+                this.disableAllInteractions();
 
                 //Trigger the phone's dialogue
                 this.parent_scene.dialogue.display("telephone");

@@ -45,7 +45,7 @@ function getScale(innerWidth, innerHeight) {
             width = Math.round(minRatio * height);
         }
     }
-    return { width: 1200, height: 1600 };
+    return { width: 1200, height: 1600, ratio: innerRatio };
 }
 
 export const scale = getScale(window.innerWidth, window.innerHeight);
@@ -57,7 +57,7 @@ const config = {
     height: window.innerHeight,
     resolution: 1, // we could use 2 for Retina
     scale: {
-      mode: Phaser.Scale.SMOOTH,
+      mode: scale.ratio > 0.75 ? Phaser.Scale.FIT : Phaser.Scale.SMOOTH,
       autoCenter: Phaser.Scale.CENTER_BOTH,
       width: scale.width,
       height: scale.height
