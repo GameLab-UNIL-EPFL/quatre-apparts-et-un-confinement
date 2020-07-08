@@ -21,8 +21,8 @@ export class CardObject {
         this.name = sprite.name;
         this.url = sprite.url;
 
-        //Position of the object
-        this.position = position;
+        //Position of the object while taking into account ratio deformation
+        this.position = new Phaser.Math.Vector2(position.x * window.horizontalRatio, position.y);
 
         //Store callback
         this.onClickCallback = onClickCallback;
@@ -52,12 +52,12 @@ export class CardObject {
      * and animates it if needed
      */
     create() {
-        this.sprite = this.parent_scene.add.image(this.position.x * window.horizontalRatio, this.position.y, this.name);
+        this.sprite = this.parent_scene.add.image(this.position.x, this.position.y, this.name);
 
         //Create the highlight and animation if needed
         if(this.highlight) {
             this.highlight_sprite = this.parent_scene.add.image(
-                this.position.x * window.horizontalRatio,
+                this.position.x,
                 this.position.y,
                 this.highlight.name);
                 

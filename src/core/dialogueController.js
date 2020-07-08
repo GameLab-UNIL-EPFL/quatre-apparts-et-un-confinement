@@ -1,4 +1,5 @@
 import Phaser from "phaser";
+import { scale } from "..";
 
 export const DialogueState = {
     NONE: 0,
@@ -10,7 +11,7 @@ export const DialogueState = {
 
 export const DIALOGUE_BOX_SPRITE_SIZE = {
     bg: { frameWidth: 1200, frameHeight: 260 },
-    prompt: { frameWidth: 1200, frameHeight: 260 }
+    prompt: { frameWidth: 340, frameHeight: 96 }
 };
 
 export const DIALOGUE_BOX_KEY = "dialogueBox";
@@ -71,8 +72,8 @@ const MSG_HEIGHT = {
 
 const MSG_LINE_CHARS = 18;
 const MSG_RESP_DELAY = 1500;
-const PROMT_HEIGHT = 400;
-const SPACING = 100;
+const PROMT_HEIGHT = 200;
+const SPACING = 25;
 const MAX_N_PROMPTS = 3;
 
 const UP_POS = {
@@ -96,15 +97,41 @@ export class DialogueController {
      * @brief Creates a dialogue controller by loading the dialogue
      * directly from JSON.
      * @param {Phaser.Scene} parent_scene the scene in which the controller is contained
+     * @param {string} dialogue_name the name of the dialogue JSON that will be loading in for the scene
      */
-    constructor(parent_scene) {
+    constructor(parent_scene, dialogue_name="dialogData") {
         this.parent_scene = parent_scene;
-        this.dialogueJSON = require("../dialogue/dialogData.json");
+        this.dialogueJSON = require("../dialogue/" + dialogue_name + ".json");
         this.current_conv_id = "";
         this.cur_state = DialogueState.NONE;
 
         this.displayed = [];
         this.prev_height = MSG_HEIGHT.typing;
+    }
+
+    /**
+     * @brief loads in all of the data needed by the dialogue controller
+     */
+    preload() {
+        //Load in the dialogue box
+        this.parent_scene.load.spritesheet(
+            DIALOGUE_BOX_KEY,
+            "sprites/UI/dialogueBox.png",
+            DIALOGUE_BOX_SPRITE_SIZE.bg
+        );
+
+        //Load in prompts
+        this.parent_scene.load.spritesheet(
+            "prompts_1",
+            "sprites/UI/prompts_1.png",
+            DIALOGUE_BOX_SPRITE_SIZE.prompt 
+        );
+
+        this.parent_scene.load.spritesheet(
+            "prompts_2",
+            "sprites/UI/prompts_2.png",
+            DIALOGUE_BOX_SPRITE_SIZE.prompt
+        );
     }
 
     /**
@@ -162,6 +189,21 @@ export class DialogueController {
     }
 
     /**
+     * @brief Destroys all of the sprites used by the current dialogue box
+     */
+    destroyDialogueBox() {
+        if(this.background) {
+            this.background.destroy();
+        }
+        if(this.name) {
+            this.name.destroy();
+        }
+        if(this.content) {
+            this.content.destroy();
+        }
+    }
+
+    /**
      * @brief displays the dialogue that has a given ID
      * @param {string} id the ID of the dialogue that we want to display
      * @param {boolean} up_down true if the dialogue will be placed on the top, false if on the bottom
@@ -181,31 +223,24 @@ export class DialogueController {
         });
 
         //Destroy the box if it is displayed
-        if(this.background) {
-            this.background.destroy();
-        }
-        if(this.name) {
-            this.name.destroy();
-        }
-        if(this.content) {
-            this.content.destroy();
-        }
+        this.destroyDialogueBox();
 
         //Create background sprite
         this.background = this.parent_scene.add.sprite(
-            this.dialogue_pos.box.x,
+            this.dialogue_pos.box.x * window.horizontalRatio,
             this.dialogue_pos.box.y,
             DIALOGUE_BOX_KEY
         ).play(D_BOX_ANIMATION_KEY);
 
         this.background.alpha = .9;
+        this.background.displayWidth *= window.horizontalRatio;
 
         //Add name text
         this.name = this.parent_scene.add.text(
-            this.dialogue_pos.name.x,
+            this.dialogue_pos.name.x * window.horizontalRatio,
             this.dialogue_pos.name.y,
             this.getName(id),
-            {font: "60px OpenSans ", fill: "black"}
+            {font: (60 * window.horizontalRatio) + "px OpenSans ", fill: "black"}
         );
 
         this.text = this.getText(id);
@@ -213,10 +248,10 @@ export class DialogueController {
 
         //Add dialogue content
         this.content = this.parent_scene.add.text(
-            this.dialogue_pos.content.x,
+            this.dialogue_pos.content.x * window.horizontalRatio,
             this.dialogue_pos.content.y,
             this.text[this.textIdx],
-            {font: "50px OpenSans", fill: "black", wordWrap: { width: 1000}}
+            {font: (50 * window.horizontalRatio) + "px OpenSans", fill: "black", wordWrap: { width: 1000 * window.horizontalRatio }}
         );
 
         //Make the text interactive
@@ -226,12 +261,13 @@ export class DialogueController {
             'gameobjectdown',
             (_, gameObject) => {
                 //Check that we clicked on the text
-                if(gameObject === this.content && this.cur_state != DialogueState.DONE) {
+                if(gameObject === this.content && this.cur_state !== DialogueState.DONE) {
 
                     this.textIdx++;
 
                     //Make sure that it's not a prompt
                     if(this.cur_state === DialogueState.DISPLAYED) {
+
                         //Check if we've shown all of the text
                         if(this.textIdx === this.text.length) {
                             //Get rid of all dialogue elements
@@ -239,6 +275,7 @@ export class DialogueController {
                             this.name.destroy();
                             this.background.destroy();
                             this.content.disableInteractive();
+                            this.textIdx = 0;
 
                             //Update dialogue state
                             this.endDialogue();
@@ -265,6 +302,15 @@ export class DialogueController {
     promptAnswers(id) {
         //Retrieve the dialogue
         const cur_dialogue = this.requestDialogue(id);
+        console.log(cur_dialogue);
+
+        //Get rid of all existing prompts
+        if(this.prompts) {
+            this.prompts.forEach(prompt => {
+                prompt.text.destroy();
+                prompt.sprite.destroy();
+            });
+        }
 
         this.prompts = [];
 
@@ -274,23 +320,58 @@ export class DialogueController {
             this.cur_state = DialogueState.PROMPT;
             cur_dialogue.choices.forEach(choice => {
 
+                //Chose which of the two spritesheets to use
+                let prompts_name = "prompts_" + ((this.prompts.length % 2) + 1);
+
+                //Create background animation
+                this.parent_scene.anims.create({
+                    key: "prompt_anim_" + this.prompts.length,
+                    frameRate: 6,
+                    frames: this.parent_scene.anims.generateFrameNames(prompts_name),
+                    repeat: -1
+                });
+
+                //Compute the prompt position
+                let prompt_position = this.background.y + this.background.displayHeight;
+
+                if(this.prompts.length > 0) {
+                    prompt_position = this.prompts[this.prompts.length - 1].sprite.y + 
+                        (this.prompts[this.prompts.length - 1].sprite.displayHeight + SPACING);
+                } 
+
                 //Create the prompt rectangle
-                const bg = new Phaser.Geom.Rectangle(
-                    0,
-                    1200 - ((PROMT_HEIGHT + SPACING) * this.prompts.length),
-                    2200,
-                    PROMT_HEIGHT
-                );
-                const prompt_sprite = this.parent_scene.add.graphics({ fillStyle: { color: 0xffffff, alpha: 50 }});
-                prompt_sprite.fillRectShape(bg);
+                const prompt_sprite = this.parent_scene.add.sprite(
+                    scale.width / 2,
+                    prompt_position,
+                    prompts_name  
+                ).play("prompt_anim_" + this.prompts.length);
+
+                //Center the box
+                prompt_sprite.setOrigin(0.5, 0.5);
 
                 //Create the prompt text
                 const prompt_text = this.parent_scene.add.text(
-                    700,
-                    1300 - ((PROMT_HEIGHT + SPACING) * this.prompts.length),
+                    scale.width / 2,
+                    prompt_sprite.y,
                     choice.text,
-                    {font: "54px OpenSans ", fill: "black"}
+                    {
+                        font: (54 * window.horizontalRatio) + "px OpenSans ",
+                        fill: "white",
+                        wordWrap: { width: this.background.displayWidth - (4 * SPACING) }
+                    }
                 );
+
+                //Center the text
+                prompt_text.setOrigin(0.5, 0.5);
+
+                //Adapt the box size to fit the text if needed
+                if(prompt_text.displayWidth > prompt_sprite.displayWidth) {
+                    prompt_sprite.displayWidth = prompt_text.displayWidth + 100;
+                }
+
+                if(prompt_text.displayHeight > prompt_sprite.displayHeight) {
+                    prompt_sprite.displayHeight = prompt_text.displayHeight + SPACING;
+                }
 
                 //Activate prompt interactivity
                 prompt_text.setInteractive();
@@ -319,6 +400,11 @@ export class DialogueController {
 
                 this.prompts.push({sprite: prompt_sprite, text: prompt_text});
             });
+
+            //Resize the dialogue box to fit the prompts
+            /*let added_height = this.prompts.length * (this.prompts[0].sprite.height + SPACING);
+            this.background.displayHeight += added_height;
+            this.background.y += added_height/2 - SPACING;*/
         }
     }
 
@@ -427,7 +513,7 @@ export class DialogueController {
             (lr ? MIN_LEFT_X.text : MIN_RIGHT_X.text),
             ypos.text,
             cur_text,
-            {font: "36px OpenSans ", fill: lr ? "black" : "white", wordWrap: { width: 360 }}
+            {font: (36 * window.horizontalRatio) + "px OpenSans ", fill: lr ? "black" : "white", wordWrap: { width: 360 * window.horizontalRatio }}
         );
 
         //Move the messages back
@@ -464,22 +550,21 @@ export class DialogueController {
 
         this.msg_prompts = [];
 
-        console.log(dialogue.goto.length);
         let font_size;
         let prompt_ypos = []; 
-        let prompt_xpos = 323;
+        let prompt_xpos = 323 * window.horizontalRatio;
         //Display the correct prompt box
         if(dialogue.goto.length <= 1) {
-            this.parent_scene.add.image(593, 1416, 'promptBox1');
-            font_size = 76;
+            this.parent_scene.add.image(593 * window.horizontalRatio, 1416, 'promptBox1');
+            font_size = 76 * window.horizontalRatio;
             prompt_ypos = [1379];
         } else if(dialogue.goto.length <= 2) {
-            this.parent_scene.add.image(593, 1416, 'promptBox2');
-            font_size = 56;
+            this.parent_scene.add.image(593 * window.horizontalRatio, 1416, 'promptBox2');
+            font_size = 56 * window.horizontalRatio;
             prompt_ypos = [1297, 1477];
         } else {
-            this.parent_scene.add.image(593, 1416, 'promptBox3');
-            font_size = 46;
+            this.parent_scene.add.image(593 * window.horizontalRatio, 1416, 'promptBox3');
+            font_size = 46 * window.horizontalRatio;
             prompt_ypos = [1276, 1392, 1511];
         }
 

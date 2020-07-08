@@ -31,24 +31,24 @@ if(consoleSeemsOpen === true){
   * BUT: scene width shouldn't be cropped beyond a 0.45 ratio
 */
 
-function getScale(innerWidth, innerHeight){
-  let innerRatio = innerWidth / innerHeight;
-  const height = 1600; // default height
-  let width = 1200; // default width
-  const targetRatio = width / height;
-  const minRatio = 0.45;
+function getScale(innerWidth, innerHeight) {
+    let innerRatio = innerWidth / innerHeight;
+    const height = 1600; // default height
+    let width = 1200; // default width
+    const targetRatio = width / height;
+    const minRatio = 0.45;
 
-
-  if(innerRatio < targetRatio){
-    if(innerRatio >= minRatio){
-      width = Math.round(innerRatio * height);
-    } else {
-      width = Math.round(minRatio * height);
+    if(innerRatio < targetRatio) {
+        if(innerRatio >= minRatio) {
+            width = Math.round(innerRatio * height);
+        } else {
+            width = Math.round(minRatio * height);
+        }
     }
-  }
-  return {width: width, height: height};
+    return { width: 1200, height: 1600, ratio: innerRatio };
 }
-const scale = getScale(window.innerWidth, window.innerHeight);
+
+export const scale = getScale(window.innerWidth, window.innerHeight);
 
 // Game Config reference: https://photonstorm.github.io/phaser3-docs/Phaser.Types.Core.html#.GameConfig
 const config = {
@@ -57,7 +57,7 @@ const config = {
     height: window.innerHeight,
     resolution: 1, // we could use 2 for Retina
     scale: {
-      mode: Phaser.Scale.FIT,
+      mode: scale.ratio > 0.75 ? Phaser.Scale.FIT : Phaser.Scale.SMOOTH,
       autoCenter: Phaser.Scale.CENTER_BOTH,
       width: scale.width,
       height: scale.height
@@ -92,7 +92,7 @@ export const game = new Phaser.Game(config);
 export const player = new Player();
 
 // We’re about to change picture width (1365 pixels wide)
-const maxPictureWidth = 1200;
+const maxPictureWidth = 1200.0;
 
 // si on veut le stocker dans game
 game.horizontalRatio = scale.width / maxPictureWidth;
@@ -102,10 +102,11 @@ window.horizontalRatio = scale.width / maxPictureWidth;
 
 // This resize implies we also resize scene sprites, or they’d stretch.
 // As we lack of time, the fastest workaround could be to instantiate the game again, or even worse...
-window.addEventListener('resize', function (event) {
-  clearTimeout(resizeTimeout);
-  resizeTimeout = setTimeout(function(){
-    // Let’s pretend it was for debug and we forgot
-    location.reload();
-  }, 200);
-}, false);
+window.addEventListener(
+    'resize',
+    (_) => {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => location.reload(), 200);
+    },
+    false
+);

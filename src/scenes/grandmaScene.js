@@ -6,6 +6,7 @@ import { player } from "../index.js";
 import { Scenes } from "../core/player.js";
 import { WindowState, Months } from "./buildingScene.js";
 import { LivingRoomCard } from "./cards/GrandmaScene/livingRoomCard.js";
+import { DialogueController, DIALOGUE_BOX_KEY, DIALOGUE_BOX_SPRITE_SIZE } from "../core/dialogueController.js";
 
 export const GrandmaCards = {
     LIVING_ROOM: 0,
@@ -63,15 +64,19 @@ export class GrandmaScene extends Phaser.Scene {
 
         this.current_card = this.livingRoomCard;
         this.card_idx = GrandmaCards.LIVING_ROOM;
+
+        //Create the scene's dialogue controller
+        this.dialogue = new DialogueController(this, "grandmaDialogMarch");
     }
 
     /**
      * @brief Preloads the scene using saved data (if any)
      * @param {JSON} data { cardIdx, clothes, food }
+     * @todo Implement saving in grandma scene
      */
     init(data) {
         //Check if any saved data exists
-        if(data) {}
+        if(data) {/* TODO */}
     }
 
     /**
@@ -79,6 +84,10 @@ export class GrandmaScene extends Phaser.Scene {
      * that will be shown in the scene
      */
     preload() {
+        //Preload the dialogue controller
+        this.dialogue.preload();
+
+        //Preload all of the cards
         this.cards.forEach(card => card.preload());
     }
 
@@ -87,6 +96,8 @@ export class GrandmaScene extends Phaser.Scene {
      * in the scene.
      */
     create() {
+        this.cameras.main.fadeIn(1000);
+
         if(this.current_card.isLoaded()) {
             this.current_card.create();
         }
