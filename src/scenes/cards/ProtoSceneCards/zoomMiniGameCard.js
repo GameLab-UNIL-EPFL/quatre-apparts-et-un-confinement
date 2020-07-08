@@ -194,6 +194,11 @@ export class ZoomMiniGameCard extends Card {
         
                             //Resize the health bar 
                             this.children[3].sprite.displayWidth -= this.focus_bar_width / INIT_FOCUS;
+                            this.children[3].sprite.tint = 0xEFA81B
+                            if(this.children[3].sprite.displayWidth < 300) {
+                                this.children[3].sprite.tint = 0xE53D3D;
+                            }
+                            
                         }
         
                         //Remove the elelment in question
@@ -292,6 +297,7 @@ export class ZoomMiniGameCard extends Card {
 
         //Save the bar's initial width
         this.focus_bar_width = this.children[3].sprite.width;
+        this.children[3].sprite.tint = 0x2EC62E;
 
         //Create the timer event
         this.msg_spawner = this.parent_scene.time.addEvent({
