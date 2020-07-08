@@ -255,15 +255,14 @@ export class DialogueController {
         );
 
         //Make the text interactive
-        this.content.setInteractive();
-
-        this.parent_scene.input.on(
-            'gameobjectdown',
-            (_, gameObject) => {
+        this.content.setInteractive().on(
+            'pointerdown',
+            () => {
                 //Check that we clicked on the text
-                if(gameObject === this.content && this.cur_state !== DialogueState.DONE) {
+                if(this.cur_state !== DialogueState.DONE) {
 
                     this.textIdx++;
+                    console.log(this.textIdx);
 
                     //Make sure that it's not a prompt
                     if(this.cur_state === DialogueState.DISPLAYED) {
