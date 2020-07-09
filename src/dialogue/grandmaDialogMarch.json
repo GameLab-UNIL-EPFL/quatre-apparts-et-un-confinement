@@ -62,7 +62,7 @@
 	"news": {
 		"name": "Radio",
 		"text": [
-			"17 Mars - La Suisse se trouve dans une situation extraordinaire",
+			"17 mars - La Suisse se trouve dans une situation extraordinaire",
 			"Restez chez vous"
 		],
 		"choices": [],
@@ -101,8 +101,8 @@
         "text": ["Allo? Ah Salut Suzanne! Comment vas-tu?"],
         "choices": [
 			{
-				"text": ["ça va, ça va"],
-				"preview": "ça va, ça va",
+				"text": ["Ça va, ça va"],
+				"preview": "Ça va, ça va",
 				"goto": "cava"
 			},
 			{
