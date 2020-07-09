@@ -102,6 +102,7 @@ export class LivingRoomCard extends Card {
 
         this.grandma_state = GRANDMA_STATES.IDLE;
         this.children = children;
+        this.objective_complete = false;
     }
 
     preload() {
@@ -114,11 +115,18 @@ export class LivingRoomCard extends Card {
         this.parent_scene.load.image("grandma_book2", "sprites/GrandmaScene/grandma_book_02.png");
         this.parent_scene.load.image("grandma_book3", "sprites/GrandmaScene/grandma_book_03.png");
 
-        //Load the ring animation spritesheet
+        //Load the cat animation spritesheet
         this.parent_scene.load.spritesheet(
             'cat',
             'sprites/GrandmaScene/cat.png',
             { frameWidth: 320, frameHeight: 240 }
+        );
+
+        //Load the arrow animation spritesheet
+        this.parent_scene.load.spritesheet(
+            'arrow',
+            'sprites/UI/arrow.png',
+            { frameWidth: 100, frameHeight: 100 }
         );
     }
 
@@ -146,12 +154,60 @@ export class LivingRoomCard extends Card {
             repeat: -1
         });
 
-        //Play the ring animation
+        //Play the cat animation
         this.cat_anim = this.parent_scene.add.sprite(
             11,
             677,
             'cat'
         ).play('cat-tail');
+
+        //Update the phone's onclickcallback
+        this.children[7].updateOnClickCallback(
+            (args) => {
+                //Exract arguments
+                const card = args[0];
+                const sprite = args[1];
+                const highlight = args[2];
+
+                //Change the grandma
+                card.changeGrandma(GRANDMA_STATES.PHONE);
+
+                //hide the phone
+                sprite.setActive(false).setVisible(false);
+                highlight.setActive(false).setVisible(false);
+            },
+            [this, this.children[7].sprite, this.children[7].highlight_sprite]
+        );
+    }
+
+    /**
+     * @brief shows the arrow that sends the user back to the building scene
+     */
+    showArrow() {
+        // Create ring sprites
+        this.parent_scene.anims.create({
+            key: 'arrow_anim',
+            frameRate: 15,
+            frames: this.parent_scene.anims.generateFrameNames('arrow'),
+            repeat: -1
+        });
+
+        //Play the cat animation
+        this.arrow = this.parent_scene.add.sprite(
+            845 * window.horizontalRatio,
+            1516,
+            'arrow'
+        ).play('arrow_anim');
+
+        //Make the arrow end the scene
+        this.arrow.setInteractive().on(
+            'pointerdown',
+            () => {
+                this.parent_scene.destroy();
+                this.parent_scene.nextScene();
+            },
+            this
+        );
     }
 
     /**
@@ -163,41 +219,31 @@ export class LivingRoomCard extends Card {
                 break;
 
             case GRANDMA_STATES.BOOK_1:
-                //Disable book 1 interaction
-                this.children[2].sprite.disableInteractive();
-                this.children[2].highlight_sprite.destroy();
-
                 //Reset grandma
                 this.changeGrandma(GRANDMA_STATES.IDLE);
                 break;
 
             case GRANDMA_STATES.BOOK_2:
-                //Disable book 2 interaction
-                this.children[3].sprite.disableInteractive();
-                this.children[3].highlight_sprite.destroy();
-
                 //Reset grandma
                 this.changeGrandma(GRANDMA_STATES.IDLE);
                 break;
 
             case GRANDMA_STATES.BOOK_3:
-                //Disable book 3 interaction
-                this.children[4].sprite.disableInteractive();
-                this.children[4].highlight_sprite.destroy();
-
                 //Reset grandma
                 this.changeGrandma(GRANDMA_STATES.IDLE);
                 break;
 
             case GRANDMA_STATES.PHONE:
-                //Disable phone interaction
-                this.children[7].sprite.disableInteractive();
-                this.children[7].highlight_sprite.destroy();
+                //show the phone
+                this.children[7].sprite.setActive(true).setVisible(true);
+                this.children[7].highlight_sprite.setActive(true).setVisible(true);
 
-                this.enableAllInteractions(this.children[7]);
+                this.enableAllInteractions();
 
                 //Reset grandma
                 this.changeGrandma(GRANDMA_STATES.IDLE);
+
+                this.showArrow();
                 break;
 
             default:
@@ -218,7 +264,7 @@ export class LivingRoomCard extends Card {
         });
     }
 
-    enableAllInteractions(except) {
+    enableAllInteractions(except=null) {
         this.children.forEach(child => {
             if(child !== except) {
                 if(child.sprite) {
@@ -233,12 +279,7 @@ export class LivingRoomCard extends Card {
     }
 
     changeGrandma(state) {
-        this.grandma_state = state;
-
-        //Destroy the grandma
-        if(this.grandma_sprite) {
-            this.grandma_sprite.destroy();
-        }
+        if(this.parent_scene.dialogue.isDone()) {
 
         switch(state) {
             case GRANDMA_STATES.IDLE:

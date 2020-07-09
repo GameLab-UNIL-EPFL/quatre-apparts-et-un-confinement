@@ -250,6 +250,12 @@ export class ZoomMiniGameCard extends Card {
                                         callback(this, true);
                                     }
                                 }
+
+                                this.children[3].sprite.displayWidth -= this.focus_bar_width / INIT_FOCUS;
+                                this.children[3].sprite.tint = 0xEFA81B
+                                if(this.children[3].sprite.displayWidth < 300) {
+                                    this.children[3].sprite.tint = 0xE53D3D;
+                                }
                             } else {
                                 this.messages[msg_idx].isDestroyed = true;
                             }
