@@ -49,13 +49,13 @@ const MIN_Y_MSG_POS = {
 };
 
 const MIN_LEFT_X = {
-    text: 311-600,
-    box: 471-600
+    text: -289,
+    box: -129
 };
 
 const MIN_RIGHT_X = {
-    text: 547-600,
-    box: 712-600
+    text: -53,
+    box: 112
 };
 
 const MSG_HEIGHT = {
@@ -552,20 +552,20 @@ export class DialogueController {
 
         let font_size;
         let prompt_ypos = [];
-        let prompt_xpos = 323 - 600;
+        let prompt_xpos = -277;
         //Display the correct prompt box
         if(dialogue.goto.length <= 1) {
-            this.parent_scene.add.image(593-600, 1416-800, 'promptBox1');
+            this.parent_scene.add.image(-7, 616, 'promptBox1');
             font_size = 76 * window.horizontalRatio;
-            prompt_ypos = [1379-800];
+            prompt_ypos = [579];
         } else if(dialogue.goto.length <= 2) {
-            this.parent_scene.add.image(593-600, 1416-800, 'promptBox2');
+            this.parent_scene.add.image(-7, 616, 'promptBox2');
             font_size = 56 * window.horizontalRatio;
-            prompt_ypos = [1297-800, 1477-800];
+            prompt_ypos = [497, 677];
         } else {
-            this.parent_scene.add.image(593 * window.horizontalRatio, 1416, 'promptBox3');
+            this.parent_scene.add.image(-7, 1416, 'promptBox3');
             font_size = 46 * window.horizontalRatio;
-            prompt_ypos = [1276-800, 1392-800, 1511-800];
+            prompt_ypos = [476, 592, 711];
         }
 
         //Create all of the prompts texts (max MAX_N_PROMPTS)
