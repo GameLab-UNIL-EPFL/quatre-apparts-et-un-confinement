@@ -102,6 +102,7 @@ export class LivingRoomCard extends Card {
 
         this.grandma_state = GRANDMA_STATES.IDLE;
         this.children = children;
+        this.objective_complete = false;
     }
 
     preload() {
@@ -114,11 +115,18 @@ export class LivingRoomCard extends Card {
         this.parent_scene.load.image("grandma_book2", "sprites/GrandmaScene/grandma_book_02.png");
         this.parent_scene.load.image("grandma_book3", "sprites/GrandmaScene/grandma_book_03.png");
 
-        //Load the ring animation spritesheet
+        //Load the cat animation spritesheet
         this.parent_scene.load.spritesheet(
             'cat',
             'sprites/GrandmaScene/cat.png',
             { frameWidth: 320, frameHeight: 240 }
+        );
+
+        //Load the arrow animation spritesheet
+        this.parent_scene.load.spritesheet(
+            'arrow',
+            'sprites/UI/arrow.png',
+            { frameWidth: 100, frameHeight: 100 }
         );
     }
 
@@ -146,7 +154,7 @@ export class LivingRoomCard extends Card {
             repeat: -1
         });
 
-        //Play the ring animation
+        //Play the cat animation
         this.cat_anim = this.parent_scene.add.sprite(
             611 * window.horizontalRatio,
             1477,
@@ -169,6 +177,36 @@ export class LivingRoomCard extends Card {
                 highlight.setActive(false).setVisible(false);
             },
             [this, this.children[7].sprite, this.children[7].highlight_sprite]
+        );
+    }
+
+    /**
+     * @brief shows the arrow that sends the user back to the building scene
+     */
+    showArrow() {
+        // Create ring sprites
+        this.parent_scene.anims.create({
+            key: 'arrow_anim',
+            frameRate: 15,
+            frames: this.parent_scene.anims.generateFrameNames('arrow'),
+            repeat: -1
+        });
+
+        //Play the cat animation
+        this.arrow = this.parent_scene.add.sprite(
+            845 * window.horizontalRatio,
+            1516,
+            'arrow'
+        ).play('arrow_anim');
+
+        //Make the arrow end the scene
+        this.arrow.setInteractive().on(
+            'pointerdown',
+            () => {
+                this.parent_scene.destroy();
+                this.parent_scene.nextScene();
+            },
+            this
         );
     }
 
@@ -204,6 +242,8 @@ export class LivingRoomCard extends Card {
 
                 //Reset grandma
                 this.changeGrandma(GRANDMA_STATES.IDLE);
+
+                this.showArrow();
                 break;
 
             default:

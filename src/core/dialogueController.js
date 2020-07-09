@@ -240,7 +240,7 @@ export class DialogueController {
             this.dialogue_pos.name.x * window.horizontalRatio,
             this.dialogue_pos.name.y,
             this.getName(id),
-            {font: (60 * window.horizontalRatio) + "px OpenSans ", fill: "black"}
+            {font: (55 * window.horizontalRatio) + "px OpenSans", fill: "black"}
         );
 
         this.text = this.getText(id);
@@ -251,7 +251,11 @@ export class DialogueController {
             this.dialogue_pos.content.x * window.horizontalRatio,
             this.dialogue_pos.content.y,
             this.text[this.textIdx],
-            {font: (50 * window.horizontalRatio) + "px OpenSans", fill: "black", wordWrap: { width: 1000 * window.horizontalRatio }}
+            {
+                font: (40 * window.horizontalRatio) + "px OpenSans",
+                fill: "black",
+                wordWrap: { width: (this.background.displayWidth - (SPACING * 8)) }
+            }
         );
 
         const interaction = () => {
@@ -404,11 +408,6 @@ export class DialogueController {
 
                 this.prompts.push({sprite: prompt_sprite, text: prompt_text});
             });
-
-            //Resize the dialogue box to fit the prompts
-            /*let added_height = this.prompts.length * (this.prompts[0].sprite.height + SPACING);
-            this.background.displayHeight += added_height;
-            this.background.y += added_height/2 - SPACING;*/
         }
     }
 
@@ -614,7 +613,6 @@ export class DialogueController {
                 this
             );
         }
-
     }
 
     /**

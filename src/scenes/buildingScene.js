@@ -468,7 +468,7 @@ export class BuildingScene extends Phaser.Scene {
         switch(this.info.windows.indep) {
             case WindowState.ON:
                 this.sprites['indep_window'] = this.add.image(0, 1188-800, "indep_window_on");
-                this.sprites['indep_window_mid'] = this.add.image(0, 588-800, "indep_window_mid");
+                this.sprites['indep_window_mid'] = this.add.image(0, 1188-800, "indep_window_mid");
 
                 this.tweens.add({
                     targets: this.sprites['indep_window_mid'],
