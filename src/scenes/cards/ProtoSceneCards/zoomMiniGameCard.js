@@ -313,15 +313,15 @@ export class ZoomMiniGameCard extends Card {
     showTutorial() {
         //Create the tutorial notification
         const tutorial_sprite = this.parent_scene.add.image(
-            600,
-            -200,
+            0,
+            -1000,
             'notification_0'
         );
-        
+
         //Animate it down the screen
         this.parent_scene.tweens.add({
             targets: tutorial_sprite,
-            y: 1400,
+            y: 600,
             duration: 7500,
             onComplete: () => {
                 const pointer = this.parent_scene.add.sprite(
@@ -334,14 +334,14 @@ export class ZoomMiniGameCard extends Card {
                 pointer.setDepth(5);
 
                 const interaction = () => {
-                    
+
                     //Play pop animation
                     this.anim = this.parent_scene.add.sprite(
                         tutorial_sprite.x,
                         tutorial_sprite.y,
                         "notif-pop"
                     ).play('pop');
-                        
+
                     tutorial_sprite.destroy();
                     pointer.destroy();
 
