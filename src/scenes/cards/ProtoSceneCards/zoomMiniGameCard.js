@@ -14,6 +14,12 @@ const INIT_FOCUS = 5;
 const SPAWN_DELAY = 1000;
 const NUM_SPAWNS = 50;
 
+const FOCUS_BAR_COLOR = {
+    FULL: 0x2EC62E,
+    MID: 0xEFA81B,
+    LOW: 0xE53D3D
+};
+
 const END_ZOOM_CALL_ID = "endZoom";
 const LOSER_ID = "loseZoom";
 
@@ -130,6 +136,13 @@ export class ZoomMiniGameCard extends Card {
             'sprites/ProtoScene/ZoomMiniGameCard/notif_pop.png',
             { frameWidth: 460, frameHeight: 160 }
         );
+
+        //Load in the click animation
+        this.parent_scene.load.spritesheet(
+            'pointer-click',
+            'sprites/UI/pointer.png',
+            { frameWidth: 340, frameHeight: 340 }
+        );
     }
 
     /**
@@ -145,7 +158,7 @@ export class ZoomMiniGameCard extends Card {
      * @brief handles the creation of a single message card
      * @param {Function} callback what will be done at the end of the minigame
      */
-    createMessage(callback) {
+    createMessage(callback = () => {}) {
         if(!this.lock) {
             //Select the message to show
             let msg_idx = Math.round(Math.random() * (N_MSG - 1));
@@ -194,9 +207,10 @@ export class ZoomMiniGameCard extends Card {
         
                             //Resize the health bar 
                             this.children[3].sprite.displayWidth -= this.focus_bar_width / INIT_FOCUS;
-                            this.children[3].sprite.tint = 0xEFA81B
+                            this.children[3].sprite.tint = FOCUS_BAR_COLOR.MID;
+
                             if(this.children[3].sprite.displayWidth < 300) {
-                                this.children[3].sprite.tint = 0xE53D3D;
+                                this.children[3].sprite.tint = FOCUS_BAR_COLOR.LOW;
                             }
                             
                         }
@@ -252,9 +266,10 @@ export class ZoomMiniGameCard extends Card {
                                 }
 
                                 this.children[3].sprite.displayWidth -= this.focus_bar_width / INIT_FOCUS;
-                                this.children[3].sprite.tint = 0xEFA81B
+                                this.children[3].sprite.tint = FOCUS_BAR_COLOR.MID;
+
                                 if(this.children[3].sprite.displayWidth < 300) {
-                                    this.children[3].sprite.tint = 0xE53D3D;
+                                    this.children[3].sprite.tint = FOCUS_BAR_COLOR.LOW;
                                 }
                             } else {
                                 this.messages[msg_idx].isDestroyed = true;
@@ -295,24 +310,71 @@ export class ZoomMiniGameCard extends Card {
         }
     }
 
+    showTutorial() {
+        //Create the tutorial notification
+        const tutorial_sprite = this.parent_scene.add.image(
+            600,
+            -200,
+            'notification_0'
+        );
+        
+        //Animate it down the screen
+        this.parent_scene.tweens.add({
+            targets: tutorial_sprite,
+            y: 1400,
+            duration: 7500,
+            onComplete: () => {
+                const pointer = this.parent_scene.add.sprite(
+                    tutorial_sprite.x,
+                    tutorial_sprite.y + 50,
+                    'pointer-click'
+                ).play('pointer-anim');
+
+                pointer.setScale(0.5, 0.5),
+                pointer.setDepth(5);
+
+                const interaction = () => {
+                    
+                    //Play pop animation
+                    this.anim = this.parent_scene.add.sprite(
+                        tutorial_sprite.x,
+                        tutorial_sprite.y,
+                        "notif-pop"
+                    ).play('pop');
+                        
+                    tutorial_sprite.destroy();
+                    pointer.destroy();
+
+                    //Create the timer event and start the game
+                    this.msg_spawner = this.parent_scene.time.addEvent({
+                        delay: SPAWN_DELAY,
+                        repeat: NUM_SPAWNS,
+                        callback: this.createMessage,
+                        callbackScope: this,
+                        args: [this.endMiniGame]
+                    });
+                };
+
+                tutorial_sprite.setInteractive().on('pointerdown', interaction, this);
+                pointer.setInteractive().on('pointerdown', interaction, this);
+            },
+            onCompleteScope: this
+        });
+    }
+
     /**
      * @brief Sets all of the animations related to the objects in the card
      */
     create() {
         super.create();
 
-        //Save the bar's initial width
+        //Save the bar's initial info
         this.focus_bar_width = this.children[3].sprite.width;
-        this.children[3].sprite.tint = 0x2EC62E;
+        this.children[3].sprite.tint = FOCUS_BAR_COLOR.FULL;
 
-        //Create the timer event
-        this.msg_spawner = this.parent_scene.time.addEvent({
-            delay: SPAWN_DELAY,
-            repeat: NUM_SPAWNS,
-            callback: this.createMessage,
-            callbackScope: this,
-            args: [this.endMiniGame]
-        });
+        //Move all of the UI stuff to the front
+        this.children[2].sprite.setDepth(1);
+        this.children[3].sprite.setDepth(1);
 
         //Create pop animation
         this.parent_scene.anims.create({
@@ -321,10 +383,24 @@ export class ZoomMiniGameCard extends Card {
             frames: this.parent_scene.anims.generateFrameNames('notif-pop'),
             repeat: 0,
             onComplete: () => {
-                this.anim.destroy();
+                this.anim.setActive(false).setVisible(false);
             },
             onCompleteScope: this
         });
+
+        //Create pop animation
+        this.parent_scene.anims.create({
+            key: 'pointer-anim',
+            frameRate: 15,
+            frames: this.parent_scene.anims.generateFrameNames('pointer-click'),
+            repeat: -1
+        });
+
+        //Move background to the front
+        this.children[1].sprite.setDepth(1);
+
+        //Start with the tutorial
+        this.showTutorial();
     }
 
     destroy() {

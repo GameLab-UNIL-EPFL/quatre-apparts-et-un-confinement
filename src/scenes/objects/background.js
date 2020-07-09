@@ -27,8 +27,11 @@ export class Background {
      * @brief Creates and places the background image in the scene
      */
     create() {
-      // We center the sprite according to base scene dimensions (baseSize)
-      this.sprite = this.parent_scene.add.image(this.parent_scene.scale.baseSize.width/2, this.parent_scene.scale.baseSize.height/2, this.name);
+        // We center the sprite according to base scene dimensions (baseSize)
+        this.sprite = this.parent_scene.add.image(
+            this.parent_scene.scale.baseSize.width/2,
+            this.parent_scene.scale.baseSize.height/2, this.name
+        );
     }
 
     update() {}

@@ -234,6 +234,7 @@ export class DialogueController {
 
         this.background.alpha = .9;
         this.background.displayWidth *= window.horizontalRatio;
+        this.background.setDepth(5);
 
         //Add name text
         this.name = this.parent_scene.add.text(
@@ -242,6 +243,8 @@ export class DialogueController {
             this.getName(id),
             {font: (55 * window.horizontalRatio) + "px OpenSans", fill: "black"}
         );
+
+        this.name.setDepth(5);
 
         this.text = this.getText(id);
         this.textIdx = 0;
@@ -257,6 +260,8 @@ export class DialogueController {
                 wordWrap: { width: (this.background.displayWidth - (SPACING * 8)) }
             }
         );
+
+        this.content.setDepth(5);
 
         const interaction = () => {
             //Check that we clicked on the text
@@ -356,6 +361,7 @@ export class DialogueController {
 
                 //Center the box
                 prompt_sprite.setOrigin(0.5, 0.5);
+                prompt_sprite.setDepth(5);
 
                 //Create the prompt text
                 const prompt_text = this.parent_scene.add.text(
@@ -371,6 +377,7 @@ export class DialogueController {
 
                 //Center the text
                 prompt_text.setOrigin(0.5, 0.5);
+                prompt_text.setDepth(5);
 
                 //Adapt the box size to fit the text if needed
                 if(prompt_text.displayWidth > prompt_sprite.displayWidth) {
