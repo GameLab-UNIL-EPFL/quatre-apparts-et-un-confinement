@@ -11,14 +11,14 @@
 	"habit": {
 		"name": "Damien",
 		"text": [
-			"Est-ce que j’ai vraiment besoin de m’habiller? *baille*"
+			"Est-ce que j'ai vraiment besoin de m'habiller? *baille*"
 		],
 		"choices": {},
 		"goto": []
 	},
 	"frigo": {
 		"name": "Damien",
-		"text": ["Bon, qu’est-ce que je vais manger?"],
+		"text": ["Bon, qu'est-ce que je vais manger?"],
 		"choices": {},
 		"goto": []
 	},
@@ -26,7 +26,7 @@
 		"name": "Damien",
 		"text": [
 			"Oh non c’est déjà midi, j’ai loupé mon premier cours...",
-			"Bon, c’est pas grave, je rattraperai avec les notes de quelqu’un d’autre."
+			"Bon, c’est pas grave, je rattraperai avec les notes de quelqu'un d'autre."
 		],
 		"choices": {},
 		"goto": []
@@ -39,7 +39,7 @@
 	},
 	"zoom": {
 		"name": "Prof",
-		"text": ["Veuillez s’il vous plaît éteindre vos micros"],
+		"text": ["Veuillez s'il vous plait éteindre vos micros"],
 		"choices": {},
 		"goto": []
 	},
@@ -67,13 +67,13 @@
 	},
 	"repFausse": {
 		"name": "Prof",
-		"text": ["Non! Chapitres 11 et 12, j’espère que vous éteindrez Netflix la prochaine fois."],
+		"text": ["Non! Chapitres 11 et 12, j'espère que vous éteignerez Netflix la prochaine fois."],
 		"choices": {},
 		"goto": []
 	},
 	"repJuste": {
 		"name": "Prof",
-		"text": ["Oui c’est juste mais essayez de vous concentrer un peu plus, s’il vous plaît"],
+		"text": ["Oui c'est juste mais essayer de vous concentrer un peu plus, s'il vous plaît"],
 		"choices": {},
 		"goto": []
 	},
@@ -82,7 +82,7 @@
 		"text": ["Hello! Ca va? :)"],
 		"choices": {
 			"bof": {
-				"text": ["Bof, j’arrive pas à me concentrer là..."],
+				"text": ["Bof, j'arrive pas à me concentrer là..."],
 				"goto": "repBof"
 			},
 			"trql": {
@@ -98,7 +98,7 @@
 	},
 	"repBof": {
 		"name": "Copine",
-		"text": ["T’inquiète, moi non plus"],
+		"text": ["T'inquiète, moi non plus"],
 		"choices":{},
 		"goto": ["sortir"]
 	},
@@ -110,7 +110,7 @@
 	},
 	"repPyjama": {
 		"name": "Copine",
-		"text": ["Haha rhoo tu pourrais t’habiller quand même"],
+		"text": ["haha rhoo tu pourrais t'habiller quand même"],
 		"choices":{},
 		"goto": ["sortir"]
 	},
@@ -120,7 +120,7 @@
 		"choices": {
 			"risque": {
 				"text": "Ton père est pas à risque ?",
-				"preview": "C’est risqué?",
+				"preview": "C'est risqué?",
 				"goto": "sortir1"
 			}
 		},
@@ -128,11 +128,11 @@
 	},
 	"sortir1": {
 		"name": "Copine",
-		"text": ["Si, mais t’inquiète tu restes à 2 mètres c’est bon"],
+		"text": ["Si, mais t'inquiète tu restes à 2 mètres c'est bon"],
 		"choices": {
 			"bosser": {
 				"text": "Mais il continue à bosser en plus non?",
-				"preview": "Il bosse encore?",
+				"preview": "il bosse encore?",
 				"goto": "sortir2"
 			}
 		},
@@ -140,11 +140,11 @@
 	},
 	"sortir2": {
 		"name": "Copine",
-		"text": ["Euh ouais mais c’est calme là comme plus personne prend de taxi"],
+		"text": ["Euh ouais mais c'est calme là comme plus personne prend de taxi"],
 		"choices": {
 			"chaud": {
-				"text": "Ah mais du coup c’est chaud financièrement?",
-				"preview": "C’est chaud non?",
+				"text": "Ah mais du coup c'est chaud financièrement?",
+				"preview": "C'est chaud non?",
 				"goto": "sortir3"
 			}
 		},
@@ -152,7 +152,7 @@
 	},
 	"sortir3": {
 		"name": "Copine",
-		"text": ["Ouais on sait pas trop encore.. mais bon tu viens? T’as promis de m’aider à étudier!"],
+		"text": ["Ouais on sait pas trop encore.. mais bon tu viens? T'as promis de m'aider à étudier!"],
 		"choices": {
 			"oui": {
 				"text": "Oui, je viens direct après mon cours",
@@ -160,7 +160,7 @@
 				"goto": "repOui"
 			},
 			"maybe": {
-				"text": "Je sais pas, t’es sûr que c’est ok pour tes parents?",
+				"text": "Je sais pas, t’es sur que c’est ok pour tes parents?",
 				"preview": ["Je sais pas"],
 				"goto": "repMaybe"
 			},
@@ -180,7 +180,7 @@
 	},
 	"repMaybe": {
 		"name": "Copine",
-		"text": ["Mais oui c’est bon, sinon tu dois m’expliquer en ligne et c’est plus compliqué"],
+		"text": ["Mais oui c'est bon, sinon tu dois m'expliquer en ligne et c'est plus compliqué"],
 		"choices":{
 			"oui": {
 				"text": "Bon ok",
