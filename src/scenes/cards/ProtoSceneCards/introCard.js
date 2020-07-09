@@ -15,7 +15,7 @@ export class IntroCard extends Card {
 
         //Initialize children array
         this.name = "Intro";
-        this.url = "sprites/ProtoScene/IntroBg.png";
+        this.url = "sprites/ProtoScene/IntroBg.jpg";
     }
 
     /**
@@ -36,9 +36,8 @@ export class IntroCard extends Card {
         super.create();
 
         //Create and place the temp image correctly
-        this.sprite = this.parent_scene.add.image(0, 0, this.name);
+        this.sprite = this.parent_scene.add.image(0, -100, this.name);
         this.sprite.setInteractive();
-        this.sprite.setScale(3);
 
         //Make said image interactive
         this.parent_scene.input.on(
