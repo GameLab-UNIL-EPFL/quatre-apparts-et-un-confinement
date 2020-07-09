@@ -8,7 +8,7 @@ const N_MSG = (N_NOTIFICATION * 2) + N_DISTRACTIONS;
 const NOTIF_SPREAD = 900;
 const NOTIF_OFFSET = 180-600;
 
-const BEG_Y_ZONE = 1300-800;
+const BEG_Y_ZONE = 1300;
 
 const INIT_FOCUS = 5;
 const SPAWN_DELAY = 1000;
