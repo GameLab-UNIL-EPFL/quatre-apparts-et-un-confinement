@@ -8,7 +8,7 @@ const CLASS_ID = "zoom";
 
 /**
  * @brief Models a "Card" inside of a scene.
- * A card can be seen as a set of images that represent 
+ * A card can be seen as a set of images that represent
  * a given interactive moment in a scene
  */
 export class ComputerCard extends Card {
@@ -18,7 +18,7 @@ export class ComputerCard extends Card {
      */
     constructor(parent_scene) {
         //Store the card's character
-        let character = new ProtoGuy(parent_scene, 796, 932, ProtoGuyCard.COMPUTER);
+        let character = new ProtoGuy(parent_scene, 196, 132, ProtoGuyCard.COMPUTER);
 
         //Initialize children array
         let children = [
@@ -27,22 +27,22 @@ export class ComputerCard extends Card {
             new CardObject(
                 parent_scene,
                 { name: "Bureau", url: "sprites/ProtoScene/ComputerCard/bureau.png" },
-                new Phaser.Math.Vector2(599, 943)
+                new Phaser.Math.Vector2(-1, 143)
             ),
             new CardObject(
                 parent_scene,
                 { name: "toast", url: "sprites/ProtoScene/ComputerCard/toast.png" },
-                new Phaser.Math.Vector2(987, 1506)
+                new Phaser.Math.Vector2(387, 706)
             ),
             new CardObject(
                 parent_scene,
                 { name: "yoghourt", url: "sprites/ProtoScene/ComputerCard/yoghourt.png" },
-                new Phaser.Math.Vector2(980, 1364)
+                new Phaser.Math.Vector2(380, 564)
             ),
             new CardObject(
                 parent_scene,
                 { name: "verre", url: "sprites/ProtoScene/ComputerCard/verre.png" },
-                new Phaser.Math.Vector2(741, 1441)
+                new Phaser.Math.Vector2(141, 641)
             )
         ];
 
@@ -71,7 +71,7 @@ export class ComputerCard extends Card {
                 destructs = [this.children[4], this.children[5]];
                 destructs.forEach(child => child.destroy());
                 break;
-            
+
             case 1:
                 destructs = [this.children[3], this.children[5]];
                 destructs.forEach(child => child.destroy());

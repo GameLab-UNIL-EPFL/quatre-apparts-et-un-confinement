@@ -5,7 +5,7 @@ import { CardObject } from "../../objects/cardObject";
 
 /**
  * @brief Models a "Card" inside of a scene.
- * A card can be seen as a set of images that represent 
+ * A card can be seen as a set of images that represent
  * a given interactive moment in a scene
  */
 export class MessageCard extends Card {
@@ -15,7 +15,7 @@ export class MessageCard extends Card {
      */
     constructor(parent_scene) {
         //Store the card's character
-        let character = new ProtoGuy(parent_scene, 601, 799, ProtoGuyCard.MESSAGE);
+        let character = new ProtoGuy(parent_scene, 1, -1, ProtoGuyCard.MESSAGE);
 
         //Initialize children array
         let children = [
@@ -24,7 +24,7 @@ export class MessageCard extends Card {
             new CardObject(
                 parent_scene,
                 { name: "phone-cover", url: "sprites/ProtoScene/MessageCard/phone.png" },
-                new Phaser.Math.Vector2(598, 1089)
+                new Phaser.Math.Vector2(-2, 289)
             )
         ];
 
@@ -74,9 +74,9 @@ export class MessageCard extends Card {
 
         //Create dialogue background
         const bg = new Phaser.Geom.Rectangle(
-            0, 
-            0, 
-            5000, 
+            -600,
+            -800,
+            5000,
             5000
         );
         const prompt_sprite = this.parent_scene.add.graphics({ fillStyle: { color: 0xf8f2df }});

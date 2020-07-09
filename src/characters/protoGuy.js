@@ -52,8 +52,8 @@ export class ProtoGuy {
 
                 this.arm_url = "/sprites/ProtoScene/WakeUpCard/character_arm.png";
                 this.arm_name = "chracter_arm";
-                this.arm_offset_x = 1195 - this.x;
-                this.arm_offset_y = 695 - this.y;
+                this.arm_offset_x = 595 - this.x;
+                this.arm_offset_y = -105 - this.y;
 
                  //Initialize the different FSMs
                 this.cur_state = ProtoGuyState.IDLE;
@@ -124,7 +124,7 @@ export class ProtoGuy {
             case ProtoGuyClothes.PYJAMAS:
                 this.sprite = this.parent_scene.add.image(this.x, this.y, this.pj_name);
                 this.sprite.setInteractive();
-                break; 
+                break;
 
             case ProtoGuyClothes.YESTERDAY_CLOTHES:
                 this.sprite = this.parent_scene.add.image(this.x, this.y, this.dirty_name);
