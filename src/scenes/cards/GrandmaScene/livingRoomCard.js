@@ -87,7 +87,7 @@ export class LivingRoomCard extends Card {
             new CardObject(
                 parent_scene,
                 { name: "phone_grandma", url: "sprites/GrandmaScene/phone.png" },
-                new Phaser.Math.Vector2(529, 415),
+                new Phaser.Math.Vector2(356, 420),
                 (card) => card.changeGrandma(GRANDMA_STATES.PHONE),
                 this,
                 -1,
@@ -137,7 +137,7 @@ export class LivingRoomCard extends Card {
         super.create();
 
         //Add in the initial grandma
-        this.grandma_sprite = this.parent_scene.add.image(GRANDMA_POS.x * window.horizontalRatio, GRANDMA_POS.y, "grandma_idle");
+        this.grandma_sprite = this.parent_scene.add.image(GRANDMA_POS.x, GRANDMA_POS.y, "grandma_idle");
 
         //Bring the phone and the
         this.children[this.children.length - 1].sprite.setDepth(2);

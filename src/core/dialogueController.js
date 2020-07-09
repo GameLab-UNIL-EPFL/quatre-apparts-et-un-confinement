@@ -252,7 +252,7 @@ export class DialogueController {
             this.dialogue_pos.content.y,
             this.text[this.textIdx],
             {
-                font: (40 * window.horizontalRatio) + "px OpenSans",
+                font: (44 * window.horizontalRatio) + "px OpenSans",
                 fill: "black",
                 wordWrap: { width: (this.background.displayWidth - (SPACING * 8)) }
             }

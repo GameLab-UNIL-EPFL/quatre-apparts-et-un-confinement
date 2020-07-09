@@ -14,7 +14,7 @@ let plugins = [{
     plugin: RexUIPlugin,
     mapping: 'rexUI'
 }];
-const OBJECT_DEBUG = false;
+const OBJECT_DEBUG = true;
 if(OBJECT_DEBUG === true){
   plugins.push({
     key: 'debugObjects',
