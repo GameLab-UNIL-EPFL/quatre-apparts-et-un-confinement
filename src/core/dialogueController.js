@@ -240,7 +240,7 @@ export class DialogueController {
             this.dialogue_pos.name.x * window.horizontalRatio,
             this.dialogue_pos.name.y,
             this.getName(id),
-            {font: (60 * window.horizontalRatio) + "px OpenSans ", fill: "black"}
+            {font: (55 * window.horizontalRatio) + "px OpenSans", fill: "black"}
         );
 
         this.text = this.getText(id);
@@ -251,46 +251,54 @@ export class DialogueController {
             this.dialogue_pos.content.x * window.horizontalRatio,
             this.dialogue_pos.content.y,
             this.text[this.textIdx],
-            {font: (50 * window.horizontalRatio) + "px OpenSans", fill: "black", wordWrap: { width: 1000 * window.horizontalRatio }}
+            {
+                font: (40 * window.horizontalRatio) + "px OpenSans",
+                fill: "black",
+                wordWrap: { width: (this.background.displayWidth - (SPACING * 8)) }
+            }
         );
 
-        //Make the text interactive
-        this.content.setInteractive();
+        const interaction = () => {
+            //Check that we clicked on the text
+            if(this.cur_state !== DialogueState.DONE) {
 
-        this.parent_scene.input.on(
-            'gameobjectdown',
-            (_, gameObject) => {
-                //Check that we clicked on the text
-                if(gameObject === this.content && this.cur_state !== DialogueState.DONE) {
+                this.textIdx++;
+                console.log(this.textIdx);
 
-                    this.textIdx++;
+                //Make sure that it's not a prompt
+                if(this.cur_state === DialogueState.DISPLAYED) {
 
-                    //Make sure that it's not a prompt
-                    if(this.cur_state === DialogueState.DISPLAYED) {
+                    //Check if we've shown all of the text
+                    if(this.textIdx >= this.text.length) {
 
-                        //Check if we've shown all of the text
-                        if(this.textIdx === this.text.length) {
-                            //Get rid of all dialogue elements
-                            this.content.destroy();
-                            this.name.destroy();
-                            this.background.destroy();
-                            this.content.disableInteractive();
-                            this.textIdx = 0;
+                        //Get rid of all dialogue elements
+                        this.content.destroy();
+                        this.name.destroy();
+                        this.background.destroy();
+                        this.content.disableInteractive();
+                        this.textIdx = 0;
 
-                            //Update dialogue state
-                            this.endDialogue();
+                        //Update dialogue state
+                        this.endDialogue();
 
-                        } else {
-                            this.content.text = this.text[this.textIdx];
-                        }
+                    } else {
+                        this.content.text = this.text[this.textIdx];
                     }
                 }
-            },
-            this
-        );
+            }
+
+            //Prompt user if necessary on interaction
+            if(this.requestDialogue(id).goto.length !== 0 && this.textIdx === this.text.length - 1) {
+                this.promptAnswers(id);
+            }
+        };
+
+        //Make the text interactive
+        this.content.setInteractive().on('pointerdown', interaction, this);
+        this.background.setInteractive().on('pointerdown', interaction, this);
 
         //Prompt user if necessary
-        if(this.requestDialogue(id).goto.length !== 0) {
+        if(this.requestDialogue(id).goto.length !== 0 && this.textIdx === this.text.length - 1) {
             this.promptAnswers(id);
         }
     }
@@ -400,11 +408,6 @@ export class DialogueController {
 
                 this.prompts.push({sprite: prompt_sprite, text: prompt_text});
             });
-
-            //Resize the dialogue box to fit the prompts
-            /*let added_height = this.prompts.length * (this.prompts[0].sprite.height + SPACING);
-            this.background.displayHeight += added_height;
-            this.background.y += added_height/2 - SPACING;*/
         }
     }
 
@@ -610,7 +613,6 @@ export class DialogueController {
                 this
             );
         }
-
     }
 
     /**

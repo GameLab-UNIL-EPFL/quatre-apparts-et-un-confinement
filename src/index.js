@@ -3,7 +3,6 @@ import RexUIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
 import DebugObjects from './plugins/debugObjects.js';
 import './style.scss';
 
-import { IntroScene } from "./scenes/introScene.js";
 import { ProtoScene } from "./scenes/protoScene.js";
 import { BuildingScene } from "./scenes/buildingScene.js";
 import { Player } from "./core/player.js";
@@ -57,10 +56,10 @@ const config = {
     height: window.innerHeight,
     resolution: 1, // we could use 2 for Retina
     scale: {
-      mode: Phaser.Scale.FIT,
-      autoCenter: Phaser.Scale.CENTER_BOTH,
-      width: scale.width,
-      height: scale.height
+        mode: Phaser.Scale.FIT,
+        autoCenter: Phaser.Scale.CENTER_BOTH,
+        width: scale.width,
+        height: scale.height
     },
     plugins: {
         scene: plugins

@@ -1,8 +1,21 @@
-*{
-  margin: 0;
-  padding: 0;
-  background: #000;
+@font-face {
+	font-family: "OpenSans";
+	src: 
+		url("/fonts/Open_Sans/OpenSans-Regular.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
 }
-canvas{
-  // border: 2px dashed orange;
+
+body {
+	font-family: "OpenSans";
 }
+
+* {
+	margin: 0;
+	padding: 0;
+	background: #000;
+}
+canvas {
+	// border: 2px dashed orange;
+}
+
