@@ -57,7 +57,7 @@ const config = {
     resolution: 1, // we could use 2 for Retina
     scale: {
         mode: Phaser.Scale.FIT,
-        autoCenter: Phaser.Scale.CENTER_BOTH,
+        autoCenter: Phaser.Scale.CENTER_HORIZONTALLY,
         width: scale.width,
         height: scale.height
     },
@@ -87,6 +87,14 @@ game.horizontalRatio = scale.width / maxPictureWidth;
 window.horizontalOffset = (maxPictureWidth - scale.width) / 2;
 window.horizontalRatio = scale.width / maxPictureWidth;
 
+function resizeGame(){
+  console.log('Resize (wip)');
+  /*let newScale = getScale(window.innerWidth, window.innerHeight);
+  game.scale.resize(newScale.width, newScale.height);
+  window.horizontalOffset = (maxPictureWidth - newScale.width) / 2;
+  window.horizontalRatio = newScale.width / maxPictureWidth;*/
+}
+
 // This resize implies we also resize scene sprites, or they’d stretch.
 // As we lack of time, the fastest workaround could be to instantiate the game again, or even worse...
 window.addEventListener(
@@ -94,7 +102,7 @@ window.addEventListener(
     (_) => {
         clearTimeout(resizeTimeout);
         // todo: new function – change game width and compute a better ratio
-        resizeTimeout = setTimeout(() => getScale, 200);
+        resizeTimeout = setTimeout(() => resizeGame(), 200);
     },
     false
 );

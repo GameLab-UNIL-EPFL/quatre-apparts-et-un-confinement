@@ -184,7 +184,7 @@ export class BuildingScene extends Phaser.Scene {
         this.sprites['continue_text'] = this.add.text(
             0,
             this.sprites['menu_continue'].y,
-            "Continue",
+            "Continuer",
             {font: "54px OpenSans", fill: "black"}
         );
         this.sprites['continue_text'].setOrigin(0.5, 0.5)
@@ -244,7 +244,7 @@ export class BuildingScene extends Phaser.Scene {
         this.sprites['new_game_text'] = this.add.text(
             0,
             this.sprites['menu_new_game'].y,
-            "New Game",
+            "Nouvelle partie",
             {font: "54px OpenSans", fill: "black"}
         );
 
