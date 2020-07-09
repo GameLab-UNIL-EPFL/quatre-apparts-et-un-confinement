@@ -22,7 +22,7 @@ module.exports = {
         use: "raw-loader"
       },
       {
-        test: /\.(gif|png|jpe?g|svg|xml)$/i,
+        test: /\.(gif|png|jpe?g|svg|xml|ttf)$/i,
         use: "file-loader"
       },
       {
@@ -35,7 +35,7 @@ module.exports = {
           // Compiles Sass to CSS
           'sass-loader',
         ],
-      },
+      }
     ]
   },
   plugins: [
@@ -61,6 +61,10 @@ module.exports = {
         {
             from: 'sprites',
             to: 'sprites'
+        },
+        {
+          from: 'fonts',
+          to: 'fonts'
         }
     ])
   ],
