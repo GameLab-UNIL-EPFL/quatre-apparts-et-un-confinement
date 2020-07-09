@@ -19,43 +19,43 @@ export const D_BOX_ANIMATION_KEY = "dBoxAnim";
 
 const MIN_Y_MSG_POS = {
     msg_1: {
-        text: 1000,
-        box: 1000
+        text: 200,
+        box: 200
     },
     msg_2: {
-        text: 1000,
-        box: 1000
+        text: 200,
+        box: 200
     },
     msg_3: {
-        text: 1035,
-        box: 1115
+        text: 235,
+        box: 315
     },
     msg_4: {
-        text: 1070,
-        box: 1132
+        text: 270,
+        box: 332
     },
     msg_5: {
-        text: 1093,
-        box: 1152
+        text: 293,
+        box: 352
     },
     msg_6: {
-        text: 1130,
-        box: 1169
+        text: 330,
+        box: 369
     },
     msg_7: {
-        text: 1156,
-        box: 1182
+        text: 356,
+        box: 382
     },
 };
 
 const MIN_LEFT_X = {
-    text: 311,
-    box: 471
+    text: -289,
+    box: -129
 };
 
 const MIN_RIGHT_X = {
-    text: 547,
-    box: 712
+    text: -53,
+    box: 112
 };
 
 const MSG_HEIGHT = {
@@ -77,15 +77,15 @@ const SPACING = 25;
 const MAX_N_PROMPTS = 3;
 
 const UP_POS = {
-    box: new Phaser.Math.Vector2(604, 150), // ici: multiplier par horizontalRatio
-    name: new Phaser.Math.Vector2(112, 55),
-    content: new Phaser.Math.Vector2(112, 125)
+    box: new Phaser.Math.Vector2(0, -650), // ici: multiplier par horizontalRatio
+    name: new Phaser.Math.Vector2(-488, -745),
+    content: new Phaser.Math.Vector2(-488, -675)
 };
 
 const DOWN_POS = {
-    box: new Phaser.Math.Vector2(604, 1446),
-    name: new Phaser.Math.Vector2(112, 1351),
-    content: new Phaser.Math.Vector2(112, 1426)
+    box: new Phaser.Math.Vector2(0, 646),
+    name: new Phaser.Math.Vector2(-488, 551),
+    content: new Phaser.Math.Vector2(-488, 626)
 };
 
 /**
@@ -124,7 +124,7 @@ export class DialogueController {
         this.parent_scene.load.spritesheet(
             "prompts_1",
             "sprites/UI/prompts_1.png",
-            DIALOGUE_BOX_SPRITE_SIZE.prompt 
+            DIALOGUE_BOX_SPRITE_SIZE.prompt
         );
 
         this.parent_scene.load.spritesheet(
@@ -227,7 +227,7 @@ export class DialogueController {
 
         //Create background sprite
         this.background = this.parent_scene.add.sprite(
-            this.dialogue_pos.box.x * window.horizontalRatio,
+            this.dialogue_pos.box.x,
             this.dialogue_pos.box.y,
             DIALOGUE_BOX_KEY
         ).play(D_BOX_ANIMATION_KEY);
@@ -252,7 +252,7 @@ export class DialogueController {
             this.dialogue_pos.content.y,
             this.text[this.textIdx],
             {
-                font: (40 * window.horizontalRatio) + "px OpenSans",
+                font: (44 * window.horizontalRatio) + "px OpenSans",
                 fill: "black",
                 wordWrap: { width: (this.background.displayWidth - (SPACING * 8)) }
             }
@@ -343,15 +343,15 @@ export class DialogueController {
                 let prompt_position = this.background.y + this.background.displayHeight;
 
                 if(this.prompts.length > 0) {
-                    prompt_position = this.prompts[this.prompts.length - 1].sprite.y + 
+                    prompt_position = this.prompts[this.prompts.length - 1].sprite.y +
                         (this.prompts[this.prompts.length - 1].sprite.displayHeight + SPACING);
-                } 
+                }
 
                 //Create the prompt rectangle
                 const prompt_sprite = this.parent_scene.add.sprite(
-                    scale.width / 2,
+                    0,
                     prompt_position,
-                    prompts_name  
+                    prompts_name
                 ).play("prompt_anim_" + this.prompts.length);
 
                 //Center the box
@@ -359,7 +359,7 @@ export class DialogueController {
 
                 //Create the prompt text
                 const prompt_text = this.parent_scene.add.text(
-                    scale.width / 2,
+                    0,
                     prompt_sprite.y,
                     choice.text,
                     {
@@ -554,21 +554,21 @@ export class DialogueController {
         this.msg_prompts = [];
 
         let font_size;
-        let prompt_ypos = []; 
-        let prompt_xpos = 323 * window.horizontalRatio;
+        let prompt_ypos = [];
+        let prompt_xpos = -277;
         //Display the correct prompt box
         if(dialogue.goto.length <= 1) {
-            this.parent_scene.add.image(593 * window.horizontalRatio, 1416, 'promptBox1');
+            this.parent_scene.add.image(-7, 616, 'promptBox1');
             font_size = 76 * window.horizontalRatio;
-            prompt_ypos = [1379];
+            prompt_ypos = [579];
         } else if(dialogue.goto.length <= 2) {
-            this.parent_scene.add.image(593 * window.horizontalRatio, 1416, 'promptBox2');
+            this.parent_scene.add.image(-7, 616, 'promptBox2');
             font_size = 56 * window.horizontalRatio;
-            prompt_ypos = [1297, 1477];
+            prompt_ypos = [497, 677];
         } else {
-            this.parent_scene.add.image(593 * window.horizontalRatio, 1416, 'promptBox3');
+            this.parent_scene.add.image(-7, 1416, 'promptBox3');
             font_size = 46 * window.horizontalRatio;
-            prompt_ypos = [1276, 1392, 1511];
+            prompt_ypos = [476, 592, 711];
         }
 
         //Create all of the prompts texts (max MAX_N_PROMPTS)

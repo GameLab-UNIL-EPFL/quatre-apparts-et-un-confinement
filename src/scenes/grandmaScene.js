@@ -80,7 +80,7 @@ export class GrandmaScene extends Phaser.Scene {
     }
 
     /**
-     * @brief preload all of the elements of all of the cards 
+     * @brief preload all of the elements of all of the cards
      * that will be shown in the scene
      */
     preload() {
@@ -96,6 +96,7 @@ export class GrandmaScene extends Phaser.Scene {
      * in the scene.
      */
     create() {
+        this.cameras.main.centerOn(0, 0);
         this.cameras.main.fadeIn(1000);
 
         if(this.current_card.isLoaded()) {

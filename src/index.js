@@ -64,28 +64,15 @@ const config = {
     plugins: {
         scene: plugins
     },
-    scene: [BuildingScene, ProtoScene, GrandmaScene],
+    scene: [
+      BuildingScene,
+      ProtoScene,
+      GrandmaScene
+    ],
     physics: {
         default: 'arcade'
     }
 };
-
-// @TODO: a clean resize. Implies some changes in scene classes
-/*
-window.addEventListener('resize', function (event) {
-  clearTimeout(resize);
-  resize = setTimeout(function(){
-    let newScale = getScale(window.innerWidth, window.innerHeight);
-    if(newScale.width !== game.scale.width || newScale.height !== game.scale.height){
-      console.log('Resize:', newScale);
-      game.scale.resize(newScale.width, newScale.height);
-      game.horizontalRatio = maxPictureWidth / newScale.width;
-    }else{
-      console.log('No resize: same scale')
-    }
-  }, 200);
-}, false);
-*/
 
 export const game = new Phaser.Game(config);
 export const player = new Player();
@@ -106,7 +93,8 @@ window.addEventListener(
     'resize',
     (_) => {
         clearTimeout(resizeTimeout);
-        resizeTimeout = setTimeout(() => location.reload(), 200);
+        // todo: new function – change game width and compute a better ratio
+        resizeTimeout = setTimeout(() => getScale, 200);
     },
     false
 );

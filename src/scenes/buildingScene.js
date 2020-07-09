@@ -172,7 +172,7 @@ export class BuildingScene extends Phaser.Scene {
         //Create continue background sprite
         this.sprites['menu_continue'] = this.add.sprite(
             0,
-            117-800,
+            -683,
             DIALOGUE_BOX_KEY
         ).play(D_BOX_ANIMATION_KEY);
 
@@ -231,7 +231,7 @@ export class BuildingScene extends Phaser.Scene {
         //Create new Game background sprite
         this.sprites['menu_new_game'] = this.add.sprite(
             0,
-            player.saveExists() ? 297-800 : 195-800,
+            player.saveExists() ? -503 : -605,
             DIALOGUE_BOX_KEY
         ).play(D_BOX_ANIMATION_KEY);
 
@@ -297,7 +297,7 @@ export class BuildingScene extends Phaser.Scene {
      * @brief create all of the elements of the scene.
      */
     create() {
-       this.cameras.main.centerOn(0, 0)
+        this.cameras.main.centerOn(0, 0);
         this.cameras.main.fadeIn(1000);
 
         switch(this.info.month) {
@@ -305,19 +305,19 @@ export class BuildingScene extends Phaser.Scene {
                 this.sprites['building_bg'] = this.add.image(0, 0, "building_bg_march");
 
                 //Load in clouds
-                this.sprites['cloud_01'] = this.add.image(2583-600, 321-800, "cloud_01_march");
-                this.sprites['cloud_02'] = this.add.image(1620-600, 645-800, "cloud_02_march");
-                this.sprites['cloud_03'] = this.add.image(2665-600, 638-800, "cloud_03_march");
-                this.sprites['cloud_04'] = this.add.image(1948-600, 114-800, "cloud_04_march");
+                this.sprites['cloud_01'] = this.add.image(1983, -479, "cloud_01_march");
+                this.sprites['cloud_02'] = this.add.image(1020, -155, "cloud_02_march");
+                this.sprites['cloud_03'] = this.add.image(2065, -162, "cloud_03_march");
+                this.sprites['cloud_04'] = this.add.image(1348, -686, "cloud_04_march");
                 break;
 
             case Months.MAY:
                 this.sprites['building_bg'] = this.add.image(0, 0, "building_bg_may");
                 //Load in the clouds
-                this.sprites['cloud_01'] = this.add.image(2583-600, 321-800, "cloud_01_may");
-                this.sprites['cloud_02'] = this.add.image(1620-600, 645-800, "cloud_02_may");
-                this.sprites['cloud_03'] = this.add.image(2665-600, 638-800, "cloud_03_may");
-                this.sprites['cloud_04'] = this.add.image(1948-600, 114-800, "cloud_04_may");
+                this.sprites['cloud_01'] = this.add.image(1983, -479, "cloud_01_may");
+                this.sprites['cloud_02'] = this.add.image(1020, -155, "cloud_02_may");
+                this.sprites['cloud_03'] = this.add.image(2065, -162, "cloud_03_may");
+                this.sprites['cloud_04'] = this.add.image(1348, -686, "cloud_04_may");
                 break;
 
             default:
@@ -339,9 +339,9 @@ export class BuildingScene extends Phaser.Scene {
         this.sprites[poster_key] = this.add.image(poster_pos.x, poster_pos.y, poster_key);
 
         //Load in the cars
-        this.sprites['car_01'] = this.add.image(464-600, 1519-800, "car_01");
-        this.sprites['car_02'] = this.add.image(1198-600, 1512-800, "car_02");
-        this.sprites['car_03'] = this.add.image(-600, 1514-800, "car_03");
+        this.sprites['car_01'] = this.add.image(-136, 719, "car_01");
+        this.sprites['car_02'] = this.add.image(598, 712, "car_02");
+        this.sprites['car_03'] = this.add.image(-600, 714, "car_03");
 
         switch(this.info.windows.family) {
             case WindowState.ON:
@@ -385,8 +385,8 @@ export class BuildingScene extends Phaser.Scene {
 
         switch(this.info.windows.damien) {
             case WindowState.ON:
-                this.sprites['damien_window'] = this.add.image(-305, 564-800, "damien_window_on");
-                this.sprites['damien_window_mid'] = this.add.image(-305, 564-800, "damien_window_mid");
+                this.sprites['damien_window'] = this.add.image(-305, -236, "damien_window_on");
+                this.sprites['damien_window_mid'] = this.add.image(-305, -236, "damien_window_mid");
 
                 this.tweens.add({
                     targets: this.sprites['damien_window_mid'],
@@ -417,7 +417,7 @@ export class BuildingScene extends Phaser.Scene {
                 break;
 
             case WindowState.OFF:
-                this.sprites['damien_window'] = this.add.image(-305, 564-800, "damien_window_off");
+                this.sprites['damien_window'] = this.add.image(-305, -236, "damien_window_off");
                 break;
 
             default:
@@ -426,8 +426,8 @@ export class BuildingScene extends Phaser.Scene {
 
         switch(this.info.windows.grandma) {
             case WindowState.ON:
-                this.sprites['grandma_window'] = this.add.image(0, 588-800, "grandma_window_on");
-                this.sprites['grandma_window_mid'] = this.add.image(0, 588-800, "grandma_window_mid");
+                this.sprites['grandma_window'] = this.add.image(0, -212, "grandma_window_on");
+                this.sprites['grandma_window_mid'] = this.add.image(0, -212, "grandma_window_mid");
 
                 this.tweens.add({
                     targets: this.sprites['grandma_window_mid'],
@@ -457,7 +457,7 @@ export class BuildingScene extends Phaser.Scene {
                 break;
 
             case WindowState.OFF:
-                this.sprites['grandma_window'] = this.add.image(0, 588-800, "grandma_window_off");
+                this.sprites['grandma_window'] = this.add.image(0, -212, "grandma_window_off");
                 break;
 
             default:
@@ -466,8 +466,8 @@ export class BuildingScene extends Phaser.Scene {
 
         switch(this.info.windows.indep) {
             case WindowState.ON:
-                this.sprites['indep_window'] = this.add.image(0, 1188-800, "indep_window_on");
-                this.sprites['indep_window_mid'] = this.add.image(0, 1188-800, "indep_window_mid");
+                this.sprites['indep_window'] = this.add.image(0, 388, "indep_window_on");
+                this.sprites['indep_window_mid'] = this.add.image(0, 388, "indep_window_mid");
 
                 this.tweens.add({
                     targets: this.sprites['indep_window_mid'],
@@ -497,7 +497,7 @@ export class BuildingScene extends Phaser.Scene {
                 break;
 
             case WindowState.OFF:
-                this.sprites['indep_window'] = this.add.image(0, 1188-800, "indep_window_off");
+                this.sprites['indep_window'] = this.add.image(0, 388, "indep_window_off");
                 break;
 
             default:
