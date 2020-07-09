@@ -47,17 +47,17 @@ export class ZoomMiniGameCard extends Card {
             new CardObject(
                 parent_scene,
                 { name: "bar_bg", url: "sprites/ProtoScene/ZoomMiniGameCard/bar_bg.png" },
-                new Phaser.Math.Vector2(12, 167-800)
+                new Phaser.Math.Vector2(12, -633)
             ),
             new CardObject(
                 parent_scene,
                 { name: "bar_fill", url: "sprites/ProtoScene/ZoomMiniGameCard/bar_fill.png" },
-                new Phaser.Math.Vector2(12, 167-800)
+                new Phaser.Math.Vector2(12, -633)
             ),
             new CardObject(
                 parent_scene,
                 { name: "line", url: "sprites/ProtoScene/ZoomMiniGameCard/line.png" },
-                new Phaser.Math.Vector2(-7, 1309-800)
+                new Phaser.Math.Vector2(-7, 509)
             )
         ];
 
