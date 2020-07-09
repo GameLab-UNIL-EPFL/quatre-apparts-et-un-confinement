@@ -149,6 +149,7 @@ export class GrandmaScene extends Phaser.Scene {
 
             case GrandmaCards.CALENDAR:
                 this.current_card = this.calendarCard;
+                callback = (scene) => scene.dialogue.display("calendrier");
                 break;
         }
 

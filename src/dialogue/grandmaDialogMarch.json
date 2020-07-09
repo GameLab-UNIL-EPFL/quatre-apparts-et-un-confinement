@@ -10,7 +10,7 @@
 		"goto": []
 	},
 	"livre1": {
-		"name": "Suzanne",
+		"name": "",
 		"text": [
 			"La peste - Albert Camus",
 			"Du reste, le docteur Rieux, par exemple, considérait que c'était cela le malheur, justement,", 
@@ -20,7 +20,7 @@
 		"goto": []
 	},
 	"livre2": {
-		"name": "Suzanne",
+		"name": "",
         "text": [
 			"A La Recherche du Temps Perdu - Marcel Proust",
 			"Certes, il y a dans ma maison toutes les choses inutiles.", 
@@ -31,7 +31,7 @@
 		"goto": []
 	},
 	"livre3": {
-		"name": "Suzanne",
+		"name": "",
         "text": [
 			"Le Misanthrope - Molière",
 			"Je ne trouve partout que lâche flatterie,",
