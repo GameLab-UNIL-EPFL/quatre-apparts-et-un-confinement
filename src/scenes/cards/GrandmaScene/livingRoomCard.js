@@ -11,7 +11,7 @@ const GRANDMA_STATES = {
     PHONE: 4
 };
 
-const GRANDMA_POS = new Phaser.Math.Vector2(739, 1124);
+const GRANDMA_POS = new Phaser.Math.Vector2(139, 324);
 
 /**
  * @brief Models a "Card" inside of a scene.
@@ -37,12 +37,12 @@ export class LivingRoomCard extends Card {
             new CardObject(
                 parent_scene,
                 { name: "furniture", url: "sprites/GrandmaScene/furniture.png" },
-                new Phaser.Math.Vector2(600, 777)
+                new Phaser.Math.Vector2(0, -23)
             ),
             new CardObject(
                 parent_scene,
                 { name: "book_01", url: "sprites/GrandmaScene/books_01.png" },
-                new Phaser.Math.Vector2(469, 538),
+                new Phaser.Math.Vector2(-131, -262),
                 (card) => card.changeGrandma(GRANDMA_STATES.BOOK_1),
                 this,
                 -1,
@@ -51,7 +51,7 @@ export class LivingRoomCard extends Card {
             new CardObject(
                 parent_scene,
                 { name: "book_02", url: "sprites/GrandmaScene/books_02.png" },
-                new Phaser.Math.Vector2(466, 708),
+                new Phaser.Math.Vector2(-134, -92),
                 (card) => card.changeGrandma(GRANDMA_STATES.BOOK_2),
                 this,
                 -1,
@@ -60,7 +60,7 @@ export class LivingRoomCard extends Card {
             new CardObject(
                 parent_scene,
                 { name: "book_03", url: "sprites/GrandmaScene/books_03.png" },
-                new Phaser.Math.Vector2(469, 857),
+                new Phaser.Math.Vector2(-131, 57),
                 (card) => card.changeGrandma(GRANDMA_STATES.BOOK_3),
                 this,
                 -1,
@@ -69,7 +69,7 @@ export class LivingRoomCard extends Card {
             new CardObject(
                 parent_scene,
                 { name: "radio", url: "sprites/GrandmaScene/radio.png" },
-                new Phaser.Math.Vector2(459, 993),
+                new Phaser.Math.Vector2(-141, 193),
                 (scene) => scene.nextCard(GrandmaCards.RADIO),
                 parent_scene,
                 -1,
@@ -78,7 +78,7 @@ export class LivingRoomCard extends Card {
             new CardObject(
                 parent_scene,
                 { name: "calendar", url: "sprites/GrandmaScene/calendar.png" },
-                new Phaser.Math.Vector2(450, 1163),
+                new Phaser.Math.Vector2(-150, 363),
                 (scene) => scene.nextCard(GrandmaCards.CALENDAR),
                 parent_scene,
                 -1,
@@ -87,7 +87,7 @@ export class LivingRoomCard extends Card {
             new CardObject(
                 parent_scene,
                 { name: "phone_grandma", url: "sprites/GrandmaScene/phone.png" },
-                new Phaser.Math.Vector2(1129, 1215),
+                new Phaser.Math.Vector2(529, 415),
                 (card) => card.changeGrandma(GRANDMA_STATES.PHONE),
                 this,
                 -1,
@@ -96,7 +96,7 @@ export class LivingRoomCard extends Card {
             new CardObject(
                 parent_scene,
                 { name: "coffee_table", url: "sprites/GrandmaScene/coffee_table.png" },
-                new Phaser.Math.Vector2(1043, 1342)
+                new Phaser.Math.Vector2(443, 542)
             )
         ];
 
@@ -131,7 +131,7 @@ export class LivingRoomCard extends Card {
         //Add in the initial grandma
         this.grandma_sprite = this.parent_scene.add.image(GRANDMA_POS.x * window.horizontalRatio, GRANDMA_POS.y, "grandma_idle");
 
-        //Bring the phone and the 
+        //Bring the phone and the
         this.children[this.children.length - 1].sprite.setDepth(2);
         this.children[this.children.length - 2].sprite.setDepth(3);
         this.children[this.children.length - 2].highlight_sprite.setDepth(3);
@@ -148,8 +148,8 @@ export class LivingRoomCard extends Card {
 
         //Play the ring animation
         this.cat_anim = this.parent_scene.add.sprite(
-            611 * window.horizontalRatio,
-            1477,
+            11,
+            677,
             'cat'
         ).play('cat-tail');
     }
@@ -224,7 +224,7 @@ export class LivingRoomCard extends Card {
                 if(child.sprite) {
                     child.sprite.setInteractive();
                 }
-                
+
                 if(child.highlight_sprite) {
                     child.highlight_sprite.setInteractive();
                 }
@@ -243,7 +243,7 @@ export class LivingRoomCard extends Card {
         switch(state) {
             case GRANDMA_STATES.IDLE:
                 this.grandma_sprite = this.parent_scene.add.image(
-                    GRANDMA_POS.x * window.horizontalRatio,
+                    GRANDMA_POS.x,
                     GRANDMA_POS.y,
                     "grandma_idle"
                 );
@@ -251,7 +251,7 @@ export class LivingRoomCard extends Card {
 
             case GRANDMA_STATES.BOOK_1:
                 this.grandma_sprite = this.parent_scene.add.image(
-                    GRANDMA_POS.x * window.horizontalRatio,
+                    GRANDMA_POS.x,
                     GRANDMA_POS.y,
                     "grandma_book1"
                 );
@@ -262,7 +262,7 @@ export class LivingRoomCard extends Card {
 
             case GRANDMA_STATES.BOOK_2:
                 this.grandma_sprite = this.parent_scene.add.image(
-                    GRANDMA_POS.x * window.horizontalRatio,
+                    GRANDMA_POS.x,
                     GRANDMA_POS.y,
                     "grandma_book2"
                 );
@@ -273,7 +273,7 @@ export class LivingRoomCard extends Card {
 
             case GRANDMA_STATES.BOOK_3:
                 this.grandma_sprite = this.parent_scene.add.image(
-                    GRANDMA_POS.x * window.horizontalRatio,
+                    GRANDMA_POS.x,
                     GRANDMA_POS.y,
                     "grandma_book3"
                 );
@@ -284,7 +284,7 @@ export class LivingRoomCard extends Card {
 
             case GRANDMA_STATES.PHONE:
                 this.grandma_sprite = this.parent_scene.add.image(
-                    GRANDMA_POS.x * window.horizontalRatio,
+                    GRANDMA_POS.x,
                     GRANDMA_POS.y,
                     "grandma_phone"
                 );
