@@ -552,20 +552,20 @@ export class DialogueController {
 
         let font_size;
         let prompt_ypos = [];
-        let prompt_xpos = 323 * window.horizontalRatio;
+        let prompt_xpos = 323 - 600;
         //Display the correct prompt box
         if(dialogue.goto.length <= 1) {
-            this.parent_scene.add.image(593 * window.horizontalRatio, 1416, 'promptBox1');
+            this.parent_scene.add.image(593-600, 1416-800, 'promptBox1');
             font_size = 76 * window.horizontalRatio;
-            prompt_ypos = [1379];
+            prompt_ypos = [1379-800];
         } else if(dialogue.goto.length <= 2) {
-            this.parent_scene.add.image(593 * window.horizontalRatio, 1416, 'promptBox2');
+            this.parent_scene.add.image(593-600, 1416-800, 'promptBox2');
             font_size = 56 * window.horizontalRatio;
-            prompt_ypos = [1297, 1477];
+            prompt_ypos = [1297-800, 1477-800];
         } else {
             this.parent_scene.add.image(593 * window.horizontalRatio, 1416, 'promptBox3');
             font_size = 46 * window.horizontalRatio;
-            prompt_ypos = [1276, 1392, 1511];
+            prompt_ypos = [1276-800, 1392-800, 1511-800];
         }
 
         //Create all of the prompts texts (max MAX_N_PROMPTS)
