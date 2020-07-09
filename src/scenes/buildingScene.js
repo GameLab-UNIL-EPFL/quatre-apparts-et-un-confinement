@@ -45,18 +45,19 @@ export class BuildingScene extends Phaser.Scene {
 
         //Dictionnary containing all of the scene's sprites
         this.sprites = {};
+
     }
 
     /**
      * @brief Preloads the scene using either saved data (if any)
      * or given data from an other scene
      * @param {JSON} data same format as this.info i.e.
-     * { 
+     * {
      *     mainMenu: boolean,
      *     stage: Number,
      *     windows: { damien, grandma, family, indep : WindowState },
      *     month: Months,
-     *     nextScene: { damien, grandma, family, indep : Scenes or null if window is OFF } 
+     *     nextScene: { damien, grandma, family, indep : Scenes or null if window is OFF }
      * }
      */
     init(data) {
@@ -67,19 +68,19 @@ export class BuildingScene extends Phaser.Scene {
     }
 
     /**
-     * @brief Preload all of the elements of all of the cards 
+     * @brief Preload all of the elements of all of the cards
      * that will be shown in the scene
      */
     preload() {
         //Load in the dialogue box if needed
         if(this.info.mainMenu) {
             this.load.spritesheet(
-                DIALOGUE_BOX_KEY, 
+                DIALOGUE_BOX_KEY,
                 "sprites/UI/dialogueBox.png",
-                DIALOGUE_BOX_SPRITE_SIZE.bg 
+                DIALOGUE_BOX_SPRITE_SIZE.bg
             );
         }
-        
+
         //Load in all of the sprites needed for this scene
         switch(this.info.month) {
             case Months.MARCH:
@@ -94,7 +95,7 @@ export class BuildingScene extends Phaser.Scene {
 
             case Months.MAY:
                 this.load.image("building_bg_may", "sprites/BuildingScene/building_bg_summer.jpg");
-        
+
                 //Load in the clouds
                 this.load.image("cloud_01_may", "sprites/BuildingScene/building_cloud01_summer.png");
                 this.load.image("cloud_02_may", "sprites/BuildingScene/building_cloud02_summer.png");
@@ -140,11 +141,11 @@ export class BuildingScene extends Phaser.Scene {
         }
 
         //Load in all of the windows
-        this.load.image("empty_windows", "sprites/BuildingScene/building_empty_windows.png");                
-              
+        this.load.image("empty_windows", "sprites/BuildingScene/building_empty_windows.png");
+
         //Load in the posters
         this.load.image("poster_0" + this.info.stage, "sprites/BuildingScene/poster_0" + this.info.stage + ".png");
-        
+
         //Load in the cars
         this.load.image("car_01", "sprites/BuildingScene/car_01.png");
         this.load.image("car_02", "sprites/BuildingScene/car_02.png");
@@ -158,10 +159,10 @@ export class BuildingScene extends Phaser.Scene {
         this.destroy();
 
         this.sprites['loading'] = this.add.text(
-            400 * window.horizontalRatio,
-            800,
+            0,
+            0,
             "Loading...",
-            {font: (80 * window.horizontalRatio) + "px OpenSans", fill: "white"}
+            {font: "80px OpenSans", fill: "white"}
         );
     }
 
@@ -171,28 +172,23 @@ export class BuildingScene extends Phaser.Scene {
     createContinueButton() {
         //Create continue background sprite
         this.sprites['menu_continue'] = this.add.sprite(
-            (scale.width / 2),
-            117,
+            0,
+            117-800,
             DIALOGUE_BOX_KEY
         ).play(D_BOX_ANIMATION_KEY);
-        
+
         //Resize the box
         this.sprites['menu_continue'].displayWidth *= .5;
         this.sprites['menu_continue'].displayHeight *= .5;
 
-        //Change origin point to center
-        this.sprites['menu_continue'].setOrigin(0.5, 0.5);
-
         //Add continue text
         this.sprites['continue_text'] = this.add.text(
-            (scale.width / 2), 
+            0,
             this.sprites['menu_continue'].y,
             "Continue",
-            {font: (54 * window.horizontalRatio) + "px OpenSans", fill: "black"}
+            {font: "54px OpenSans", fill: "black"}
         );
-
-        //Change origin point to center
-        this.sprites['continue_text'].setOrigin(0.5, 0.5);
+        this.sprites['continue_text'].setOrigin(0.5, 0.5)
 
         //Make continue button interactive
         this.sprites['continue_text'].setInteractive();
@@ -203,7 +199,7 @@ export class BuildingScene extends Phaser.Scene {
             (_, gameObject) => {
                 //Check that we clicked on the right button
                 if(gameObject === this.sprites['menu_continue'] ||
-                   gameObject === this.sprites['continue_text']) 
+                   gameObject === this.sprites['continue_text'])
                 {
                     //Show a loading screen
                     this.showLoading();
@@ -232,11 +228,11 @@ export class BuildingScene extends Phaser.Scene {
         if(player.saveExists()) {
             this.createContinueButton();
         }
-        
+
         //Create new Game background sprite
         this.sprites['menu_new_game'] = this.add.sprite(
-            scale.width / 2,
-            player.saveExists() ? 297 : 195,
+            0,
+            player.saveExists() ? 297-800 : 195-800,
             DIALOGUE_BOX_KEY
         ).play(D_BOX_ANIMATION_KEY);
 
@@ -244,15 +240,13 @@ export class BuildingScene extends Phaser.Scene {
         this.sprites['menu_new_game'].displayWidth *= .5;
         this.sprites['menu_new_game'].displayHeight *= .5;
 
-        //Center the new game box
-        this.sprites['menu_new_game'].setOrigin(0.5, 0.5);
 
         //Add new Game text
         this.sprites['new_game_text'] = this.add.text(
-            (scale.width / 2), 
+            0,
             this.sprites['menu_new_game'].y,
             "New Game",
-            {font: (54 * window.horizontalRatio) + "px OpenSans", fill: "black"}
+            {font: "54px OpenSans", fill: "black"}
         );
 
         //Center the new game box
@@ -263,19 +257,19 @@ export class BuildingScene extends Phaser.Scene {
         this.sprites['menu_new_game'].setInteractive();
 
         //Adapt width for small ratio screens
-        this.sprites['menu_continue'].displayWidth *= window.horizontalRatio;
-        this.sprites['menu_new_game'].displayWidth *= window.horizontalRatio;
+        // this.sprites['menu_continue'].displayWidth *= window.horizontalRatio;
+        // this.sprites['menu_new_game'].displayWidth *= window.horizontalRatio;
 
         this.input.on(
             'gameobjectdown',
             (_, gameObject) => {
                 //Check that we clicked on the right button
                 if(gameObject === this.sprites['menu_new_game'] ||
-                   gameObject === this.sprites['new_game_text']) 
+                   gameObject === this.sprites['new_game_text'])
                 {
                     //Sart a new game
                     this.scene.start(
-                        Scenes.BUILDING, 
+                        Scenes.BUILDING,
                         {
                             mainMenu: false,
                             stage: 2,
@@ -304,6 +298,7 @@ export class BuildingScene extends Phaser.Scene {
      * @brief create all of the elements of the scene.
      */
     create() {
+       this.cameras.main.centerOn(0, 0)
         this.cameras.main.fadeIn(1000);
 
         switch(this.info.month) {
@@ -311,19 +306,19 @@ export class BuildingScene extends Phaser.Scene {
                 this.sprites['building_bg'] = this.add.image(0, 0, "building_bg_march");
 
                 //Load in clouds
-                this.sprites['cloud_01'] = this.add.image(2583 * window.horizontalRatio, 321, "cloud_01_march");
-                this.sprites['cloud_02'] = this.add.image(1620 * window.horizontalRatio, 645, "cloud_02_march");
-                this.sprites['cloud_03'] = this.add.image(2665 * window.horizontalRatio, 638, "cloud_03_march");
-                this.sprites['cloud_04'] = this.add.image(1948 * window.horizontalRatio, 114, "cloud_04_march");
+                this.sprites['cloud_01'] = this.add.image(2583-600, 321-800, "cloud_01_march");
+                this.sprites['cloud_02'] = this.add.image(1620-600, 645-800, "cloud_02_march");
+                this.sprites['cloud_03'] = this.add.image(2665-600, 638-800, "cloud_03_march");
+                this.sprites['cloud_04'] = this.add.image(1948-600, 114-800, "cloud_04_march");
                 break;
 
             case Months.MAY:
-                this.sprites['building_bg'] = this.add.image(0, 0, "building_bg_may");      
+                this.sprites['building_bg'] = this.add.image(0, 0, "building_bg_may");
                 //Load in the clouds
-                this.sprites['cloud_01'] = this.add.image(2583 * window.horizontalRatio, 321, "cloud_01_may");
-                this.sprites['cloud_02'] = this.add.image(1620 * window.horizontalRatio, 645, "cloud_02_may");
-                this.sprites['cloud_03'] = this.add.image(2665 * window.horizontalRatio, 638, "cloud_03_may");
-                this.sprites['cloud_04'] = this.add.image(1948 * window.horizontalRatio, 114, "cloud_04_may");
+                this.sprites['cloud_01'] = this.add.image(2583-600, 321-800, "cloud_01_may");
+                this.sprites['cloud_02'] = this.add.image(1620-600, 645-800, "cloud_02_may");
+                this.sprites['cloud_03'] = this.add.image(2665-600, 638-800, "cloud_03_may");
+                this.sprites['cloud_04'] = this.add.image(1948-600, 114-800, "cloud_04_may");
                 break;
 
             default:
@@ -331,28 +326,28 @@ export class BuildingScene extends Phaser.Scene {
         }
 
         //Center the background
-        this.sprites['building_bg'].setOrigin(0, 0);
+        // this.sprites['building_bg'].setOrigin(0, 0);
 
         //Load in everything needed no matter the month
-        this.sprites['building'] = this.add.image(613 * window.horizontalRatio, 1000, "building");
+        this.sprites['building'] = this.add.image(0, 200, "building");
 
         //Load in all of the windows
-        this.sprites['empty_windows'] = this.add.image(613 * window.horizontalRatio, 965, "empty_windows");
+        this.sprites['empty_windows'] = this.add.image(0, 165, "empty_windows");
 
         //Load in the posters
-        let poster_pos = new Phaser.Math.Vector2(1025 * window.horizontalRatio, 1435);
+        let poster_pos = new Phaser.Math.Vector2(425, 635);
         let poster_key = 'poster_0' + this.info.stage;
-        this.sprites[poster_key] = this.add.image(poster_pos.x * window.horizontalRatio, poster_pos.y, poster_key);
-        
+        this.sprites[poster_key] = this.add.image(poster_pos.x, poster_pos.y, poster_key);
+
         //Load in the cars
-        this.sprites['car_01'] = this.add.image(464 * window.horizontalRatio, 1519, "car_01");
-        this.sprites['car_02'] = this.add.image(1198 * window.horizontalRatio, 1512, "car_02");
-        this.sprites['car_03'] = this.add.image(-9 * window.horizontalRatio, 1514, "car_03");
+        this.sprites['car_01'] = this.add.image(464-600, 1519-800, "car_01");
+        this.sprites['car_02'] = this.add.image(1198-600, 1512-800, "car_02");
+        this.sprites['car_03'] = this.add.image(-600, 1514-800, "car_03");
 
         switch(this.info.windows.family) {
-            case WindowState.ON:    
-                this.sprites['family_window'] = this.add.image(613 * window.horizontalRatio, 988, "family_window_on");
-                this.sprites['family_window_mid'] = this.add.image(613 * window.horizontalRatio, 988, "family_window_mid");
+            case WindowState.ON:
+                this.sprites['family_window'] = this.add.image(0, 188, "family_window_on");
+                this.sprites['family_window_mid'] = this.add.image(0, 188, "family_window_mid");
 
                 this.tweens.add({
                     targets: this.sprites['family_window_mid'],
@@ -369,7 +364,7 @@ export class BuildingScene extends Phaser.Scene {
                     this.sprites['family_window_mid'].setInteractive();
 
                     this.input.on(
-                        'gameobjectdown', 
+                        'gameobjectdown',
                         (_, gameObject) => {
                             //Check that we clicked on the right window
                             if(gameObject === this.sprites['family_window'] || gameObject === this.sprites['family_window_mid']) {
@@ -380,9 +375,9 @@ export class BuildingScene extends Phaser.Scene {
                     );
                 }
                 break;
-            
+
             case WindowState.OFF:
-                this.sprites['family_window'] = this.add.image(613 * window.horizontalRatio, 988, "family_window_off");
+                this.sprites['family_window'] = this.add.image(0, 188, "family_window_off");
                 break;
 
             default:
@@ -391,8 +386,8 @@ export class BuildingScene extends Phaser.Scene {
 
         switch(this.info.windows.damien) {
             case WindowState.ON:
-                this.sprites['damien_window'] = this.add.image(307 * window.horizontalRatio, 564, "damien_window_on");
-                this.sprites['damien_window_mid'] = this.add.image(307 * window.horizontalRatio, 564, "damien_window_mid");
+                this.sprites['damien_window'] = this.add.image(-305, 564-800, "damien_window_on");
+                this.sprites['damien_window_mid'] = this.add.image(-305, 564-800, "damien_window_mid");
 
                 this.tweens.add({
                     targets: this.sprites['damien_window_mid'],
@@ -409,7 +404,7 @@ export class BuildingScene extends Phaser.Scene {
                     this.sprites['damien_window_mid'].setInteractive();
 
                     this.input.on(
-                        'gameobjectdown', 
+                        'gameobjectdown',
                         (_, gameObject) => {
                             //Check that we clicked on the right window
                             if(gameObject === this.sprites['damien_window'] || gameObject === this.sprites['damien_window_mid']) {
@@ -421,9 +416,9 @@ export class BuildingScene extends Phaser.Scene {
                     );
                 }
                 break;
-            
+
             case WindowState.OFF:
-                this.sprites['damien_window'] = this.add.image(307 * window.horizontalRatio, 564, "damien_window_off");
+                this.sprites['damien_window'] = this.add.image(-305, 564-800, "damien_window_off");
                 break;
 
             default:
@@ -432,8 +427,8 @@ export class BuildingScene extends Phaser.Scene {
 
         switch(this.info.windows.grandma) {
             case WindowState.ON:
-                this.sprites['grandma_window'] = this.add.image(613 * window.horizontalRatio, 588, "grandma_window_on");
-                this.sprites['grandma_window_mid'] = this.add.image(613 * window.horizontalRatio, 588, "grandma_window_mid");
+                this.sprites['grandma_window'] = this.add.image(0, 588-800, "grandma_window_on");
+                this.sprites['grandma_window_mid'] = this.add.image(0, 588-800, "grandma_window_mid");
 
                 this.tweens.add({
                     targets: this.sprites['grandma_window_mid'],
@@ -450,7 +445,7 @@ export class BuildingScene extends Phaser.Scene {
                     this.sprites['grandma_window_mid'].setInteractive();
 
                     this.input.on(
-                        'gameobjectdown', 
+                        'gameobjectdown',
                         (_, gameObject) => {
                             //Check that we clicked on the right window
                             if(gameObject === this.sprites['grandma_window'] || gameObject === this.sprites['grandma_window_mid']) {
@@ -461,9 +456,9 @@ export class BuildingScene extends Phaser.Scene {
                     );
                 }
                 break;
-            
+
             case WindowState.OFF:
-                this.sprites['grandma_window'] = this.add.image(613 * window.horizontalRatio, 588, "grandma_window_off");
+                this.sprites['grandma_window'] = this.add.image(0, 588-800, "grandma_window_off");
                 break;
 
             default:
@@ -472,8 +467,8 @@ export class BuildingScene extends Phaser.Scene {
 
         switch(this.info.windows.indep) {
             case WindowState.ON:
-                this.sprites['indep_window'] = this.add.image(613 * window.horizontalRatio, 1188, "indep_window_on");
-                this.sprites['indep_window_mid'] = this.add.image(613 * window.horizontalRatio, 588, "indep_window_mid");
+                this.sprites['indep_window'] = this.add.image(0, 1188-800, "indep_window_on");
+                this.sprites['indep_window_mid'] = this.add.image(0, 588-800, "indep_window_mid");
 
                 this.tweens.add({
                     targets: this.sprites['indep_window_mid'],
@@ -490,7 +485,7 @@ export class BuildingScene extends Phaser.Scene {
                     this.sprites['indep_window_mid'].setInteractive();
 
                     this.input.on(
-                        'gameobjectdown', 
+                        'gameobjectdown',
                         (_, gameObject) => {
                             //Check that we clicked on the right window
                             if(gameObject === this.sprites['indep_window']) {
@@ -501,9 +496,9 @@ export class BuildingScene extends Phaser.Scene {
                     );
                 }
                 break;
-            
+
             case WindowState.OFF:
-                this.sprites['indep_window'] = this.add.image(613 * window.horizontalRatio, 1188, "indep_window_off");
+                this.sprites['indep_window'] = this.add.image(0, 1188-800, "indep_window_off");
                 break;
 
             default:
@@ -513,28 +508,28 @@ export class BuildingScene extends Phaser.Scene {
         //Create cloud animations
         this.tweens.add({
             targets: this.sprites['cloud_01'],
-            x: -1000 * window.horizontalRatio,
+            x: -1000,
             duration: 90000,
             ease: "Quadratic",
             loop: -1
         });
         this.tweens.add({
             targets: this.sprites['cloud_02'],
-            x: -1000 * window.horizontalRatio,
+            x: -1000,
             duration: 75000,
             ease: "Quadratic",
             loop: -1
         });
         this.tweens.add({
             targets: this.sprites['cloud_03'],
-            x: -1000 * window.horizontalRatio,
+            x: -1000,
             duration: 80000,
             ease: "Quadratic",
             loop: -1
         });
         this.tweens.add({
             targets: this.sprites['cloud_04'],
-            x: -1000 * window.horizontalRatio,
+            x: -1000,
             duration: 60000,
             ease: "Quadratic",
             loop: -1
@@ -546,11 +541,11 @@ export class BuildingScene extends Phaser.Scene {
         }
 
         //Compensate for the horizontal ratio
-        for (var key in this.sprites) {
-            if (this.sprites.hasOwnProperty(key)) {           
+        /*for (var key in this.sprites) {
+            if (this.sprites.hasOwnProperty(key)) {
                 this.sprites[key].x *= window.horizontalRatio;
             }
-        }
+        }*/
     }
 
     /**
@@ -559,8 +554,8 @@ export class BuildingScene extends Phaser.Scene {
     destroy() {
         //Destroy all of the sprites in the scene
         for (var key in this.sprites) {
-            
-            if (this.sprites.hasOwnProperty(key)) {           
+
+            if (this.sprites.hasOwnProperty(key)) {
                 this.sprites[key].destroy();
             }
         }

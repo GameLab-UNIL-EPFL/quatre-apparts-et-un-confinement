@@ -15,8 +15,8 @@ let plugins = [{
     plugin: RexUIPlugin,
     mapping: 'rexUI'
 }];
-const consoleSeemsOpen = window.outerHeight - window.innerHeight > 200;
-if(consoleSeemsOpen === true){
+const OBJECT_DEBUG = false;
+if(OBJECT_DEBUG === true){
   plugins.push({
     key: 'debugObjects',
     plugin: DebugObjects,
@@ -45,7 +45,7 @@ function getScale(innerWidth, innerHeight) {
             width = Math.round(minRatio * height);
         }
     }
-    return { width: 1200, height: 1600, ratio: innerRatio };
+    return { width: width, height: height, ratio: innerRatio };
 }
 
 export const scale = getScale(window.innerWidth, window.innerHeight);
@@ -57,7 +57,7 @@ const config = {
     height: window.innerHeight,
     resolution: 1, // we could use 2 for Retina
     scale: {
-      mode: scale.ratio > 0.75 ? Phaser.Scale.FIT : Phaser.Scale.SMOOTH,
+      mode: Phaser.Scale.FIT,
       autoCenter: Phaser.Scale.CENTER_BOTH,
       width: scale.width,
       height: scale.height
@@ -98,6 +98,7 @@ const maxPictureWidth = 1200.0;
 game.horizontalRatio = scale.width / maxPictureWidth;
 
 // ou betement dans window (puisque le jeu met du temps à s’instancier)
+window.horizontalOffset = (maxPictureWidth - scale.width) / 2;
 window.horizontalRatio = scale.width / maxPictureWidth;
 
 // This resize implies we also resize scene sprites, or they’d stretch.
