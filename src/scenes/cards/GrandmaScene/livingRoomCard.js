@@ -153,9 +153,6 @@ export class LivingRoomCard extends Card {
             'cat'
         ).play('cat-tail');
 
-        //Show the radio dialogue
-        this.parent_scene.dialogue.display("news");
-
         //Update the phone's onclickcallback
         this.children[7].updateOnClickCallback(
             (args) => {

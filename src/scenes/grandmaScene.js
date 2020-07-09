@@ -104,6 +104,9 @@ export class GrandmaScene extends Phaser.Scene {
 
         //Update the saved data
         player.cur_scene = Scenes.GRANDMA;
+
+        //Show the radio dialogue
+        this.dialogue.display("news");
     }
 
     /**
