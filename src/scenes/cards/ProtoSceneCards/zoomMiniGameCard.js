@@ -6,9 +6,9 @@ const N_NOTIFICATION = 10;
 const N_DISTRACTIONS = 19;
 const N_MSG = (N_NOTIFICATION * 2) + N_DISTRACTIONS;
 const NOTIF_SPREAD = 900;
-const NOTIF_OFFSET = 180;
+const NOTIF_OFFSET = 180-600;
 
-const BEG_Y_ZONE = 1300;
+const BEG_Y_ZONE = 1300-800;
 
 const INIT_FOCUS = 5;
 const SPAWN_DELAY = 1000;
@@ -37,27 +37,27 @@ export class ZoomMiniGameCard extends Card {
             new CardObject(
                 parent_scene,
                 { name: "zoom_bg", url: "sprites/ProtoScene/ZoomMiniGameCard/zoom_bg.png" },
-                new Phaser.Math.Vector2(600, 786)
+                new Phaser.Math.Vector2(0, -14)
             ),
             new Background(
                 parent_scene,
-                "sprites/ProtoScene/ZoomMiniGameCard/computer_screen.png", 
+                "sprites/ProtoScene/ZoomMiniGameCard/computer_screen.png",
                 "computer_bg"
             ),
             new CardObject(
                 parent_scene,
                 { name: "bar_bg", url: "sprites/ProtoScene/ZoomMiniGameCard/bar_bg.png" },
-                new Phaser.Math.Vector2(612, 167)
+                new Phaser.Math.Vector2(12, 167-800)
             ),
             new CardObject(
                 parent_scene,
                 { name: "bar_fill", url: "sprites/ProtoScene/ZoomMiniGameCard/bar_fill.png" },
-                new Phaser.Math.Vector2(612, 167)
+                new Phaser.Math.Vector2(12, 167-800)
             ),
             new CardObject(
                 parent_scene,
                 { name: "line", url: "sprites/ProtoScene/ZoomMiniGameCard/line.png" },
-                new Phaser.Math.Vector2(593, 1309)
+                new Phaser.Math.Vector2(-7, 1309-800)
             )
         ];
 
@@ -71,7 +71,7 @@ export class ZoomMiniGameCard extends Card {
             this.messages.push({
                 name: "notification_" + i,
                 url: "sprites/ProtoScene/ZoomMiniGameCard/notif_" + i + ".png" ,
-                pos: new Phaser.Math.Vector2(0, -200),
+                pos: new Phaser.Math.Vector2(-600, -1000),
                 sprite: null,
                 type: MessageType.Cours,
                 isDestroyed: false
@@ -81,7 +81,7 @@ export class ZoomMiniGameCard extends Card {
             this.messages.push({
                 name: "notification_" + i,
                 url: "sprites/ProtoScene/ZoomMiniGameCard/notif_" + i + ".png" ,
-                pos: new Phaser.Math.Vector2(0, -200),
+                pos: new Phaser.Math.Vector2(-600, -1000),
                 sprite: null,
                 type: MessageType.Cours,
                 isDestroyed: false
@@ -91,9 +91,9 @@ export class ZoomMiniGameCard extends Card {
         //Add all distractions to the card
         for(let i = 0; i < N_DISTRACTIONS; ++i) {
             this.messages.push({
-                name: "distraction_" + i, 
+                name: "distraction_" + i,
                 url: "sprites/ProtoScene/ZoomMiniGameCard/distraction_" + i + ".png" ,
-                pos: new Phaser.Math.Vector2(0, -200),
+                pos: new Phaser.Math.Vector2(-600, -1000),
                 sprite: null,
                 type: MessageType.Distraction,
                 isDestroyed: false
@@ -149,62 +149,62 @@ export class ZoomMiniGameCard extends Card {
         if(!this.lock) {
             //Select the message to show
             let msg_idx = Math.round(Math.random() * (N_MSG - 1));
-    
+
             //Make sure that the current message isn't already displayed
             let max_loop = N_MSG / 2;
             while(msg_idx in this.cur_msg) {
                 //Make sure that we can't get stuck in the loop
                 if(--max_loop <= 0) {
                     break;
-                } 
+                }
                 msg_idx = Math.round(Math.random() * (N_MSG - 1));
-            } 
-    
+            }
+
             this.cur_msg.push(msg_idx);
-    
+
             //Create the msg at a random location
             this.messages[msg_idx].pos.x = Math.round(Math.random() * NOTIF_SPREAD) + NOTIF_OFFSET;
-    
+
             this.messages[msg_idx].sprite = this.parent_scene.add.image(
-                this.messages[msg_idx].pos.x, 
-                this.messages[msg_idx].pos.y, 
+                this.messages[msg_idx].pos.x,
+                this.messages[msg_idx].pos.y,
                 this.messages[msg_idx].name
             );
 
             this.messages[msg_idx].isDestroyed = false;
-    
+
             //Animate the msg
             this.parent_scene.tweens.add({
                 targets: this.messages[msg_idx].sprite,
-                y: 1800,
+                y: 1000,
                 duration: 10000,
                 onComplete: () => {
                     if(!this.messages[msg_idx].isDestroyed) {
                         this.messages[msg_idx].sprite.destroy();
-    
+
                         //Make sure that the player didn't miss a class notification
                         if(this.messages[msg_idx].type === MessageType.Cours) {
-        
+
                             //Check that the health bar doesn't drop below 0
                             if(--this.focus_bar_health <= 0) {
                                 if(typeof callback === "function") {
                                     callback(this, true);
                                 }
                             }
-        
-                            //Resize the health bar 
+
+                            //Resize the health bar
                             this.children[3].sprite.displayWidth -= this.focus_bar_width / INIT_FOCUS;
                             this.children[3].sprite.tint = 0xEFA81B
                             if(this.children[3].sprite.displayWidth < 300) {
                                 this.children[3].sprite.tint = 0xE53D3D;
                             }
-                            
+
                         }
-        
+
                         //Remove the elelment in question
                         this.cur_msg.filter((val, _) => val === msg_idx);
                     }
-                        
+
                         //Check if the game is over
                         if(--this.num_spaws === 0) {
                             if(typeof callback === "function") {
@@ -217,7 +217,7 @@ export class ZoomMiniGameCard extends Card {
 
             //Activate interactivity
             this.messages[msg_idx].sprite.setInteractive();
-    
+
             //Make the card interactive
             this.parent_scene.input.on(
                 'gameobjectdown',
@@ -237,13 +237,13 @@ export class ZoomMiniGameCard extends Card {
                                 gameObject.y,
                                 "notif-pop"
                             ).play('pop');
-    
+
                             //Remove the elelment in question
                             this.cur_msg.filter((val, _) => val === msg_idx);
-    
+
                             //Make sure that the player didn't miss a class notification
                             if(this.messages[msg_idx].type === MessageType.Distraction) {
-    
+
                                 //Check that the health bar doesn't drop below 0
                                 if(--this.focus_bar_health <= 0) {
                                     if(typeof callback === "function") {
@@ -276,7 +276,7 @@ export class ZoomMiniGameCard extends Card {
 
             card.lock = true;
 
-            //Open the dialogue 
+            //Open the dialogue
             card.parent_scene.dialogue.display(
                 lose ? LOSER_ID : END_ZOOM_CALL_ID
             );
@@ -323,7 +323,7 @@ export class ZoomMiniGameCard extends Card {
 
     destroy() {
         super.destroy();
-        
+
         this.messages.forEach(msg => {
             if(msg.sprite) {
                 msg.sprite.destroy()

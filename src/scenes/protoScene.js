@@ -49,9 +49,9 @@ export class ProtoScene extends Phaser.Scene {
         this.wakeUpCard = new WakeUpCard(this);
 
         let characters = {
-            'chosePath': new ProtoGuy(this, 733, 1222, ProtoGuyCard.CHOSE_PATH),
-            'clothes': new ProtoGuy(this, 651, 915, ProtoGuyCard.CLOTHES),
-            'kitchen': new ProtoGuy(this, 382, 768, ProtoGuyCard.KITCHEN)
+            'chosePath': new ProtoGuy(this, 733-600, 1222-800, ProtoGuyCard.CHOSE_PATH),
+            'clothes': new ProtoGuy(this, 651-600, 915-800, ProtoGuyCard.CLOTHES),
+            'kitchen': new ProtoGuy(this, 382-600, 768-800, ProtoGuyCard.KITCHEN)
         };
 
         this.chosePathCard = new Card(this, [
@@ -63,7 +63,7 @@ export class ProtoScene extends Phaser.Scene {
                 new CardObject(
                     this,
                     { name: "kitchen", url: "sprites/ProtoScene/ChosePathCard/kitchen.png" },
-                    new Phaser.Math.Vector2(831, 740),
+                    new Phaser.Math.Vector2(831-600, 740-800),
                     null,
                     null,
                     1,
@@ -72,7 +72,7 @@ export class ProtoScene extends Phaser.Scene {
                 new CardObject(
                     this,
                     { name: "closet", url: "sprites/ProtoScene/ChosePathCard/closet.png" },
-                    new Phaser.Math.Vector2(300, 783),
+                    new Phaser.Math.Vector2(300-600, 783-800),
                     null,
                     null,
                     0,
@@ -92,7 +92,7 @@ export class ProtoScene extends Phaser.Scene {
                 new CardObject(
                     this,
                     { name: "clothes", url: "sprites/ProtoScene/ClothesCard/clothes.png" },
-                    new Phaser.Math.Vector2(893, 785),
+                    new Phaser.Math.Vector2(893-600, 785-800),
                     (scene) => scene.changeClothes(ProtoGuyClothes.CLEAN_CLOTHES),
                     this,
                     -1,
@@ -101,7 +101,7 @@ export class ProtoScene extends Phaser.Scene {
                 new CardObject(
                     this,
                     { name: "chair", url: "sprites/ProtoScene/ClothesCard/chair.png" },
-                    new Phaser.Math.Vector2(375, 1185),
+                    new Phaser.Math.Vector2(375-600, 1185-800),
                     (scene) => scene.changeClothes(ProtoGuyClothes.YESTERDAY_CLOTHES),
                     this,
                     -1,
@@ -122,7 +122,7 @@ export class ProtoScene extends Phaser.Scene {
                 new CardObject(
                     this,
                     { name: "fridge", url: "sprites/ProtoScene/KitchenCard/frigo.png" },
-                    new Phaser.Math.Vector2(794, 649),
+                    new Phaser.Math.Vector2(794-600, 649-800),
                     null,
                     null,
                     1,
@@ -131,17 +131,17 @@ export class ProtoScene extends Phaser.Scene {
                 new CardObject(
                     this,
                     { name: "table", url: "sprites/ProtoScene/KitchenCard/table.png" },
-                    new Phaser.Math.Vector2(571, 1188)
+                    new Phaser.Math.Vector2(571-600, 1188-800)
                 ),
                 new CardObject(
                     this,
                     { name: "counter", url: "sprites/ProtoScene/KitchenCard/comptoire.png" },
-                    new Phaser.Math.Vector2(600, 1282)
+                    new Phaser.Math.Vector2(0, 1282-800)
                 ),
                 new CardObject(
                     this,
                     { name: "sink", url: "sprites/ProtoScene/KitchenCard/lavabo.png" },
-                    new Phaser.Math.Vector2(824, 1407),
+                    new Phaser.Math.Vector2(824-600, 1407-800),
                     null,
                     null,
                     2,
@@ -150,12 +150,12 @@ export class ProtoScene extends Phaser.Scene {
                 new CardObject(
                     this,
                     { name: "counter_stuff", url: "sprites/ProtoScene/KitchenCard/objets.png" },
-                    new Phaser.Math.Vector2(745, 1495)
+                    new Phaser.Math.Vector2(745-600, 1495-800)
                 ),
                 new CardObject(
                     this,
                     { name: "toaster", url: "sprites/ProtoScene/KitchenCard/toaster.png" },
-                    new Phaser.Math.Vector2(242, 1453),
+                    new Phaser.Math.Vector2(242-600, 1453-800),
                     null,
                     null,
                     0,
@@ -164,7 +164,7 @@ export class ProtoScene extends Phaser.Scene {
                 new CardObject(
                     this,
                     { name: "lamp", url: "sprites/ProtoScene/KitchenCard/lampe.png" },
-                    new Phaser.Math.Vector2(693, 322)
+                    new Phaser.Math.Vector2(693-600, 322-800)
                 )
             ],
             characters['kitchen']
@@ -281,6 +281,8 @@ export class ProtoScene extends Phaser.Scene {
      * in the scene.
      */
     create() {
+        this.cameras.main.centerOn(0, 0);
+
         if(this.current_card.isLoaded()) {
             this.current_card.create();
         }

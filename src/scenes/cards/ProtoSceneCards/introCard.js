@@ -2,7 +2,7 @@ import { Card } from "../card";
 
 /**
  * @brief Models a "Card" inside of a scene.
- * A card can be seen as a set of images that represent 
+ * A card can be seen as a set of images that represent
  * a given interactive moment in a scene
  */
 export class IntroCard extends Card {
@@ -37,8 +37,6 @@ export class IntroCard extends Card {
 
         //Create and place the temp image correctly
         this.sprite = this.parent_scene.add.image(0, 0, this.name);
-        this.sprite.y = 870;
-        this.sprite.x = 624;
         this.sprite.setInteractive();
         this.sprite.setScale(3);
 

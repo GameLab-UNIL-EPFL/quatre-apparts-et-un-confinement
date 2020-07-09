@@ -17,7 +17,7 @@ export class WakeUpCard extends Card {
      */
     constructor(parent_scene) {
         //Store the scene's character
-        let character = new ProtoGuy(parent_scene, 900, 1022, ProtoGuyCard.WAKE_UP);
+        let character = new ProtoGuy(parent_scene, 300, 222, ProtoGuyCard.WAKE_UP);
 
         //Initialize children array
         let children = [
@@ -25,11 +25,11 @@ export class WakeUpCard extends Card {
             new CardObject(
                 parent_scene,
                 { name: "phone", url: "sprites/ProtoScene/WakeUpCard/phone.png" },
-                new Phaser.Math.Vector2(447 * window.horizontalRatio, 860), // ici: multiplier par horizontalRatio, mais game et la scene sont encore en construction
+                new Phaser.Math.Vector2(-153, 60),
                 () => {},
                 null,
                 -1,
-                { name: "phone_h", url: "sprites/ProtoScene/WakeUpCard/phone_h.png" }  
+                { name: "phone_h", url: "sprites/ProtoScene/WakeUpCard/phone_h.png" }
             ),
             character
         ];
@@ -90,8 +90,8 @@ export class WakeUpCard extends Card {
         ).play('phone-ring');
 
         this.bubbles = this.parent_scene.add.sprite(
-            843,
-            325,
+            243,
+            -475,
             'tired-bubble'
         ).play('tired-bubbles');
 
