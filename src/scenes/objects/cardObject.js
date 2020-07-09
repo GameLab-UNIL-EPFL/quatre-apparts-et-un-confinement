@@ -74,32 +74,31 @@ export class CardObject {
 
         //Add a choice if needed
         if(this.choice !== -1 || this.onClickCallback !== null) {
-            //Make the clothes interactive
-            this.sprite.setInteractive();
 
-            this.parent_scene.input.on(
-                'gameobjectdown',
-                (_, gameObject) => {
-                    //Check that we clicked the clothes
-                    if(gameObject === this.sprite || gameObject === this.highlight_sprite) {
-
-                        //Check if the callback exists
-                        if(this.onClickCallback !== null) {
-
-                            //Check for arguments
-                            if(this.onClickArgs !== null) {
-                                this.onClickCallback(this.onClickArgs);
-                            } else {
-                                this.onClickCallback();
-                            }
+            const interaction = () => {
+                //Only trigger interaction if the dialogue is done
+                if(this.parent_scene.dialogue.isDone()) {
+                    //Check if the callback exists
+                    if(this.onClickCallback !== null) {
+    
+                        //Check for arguments
+                        if(this.onClickArgs !== null) {
+                            this.onClickCallback(this.onClickArgs);
                         } else {
-                            this.parent_scene.endCard();
-                            this.parent_scene.nextCard(this.choice);
+                            this.onClickCallback();
                         }
+                    } else {
+                        this.parent_scene.endCard();
+                        this.parent_scene.nextCard(this.choice);
                     }
-                },
-                this.parent_scene
-            );
+                }
+            };
+
+            //Make the sprites interactive
+            if(this.highlight_sprite) {
+                this.highlight_sprite.setInteractive().on('pointerdown', interaction, this);
+            }
+            this.sprite.setInteractive().on('pointerdown', interaction, this);
         }
     }
 
@@ -110,6 +109,16 @@ export class CardObject {
     update() {
         this.x = this.sprite.x;
         this.y = this.sprite.y;
+    }
+
+    /**
+     * @brief Modifies the object's onclickcallback
+     * @param {Function} newCallback the new onclickCallback
+     * @param {array} newArgs the arguments used by the new callback
+     */
+    updateOnClickCallback(newCallback, newArgs) {
+        this.onClickCallback = newCallback;
+        this.onClickArgs = newArgs;
     }
 
     /**

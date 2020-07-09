@@ -6,7 +6,7 @@ import { player } from "../index.js";
 import { Scenes } from "../core/player.js";
 import { WindowState, Months } from "./buildingScene.js";
 import { LivingRoomCard } from "./cards/GrandmaScene/livingRoomCard.js";
-import { DialogueController, DIALOGUE_BOX_KEY, DIALOGUE_BOX_SPRITE_SIZE } from "../core/dialogueController.js";
+import { DialogueController } from "../core/dialogueController.js";
 
 export const GrandmaCards = {
     LIVING_ROOM: 0,
@@ -104,6 +104,9 @@ export class GrandmaScene extends Phaser.Scene {
 
         //Update the saved data
         player.cur_scene = Scenes.GRANDMA;
+
+        //Show the radio dialogue
+        this.dialogue.display("news");
     }
 
     /**
@@ -131,6 +134,8 @@ export class GrandmaScene extends Phaser.Scene {
         //Destroy the current card
         this.current_card.destroy();
 
+        let callback = (scene) => {};
+
         //Choose which card to show next
         switch(card) {
             case GrandmaCards.LIVING_ROOM:
@@ -139,15 +144,20 @@ export class GrandmaScene extends Phaser.Scene {
 
             case GrandmaCards.RADIO:
                 this.current_card = this.radioCard;
+                callback = (scene) => scene.dialogue.display("radio");
                 break;
 
             case GrandmaCards.CALENDAR:
                 this.current_card = this.calendarCard;
+                callback = (scene) => scene.dialogue.display("calendrier");
                 break;
         }
 
         //Create the new card
         this.current_card.create();
+
+        //Run callback if needed
+        callback(this);
     }
 
     nextScene() {

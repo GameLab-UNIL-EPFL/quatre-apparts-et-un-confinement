@@ -6,32 +6,32 @@
             "28 Mars\nHmm, j'avais rendez-vous chez le coiffeur...",
             "C'est mercredi, normalement je vois mes petits-enfants."
 		],
-		"choices": {},
+		"choices": [],
 		"goto": []
 	},
 	"livre1": {
-		"name": "Suzanne",
+		"name": "",
 		"text": [
 			"La peste - Albert Camus",
 			"Du reste, le docteur Rieux, par exemple, considérait que c'était cela le malheur, justement,", 
 			"et que l'habitude du désespoir est pire que le désespoir lui-même."
 		],
-		"choices": {},
+		"choices": [],
 		"goto": []
 	},
 	"livre2": {
-		"name": "Suzanne",
+		"name": "",
         "text": [
 			"A La Recherche du Temps Perdu - Marcel Proust",
 			"Certes, il y a dans ma maison toutes les choses inutiles.", 
 			"Il n'y manque que le nécessaire, un grand morceau de ciel comme ici.", 
 			"Tâchez de garder toujours un morceau de ciel au-dessus de votre vie..."
 		], 
-        "choices": {},
+        "choices": [],
 		"goto": []
 	},
 	"livre3": {
-		"name": "Suzanne",
+		"name": "",
         "text": [
 			"Le Misanthrope - Molière",
 			"Je ne trouve partout que lâche flatterie,",
@@ -39,24 +39,24 @@
 			"Je n'y puis plus tenir, j'enrage, et mon dessein",
 			"Est de rompre en visière à tout le genre humain."
 		], 
-        "choices": {},
+        "choices": [],
 		"goto": []
 	},
 	"radio": {
 		"name": "Radio",
 		"text": ["Que faire?"],
-		"choices": {
-            "musique": {
+		"choices": [
+			{
 				"text": ["écouter de la musique"],
 				"preview": "Musique",
 				"goto": "bleiben"
 			},
-			"news": {
+			{
 				"text": ["écouter les nouvelles"],
 				"preview": "Nouvelles",
 				"goto": "news"
 			}
-        },
+		],
 		"goto": ["bleiben", "news"]
 	},
 	"news": {
@@ -65,13 +65,13 @@
 			"17 Mars - La Suisse se trouve dans une situation extraordinaire", 
 			"Restez chez vous"
 		],
-		"choices": {},
+		"choices": [],
 		"goto": []
 	},
 	"bleiben": {
 		"name": "Radio",
 		"text": ["*musique* Bleiben Sie zuhause"],
-		"choices":{},
+		"choices": [],
 		"goto": []
 	},
 	"telephone": {
