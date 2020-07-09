@@ -131,6 +131,8 @@ export class GrandmaScene extends Phaser.Scene {
         //Destroy the current card
         this.current_card.destroy();
 
+        let callback = (scene) => {};
+
         //Choose which card to show next
         switch(card) {
             case GrandmaCards.LIVING_ROOM:
@@ -139,6 +141,7 @@ export class GrandmaScene extends Phaser.Scene {
 
             case GrandmaCards.RADIO:
                 this.current_card = this.radioCard;
+                callback = (scene) => scene.dialogue.display("radio");
                 break;
 
             case GrandmaCards.CALENDAR:
@@ -148,6 +151,9 @@ export class GrandmaScene extends Phaser.Scene {
 
         //Create the new card
         this.current_card.create();
+
+        //Run callback if needed
+        callback(this);
     }
 
     nextScene() {

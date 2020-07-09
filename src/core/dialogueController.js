@@ -254,42 +254,47 @@ export class DialogueController {
             {font: (50 * window.horizontalRatio) + "px OpenSans", fill: "black", wordWrap: { width: 1000 * window.horizontalRatio }}
         );
 
-        //Make the text interactive
-        this.content.setInteractive().on(
-            'pointerdown',
-            () => {
-                //Check that we clicked on the text
-                if(this.cur_state !== DialogueState.DONE) {
+        const interaction = () => {
+            //Check that we clicked on the text
+            if(this.cur_state !== DialogueState.DONE) {
 
-                    this.textIdx++;
-                    console.log(this.textIdx);
+                this.textIdx++;
+                console.log(this.textIdx);
 
-                    //Make sure that it's not a prompt
-                    if(this.cur_state === DialogueState.DISPLAYED) {
+                //Make sure that it's not a prompt
+                if(this.cur_state === DialogueState.DISPLAYED) {
 
-                        //Check if we've shown all of the text
-                        if(this.textIdx === this.text.length) {
-                            //Get rid of all dialogue elements
-                            this.content.destroy();
-                            this.name.destroy();
-                            this.background.destroy();
-                            this.content.disableInteractive();
-                            this.textIdx = 0;
+                    //Check if we've shown all of the text
+                    if(this.textIdx >= this.text.length) {
 
-                            //Update dialogue state
-                            this.endDialogue();
+                        //Get rid of all dialogue elements
+                        this.content.destroy();
+                        this.name.destroy();
+                        this.background.destroy();
+                        this.content.disableInteractive();
+                        this.textIdx = 0;
 
-                        } else {
-                            this.content.text = this.text[this.textIdx];
-                        }
+                        //Update dialogue state
+                        this.endDialogue();
+
+                    } else {
+                        this.content.text = this.text[this.textIdx];
                     }
                 }
-            },
-            this
-        );
+            }
+
+            //Prompt user if necessary on interaction
+            if(this.requestDialogue(id).goto.length !== 0 && this.textIdx === this.text.length - 1) {
+                this.promptAnswers(id);
+            }
+        };
+
+        //Make the text interactive
+        this.content.setInteractive().on('pointerdown', interaction, this);
+        this.background.setInteractive().on('pointerdown', interaction, this);
 
         //Prompt user if necessary
-        if(this.requestDialogue(id).goto.length !== 0) {
+        if(this.requestDialogue(id).goto.length !== 0 && this.textIdx === this.text.length - 1) {
             this.promptAnswers(id);
         }
     }
