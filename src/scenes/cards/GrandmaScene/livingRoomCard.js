@@ -281,64 +281,67 @@ export class LivingRoomCard extends Card {
     changeGrandma(state) {
         if(this.parent_scene.dialogue.isDone()) {
 
-        switch(state) {
-            case GRANDMA_STATES.IDLE:
-                this.grandma_sprite = this.parent_scene.add.image(
-                    GRANDMA_POS.x,
-                    GRANDMA_POS.y,
-                    "grandma_idle"
-                );
-                break;
+            switch(state) {
+                case GRANDMA_STATES.IDLE:
+                    this.grandma_sprite = this.parent_scene.add.image(
+                        GRANDMA_POS.x,
+                        GRANDMA_POS.y,
+                        "grandma_idle"
+                    );
+                    break;
 
-            case GRANDMA_STATES.BOOK_1:
-                this.grandma_sprite = this.parent_scene.add.image(
-                    GRANDMA_POS.x,
-                    GRANDMA_POS.y,
-                    "grandma_book1"
-                );
+                case GRANDMA_STATES.BOOK_1:
+                    this.grandma_sprite = this.parent_scene.add.image(
+                        GRANDMA_POS.x,
+                        GRANDMA_POS.y,
+                        "grandma_book1"
+                    );
 
-                //Trigger the book's dialogue
-                this.parent_scene.dialogue.display("livre1");
-                break;
+                    //Trigger the book's dialogue
+                    this.parent_scene.dialogue.display("livre1");
+                    break;
 
-            case GRANDMA_STATES.BOOK_2:
-                this.grandma_sprite = this.parent_scene.add.image(
-                    GRANDMA_POS.x,
-                    GRANDMA_POS.y,
-                    "grandma_book2"
-                );
+                case GRANDMA_STATES.BOOK_2:
+                    this.grandma_sprite = this.parent_scene.add.image(
+                        GRANDMA_POS.x,
+                        GRANDMA_POS.y,
+                        "grandma_book2"
+                    );
 
-                //Trigger the book's dialogue
-                this.parent_scene.dialogue.display("livre2");
-                break;
+                    //Trigger the book's dialogue
+                    this.parent_scene.dialogue.display("livre2");
+                    break;
 
-            case GRANDMA_STATES.BOOK_3:
-                this.grandma_sprite = this.parent_scene.add.image(
-                    GRANDMA_POS.x,
-                    GRANDMA_POS.y,
-                    "grandma_book3"
-                );
+                case GRANDMA_STATES.BOOK_3:
+                    this.grandma_sprite = this.parent_scene.add.image(
+                        GRANDMA_POS.x,
+                        GRANDMA_POS.y,
+                        "grandma_book3"
+                    );
 
-                //Trigger the book's dialogue
-                this.parent_scene.dialogue.display("livre3");
-                break;
+                    //Trigger the book's dialogue
+                    this.parent_scene.dialogue.display("livre3");
+                    break;
 
-            case GRANDMA_STATES.PHONE:
-                this.grandma_sprite = this.parent_scene.add.image(
-                    GRANDMA_POS.x,
-                    GRANDMA_POS.y,
-                    "grandma_phone"
-                );
+                case GRANDMA_STATES.PHONE:
+                    this.grandma_sprite = this.parent_scene.add.image(
+                        GRANDMA_POS.x,
+                        GRANDMA_POS.y,
+                        "grandma_phone"
+                    );
 
-                //Disable all of the scenes interactions
-                this.disableAllInteractions();
+                    //Disable all of the scenes interactions
+                    this.disableAllInteractions();
 
-                //Trigger the phone's dialogue
-                this.parent_scene.dialogue.display("telephone");
-                break;
+                    //Trigger the phone's dialogue
+                    this.parent_scene.dialogue.display("telephone");
+                    break;
 
-            default:
-                break;
+                default:
+                    break;
+            }
         }
     }
 }
+
+
