@@ -6,7 +6,7 @@ import { player } from "../index.js";
 import { Scenes } from "../core/player.js";
 import { WindowState, Months } from "./buildingScene.js";
 import { LivingRoomCard } from "./cards/GrandmaScene/livingRoomCard.js";
-import { DialogueController, DIALOGUE_BOX_KEY, DIALOGUE_BOX_SPRITE_SIZE } from "../core/dialogueController.js";
+import { DialogueController } from "../core/dialogueController.js";
 
 export const GrandmaCards = {
     LIVING_ROOM: 0,

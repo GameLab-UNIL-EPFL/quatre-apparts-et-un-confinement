@@ -2,7 +2,6 @@ import Phaser from "phaser";
 import { Scenes } from "../core/player";
 import { DIALOGUE_BOX_KEY, D_BOX_ANIMATION_KEY, DIALOGUE_BOX_SPRITE_SIZE } from "../core/dialogueController";
 import { player } from "..";
-import { scale } from "../index";
 
 export const Months = {
     MARCH: 'march',
