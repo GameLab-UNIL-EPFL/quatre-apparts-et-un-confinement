@@ -2,8 +2,8 @@
 	"reveil": {
 		"name": "Damien",
 		"text": [
-			"RAAAAH purée ! J’ai oublié de désactiver mon réveil hier soir…",
-			"Pourtant je n’ai plus besoin de me dépêcher pour me préparer ou aller prendre le bus."
+			"Aaah purée j’ai oublié de désactiver mon réveil hier soir!",
+			"Pourtant j’ai plus besoin de me dépêcher pour aller prendre le bus ou me préparer."
 		],
 		"choices": {},
 		"goto": []
@@ -11,48 +11,48 @@
 	"habit": {
 		"name": "Damien",
 		"text": [
-			"Est-ce que j’ai vraiment besoin de m’habiller ? *baille*"
+			"Est-ce que j’ai vraiment besoin de m’habiller? *baille*"
 		],
 		"choices": {},
 		"goto": []
 	},
 	"frigo": {
 		"name": "Damien",
-		"text": ["Bon, qu’est-ce que je vais manger ?"],
+		"text": ["Bon, qu’est-ce que je vais manger?"],
 		"choices": {},
 		"goto": []
 	},
 	"dodo": {
 		"name": "Damien",
 		"text": [
-			"Oh non, c’est déjà midi ! J’ai loupé mon premier cours…",
-			"Bon, pas grave, je rattraperai avec les notes de quelqu’un d’autre."
+			"Oh non c’est déjà midi, j’ai loupé mon premier cours...",
+			"Bon, c’est pas grave, je rattraperai avec les notes de quelqu’un d’autre."
 		],
 		"choices": {},
 		"goto": []
 	},
 	"bureau": {
 		"name": "Damien",
-		"text": ["Ah ! Mon cours va commencer."],
+		"text": ["Ah! Mon cours va commencer."],
 		"choices": {},
 		"goto": []
 	},
 	"zoom": {
 		"name": "Prof",
-		"text": ["Veuillez s’il vous plaît éteindre vos micros."],
+		"text": ["Veuillez s’il vous plaît éteindre vos micros"],
 		"choices": {},
 		"goto": []
 	},
 	"endZoom": {
 		"name": "Prof",
-		"text": ["Merci pour votre attention et bonne journée."],
+		"text": ["Merci pour votre attention et bonne journée!"],
 		"choices": {},
 		"goto": []
 	},
 	"loseZoom": {
 		"name": "Prof",
 		"text": [
-			"Damien ! Quels chapitres devez-vous lire pour la semaine prochaine ?"
+			"Damien! Quels chapitres devez-vous lire pour la semaine prochaine?"
 		],
 		"choices": [
 			{
@@ -67,13 +67,13 @@
 	},
 	"repFausse": {
 		"name": "Prof",
-		"text": ["Non ! Ce sont les chapitres 11 et 12. J’espère que vous serez plus concentré la prochaine fois."],
+		"text": ["Non! Chapitres 11 et 12, j’espère que vous éteindrez Netflix la prochaine fois."],
 		"choices": {},
 		"goto": []
 	},
 	"repJuste": {
 		"name": "Prof",
-		"text": ["Oui, c’est juste. Néanmoins, essayez de vous concentrer un peu plus la prochaine fois, s’il vous plaît."],
+		"text": ["Oui c’est juste mais essayez de vous concentrer un peu plus, s’il vous plaît"],
 		"choices": {},
 		"goto": []
 	},
@@ -116,7 +116,7 @@
 	},
 	"sortir": {
 		"name": "Copine",
-		"text": ["Tu viens chez moi après ?"],
+		"text": ["Tu viens chez moi après?"],
 		"choices": {
 			"risque": {
 				"text": "Ton père est pas à risque ?",
@@ -143,7 +143,7 @@
 		"text": ["Euh ouais mais c’est calme là comme plus personne prend de taxi"],
 		"choices": {
 			"chaud": {
-				"text": "Ah mais du coup c’est chaud financièrement ?",
+				"text": "Ah mais du coup c’est chaud financièrement?",
 				"preview": "C’est chaud non?",
 				"goto": "sortir3"
 			}
@@ -160,7 +160,7 @@
 				"goto": "repOui"
 			},
 			"maybe": {
-				"text": "Je sais pas, t’es sûr que c’est ok pour tes parents ?",
+				"text": "Je sais pas, t’es sûr que c’est ok pour tes parents?",
 				"preview": ["Je sais pas"],
 				"goto": "repMaybe"
 			},
@@ -174,13 +174,13 @@
 	},
 	"repOui": {
 		"name": "Copine",
-		"text": ["Cool ! A toute !"],
+		"text": ["Cool! A toute!"],
 		"choices":{},
 		"goto": []
 	},
 	"repMaybe": {
 		"name": "Copine",
-		"text": ["Mais oui, c’est bon, sinon tu dois m’expliquer en ligne et c’est plus compliqué"],
+		"text": ["Mais oui c’est bon, sinon tu dois m’expliquer en ligne et c’est plus compliqué"],
 		"choices":{
 			"oui": {
 				"text": "Bon ok",
@@ -188,7 +188,7 @@
 				"goto": "repOui"
 			},
 			"non": {
-				"text": "Non… je préfère pas prendre de risques… désolé",
+				"text": "Non... je préfère pas risquer... désolé",
 				"preview": ["Non... désolé"],
 				"goto": "repNon"
 			}
