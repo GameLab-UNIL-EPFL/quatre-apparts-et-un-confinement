@@ -32,7 +32,7 @@ export class ProtoGuy {
      */
     constructor(parent_scene, x, y, card) {
         this.parent_scene = parent_scene;
-        this.x = x * window.horizontalRatio;
+        this.x = x;
         this.y = y;
 
         this.card = card;
