@@ -32,7 +32,7 @@ export class ProtoGuy {
      */
     constructor(parent_scene, x, y, card) {
         this.parent_scene = parent_scene;
-        this.x = x * window.horizontalRatio;
+        this.x = x;
         this.y = y;
 
         this.card = card;
@@ -40,17 +40,17 @@ export class ProtoGuy {
 
         switch(card) {
             case ProtoGuyCard.WAKE_UP:
-                this.base_url = "/sprites/ProtoScene/WakeUpCard/character_body.png";
+                this.base_url = "sprites/ProtoScene/WakeUpCard/character_body.png";
                 this.base_name = "character_body";
                 this.base_offset_x = 0;
                 this.base_offset_y = 0;
 
-                this.head_url = "/sprites/ProtoScene/WakeUpCard/character_head.png";
+                this.head_url = "sprites/ProtoScene/WakeUpCard/character_head.png";
                 this.head_name = "character_head";
                 this.head_offset_x = -55;
                 this.head_offset_y = -519;
 
-                this.arm_url = "/sprites/ProtoScene/WakeUpCard/character_arm.png";
+                this.arm_url = "sprites/ProtoScene/WakeUpCard/character_arm.png";
                 this.arm_name = "chracter_arm";
                 this.arm_offset_x = 595 - this.x;
                 this.arm_offset_y = -105 - this.y;
@@ -68,10 +68,10 @@ export class ProtoGuy {
             case ProtoGuyCard.CLOTHES:
 
                 this.dirty_name = "clothesProtoGuy_dirty";
-                this.dirty_url = "/sprites/ProtoScene/ClothesCard/damien_Y.png";
+                this.dirty_url = "sprites/ProtoScene/ClothesCard/damien_Y.png";
 
                 this.clean_name = "clothesProtoGuy_clean";
-                this.clean_url = "/sprites/ProtoScene/ClothesCard/damien_G.png";
+                this.clean_url = "sprites/ProtoScene/ClothesCard/damien_G.png";
 
                 this.pj_name = "clothesProtoGuy_pj";
                 this.pj_url = "sprites/ProtoScene/ClothesCard/damien_pj.png";

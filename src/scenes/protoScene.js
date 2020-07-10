@@ -57,7 +57,7 @@ export class ProtoScene extends Phaser.Scene {
         this.chosePathCard = new Card(this, [
                 new Background(
                     this,
-                    "/sprites/ProtoScene/ChosePathCard/bg.jpg",
+                    "sprites/ProtoScene/ChosePathCard/bg.jpg",
                     "choseBG"
                 ),
                 new CardObject(
