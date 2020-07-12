@@ -564,11 +564,11 @@ export class DialogueController {
         let prompt_ypos = [];
         let prompt_xpos = -277;
         //Display the correct prompt box
-        if(dialogue.goto.length <= 1) {
+        if(Object.keys(dialogue.choices).length <= 1) {
             this.parent_scene.add.image(-7, 616, 'promptBox1');
             font_size = 76 * window.horizontalRatio;
             prompt_ypos = [579];
-        } else if(dialogue.goto.length <= 2) {
+        } else if(Object.keys(dialogue.choices).length <= 2) {
             this.parent_scene.add.image(-7, 616, 'promptBox2');
             font_size = 56 * window.horizontalRatio;
             prompt_ypos = [497, 677];
