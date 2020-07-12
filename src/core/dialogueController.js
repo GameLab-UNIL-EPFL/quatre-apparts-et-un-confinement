@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 import { scale } from "..";
+import { player } from "../index.js";
 
 export const DialogueState = {
     NONE: 0,
@@ -175,7 +176,7 @@ export class DialogueController {
      * @return {boolean} whether the dialogue state is DONE
      */
     isDone() {
-        return this.cur_state === DialogueState.DONE;
+        return this.cur_state === DialogueState.DONE || this.cur_state === DialogueState.NONE;
     }
 
     /**
@@ -268,14 +269,12 @@ export class DialogueController {
             if(this.cur_state !== DialogueState.DONE) {
 
                 this.textIdx++;
-                console.log(this.textIdx);
 
                 //Make sure that it's not a prompt
                 if(this.cur_state === DialogueState.DISPLAYED) {
 
                     //Check if we've shown all of the text
-                    if(this.textIdx >= this.text.length) {
-
+                    if(this.textIdx === this.text.length) {
                         //Get rid of all dialogue elements
                         this.content.destroy();
                         this.name.destroy();
@@ -315,7 +314,6 @@ export class DialogueController {
     promptAnswers(id) {
         //Retrieve the dialogue
         const cur_dialogue = this.requestDialogue(id);
-        console.log(cur_dialogue);
 
         //Get rid of all existing prompts
         if(this.prompts) {
@@ -388,30 +386,29 @@ export class DialogueController {
                     prompt_sprite.displayHeight = prompt_text.displayHeight + SPACING;
                 }
 
-                //Activate prompt interactivity
-                prompt_text.setInteractive();
-                prompt_sprite.setInteractive();
+                const interaction = () => {
+                    //Destroy all prompts if clicked
+                    this.prompts.forEach(prompt => {
+                        prompt.text.destroy();
+                        prompt.sprite.destroy();
+                    });
+
+                    //Update the state
+                    this.cur_state = DialogueState.DISPLAYED;
+
+                    //Make a decision
+                    this.display(choice.goto);
+
+                    //Save the dialogue entry
+                    player.addDialogueTreeEntry({
+                        id: id,
+                        next_id: choice.goto
+                    });
+                };
 
                 //Make the prompt interactive
-                this.parent_scene.input.on(
-                    'gameobjectdown',
-                    (_, gameObject) => {
-                        if(prompt_text === gameObject || prompt_sprite === gameObject) {
-                            //Destroy all prompts if clicked
-                            this.prompts.forEach(prompt => {
-                                prompt.text.destroy();
-                                prompt.sprite.destroy();
-                            });
-
-                            //Update the state
-                            this.cur_state = DialogueState.DISPLAYED;
-
-                            //Make a decision
-                            this.display(choice.goto);
-                        }
-                    },
-                    this
-                );
+                prompt_text.setInteractive().on('pointerdown', interaction, this);
+                prompt_sprite.setInteractive().on('pointerdown', interaction, this);
 
                 this.prompts.push({sprite: prompt_sprite, text: prompt_text});
             });
@@ -538,6 +535,12 @@ export class DialogueController {
             //this.msg_prompts.forEach(msg => msg.destroy());
             this.promptMessageAnswers(id);
         } else if(cur_dialogue.goto.length === 0) {
+            //Save the dialogue entry
+            player.addDialogueTreeEntry({
+                id: id,
+                next_id: ""
+            });
+
             //Trigger end of dialogue
             this.parent_scene.time.addEvent({
                 delay: 3000,
@@ -591,31 +594,34 @@ export class DialogueController {
             this.msg_prompts.push(text_msg_elem);
 
             //Make the element interactive
-            text_msg_elem.setInteractive();
-            this.parent_scene.input.on(
-                'gameobjectdown',
-                (_, gameObject) => {
-                    if(gameObject === text_msg_elem) {
-                        this.msg_prompts.forEach(msg => msg.destroy());
+            text_msg_elem.setInteractive().on(
+                'pointerdown',
+                () => {
+                    this.msg_prompts.forEach(msg => msg.destroy());
 
-                        //Show the message above
-                        this.displayMessage(id, false, choice_key);
+                    //Show the message above
+                    this.displayMessage(id, false, choice_key);
 
-                        //Goto the next dialogue
-                        let next_id = dialogue.choices[choice_key].goto;
+                    //Goto the next dialogue
+                    const next_id = dialogue.choices[choice_key].goto;
 
-                        //Add a timer event to trigger the next message
-                        this.parent_scene.time.addEvent({
-                            delay: MSG_RESP_DELAY,
-                            repeat: 0,
-                            callback: () => {
-                                if((next_id.length) > 0) {
-                                    this.displayMessage(next_id, true);
-                                }
-                            },
-                            callbackScope: this,
-                        });
-                    }
+                    //Add a timer event to trigger the next message
+                    this.parent_scene.time.addEvent({
+                        delay: MSG_RESP_DELAY,
+                        repeat: 0,
+                        callback: () => {
+                            if((next_id.length) > 0) {
+                                this.displayMessage(next_id, true);
+                            }
+                        },
+                        callbackScope: this,
+                    });
+
+                    //Save the dialogue entry
+                    player.addDialogueTreeEntry({
+                        id: id,
+                        next_id: next_id
+                    });
                 },
                 this
             );

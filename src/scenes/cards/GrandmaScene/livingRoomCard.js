@@ -194,8 +194,8 @@ export class LivingRoomCard extends Card {
 
         //Play the cat animation
         this.arrow = this.parent_scene.add.sprite(
-            845 * window.horizontalRatio,
-            1516,
+            245,
+            716,
             'arrow'
         ).play('arrow_anim');
 
@@ -234,6 +234,9 @@ export class LivingRoomCard extends Card {
                 break;
 
             case GRANDMA_STATES.PHONE:
+
+                console.log("PHONE_DIALOGUE_END");
+
                 //show the phone
                 this.children[7].sprite.setActive(true).setVisible(true);
                 this.children[7].highlight_sprite.setActive(true).setVisible(true);
@@ -280,6 +283,9 @@ export class LivingRoomCard extends Card {
 
     changeGrandma(state) {
         if(this.parent_scene.dialogue.isDone()) {
+
+            this.grandma_state = state;
+            this.grandma_sprite.destroy();
 
             switch(state) {
                 case GRANDMA_STATES.IDLE:

@@ -7,6 +7,7 @@ import { Scenes } from "../core/player.js";
 import { WindowState, Months } from "./buildingScene.js";
 import { LivingRoomCard } from "./cards/GrandmaScene/livingRoomCard.js";
 import { DialogueController } from "../core/dialogueController.js";
+import { HallwayCards } from "./hallwayScene.js";
 
 export const GrandmaCards = {
     LIVING_ROOM: 0,
@@ -76,7 +77,9 @@ export class GrandmaScene extends Phaser.Scene {
      */
     init(data) {
         //Check if any saved data exists
-        if(data) {/* TODO */}
+        if(data.cardIdx) {
+            this.cardIdx = data.cardIdx;
+        }
     }
 
     /**
@@ -108,6 +111,10 @@ export class GrandmaScene extends Phaser.Scene {
 
         //Show the radio dialogue
         this.dialogue.display("news");
+
+        //Save the new game state
+        player.setData({ cardIdx: GrandmaCards.LIVING_ROOM });
+        player.saveGame();
     }
 
     /**
@@ -121,8 +128,11 @@ export class GrandmaScene extends Phaser.Scene {
      * @brief Notifies the current card that the dialogue has ended
      */
     notifyDialogueEnd() {
+        console.log("SCENE_NOTIFIED_OF_END");
+
         //Notify the current card if it is interested
         if(this.current_card.isDialogueSensitive()) {
+            console.log("NOTIFYING_CARD");
             this.current_card.notifyDialogueEnd();
         }
     }
@@ -132,6 +142,7 @@ export class GrandmaScene extends Phaser.Scene {
      * @param {GrandmaCards} card the next card to show
      */
     nextCard(card) {
+
         //Destroy the current card
         this.current_card.destroy();
 
@@ -162,22 +173,9 @@ export class GrandmaScene extends Phaser.Scene {
     }
 
     nextScene() {
-        this.scene.start("Building", {
-            mainMenu: false,
-            stage: 2,
-            windows: {
-                damien: WindowState.OFF,
-                grandma: WindowState.OFF,
-                family: WindowState.OFF,
-                indep: WindowState.ON
-            },
-            month: Months.MARCH,
-            nextScene: {
-                damien: null,
-                grandma: null,
-                family: null,
-                indep: null
-            }
+        this.scene.start(Scenes.HALLWAY, {
+            cardIdx: HallwayCards.INDEP_GRANDMA,
+            damien_gone: player.dialogue_tree.repOui !== null
         });
     }
 

@@ -2,26 +2,25 @@
     "texto": {
         "name": "Copine",
         "text": "Hello! Ca va? :)",
-        "choices": {
-            "bof": {
+        "choices": [{
                 "text": "Bof, j'arrive pas à me concentrer là...",
                 "goto": "repBof"
             },
-            "trql": {
+            {
                 "text": "Tranquille et toi?",
                 "goto": "repTrql"
             },
-            "pyjama": {
+            {
                 "text": "Je suis encore en pyjama lol",
                 "goto": "repPyjama"
             }
-        },
+        ],
         "goto": ["repBof", "repTrql", "repPyjama"]
     },
     "repBof": {
         "name": "Copine",
         "text": "T'inquiète, moi non plus",
-        "choices":{},
+        "choices": [],
         "goto": [".."]
     }
 }

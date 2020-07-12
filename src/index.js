@@ -7,6 +7,9 @@ import { ProtoScene } from "./scenes/protoScene.js";
 import { BuildingScene } from "./scenes/buildingScene.js";
 import { Player } from "./core/player.js";
 import { GrandmaScene } from "./scenes/grandmaScene.js";
+import { DamienComputerScene } from "./scenes/damienComputerScene.js";
+import { DamienKitchenClothesScene } from "./scenes/damienKitchenClothesScene.js";
+import { HallwayScene } from "./scenes/hallwayScene.js";
 
 let resizeTimeout;
 let plugins = [{
@@ -67,7 +70,10 @@ const config = {
     scene: [
       BuildingScene,
       ProtoScene,
-      GrandmaScene
+      DamienKitchenClothesScene,
+      DamienComputerScene,
+      GrandmaScene,
+      HallwayScene
     ],
     physics: {
         default: 'arcade'

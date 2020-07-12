@@ -193,32 +193,6 @@ export class ProtoGuy {
     }
 
     /**
-     * @brief Makes protoguy a card changing trigger
-     * @param {int} choice, the choice that this trigger intells
-     */
-    setProtoGuyCardTrigger(choice) {
-        this.sprite = this.parent_scene.add.image(this.x, this.y, this.name);
-        this.sprites = [this.sprite];
-
-        //Make the sprite interactive and add an event listener
-        this.sprite.setInteractive();
-        this.parent_scene.input.on(
-            'gameobjectdown',
-            (_, gameObject) => {
-                //Check that we clicked on the closet
-                if(gameObject === this.sprite) {
-                    console.log("click protoGuy");
-
-                    //Go to the next scene
-                    this.parent_scene.endCard();
-                    this.parent_scene.nextCard(choice);
-                }
-            },
-            this.parent_scene
-        );
-    }
-
-    /**
      * @brief Draws and places all of the character's images in the scene
      */
     create() {
@@ -252,8 +226,8 @@ export class ProtoGuy {
                 break;
 
             case ProtoGuyCard.CHOSE_PATH:
-                //Make protoguy trigger a card change
-                this.setProtoGuyCardTrigger(2);
+                this.sprite = this.parent_scene.add.image(this.x, this.y, this.name);
+                this.sprites = [this.sprite];
                 break;
 
             case ProtoGuyCard.CLOTHES:
