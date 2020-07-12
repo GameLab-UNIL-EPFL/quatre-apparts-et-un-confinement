@@ -3,6 +3,8 @@ import { game } from "..";
 export const Scenes = {
     INTRO: 'TitleScene',
     PROTOTYPE: 'Prototype',
+    DAMIEN_KITCHEN_CLOTHES: 'DamienKitchenClothesScene',
+    DAMIEN_COMPUTER: 'DamienComputer',
     BUILDING: 'Building',
     GRANDMA: 'Grandma'
 };
@@ -30,6 +32,14 @@ export class Player {
         if(data) {
             this.scene_data = data;
         }
+    }
+
+    /**
+     * @brief getter for the data attribute
+     * @returns {JSON} the data saved for the current scene
+     */
+    getData() {
+        return this.scene_data;
     }
 
     /**

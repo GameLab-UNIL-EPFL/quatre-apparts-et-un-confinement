@@ -175,7 +175,7 @@ export class DialogueController {
      * @return {boolean} whether the dialogue state is DONE
      */
     isDone() {
-        return this.cur_state === DialogueState.DONE;
+        return this.cur_state === DialogueState.DONE || this.cur_state === DialogueState.NONE;
     }
 
     /**
@@ -183,8 +183,6 @@ export class DialogueController {
      */
     endDialogue() {
         this.cur_state = DialogueState.DONE;
-
-        console.log("ENDING_DIALOGUE");
 
         //Notify the parent scene
         this.parent_scene.notifyDialogueEnd();
@@ -270,14 +268,12 @@ export class DialogueController {
             if(this.cur_state !== DialogueState.DONE) {
 
                 this.textIdx++;
-                console.log(this.textIdx);
 
                 //Make sure that it's not a prompt
                 if(this.cur_state === DialogueState.DISPLAYED) {
 
                     //Check if we've shown all of the text
                     if(this.textIdx === this.text.length) {
-                        console.log("END_DIALOGUE");
                         //Get rid of all dialogue elements
                         this.content.destroy();
                         this.name.destroy();
@@ -317,7 +313,6 @@ export class DialogueController {
     promptAnswers(id) {
         //Retrieve the dialogue
         const cur_dialogue = this.requestDialogue(id);
-        console.log(cur_dialogue);
 
         //Get rid of all existing prompts
         if(this.prompts) {

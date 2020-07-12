@@ -7,6 +7,8 @@ import { ProtoScene } from "./scenes/protoScene.js";
 import { BuildingScene } from "./scenes/buildingScene.js";
 import { Player } from "./core/player.js";
 import { GrandmaScene } from "./scenes/grandmaScene.js";
+import { DamienComputerScene } from "./scenes/damienComputerScene.js";
+import { DamienKitchenClothesScene } from "./scenes/damienKitchenClothesScene.js";
 
 let resizeTimeout;
 let plugins = [{
@@ -14,7 +16,7 @@ let plugins = [{
     plugin: RexUIPlugin,
     mapping: 'rexUI'
 }];
-const OBJECT_DEBUG = false;
+const OBJECT_DEBUG = true;
 if(OBJECT_DEBUG === true){
   plugins.push({
     key: 'debugObjects',
@@ -67,6 +69,8 @@ const config = {
     scene: [
       BuildingScene,
       ProtoScene,
+      DamienKitchenClothesScene,
+      DamienComputerScene,
       GrandmaScene
     ],
     physics: {
