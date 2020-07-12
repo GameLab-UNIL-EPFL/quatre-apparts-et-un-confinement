@@ -263,6 +263,8 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
     }
 
     nextScene(choices) {
+        this.cameras.main.fadeOut(1000);
+        
         this.scene.start(Scenes.DAMIEN_COMPUTER, {
             cardIdx: ProtoCards.COMPUTER,
             clothes: choices.clothes,

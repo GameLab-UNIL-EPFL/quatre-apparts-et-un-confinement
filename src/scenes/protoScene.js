@@ -261,8 +261,10 @@ export class ProtoScene extends Phaser.Scene {
     }
 
     nextScene(cardIdx) {
-        this.scene.start(Scenes.DAMIEN_KITCHEN_CLOTHES, { cardIdx: cardIdx });
-        this.destroy();
+        this.cameras.main.fadeOut(3000, 0, 0, 0,
+            () => this.scene.start(Scenes.DAMIEN_KITCHEN_CLOTHES, { cardIdx: cardIdx }),
+            this
+        );        
     }
 
     /**

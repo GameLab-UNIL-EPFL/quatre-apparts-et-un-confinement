@@ -190,6 +190,7 @@ export class DamienComputerScene extends Phaser.Scene {
     }
 
     nextScene() {
+        this.cameras.main.fadeOut(1000);
         this.scene.start("Building", {
             mainMenu: false,
             stage: 3,
