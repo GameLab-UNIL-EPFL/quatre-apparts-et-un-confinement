@@ -186,6 +186,13 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
 
         if(this.current_card.isLoaded()) {
             this.current_card.create();
+
+            //Trigger the dialogue
+            if(this.cardIdx === ProtoCards.CLOTHES) {
+                this.dialogue.display("habit");
+            } else {
+                this.dialogue.display("frigo");
+            }
         }
 
         //Update the saved data
@@ -264,7 +271,7 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
 
     nextScene(choices) {
         this.cameras.main.fadeOut(1000);
-        
+
         this.scene.start(Scenes.DAMIEN_COMPUTER, {
             cardIdx: ProtoCards.COMPUTER,
             clothes: choices.clothes,

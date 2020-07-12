@@ -117,7 +117,9 @@ export class DamienComputerScene extends Phaser.Scene {
         player.cur_scene = Scenes.DAMIEN_COMPUTER;
 
         //Handle the loaded food case
-        this.current_card.showItem(this.food);
+        if(this.cardIdx === ProtoCards.COMPUTER) {
+            this.current_card.showItem(this.food);
+        }
     }
 
     /**

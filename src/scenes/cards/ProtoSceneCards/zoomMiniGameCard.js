@@ -250,7 +250,7 @@ export class ZoomMiniGameCard extends Card {
                                 gameObject.x,
                                 gameObject.y,
                                 "notif-pop"
-                            ).play('pop');
+                            ).play('pop').on('complete', () => this.anim.destroy(), this);
 
                             //Remove the elelment in question
                             this.cur_msg.filter((val, _) => val === msg_idx);

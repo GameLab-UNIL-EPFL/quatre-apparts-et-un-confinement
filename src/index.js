@@ -9,6 +9,7 @@ import { Player } from "./core/player.js";
 import { GrandmaScene } from "./scenes/grandmaScene.js";
 import { DamienComputerScene } from "./scenes/damienComputerScene.js";
 import { DamienKitchenClothesScene } from "./scenes/damienKitchenClothesScene.js";
+import { HallwayScene } from "./scenes/hallwayScene.js";
 
 let resizeTimeout;
 let plugins = [{
@@ -71,7 +72,8 @@ const config = {
       ProtoScene,
       DamienKitchenClothesScene,
       DamienComputerScene,
-      GrandmaScene
+      GrandmaScene,
+      HallwayScene
     ],
     physics: {
         default: 'arcade'

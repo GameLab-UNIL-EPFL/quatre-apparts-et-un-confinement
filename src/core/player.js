@@ -6,7 +6,8 @@ export const Scenes = {
     DAMIEN_KITCHEN_CLOTHES: 'DamienKitchenClothesScene',
     DAMIEN_COMPUTER: 'DamienComputer',
     BUILDING: 'Building',
-    GRANDMA: 'Grandma'
+    GRANDMA: 'Grandma',
+    HALLWAY: 'Hallway'
 };
 
 /**
@@ -96,13 +97,20 @@ export class Player {
 
         //Check if said file exists
         if(storedGame) {
-            try{
+            try {
                 game_data = JSON.parse(atob(storedGame));
             } catch(e) {
                 console.log('Could not get game data:', e);
             }
 
             if(game_data) {
+
+                //Load all data into the player
+                this.dialogue_tree = game_data.tree;
+                this.cur_scene = game_data.scene;
+                this.scene_data = game_data.data;
+
+                //Start the loaded scene
                 game.scene.start(game_data.scene, game_data.data);
             }
         }
