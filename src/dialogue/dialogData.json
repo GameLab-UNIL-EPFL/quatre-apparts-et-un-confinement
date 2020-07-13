@@ -119,6 +119,11 @@
 				"text": ["☹"],
 				"preview": "☹",
 				"goto": "cours"
+			},
+			"rep2": {
+				"text": ["😖"],
+				"preview": "😖",
+				"goto": "cours"
 			}
 		},
 		"goto": ["cours"]
@@ -145,8 +150,13 @@
 		"text": ["Haha rhoo tu pourrais t’habiller quand même"],
 		"choices":{
 			"rep": {
-				"text": ["Hehehe"],
-				"preview": "Hehehe",
+				"text": ["😜"],
+				"preview": "😜",
+				"goto": "cours"
+			},
+			"rep2": {
+				"text": ["😂"],
+				"preview": "😂",
 				"goto": "cours"
 			}
 		},
@@ -244,7 +254,7 @@
 		"text": ["Ouais on sait pas trop encore.. mais bon tu viens? T’as promis de m’aider à étudier!"],
 		"choices": {
 			"oui": {
-				"text": "Oui, je viens direct après mon cours",
+				"text": "Oui, à toute!",
 				"preview": ["Oui"],
 				"goto": "repOui"
 			},
