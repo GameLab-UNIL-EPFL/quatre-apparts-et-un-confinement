@@ -77,20 +77,35 @@
 		"choices": {},
 		"goto": []
 	},
+	"hello": {
+		"name": "Copine",
+		"text": ["Coucou!"],
+		"choices":{
+			"hello": {
+				"text": ["Hello!"],
+				"preview": "Hello!",
+				"goto": "texto"
+			}
+		},
+		"goto": ["texto"]
+	},
 	"texto": {
 		"name": "Copine",
-		"text": ["Hello! Ca va? :)"],
+		"text": ["Ca va? 😊"],
 		"choices": {
 			"bof": {
-				"text": ["Bof, j’arrive pas à me concentrer là..."],
+				"text": ["Bof, je m'ennuie là..."],
+				"preview": "Bof",
 				"goto": "repBof"
 			},
 			"trql": {
 				"text": ["Tranquille et toi?"],
+				"preview": "Tranquille",
 				"goto": "repTrql"
 			},
 			"pyjama": {
 				"text": ["Je suis encore en pyjama lol"],
+				"preview": "En pyjama",
 				"goto": "repPyjama"
 			}
 		},
@@ -98,20 +113,104 @@
 	},
 	"repBof": {
 		"name": "Copine",
-		"text": ["T’inquiète, moi non plus"],
-		"choices":{},
-		"goto": ["sortir"]
+		"text": ["Ouais moi aussi"],
+		"choices":{
+			"rep": {
+				"text": ["☹"],
+				"preview": "☹",
+				"goto": "cours"
+			},
+			"rep2": {
+				"text": ["😖"],
+				"preview": "😖",
+				"goto": "cours"
+			}
+		},
+		"goto": ["cours"]
 	},
 	"repTrql": {
 		"name": "Copine",
-		"text": ["Ouais pareil :)"],
-		"choices":{},
-		"goto": ["sortir"]
+		"text": ["Ouais pareil!"],
+		"choices":{
+			"rep": {
+				"text": ["Top 😊"],
+				"preview": "Top 😊",
+				"goto": "cours"
+			},
+			"rep2": {
+				"text": ["Nice 😁"],
+				"preview": "Nice 😁",
+				"goto": "cours"
+			}
+		},
+		"goto": ["cours"]
 	},
 	"repPyjama": {
 		"name": "Copine",
 		"text": ["Haha rhoo tu pourrais t’habiller quand même"],
-		"choices":{},
+		"choices":{
+			"rep": {
+				"text": ["😜"],
+				"preview": "😜",
+				"goto": "cours"
+			},
+			"rep2": {
+				"text": ["😂"],
+				"preview": "😂",
+				"goto": "cours"
+			}
+		},
+		"goto": ["cours"]
+	},
+	"cours": {
+		"name": "Copine",
+		"text": ["C'était bien ton cours?"],
+		"choices": {
+			"bof": {
+				"text": ["Non, j'aime pas avoir les cours en ligne"],
+				"preview": "Non, j'aime pas",
+				"goto": "aimePas"
+			},
+			"trql": {
+				"text": ["Ouais j'adore! C'est tellement pratique"],
+				"preview": "Ouais j'adore!",
+				"goto": "aime"
+			}
+		},
+		"goto": ["aimePas", "aime"]
+	},
+	"aimePas": {
+		"name": "Copine",
+		"text": ["Je comprends... C'est pas facile de se concentrer."],
+		"choices": {
+			"bof": {
+				"text": ["Ouais vraiment et j'en ai marre de seulement voir des visages sur un écran!"],
+				"preview": "Marre de l'écran",
+				"goto": "sortir"
+			},
+			"trql": {
+				"text": ["Ouais mais au moins on a plus besoin de prendre le bus!"],
+				"preview": "Plus besoin de bus",
+				"goto": "sortir"
+			}
+		},
+		"goto": ["sortir"]
+	},
+	"aime": {
+		"name": "Copine",
+		"text": ["C'est vrai! Plus besoin de s'habiller... ni prendre le bus"],
+		"choices": {
+			"bof": {
+				"text": ["Ouais le bus me manque pas du tout!"],
+				"preview": "Marre du bus",
+				"goto": "sortir"
+			},
+			"trql": {
+				"text": ["Ouais le pantalon c'est optionnel de nos jours"],
+				"preview": "Plus besoin de pantalon",
+				"goto": "sortir"
+			}
+		},
 		"goto": ["sortir"]
 	},
 	"sortir": {
@@ -155,7 +254,7 @@
 		"text": ["Ouais on sait pas trop encore.. mais bon tu viens? T’as promis de m’aider à étudier!"],
 		"choices": {
 			"oui": {
-				"text": "Oui, je viens direct après mon cours",
+				"text": "Oui, à toute!",
 				"preview": ["Oui"],
 				"goto": "repOui"
 			},
@@ -197,7 +296,7 @@
 	},
 	"repNon": {
 		"name": "Copine",
-		"text": ["Rhoo </3"],
+		"text": ["Rhoo 💔"],
 		"choices":{},
 		"goto": []
 	}

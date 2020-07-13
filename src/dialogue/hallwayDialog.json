@@ -1,0 +1,57 @@
+{
+	"damienAway": {
+		"name": "Suzanne",
+		"text": [
+			"Personne?",
+			"Hmm, je pensais que tout le monde serait à la maison en ce moment."
+		],
+		"choices": {},
+		"goto": []
+	},
+	"damienHome": {
+		"name": "Suzanne",
+		"text": [
+            "Bonjour, j’aurais besoin de quelqu’un pour aller faire les courses pour moi.", 
+            "Est-ce que vous seriez d’accord de m’aider?"
+		],
+		"choices": {},
+		"goto": []
+	},
+	"damienReply": {
+		"name": "Damien",
+        "text": [
+            "Désolé madame, j’essaie de suivre un cours en ligne.", 
+            "Est-ce que vous pouvez demander à quelqu’un d’autre?"],
+		"choices": {},
+		"goto": []
+    },
+    "PatrickHome": {
+		"name": "Suzanne",
+        "text": [
+            "Bonjour, est-ce que vous pourriez m’aider?", 
+            "J’aurais besoin que quelqu’un aille faire les courses pour moi."],
+		"choices": {},
+		"goto": []
+    },
+    "patrickReply": {
+        "name": "Patrick",
+        "text": [
+            "Oui, pas de problème madame, j’allais justement y aller aujourd’hui."
+        ],
+        "choices": {},
+        "goto": []
+    },
+    "patrickReturn": {
+        "name": "Patrick",
+        "text": [
+            "Voilà vos courses et la monnaie."
+        ] 
+    },
+    "suzanneReply": {
+        "name": "Suzanne",
+        "text": [
+            "Merci infiniment! C’est compliqué de plus pouvoir faire les courses.",
+            "N'hésitez pas à me demander s'il vous faut quoique ce soit!"
+        ] 
+    }
+}
