@@ -17,7 +17,7 @@ export class DamienComputerScene extends Phaser.Scene {
      * in said scene
      */
     constructor() {
-        super({key: 'DamienComputer'});
+        super({ key: Scenes.DAMIEN_COMPUTER });
 
         //Keep track of the clothes that protoguy is wearing
         this.clothes = ProtoGuyClothes.PYJAMAS;
@@ -193,7 +193,7 @@ export class DamienComputerScene extends Phaser.Scene {
 
     nextScene() {
         this.cameras.main.fadeOut(1000);
-        this.scene.start("Building", {
+        this.scene.start(Scenes.BUILDING, {
             mainMenu: false,
             stage: 3,
             windows: {

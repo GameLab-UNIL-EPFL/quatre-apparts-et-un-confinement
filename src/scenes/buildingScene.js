@@ -21,7 +21,7 @@ export class BuildingScene extends Phaser.Scene {
      * @brief initializes the scene
      */
     constructor() {
-        super({key: 'Building'});
+        super({ key: Scenes.BUILDING });
 
         //Information about what's shown in the scene
         this.info = {
@@ -31,14 +31,14 @@ export class BuildingScene extends Phaser.Scene {
                 damien: WindowState.ON,
                 grandma: WindowState.ON,
                 family: WindowState.OFF,
-                indep: WindowState.OFF
+                indep: WindowState.ON
             },
             month: Months.MAY,
             nextScene: {
                 damien: Scenes.PROTOTYPE,
                 grandma: Scenes.GRANDMA,
                 family: null,
-                indep: null
+                indep: Scenes.INDEP
             }
         };
 
@@ -480,19 +480,10 @@ export class BuildingScene extends Phaser.Scene {
 
                 //Make window interactive
                 if(this.info.nextScene.indep) {
-                    this.sprites['indep_window'].setInteractive();
-                    this.sprites['indep_window_mid'].setInteractive();
+                    const interaction = () => this.scene.start(this.info.nextScene.indep);
 
-                    this.input.on(
-                        'gameobjectdown',
-                        (_, gameObject) => {
-                            //Check that we clicked on the right window
-                            if(gameObject === this.sprites['indep_window']) {
-                                this.scene.start(this.info.nextScene.indep);
-                            }
-                        },
-                        this
-                    );
+                    this.sprites['indep_window'].setInteractive().on('pointerdown', interaction, this);
+                    this.sprites['indep_window_mid'].setInteractive().on('pointerdown', interaction, this);
                 }
                 break;
 

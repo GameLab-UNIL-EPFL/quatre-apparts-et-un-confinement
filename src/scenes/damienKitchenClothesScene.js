@@ -17,7 +17,7 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
      * in said scene
      */
     constructor() {
-        super({key: 'DamienKitchenClothesScene'});
+        super({ key: Scenes.DAMIEN_KITCHEN_CLOTHES });
 
         //Keep track of the clothes that protoguy is wearing
         this.clothes = ProtoGuyClothes.PYJAMAS;
