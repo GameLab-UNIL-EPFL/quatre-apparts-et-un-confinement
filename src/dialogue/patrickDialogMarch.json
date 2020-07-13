@@ -1,4 +1,29 @@
 {
+    "tv": {
+		"name": "TV",
+		"text": [
+			"..."
+		],
+		"choices": [],
+		"goto": []
+	},
+	"dvd1": {
+		"name": "",
+		"text": [
+            "Intouchables (2011)"
+		],
+		"choices": [],
+		"goto": []
+	},
+	"dvd2": {
+		"name": "",
+        "text": [
+            "The Mask (1994)",
+            "Du bon Jim Carrey ça!"
+		],
+        "choices": [],
+		"goto": []
+	},
     "telephone": {
 		"name": "Patrick",
 		"text": ["Bon, qui est-ce que je pourrais appeler?"],
@@ -27,7 +52,7 @@
 		"choices": [
 			{
 				"text": ["Bien"],
-				"preview": "Bien! Je suis en vacances forcées",
+				"preview": "Bien! Je suis en vacances forcées...",
 				"goto": "bien"
 			},
 			{
