@@ -173,8 +173,8 @@ export class GrandmaScene extends Phaser.Scene {
 
     nextScene() {
         this.scene.start(Scenes.HALLWAY, {
-            cardIdx: HallwayCards.INDEP_GRANDMA,
-            damien_gone: player.dialogue_tree.repOui !== null
+            cardIdx: HallwayCards.DAMIEN_CLOSED,
+            damien_gone: false//player.dialogue_tree.repOui !== null
         });
     }
 

@@ -5,6 +5,7 @@ import { CardObject } from "./objects/cardObject.js";
 import { Background } from "./objects/background.js";
 import { player } from "../index.js";
 import { Scenes } from "../core/player.js";
+import { WindowState, Months } from "./buildingScene.js";
 
 export const HallwayCards = {
     DAMIEN_CLOSED: 0,
@@ -38,6 +39,7 @@ export class HallwayScene extends Phaser.Scene {
                     (scene) => {
                         if(scene.damien_gone) {
                             scene.dialogue.display("damienAway");
+                            scene.damien_closed_card.dialogueSensitive = true;
                         } else {
                             scene.endCard();
                             scene.nextCard();
@@ -340,7 +342,7 @@ export class HallwayScene extends Phaser.Scene {
 
                     //Load the next card
                     this.current_card.create();
-                    this.dialogue.display("PatrickHome");
+                    this.dialogue.display("PatrickHome", true);
                     break;
 
                 case HallwayCards.INDEP_OPEN:
@@ -382,7 +384,23 @@ export class HallwayScene extends Phaser.Scene {
         }
 
         this.cameras.main.fadeOut(3000, 0, 0, 0,
-            () => this.scene.start(Scenes.DAMIEN_KITCHEN_CLOTHES, { cardIdx: cardIdx }),
+            () => this.scene.start(Scenes.BUILDING, {
+                mainMenu: false,
+                stage: 3,
+                windows: {
+                    damien: WindowState.OFF,
+                    grandma: WindowState.OFF,
+                    family: WindowState.OFF,
+                    indep: WindowState.OFF
+                },
+                month: Months.MARCH,
+                nextScene: {
+                    damien: null,
+                    grandma: null,
+                    family: null,
+                    indep: null
+                }
+            }),
             this
         );        
     }

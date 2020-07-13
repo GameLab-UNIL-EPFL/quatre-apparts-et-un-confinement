@@ -209,7 +209,7 @@ export class DialogueController {
      * @param {string} id the ID of the dialogue that we want to display
      * @param {boolean} up_down true if the dialogue will be placed on the top, false if on the bottom
      */
-    display(id, up_down=true) {
+    display(id, dontEnd=false, up_down=true) {
         this.dialogue_pos = up_down ? UP_POS : DOWN_POS;
 
         this.current_conv_id = id;
@@ -265,6 +265,16 @@ export class DialogueController {
         this.content.setDepth(5);
 
         const interaction = () => {
+            //Prompt user if necessary on interaction
+            if(this.requestDialogue(id).goto.length !== 0 && this.textIdx === this.text.length - 1) {
+                if(Object.keys(this.requestDialogue(id).choices).length !== 0) {
+                    this.promptAnswers(id);
+                } else {
+                    this.display(this.requestDialogue(id).goto[0], false);
+                    return;
+                }
+            }
+
             //Check that we clicked on the text
             if(this.cur_state !== DialogueState.DONE) {
 
@@ -275,25 +285,22 @@ export class DialogueController {
 
                     //Check if we've shown all of the text
                     if(this.textIdx === this.text.length) {
-                        //Get rid of all dialogue elements
-                        this.content.destroy();
-                        this.name.destroy();
-                        this.background.destroy();
-                        this.content.disableInteractive();
-                        this.textIdx = 0;
 
-                        //Update dialogue state
-                        this.endDialogue();
+                        if(!dontEnd) {
+                            //Get rid of all dialogue elements
+                            this.content.destroy();
+                            this.name.destroy();
+                            this.background.destroy();
+                            this.content.disableInteractive();
+                            this.textIdx = 0;
 
+                            //Update dialogue state
+                            this.endDialogue();
+                        }
                     } else {
                         this.content.text = this.text[this.textIdx];
                     }
                 }
-            }
-
-            //Prompt user if necessary on interaction
-            if(this.requestDialogue(id).goto.length !== 0 && this.textIdx === this.text.length - 1) {
-                this.promptAnswers(id);
             }
         };
 
@@ -303,7 +310,12 @@ export class DialogueController {
 
         //Prompt user if necessary
         if(this.requestDialogue(id).goto.length !== 0 && this.textIdx === this.text.length - 1) {
-            this.promptAnswers(id);
+            if(Object.keys(this.requestDialogue(id).choices).length !== 0) {
+                this.promptAnswers(id);
+            } else {
+                this.display(this.requestDialogue(id).goto[0], false);
+                return;
+            }
         }
     }
 
