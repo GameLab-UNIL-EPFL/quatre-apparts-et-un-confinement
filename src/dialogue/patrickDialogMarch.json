@@ -26,7 +26,7 @@
 	},
     "telephone": {
 		"name": "Patrick",
-		"text": ["Bon, qui est-ce que je pourrais appeler?"],
+		"text": ["Qui est-ce que je pourrais contacter?"],
 		"choices":[
 			{
 				"text": ["Nathan"],
@@ -49,52 +49,58 @@
     "nathan": {
 		"name": "Nathan",
 		"text": ["Salut comment tu vas?"],
-		"choices": [
+		"choices": {
+            "rep":
 			{
-				"text": ["Bien"],
-				"preview": "Bien! Je suis en vacances forcées...",
+				"text": ["Bien! Je suis en vacances forcées..."],
+				"preview": "Bien!",
 				"goto": "bien"
-			},
+            },
+            "rep2":
 			{
-				"text": ["Ben"],
-				"preview": "Ben je me sens un peu seul.",
+				"text": ["Ben je me sens un peu seul."],
+				"preview": "Je me sens seul",
 				"goto": "seul"
 			}
-        ],
+        },
 		"goto": ["bien", "seul"]
 	},
 	"bien": {
 		"name": "Nathan",
 		"text": ["Ouais t'as trop de la chance!"],
-		"choices": [
+		"choices": {
+            "rep":
 			{
-				"text": ["Ouais"],
-				"preview": "Ouais enfin des vacances à la maison...",
+				"text": ["Ouais Ouais enfin des vacances à la maison..."],
+				"preview": "vacances à la maison...",
 				"goto": "couple"
-			},
+            },
+            "rep2":
 			{
-				"text": ["Ouais"],
-				"preview": "Ouais enfin c'est des vacances non payées...",
+				"text": ["Ouais enfin c'est des vacances non payées..."],
+				"preview": "vacances non payées...",
 				"goto": "couple"
 			}
-        ],
+        },
 		"goto": ["couple"]
 	},
 	"seul": {
 		"name": "Nathan",
 		"text": ["Dis pas ça... Tu ne sais pas comme j'aimerais être à ta place!"],
-		"choices": [
+		"choices": {
+            "rep":
 			{
 				"text": ["Comment ça? Je ne vois plus personne!"],
-				"preview": "Comment ça? Je ne vois plus personne!",
+				"preview": "Comment ça?",
 				"goto": "personne"
-			},
+            },
+            "rep2":
 			{
-				"text": ["Quoi?"],
-				"preview": "Quoi? Ça ne se passe pas bien avec Elise?",
+				"text": ["Quoi? Ça ne se passe pas bien avec Elise?"],
+				"preview": "Quoi?",
 				"goto": "elise"
 			}
-        ],
+        },
 		"goto": ["personne", "elise"]
 	},
 	"couple": {
@@ -103,134 +109,148 @@
             "Moi je continue à travailler depuis la maison et Elise aussi...", 
             "Donc autant te dire que c'est loin d'être des vacances"
         ],
-		"choices": [
+		"choices": {
+            "rep":
 			{
-				"text": ["Quoi?"],
-				"preview": "Quoi? Ça se passe pas bien avec Elise?",
+				"text": ["Quoi? Ça se passe pas bien avec Elise?"],
+				"preview": "Quoi?",
 				"goto": "elise"
 			}
-        ],
+        },
 		"goto": ["elise"]
 	},
 	"elise": {
 		"name": "Nathan",
 		"text": ["Ecoute, c'est pas facile. On est presque 24h sur 24 dans le même petit appart, donc la tension monte vite. "],
-		"choices": [
+		"choices": {
+            "rep":
 			{
-				"text": ["Non"],
+				"text": ["Oh non!"],
 				"preview": "Oh non!",
 				"goto": "conseil"
-			},
+            },
+            "rep2":
 			{
-				"text": ["Pire"],
-				"preview": "Ça pourrait être pire! On échange si tu veux.",
+				"text": ["Ça pourrait être pire! On échange si tu veux."],
+				"preview": "Ça pourrait être pire!",
 				"goto": "conseil"
 			}
-        ],
+        },
 		"goto": ["conseil"]
 	},
 	"conseil": {
 		"name": "Nathan",
 		"text": ["Je ne sais vraiment pas quoi faire. Si on ne trouve pas une solution, on va pas tenir jusqu'au déconfinement."],
-		"choices": [
+		"choices": {
+            "rep":
 			{
-				"text": ["mauvais conseil"],
-				"preview": "Je pense que tu dois juste être plus attentionné, c'est ce que toutes les femmes veulent.",
+				"text": ["Je pense que tu dois juste être plus attentionné, c'est ce que toutes les femmes veulent."],
+				"preview": "Plus attentionné",
 				"goto": "fin"
-			},
+            },
+            "rep2":
 			{
-				"text": ["bon conseil"],
-				"preview": "Je pense que vous devez juste prendre un peu de temps pour vous.",
+				"text": ["Je pense que vous devez juste prendre un peu de temps pour vous."],
+				"preview": "prendre du temps pour vous.",
 				"goto": "fin"
 			}
-        ],
+        },
 		"goto": ["fin"]
 	},
 	"fin": {
 		"name": "Nathan",
 		"text": ["Ah merci! Je vais suivre ton conseil alors! J'y vais salut!"],
-		"choices": [
+		"choices": {
+            "rep":
 			{
-				"text": ["Ouais"],
-				"preview": "Ouais! Tu me tiens au courant! A bientôt!",
+				"text": ["Ouais! Tu me tiens au courant! A bientôt!"],
+				"preview": "Ouais!",
 				"goto": "sortir"
 			}
-        ],
+        },
 		"goto": []
     },
     "sandrine": {
         "name": "Sandrine",
 		"text": ["Coucou ça va? ça fait longtemps!"],
-		"choices": [
+		"choices": {
+            "rep":
 			{
-				"text": ["hello"],
-				"preview": "Hello! Ouais c'est clair! Tu deviens quoi?",
+				"text": ["Hello! Ouais c'est clair! Tu deviens quoi?"],
+				"preview": "Hello!",
 				"goto": "hello"
 			}
-        ],
+        },
 		"goto": ["hello"]
     },
     "hello": {
         "name": "Sandrine",
 		"text": ["Comment dire... pas grand chose là. Ce n'est pas vraiment le meilleur moment pour être au chômage..."],
-		"choices": [
+		"choices": {
+            "rep":
 			{
-				"text": ["hello"],
-				"preview": "Je comprends, ce n'est pas le meilleur moment pour être indépendant non plus...",
+				"text": ["Je comprends, ce n'est pas le meilleur moment pour être indépendant non plus..."],
+				"preview": "Je comprends...",
 				"goto": "independant"
 			}
-        ],
+        },
 		"goto": ["independant"]
     },
     "independant": {
         "name": "Sandrine",
 		"text": ["Ah oui juste! Tu bosses plus du tout?"],
-		"choices": [
+		"choices": {
+            "rep":
 			{
-				"text": ["non"],
-				"preview": "Non et je n'ai pas le droit au chômage moi...",
+				"text": ["Non et je n'ai pas le droit au chômage moi..."],
+				"preview": "pas le droit au chômage",
 				"goto": "aide"
             },
+            "rep2":
             {
-				"text": ["non"],
-				"preview": "Non, vacances forcées mais non payées...",
+				"text": ["Non, vacances forcées mais non payées..."],
+				"preview": "vacances non payées...",
 				"goto": "aide"
 			}
-        ],
+        },
 		"goto": ["aide"]
     },
     "aide": {
         "name": "Sandrine",
 		"text": ["Oh non! Je suis vraiment désolée. N'hésite pas si t'as besoin d'aide avec quoique ce soit!"],
-		"choices": [
+		"choices": {
+            "rep":
 			{
-				"text": ["merci"],
-				"preview": "Merci c'est super sympa!",
+				"text": ["Merci c'est super sympa!"],
+				"preview": "Merci c'est sympa!",
 				"goto": "apero"
             },
+            "rep2":
             {
-				"text": ["merci"],
-				"preview": "Merci je te tiens au courant alors!",
+				"text": ["Merci je te tiens au courant alors!"],
+				"preview": "Merci je te redis!",
 				"goto": "apero"
 			}
-        ],
+        },
 		"goto": ["apero"]
     },
     "apero": {
         "name": "Sandrine",
 		"text": ["Ok! Sinon, j'organise un skypéro samedi avec les autres? T'es libre j'imagine?"],
-		"choices": [
+		"choices": {
+            "rep":
 			{
-				"text": ["oui"],
-				"preview": "Oui compte sur moi!",
+				"text": ["Oui compte sur moi!"],
+				"preview": "Oui!",
 				"goto": "oui"
             },
+            "rep2":
             {
-				"text": ["merci"],
-				"preview": "Non, désolé je ne suis pas trop fan des soirées en ligne comme ça",
+				"text": ["Non, désolé je ne suis pas trop fan des soirées en ligne comme ça"],
+				"preview": "Non, désolé",
 				"goto": "non"
 			}
-        ],
+        },
 		"goto": ["oui", "non"]
     },
     "oui": {
@@ -248,13 +268,14 @@
     "paul": {
 		"name": "Paul",
 		"text": ["Allo?"],
-		"choices": [
+		"choices": {
+            "rep":
 			{
 				"text": ["Allo Paul! Tu vas bien?"],
 				"preview": "Allo Paul! Tu vas bien?",
 				"goto": "desole"
 			}
-		],
+        },
 		"goto": ["desole"]
 	},
 	"desole": {
@@ -264,7 +285,7 @@
 			"Je travaille sur un nouveau projet en lien avec le covid.",
 			"Je t'en reparle une prochaine fois! Ciao"
 		],
-		"choices": [],
+		"choices": {},
 		"goto": []
 	}
 }
