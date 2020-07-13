@@ -35,8 +35,15 @@ export class HallwayScene extends Phaser.Scene {
                     this,
                     { name: "damienHallwayDoor", url: "sprites/HallwayScenes/Palier-Etudiant-Ferme/door.png" },
                     new Phaser.Math.Vector2(-215, -80),
-                    null,
-                    null,
+                    (scene) => {
+                        if(scene.damien_gone) {
+                            scene.dialogue.display("damienAway");
+                        } else {
+                            scene.endCard();
+                            scene.nextCard();
+                        }
+                    },
+                    this,
                     0,
                     { name: "damienHallwayDoor_h", url: "sprites/HallwayScenes/Palier-Etudiant-Ferme/door_h.png" }
                 ),
@@ -158,7 +165,7 @@ export class HallwayScene extends Phaser.Scene {
         this.damien_gone = false;
 
         //Create the dialogue controller
-        this.dialogue = new DialogueController(this);
+        this.dialogue = new DialogueController(this, "hallwayDialog");
     }
 
     /**
@@ -168,10 +175,8 @@ export class HallwayScene extends Phaser.Scene {
     init(data) {
         //Check if any saved data exists
         if(data) {
-            console.log("INIT_HALLWAY");
             //Get damien's status
             if(data.damien_gone) {
-                console.log("INIT_HALLWAY_DAMIEN_GONE");
                 this.damien_gone = data.damien_gone;
             }
 
@@ -307,12 +312,12 @@ export class HallwayScene extends Phaser.Scene {
                     if(this.damien_gone) {
                         this.cardIdx = HallwayCards.INDEP_CLOSED;
                         this.current_card = this.indep_closed_card;
+
                     } else {
                         this.cardIdx = HallwayCards.DAMIEN_OPEN;
                         this.current_card = this.damien_open_card;
 
-                        //Display the dialogue
-                        //TODO Display the right dialogue
+                        callback = () => this.dialogue.display("damienHome");
                     }
 
                     //Load the next card
@@ -335,6 +340,7 @@ export class HallwayScene extends Phaser.Scene {
 
                     //Load the next card
                     this.current_card.create();
+                    this.dialogue.display("PatrickHome");
                     break;
 
                 case HallwayCards.INDEP_OPEN:
