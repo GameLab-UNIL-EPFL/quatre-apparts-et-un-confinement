@@ -84,6 +84,6 @@ export class MessageCard extends Card {
 
         prompt_sprite.setDepth(-2);
 
-        this.parent_scene.dialogue.displayMessage("sortir", true);
+        this.parent_scene.dialogue.displayMessage("hello", true);
     }
 }

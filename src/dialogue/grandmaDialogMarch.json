@@ -14,7 +14,7 @@
 		"text": [
 			"La peste - Albert Camus",
 			"Du reste, le docteur Rieux, par exemple, considérait que c’était cela le malheur, justement,",
-			"et que l’habitude du désespoir est pire que le désespoir lui-même."
+			"et que l’habitude du confinement est pire que le confinement lui-même."
 		],
 		"choices": [],
 		"goto": []
@@ -257,7 +257,7 @@
 				"goto": "non"
 			},
 			{
-				"text": ["Oui bien sûr! Je pense pas pouvoir m’en remettre..."],
+				"text": ["Oui bien sûr! Je ne pense pas pouvoir m’en remettre..."],
 				"preview": "Oui",
 				"goto": "peur"
             }
@@ -267,8 +267,8 @@
     "non": {
         "name": "Françoise",
 		"text": [
-			"Ah c’est bien, mais on sait jamais.",
-			"Prends bien soin de toi en tout cas!"
+			"Ah c’est bien, mais on ne sait jamais.",
+			"Prend bien soin de toi en tout cas!"
 		],
         "choices": [
 			{
@@ -283,7 +283,7 @@
         "name": "Françoise",
 		"text": [
 			"Oui, c’est normal. On peut y passer...",
-			"Fais bien attention et prends bien soin de toi!"
+			"Fais bien attention et prend bien soin de toi!"
 		],
         "choices": [
 			{
@@ -352,15 +352,15 @@
 	},
 	"sante": {
 		"name": "Sophie",
-		"text": ["Oui, ben on est pas vraiment sorti encore donc à part la fatigue, tout vas bien."],
+		"text": ["Oui, ben on n'est pas vraiment sorti encore donc à part la fatigue, tout vas bien."],
 		"choices": [
 			{
-				"text": ["Tant mieux, mais oublie pas de boire du jus de gingembre et de curcuma!"],
+				"text": ["Tant mieux, mais n'oublie pas de boire du jus de gingembre et de curcuma!"],
 				"preview": "Tant mieux",
 				"goto": "fin"
 			},
 			{
-				"text": ["Tant mieux, mais oublie pas de manger de la soupe à l’ortie!"],
+				"text": ["Tant mieux, mais n'oublie pas de manger de la soupe à l’ortie!"],
 				"preview": "Tant mieux",
 				"goto": "fin"
 			}
@@ -394,7 +394,7 @@
 	"desole": {
 		"name": "Marc",
 		"text": [
-			"Ah Salut Suzanne, désolé j’ai vraiment pas le temps là.",
+			"Ah Salut Suzanne, désolé je n'ai vraiment pas le temps là.",
 			"On doit tout réorganiser pour le mariage, c’est vraiment compliqué.",
 			"Marion est stressée comme pas possible. Je te laisse!"
 		],
