@@ -23,7 +23,7 @@ export class HallwayScene extends Phaser.Scene {
      * in said scene
      */
     constructor() {
-        super({key: 'Hallway'});
+        super({ key: Scenes.HALLWAY });
 
         this.damien_closed_card = new Card(this, [
                 new Background(

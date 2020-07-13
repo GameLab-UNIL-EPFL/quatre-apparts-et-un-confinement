@@ -24,7 +24,7 @@ export class GrandmaScene extends Phaser.Scene {
      * in said scene
      */
     constructor() {
-        super({key: 'Grandma'});
+        super({ key: Scenes.GRANDMA });
 
         this.livingRoomCard = new LivingRoomCard(this);
         this.radioCard = new Card(this, [
@@ -73,7 +73,6 @@ export class GrandmaScene extends Phaser.Scene {
     /**
      * @brief Preloads the scene using saved data (if any)
      * @param {JSON} data { cardIdx, clothes, food }
-     * @todo Implement saving in grandma scene
      */
     init(data) {
         //Check if any saved data exists
