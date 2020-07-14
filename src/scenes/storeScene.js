@@ -21,6 +21,7 @@ export class StoreScene extends Phaser.Scene {
         this.firstShelf = new Card(this, [
                 new Background(
                     this,
+                    // "sprites/StoreScene/part1/rayon01_01_rayonnage.jpg"
                     "sprites/StoreScene/part1/rayon01_00_model_light.jpg",
                     "storeBg1"
                 ),
@@ -43,7 +44,7 @@ export class StoreScene extends Phaser.Scene {
                     this,
                     { name: "pasta3", url: "sprites/StoreScene/part1/rayon01_03_pate03.png" },
                     new Phaser.Math.Vector2(-441, -132),
-                    (scene) => scene.takeObject("pasta2"),
+                    (scene) => scene.takeObject("pasta3"),
                     this
                 ),
                 
@@ -51,20 +52,189 @@ export class StoreScene extends Phaser.Scene {
                     this,
                     { name: "pasta4", url: "sprites/StoreScene/part1/rayon01_03_pate04.png" },
                     new Phaser.Math.Vector2(-328, -132),
-                    (scene) => scene.takeObject("pasta2"),
+                    (scene) => scene.takeObject("pasta4"),
                     this
                 ),
                 new CardObject(
                     this,
                     { name: "pasta5", url: "sprites/StoreScene/part1/rayon01_03_pate05.png" },
                     new Phaser.Math.Vector2(-206, -132),
-                    (scene) => scene.takeObject("pasta2"),
+                    (scene) => scene.takeObject("pasta5"),
+                    this
+                ),
+                new CardObject(
+                    this,
+                    { name: "farine01", url: "sprites/StoreScene/part1/rayon01_03_farine01.png" },
+                    new Phaser.Math.Vector2(-525, 145),
+                    (scene) => scene.takeObject("farine01"),
+                    this
+                ),
+                new CardObject(
+                    this,
+                    { name: "farine02", url: "sprites/StoreScene/part1/rayon01_03_farine02.png" },
+                    new Phaser.Math.Vector2(-417, 148),
+                    (scene) => scene.takeObject("farine02"),
+                    this
+                ),
+                new CardObject(
+                    this,
+                    { name: "farine03", url: "sprites/StoreScene/part1/rayon01_03_farine03.png" },
+                    new Phaser.Math.Vector2(-294, 145),
+                    (scene) => scene.takeObject("farine03"),
+                    this
+                ),
+                new CardObject(
+                    this,
+                    { name: "farine04", url: "sprites/StoreScene/part1/rayon01_03_farine04.png" },
+                    new Phaser.Math.Vector2(-119, 148),
+                    (scene) => scene.takeObject("farine04"),
+                    this
+                ),
+                new CardObject(
+                    this,
+                    { name: "farine05", url: "sprites/StoreScene/part1/rayon01_03_farine05.png" },
+                    new Phaser.Math.Vector2(-8, 145),
+                    (scene) => scene.takeObject("farine05"),
+                    this
+                ),
+                new CardObject(
+                    this,
+                    { name: "farine06", url: "sprites/StoreScene/part1/rayon01_03_farine06.png" },
+                    new Phaser.Math.Vector2(97, 142),
+                    (scene) => scene.takeObject("farine06"),
+                    this
+                ),
+                new CardObject(
+                    this,
+                    { name: "farine07", url: "sprites/StoreScene/part1/rayon01_03_farine07.png" },
+                    new Phaser.Math.Vector2(203, 142),
+                    (scene) => scene.takeObject("farine07"),
+                    this
+                ),
+                new CardObject(
+                    this,
+                    { name: "farine08", url: "sprites/StoreScene/part1/rayon01_03_farine08.png" },
+                    new Phaser.Math.Vector2(306, 148),
+                    (scene) => scene.takeObject("farine08"),
                     this
                 ),
                 
+                new CardObject(
+                    this,
+                    { name: "sac01", url: "sprites/StoreScene/part1/rayon01_03_sac01.png" },
+                    new Phaser.Math.Vector2(-119, 431),
+                    (scene) => scene.takeObject("sac01"),
+                    this
+                ),
                 
+                new CardObject(
+                    this,
+                    { name: "sac02", url: "sprites/StoreScene/part1/rayon01_03_sac02.png" },
+                    new Phaser.Math.Vector2(159, 420),
+                    (scene) => scene.takeObject("sac02"),
+                    this
+                ),
+/*
+                new CardObject(
+                this,
+                { name: "pate11", url: "sprites/StoreScene/part1/rayon01_03_pate11.png" },
+                new Phaser.Math.Vector2(20, -300),
+                (scene) => scene.takeObject("pate11"),
+                this
+                ),
 
-            ], null, null, null, null, true
+
+
+
+                new CardObject(
+                this,
+                { name: "pate10", url: "sprites/StoreScene/part1/rayon01_03_pate10.png" },
+                new Phaser.Math.Vector2(20, -300),
+                (scene) => scene.takeObject("pate10"),
+                this
+                ),
+
+
+
+                new CardObject(
+                this,
+                { name: "pate06", url: "sprites/StoreScene/part1/rayon01_03_pate06.png" },
+                new Phaser.Math.Vector2(20, -300),
+                (scene) => scene.takeObject("pate06"),
+                this
+                ),
+
+                new CardObject(
+                this,
+                { name: "pate12", url: "sprites/StoreScene/part1/rayon01_03_pate12.png" },
+                new Phaser.Math.Vector2(20, -300),
+                (scene) => scene.takeObject("pate12"),
+                this
+                ),
+
+
+
+                new CardObject(
+                this,
+                { name: "pate07", url: "sprites/StoreScene/part1/rayon01_03_pate07.png" },
+                new Phaser.Math.Vector2(20, -300),
+                (scene) => scene.takeObject("pate07"),
+                this
+                ),
+
+                new CardObject(
+                this,
+                { name: "sac03", url: "sprites/StoreScene/part1/rayon01_03_sac03.png" },
+                new Phaser.Math.Vector2(20, -300),
+                (scene) => scene.takeObject("sac03"),
+                this
+                ),
+
+                new CardObject(
+                this,
+                { name: "spaghetti02", url: "sprites/StoreScene/part1/rayon01_03_spaghetti02.png" },
+                new Phaser.Math.Vector2(20, -300),
+                (scene) => scene.takeObject("spaghetti02"),
+                this
+                ),
+
+                new CardObject(
+                this,
+                { name: "spaghetti03", url: "sprites/StoreScene/part1/rayon01_03_spaghetti03.png" },
+                new Phaser.Math.Vector2(20, -300),
+                (scene) => scene.takeObject("spaghetti03"),
+                this
+                ),
+
+                new CardObject(
+                this,
+                { name: "spaghetti01", url: "sprites/StoreScene/part1/rayon01_03_spaghetti01.png" },
+                new Phaser.Math.Vector2(20, -300),
+                (scene) => scene.takeObject("spaghetti01"),
+                this
+                ),
+
+
+                new CardObject(
+                this,
+                { name: "pate09", url: "sprites/StoreScene/part1/rayon01_03_pate09.png" },
+                new Phaser.Math.Vector2(20, -300),
+                (scene) => scene.takeObject("pate09"),
+                this
+                ),
+
+
+                new CardObject(
+                this,
+                { name: "pate08", url: "sprites/StoreScene/part1/rayon01_03_pate08.png" },
+                new Phaser.Math.Vector2(20, -300),
+                (scene) => scene.takeObject("pate08"),
+                this
+                ),
+
+
+*/
+            ]
         );
 
         this.secondShelf = new Card(this, [
