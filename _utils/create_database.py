@@ -31,6 +31,7 @@ def main():
 
     sql_create_choices_table = """CREATE TABLE IF NOT EXISTS player_choice(
 id	INTEGER	PRIMARY KEY AUTOINCREMENT,
+player_id   INTEGER NOT NULL,
 damien_stay_home	INTEGER	,
 damien_food	INTEGER	,
 damien_game_score_mean	REAL	,
@@ -43,7 +44,8 @@ freelancer_food_amount	INTEGER	,
 freelancer_love_advice	INTEGER	,
 freelancer_game_score	INTEGER	,
 grandma_books	TEXT	,
-grandma_advice	INTEGER	
+grandma_advice	INTEGER	,
+UNIQUE(player_id)
   );"""
 
     conn = create_connection(database)
