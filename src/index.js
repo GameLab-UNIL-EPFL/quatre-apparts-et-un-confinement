@@ -11,6 +11,7 @@ import { DamienComputerScene } from "./scenes/damienComputerScene.js";
 import { DamienKitchenClothesScene } from "./scenes/damienKitchenClothesScene.js";
 import { HallwayScene } from "./scenes/hallwayScene.js";
 import { StoreScene } from "./scenes/storeScene.js";
+import { IndepScene } from "./scenes/indepScene.js";
 
 let resizeTimeout;
 let plugins = [{
@@ -18,13 +19,16 @@ let plugins = [{
     plugin: RexUIPlugin,
     mapping: 'rexUI'
 }];
+
+
 const OBJECT_DEBUG = true;
-if(OBJECT_DEBUG === true){
-  plugins.push({
-    key: 'debugObjects',
-    plugin: DebugObjects,
-    mapping: 'debugObjects'
-  });
+
+if(OBJECT_DEBUG === true) {
+    plugins.push({
+        key: 'debugObjects',
+        plugin: DebugObjects,
+        mapping: 'debugObjects'
+    });
 }
 
 /*
@@ -75,6 +79,7 @@ const config = {
       DamienComputerScene,
       GrandmaScene,
       HallwayScene,
+      IndepScene,
       StoreScene,
     ],
     physics: {

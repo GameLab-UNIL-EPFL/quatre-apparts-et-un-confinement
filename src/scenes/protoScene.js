@@ -34,7 +34,7 @@ export class ProtoScene extends Phaser.Scene {
      * in said scene
      */
     constructor() {
-        super({key: 'Prototype'});
+        super({ key: Scenes.PROTOTYPE });
 
         //Keep track of the clothes that protoguy is wearing
         this.clothes = ProtoGuyClothes.PYJAMAS;
