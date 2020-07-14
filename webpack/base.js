@@ -51,10 +51,6 @@ module.exports = {
     }),
     new CopyWebpackPlugin([
         {
-            from: 'levels',
-            to: 'levels'
-        },
-        {
             from: 'sound',
             to: 'sound'
         },
