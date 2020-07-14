@@ -28,6 +28,8 @@ const MessageType = {
     Distraction: 0
 };
 
+var END = false;
+
 /**
  * @brief Models a "Card" inside of a scene.
  * This card spefically handles the mechanics linked to the zoom minigame
@@ -124,6 +126,12 @@ export class ZoomMiniGameCard extends Card {
      */
     preload() {
         super.preload();
+
+        //Load sounds
+        this.parent_scene.load.audio("music", "sounds/zoomMiniGame/zoomMusic.mp3");
+        this.parent_scene.load.audio("wrong", "sounds/zoomMiniGame/wrong.wav");
+        this.parent_scene.load.audio("right", "sounds/zoomMiniGame/right.wav");
+        this.parent_scene.load.audio("lose", "sounds/zoomMiniGame/lose.wav");
 
         //Load all of the messages in
         this.messages.forEach(msg => {
@@ -223,6 +231,7 @@ export class ZoomMiniGameCard extends Card {
                         if(--this.num_spaws === 0) {
                             if(typeof callback === "function") {
                                 callback(this, false);
+                                this.lose.play();
                             }
                         }
                 },
@@ -255,13 +264,21 @@ export class ZoomMiniGameCard extends Card {
                             //Remove the elelment in question
                             this.cur_msg.filter((val, _) => val === msg_idx);
 
+                            if(this.messages[msg_idx].type === MessageType.Cours) {
+                                this.right.play();
+                            }
+
                             //Make sure that the player didn't miss a class notification
                             if(this.messages[msg_idx].type === MessageType.Distraction) {
+
+                                //play sound
+                                this.wrong.play();
 
                                 //Check that the health bar doesn't drop below 0
                                 if(--this.focus_bar_health <= 0) {
                                     if(typeof callback === "function") {
                                         callback(this, true);
+                                        this.lose.play();
                                     }
                                 }
 
@@ -307,6 +324,9 @@ export class ZoomMiniGameCard extends Card {
 
             //End the card
             card.endCard();
+
+            END = true;
+
         }
     }
 
@@ -368,6 +388,14 @@ export class ZoomMiniGameCard extends Card {
     create() {
         super.create();
 
+        //starts the song at the beginning of the scene
+        this.music = this.parent_scene.sound.add("music");
+        this.wrong = this.parent_scene.sound.add("wrong");
+        this.right = this.parent_scene.sound.add("right");
+        this.lose = this.parent_scene.sound.add("lose");
+
+        this.music.play();
+
         //Save the bar's initial info
         this.focus_bar_width = this.children[3].sprite.width;
         this.children[3].sprite.tint = FOCUS_BAR_COLOR.FULL;
@@ -401,6 +429,17 @@ export class ZoomMiniGameCard extends Card {
 
         //Start with the tutorial
         this.showTutorial();
+
+    }
+
+    update() {
+        if(END){
+            this.parent_scene.tweens.add({
+                targets:  this.music,
+                volume:   0,
+                duration: 800
+            });
+        }
     }
 
     destroy() {
