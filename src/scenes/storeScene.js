@@ -801,6 +801,9 @@ export class StoreScene extends Phaser.Scene {
       console.log('take', object_name);
       let object = this.children.getByName(object_name);
       object.depth = 5;
+      
+      let yDistance = this.basket.y - object.y; // between 280 and 1340
+      console.log('yDistance:', yDistance)
       let target_objects = [object]
       if(object_name == 'pate_spaghetti01'){
         // also move the other pack
@@ -812,7 +815,7 @@ export class StoreScene extends Phaser.Scene {
           targets: target_objects,
           x: this.basket.x + (Math.random() * 50),
           y: this.basket.y + 25 + (Math.random() * 25),
-          duration: 300,
+          duration: 150 + (yDistance / 8),
           ease: 'Quadratic',
           yoyo: false,
           loop: 0,
