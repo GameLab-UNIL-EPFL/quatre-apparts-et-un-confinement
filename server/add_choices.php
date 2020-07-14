@@ -22,11 +22,12 @@ try {
     
 		// prepare add statement
 		$add_stmt = $pdo->prepare("INSERT OR REPLACE INTO player_choice " .
-			"(damien_clothes) " .
+			"(player_id, damien_clothes) " .
 			"VALUES" .
-			"(:damien_clothes)");
+			"(:player_id, :damien_clothes)");
 
 		$add_stmt->execute(array(
+      ':player_id' => $data['player_id'],
 			':damien_clothes' => $data['damien_clothes'],
 		));
 
