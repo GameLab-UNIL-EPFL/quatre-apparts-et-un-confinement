@@ -100,7 +100,7 @@ DebugObjects.prototype = {
     this.scene.input.on('dragend', function (pointer, gameObject) {
       if(debugPlugin.active){
         gameObject.clearTint();
-        console.log('Game object position: (x:', gameObject.x, 'y:', gameObject.y, 'z:', gameObject.z, ')');
+        console.log('Game object position: (' + Math.round(gameObject.x) +", " + Math.round(gameObject.y), ')');
       }
     });
     
