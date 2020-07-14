@@ -8,6 +8,22 @@
       'damien_clothes': 1
   };
   
+  // fetch api
+  (async () => {
+    const rawResponse = await fetch('https://labs.letemps.ch/interactive/2020/_sandbox/_covidou_server/add_choices.php', {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
+    const content = await rawResponse.json();
+
+    console.log(content);
+  })();
+  
+  // Old XHR
   var xhr = new XMLHttpRequest();
   xhr.open("POST", "https://labs.letemps.ch/interactive/2020/_sandbox/_covidou_server/add_choices.php?adsf", true);
   xhr.setRequestHeader("Content-Type", "application/json");
