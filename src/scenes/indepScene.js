@@ -5,10 +5,12 @@ import { CardObject } from "./objects/cardObject.js";
 import { Background } from "./objects/background.js";
 import { player } from "../index.js";
 import { Scenes } from "../core/player.js";
+import { TVCard } from "./cards/IndepScene/tvCard.js";
 
 export const IndepCards = {
     IDLE_CARD: 0,
-    PHONE_CARD: 1
+    PHONE_CARD: 1,
+    TV_CARD: 2
 };
 
 const NUM_CARDS = 2;
@@ -61,7 +63,9 @@ export class IndepScene extends Phaser.Scene {
                 new CardObject(
                     this,
                     { name: "indepIdlePhone", url: "sprites/IndepScene/01_IDLE/phone.png" },
-                    new Phaser.Math.Vector2(161, 374)
+                    new Phaser.Math.Vector2(280, 375),
+                    () => this.changeIndep(),
+                    this
                 ),
                 new CardObject(
                     this,
@@ -71,7 +75,10 @@ export class IndepScene extends Phaser.Scene {
                 new CardObject(
                     this,
                     { name: "indepIdleTV", url: "sprites/IndepScene/01_IDLE/tv.png" },
-                    new Phaser.Math.Vector2(-189, 460)
+                    new Phaser.Math.Vector2(-189, 460),
+                    null,
+                    null,
+                    0
                 ),
                 new CardObject(
                     this,
@@ -134,17 +141,22 @@ export class IndepScene extends Phaser.Scene {
             true
         );
 
+        this.tv_card = new TVCard(this);
+
         this.cards = [
             this.idle_card,
-            this.phone_card
+            this.phone_card,
+            this.tv_card
         ];
 
         //Keep track of wich card is displayed
-        this.cardIdx = IndepCards.PHONE_CARD;
-        this.current_card = this.phone_card;
+        this.cardIdx = IndepCards.IDLE_CARD;
+        this.current_card = this.idle_card;
+
+        this.onPhone = false;
 
         //Create the dialogue controller
-        this.dialogue = new DialogueController(this);
+        this.dialogue = new DialogueController(this, "patrickDialogMarch");
     }
 
     /**
@@ -167,10 +179,29 @@ export class IndepScene extends Phaser.Scene {
                     this.current_card = this.phone_card;
                     break;
 
+                case IndepCards.TV_CARD:
+                    this.cardIdx = IndepCards.TV_CARD;
+                    this.current_card = this.tv_card;
+                    break;
+
                 default:
                     break;
             }
         }
+    }
+
+    /**
+     * @brief Toggles the sprite used for the freelancer guy
+     */
+    changeIndep() {
+        this.onPhone = !this.onPhone;
+
+        //Toggle the guy on the phone sprite
+        this.current_card.children[5].sprite.setActive(this.onPhone).setVisible(this.onPhone);
+
+        //Toggle the guy idle sprite
+        this.current_card.children[4].sprite.setActive(!this.onPhone).setVisible(!this.onPhone);
+        this.current_card.children[7].sprite.setActive(!this.onPhone).setVisible(!this.onPhone);
     }
 
     /**
@@ -180,6 +211,8 @@ export class IndepScene extends Phaser.Scene {
     preload() {
         //Preload the dialogue controller
         this.dialogue.preload();
+
+        this.tv_card.preload();
 
         //Preload all of the cards
         if(this.cardIdx === IndepCards.IDLE_CARD) {
@@ -202,8 +235,8 @@ export class IndepScene extends Phaser.Scene {
             this.current_card.create();
 
             if(this.cardIdx === IndepCards.IDLE_CARD) {
-                //Initially hide the phone guy sprite
-                this.current_card.children[5].sprite.setActive(false).setVisible(false);
+                this.onPhone = true;
+                this.changeIndep();
             }
         }
 
@@ -256,11 +289,31 @@ export class IndepScene extends Phaser.Scene {
             cardIdx: this.cardIdx
         };
 
-        if(this.current_card.isDone()) {
-            this.current_card.destroy();
+        //Get rid of all existing sprites
+        this.current_card.destroy();
 
-            //Move on to the next scene
-            this.nextScene(this.current_card);
+        //Create the next card
+        if(this.cardIdx === IndepCards.TV_CARD) {
+            this.cardIdx = IndepCards.IDLE_CARD;
+            this.current_card = this.idle_card;
+
+            this.current_card.create();
+
+            this.onPhone = true;
+            this.changeIndep();
+
+        } else if (this.cardIdx === IndepCards.IDLE_CARD) {
+            this.cardIdx = IndepCards.TV_CARD;
+            this.current_card = this.tv_card;
+
+            this.current_card.create();
+        } else {
+            if(this.current_card.isDone()) {
+                this.current_card.destroy();
+    
+                //Move on to the next scene
+                this.nextScene(this.current_card);
+            }
         }
 
         //Store the saved data
@@ -274,7 +327,7 @@ export class IndepScene extends Phaser.Scene {
      */
     nextScene(cardIdx) {
         let data;
-        switch(data.cardIdx) {
+        switch(this.cardIdx) {
             case IndepCards.IDLE_CARD:
                 data = {
                     mainMenu: false,

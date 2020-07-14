@@ -4,7 +4,6 @@ import { CardObject } from "./objects/cardObject.js";
 import { Background } from "./objects/background.js";
 import { player } from "../index.js";
 import { Scenes } from "../core/player.js";
-import { WindowState, Months } from "./buildingScene.js";
 import { LivingRoomCard } from "./cards/GrandmaScene/livingRoomCard.js";
 import { DialogueController } from "../core/dialogueController.js";
 import { HallwayCards } from "./hallwayScene.js";
@@ -174,7 +173,7 @@ export class GrandmaScene extends Phaser.Scene {
     nextScene() {
         this.scene.start(Scenes.HALLWAY, {
             cardIdx: HallwayCards.DAMIEN_CLOSED,
-            damien_gone: false//player.dialogue_tree.repOui !== null
+            damien_gone: false
         });
     }
 

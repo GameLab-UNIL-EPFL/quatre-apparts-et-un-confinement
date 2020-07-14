@@ -71,12 +71,12 @@ const config = {
         scene: plugins
     },
     scene: [
-      BuildingScene,
+      /*BuildingScene,
       ProtoScene,
       DamienKitchenClothesScene,
       DamienComputerScene,
       GrandmaScene,
-      HallwayScene,
+      HallwayScene,*/
       IndepScene
     ],
     physics: {
