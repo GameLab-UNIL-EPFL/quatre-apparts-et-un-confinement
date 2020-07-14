@@ -250,7 +250,7 @@ export class ZoomMiniGameCard extends Card {
             //Make the card interactive
             this.parent_scene.input.on(
                 'gameobjectdown',
-                (pointer, gameObject) => {
+                (_, gameObject) => {
                     //Check that we clicked the object
                     if(gameObject === this.messages[msg_idx].sprite) {
                         if(this.anim) {

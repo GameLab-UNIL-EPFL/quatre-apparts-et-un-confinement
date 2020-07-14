@@ -6,6 +6,7 @@ import { Background } from "./objects/background.js";
 import { player } from "../index.js";
 import { Scenes } from "../core/player.js";
 import { TVCard } from "./cards/IndepScene/tvCard.js";
+import { WindowState, Months } from "./buildingScene.js";
 
 export const IndepCards = {
     IDLE_CARD: 0,
@@ -64,7 +65,10 @@ export class IndepScene extends Phaser.Scene {
                     this,
                     { name: "indepIdlePhone", url: "sprites/IndepScene/01_IDLE/phone.png" },
                     new Phaser.Math.Vector2(280, 375),
-                    () => this.changeIndep(),
+                    (scene) => {
+                        scene.changeIndep();
+                        scene.dialogue.display("telephone");
+                    },
                     this
                 ),
                 new CardObject(
@@ -75,10 +79,24 @@ export class IndepScene extends Phaser.Scene {
                 new CardObject(
                     this,
                     { name: "indepIdleTV", url: "sprites/IndepScene/01_IDLE/tv.png" },
-                    new Phaser.Math.Vector2(-189, 460),
+                    new Phaser.Math.Vector2(-218, 431),
                     null,
                     null,
                     0
+                ),
+                new CardObject(
+                    this,
+                    { name: "indepIdleDVD1", url: "sprites/IndepScene/01_IDLE/dvd_1.png" },
+                    new Phaser.Math.Vector2(31, 761),
+                    (scene) => scene.dialogue.display("dvd1"),
+                    this
+                ),
+                new CardObject(
+                    this,
+                    { name: "indepIdleDVD2", url: "sprites/IndepScene/01_IDLE/dvd_2.png" },
+                    new Phaser.Math.Vector2(163, 724),
+                    (scene) => scene.dialogue.display("dvd2"),
+                    this
                 ),
                 new CardObject(
                     this,
@@ -212,11 +230,10 @@ export class IndepScene extends Phaser.Scene {
         //Preload the dialogue controller
         this.dialogue.preload();
 
-        this.tv_card.preload();
-
         //Preload all of the cards
         if(this.cardIdx === IndepCards.IDLE_CARD) {
             this.idle_card.preload();
+            this.tv_card.preload();
         } else {
             this.phone_card.preload();
         }
@@ -269,12 +286,46 @@ export class IndepScene extends Phaser.Scene {
     }
 
     /**
+     * @brief shows the arrow that sends the user back to the building scene
+     */
+    showArrow() {
+        // Create ring sprites
+        this.anims.create({
+            key: 'arrow_anim',
+            frameRate: 15,
+            frames: this.anims.generateFrameNames('arrow'),
+            repeat: -1
+        });
+
+        //Play the cat animation
+        this.arrow = this.add.sprite(
+            245,
+            716,
+            'arrow'
+        ).play('arrow_anim');
+
+        //Make the arrow end the scene
+        this.arrow.setInteractive().on(
+            'pointerdown',
+            () => this.nextScene(),
+            this
+        );
+    }
+
+    /**
      * @brief Notifies the current card that the dialogue has ended
      */
     notifyDialogueEnd() {
         //Notify the current card if it is interested
-        if(this.current_card.isDialogueSensitive()) {
-            this.current_card.notifyDialogueEnd();
+        if(this.cardIdx === IndepCards.IDLE_CARD) {
+            if(this.onPhone) {
+                this.showArrow();
+                this.changeIndep();
+            }
+        } else {
+            if(this.current_card.isDialogueSensitive()) {
+                this.current_card.notifyDialogueEnd();
+            }
         }
     }
 
@@ -302,7 +353,7 @@ export class IndepScene extends Phaser.Scene {
             this.onPhone = true;
             this.changeIndep();
 
-        } else if (this.cardIdx === IndepCards.IDLE_CARD) {
+        } else if(this.cardIdx === IndepCards.IDLE_CARD) {
             this.cardIdx = IndepCards.TV_CARD;
             this.current_card = this.tv_card;
 

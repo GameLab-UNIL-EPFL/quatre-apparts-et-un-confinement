@@ -71,12 +71,12 @@ const config = {
         scene: plugins
     },
     scene: [
-      /*BuildingScene,
+      BuildingScene,
       ProtoScene,
       DamienKitchenClothesScene,
       DamienComputerScene,
       GrandmaScene,
-      HallwayScene,*/
+      HallwayScene,
       IndepScene
     ],
     physics: {
@@ -97,7 +97,7 @@ game.horizontalRatio = scale.width / maxPictureWidth;
 window.horizontalOffset = (maxPictureWidth - scale.width) / 2;
 window.horizontalRatio = scale.width / maxPictureWidth;
 
-function resizeGame(){
+function resizeGame() {
   console.log('Resize (wip)');
   /*let newScale = getScale(window.innerWidth, window.innerHeight);
   game.scale.resize(newScale.width, newScale.height);
