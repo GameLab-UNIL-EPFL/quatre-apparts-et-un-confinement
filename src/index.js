@@ -69,13 +69,13 @@ const config = {
         scene: plugins
     },
     scene: [
-      StoreScene,
       BuildingScene,
       ProtoScene,
       DamienKitchenClothesScene,
       DamienComputerScene,
       GrandmaScene,
-      HallwayScene
+      HallwayScene,
+      StoreScene,
     ],
     physics: {
         default: 'arcade'
