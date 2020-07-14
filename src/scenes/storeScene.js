@@ -182,24 +182,24 @@ export class StoreScene extends Phaser.Scene {
 
                 new CardObject(
                     this,
-                    { name: "spaghetti01", url: "sprites/StoreScene/part1/rayon01_03_spaghetti01.png" },
+                    { name: "pate_spaghetti01", url: "sprites/StoreScene/part1/rayon01_03_spaghetti01.png" },
                     new Phaser.Math.Vector2(28, -333),
-                    (scene) => scene.takeObject("spaghetti01"),
+                    (scene) => scene.takeObject("pate_spaghetti01"),
                     this
                 ),
                 new CardObject(
                     this,
-                    { name: "spaghetti02", url: "sprites/StoreScene/part1/rayon01_03_spaghetti02.png" },
+                    { name: "pate_spaghetti02", url: "sprites/StoreScene/part1/rayon01_03_spaghetti02.png" },
                     new Phaser.Math.Vector2(30, -385),
-                    (scene) => scene.takeObject("spaghetti02"),
+                    (scene) => scene.takeObject("pate_spaghetti02"),
                     this
                 ),
 
                 new CardObject(
                     this,
-                    { name: "spaghetti03", url: "sprites/StoreScene/part1/rayon01_03_spaghetti03.png" },
+                    { name: "pate_spaghetti03", url: "sprites/StoreScene/part1/rayon01_03_spaghetti03.png" },
                     new Phaser.Math.Vector2(318, -336),
-                    (scene) => scene.takeObject("spaghetti03"),
+                    (scene) => scene.takeObject("pate_spaghetti03"),
                     this
                 ),
 
@@ -801,10 +801,15 @@ export class StoreScene extends Phaser.Scene {
       console.log('take', object_name);
       let object = this.children.getByName(object_name);
       object.depth = 5;
+      let target_objects = [object]
+      if(object_name == 'pate_spaghetti01'){
+        // also move the other pack
+        target_objects.push(this.children.getByName('pate_spaghetti02'));
+      }
       
       // Move to basket
       this.tweens.add({
-          targets: object,
+          targets: target_objects,
           x: this.basket.x + (Math.random() * 50),
           y: this.basket.y + 25 + (Math.random() * 25),
           duration: 300,
