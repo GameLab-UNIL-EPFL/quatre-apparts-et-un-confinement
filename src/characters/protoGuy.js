@@ -119,6 +119,8 @@ export class ProtoGuy {
         //Get rid of the existing protoGuy
         this.destroy();
 
+        this.zipper.play();
+
         //Chose which clothes to wear
         switch(this.parent_scene.clothes) {
             case ProtoGuyClothes.PYJAMAS:
@@ -190,12 +192,19 @@ export class ProtoGuy {
             default:
                 break;
         }
+
+        //Load the sounds
+        this.parent_scene.load.audio("zipper", "sounds/damien/zipper.wav");
     }
 
     /**
      * @brief Draws and places all of the character's images in the scene
      */
     create() {
+
+        this.zipper = this.parent_scene.sound.add("zipper");
+
+
         switch(this.card) {
             case ProtoGuyCard.WAKE_UP:
                 //Create the different sprites that make up the character

@@ -617,6 +617,10 @@ export class DialogueController {
                     //Goto the next dialogue
                     const next_id = dialogue.choices[choice_key].goto;
 
+                    //play sound
+                    this.sent = this.parent_scene.sound.add("sent");
+                    this.sent.play({volume: 0.5});
+
                     //Add a timer event to trigger the next message
                     this.parent_scene.time.addEvent({
                         delay: MSG_RESP_DELAY,

@@ -80,6 +80,9 @@ export class BuildingScene extends Phaser.Scene {
             );
         }
 
+        //load sounds
+        this.load.audio("bird", "sounds/birdTraffic.mp3");
+
         //Load in all of the sprites needed for this scene
         switch(this.info.month) {
             case Months.MARCH:
@@ -299,6 +302,10 @@ export class BuildingScene extends Phaser.Scene {
     create() {
         this.cameras.main.centerOn(0, 0);
         this.cameras.main.fadeIn(1000);
+
+        // TODO: rerecord birdTraffic sound
+        //this.bird = this.sound.add("bird");
+        //this.bird.play({volume: 0.3});
 
         switch(this.info.month) {
             case Months.MARCH:

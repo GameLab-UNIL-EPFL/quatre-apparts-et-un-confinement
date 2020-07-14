@@ -43,6 +43,11 @@ export class WakeUpCard extends Card {
     preload() {
         super.preload();
 
+        //Load the sounds
+        this.parent_scene.load.audio("alarm", "sounds/damien/alarmClock.wav");
+        this.parent_scene.load.audio("vibrate", "sounds/damien/vibration.wav");
+        this.parent_scene.load.audio("click", "sounds/click01.wav");
+
         //Load the ring animation spritesheet
         this.parent_scene.load.spritesheet(
             'ring',
@@ -95,6 +100,14 @@ export class WakeUpCard extends Card {
             'tired-bubble'
         ).play('tired-bubbles');
 
+        //========= HANDLE_SOUNDS =========
+        this.alarm = this.parent_scene.sound.add("alarm");
+        this.vibrate = this.parent_scene.sound.add("vibrate");
+        this.click = this.parent_scene.sound.add("click");
+
+        this.alarm.play({loop: true});
+        this.vibrate.play({loop: true});
+
         //========= HANDLE_INTERACTION =========
         //Make the phone interactive
         this.children[1].sprite.setInteractive();
@@ -109,6 +122,10 @@ export class WakeUpCard extends Card {
                 if((gameObject === this.children[1].sprite || gameObject === this.children[1].highlight_sprite) && this.phone_ring) {
                     this.phone_ring = false;
                     this.children[1].highlight_sprite.destroy();
+
+                    this.click.play();
+                    this.alarm.stop();
+                    this.vibrate.stop();
 
                     this.parent_scene.tweens.add({
                         targets: [this.children[1].sprite, this.children[1].highlight_sprite],

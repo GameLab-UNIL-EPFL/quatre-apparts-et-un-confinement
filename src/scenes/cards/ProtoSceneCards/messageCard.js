@@ -64,6 +64,9 @@ export class MessageCard extends Card {
         this.parent_scene.load.image("recievedMsg7", "sprites/UI/Messages/ReceivedMessage_07.png");
 
         this.parent_scene.load.image("typing", "sprites/UI/Messages/typing.png");
+
+        this.parent_scene.load.audio("newMessage", "sounds/textMessages/newMessage.wav");
+        this.parent_scene.load.audio("sent", "sounds/textMessages/sentMessage.wav");
     }
 
     /**
@@ -71,6 +74,9 @@ export class MessageCard extends Card {
      */
     create() {
         super.create();
+
+        this.message = this.parent_scene.sound.add("newMessage");
+        this.message.play();
 
         //Create dialogue background
         const bg = new Phaser.Geom.Rectangle(
