@@ -2,7 +2,9 @@ import Phaser from "phaser";
 import { Card } from "./cards/card.js";
 import { CardObject } from "./objects/cardObject.js";
 import { Background } from "./objects/background.js";
-import { DialogueController } from "../core/dialogueController.js";
+import { player } from "../index.js";
+import { WindowState, Months } from "./buildingScene.js";
+import { Scenes } from "../core/player.js";
 
 export const StoreCards = {
     FIRST_SHELF: 0,
@@ -740,8 +742,6 @@ export class StoreScene extends Phaser.Scene {
         this.cardIdx = StoreCards.FIRST_SHELF;
         this.current_card = this.firstShelf;
 
-        //Create the dialogue controller
-        this.dialogue = new DialogueController(this);
     }
 
     init(data) {
@@ -752,9 +752,6 @@ export class StoreScene extends Phaser.Scene {
     }
 
     preload() {
-        //Preload the dialogue controller
-        this.dialogue.preload();
-
         //Preload all of the cards
         this.cards.forEach(card => card.preload());
 
@@ -871,7 +868,8 @@ export class StoreScene extends Phaser.Scene {
         this.basket_front.depth = 25;
         
         // Update the saved data
-        // ! Cette scene apparaitra pour deux personnages: independant, etudiant
+        // @TODO
+        // player.setData() 
         // player.cur_scene = Scenes.STORE;
     }
 
@@ -898,19 +896,29 @@ export class StoreScene extends Phaser.Scene {
         this.cardIdx++;
         this.current_card = this.cards[this.cardIdx];
         this.current_card.create();
-        if(this.cardIdx >= this.cards.length - 1){
-          console.log('remove arrow')
-          this.nextCardButton.destroy();
-          // ici: prochaine scène
-        }
+      } else {
+        this.nextScene();
       }
     }
     
-    nextScene(cardIdx) {
-        // TODO -- depends on current position in story
-        /*this.cameras.main.fadeOut(3000, 0, 0, 0,
-            () => this.scene.start(Scenes.XXXX, { cardIdx: cardIdx }),
-            this
-        );*/
+    nextScene() {
+      // @TODO: set the right state, nextScene, time
+      this.scene.start(Scenes.BUILDING, {
+        mainMenu: false,
+        stage: 3,
+        windows: {
+            damien: WindowState.OFF,
+            grandma: WindowState.OFF,
+            family: WindowState.OFF,
+            indep: WindowState.OFF
+        },
+        month: Months.MARCH,
+        nextScene: {
+            damien: null,
+            grandma: null,
+            family: null,
+            indep: null
+        }
+      });
     }
 }
