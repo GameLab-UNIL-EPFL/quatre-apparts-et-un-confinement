@@ -1,5 +1,8 @@
 <?php
-header('Content-Type: text/html; charset=utf-8');
+header('Access-Control-Allow-Origin: *');
+header('Access-Control-Allow-Methods: GET, POST');
+header("Access-Control-Allow-Headers: Origin, X-Requested-With, Content-Type, Accept");
+// header('Content-Type: text/html; charset=utf-8');
 $data = json_decode(file_get_contents('php://input'), true);
 
 $inserted_count = 0;
