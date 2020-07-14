@@ -115,5 +115,29 @@ export class Player {
             }
         }
     }
+    
+    sendChoices() {
+      // TODO: select exactly which data we’ll send
+      let sample_payload = {
+          'player_id': 1235, // required
+          'damien_clothes': 1
+      };
+      
+      const xhr = new XMLHttpRequest();
+      xhr.open("POST", "https://labs.letemps.ch/interactive/2020/_sandbox/_covidou_server/add_choices.php", true);
+      xhr.setRequestHeader("Content-Type", "application/json");
+      let data = JSON.stringify(sample_payload);
+      xhr.send(data);
+      
+      // add a retry?
+      xhr.onreadystatechange = function () {
+          // if DONE && SUCCESS
+          if (xhr.readyState === 4 && xhr.status === 200) {
+              // Tells if database was successfully updated
+              let json = JSON.parse(xhr.responseText);
+              console.log(json);
+          }
+      };
+    }
 }
 
