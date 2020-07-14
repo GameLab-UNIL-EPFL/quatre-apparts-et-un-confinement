@@ -285,8 +285,8 @@ export class StoreScene extends Phaser.Scene {
 
         // Sprites for the whole scene (all 3 cards)
         this.load.image('liste', "sprites/StoreScene/part1/rayon01_04_liste.png");
-        this.load.image('caddie', "sprites/StoreScene/part1/rayon01_02_panier.png");
-        this.load.image('caddie-front', "sprites/StoreScene/part1/rayon01_02_panier-02front.png");
+        this.load.image('basket', "sprites/StoreScene/part1/rayon01_02_panier.png");
+        this.load.image('basket-front', "sprites/StoreScene/part1/rayon01_02_panier-02front.png");
         
         this.load.image('rature', "sprites/StoreScene/part1/rayon01_05_rature.png");
         
@@ -325,11 +325,11 @@ export class StoreScene extends Phaser.Scene {
       let object = this.children.getByName(object_name);
       object.depth = 5;
       
-      // Move to caddie
+      // Move to basket
       this.tweens.add({
           targets: object,
-          x: this.caddie.x + (Math.random() * 50),
-          y: this.caddie.y + 25 + (Math.random() * 25),
+          x: this.basket.x + (Math.random() * 50),
+          y: this.basket.y + 25 + (Math.random() * 25),
           duration: 300,
           ease: 'Quadratic',
           yoyo: false,
@@ -351,9 +351,9 @@ export class StoreScene extends Phaser.Scene {
                 }
               }
               
-              // Animate caddie
+              // Animate basket
               this.tweens.add({
-                targets: [this.caddie, this.caddie_front],
+                targets: [this.basket, this.basket_front],
                 scale: 1.2,
                 duration: 100,
                 ease: 'Quadratic',
@@ -378,11 +378,11 @@ export class StoreScene extends Phaser.Scene {
         this.checklist.depth = 20;
         
         
-        this.caddie = this.add.image(this.cameras.main.width * 0.24166, 700, 'caddie');
-        this.caddie.depth = 4;
+        this.basket = this.add.image(this.cameras.main.width * 0.24166, 700, 'basket');
+        this.basket.depth = 4;
         
-        this.caddie_front = this.add.image(this.cameras.main.width * 0.24166, 700, 'caddie-front');
-        this.caddie_front.depth = 25;
+        this.basket_front = this.add.image(this.cameras.main.width * 0.24166, 700, 'basket-front');
+        this.basket_front.depth = 25;
         
         // Update the saved data
         // ! Cette scene apparaitra pour deux personnages: independant, etudiant
