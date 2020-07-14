@@ -1,14 +1,14 @@
 from glob import glob
 import pandas as pd
 
-path = '../sprites/StoreScene/part2/*'
+path = '../sprites/StoreScene/part3/*'
 
 sprites = glob(path)
 
 template = """new CardObject(
     this,
     { name: "NAME", url: "PATH" },
-    new Phaser.Math.Vector2(0, -300),
+    new Phaser.Math.Vector2(20, 30),
     (scene) => scene.takeObject("NAME"),
     this
 ),
