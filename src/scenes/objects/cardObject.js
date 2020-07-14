@@ -69,6 +69,7 @@ export class CardObject {
                 yoyo: true,
                 loop: -1
             });
+            
             this.highlight_sprite.setInteractive();
         }
 

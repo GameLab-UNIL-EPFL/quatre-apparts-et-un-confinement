@@ -126,11 +126,9 @@ export class GrandmaScene extends Phaser.Scene {
      * @brief Notifies the current card that the dialogue has ended
      */
     notifyDialogueEnd() {
-        console.log("SCENE_NOTIFIED_OF_END");
 
         //Notify the current card if it is interested
         if(this.current_card.isDialogueSensitive()) {
-            console.log("NOTIFYING_CARD");
             this.current_card.notifyDialogueEnd();
         }
     }

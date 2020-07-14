@@ -396,7 +396,7 @@ export class IndepScene extends Phaser.Scene {
                         family: null,
                         indep: null
                     }
-                }
+                };
                 break;
 
             case IndepCards.PHONE_CARD:
@@ -416,7 +416,7 @@ export class IndepScene extends Phaser.Scene {
                         family: null,
                         indep: null
                     }
-                }
+                };
                 break;
 
             default:

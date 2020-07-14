@@ -522,13 +522,13 @@ export class DialogueController {
         this.moveDisplayedUp();
 
         //Create dialogue background
-        let box_elem = this.parent_scene.add.image(
+        const box_elem = this.parent_scene.add.image(
             lr ? MIN_LEFT_X.box : MIN_RIGHT_X.box,
             ypos.box,
             box
         );
 
-        let text_elem = this.parent_scene.add.text(
+        const text_elem = this.parent_scene.add.text(
             (lr ? MIN_LEFT_X.text : MIN_RIGHT_X.text),
             ypos.text,
             cur_text,

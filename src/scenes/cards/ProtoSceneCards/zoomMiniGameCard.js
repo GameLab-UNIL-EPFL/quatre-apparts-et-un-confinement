@@ -4,7 +4,7 @@ import { CardObject } from "../../objects/cardObject";
 
 const N_NOTIFICATION = 10;
 const N_DISTRACTIONS = 19;
-const N_MSG = (N_NOTIFICATION * 2) + N_DISTRACTIONS;
+const N_MSG = (N_NOTIFICATION * 3) + N_DISTRACTIONS;
 const NOTIF_SPREAD = 900;
 const NOTIF_OFFSET = 180-600;
 
@@ -39,7 +39,7 @@ export class ZoomMiniGameCard extends Card {
      */
     constructor(parent_scene) {
         //Initialize children array
-        let children = [
+        const children = [
             new CardObject(
                 parent_scene,
                 { name: "zoom_bg", url: "sprites/ProtoScene/ZoomMiniGameCard/zoom_bg.png" },
@@ -74,6 +74,16 @@ export class ZoomMiniGameCard extends Card {
 
         //Add all notifications to the card
         for(let i = 0; i < N_NOTIFICATION; ++i) {
+            this.messages.push({
+                name: "notification_" + i,
+                url: "sprites/ProtoScene/ZoomMiniGameCard/notif_" + i + ".png" ,
+                pos: new Phaser.Math.Vector2(-600, -1000),
+                sprite: null,
+                type: MessageType.Cours,
+                isDestroyed: false
+            });
+
+            //Push the notif again
             this.messages.push({
                 name: "notification_" + i,
                 url: "sprites/ProtoScene/ZoomMiniGameCard/notif_" + i + ".png" ,
@@ -345,7 +355,7 @@ export class ZoomMiniGameCard extends Card {
             ease: "Quadratic",
             yoyo: true,
             loop: -1
-        })
+        });
 
         //Create the tutorial notification
         const tutorial_sprite = this.parent_scene.add.image(

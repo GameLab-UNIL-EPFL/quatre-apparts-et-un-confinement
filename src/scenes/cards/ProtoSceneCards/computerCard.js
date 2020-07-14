@@ -21,7 +21,7 @@ export class ComputerCard extends Card {
         let character = new ProtoGuy(parent_scene, 196, 132, ProtoGuyCard.COMPUTER);
 
         //Initialize children array
-        let children = [
+        const children = [
             new Background(parent_scene, "sprites/ProtoScene/ComputerCard/bg.jpg", "ComputerBG"),
             character,
             new CardObject(

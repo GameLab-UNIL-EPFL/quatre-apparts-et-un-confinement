@@ -22,7 +22,7 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
         //Keep track of the clothes that protoguy is wearing
         this.clothes = ProtoGuyClothes.PYJAMAS;
 
-        let characters = {
+        const characters = {
             'clothes': new ProtoGuy(this, 51, 115, ProtoGuyCard.CLOTHES),
             'kitchen': new ProtoGuy(this, -218, -32, ProtoGuyCard.KITCHEN)
         };
