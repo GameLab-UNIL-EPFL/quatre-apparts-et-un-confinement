@@ -28,8 +28,6 @@ const MessageType = {
     Distraction: 0
 };
 
-var END = false;
-
 /**
  * @brief Models a "Card" inside of a scene.
  * This card spefically handles the mechanics linked to the zoom minigame
@@ -265,7 +263,7 @@ export class ZoomMiniGameCard extends Card {
                                 gameObject.x,
                                 gameObject.y,
                                 "notif-pop"
-                            ).play('pop').on('complete', () => this.anim.destroy(), this);
+                            ).play('pop');
 
                             //Remove the elelment in question
                             this.cur_msg.filter((val, _) => val === msg_idx);
@@ -326,8 +324,11 @@ export class ZoomMiniGameCard extends Card {
             //End the card
             card.endCard();
 
-            END = true;
-
+            card.parent_scene.tweens.add({
+                targets:  card.music,
+                volume:   0,
+                duration: 800
+            });
         }
     }
 
@@ -379,6 +380,9 @@ export class ZoomMiniGameCard extends Card {
                         "notif-pop"
                     ).play('pop');
 
+                    //Play the SFX
+                    this.right.play();
+
                     tutorial_sprite.destroy();
                     pointer.destroy();
                     hitzone.destroy();
@@ -391,6 +395,7 @@ export class ZoomMiniGameCard extends Card {
                         callbackScope: this,
                         args: [this.endMiniGame]
                     });
+
                 };
 
                 tutorial_sprite.setInteractive().on('pointerdown', interaction, this);
@@ -446,16 +451,6 @@ export class ZoomMiniGameCard extends Card {
         //Start with the tutorial
         this.showTutorial();
 
-    }
-
-    update() {
-        if(END){
-            this.parent_scene.tweens.add({
-                targets:  this.music,
-                volume:   0,
-                duration: 800
-            });
-        }
     }
 
     destroy() {

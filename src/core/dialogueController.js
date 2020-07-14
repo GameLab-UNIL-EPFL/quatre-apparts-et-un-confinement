@@ -71,14 +71,14 @@ const MSG_HEIGHT = {
     msg_space: 15
 };
 
-const MSG_LINE_CHARS = 18;
+const MSG_LINE_CHARS = 16;
 const MSG_RESP_DELAY = 1500;
 const PROMT_HEIGHT = 200;
 const SPACING = 25;
 const MAX_N_PROMPTS = 3;
 
 const UP_POS = {
-    box: new Phaser.Math.Vector2(0, -650), // ici: multiplier par horizontalRatio
+    box: new Phaser.Math.Vector2(0, -650), 
     name: new Phaser.Math.Vector2(-488, -745),
     content: new Phaser.Math.Vector2(-488, -675)
 };
