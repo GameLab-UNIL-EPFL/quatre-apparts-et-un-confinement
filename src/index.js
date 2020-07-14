@@ -18,7 +18,7 @@ let plugins = [{
     plugin: RexUIPlugin,
     mapping: 'rexUI'
 }];
-const OBJECT_DEBUG = false;
+const OBJECT_DEBUG = true;
 if(OBJECT_DEBUG === true){
   plugins.push({
     key: 'debugObjects',
@@ -69,13 +69,13 @@ const config = {
         scene: plugins
     },
     scene: [
-      StoreScene,
       BuildingScene,
       ProtoScene,
       DamienKitchenClothesScene,
       DamienComputerScene,
       GrandmaScene,
-      HallwayScene
+      HallwayScene,
+      StoreScene,
     ],
     physics: {
         default: 'arcade'
