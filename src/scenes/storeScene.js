@@ -262,7 +262,11 @@ export class StoreScene extends Phaser.Scene {
           
             ]
         );
-
+        
+        this.listPosition = {
+          'pain': []
+        }
+        
         this.cards = [
             this.firstShelf,
             this.secondShelf,
@@ -294,6 +298,8 @@ export class StoreScene extends Phaser.Scene {
         // Sprites for the whole scene (all 3 cards)
         this.load.image('liste', "sprites/StoreScene/part1/rayon01_04_liste.png");
         this.load.image('caddie', "sprites/StoreScene/part1/rayon01_02_panier.png");
+        this.load.image('rature', "sprites/StoreScene/part1/rayon01_05_rature.png");
+        
 
         this.nextCardArrow = this.load.spritesheet(
             'next-card-arrow',
@@ -323,7 +329,7 @@ export class StoreScene extends Phaser.Scene {
     }
 
     takeObject(object_name) {
-      return; // debug
+      // return; // debug
       
       console.log('take', object_name);
       let object = this.children.getByName(object_name);
@@ -339,6 +345,11 @@ export class StoreScene extends Phaser.Scene {
           yoyo: false,
           loop: 0,
           onComplete: () => {
+              // this.rature = this.add.image(this.listPositions[object_name], 'rature')
+              // todo: add flag
+              this.rature = this.add.image(-276, 234, 'rature')
+              this.rature.depth = 15;
+              
               // Animate caddie
               this.tweens.add({
                 targets: this.caddie,
@@ -366,7 +377,6 @@ export class StoreScene extends Phaser.Scene {
         this.checklist.depth = 10;
         
         this.caddie = this.add.image(this.cameras.main.width * 0.24166, 669, 'caddie');
-
         // Update the saved data
         // ! Cette scene apparaitra pour deux personnages: independant, etudiant
         // player.cur_scene = Scenes.STORE;
