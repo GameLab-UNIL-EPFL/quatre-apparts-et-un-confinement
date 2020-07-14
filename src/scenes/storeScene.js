@@ -305,7 +305,7 @@ export class StoreScene extends Phaser.Scene {
                 new CardObject(
                     this,
                     { name: "pain02", url: "sprites/StoreScene/part2/rayon01_02_pain02.png" },
-                    new Phaser.Math.Vector2(-564, 17),
+                    new Phaser.Math.Vector2(-546, 174),
                     (scene) => scene.takeObject("pain02"),
                     this
                 ),
