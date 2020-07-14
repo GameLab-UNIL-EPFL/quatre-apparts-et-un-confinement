@@ -164,16 +164,16 @@
 	},
 	"cours": {
 		"name": "Copine",
-		"text": ["C'était bien ton cours?"],
+		"text": ["Tu penses quoi des cours en ligne?"],
 		"choices": {
 			"bof": {
-				"text": ["Non, j'aime pas avoir les cours en ligne"],
-				"preview": "Non, j'aime pas",
+				"text": ["J'aime pas du tout!"],
+				"preview": "J'aime pas",
 				"goto": "aimePas"
 			},
 			"trql": {
-				"text": ["Ouais j'adore! C'est tellement pratique"],
-				"preview": "Ouais j'adore!",
+				"text": ["J'adore! C'est tellement pratique"],
+				"preview": "J'adore!",
 				"goto": "aime"
 			}
 		},
