@@ -123,21 +123,19 @@ export class Player {
           'damien_clothes': 1
       };
       
-      const xhr = new XMLHttpRequest();
-      xhr.open("POST", "https://labs.letemps.ch/interactive/2020/_sandbox/_covidou_server/add_choices.php", true);
-      xhr.setRequestHeader("Content-Type", "application/json");
-      let data = JSON.stringify(sample_payload);
-      xhr.send(data);
-      
-      // add a retry?
-      xhr.onreadystatechange = function () {
-          // if DONE && SUCCESS
-          if (xhr.readyState === 4 && xhr.status === 200) {
-              // Tells if database was successfully updated
-              let json = JSON.parse(xhr.responseText);
-              console.log(json);
-          }
-      };
+      (async () => {
+        const rawResponse = await fetch('https://labs.letemps.ch/interactive/2020/_sandbox/_covidou_server/add_choices.php', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify(sample_payload)
+        });
+        const content = await rawResponse.json();
+        // Tells if database was successfully updated
+        console.log(content);
+      })();
     }
 }
 
