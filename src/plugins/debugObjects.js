@@ -20,7 +20,7 @@ var DebugObjects = function (scene)
   checkbox.id = "debugObjectsCheckbox";
   checkbox.checked = 'checked';
   
-  var label = document.createElement('label')
+  var label = document.createElement('label');
   label.htmlFor = "debugObjectsCheckbox";
   label.appendChild(document.createTextNode('Debug objects'));
   
@@ -31,7 +31,7 @@ var DebugObjects = function (scene)
   checkbox.onclick = function(){
     debugPlugin.active = !debugPlugin.active;
     console.log('%c Debug plugin active: ' + debugPlugin.active, 'background: #222; color: #bada55');
-  }
+  };
   
   //  The Scene that owns this plugin
   this.scene = scene;
@@ -108,7 +108,7 @@ DebugObjects.prototype = {
     var debugObjects = this;
     setInterval(function(){
       debugObjects.drawDebug();
-    }, 800)
+    }, 800);
   },
   
   
@@ -140,7 +140,7 @@ DebugObjects.prototype = {
           // most objects cant become draggable
         }
       }
-    })
+    });
   },
   
   //  Called when a Scene shuts down, it may then come back again later (which will invoke the 'start' event) but should be considered dormant.

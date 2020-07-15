@@ -730,7 +730,7 @@ export class StoreScene extends Phaser.Scene {
             position_y: 422,
             done: false
           },
-        }
+        };
         
         this.cards = [
             this.firstShelf,
@@ -800,8 +800,8 @@ export class StoreScene extends Phaser.Scene {
       object.depth = 5;
       
       let yDistance = this.basket.y - object.y; // between 280 and 1340
-      console.log('yDistance:', yDistance)
-      let target_objects = [object]
+      console.log('yDistance:', yDistance);
+      let target_objects = [object];
       if(object_name == 'pate_spaghetti01'){
         // also move the other pack
         target_objects.push(this.children.getByName('pate_spaghetti02'));
@@ -822,15 +822,15 @@ export class StoreScene extends Phaser.Scene {
               for (const item in this.checklist_done) {
                 if(object_name.indexOf(item) >= 0){
                   if(this.checklist_done[item].done == false) {
-                    console.log('ajout rature', item)
-                    this.rature = this.add.image(this.checklist_done[item].position_x, this.checklist_done[item].position_y, 'rature')
+                    console.log('ajout rature', item);
+                    this.rature = this.add.image(this.checklist_done[item].position_x, this.checklist_done[item].position_y, 'rature');
                     this.rature.depth = 20;
                     this.checklist_done[item].done = true;
                   } else {
-                    console.log('rature deja ajoutée')
+                    console.log('rature deja ajoutée');
                   }
                 }else{
-                  console.log('pas de', item)
+                  console.log('pas de', item);
                 }
               }
               
@@ -842,7 +842,7 @@ export class StoreScene extends Phaser.Scene {
                 ease: 'Quadratic',
                 yoyo: true,
                 loop: 0
-              })
+              });
           },
           onCompleteScope: this
       });
@@ -854,7 +854,7 @@ export class StoreScene extends Phaser.Scene {
 
         if(this.current_card.isLoaded()) {
             this.current_card.create();
-            this.addArrow()
+            this.addArrow();
         }
         
         this.checklist = this.add.image(-this.cameras.main.width * 0.255, 489, 'liste');
@@ -881,7 +881,7 @@ export class StoreScene extends Phaser.Scene {
         container.depth = 2;
         for(let i in this.current_card.children){
           if(this.current_card.children[i].sprite.depth != 5){
-            container.add(this.current_card.children[i].sprite)
+            container.add(this.current_card.children[i].sprite);
           }
         }
         this.tweens.add({
@@ -891,7 +891,7 @@ export class StoreScene extends Phaser.Scene {
           ease: 'Quadratic',
           yoyo: false,
           loop: 0
-        })
+        });
         
         this.cardIdx++;
         this.current_card = this.cards[this.cardIdx];
