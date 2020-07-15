@@ -7,6 +7,8 @@
         }
     },
     "rules": {
-        "semi": 1
+        "semi": 1,
+        "indent": ["error", 4],
+        "space-before-blocks": ["error", "always"]
     }
 }
