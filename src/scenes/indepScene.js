@@ -25,7 +25,9 @@ export class IndepScene extends Phaser.Scene {
     constructor() {
         super({ key: Scenes.INDEP });
 
-        this.idle_card = new Card(this, [
+        this.idle_card = new Card(
+            this,
+            [
                 new Background(
                     this,
                     "sprites/IndepScene/01_IDLE/bg.jpg",
@@ -108,7 +110,9 @@ export class IndepScene extends Phaser.Scene {
             true
         );
 
-        this.phone_card = new Card(this, [
+        this.phone_card = new Card(
+            this,
+            [
                 new Background(
                     this,
                     "sprites/IndepScene/02_Messages/bg.png",

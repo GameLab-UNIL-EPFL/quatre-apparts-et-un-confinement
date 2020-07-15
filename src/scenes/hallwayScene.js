@@ -26,7 +26,9 @@ export class HallwayScene extends Phaser.Scene {
     constructor() {
         super({ key: Scenes.HALLWAY });
 
-        this.damien_closed_card = new Card(this, [
+        this.damien_closed_card = new Card(
+            this,
+            [
                 new Background(
                     this,
                     "sprites/HallwayScenes/Palier-Etudiant-Ferme/bg.jpg",

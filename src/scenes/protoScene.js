@@ -48,7 +48,9 @@ export class ProtoScene extends Phaser.Scene {
             'chosePath': new ProtoGuy(this, 133, 422, ProtoGuyCard.CHOSE_PATH)
         };
 
-        this.chosePathCard = new Card(this, [
+        this.chosePathCard = new Card(
+            this,
+            [
                 new Background(
                     this,
                     "sprites/ProtoScene/ChosePathCard/bg.jpg",

@@ -27,7 +27,9 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
             'kitchen': new ProtoGuy(this, -218, -32, ProtoGuyCard.KITCHEN)
         };
 
-        this.clothesCard = new Card(this, [
+        this.clothesCard = new Card(
+            this,
+            [
                 new Background(
                     this,
                     "sprites/ProtoScene/ClothesCard/bg.jpg",
@@ -56,7 +58,9 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
             characters['clothes']
         );
 
-        this.kitchenCard = new Card(this, [
+        this.kitchenCard = new Card(
+            this,
+            [
                 new Background(
                     this,
                     "sprites/ProtoScene/KitchenCard/bg.jpg",

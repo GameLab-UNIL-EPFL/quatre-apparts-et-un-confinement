@@ -76,7 +76,7 @@ export class Player {
      * @brief Writes the current game data to a cookie
      */
     saveGame() {
-        const serialized_data = {
+        let serialized_data = {
             scene: this.cur_scene,
             data: this.scene_data,
             tree: this.dialogue_tree,

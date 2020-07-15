@@ -26,35 +26,41 @@ export class GrandmaScene extends Phaser.Scene {
         super({ key: Scenes.GRANDMA });
 
         this.livingRoomCard = new LivingRoomCard(this);
-        this.radioCard = new Card(this, [
-            new Background(
-                this,
-                "sprites/GrandmaScene/Radio/radio_bg.jpg",
-                "radio_bg"
-            ),
-            new CardObject(
-                this,
-                { name: "radio_radio", url: "sprites/GrandmaScene/Radio/radio_radio.png" },
-                new Phaser.Math.Vector2(-131, -273),
-                (scene) => scene.nextCard(GrandmaCards.LIVING_ROOM),
-                this
-            )
-        ]);
+        this.radioCard = new Card(
+            this,
+            [
+                new Background(
+                    this,
+                    "sprites/GrandmaScene/Radio/radio_bg.jpg",
+                    "radio_bg"
+                ),
+                new CardObject(
+                    this,
+                    { name: "radio_radio", url: "sprites/GrandmaScene/Radio/radio_radio.png" },
+                    new Phaser.Math.Vector2(-131, -273),
+                    (scene) => scene.nextCard(GrandmaCards.LIVING_ROOM),
+                    this
+                )
+            ]
+        );
 
-        this.calendarCard = new Card(this, [
-            new Background(
-                this,
-                "sprites/GrandmaScene/Calendar/calendar_bg.jpg",
-                "calendar_bg"
-            ),
-            new CardObject(
-                this,
-                { name: "calendar_calendar", url: "sprites/GrandmaScene/Calendar/calendar_calendar.png" },
-                new Phaser.Math.Vector2(-88, -162),
-                (scene) => scene.nextCard(GrandmaCards.LIVING_ROOM),
-                this
-            )
-        ]);
+        this.calendarCard = new Card(
+            this,
+            [
+                new Background(
+                    this,
+                    "sprites/GrandmaScene/Calendar/calendar_bg.jpg",
+                    "calendar_bg"
+                ),
+                new CardObject(
+                    this,
+                    { name: "calendar_calendar", url: "sprites/GrandmaScene/Calendar/calendar_calendar.png" },
+                    new Phaser.Math.Vector2(-88, -162),
+                    (scene) => scene.nextCard(GrandmaCards.LIVING_ROOM),
+                    this
+                )
+            ]
+        );
 
         this.cards = [
             this.livingRoomCard,
