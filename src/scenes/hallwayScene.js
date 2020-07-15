@@ -236,6 +236,9 @@ export class HallwayScene extends Phaser.Scene {
 
         //Preload all of the cards
         this.cards.forEach(card => card.preload());
+
+        this.load.audio("door", "sounds/hallway/door.wav");
+        this.load.audio("doorBell", "sounds/hallway/doorBell.wav");
     }
 
     /**
@@ -310,6 +313,9 @@ export class HallwayScene extends Phaser.Scene {
                 case HallwayCards.DAMIEN_CLOSED:
                     let callback = () => {};
 
+                    this.door = this.sound.add("door");
+                    this.door.play();
+
                     //Check if Damien is home or not
                     if(this.damien_gone) {
                         this.cardIdx = HallwayCards.INDEP_CLOSED;
@@ -339,6 +345,9 @@ export class HallwayScene extends Phaser.Scene {
                 case HallwayCards.INDEP_CLOSED:
                     this.cardIdx = HallwayCards.INDEP_OPEN;
                     this.current_card = this.indep_open_card;
+
+                    this.door = this.sound.add("door");
+                    this.door.play();
 
                     //Load the next card
                     this.current_card.create();

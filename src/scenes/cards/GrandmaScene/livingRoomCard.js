@@ -115,6 +115,8 @@ export class LivingRoomCard extends Card {
         this.parent_scene.load.image("grandma_book2", "sprites/GrandmaScene/grandma_book_02.png");
         this.parent_scene.load.image("grandma_book3", "sprites/GrandmaScene/grandma_book_03.png");
 
+        this.parent_scene.load.audio("pageTurn", "sounds/grandma/pageTurn.wav");
+
         //Load the cat animation spritesheet
         this.parent_scene.load.spritesheet(
             'cat',
@@ -303,6 +305,9 @@ export class LivingRoomCard extends Card {
                         "grandma_book1"
                     );
 
+                    this.page = this.parent_scene.sound.add("pageTurn");
+                    this.page.play();
+
                     //Trigger the book's dialogue
                     this.parent_scene.dialogue.display("livre1");
                     break;
@@ -313,6 +318,8 @@ export class LivingRoomCard extends Card {
                         GRANDMA_POS.y,
                         "grandma_book2"
                     );
+                    
+                    this.page.play();
 
                     //Trigger the book's dialogue
                     this.parent_scene.dialogue.display("livre2");
@@ -324,6 +331,8 @@ export class LivingRoomCard extends Card {
                         GRANDMA_POS.y,
                         "grandma_book3"
                     );
+
+                    this.page.play();
 
                     //Trigger the book's dialogue
                     this.parent_scene.dialogue.display("livre3");

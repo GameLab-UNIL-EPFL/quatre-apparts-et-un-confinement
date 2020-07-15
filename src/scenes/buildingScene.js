@@ -81,7 +81,7 @@ export class BuildingScene extends Phaser.Scene {
         }
 
         //load sounds
-        this.load.audio("bird", "sounds/birdTraffic.mp3");
+        this.load.audio("bird", "sounds/building/birdTraffic.mp3");
 
         //Load in all of the sprites needed for this scene
         switch(this.info.month) {

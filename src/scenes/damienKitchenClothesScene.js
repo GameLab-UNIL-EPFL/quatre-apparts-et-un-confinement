@@ -1,4 +1,4 @@
-import Phaser from "phaser";
+import Phaser, { GameObjects } from "phaser";
 import { DialogueController } from "../core/dialogueController.js";
 import { Card } from "./cards/card.js";
 import { CardObject } from "./objects/cardObject.js";
@@ -174,6 +174,11 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
 
         //Preload all of the cards
         this.current_card.preload();
+
+        //load sounds
+        this.load.audio("toast", "sounds/kitchen/toasterPop.wav");
+        this.load.audio("fridge", "sounds/kitchen/fridge.wav");
+        this.load.audio("glass", "sounds/kitchen/glass.wav");
     }
 
     /**
@@ -197,6 +202,27 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
 
         //Update the saved data
         player.cur_scene = Scenes.DAMIEN_KITCHEN_CLOTHES;
+
+        this.toast = this.sound.add("toast");
+        this.fridge = this.sound.add("fridge");
+        this.glass = this.sound.add("glass");
+
+        this.input.on(
+            'gameobjectdown',
+            (_, GameObject) => {
+                console.log(GameObject.texture.key);
+                if(GameObject.texture.key === "toaster_h"){
+                    this.toast.play();
+                }
+                else if(GameObject.texture.key === "fridge_h"){
+                    this.fridge.play();
+                }
+                else if(GameObject.texture.key === "sink_h"){
+                    this.glass.play();
+                }
+                
+            }
+        );
     }
 
     /**
