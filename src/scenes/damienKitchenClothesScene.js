@@ -64,7 +64,7 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
                 new Background(
                     this,
                     "sprites/ProtoScene/KitchenCard/bg.jpg",
-                    "KitchenBG",
+                    "KitchenBG"
                 ),
                 characters['kitchen'],
                 new CardObject(

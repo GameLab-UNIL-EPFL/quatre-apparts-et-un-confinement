@@ -11,11 +11,9 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.js$/,
+        test: /\.(js)$/,
         exclude: /node_modules/,
-        use: {
-          loader: "babel-loader"
-        }
+        use: ["babel-loader", "eslint-loader"]
       },
       {
         test: [/\.vert$/, /\.frag$/],
@@ -50,10 +48,6 @@ module.exports = {
       template: "./index.html"
     }),
     new CopyWebpackPlugin([
-        {
-            from: 'levels',
-            to: 'levels'
-        },
         {
             from: 'sound',
             to: 'sound'
