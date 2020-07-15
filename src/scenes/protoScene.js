@@ -104,7 +104,7 @@ export class ProtoScene extends Phaser.Scene {
             //Set the correct card
             switch(data.cardIdx) {
                 case ProtoCards.INTRO:
-                    this.cardIdx = ProtoCards.INTRO;
+                this.cardIdx = ProtoCards.INTRO;
                     break;
 
                 case ProtoCards.WAKE_UP:

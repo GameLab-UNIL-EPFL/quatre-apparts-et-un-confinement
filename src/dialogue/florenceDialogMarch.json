@@ -1,0 +1,47 @@
+{
+	"florence": {
+		"name": "Florence",
+		"text": [
+			"Même si vous n'avez plus l'école,",
+            "ça ne veut pas dire que vous êtes en vancances!",
+            "Vous avez des devoirs à faire encore!"
+		],
+		"choices": [],
+		"goto": ["kids"]
+	},
+	"kids": {
+		"name": "Maxime et Liliane",
+		"text": [
+            "Mais maman! Ça fait trop longtemps qu'on est pas sorti!", 
+            "On peut allez au jouer au parc, s'il te plaît?",
+            "On fera attention promis!"
+		],
+		"choices": [
+            {
+                "text": "Bon d'accord! Mais vous devez ranger la chambre d'abord.",
+                "goto": "merci"
+            },
+            {
+                "text": "Non! Je vous ai déjà expliqué pourquoi et vous devez ranger votre chambre!",
+                "goto": "oh"
+            }
+        ],
+		"goto": ["merci", "oh"]
+    },
+    "merci": {
+		"name": "Maxime et Liliane",
+		"text": [
+			"Merci maman!"
+		],
+		"choices": [],
+		"goto": []
+    },
+    "oh": {
+		"name": "Maxime et Liliane",
+		"text": [
+			"Mais rhooo!"
+		],
+		"choices": [],
+		"goto": []
+	}
+}

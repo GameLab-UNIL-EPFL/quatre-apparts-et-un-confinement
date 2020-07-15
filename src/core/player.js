@@ -8,7 +8,9 @@ export const Scenes = {
     BUILDING: 'Building',
     GRANDMA: 'Grandma',
     HALLWAY: 'Hallway',
-    INDEP: 'Indep'
+    INDEP: 'Indep',
+    STORE: 'Store',
+    MOTHER: 'Mother'
 };
 
 /**
