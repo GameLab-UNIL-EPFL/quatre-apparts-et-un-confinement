@@ -79,6 +79,7 @@ export class MessageCard extends Card {
             5000,
             5000
         );
+        
         const prompt_sprite = this.parent_scene.add.graphics({ fillStyle: { color: 0xf8f2df }});
         prompt_sprite.fillRectShape(bg);
 

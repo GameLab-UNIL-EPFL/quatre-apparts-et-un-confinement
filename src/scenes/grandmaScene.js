@@ -4,7 +4,6 @@ import { CardObject } from "./objects/cardObject.js";
 import { Background } from "./objects/background.js";
 import { player } from "../index.js";
 import { Scenes } from "../core/player.js";
-import { WindowState, Months } from "./buildingScene.js";
 import { LivingRoomCard } from "./cards/GrandmaScene/livingRoomCard.js";
 import { DialogueController } from "../core/dialogueController.js";
 import { HallwayCards } from "./hallwayScene.js";
@@ -27,35 +26,41 @@ export class GrandmaScene extends Phaser.Scene {
         super({ key: Scenes.GRANDMA });
 
         this.livingRoomCard = new LivingRoomCard(this);
-        this.radioCard = new Card(this, [
-            new Background(
-                this,
-                "sprites/GrandmaScene/Radio/radio_bg.jpg",
-                "radio_bg"
-            ),
-            new CardObject(
-                this,
-                { name: "radio_radio", url: "sprites/GrandmaScene/Radio/radio_radio.png" },
-                new Phaser.Math.Vector2(-131, -273),
-                (scene) => scene.nextCard(GrandmaCards.LIVING_ROOM),
-                this
-            )
-        ]);
+        this.radioCard = new Card(
+            this,
+            [
+                new Background(
+                    this,
+                    "sprites/GrandmaScene/Radio/radio_bg.jpg",
+                    "radio_bg"
+                ),
+                new CardObject(
+                    this,
+                    { name: "radio_radio", url: "sprites/GrandmaScene/Radio/radio_radio.png" },
+                    new Phaser.Math.Vector2(-131, -273),
+                    (scene) => scene.nextCard(GrandmaCards.LIVING_ROOM),
+                    this
+                )
+            ]
+        );
 
-        this.calendarCard = new Card(this, [
-            new Background(
-                this,
-                "sprites/GrandmaScene/Calendar/calendar_bg.jpg",
-                "calendar_bg"
-            ),
-            new CardObject(
-                this,
-                { name: "calendar_calendar", url: "sprites/GrandmaScene/Calendar/calendar_calendar.png" },
-                new Phaser.Math.Vector2(-88, -162),
-                (scene) => scene.nextCard(GrandmaCards.LIVING_ROOM),
-                this
-            )
-        ]);
+        this.calendarCard = new Card(
+            this,
+            [
+                new Background(
+                    this,
+                    "sprites/GrandmaScene/Calendar/calendar_bg.jpg",
+                    "calendar_bg"
+                ),
+                new CardObject(
+                    this,
+                    { name: "calendar_calendar", url: "sprites/GrandmaScene/Calendar/calendar_calendar.png" },
+                    new Phaser.Math.Vector2(-88, -162),
+                    (scene) => scene.nextCard(GrandmaCards.LIVING_ROOM),
+                    this
+                )
+            ]
+        );
 
         this.cards = [
             this.livingRoomCard,
@@ -127,11 +132,9 @@ export class GrandmaScene extends Phaser.Scene {
      * @brief Notifies the current card that the dialogue has ended
      */
     notifyDialogueEnd() {
-        console.log("SCENE_NOTIFIED_OF_END");
 
         //Notify the current card if it is interested
         if(this.current_card.isDialogueSensitive()) {
-            console.log("NOTIFYING_CARD");
             this.current_card.notifyDialogueEnd();
         }
     }
@@ -174,7 +177,7 @@ export class GrandmaScene extends Phaser.Scene {
     nextScene() {
         this.scene.start(Scenes.HALLWAY, {
             cardIdx: HallwayCards.DAMIEN_CLOSED,
-            damien_gone: false//player.dialogue_tree.repOui !== null
+            damien_gone: false
         });
     }
 

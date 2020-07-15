@@ -20,8 +20,7 @@ let plugins = [{
     mapping: 'rexUI'
 }];
 
-
-const OBJECT_DEBUG = true;
+const OBJECT_DEBUG = false;
 
 if(OBJECT_DEBUG === true) {
     plugins.push({
@@ -100,7 +99,7 @@ game.horizontalRatio = scale.width / maxPictureWidth;
 window.horizontalOffset = (maxPictureWidth - scale.width) / 2;
 window.horizontalRatio = scale.width / maxPictureWidth;
 
-function resizeGame(){
+function resizeGame() {
   console.log('Resize (wip)');
   /*let newScale = getScale(window.innerWidth, window.innerHeight);
   game.scale.resize(newScale.width, newScale.height);

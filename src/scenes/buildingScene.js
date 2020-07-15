@@ -187,7 +187,7 @@ export class BuildingScene extends Phaser.Scene {
             "Continuer",
             {font: "54px OpenSans", fill: "black"}
         );
-        this.sprites['continue_text'].setOrigin(0.5, 0.5)
+        this.sprites['continue_text'].setOrigin(0.5, 0.5);
 
         //Make continue button interactive
         this.sprites['continue_text'].setInteractive();
@@ -334,8 +334,8 @@ export class BuildingScene extends Phaser.Scene {
         this.sprites['empty_windows'] = this.add.image(0, 165, "empty_windows");
 
         //Load in the posters
-        let poster_pos = new Phaser.Math.Vector2(425, 635);
-        let poster_key = 'poster_0' + this.info.stage;
+        const poster_pos = new Phaser.Math.Vector2(425, 635);
+        const poster_key = 'poster_0' + this.info.stage;
         this.sprites[poster_key] = this.add.image(poster_pos.x, poster_pos.y, poster_key);
 
         //Load in the cars
@@ -529,13 +529,6 @@ export class BuildingScene extends Phaser.Scene {
         if(this.info.mainMenu) {
             this.createMainMenu();
         }
-
-        //Compensate for the horizontal ratio
-        /*for (var key in this.sprites) {
-            if (this.sprites.hasOwnProperty(key)) {
-                this.sprites[key].x *= window.horizontalRatio;
-            }
-        }*/
     }
 
     /**

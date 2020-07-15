@@ -71,14 +71,14 @@ const MSG_HEIGHT = {
     msg_space: 15
 };
 
-const MSG_LINE_CHARS = 18;
+const MSG_LINE_CHARS = 16;
 const MSG_RESP_DELAY = 1500;
 const PROMT_HEIGHT = 200;
 const SPACING = 25;
 const MAX_N_PROMPTS = 3;
 
 const UP_POS = {
-    box: new Phaser.Math.Vector2(0, -650), // ici: multiplier par horizontalRatio
+    box: new Phaser.Math.Vector2(0, -650), 
     name: new Phaser.Math.Vector2(-488, -745),
     content: new Phaser.Math.Vector2(-488, -675)
 };
@@ -522,13 +522,13 @@ export class DialogueController {
         this.moveDisplayedUp();
 
         //Create dialogue background
-        let box_elem = this.parent_scene.add.image(
+        const box_elem = this.parent_scene.add.image(
             lr ? MIN_LEFT_X.box : MIN_RIGHT_X.box,
             ypos.box,
             box
         );
 
-        let text_elem = this.parent_scene.add.text(
+        const text_elem = this.parent_scene.add.text(
             (lr ? MIN_LEFT_X.text : MIN_RIGHT_X.text),
             ypos.text,
             cur_text,

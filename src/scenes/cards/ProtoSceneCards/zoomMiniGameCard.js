@@ -4,7 +4,7 @@ import { CardObject } from "../../objects/cardObject";
 
 const N_NOTIFICATION = 10;
 const N_DISTRACTIONS = 19;
-const N_MSG = (N_NOTIFICATION * 2) + N_DISTRACTIONS;
+const N_MSG = (N_NOTIFICATION * 3) + N_DISTRACTIONS;
 const NOTIF_SPREAD = 900;
 const NOTIF_OFFSET = 180-600;
 
@@ -28,8 +28,6 @@ const MessageType = {
     Distraction: 0
 };
 
-var END = false;
-
 /**
  * @brief Models a "Card" inside of a scene.
  * This card spefically handles the mechanics linked to the zoom minigame
@@ -41,7 +39,7 @@ export class ZoomMiniGameCard extends Card {
      */
     constructor(parent_scene) {
         //Initialize children array
-        let children = [
+        const children = [
             new CardObject(
                 parent_scene,
                 { name: "zoom_bg", url: "sprites/ProtoScene/ZoomMiniGameCard/zoom_bg.png" },
@@ -76,6 +74,16 @@ export class ZoomMiniGameCard extends Card {
 
         //Add all notifications to the card
         for(let i = 0; i < N_NOTIFICATION; ++i) {
+            this.messages.push({
+                name: "notification_" + i,
+                url: "sprites/ProtoScene/ZoomMiniGameCard/notif_" + i + ".png" ,
+                pos: new Phaser.Math.Vector2(-600, -1000),
+                sprite: null,
+                type: MessageType.Cours,
+                isDestroyed: false
+            });
+
+            //Push the notif again
             this.messages.push({
                 name: "notification_" + i,
                 url: "sprites/ProtoScene/ZoomMiniGameCard/notif_" + i + ".png" ,
@@ -250,7 +258,7 @@ export class ZoomMiniGameCard extends Card {
             //Make the card interactive
             this.parent_scene.input.on(
                 'gameobjectdown',
-                (pointer, gameObject) => {
+                (_, gameObject) => {
                     //Check that we clicked the object
                     if(gameObject === this.messages[msg_idx].sprite) {
                         if(this.anim) {
@@ -265,7 +273,7 @@ export class ZoomMiniGameCard extends Card {
                                 gameObject.x,
                                 gameObject.y,
                                 "notif-pop"
-                            ).play('pop').on('complete', () => this.anim.destroy(), this);
+                            ).play('pop');
 
                             //Remove the elelment in question
                             this.cur_msg.filter((val, _) => val === msg_idx);
@@ -326,8 +334,11 @@ export class ZoomMiniGameCard extends Card {
             //End the card
             card.endCard();
 
-            END = true;
-
+            card.parent_scene.tweens.add({
+                targets:  card.music,
+                volume:   0,
+                duration: 800
+            });
         }
     }
 
@@ -344,7 +355,7 @@ export class ZoomMiniGameCard extends Card {
             ease: "Quadratic",
             yoyo: true,
             loop: -1
-        })
+        });
 
         //Create the tutorial notification
         const tutorial_sprite = this.parent_scene.add.image(
@@ -379,6 +390,9 @@ export class ZoomMiniGameCard extends Card {
                         "notif-pop"
                     ).play('pop');
 
+                    //Play the SFX
+                    this.right.play();
+
                     tutorial_sprite.destroy();
                     pointer.destroy();
                     hitzone.destroy();
@@ -391,6 +405,7 @@ export class ZoomMiniGameCard extends Card {
                         callbackScope: this,
                         args: [this.endMiniGame]
                     });
+
                 };
 
                 tutorial_sprite.setInteractive().on('pointerdown', interaction, this);
@@ -446,16 +461,6 @@ export class ZoomMiniGameCard extends Card {
         //Start with the tutorial
         this.showTutorial();
 
-    }
-
-    update() {
-        if(END){
-            this.parent_scene.tweens.add({
-                targets:  this.music,
-                volume:   0,
-                duration: 800
-            });
-        }
     }
 
     destroy() {
