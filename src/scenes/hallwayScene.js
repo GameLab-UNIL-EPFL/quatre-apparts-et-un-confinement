@@ -6,6 +6,7 @@ import { Background } from "./objects/background.js";
 import { player } from "../index.js";
 import { Scenes } from "../core/player.js";
 import { WindowState, Months } from "./buildingScene.js";
+import { IndepCards } from "./indepScene.js";
 
 export const HallwayCards = {
     DAMIEN_CLOSED: 0,
@@ -253,6 +254,10 @@ export class HallwayScene extends Phaser.Scene {
             this.current_card.create();
         }
 
+        if(this.cardIdx === HallwayCards.INDEP_GRANDMA) {
+            this.dialogue.display("patrickReturn");
+        }
+
         //Update the saved data
         player.cur_scene = Scenes.HALLWAY;
 
@@ -375,36 +380,32 @@ export class HallwayScene extends Phaser.Scene {
     nextScene(cardIdx) {
         switch(cardIdx) {
             case HallwayCards.INDEP_OPEN:
-                //TODO: START THE GROCERY STORE SCENE
+                this.scene.start(Scenes.STORE);
                 break;
 
             case HallwayCards.INDEP_GRANDMA:
+                this.scene.start(Scenes.BUILDING, {
+                    mainMenu: true,
+                    stage: 1,
+                    windows: {
+                        damien: WindowState.OFF,
+                        grandma: WindowState.OFF,
+                        family: WindowState.OFF,
+                        indep: WindowState.OFF
+                    },
+                    month: Months.MARCH,
+                    nextScene: {
+                        damien: null,
+                        grandma: null,
+                        family: null,
+                        indep: null
+                    }
+                });
                 break;
             
             default:
                 break;
-        }
-
-        this.cameras.main.fadeOut(3000, 0, 0, 0,
-            () => this.scene.start(Scenes.BUILDING, {
-                mainMenu: false,
-                stage: 3,
-                windows: {
-                    damien: WindowState.OFF,
-                    grandma: WindowState.OFF,
-                    family: WindowState.OFF,
-                    indep: WindowState.OFF
-                },
-                month: Months.MARCH,
-                nextScene: {
-                    damien: null,
-                    grandma: null,
-                    family: null,
-                    indep: null
-                }
-            }),
-            this
-        );        
+        }      
     }
 
     /**

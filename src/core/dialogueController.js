@@ -71,7 +71,7 @@ const MSG_HEIGHT = {
     msg_space: 15
 };
 
-const MSG_LINE_CHARS = 16;
+const MSG_LINE_CHARS = 18;
 const MSG_RESP_DELAY = 1500;
 const PROMT_HEIGHT = 200;
 const SPACING = 25;
@@ -133,6 +133,46 @@ export class DialogueController {
             "sprites/UI/prompts_2.png",
             DIALOGUE_BOX_SPRITE_SIZE.prompt
         );
+    }
+
+    preloadMessages() {
+        //Load in the phone message sprites
+        this.parent_scene.load.image("promptBox1", "sprites/UI/Messages/SelectionMessage_01.png");
+        this.parent_scene.load.image("promptBox2", "sprites/UI/Messages/SelectionMessage_02.png");
+        this.parent_scene.load.image("promptBox3", "sprites/UI/Messages/SelectionMessage_03.png");
+
+        this.parent_scene.load.image("sentMsg1", "sprites/UI/Messages/SendMessage_01.png");
+        this.parent_scene.load.image("sentMsg2", "sprites/UI/Messages/SendMessage_02.png");
+        this.parent_scene.load.image("sentMsg3", "sprites/UI/Messages/SendMessage_03.png");
+        this.parent_scene.load.image("sentMsg4", "sprites/UI/Messages/SendMessage_04.png");
+        this.parent_scene.load.image("sentMsg5", "sprites/UI/Messages/SendMessage_05.png");
+        this.parent_scene.load.image("sentMsg6", "sprites/UI/Messages/SendMessage_06.png");
+        this.parent_scene.load.image("sentMsg7", "sprites/UI/Messages/SendMessage_07.png");
+
+        this.parent_scene.load.image("recievedMsg1", "sprites/UI/Messages/ReceivedMessage_01.png");
+        this.parent_scene.load.image("recievedMsg2", "sprites/UI/Messages/ReceivedMessage_02.png");
+        this.parent_scene.load.image("recievedMsg3", "sprites/UI/Messages/ReceivedMessage_03.png");
+        this.parent_scene.load.image("recievedMsg4", "sprites/UI/Messages/ReceivedMessage_04.png");
+        this.parent_scene.load.image("recievedMsg5", "sprites/UI/Messages/ReceivedMessage_05.png");
+        this.parent_scene.load.image("recievedMsg6", "sprites/UI/Messages/ReceivedMessage_06.png");
+        this.parent_scene.load.image("recievedMsg7", "sprites/UI/Messages/ReceivedMessage_07.png");
+
+        this.parent_scene.load.image("typing", "sprites/UI/Messages/typing.png");
+    }
+
+    createMessageBG() {
+        //Create dialogue background
+        const bg = new Phaser.Geom.Rectangle(
+            -600,
+            -800,
+            5000,
+            5000
+        );
+        
+        const prompt_sprite = this.parent_scene.add.graphics({ fillStyle: { color: 0xf8f2df }});
+        prompt_sprite.fillRectShape(bg);
+
+        prompt_sprite.setDepth(-3);
     }
 
     /**
@@ -209,7 +249,7 @@ export class DialogueController {
      * @param {string} id the ID of the dialogue that we want to display
      * @param {boolean} up_down true if the dialogue will be placed on the top, false if on the bottom
      */
-    display(id, dontEnd=false, up_down=true) {
+    display(id, dontEnd=false, toMessage=false, up_down=true) {
         this.dialogue_pos = up_down ? UP_POS : DOWN_POS;
 
         this.current_conv_id = id;
@@ -268,7 +308,7 @@ export class DialogueController {
             //Prompt user if necessary on interaction
             if(this.requestDialogue(id).goto.length !== 0 && this.textIdx === this.text.length - 1) {
                 if(Object.keys(this.requestDialogue(id).choices).length !== 0) {
-                    this.promptAnswers(id);
+                    this.promptAnswers(id, toMessage);
                 } else {
                     this.display(this.requestDialogue(id).goto[0], false);
                     return;
@@ -311,7 +351,7 @@ export class DialogueController {
         //Prompt user if necessary
         if(this.requestDialogue(id).goto.length !== 0 && this.textIdx === this.text.length - 1) {
             if(Object.keys(this.requestDialogue(id).choices).length !== 0) {
-                this.promptAnswers(id);
+                this.promptAnswers(id, toMessage);
             } else {
                 this.display(this.requestDialogue(id).goto[0], false);
                 return;
@@ -323,7 +363,7 @@ export class DialogueController {
      * @brief Shows (if any) the possible answers to a question
      * @param {string} id, the ID of the dialogue that requires a prompt
      */
-    promptAnswers(id) {
+    promptAnswers(id, toMessage = false) {
         //Retrieve the dialogue
         const cur_dialogue = this.requestDialogue(id);
 
@@ -409,7 +449,11 @@ export class DialogueController {
                     this.cur_state = DialogueState.DISPLAYED;
 
                     //Make a decision
-                    this.display(choice.goto);
+                    if(toMessage) {
+                        this.displayMessage(choice.goto, true);
+                    } else {
+                        this.display(choice.goto);
+                    }
 
                     //Save the dialogue entry
                     player.addDialogueTreeEntry({
@@ -456,7 +500,7 @@ export class DialogueController {
 
         //Retrieve the dialogue
         let cur_text = choice_id ?
-            this.requestDialogue(id).choices[choice_id].text :
+            this.requestDialogue(id).choices[choice_id].text[0] :
             this.getText(id)[idx];
 
         let cur_dialogue = this.requestDialogue(id);
@@ -532,12 +576,12 @@ export class DialogueController {
             (lr ? MIN_LEFT_X.text : MIN_RIGHT_X.text),
             ypos.text,
             cur_text,
-            {font: (36 * window.horizontalRatio) + "px OpenSans ", fill: lr ? "black" : "white", wordWrap: { width: 360 * window.horizontalRatio }}
+            {font: (36 * window.horizontalRatio) + "px OpenSans ", fill: lr ? "black" : "white", wordWrap: { width: 350 }}
         );
 
         //Move the messages back
-        box_elem.setDepth(-1);
-        text_elem.setDepth(-1);
+        box_elem.setDepth(-2);
+        text_elem.setDepth(-2);
 
         this.displayed.push(box_elem);
         this.displayed.push(text_elem);
@@ -617,13 +661,42 @@ export class DialogueController {
                     //Goto the next dialogue
                     const next_id = dialogue.choices[choice_key].goto;
 
+                    //Retrieve dialiogue
+                    const next_msg = this.requestDialogue(next_id);
+
                     //Add a timer event to trigger the next message
                     this.parent_scene.time.addEvent({
                         delay: MSG_RESP_DELAY,
                         repeat: 0,
                         callback: () => {
                             if((next_id.length) > 0) {
-                                this.displayMessage(next_id, true);
+                                this.displayMessage(next_id, true, null, 0);
+
+                                if(next_msg.text.length > 1) {
+                                    this.parent_scene.time.addEvent({
+                                        delay: MSG_RESP_DELAY,
+                                        repeat: 0,
+                                        callback: () => {
+                                            if((next_id.length) > 0) {
+                                                this.displayMessage(next_id, true, null, 1);
+
+                                                if(next_msg.text.length > 2) {
+                                                    this.parent_scene.time.addEvent({
+                                                        delay: MSG_RESP_DELAY,
+                                                        repeat: 0,
+                                                        callback: () => {
+                                                            if((next_id.length) > 0) {
+                                                                this.displayMessage(next_id, true, null, 2);
+                                                            }
+                                                        },
+                                                        callbackScope: this,
+                                                    });
+                                                }
+                                            }
+                                        },
+                                        callbackScope: this,
+                                    });
+                                }
                             }
                         },
                         callbackScope: this,

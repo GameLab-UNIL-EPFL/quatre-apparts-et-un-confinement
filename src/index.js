@@ -13,6 +13,8 @@ import { HallwayScene } from "./scenes/hallwayScene.js";
 import { StoreScene } from "./scenes/storeScene.js";
 import { IndepScene } from "./scenes/indepScene.js";
 import { MotherScene } from "./scenes/motherScene.js";
+import { DamienInitScene } from "./scenes/damienInitScene.js";
+import { IndepMessageScene } from "./scenes/indepMessageScene.js";
 
 let resizeTimeout;
 let plugins = [{
@@ -75,11 +77,13 @@ const config = {
     scene: [
         BuildingScene,
         ProtoScene,
+        DamienInitScene,
         DamienKitchenClothesScene,
         DamienComputerScene,
         GrandmaScene,
         HallwayScene,
         IndepScene,
+        IndepMessageScene,
         StoreScene,
         MotherScene
     ],

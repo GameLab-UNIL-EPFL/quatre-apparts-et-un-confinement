@@ -6,6 +6,7 @@ import { Background } from "./objects/background.js";
 import { player } from "../index.js";
 import { Scenes } from "../core/player.js";
 import { WindowState, Months } from "./buildingScene.js";
+import { GrandmaScene } from "./grandmaScene.js";
 
 const INIT_CLEANABLE_OBJECTS = 8;
 
@@ -313,18 +314,18 @@ export class MotherScene extends Phaser.Scene {
 
         this.cameras.main.fadeOut(3000, 0, 0, 0,
             () => this.scene.start(Scenes.BUILDING, {
-                mainMenu: true,
-                stage: 3,
+                mainMenu: false,
+                stage: 2,
                 windows: {
                     damien: WindowState.OFF,
-                    grandma: WindowState.OFF,
+                    grandma: WindowState.ON,
                     family: WindowState.OFF,
                     indep: WindowState.OFF
                 },
-                month: Months.MARCH,
+                month: Months.MAY,
                 nextScene: {
                     damien: null,
-                    grandma: null,
+                    grandma: Scenes.GRANDMA,
                     family: null,
                     indep: null
                 }

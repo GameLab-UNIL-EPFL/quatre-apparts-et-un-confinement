@@ -5,6 +5,7 @@ import { Background } from "./objects/background.js";
 import { player } from "../index.js";
 import { WindowState, Months } from "./buildingScene.js";
 import { Scenes } from "../core/player.js";
+import { HallwayCards } from "./hallwayScene.js";
 
 export const StoreCards = {
     FIRST_SHELF: 0,
@@ -840,23 +841,6 @@ export class StoreScene extends Phaser.Scene {
     }
     
     nextScene() {
-        // @TODO: set the right state, nextScene, time
-        this.scene.start(Scenes.BUILDING, {
-            mainMenu: false,
-            stage: 3,
-            windows: {
-                damien: WindowState.OFF,
-                grandma: WindowState.OFF,
-                family: WindowState.OFF,
-                indep: WindowState.OFF
-            },
-            month: Months.MARCH,
-            nextScene: {
-                damien: null,
-                grandma: null,
-                family: null,
-                indep: null
-            }
-        });
+        this.scene.start(Scenes.HALLWAY, {cardIdx: HallwayCards.INDEP_GRANDMA, damien_gone: false});
     }
 }

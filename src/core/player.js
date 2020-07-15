@@ -2,6 +2,7 @@ import { game } from "..";
 
 export const Scenes = {
     INTRO: 'TitleScene',
+    DAMIEN_INIT: 'DamienInit',
     PROTOTYPE: 'Prototype',
     DAMIEN_KITCHEN_CLOTHES: 'DamienKitchenClothesScene',
     DAMIEN_COMPUTER: 'DamienComputer',
@@ -9,6 +10,7 @@ export const Scenes = {
     GRANDMA: 'Grandma',
     HALLWAY: 'Hallway',
     INDEP: 'Indep',
+    INDEP_MSG: 'IndepMsg',
     STORE: 'Store',
     MOTHER: 'Mother'
 };

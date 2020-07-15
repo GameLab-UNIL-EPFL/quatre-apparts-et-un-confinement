@@ -29,7 +29,7 @@ export class Background {
     create() {
         // We center the sprite according to base scene dimensions (baseSize)
         this.sprite = this.parent_scene.add.image(0, 0, this.name);
-        this.sprite.setDepth(-3);
+        this.sprite.setDepth(-1);
     }
 
     update() {}

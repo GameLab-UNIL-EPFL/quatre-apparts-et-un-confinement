@@ -2,7 +2,6 @@ import Phaser from "phaser";
 import { DialogueController } from "../core/dialogueController.js";
 import { ComputerCard } from "./cards/ProtoSceneCards/computerCard.js";
 import { ZoomMiniGameCard } from "./cards/ProtoSceneCards/zoomMiniGameCard.js";
-import { MessageCard } from "./cards/ProtoSceneCards/messageCard.js";
 import { player } from "../index.js";
 import { Scenes } from "../core/player.js";
 import { WindowState, Months } from "./buildingScene.js";
@@ -10,28 +9,25 @@ import { ProtoGuyClothes, ProtoCards } from "./protoScene.js";
 
 const NUM_CARDS = 3;
 
-export class DamienComputerScene extends Phaser.Scene {
+export class DamienInitScene extends Phaser.Scene {
     /**
      * @brief initializes the different cards needed in the scene
      * and the index that will be used to know which card we are at
      * in said scene
      */
     constructor() {
-        super({ key: Scenes.DAMIEN_COMPUTER });
+        super({ key: Scenes.DAMIEN_INIT });
 
         //Keep track of the clothes that protoguy is wearing
-        this.clothes = ProtoGuyClothes.PYJAMAS;
+        this.clothes = ProtoGuyClothes.YESTERDAY_CLOTHES;
 
-        this.computerCard = new ComputerCard(this, Scenes.DAMIEN_COMPUTER);
+        this.computerCard = new ComputerCard(this, Scenes.DAMIEN_INIT);
 
-        this.zoomMiniGame = new ZoomMiniGameCard(this, Scenes.DAMIEN_COMPUTER);
-
-        this.messageCard = new MessageCard(this);
+        this.zoomMiniGame = new ZoomMiniGameCard(this, Scenes.DAMIEN_INIT);
 
         this.cards = [
             this.computerCard,
-            this.zoomMiniGame,
-            this.messageCard
+            this.zoomMiniGame
         ];
 
         //Keep track of wich card is displayed
@@ -64,12 +60,6 @@ export class DamienComputerScene extends Phaser.Scene {
                 case ProtoCards.MINI_GAME:
                     this.current_card = this.zoomMiniGame;
                     this.cardIdx = ProtoCards.MINI_GAME;
-                    break;
-
-                case ProtoCards.MESSAGE:
-                    this.current_card = this.messageCard;
-                    this.clothes = data.clothes;
-                    this.cardIdx = ProtoCards.MESSAGE;
                     break;
 
                 default:
@@ -114,11 +104,11 @@ export class DamienComputerScene extends Phaser.Scene {
         }
 
         //Update the saved data
-        player.cur_scene = Scenes.DAMIEN_COMPUTER;
+        player.cur_scene = Scenes.DAMIEN_INIT;
 
         //Handle the loaded food case
         if(this.cardIdx === ProtoCards.COMPUTER) {
-            this.current_card.showItem(this.food);
+            this.current_card.showItem();
         }
     }
 
@@ -172,9 +162,7 @@ export class DamienComputerScene extends Phaser.Scene {
                     break;
 
                 case ProtoCards.MINI_GAME:
-                    this.cardIdx = ProtoCards.MESSAGE;
-                    this.current_card = this.messageCard;
-                    this.current_card.create();
+                    this.nextScene();
                     break;
 
                 default:
@@ -198,15 +186,15 @@ export class DamienComputerScene extends Phaser.Scene {
             stage: 1,
             windows: {
                 damien: WindowState.OFF,
-                grandma: WindowState.OFF,
-                family: WindowState.ON,
+                grandma: WindowState.ON,
+                family: WindowState.OFF,
                 indep: WindowState.OFF
             },
             month: Months.MARCH,
             nextScene: {
                 damien: null,
-                grandma: null,
-                family: Scenes.MOTHER,
+                grandma: Scenes.GRANDMA,
+                family: null,
                 indep: null
             }
         });

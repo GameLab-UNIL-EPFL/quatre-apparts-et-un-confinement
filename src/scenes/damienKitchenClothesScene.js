@@ -128,7 +128,7 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
         this.current_card = null;
 
         //Create the dialogue controller
-        this.dialogue = new DialogueController(this);
+        this.dialogue = new DialogueController(this, "damienDialogMarch");
     }
 
     /**
