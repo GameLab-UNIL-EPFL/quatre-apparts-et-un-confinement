@@ -53,6 +53,7 @@ export class CardObject {
      */
     create() {
         this.sprite = this.parent_scene.add.image(this.position.x, this.position.y, this.name);
+        this.sprite.name = this.name;
 
         //Create the highlight and animation if needed
         if(this.highlight) {
@@ -80,7 +81,7 @@ export class CardObject {
                 if(this.parent_scene.dialogue.isDone()) {
                     //Check if the callback exists
                     if(this.onClickCallback !== null) {
-    
+
                         //Check for arguments
                         if(this.onClickArgs !== null) {
                             this.onClickCallback(this.onClickArgs);

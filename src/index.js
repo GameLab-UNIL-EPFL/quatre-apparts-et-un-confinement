@@ -10,6 +10,7 @@ import { GrandmaScene } from "./scenes/grandmaScene.js";
 import { DamienComputerScene } from "./scenes/damienComputerScene.js";
 import { DamienKitchenClothesScene } from "./scenes/damienKitchenClothesScene.js";
 import { HallwayScene } from "./scenes/hallwayScene.js";
+import { StoreScene } from "./scenes/storeScene.js";
 import { IndepScene } from "./scenes/indepScene.js";
 
 let resizeTimeout;
@@ -18,6 +19,7 @@ let plugins = [{
     plugin: RexUIPlugin,
     mapping: 'rexUI'
 }];
+
 
 const OBJECT_DEBUG = true;
 
@@ -77,7 +79,8 @@ const config = {
       DamienComputerScene,
       GrandmaScene,
       HallwayScene,
-      IndepScene
+      IndepScene,
+      StoreScene,
     ],
     physics: {
         default: 'arcade'
