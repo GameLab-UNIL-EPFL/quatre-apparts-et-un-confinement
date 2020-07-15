@@ -12,6 +12,7 @@ import { DamienKitchenClothesScene } from "./scenes/damienKitchenClothesScene.js
 import { HallwayScene } from "./scenes/hallwayScene.js";
 import { StoreScene } from "./scenes/storeScene.js";
 import { IndepScene } from "./scenes/indepScene.js";
+import { MotherScene } from "./scenes/motherScene.js";
 
 let resizeTimeout;
 let plugins = [{
@@ -72,14 +73,15 @@ const config = {
         scene: plugins
     },
     scene: [
-      BuildingScene,
-      ProtoScene,
-      DamienKitchenClothesScene,
-      DamienComputerScene,
-      GrandmaScene,
-      HallwayScene,
-      IndepScene,
-      StoreScene,
+        BuildingScene,
+        ProtoScene,
+        DamienKitchenClothesScene,
+        DamienComputerScene,
+        GrandmaScene,
+        HallwayScene,
+        IndepScene,
+        StoreScene,
+        MotherScene
     ],
     physics: {
         default: 'arcade'
@@ -100,11 +102,11 @@ window.horizontalOffset = (maxPictureWidth - scale.width) / 2;
 window.horizontalRatio = scale.width / maxPictureWidth;
 
 function resizeGame() {
-  console.log('Resize (wip)');
-  /*let newScale = getScale(window.innerWidth, window.innerHeight);
-  game.scale.resize(newScale.width, newScale.height);
-  window.horizontalOffset = (maxPictureWidth - newScale.width) / 2;
-  window.horizontalRatio = newScale.width / maxPictureWidth;*/
+    console.log('Resize (wip)');
+    /*let newScale = getScale(window.innerWidth, window.innerHeight);
+    game.scale.resize(newScale.width, newScale.height);
+    window.horizontalOffset = (maxPictureWidth - newScale.width) / 2;
+    window.horizontalRatio = newScale.width / maxPictureWidth;*/
 }
 
 // This resize implies we also resize scene sprites, or they’d stretch.

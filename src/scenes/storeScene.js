@@ -18,7 +18,7 @@ export class StoreScene extends Phaser.Scene {
      * in said scene
      */
     constructor() {
-        super({key: 'Store'});
+        super({key: Scenes.STORE});
 
         /* === FIRST SHELF === */
         this.firstShelf = new Card(
@@ -728,7 +728,6 @@ export class StoreScene extends Phaser.Scene {
     }
 
     takeObject(object_name) {
-        // return; // debug
       
         console.log('take', object_name);
         let object = this.children.getByName(object_name);
@@ -736,6 +735,7 @@ export class StoreScene extends Phaser.Scene {
       
         let yDistance = this.basket.y - object.y; // between 280 and 1340
         console.log('yDistance:', yDistance);
+        
         let target_objects = [object];
         if(object_name === 'pate_spaghetti01') {
             // also move the other pack
@@ -815,7 +815,7 @@ export class StoreScene extends Phaser.Scene {
             // move previous card
             let container = this.add.container();
             container.depth = 2;
-            
+
             for(let i in this.current_card.children) {
                 if(this.current_card.children[i].sprite.depth != 5) {
                     container.add(this.current_card.children[i].sprite);
