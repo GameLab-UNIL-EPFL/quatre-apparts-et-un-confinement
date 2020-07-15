@@ -100,7 +100,7 @@ export class DialogueController {
      * @param {Phaser.Scene} parent_scene the scene in which the controller is contained
      * @param {string} dialogue_name the name of the dialogue JSON that will be loading in for the scene
      */
-    constructor(parent_scene, dialogue_name="dialogData") {
+    constructor(parent_scene, dialogue_name="example") {
         this.parent_scene = parent_scene;
         this.dialogueJSON = require("../dialogue/" + dialogue_name + ".json");
         this.current_conv_id = "";
