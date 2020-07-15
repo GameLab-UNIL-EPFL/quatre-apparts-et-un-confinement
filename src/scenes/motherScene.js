@@ -96,7 +96,7 @@ export class MotherScene extends Phaser.Scene {
         this.current_card = current_card;
 
         //Create the dialogue controller
-        this.dialogue = new DialogueController(this);
+        this.dialogue = new DialogueController(this, "florenceDialogMarch");
 
         //Keep track of all cleanable objects
         this.cleanable_objects = INIT_CLEANABLE_OBJECTS;
@@ -139,7 +139,6 @@ export class MotherScene extends Phaser.Scene {
         } else {
             clean_obj.x = cleanPos.x;
             clean_obj.y = cleanPos.y;
-            
         }
 
         if(--this.cleanable_objects === 0) {
@@ -187,6 +186,9 @@ export class MotherScene extends Phaser.Scene {
 
         if(this.current_card.isLoaded()) {
             this.current_card.create();
+
+            //Display the first dialogue
+            this.dialogue.display("florence");
         }
 
         //Set all clickable objects
@@ -218,12 +220,16 @@ export class MotherScene extends Phaser.Scene {
 
             clean_obj.setInteractive().on(
                 'pointerdown',
-                () => this.cleanObject(
-                    clean_obj,
-                    clean_positions[i],
-                    clean_names[i],
-                    (i !== 0 && i !== 5) //don't animate the bed and the hamper
-                ),
+                () => {
+                    if(this.dialogue.isDone()) {
+                        this.cleanObject(
+                            clean_obj,
+                            clean_positions[i],
+                            clean_names[i],
+                            (i !== 0 && i !== 5) //don't animate the bed and the hamper
+                        );  
+                    }
+                },
                 this
             );
         }
