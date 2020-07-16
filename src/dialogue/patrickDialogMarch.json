@@ -1,12 +1,4 @@
 {
-    "tv": {
-		"name": "TV",
-		"text": [
-			"..."
-		],
-		"choices": [],
-		"goto": []
-	},
 	"dvd1": {
 		"name": "",
 		"text": [

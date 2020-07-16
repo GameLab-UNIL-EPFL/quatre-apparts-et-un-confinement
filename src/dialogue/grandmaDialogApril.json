@@ -208,7 +208,7 @@
             "goto": "oui"
         },
         {
-            "text": ["T'habiteras bientôt dans la jungle avec toutes tes plantes"],
+            "text": ["T'habiteras bientôt dans la jungle avec toutes tes plantes!"],
             "preview": "T'habiteras bientôt dans une jungle avec toutes ces plantes!",
             "goto": "pandemie"
         }
