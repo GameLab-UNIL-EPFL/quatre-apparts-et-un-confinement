@@ -48,7 +48,9 @@ export class ProtoScene extends Phaser.Scene {
             'chosePath': new ProtoGuy(this, 133, 422, ProtoGuyCard.CHOSE_PATH)
         };
 
-        this.chosePathCard = new Card(this, [
+        this.chosePathCard = new Card(
+            this,
+            [
                 new Background(
                     this,
                     "sprites/ProtoScene/ChosePathCard/bg.jpg",
@@ -88,7 +90,7 @@ export class ProtoScene extends Phaser.Scene {
         this.current_card = this.introCard;
 
         //Create the dialogue controller
-        this.dialogue = new DialogueController(this);
+        this.dialogue = new DialogueController(this, "damienDialogMarch");
     }
 
     /**
@@ -102,7 +104,7 @@ export class ProtoScene extends Phaser.Scene {
             //Set the correct card
             switch(data.cardIdx) {
                 case ProtoCards.INTRO:
-                    this.cardIdx = ProtoCards.INTRO;
+                this.cardIdx = ProtoCards.INTRO;
                     break;
 
                 case ProtoCards.WAKE_UP:

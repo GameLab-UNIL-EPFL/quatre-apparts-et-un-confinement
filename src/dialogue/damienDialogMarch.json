@@ -1,11 +1,19 @@
 {
+	"init": {
+		"name": "Damien",
+		"text": [
+			"Bon il est interminable ce cours"
+		],
+		"choices": [],
+		"goto": []
+	},
 	"reveil": {
 		"name": "Damien",
 		"text": [
 			"Aaah purée j’ai oublié de désactiver mon réveil hier soir!",
 			"Pourtant j’ai plus besoin de me dépêcher pour aller prendre le bus ou me préparer."
 		],
-		"choices": {},
+		"choices": [],
 		"goto": []
 	},
 	"habit": {
@@ -13,13 +21,13 @@
 		"text": [
 			"Est-ce que j’ai vraiment besoin de m’habiller? *baille*"
 		],
-		"choices": {},
+		"choices": [],
 		"goto": []
 	},
 	"frigo": {
 		"name": "Damien",
 		"text": ["Bon, qu’est-ce que je vais manger?"],
-		"choices": {},
+		"choices": [],
 		"goto": []
 	},
 	"dodo": {
@@ -28,25 +36,25 @@
 			"Oh non c’est déjà midi, j’ai loupé mon premier cours...",
 			"Bon, c’est pas grave, je rattraperai avec les notes de quelqu’un d’autre."
 		],
-		"choices": {},
+		"choices": [],
 		"goto": []
 	},
 	"bureau": {
 		"name": "Damien",
 		"text": ["Ah! Mon cours va commencer."],
-		"choices": {},
+		"choices": [],
 		"goto": []
 	},
 	"zoom": {
 		"name": "Prof",
 		"text": ["Veuillez s’il vous plaît éteindre vos micros"],
-		"choices": {},
+		"choices": [],
 		"goto": []
 	},
 	"endZoom": {
 		"name": "Prof",
 		"text": ["Merci pour votre attention et bonne journée!"],
-		"choices": {},
+		"choices": [],
 		"goto": []
 	},
 	"loseZoom": {
@@ -164,16 +172,16 @@
 	},
 	"cours": {
 		"name": "Copine",
-		"text": ["C'était bien ton cours?"],
+		"text": ["Tu penses quoi des cours en ligne?"],
 		"choices": {
 			"bof": {
-				"text": ["Non, j'aime pas avoir les cours en ligne"],
-				"preview": "Non, j'aime pas",
+				"text": ["J'aime pas du tout!"],
+				"preview": "J'aime pas",
 				"goto": "aimePas"
 			},
 			"trql": {
-				"text": ["Ouais j'adore! C'est tellement pratique"],
-				"preview": "Ouais j'adore!",
+				"text": ["J'adore! C'est tellement pratique"],
+				"preview": "J'adore!",
 				"goto": "aime"
 			}
 		},
@@ -218,7 +226,7 @@
 		"text": ["Tu viens chez moi après?"],
 		"choices": {
 			"risque": {
-				"text": "Ton père est pas à risque ?",
+				"text": ["Ton père est pas à risque ?"],
 				"preview": "C’est risqué?",
 				"goto": "sortir1"
 			}
@@ -230,7 +238,7 @@
 		"text": ["Si, mais t’inquiète tu restes à 2 mètres c’est bon"],
 		"choices": {
 			"bosser": {
-				"text": "Mais il continue à bosser en plus non?",
+				"text": ["Mais il continue à bosser en plus non?"],
 				"preview": "Il bosse encore?",
 				"goto": "sortir2"
 			}
@@ -242,7 +250,7 @@
 		"text": ["Euh ouais mais c’est calme là comme plus personne prend de taxi"],
 		"choices": {
 			"chaud": {
-				"text": "Ah mais du coup c’est chaud financièrement?",
+				"text": ["Ah mais du coup c’est chaud financièrement?"],
 				"preview": "C’est chaud non?",
 				"goto": "sortir3"
 			}
@@ -254,18 +262,18 @@
 		"text": ["Ouais on sait pas trop encore.. mais bon tu viens? T’as promis de m’aider à étudier!"],
 		"choices": {
 			"oui": {
-				"text": "Oui, à toute!",
-				"preview": ["Oui"],
+				"text": ["Oui, à toute!"],
+				"preview": "Oui",
 				"goto": "repOui"
 			},
 			"maybe": {
-				"text": "Je sais pas, t’es sûr que c’est ok pour tes parents?",
-				"preview": ["Je sais pas"],
+				"text": ["Je sais pas, t’es sûr que c’est ok pour tes parents?"],
+				"preview": "Je sais pas",
 				"goto": "repMaybe"
 			},
 			"non": {
-				"text": "Non... je ferais mieux de rester à la maison",
-				"preview": ["Non..."],
+				"text": ["Non... je ferais mieux de rester à la maison"],
+				"preview": "Non...",
 				"goto": "repNon"
 			}
 		},
@@ -282,13 +290,13 @@
 		"text": ["Mais oui c’est bon, sinon tu dois m’expliquer en ligne et c’est plus compliqué"],
 		"choices":{
 			"oui": {
-				"text": "Bon ok",
-				"preview": ["Ok"],
+				"text": ["Bon ok"],
+				"preview": "Ok",
 				"goto": "repOui"
 			},
 			"non": {
-				"text": "Non... je préfère pas risquer... désolé",
-				"preview": ["Non... désolé"],
+				"text": ["Non... je préfère pas risquer... désolé"],
+				"preview": "Non... désolé",
 				"goto": "repNon"
 			}
 		},

@@ -2,6 +2,7 @@ import Phaser from "phaser";
 import { Scenes } from "../core/player";
 import { DIALOGUE_BOX_KEY, D_BOX_ANIMATION_KEY, DIALOGUE_BOX_SPRITE_SIZE } from "../core/dialogueController";
 import { player } from "..";
+import { GrandmaCards } from "./grandmaScene";
 
 export const Months = {
     MARCH: 'march',
@@ -26,18 +27,18 @@ export class BuildingScene extends Phaser.Scene {
         //Information about what's shown in the scene
         this.info = {
             mainMenu: true,
-            stage: 3,
+            stage: 1,
             windows: {
                 damien: WindowState.ON,
                 grandma: WindowState.ON,
-                family: WindowState.OFF,
+                family: WindowState.ON,
                 indep: WindowState.ON
             },
-            month: Months.MAY,
+            month: Months.MARCH,
             nextScene: {
                 damien: Scenes.PROTOTYPE,
                 grandma: Scenes.GRANDMA,
-                family: null,
+                family: Scenes.MOTHER,
                 indep: Scenes.INDEP
             }
         };
@@ -190,7 +191,7 @@ export class BuildingScene extends Phaser.Scene {
             "Continuer",
             {font: "54px OpenSans", fill: "black"}
         );
-        this.sprites['continue_text'].setOrigin(0.5, 0.5)
+        this.sprites['continue_text'].setOrigin(0.5, 0.5);
 
         //Make continue button interactive
         this.sprites['continue_text'].setInteractive();
@@ -258,10 +259,6 @@ export class BuildingScene extends Phaser.Scene {
         this.sprites['new_game_text'].setInteractive();
         this.sprites['menu_new_game'].setInteractive();
 
-        //Adapt width for small ratio screens
-        // this.sprites['menu_continue'].displayWidth *= window.horizontalRatio;
-        // this.sprites['menu_new_game'].displayWidth *= window.horizontalRatio;
-
         this.input.on(
             'gameobjectdown',
             (_, gameObject) => {
@@ -274,7 +271,7 @@ export class BuildingScene extends Phaser.Scene {
                         Scenes.BUILDING,
                         {
                             mainMenu: false,
-                            stage: 2,
+                            stage: 1,
                             windows: {
                                 damien: WindowState.ON,
                                 grandma: WindowState.OFF,
@@ -283,7 +280,7 @@ export class BuildingScene extends Phaser.Scene {
                             },
                             month: Months.MAY,
                             nextScene: {
-                                damien: Scenes.PROTOTYPE,
+                                damien: Scenes.DAMIEN_INIT,
                                 grandma: null,
                                 family: null,
                                 indep: null
@@ -341,8 +338,8 @@ export class BuildingScene extends Phaser.Scene {
         this.sprites['empty_windows'] = this.add.image(0, 165, "empty_windows");
 
         //Load in the posters
-        let poster_pos = new Phaser.Math.Vector2(425, 635);
-        let poster_key = 'poster_0' + this.info.stage;
+        const poster_pos = new Phaser.Math.Vector2(425, 635);
+        const poster_key = 'poster_0' + this.info.stage;
         this.sprites[poster_key] = this.add.image(poster_pos.x, poster_pos.y, poster_key);
 
         //Load in the cars
@@ -455,7 +452,10 @@ export class BuildingScene extends Phaser.Scene {
                         (_, gameObject) => {
                             //Check that we clicked on the right window
                             if(gameObject === this.sprites['grandma_window'] || gameObject === this.sprites['grandma_window_mid']) {
-                                this.scene.start(this.info.nextScene.grandma);
+                                this.scene.start(
+                                    this.info.nextScene.grandma,
+                                    { cardIdx: GrandmaCards.LIVING_ROOM, month: this.info.month }
+                                );
                             }
                         },
                         this
@@ -536,13 +536,6 @@ export class BuildingScene extends Phaser.Scene {
         if(this.info.mainMenu) {
             this.createMainMenu();
         }
-
-        //Compensate for the horizontal ratio
-        /*for (var key in this.sprites) {
-            if (this.sprites.hasOwnProperty(key)) {
-                this.sprites[key].x *= window.horizontalRatio;
-            }
-        }*/
     }
 
     /**

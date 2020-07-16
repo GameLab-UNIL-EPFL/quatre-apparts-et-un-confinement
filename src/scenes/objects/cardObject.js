@@ -13,8 +13,9 @@ export class CardObject {
      * @param {Array} onClickArgs arguments that will be passed to the onClick callback
      * @param {Number} choice, the path that this item will entail (only if !-1)
      * @param {JSON} highlight {name, url} of the highlighted version of the sprite (can be null)
+     * @param {Number} depth the z coordinate of the card object
      */
-    constructor(parent_scene, sprite, position, onClickCallback=null, onClickArgs=null, choice=-1, highlight=null) {
+    constructor(parent_scene, sprite, position, onClickCallback=null, onClickArgs=null, choice=-1, highlight=null, depth=0) {
         this.parent_scene = parent_scene;
 
         //Sprite parameters
@@ -33,6 +34,8 @@ export class CardObject {
 
         //Highlighted sprite
         this.highlight = highlight;
+
+        this.depth = depth;
     }
 
     /**
@@ -53,6 +56,9 @@ export class CardObject {
      */
     create() {
         this.sprite = this.parent_scene.add.image(this.position.x, this.position.y, this.name);
+        this.sprite.name = this.name;
+
+        this.sprite.setDepth(this.depth);
 
         //Create the highlight and animation if needed
         if(this.highlight) {
@@ -69,7 +75,9 @@ export class CardObject {
                 yoyo: true,
                 loop: -1
             });
+            
             this.highlight_sprite.setInteractive();
+            this.highlight_sprite.setDepth(this.depth);
         }
 
         //Add a choice if needed
@@ -80,7 +88,7 @@ export class CardObject {
                 if(this.parent_scene.dialogue.isDone()) {
                     //Check if the callback exists
                     if(this.onClickCallback !== null) {
-    
+
                         //Check for arguments
                         if(this.onClickArgs !== null) {
                             this.onClickCallback(this.onClickArgs);

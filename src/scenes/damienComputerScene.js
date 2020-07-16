@@ -22,9 +22,9 @@ export class DamienComputerScene extends Phaser.Scene {
         //Keep track of the clothes that protoguy is wearing
         this.clothes = ProtoGuyClothes.PYJAMAS;
 
-        this.computerCard = new ComputerCard(this);
+        this.computerCard = new ComputerCard(this, Scenes.DAMIEN_COMPUTER);
 
-        this.zoomMiniGame = new ZoomMiniGameCard(this);
+        this.zoomMiniGame = new ZoomMiniGameCard(this, Scenes.DAMIEN_COMPUTER);
 
         this.messageCard = new MessageCard(this);
 
@@ -40,7 +40,7 @@ export class DamienComputerScene extends Phaser.Scene {
         this.food = -1;
 
         //Create the dialogue controller
-        this.dialogue = new DialogueController(this);
+        this.dialogue = new DialogueController(this, "damienDialogMarch");
     }
 
     /**
@@ -195,18 +195,18 @@ export class DamienComputerScene extends Phaser.Scene {
         this.cameras.main.fadeOut(1000);
         this.scene.start(Scenes.BUILDING, {
             mainMenu: false,
-            stage: 3,
+            stage: 1,
             windows: {
                 damien: WindowState.OFF,
-                grandma: WindowState.ON,
-                family: WindowState.OFF,
+                grandma: WindowState.OFF,
+                family: WindowState.ON,
                 indep: WindowState.OFF
             },
             month: Months.MARCH,
             nextScene: {
                 damien: null,
-                grandma: Scenes.GRANDMA,
-                family: null,
+                grandma: null,
+                family: Scenes.MOTHER,
                 indep: null
             }
         });

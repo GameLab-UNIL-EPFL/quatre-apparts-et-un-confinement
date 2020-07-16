@@ -22,12 +22,14 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
         //Keep track of the clothes that protoguy is wearing
         this.clothes = ProtoGuyClothes.PYJAMAS;
 
-        let characters = {
+        const characters = {
             'clothes': new ProtoGuy(this, 51, 115, ProtoGuyCard.CLOTHES),
             'kitchen': new ProtoGuy(this, -218, -32, ProtoGuyCard.KITCHEN)
         };
 
-        this.clothesCard = new Card(this, [
+        this.clothesCard = new Card(
+            this,
+            [
                 new Background(
                     this,
                     "sprites/ProtoScene/ClothesCard/bg.jpg",
@@ -56,11 +58,13 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
             characters['clothes']
         );
 
-        this.kitchenCard = new Card(this, [
+        this.kitchenCard = new Card(
+            this,
+            [
                 new Background(
                     this,
                     "sprites/ProtoScene/KitchenCard/bg.jpg",
-                    "KitchenBG",
+                    "KitchenBG"
                 ),
                 characters['kitchen'],
                 new CardObject(
@@ -124,7 +128,7 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
         this.current_card = null;
 
         //Create the dialogue controller
-        this.dialogue = new DialogueController(this);
+        this.dialogue = new DialogueController(this, "damienDialogMarch");
     }
 
     /**

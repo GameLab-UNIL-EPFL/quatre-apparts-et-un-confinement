@@ -10,7 +10,11 @@ import { GrandmaScene } from "./scenes/grandmaScene.js";
 import { DamienComputerScene } from "./scenes/damienComputerScene.js";
 import { DamienKitchenClothesScene } from "./scenes/damienKitchenClothesScene.js";
 import { HallwayScene } from "./scenes/hallwayScene.js";
+import { StoreScene } from "./scenes/storeScene.js";
 import { IndepScene } from "./scenes/indepScene.js";
+import { MotherScene } from "./scenes/motherScene.js";
+import { DamienInitScene } from "./scenes/damienInitScene.js";
+import { IndepMessageScene } from "./scenes/indepMessageScene.js";
 
 let resizeTimeout;
 let plugins = [{
@@ -19,7 +23,7 @@ let plugins = [{
     mapping: 'rexUI'
 }];
 
-const OBJECT_DEBUG = true;
+const OBJECT_DEBUG = false;
 
 if(OBJECT_DEBUG === true) {
     plugins.push({
@@ -71,13 +75,17 @@ const config = {
         scene: plugins
     },
     scene: [
-      BuildingScene,
-      ProtoScene,
-      DamienKitchenClothesScene,
-      DamienComputerScene,
-      GrandmaScene,
-      HallwayScene,
-      IndepScene
+        BuildingScene,
+        ProtoScene,
+        DamienInitScene,
+        DamienKitchenClothesScene,
+        DamienComputerScene,
+        GrandmaScene,
+        HallwayScene,
+        IndepScene,
+        IndepMessageScene,
+        StoreScene,
+        MotherScene
     ],
     physics: {
         default: 'arcade'
@@ -97,12 +105,12 @@ game.horizontalRatio = scale.width / maxPictureWidth;
 window.horizontalOffset = (maxPictureWidth - scale.width) / 2;
 window.horizontalRatio = scale.width / maxPictureWidth;
 
-function resizeGame(){
-  console.log('Resize (wip)');
-  /*let newScale = getScale(window.innerWidth, window.innerHeight);
-  game.scale.resize(newScale.width, newScale.height);
-  window.horizontalOffset = (maxPictureWidth - newScale.width) / 2;
-  window.horizontalRatio = newScale.width / maxPictureWidth;*/
+function resizeGame() {
+    console.log('Resize (wip)');
+    /*let newScale = getScale(window.innerWidth, window.innerHeight);
+    game.scale.resize(newScale.width, newScale.height);
+    window.horizontalOffset = (maxPictureWidth - newScale.width) / 2;
+    window.horizontalRatio = newScale.width / maxPictureWidth;*/
 }
 
 // This resize implies we also resize scene sprites, or they’d stretch.
