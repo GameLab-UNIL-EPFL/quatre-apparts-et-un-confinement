@@ -2,7 +2,7 @@
 	"init": {
 		"name": "Damien",
 		"text": [
-			"Bon il est interminable ce cours"
+			"Il est interminable ce cours."
 		],
 		"choices": [],
 		"goto": []
@@ -10,8 +10,8 @@
 	"reveil": {
 		"name": "Damien",
 		"text": [
-			"Aaah purée j’ai oublié de désactiver mon réveil hier soir!",
-			"Pourtant j’ai plus besoin de me dépêcher pour aller prendre le bus ou me préparer."
+			"Ha purée! J’ai oublié de désactiver mon réveil hier soir.",
+			"Pourtant je n'ai pas besoin de me préparer. Il n'y plus de bus à prendre…"
 		],
 		"choices": [],
 		"goto": []
@@ -19,35 +19,36 @@
 	"habit": {
 		"name": "Damien",
 		"text": [
-			"Est-ce que j’ai vraiment besoin de m’habiller? *baille*"
+			"Est-ce qu'il faut vraiment que je m’habille?"
+			"* baille *"
 		],
 		"choices": [],
 		"goto": []
 	},
 	"frigo": {
 		"name": "Damien",
-		"text": ["Bon, qu’est-ce que je vais manger?"],
+		"text": ["Maintenant, place au déjeuner."],
 		"choices": [],
 		"goto": []
 	},
 	"dodo": {
 		"name": "Damien",
 		"text": [
-			"Oh non c’est déjà midi, j’ai loupé mon premier cours...",
-			"Bon, c’est pas grave, je rattraperai avec les notes de quelqu’un d’autre."
+			"Mince, déjà midi! J’ai loupé mon premier cours…",
+			"Ok, pas grave. Je rattraperai avec les notes de Julie."
 		],
 		"choices": [],
 		"goto": []
 	},
 	"bureau": {
 		"name": "Damien",
-		"text": ["Ah! Mon cours va commencer."],
+		"text": ["Oh! Le cours va commencer."],
 		"choices": [],
 		"goto": []
 	},
 	"zoom": {
 		"name": "Prof",
-		"text": ["Veuillez s’il vous plaît éteindre vos micros"],
+		"text": ["Merci d'éteindre vos micros."],
 		"choices": [],
 		"goto": []
 	},
@@ -60,28 +61,31 @@
 	"loseZoom": {
 		"name": "Prof",
 		"text": [
-			"Damien! Quels chapitres devez-vous lire pour la semaine prochaine?"
+			"Damien, pouvez-vous me dire quels chapitres sont à lire pour la semaine prochaine?"
 		],
 		"choices": [
 			{
-				"text": "12 et 13",
-				"goto": "repFausse"
-			}, {
 				"text": "11 et 12",
 				"goto": "repJuste"
+			}, {
+				"text": "12 et 13",
+				"goto": "repFausse"
 			}
 		],
-		"goto": ["repFausse", "repJuste"]
+		"goto": ["repJuste", "repFausse"]
 	},
 	"repFausse": {
 		"name": "Prof",
-		"text": ["Non! Chapitres 11 et 12, j’espère que vous éteindrez Netflix la prochaine fois."],
+		"text": [
+			"Non! Il s'agissait des chapitres 11 et 12"
+			"J’espère que vous ferez l'effort d'éteindre Netflix dorénavant."
+		],
 		"choices": {},
 		"goto": []
 	},
 	"repJuste": {
 		"name": "Prof",
-		"text": ["Oui c’est juste mais essayez de vous concentrer un peu plus, s’il vous plaît"],
+		"text": ["C'est bien ça, Damien. Félicitations pour votre concentration exemplaire."],
 		"choices": {},
 		"goto": []
 	},
@@ -107,7 +111,7 @@
 				"goto": "repBof"
 			},
 			"trql": {
-				"text": ["Tranquille et toi?"],
+				"text": ["Tranquille, et toi?"],
 				"preview": "Tranquille",
 				"goto": "repTrql"
 			},
@@ -124,8 +128,8 @@
 		"text": ["Ouais moi aussi"],
 		"choices":{
 			"rep": {
-				"text": ["☹"],
-				"preview": "☹",
+				"text": ["😩"],
+				"preview": "😩",
 				"goto": "cours"
 			},
 			"rep2": {
@@ -138,7 +142,7 @@
 	},
 	"repTrql": {
 		"name": "Copine",
-		"text": ["Ouais pareil!"],
+		"text": ["Ouais, pareil!"],
 		"choices":{
 			"rep": {
 				"text": ["Top 😊"],
@@ -175,12 +179,12 @@
 		"text": ["Tu penses quoi des cours en ligne?"],
 		"choices": {
 			"bof": {
-				"text": ["J'aime pas du tout!"],
+				"text": ["Je n'aime pas du tout!"],
 				"preview": "J'aime pas",
 				"goto": "aimePas"
 			},
 			"trql": {
-				"text": ["J'adore! C'est tellement pratique"],
+				"text": ["J'adore! C'est tellement plus pratique."],
 				"preview": "J'adore!",
 				"goto": "aime"
 			}
@@ -189,15 +193,15 @@
 	},
 	"aimePas": {
 		"name": "Copine",
-		"text": ["Je comprends... C'est pas facile de se concentrer."],
+		"text": ["Je comprends… C'est pas facile de rester concentré."],
 		"choices": {
 			"bof": {
-				"text": ["Ouais vraiment et j'en ai marre de seulement voir des visages sur un écran!"],
+				"text": ["Ouais vraiment. Et j'en ai marre de ce défilé de visages sur mon écran."],
 				"preview": "Marre de l'écran",
 				"goto": "sortir"
 			},
 			"trql": {
-				"text": ["Ouais mais au moins on a plus besoin de prendre le bus!"],
+				"text": ["Ha ha ouais, mais au moins on n'a plus besoin de prendre le bus!"],
 				"preview": "Plus besoin de bus",
 				"goto": "sortir"
 			}
@@ -206,15 +210,15 @@
 	},
 	"aime": {
 		"name": "Copine",
-		"text": ["C'est vrai! Plus besoin de s'habiller... ni prendre le bus"],
+		"text": ["C'est vrai! Plus besoin de s'habiller... ni de prendre le bus"],
 		"choices": {
 			"bof": {
-				"text": ["Ouais le bus me manque pas du tout!"],
+				"text": ["Ha ha ouais, le bus me manque pas du tout!"],
 				"preview": "Marre du bus",
 				"goto": "sortir"
 			},
 			"trql": {
-				"text": ["Ouais le pantalon c'est optionnel de nos jours"],
+				"text": ["Hi hi le pantalon c'est so 2019! De nos jours c'est optionnel."],
 				"preview": "Plus besoin de pantalon",
 				"goto": "sortir"
 			}
@@ -226,7 +230,7 @@
 		"text": ["Tu viens chez moi après?"],
 		"choices": {
 			"risque": {
-				"text": ["Ton père est pas à risque ?"],
+				"text": ["Ton père était pas une personne à risque ?"],
 				"preview": "C’est risqué?",
 				"goto": "sortir1"
 			}
@@ -235,10 +239,10 @@
 	},
 	"sortir1": {
 		"name": "Copine",
-		"text": ["Si, mais t’inquiète tu restes à 2 mètres c’est bon"],
+		"text": ["Si si mais t’inquiète, tu restes à 2 mètres et c’est bon."],
 		"choices": {
 			"bosser": {
-				"text": ["Mais il continue à bosser en plus non?"],
+				"text": ["Mais il continue à bosser en plus, non?"],
 				"preview": "Il bosse encore?",
 				"goto": "sortir2"
 			}
@@ -247,10 +251,10 @@
 	},
 	"sortir2": {
 		"name": "Copine",
-		"text": ["Euh ouais mais c’est calme là comme plus personne prend de taxi"],
+		"text": ["Euh… ouais 😕 mais c’est calme là comme plus personne prend le taxi."],
 		"choices": {
 			"chaud": {
-				"text": ["Ah mais du coup c’est chaud financièrement?"],
+				"text": ["Du coup c’est chaud financièrement?"],
 				"preview": "C’est chaud non?",
 				"goto": "sortir3"
 			}
@@ -259,20 +263,20 @@
 	},
 	"sortir3": {
 		"name": "Copine",
-		"text": ["Ouais on sait pas trop encore.. mais bon tu viens? T’as promis de m’aider à étudier!"],
+		"text": ["Ouais on sait pas trop encore… mais bon, tu viens? T’as promis de m’aider à étudier!"],
 		"choices": {
 			"oui": {
-				"text": ["Oui, à toute!"],
+				"text": ["Oui oui, à toute!"],
 				"preview": "Oui",
 				"goto": "repOui"
 			},
 			"maybe": {
-				"text": ["Je sais pas, t’es sûr que c’est ok pour tes parents?"],
+				"text": ["Je sais pas, t’es sûre que c’est ok pour tes parents?"],
 				"preview": "Je sais pas",
 				"goto": "repMaybe"
 			},
 			"non": {
-				"text": ["Non... je ferais mieux de rester à la maison"],
+				"text": ["Mmm… je ferais peut-être mieux de rester à la maison."],
 				"preview": "Non...",
 				"goto": "repNon"
 			}
@@ -281,21 +285,21 @@
 	},
 	"repOui": {
 		"name": "Copine",
-		"text": ["Cool! A toute!"],
+		"text": ["Cool! À toute!"],
 		"choices":{},
 		"goto": []
 	},
 	"repMaybe": {
 		"name": "Copine",
-		"text": ["Mais oui c’est bon, sinon tu dois m’expliquer en ligne et c’est plus compliqué"],
+		"text": ["Mais oui c’est bon! Sinon tu dois m’expliquer en ligne et c’est plus compliqué."],
 		"choices":{
 			"oui": {
-				"text": ["Bon ok"],
+				"text": ["Bon, ok"],
 				"preview": "Ok",
 				"goto": "repOui"
 			},
 			"non": {
-				"text": ["Non... je préfère pas risquer... désolé"],
+				"text": ["Non… je ne préfère pas risquer… désolé 😔"],
 				"preview": "Non... désolé",
 				"goto": "repNon"
 			}
