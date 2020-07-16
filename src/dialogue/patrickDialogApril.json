@@ -1,0 +1,243 @@
+{
+    "dvd1": {
+		"name": "",
+		"text": [
+            "Intouchables (2011)"
+		],
+		"choices": [],
+		"goto": []
+	},
+	"dvd2": {
+		"name": "",
+        "text": [
+            "The Mask (1994)",
+            "Du bon Jim Carrey, ça!"
+		],
+        "choices": [],
+		"goto": []
+	},
+    "telephoneMauvais": {
+		"name": "Patrick",
+		"text": ["Qui pourrais-je bien appeler?"],
+		"choices":[
+			{
+				"text": ["Nathan"],
+				"preview": "Nathan",
+				"goto": "nathanMauvais"
+            },
+            {
+				"text": ["Sandrine"],
+				"preview": "Sandrine",
+				"goto": "sandrine"
+            },
+            {
+				"text": ["Maman"],
+				"preview": "Maman",
+				"goto": "maman"
+            }
+		],
+		"goto": ["nathan", "sandrine", "maman"]
+    },
+    "nathanMauvais": {
+		"name": "Nathan",
+		"text": ["Hello! Comment vas-tu?"],
+		"choices": [
+			{
+				"text": ["Pas trop mal! et toi?"],
+				"preview": "Bien!",
+				"goto": "mauvais"
+            },
+			{
+				"text": ["Pas top et toi?"],
+				"preview": "Je me sens seul",
+				"goto": "mauvais"
+			}
+        ],
+		"goto": ["mauvais"]
+    },
+    "telephoneBon": {
+		"name": "Patrick",
+		"text": ["Qui pourrais-je bien appeler?"],
+		"choices":[
+			{
+				"text": ["Nathan"],
+				"preview": "Nathan",
+				"goto": "nathanMauvais"
+            },
+            {
+				"text": ["Sandrine"],
+				"preview": "Sandrine",
+				"goto": "sandrine"
+            },
+            {
+				"text": ["Maman"],
+				"preview": "Maman",
+				"goto": "maman"
+            }
+		],
+		"goto": ["nathan", "sandrine", "maman"]
+    },
+    "nathanBon": {
+		"name": "Nathan",
+		"text": ["Hello! Comment vas-tu?"],
+		"choices": [
+			{
+				"text": ["Pas trop mal! et toi?"],
+				"preview": "Bien!",
+				"goto": "bon"
+            },
+			{
+				"text": ["Pas top et toi?"],
+				"preview": "Je me sens seul",
+				"goto": "bon"
+			}
+        ],
+		"goto": ["bon"]
+	},
+	"mauvais": {
+		"name": "Nathan",
+		"text": ["Pas très bien... Elise m'a quitté."],
+		"choices": [
+			{
+				"text": ["Quoi? Mais non!"],
+				"preview": "Quoi? Mais non!",
+				"goto": "couple"
+            }
+        ],
+		"goto": ["couple"]
+	},
+	"couple": {
+		"name": "Nathan",
+		"text": ["J'ai suivi ton conseil à deux balles, merci hein!"],
+		"choices": [
+			{
+				"text": ["Peut-être que tu l'as mal suivi..."],
+				"preview": "Peut-être que tu l'as mal suivi...",
+				"goto": "suivi"
+            },
+			{
+				"text": ["Ah merde, je suis désolé"],
+				"preview": "Ah merde, je suis désolé",
+				"goto": "suivi"
+			}
+        ],
+		"goto": ["suivi"]
+	},
+	"suivi": {
+		"name": "Nathan",
+		"text": ["J'aurais pas dû t'écouter... Bon tcho, je te laisse"],
+		"choices": [
+			{
+				"text": ["Salut!"],
+				"preview": "Oh non!",
+				"goto": ""
+            }
+        ],
+		"goto": []
+    },
+    "bon": {
+		"name": "Nathan",
+		"text": ["Oui super! Ça se passe beaucoup mieux avec Elise."],
+		"choices": [
+			{
+				"text": ["Ah trop bien!"],
+				"preview": "Ah trop bien!",
+				"goto": "couple"
+            }
+        ],
+		"goto": ["couple"]
+	},
+	"bien": {
+		"name": "Nathan",
+		"text": ["Ouais, j'ai bien fait de suivre ton conseil."],
+		"choices": [
+			{
+				"text": ["Tant mieux!"],
+				"preview": "Tant mieux!",
+				"goto": "super"
+            },
+			{
+				"text": ["Je suis content pour vous!"],
+				"preview": "Je suis content pour vous",
+				"goto": "super"
+			}
+        ],
+		"goto": ["suivi"]
+	},
+	"super": {
+		"name": "Nathan",
+		"text": ["On s'organise un truc quand ça se sera calmé?"],
+		"choices": [
+			{
+				"text": ["Ouais à fond!"],
+				"preview": "Ouais à fond!",
+				"goto": ""
+            }
+        ],
+		"goto": []
+	},
+    "sandrine": {
+        "name": "Sandrine",
+		"text": ["Coucou, ça va? T'as pû reprendre le travail?"],
+		"choices": [
+			{
+				"text": ["Hello! Ça va et toi? Non pas encore."],
+				"preview": "Hello!",
+				"goto": "hello"
+			}
+        ],
+		"goto": ["hello"]
+    },
+    "hello": {
+        "name": "Sandrine",
+		"text": ["Ah mince, bon j'ai pas retrouvé de travail non plus si ça peut te rassurer."],
+		"choices": [
+			{
+				"text": ["..."],
+				"preview": "...",
+				"goto": "independant"
+			}
+        ],
+		"goto": ["independant"]
+    },
+    "independant": {
+        "name": "Sandrine",
+        "text": [
+            "Oups désolé, sujet sensible. J'ai une bonne nouvelle par contre, on organise une petite soirée chez Carlos.",
+            "Tu veux venir?"
+    ],
+		"choices": {
+            "rep":
+			{
+				"text": ["Non, c'est encore trop risqué."],
+				"preview": "Non, c'est encore trop risqué.",
+				"goto": "non"
+            },
+            "rep2":
+            {
+				"text": ["Oui, il faut abolument que je sorte et pense à autre chose!"],
+				"preview": "Oui, il faut abolument que je sorte et pense à autre chose!",
+				"goto": "oui"
+			}
+        },
+		"goto": ["aide"]
+    },
+    "oui": {
+        "name": "Sandrine",
+		"text": ["Cool! Je t'envoie les détails par message! Salut!"],
+		"choices": [],
+		"goto": []
+    },
+    "non": {
+        "name": "Sandrine",
+		"text": ["Pas de soucis! Salut!"],
+		"choices": [],
+		"goto": []
+    },
+    "maman": {
+		"name": "Patrick",
+		"text": ["... Pas de réponse, c'est bizarre."],
+		"choices": [],
+		"goto": []
+	}
+}
