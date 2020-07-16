@@ -20,7 +20,7 @@ export class WakeUpCard extends Card {
         let character = new ProtoGuy(parent_scene, 300, 222, ProtoGuyCard.WAKE_UP);
 
         //Initialize children array
-        let children = [
+        const children = [
             new Background(parent_scene, "sprites/ProtoScene/WakeUpCard/bg.jpg", "WakeUpBG"),
             new CardObject(
                 parent_scene,

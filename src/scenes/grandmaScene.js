@@ -4,9 +4,10 @@ import { CardObject } from "./objects/cardObject.js";
 import { Background } from "./objects/background.js";
 import { player } from "../index.js";
 import { Scenes } from "../core/player.js";
-import { WindowState, Months } from "./buildingScene.js";
 import { LivingRoomCard } from "./cards/GrandmaScene/livingRoomCard.js";
 import { DialogueController } from "../core/dialogueController.js";
+import { WindowState, Months } from "./buildingScene.js";
+import { HallwayCards } from "./hallwayScene.js";
 
 export const GrandmaCards = {
     LIVING_ROOM: 0,
@@ -23,38 +24,44 @@ export class GrandmaScene extends Phaser.Scene {
      * in said scene
      */
     constructor() {
-        super({key: 'Grandma'});
+        super({ key: Scenes.GRANDMA });
 
         this.livingRoomCard = new LivingRoomCard(this);
-        this.radioCard = new Card(this, [
-            new Background(
-                this,
-                "sprites/GrandmaScene/Radio/radio_bg.jpg",
-                "radio_bg"
-            ),
-            new CardObject(
-                this,
-                { name: "radio_radio", url: "sprites/GrandmaScene/Radio/radio_radio.png" },
-                new Phaser.Math.Vector2(-131, -273),
-                (scene) => scene.nextCard(GrandmaCards.LIVING_ROOM),
-                this
-            )
-        ]);
+        this.radioCard = new Card(
+            this,
+            [
+                new Background(
+                    this,
+                    "sprites/GrandmaScene/Radio/radio_bg.jpg",
+                    "radio_bg"
+                ),
+                new CardObject(
+                    this,
+                    { name: "radio_radio", url: "sprites/GrandmaScene/Radio/radio_radio.png" },
+                    new Phaser.Math.Vector2(-131, -273),
+                    (scene) => scene.nextCard(GrandmaCards.LIVING_ROOM),
+                    this
+                )
+            ]
+        );
 
-        this.calendarCard = new Card(this, [
-            new Background(
-                this,
-                "sprites/GrandmaScene/Calendar/calendar_bg.jpg",
-                "calendar_bg"
-            ),
-            new CardObject(
-                this,
-                { name: "calendar_calendar", url: "sprites/GrandmaScene/Calendar/calendar_calendar.png" },
-                new Phaser.Math.Vector2(-88, -162),
-                (scene) => scene.nextCard(GrandmaCards.LIVING_ROOM),
-                this
-            )
-        ]);
+        this.calendarCard = new Card(
+            this,
+            [
+                new Background(
+                    this,
+                    "sprites/GrandmaScene/Calendar/calendar_bg.jpg",
+                    "calendar_bg"
+                ),
+                new CardObject(
+                    this,
+                    { name: "calendar_calendar", url: "sprites/GrandmaScene/Calendar/calendar_calendar.png" },
+                    new Phaser.Math.Vector2(-88, -162),
+                    (scene) => scene.nextCard(GrandmaCards.LIVING_ROOM),
+                    this
+                )
+            ]
+        );
 
         this.cards = [
             this.livingRoomCard,
@@ -64,19 +71,27 @@ export class GrandmaScene extends Phaser.Scene {
 
         this.current_card = this.livingRoomCard;
         this.card_idx = GrandmaCards.LIVING_ROOM;
-
-        //Create the scene's dialogue controller
-        this.dialogue = new DialogueController(this, "grandmaDialogMarch");
     }
 
     /**
      * @brief Preloads the scene using saved data (if any)
-     * @param {JSON} data { cardIdx, clothes, food }
-     * @todo Implement saving in grandma scene
+     * @param {JSON} data { cardIdx, month }
      */
     init(data) {
         //Check if any saved data exists
-        if(data) {/* TODO */}
+        if(data.cardIdx) {
+            this.cardIdx = data.cardIdx;
+        }
+
+        this.month = data.month;
+
+        if(data.month === Months.MARCH) {
+            //Create the scene's dialogue controller
+            this.dialogue = new DialogueController(this, "grandmaDialogMarch");
+        } else {
+            //Create the scene's dialogue controller
+            this.dialogue = new DialogueController(this, "grandmaDialogApril");
+        }
     }
 
     /**
@@ -108,6 +123,10 @@ export class GrandmaScene extends Phaser.Scene {
 
         //Show the radio dialogue
         this.dialogue.display("news");
+
+        //Save the new game state
+        player.setData({ cardIdx: GrandmaCards.LIVING_ROOM });
+        player.saveGame();
     }
 
     /**
@@ -121,6 +140,7 @@ export class GrandmaScene extends Phaser.Scene {
      * @brief Notifies the current card that the dialogue has ended
      */
     notifyDialogueEnd() {
+
         //Notify the current card if it is interested
         if(this.current_card.isDialogueSensitive()) {
             this.current_card.notifyDialogueEnd();
@@ -132,6 +152,7 @@ export class GrandmaScene extends Phaser.Scene {
      * @param {GrandmaCards} card the next card to show
      */
     nextCard(card) {
+
         //Destroy the current card
         this.current_card.destroy();
 
@@ -162,23 +183,31 @@ export class GrandmaScene extends Phaser.Scene {
     }
 
     nextScene() {
-        this.scene.start("Building", {
-            mainMenu: false,
-            stage: 2,
-            windows: {
-                damien: WindowState.OFF,
-                grandma: WindowState.OFF,
-                family: WindowState.OFF,
-                indep: WindowState.ON
-            },
-            month: Months.MARCH,
-            nextScene: {
-                damien: null,
-                grandma: null,
-                family: null,
-                indep: null
-            }
-        });
+        this.cameras.main.fadeOut(1000);
+        if(this.month === Months.MARCH) {
+            this.scene.start(Scenes.BUILDING, {
+                mainMenu: false,
+                stage: 1,
+                windows: {
+                    damien: WindowState.OFF,
+                    grandma: WindowState.OFF,
+                    family: WindowState.OFF,
+                    indep: WindowState.ON
+                },
+                month: Months.MARCH,
+                nextScene: {
+                    damien: null,
+                    grandma: null,
+                    family: null,
+                    indep: Scenes.INDEP
+                }
+            });
+        } else {
+            this.scene.start(
+                Scenes.HALLWAY,
+                { cardIdx: HallwayCards.DAMIEN_CLOSED, damien_gone: Math.random() > 0.5 }
+            );
+        }
     }
 
     /**

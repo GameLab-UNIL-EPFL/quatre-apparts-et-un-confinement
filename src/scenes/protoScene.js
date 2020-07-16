@@ -1,17 +1,13 @@
 import Phaser from "phaser";
 import { WakeUpCard } from "./cards/ProtoSceneCards/wakeUpCard.js";
-import { DialogueController, DIALOGUE_BOX_KEY, DIALOGUE_BOX_SPRITE_SIZE } from "../core/dialogueController.js";
+import { DialogueController } from "../core/dialogueController.js";
 import { IntroCard } from "./cards/ProtoSceneCards/introCard.js";
-import { ComputerCard } from "./cards/ProtoSceneCards/computerCard.js";
 import { Card } from "./cards/card.js";
 import { CardObject } from "./objects/cardObject.js";
 import { Background } from "./objects/background.js";
 import { ProtoGuy, ProtoGuyCard } from "../characters/protoGuy.js";
-import { ZoomMiniGameCard } from "./cards/ProtoSceneCards/zoomMiniGameCard.js";
-import { MessageCard } from "./cards/ProtoSceneCards/messageCard.js";
 import { player } from "../index.js";
 import { Scenes } from "../core/player.js";
-import { WindowState, Months } from "./buildingScene.js";
 
 export const ProtoCards = {
     INTRO: 0,
@@ -38,7 +34,7 @@ export class ProtoScene extends Phaser.Scene {
      * in said scene
      */
     constructor() {
-        super({key: 'Prototype'});
+        super({ key: Scenes.PROTOTYPE });
 
         //Keep track of the clothes that protoguy is wearing
         this.clothes = ProtoGuyClothes.PYJAMAS;
@@ -49,12 +45,12 @@ export class ProtoScene extends Phaser.Scene {
         this.wakeUpCard = new WakeUpCard(this);
 
         let characters = {
-            'chosePath': new ProtoGuy(this, 133, 422, ProtoGuyCard.CHOSE_PATH),
-            'clothes': new ProtoGuy(this, 51, 115, ProtoGuyCard.CLOTHES),
-            'kitchen': new ProtoGuy(this, -218, -32, ProtoGuyCard.KITCHEN)
+            'chosePath': new ProtoGuy(this, 133, 422, ProtoGuyCard.CHOSE_PATH)
         };
 
-        this.chosePathCard = new Card(this, [
+        this.chosePathCard = new Card(
+            this,
+            [
                 new Background(
                     this,
                     "sprites/ProtoScene/ChosePathCard/bg.jpg",
@@ -83,108 +79,10 @@ export class ProtoScene extends Phaser.Scene {
             characters['chosePath']
         );
 
-        this.clothesCard = new Card(this, [
-                new Background(
-                    this,
-                    "sprites/ProtoScene/ClothesCard/bg.jpg",
-                    "ClothesBG"
-                ),
-                new CardObject(
-                    this,
-                    { name: "clothes", url: "sprites/ProtoScene/ClothesCard/clothes.png" },
-                    new Phaser.Math.Vector2(293, -15),
-                    (scene) => scene.changeClothes(ProtoGuyClothes.CLEAN_CLOTHES),
-                    this,
-                    -1,
-                    { name: "clothes_h", url: "sprites/ProtoScene/ClothesCard/clothes_h.png" }
-                ),
-                new CardObject(
-                    this,
-                    { name: "chair", url: "sprites/ProtoScene/ClothesCard/chair.png" },
-                    new Phaser.Math.Vector2(-225, 385),
-                    (scene) => scene.changeClothes(ProtoGuyClothes.YESTERDAY_CLOTHES),
-                    this,
-                    -1,
-                    { name: "chair_h", url: "sprites/ProtoScene/ClothesCard/chair_h.png" }
-                ),
-                characters['clothes']
-            ],
-            characters['clothes']
-        );
-
-        this.kitchenCard = new Card(this, [
-                new Background(
-                    this,
-                    "sprites/ProtoScene/KitchenCard/bg.jpg",
-                    "KitchenBG",
-                ),
-                characters['kitchen'],
-                new CardObject(
-                    this,
-                    { name: "fridge", url: "sprites/ProtoScene/KitchenCard/frigo.png" },
-                    new Phaser.Math.Vector2(194, -151),
-                    null,
-                    null,
-                    1,
-                    { name: "fridge_h", url: "sprites/ProtoScene/KitchenCard/frigo_h.png" }
-                ),
-                new CardObject(
-                    this,
-                    { name: "table", url: "sprites/ProtoScene/KitchenCard/table.png" },
-                    new Phaser.Math.Vector2(-29, 388)
-                ),
-                new CardObject(
-                    this,
-                    { name: "counter", url: "sprites/ProtoScene/KitchenCard/comptoire.png" },
-                    new Phaser.Math.Vector2(0, 482)
-                ),
-                new CardObject(
-                    this,
-                    { name: "sink", url: "sprites/ProtoScene/KitchenCard/lavabo.png" },
-                    new Phaser.Math.Vector2(224, 607),
-                    null,
-                    null,
-                    2,
-                    { name: "sink_h", url: "sprites/ProtoScene/KitchenCard/lavabo_h.png" }
-                ),
-                new CardObject(
-                    this,
-                    { name: "counter_stuff", url: "sprites/ProtoScene/KitchenCard/objets.png" },
-                    new Phaser.Math.Vector2(145, 695)
-                ),
-                new CardObject(
-                    this,
-                    { name: "toaster", url: "sprites/ProtoScene/KitchenCard/toaster.png" },
-                    new Phaser.Math.Vector2(-358, 653),
-                    null,
-                    null,
-                    0,
-                    { name: "toaster_h", url: "sprites/ProtoScene/KitchenCard/toaster_h.png" }
-                ),
-                new CardObject(
-                    this,
-                    { name: "lamp", url: "sprites/ProtoScene/KitchenCard/lampe.png" },
-                    new Phaser.Math.Vector2(93, -478)
-                )
-            ],
-            characters['kitchen']
-        );
-
-        this.computerCard = new ComputerCard(this);
-
-        this.zoomMiniGame = new ZoomMiniGameCard(this);
-
-        this.messageCard = new MessageCard(this);
-
         this.cards = [
             this.introCard,
             this.wakeUpCard,
-            this.chosePathCard,
-            this.clothesCard,
-            this.kitchenCard,
-            this.computerCard,
-            this.zoomMiniGame,
-            this.messageCard
+            this.chosePathCard
         ];
 
         //Keep track of wich card is displayed
@@ -192,7 +90,7 @@ export class ProtoScene extends Phaser.Scene {
         this.current_card = this.introCard;
 
         //Create the dialogue controller
-        this.dialogue = new DialogueController(this);
+        this.dialogue = new DialogueController(this, "damienDialogMarch");
     }
 
     /**
@@ -206,7 +104,7 @@ export class ProtoScene extends Phaser.Scene {
             //Set the correct card
             switch(data.cardIdx) {
                 case ProtoCards.INTRO:
-                    this.cardIdx = ProtoCards.INTRO;
+                this.cardIdx = ProtoCards.INTRO;
                     break;
 
                 case ProtoCards.WAKE_UP:
@@ -217,34 +115,6 @@ export class ProtoScene extends Phaser.Scene {
                 case ProtoCards.CHOSE_PATH:
                     this.current_card = this.chosePathCard;
                     this.cardIdx = ProtoCards.CHOSE_PATH;
-                    break;
-
-                case ProtoCards.CLOTHES:
-                    this.current_card = this.clothesCard;
-                    this.cardIdx = ProtoCards.CLOTHES;
-                    break;
-
-                case ProtoCards.KITCHEN:
-                    this.current_card = this.kitchenCard;
-                    this.cardIdx = ProtoCards.KITCHEN;
-                    break;
-
-                case ProtoCards.COMPUTER:
-                    this.current_card = this.computerCard;
-                    this.clothes = data.clothes;
-                    this.food = data.food;
-                    this.cardIdx = ProtoCards.COMPUTER;
-                    break;
-
-                case ProtoCards.MINI_GAME:
-                    this.current_card = this.zoomMiniGame;
-                    this.cardIdx = ProtoCards.MINI_GAME;
-                    break;
-
-                case ProtoCards.MESSAGE:
-                    this.current_card = this.messageCard;
-                    this.clothes = data.clothes;
-                    this.cardIdx = ProtoCards.MESSAGE;
                     break;
 
                 default:
@@ -362,20 +232,13 @@ export class ProtoScene extends Phaser.Scene {
                         //The Closet was selected
                         case 0:
                             this.cardIdx = ProtoCards.CLOTHES;
-                            this.current_card = this.clothesCard;
-                            this.current_card.create();
+                            this.nextScene(this.cardIdx);
                             break;
 
                         //The kitchen was selected
                         case 1:
                             this.cardIdx = ProtoCards.KITCHEN;
-                            this.current_card = this.kitchenCard;
-                            this.current_card.create();
-                            break;
-
-                        //Proto guy was selected (back to bed)
-                        case 2:
-                            this.cardIdx = ProtoCards.WAKE_UP;
+                            this.nextScene(this.cardIdx);
                             break;
 
                         default:
@@ -383,36 +246,6 @@ export class ProtoScene extends Phaser.Scene {
 
                     }
 
-                    break;
-
-                case ProtoCards.CLOTHES:
-                    //Chose the next card depending on the user's choice
-                    this.cardIdx = ProtoCards.COMPUTER;
-                    this.current_card = this.computerCard;
-                    this.current_card.create();
-                    this.current_card.showItem();
-                    break;
-
-                case ProtoCards.KITCHEN:
-                    this.cardIdx = ProtoCards.COMPUTER;
-                    this.current_card = this.computerCard;
-                    this.current_card.create();
-                    this.current_card.showItem(choice);
-
-                    //Save the food choice
-                    savable_data.food = choice;
-                    break;
-
-                case ProtoCards.COMPUTER:
-                    this.cardIdx = ProtoCards.MINI_GAME;
-                    this.current_card = this.zoomMiniGame;
-                    this.current_card.create();
-                    break;
-
-                case ProtoCards.MINI_GAME:
-                    this.cardIdx = ProtoCards.MESSAGE;
-                    this.current_card = this.messageCard;
-                    this.current_card.create();
                     break;
 
                 default:
@@ -429,24 +262,11 @@ export class ProtoScene extends Phaser.Scene {
         player.saveGame();
     }
 
-    nextScene() {
-        this.scene.start("Building", {
-            mainMenu: false,
-            stage: 3,
-            windows: {
-                damien: WindowState.OFF,
-                grandma: WindowState.ON,
-                family: WindowState.OFF,
-                indep: WindowState.OFF
-            },
-            month: Months.MARCH,
-            nextScene: {
-                damien: null,
-                grandma: Scenes.GRANDMA,
-                family: null,
-                indep: null
-            }
-        });
+    nextScene(cardIdx) {
+        this.cameras.main.fadeOut(3000, 0, 0, 0,
+            () => this.scene.start(Scenes.DAMIEN_KITCHEN_CLOTHES, { cardIdx: cardIdx }),
+            this
+        );        
     }
 
     /**

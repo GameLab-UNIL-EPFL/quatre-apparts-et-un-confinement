@@ -67,7 +67,8 @@
     "masque": {
 		"name": "Copine",
         "text": [
-            "Ben le masque ça protège pas forcément... Et j'aurais pas dû t'invité, même si ça vient pas de toi, je l'ai mis à risque"
+			"Ben le masque ça protège pas forcément...",
+			"Et j'aurais pas dû t'invité, même si ça vient pas de toi, je l'ai mis à risque"
         ],
 		"choices": {
             "rep":
@@ -88,7 +89,8 @@
     "malade": {
 		"name": "Copine",
         "text": [
-            "Si ça se trouve on est asymptomatique... J'aurais pas dû t'invité, même si ça vient pas de toi, je l'ai mis à risque"
+			"Si ça se trouve on est asymptomatique...",
+			"J'aurais pas dû t'invité, même si ça vient pas de toi, je l'ai mis à risque"
         ],
 		"choices": {
             "rep":
