@@ -86,28 +86,28 @@ export class BuildingScene extends Phaser.Scene {
 
         //Load in all of the sprites needed for this scene
         switch(this.info.month) {
-            case Months.MARCH:
-                this.load.image("building_bg_march", "sprites/BuildingScene/building_bg_winter.jpg");
+        case Months.MARCH:
+            this.load.image("building_bg_march", "sprites/BuildingScene/building_bg_winter.jpg");
 
-                //Load in clouds
-                this.load.image("cloud_01_march", "sprites/BuildingScene/building_cloud01_winter.png");
-                this.load.image("cloud_02_march", "sprites/BuildingScene/building_cloud02_winter.png");
-                this.load.image("cloud_03_march", "sprites/BuildingScene/building_cloud03_winter.png");
-                this.load.image("cloud_04_march", "sprites/BuildingScene/building_cloud04_winter.png");
-                break;
+            //Load in clouds
+            this.load.image("cloud_01_march", "sprites/BuildingScene/building_cloud01_winter.png");
+            this.load.image("cloud_02_march", "sprites/BuildingScene/building_cloud02_winter.png");
+            this.load.image("cloud_03_march", "sprites/BuildingScene/building_cloud03_winter.png");
+            this.load.image("cloud_04_march", "sprites/BuildingScene/building_cloud04_winter.png");
+            break;
 
-            case Months.MAY:
-                this.load.image("building_bg_may", "sprites/BuildingScene/building_bg_summer.jpg");
+        case Months.MAY:
+            this.load.image("building_bg_may", "sprites/BuildingScene/building_bg_summer.jpg");
 
-                //Load in the clouds
-                this.load.image("cloud_01_may", "sprites/BuildingScene/building_cloud01_summer.png");
-                this.load.image("cloud_02_may", "sprites/BuildingScene/building_cloud02_summer.png");
-                this.load.image("cloud_03_may", "sprites/BuildingScene/building_cloud03_summer.png");
-                this.load.image("cloud_04_may", "sprites/BuildingScene/building_cloud04_summer.png");
-                break;
+            //Load in the clouds
+            this.load.image("cloud_01_may", "sprites/BuildingScene/building_cloud01_summer.png");
+            this.load.image("cloud_02_may", "sprites/BuildingScene/building_cloud02_summer.png");
+            this.load.image("cloud_03_may", "sprites/BuildingScene/building_cloud03_summer.png");
+            this.load.image("cloud_04_may", "sprites/BuildingScene/building_cloud04_summer.png");
+            break;
 
-            default:
-                break;
+        default:
+            break;
         }
 
         //Load in everything needed no matter the month
@@ -305,27 +305,27 @@ export class BuildingScene extends Phaser.Scene {
         //this.bird.play({volume: 0.3});
 
         switch(this.info.month) {
-            case Months.MARCH:
-                this.sprites['building_bg'] = this.add.image(0, 0, "building_bg_march");
+        case Months.MARCH:
+            this.sprites['building_bg'] = this.add.image(0, 0, "building_bg_march");
 
-                //Load in clouds
-                this.sprites['cloud_01'] = this.add.image(1983, -479, "cloud_01_march");
-                this.sprites['cloud_02'] = this.add.image(1020, -155, "cloud_02_march");
-                this.sprites['cloud_03'] = this.add.image(2065, -162, "cloud_03_march");
-                this.sprites['cloud_04'] = this.add.image(1348, -686, "cloud_04_march");
-                break;
+            //Load in clouds
+            this.sprites['cloud_01'] = this.add.image(1983, -479, "cloud_01_march");
+            this.sprites['cloud_02'] = this.add.image(1020, -155, "cloud_02_march");
+            this.sprites['cloud_03'] = this.add.image(2065, -162, "cloud_03_march");
+            this.sprites['cloud_04'] = this.add.image(1348, -686, "cloud_04_march");
+            break;
 
-            case Months.MAY:
-                this.sprites['building_bg'] = this.add.image(0, 0, "building_bg_may");
-                //Load in the clouds
-                this.sprites['cloud_01'] = this.add.image(1983, -479, "cloud_01_may");
-                this.sprites['cloud_02'] = this.add.image(1020, -155, "cloud_02_may");
-                this.sprites['cloud_03'] = this.add.image(2065, -162, "cloud_03_may");
-                this.sprites['cloud_04'] = this.add.image(1348, -686, "cloud_04_may");
-                break;
+        case Months.MAY:
+            this.sprites['building_bg'] = this.add.image(0, 0, "building_bg_may");
+            //Load in the clouds
+            this.sprites['cloud_01'] = this.add.image(1983, -479, "cloud_01_may");
+            this.sprites['cloud_02'] = this.add.image(1020, -155, "cloud_02_may");
+            this.sprites['cloud_03'] = this.add.image(2065, -162, "cloud_03_may");
+            this.sprites['cloud_04'] = this.add.image(1348, -686, "cloud_04_may");
+            break;
 
-            default:
-                break;
+        default:
+            break;
         }
 
         //Center the background
@@ -348,158 +348,158 @@ export class BuildingScene extends Phaser.Scene {
         this.sprites['car_03'] = this.add.image(-600, 714, "car_03");
 
         switch(this.info.windows.family) {
-            case WindowState.ON:
-                this.sprites['family_window'] = this.add.image(0, 188, "family_window_on");
-                this.sprites['family_window_mid'] = this.add.image(0, 188, "family_window_mid");
+        case WindowState.ON:
+            this.sprites['family_window'] = this.add.image(0, 188, "family_window_on");
+            this.sprites['family_window_mid'] = this.add.image(0, 188, "family_window_mid");
 
-                this.tweens.add({
-                    targets: this.sprites['family_window_mid'],
-                    alpha: 0,
-                    duration: 3000,
-                    ease: 'Quadratic',
-                    yoyo: true,
-                    loop: -1
-                });
+            this.tweens.add({
+                targets: this.sprites['family_window_mid'],
+                alpha: 0,
+                duration: 3000,
+                ease: 'Quadratic',
+                yoyo: true,
+                loop: -1
+            });
 
-                //Make window interactive
-                if(this.info.nextScene.family) {
-                    this.sprites['family_window'].setInteractive();
-                    this.sprites['family_window_mid'].setInteractive();
+            //Make window interactive
+            if(this.info.nextScene.family) {
+                this.sprites['family_window'].setInteractive();
+                this.sprites['family_window_mid'].setInteractive();
 
-                    this.input.on(
-                        'gameobjectdown',
-                        (_, gameObject) => {
-                            //Check that we clicked on the right window
-                            if(gameObject === this.sprites['family_window'] || gameObject === this.sprites['family_window_mid']) {
-                                this.scene.start(this.info.nextScene.family);
-                            }
-                        },
-                        this
-                    );
-                }
-                break;
+                this.input.on(
+                    'gameobjectdown',
+                    (_, gameObject) => {
+                        //Check that we clicked on the right window
+                        if(gameObject === this.sprites['family_window'] || gameObject === this.sprites['family_window_mid']) {
+                            this.scene.start(this.info.nextScene.family);
+                        }
+                    },
+                    this
+                );
+            }
+            break;
 
-            case WindowState.OFF:
-                this.sprites['family_window'] = this.add.image(0, 188, "family_window_off");
-                break;
+        case WindowState.OFF:
+            this.sprites['family_window'] = this.add.image(0, 188, "family_window_off");
+            break;
 
-            default:
-                break;
+        default:
+            break;
         }
 
         switch(this.info.windows.damien) {
-            case WindowState.ON:
-                this.sprites['damien_window'] = this.add.image(-305, -236, "damien_window_on");
-                this.sprites['damien_window_mid'] = this.add.image(-305, -236, "damien_window_mid");
+        case WindowState.ON:
+            this.sprites['damien_window'] = this.add.image(-305, -236, "damien_window_on");
+            this.sprites['damien_window_mid'] = this.add.image(-305, -236, "damien_window_mid");
 
-                this.tweens.add({
-                    targets: this.sprites['damien_window_mid'],
-                    alpha: 0,
-                    duration: 3000,
-                    ease: 'Quadratic',
-                    yoyo: true,
-                    loop: -1
-                });
+            this.tweens.add({
+                targets: this.sprites['damien_window_mid'],
+                alpha: 0,
+                duration: 3000,
+                ease: 'Quadratic',
+                yoyo: true,
+                loop: -1
+            });
 
-                //Make window interactive
-                if(this.info.nextScene.damien) {
-                    this.sprites['damien_window'].setInteractive();
-                    this.sprites['damien_window_mid'].setInteractive();
+            //Make window interactive
+            if(this.info.nextScene.damien) {
+                this.sprites['damien_window'].setInteractive();
+                this.sprites['damien_window_mid'].setInteractive();
 
-                    this.input.on(
-                        'gameobjectdown',
-                        (_, gameObject) => {
-                            //Check that we clicked on the right window
-                            if(gameObject === this.sprites['damien_window'] || gameObject === this.sprites['damien_window_mid']) {
+                this.input.on(
+                    'gameobjectdown',
+                    (_, gameObject) => {
+                        //Check that we clicked on the right window
+                        if(gameObject === this.sprites['damien_window'] || gameObject === this.sprites['damien_window_mid']) {
 
-                                this.scene.start(this.info.nextScene.damien);
-                            }
-                        },
-                        this
-                    );
-                }
-                break;
+                            this.scene.start(this.info.nextScene.damien);
+                        }
+                    },
+                    this
+                );
+            }
+            break;
 
-            case WindowState.OFF:
-                this.sprites['damien_window'] = this.add.image(-305, -236, "damien_window_off");
-                break;
+        case WindowState.OFF:
+            this.sprites['damien_window'] = this.add.image(-305, -236, "damien_window_off");
+            break;
 
-            default:
-                break;
+        default:
+            break;
         }
 
         switch(this.info.windows.grandma) {
-            case WindowState.ON:
-                this.sprites['grandma_window'] = this.add.image(0, -212, "grandma_window_on");
-                this.sprites['grandma_window_mid'] = this.add.image(0, -212, "grandma_window_mid");
+        case WindowState.ON:
+            this.sprites['grandma_window'] = this.add.image(0, -212, "grandma_window_on");
+            this.sprites['grandma_window_mid'] = this.add.image(0, -212, "grandma_window_mid");
 
-                this.tweens.add({
-                    targets: this.sprites['grandma_window_mid'],
-                    alpha: 0,
-                    duration: 3000,
-                    ease: 'Quadratic',
-                    yoyo: true,
-                    loop: -1
-                });
+            this.tweens.add({
+                targets: this.sprites['grandma_window_mid'],
+                alpha: 0,
+                duration: 3000,
+                ease: 'Quadratic',
+                yoyo: true,
+                loop: -1
+            });
 
-                //Make window interactive
-                if(this.info.nextScene.grandma) {
-                    this.sprites['grandma_window'].setInteractive();
-                    this.sprites['grandma_window_mid'].setInteractive();
+            //Make window interactive
+            if(this.info.nextScene.grandma) {
+                this.sprites['grandma_window'].setInteractive();
+                this.sprites['grandma_window_mid'].setInteractive();
 
-                    this.input.on(
-                        'gameobjectdown',
-                        (_, gameObject) => {
-                            //Check that we clicked on the right window
-                            if(gameObject === this.sprites['grandma_window'] || gameObject === this.sprites['grandma_window_mid']) {
-                                this.scene.start(
-                                    this.info.nextScene.grandma,
-                                    { cardIdx: GrandmaCards.LIVING_ROOM, month: this.info.month }
-                                );
-                            }
-                        },
-                        this
-                    );
-                }
-                break;
+                this.input.on(
+                    'gameobjectdown',
+                    (_, gameObject) => {
+                        //Check that we clicked on the right window
+                        if(gameObject === this.sprites['grandma_window'] || gameObject === this.sprites['grandma_window_mid']) {
+                            this.scene.start(
+                                this.info.nextScene.grandma,
+                                { cardIdx: GrandmaCards.LIVING_ROOM, month: this.info.month }
+                            );
+                        }
+                    },
+                    this
+                );
+            }
+            break;
 
-            case WindowState.OFF:
-                this.sprites['grandma_window'] = this.add.image(0, -212, "grandma_window_off");
-                break;
+        case WindowState.OFF:
+            this.sprites['grandma_window'] = this.add.image(0, -212, "grandma_window_off");
+            break;
 
-            default:
-                break;
+        default:
+            break;
         }
 
         switch(this.info.windows.indep) {
-            case WindowState.ON:
-                this.sprites['indep_window'] = this.add.image(0, 388, "indep_window_on");
-                this.sprites['indep_window_mid'] = this.add.image(0, 388, "indep_window_mid");
+        case WindowState.ON:
+            this.sprites['indep_window'] = this.add.image(0, 388, "indep_window_on");
+            this.sprites['indep_window_mid'] = this.add.image(0, 388, "indep_window_mid");
 
-                this.tweens.add({
-                    targets: this.sprites['indep_window_mid'],
-                    alpha: 0,
-                    duration: 3000,
-                    ease: 'Quadratic',
-                    yoyo: true,
-                    loop: -1
-                });
+            this.tweens.add({
+                targets: this.sprites['indep_window_mid'],
+                alpha: 0,
+                duration: 3000,
+                ease: 'Quadratic',
+                yoyo: true,
+                loop: -1
+            });
 
-                //Make window interactive
-                if(this.info.nextScene.indep) {
-                    const interaction = () => this.scene.start(this.info.nextScene.indep);
+            //Make window interactive
+            if(this.info.nextScene.indep) {
+                const interaction = () => this.scene.start(this.info.nextScene.indep);
 
-                    this.sprites['indep_window'].setInteractive().on('pointerdown', interaction, this);
-                    this.sprites['indep_window_mid'].setInteractive().on('pointerdown', interaction, this);
-                }
-                break;
+                this.sprites['indep_window'].setInteractive().on('pointerdown', interaction, this);
+                this.sprites['indep_window_mid'].setInteractive().on('pointerdown', interaction, this);
+            }
+            break;
 
-            case WindowState.OFF:
-                this.sprites['indep_window'] = this.add.image(0, 388, "indep_window_off");
-                break;
+        case WindowState.OFF:
+            this.sprites['indep_window'] = this.add.image(0, 388, "indep_window_off");
+            break;
 
-            default:
-                break;
+        default:
+            break;
         }
 
         //Create cloud animations

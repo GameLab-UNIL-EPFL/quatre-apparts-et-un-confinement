@@ -54,26 +54,26 @@ export class DamienComputerScene extends Phaser.Scene {
             //Set the correct card
             switch(data.cardIdx) {
 
-                case ProtoCards.COMPUTER:
-                    this.current_card = this.computerCard;
-                    this.clothes = data.clothes;
-                    this.food = data.food;
-                    this.cardIdx = ProtoCards.COMPUTER;
-                    break;
+            case ProtoCards.COMPUTER:
+                this.current_card = this.computerCard;
+                this.clothes = data.clothes;
+                this.food = data.food;
+                this.cardIdx = ProtoCards.COMPUTER;
+                break;
 
-                case ProtoCards.MINI_GAME:
-                    this.current_card = this.zoomMiniGame;
-                    this.cardIdx = ProtoCards.MINI_GAME;
-                    break;
+            case ProtoCards.MINI_GAME:
+                this.current_card = this.zoomMiniGame;
+                this.cardIdx = ProtoCards.MINI_GAME;
+                break;
 
-                case ProtoCards.MESSAGE:
-                    this.current_card = this.messageCard;
-                    this.clothes = data.clothes;
-                    this.cardIdx = ProtoCards.MESSAGE;
-                    break;
+            case ProtoCards.MESSAGE:
+                this.current_card = this.messageCard;
+                this.clothes = data.clothes;
+                this.cardIdx = ProtoCards.MESSAGE;
+                break;
 
-                default:
-                    break;
+            default:
+                break;
             }
         }
     }
@@ -165,20 +165,20 @@ export class DamienComputerScene extends Phaser.Scene {
 
             switch(this.cardIdx) {
 
-                case ProtoCards.COMPUTER:
-                    this.cardIdx = ProtoCards.MINI_GAME;
-                    this.current_card = this.zoomMiniGame;
-                    this.current_card.create();
-                    break;
+            case ProtoCards.COMPUTER:
+                this.cardIdx = ProtoCards.MINI_GAME;
+                this.current_card = this.zoomMiniGame;
+                this.current_card.create();
+                break;
 
-                case ProtoCards.MINI_GAME:
-                    this.cardIdx = ProtoCards.MESSAGE;
-                    this.current_card = this.messageCard;
-                    this.current_card.create();
-                    break;
+            case ProtoCards.MINI_GAME:
+                this.cardIdx = ProtoCards.MESSAGE;
+                this.current_card = this.messageCard;
+                this.current_card.create();
+                break;
 
-                default:
-                    break;
+            default:
+                break;
             }
 
             //Save the card and clothes choices

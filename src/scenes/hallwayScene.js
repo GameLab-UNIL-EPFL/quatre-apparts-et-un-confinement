@@ -187,33 +187,33 @@ export class HallwayScene extends Phaser.Scene {
 
             //Set the correct card
             switch(data.cardIdx) {
-                case HallwayCards.DAMIEN_CLOSED:
-                    this.cardIdx = HallwayCards.DAMIEN_CLOSED;
-                    this.current_card = this.damien_closed_card;
-                    break;
+            case HallwayCards.DAMIEN_CLOSED:
+                this.cardIdx = HallwayCards.DAMIEN_CLOSED;
+                this.current_card = this.damien_closed_card;
+                break;
 
-                case HallwayCards.DAMIEN_OPEN:
-                    this.cardIdx = HallwayCards.DAMIEN_OPEN;
-                    this.current_card = this.damien_open_card;
-                    break;
+            case HallwayCards.DAMIEN_OPEN:
+                this.cardIdx = HallwayCards.DAMIEN_OPEN;
+                this.current_card = this.damien_open_card;
+                break;
 
-                case HallwayCards.INDEP_CLOSED:
-                    this.cardIdx = HallwayCards.INDEP_CLOSED;
-                    this.current_card = this.indep_closed_card;
-                    break;
+            case HallwayCards.INDEP_CLOSED:
+                this.cardIdx = HallwayCards.INDEP_CLOSED;
+                this.current_card = this.indep_closed_card;
+                break;
 
-                case HallwayCards.INDEP_OPEN:
-                    this.cardIdx = HallwayCards.INDEP_OPEN;
-                    this.current_card = this.indep_open_card;
-                    break;
+            case HallwayCards.INDEP_OPEN:
+                this.cardIdx = HallwayCards.INDEP_OPEN;
+                this.current_card = this.indep_open_card;
+                break;
 
-                case HallwayCards.INDEP_GRANDMA:
-                    this.cardIdx = HallwayCards.INDEP_GRANDMA;
-                    this.current_card = this.indep_grandma_card;
-                    break;
+            case HallwayCards.INDEP_GRANDMA:
+                this.cardIdx = HallwayCards.INDEP_GRANDMA;
+                this.current_card = this.indep_grandma_card;
+                break;
 
-                default:
-                    break;
+            default:
+                break;
             }
         }
     }
@@ -317,60 +317,60 @@ export class HallwayScene extends Phaser.Scene {
 
             switch(this.cardIdx) {
 
-                case HallwayCards.DAMIEN_CLOSED:
-                    let callback = () => {};
+            case HallwayCards.DAMIEN_CLOSED:
+                let callback = () => {};
 
-                    this.door = this.sound.add("door");
-                    this.door.play();
+                this.door = this.sound.add("door");
+                this.door.play();
 
-                    //Check if Damien is home or not
-                    if(this.damien_gone) {
-                        this.cardIdx = HallwayCards.INDEP_CLOSED;
-                        this.current_card = this.indep_closed_card;
-
-                    } else {
-                        this.cardIdx = HallwayCards.DAMIEN_OPEN;
-                        this.current_card = this.damien_open_card;
-
-                        callback = () => this.dialogue.display("damienHome");
-                    }
-
-                    //Load the next card
-                    this.current_card.create();
-                    callback();
-                    
-                    break;
-
-                case HallwayCards.DAMIEN_OPEN:
+                //Check if Damien is home or not
+                if(this.damien_gone) {
                     this.cardIdx = HallwayCards.INDEP_CLOSED;
                     this.current_card = this.indep_closed_card;
 
-                    //Load the next card
-                    this.current_card.create();
-                    break;
+                } else {
+                    this.cardIdx = HallwayCards.DAMIEN_OPEN;
+                    this.current_card = this.damien_open_card;
 
-                case HallwayCards.INDEP_CLOSED:
-                    this.cardIdx = HallwayCards.INDEP_OPEN;
-                    this.current_card = this.indep_open_card;
+                    callback = () => this.dialogue.display("damienHome");
+                }
 
-                    this.door = this.sound.add("door");
-                    this.door.play();
+                //Load the next card
+                this.current_card.create();
+                callback();
+                    
+                break;
 
-                    //Load the next card
-                    this.current_card.create();
-                    this.dialogue.display("PatrickHome", true);
-                    break;
+            case HallwayCards.DAMIEN_OPEN:
+                this.cardIdx = HallwayCards.INDEP_CLOSED;
+                this.current_card = this.indep_closed_card;
 
-                case HallwayCards.INDEP_OPEN:
-                    this.nextScene(HallwayCards.INDEP_OPEN);
-                    break;
+                //Load the next card
+                this.current_card.create();
+                break;
 
-                case HallwayCards.INDEP_GRANDMA:
-                    this.nextScene(HallwayCards.INDEP_GRANDMA);
-                    break;
+            case HallwayCards.INDEP_CLOSED:
+                this.cardIdx = HallwayCards.INDEP_OPEN;
+                this.current_card = this.indep_open_card;
 
-                default:
-                    break;
+                this.door = this.sound.add("door");
+                this.door.play();
+
+                //Load the next card
+                this.current_card.create();
+                this.dialogue.display("PatrickHome", true);
+                break;
+
+            case HallwayCards.INDEP_OPEN:
+                this.nextScene(HallwayCards.INDEP_OPEN);
+                break;
+
+            case HallwayCards.INDEP_GRANDMA:
+                this.nextScene(HallwayCards.INDEP_GRANDMA);
+                break;
+
+            default:
+                break;
             }
 
             //Save the card and clothes choices
@@ -388,32 +388,32 @@ export class HallwayScene extends Phaser.Scene {
      */
     nextScene(cardIdx) {
         switch(cardIdx) {
-            case HallwayCards.INDEP_OPEN:
-                this.scene.start(Scenes.STORE);
-                break;
+        case HallwayCards.INDEP_OPEN:
+            this.scene.start(Scenes.STORE);
+            break;
 
-            case HallwayCards.INDEP_GRANDMA:
-                this.scene.start(Scenes.BUILDING, {
-                    mainMenu: true,
-                    stage: 1,
-                    windows: {
-                        damien: WindowState.OFF,
-                        grandma: WindowState.OFF,
-                        family: WindowState.OFF,
-                        indep: WindowState.OFF
-                    },
-                    month: Months.MARCH,
-                    nextScene: {
-                        damien: null,
-                        grandma: null,
-                        family: null,
-                        indep: null
-                    }
-                });
-                break;
+        case HallwayCards.INDEP_GRANDMA:
+            this.scene.start(Scenes.BUILDING, {
+                mainMenu: true,
+                stage: 1,
+                windows: {
+                    damien: WindowState.OFF,
+                    grandma: WindowState.OFF,
+                    family: WindowState.OFF,
+                    indep: WindowState.OFF
+                },
+                month: Months.MARCH,
+                nextScene: {
+                    damien: null,
+                    grandma: null,
+                    family: null,
+                    indep: null
+                }
+            });
+            break;
             
-            default:
-                break;
+        default:
+            break;
         }      
     }
 

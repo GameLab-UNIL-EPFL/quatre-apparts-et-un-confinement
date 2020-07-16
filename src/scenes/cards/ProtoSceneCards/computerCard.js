@@ -76,25 +76,25 @@ export class ComputerCard extends Card {
     showItem(choice=-1) {
         let destructs = [];
         switch(choice) {
-            case 0:
-                destructs = [this.children[4], this.children[5]];
-                destructs.forEach(child => child.destroy());
-                break;
+        case 0:
+            destructs = [this.children[4], this.children[5]];
+            destructs.forEach(child => child.destroy());
+            break;
 
-            case 1:
-                destructs = [this.children[3], this.children[5]];
-                destructs.forEach(child => child.destroy());
-                break;
+        case 1:
+            destructs = [this.children[3], this.children[5]];
+            destructs.forEach(child => child.destroy());
+            break;
 
-            case 2:
-                destructs = [this.children[3], this.children[4]];
-                destructs.forEach(child => child.destroy());
-                break;
+        case 2:
+            destructs = [this.children[3], this.children[4]];
+            destructs.forEach(child => child.destroy());
+            break;
 
-            default:
-                destructs = [this.children[3], this.children[4], this.children[5]];
-                destructs.forEach(child => child.destroy());
-                break;
+        default:
+            destructs = [this.children[3], this.children[4], this.children[5]];
+            destructs.forEach(child => child.destroy());
+            break;
         }
     }
 }

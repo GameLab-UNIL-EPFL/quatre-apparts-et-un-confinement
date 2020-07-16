@@ -141,18 +141,18 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
 
             //Set the correct card
             switch(data.cardIdx) {
-                case ProtoCards.CLOTHES:
-                    this.current_card = this.clothesCard;
-                    this.cardIdx = ProtoCards.CLOTHES;
-                    break;
+            case ProtoCards.CLOTHES:
+                this.current_card = this.clothesCard;
+                this.cardIdx = ProtoCards.CLOTHES;
+                break;
 
-                case ProtoCards.KITCHEN:
-                    this.current_card = this.kitchenCard;
-                    this.cardIdx = ProtoCards.KITCHEN;
-                    break;
+            case ProtoCards.KITCHEN:
+                this.current_card = this.kitchenCard;
+                this.cardIdx = ProtoCards.KITCHEN;
+                break;
 
-                default:
-                    break;
+            default:
+                break;
             }
         }
     }
@@ -215,13 +215,13 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
             'gameobjectdown',
             (_, GameObject) => {
                 console.log(GameObject.texture.key);
-                if(GameObject.texture.key === "toaster_h"){
+                if(GameObject.texture.key === "toaster_h") {
                     this.toast.play();
                 }
-                else if(GameObject.texture.key === "fridge_h"){
+                else if(GameObject.texture.key === "fridge_h") {
                     this.fridge.play();
                 }
-                else if(GameObject.texture.key === "sink_h"){
+                else if(GameObject.texture.key === "sink_h") {
                     this.glass.play();
                 }
                 
@@ -272,22 +272,22 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
 
         switch(this.cardIdx) {
 
-            case ProtoCards.CLOTHES:
-                //Chose the next card depending on the user's choice
-                this.cardIdx = ProtoCards.COMPUTER;
-                this.nextScene({food: choice, clothes: this.clothes});
-                break;
+        case ProtoCards.CLOTHES:
+            //Chose the next card depending on the user's choice
+            this.cardIdx = ProtoCards.COMPUTER;
+            this.nextScene({food: choice, clothes: this.clothes});
+            break;
 
-            case ProtoCards.KITCHEN:
-                this.cardIdx = ProtoCards.COMPUTER;
-                this.nextScene({food: choice, clothes: this.clothes});
+        case ProtoCards.KITCHEN:
+            this.cardIdx = ProtoCards.COMPUTER;
+            this.nextScene({food: choice, clothes: this.clothes});
 
-                //Save the food choice
-                savable_data.food = choice;
-                break;
+            //Save the food choice
+            savable_data.food = choice;
+            break;
 
-            default:
-                break;
+        default:
+            break;
         }
 
         //Save the card and clothes choices

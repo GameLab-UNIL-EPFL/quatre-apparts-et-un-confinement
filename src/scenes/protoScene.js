@@ -103,22 +103,22 @@ export class ProtoScene extends Phaser.Scene {
 
             //Set the correct card
             switch(data.cardIdx) {
-                case ProtoCards.INTRO:
+            case ProtoCards.INTRO:
                 this.cardIdx = ProtoCards.INTRO;
-                    break;
+                break;
 
-                case ProtoCards.WAKE_UP:
-                    this.current_card = this.wakeUpCard;
-                    this.cardIdx = ProtoCards.WAKE_UP;
-                    break;
+            case ProtoCards.WAKE_UP:
+                this.current_card = this.wakeUpCard;
+                this.cardIdx = ProtoCards.WAKE_UP;
+                break;
 
-                case ProtoCards.CHOSE_PATH:
-                    this.current_card = this.chosePathCard;
-                    this.cardIdx = ProtoCards.CHOSE_PATH;
-                    break;
+            case ProtoCards.CHOSE_PATH:
+                this.current_card = this.chosePathCard;
+                this.cardIdx = ProtoCards.CHOSE_PATH;
+                break;
 
-                default:
-                    break;
+            default:
+                break;
             }
         }
     }
@@ -209,47 +209,47 @@ export class ProtoScene extends Phaser.Scene {
             this.current_card.destroy();
 
             switch(this.cardIdx) {
-                case ProtoCards.INTRO:
-                    this.cardIdx = ProtoCards.WAKE_UP;
-                    this.current_card = this.wakeUpCard;
+            case ProtoCards.INTRO:
+                this.cardIdx = ProtoCards.WAKE_UP;
+                this.current_card = this.wakeUpCard;
 
-                    //Load the next card
-                    this.current_card.create();
+                //Load the next card
+                this.current_card.create();
+                break;
+
+            case ProtoCards.WAKE_UP:
+                this.cardIdx = ProtoCards.CHOSE_PATH;
+                this.current_card = this.chosePathCard;
+
+                //Load the next card
+                this.current_card.create();
+                break;
+
+            case ProtoCards.CHOSE_PATH:
+
+                //Chose the next card depending on the user's choice
+                switch(choice) {
+                //The Closet was selected
+                case 0:
+                    this.cardIdx = ProtoCards.CLOTHES;
+                    this.nextScene(this.cardIdx);
                     break;
 
-                case ProtoCards.WAKE_UP:
-                        this.cardIdx = ProtoCards.CHOSE_PATH;
-                        this.current_card = this.chosePathCard;
-
-                        //Load the next card
-                        this.current_card.create();
-                    break;
-
-                case ProtoCards.CHOSE_PATH:
-
-                    //Chose the next card depending on the user's choice
-                    switch(choice) {
-                        //The Closet was selected
-                        case 0:
-                            this.cardIdx = ProtoCards.CLOTHES;
-                            this.nextScene(this.cardIdx);
-                            break;
-
-                        //The kitchen was selected
-                        case 1:
-                            this.cardIdx = ProtoCards.KITCHEN;
-                            this.nextScene(this.cardIdx);
-                            break;
-
-                        default:
-                            break;
-
-                    }
-
+                    //The kitchen was selected
+                case 1:
+                    this.cardIdx = ProtoCards.KITCHEN;
+                    this.nextScene(this.cardIdx);
                     break;
 
                 default:
                     break;
+
+                }
+
+                break;
+
+            default:
+                break;
             }
 
             //Save the card and clothes choices
