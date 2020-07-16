@@ -115,6 +115,8 @@ export class LivingRoomCard extends Card {
         this.parent_scene.load.image("grandma_book2", "sprites/GrandmaScene/grandma_book_02.png");
         this.parent_scene.load.image("grandma_book3", "sprites/GrandmaScene/grandma_book_03.png");
 
+        this.parent_scene.load.audio("pageTurn", "sounds/grandma/pageTurn.wav");
+
         //Load the cat animation spritesheet
         this.parent_scene.load.spritesheet(
             'cat',
@@ -215,42 +217,42 @@ export class LivingRoomCard extends Card {
      */
     notifyDialogueEnd() {
         switch(this.grandma_state) {
-            case GRANDMA_STATES.IDLE:
-                break;
+        case GRANDMA_STATES.IDLE:
+            break;
 
-            case GRANDMA_STATES.BOOK_1:
-                //Reset grandma
-                this.changeGrandma(GRANDMA_STATES.IDLE);
-                break;
+        case GRANDMA_STATES.BOOK_1:
+            //Reset grandma
+            this.changeGrandma(GRANDMA_STATES.IDLE);
+            break;
 
-            case GRANDMA_STATES.BOOK_2:
-                //Reset grandma
-                this.changeGrandma(GRANDMA_STATES.IDLE);
-                break;
+        case GRANDMA_STATES.BOOK_2:
+            //Reset grandma
+            this.changeGrandma(GRANDMA_STATES.IDLE);
+            break;
 
-            case GRANDMA_STATES.BOOK_3:
-                //Reset grandma
-                this.changeGrandma(GRANDMA_STATES.IDLE);
-                break;
+        case GRANDMA_STATES.BOOK_3:
+            //Reset grandma
+            this.changeGrandma(GRANDMA_STATES.IDLE);
+            break;
 
-            case GRANDMA_STATES.PHONE:
+        case GRANDMA_STATES.PHONE:
 
-                console.log("PHONE_DIALOGUE_END");
+            console.log("PHONE_DIALOGUE_END");
 
-                //show the phone
-                this.children[7].sprite.setActive(true).setVisible(true);
-                this.children[7].highlight_sprite.setActive(true).setVisible(true);
+            //show the phone
+            this.children[7].sprite.setActive(true).setVisible(true);
+            this.children[7].highlight_sprite.setActive(true).setVisible(true);
 
-                this.enableAllInteractions();
+            this.enableAllInteractions();
 
-                //Reset grandma
-                this.changeGrandma(GRANDMA_STATES.IDLE);
+            //Reset grandma
+            this.changeGrandma(GRANDMA_STATES.IDLE);
 
-                this.showArrow();
-                break;
+            this.showArrow();
+            break;
 
-            default:
-                break;
+        default:
+            break;
         }
     }
 
@@ -288,63 +290,70 @@ export class LivingRoomCard extends Card {
             this.grandma_sprite.destroy();
 
             switch(state) {
-                case GRANDMA_STATES.IDLE:
-                    this.grandma_sprite = this.parent_scene.add.image(
-                        GRANDMA_POS.x,
-                        GRANDMA_POS.y,
-                        "grandma_idle"
-                    );
-                    break;
+            case GRANDMA_STATES.IDLE:
+                this.grandma_sprite = this.parent_scene.add.image(
+                    GRANDMA_POS.x,
+                    GRANDMA_POS.y,
+                    "grandma_idle"
+                );
+                break;
 
-                case GRANDMA_STATES.BOOK_1:
-                    this.grandma_sprite = this.parent_scene.add.image(
-                        GRANDMA_POS.x,
-                        GRANDMA_POS.y,
-                        "grandma_book1"
-                    );
+            case GRANDMA_STATES.BOOK_1:
+                this.grandma_sprite = this.parent_scene.add.image(
+                    GRANDMA_POS.x,
+                    GRANDMA_POS.y,
+                    "grandma_book1"
+                );
 
-                    //Trigger the book's dialogue
-                    this.parent_scene.dialogue.display("livre1");
-                    break;
+                this.page = this.parent_scene.sound.add("pageTurn");
+                this.page.play();
 
-                case GRANDMA_STATES.BOOK_2:
-                    this.grandma_sprite = this.parent_scene.add.image(
-                        GRANDMA_POS.x,
-                        GRANDMA_POS.y,
-                        "grandma_book2"
-                    );
+                //Trigger the book's dialogue
+                this.parent_scene.dialogue.display("livre1");
+                break;
 
-                    //Trigger the book's dialogue
-                    this.parent_scene.dialogue.display("livre2");
-                    break;
+            case GRANDMA_STATES.BOOK_2:
+                this.grandma_sprite = this.parent_scene.add.image(
+                    GRANDMA_POS.x,
+                    GRANDMA_POS.y,
+                    "grandma_book2"
+                );
+                    
+                this.page.play();
 
-                case GRANDMA_STATES.BOOK_3:
-                    this.grandma_sprite = this.parent_scene.add.image(
-                        GRANDMA_POS.x,
-                        GRANDMA_POS.y,
-                        "grandma_book3"
-                    );
+                //Trigger the book's dialogue
+                this.parent_scene.dialogue.display("livre2");
+                break;
 
-                    //Trigger the book's dialogue
-                    this.parent_scene.dialogue.display("livre3");
-                    break;
+            case GRANDMA_STATES.BOOK_3:
+                this.grandma_sprite = this.parent_scene.add.image(
+                    GRANDMA_POS.x,
+                    GRANDMA_POS.y,
+                    "grandma_book3"
+                );
 
-                case GRANDMA_STATES.PHONE:
-                    this.grandma_sprite = this.parent_scene.add.image(
-                        GRANDMA_POS.x,
-                        GRANDMA_POS.y,
-                        "grandma_phone"
-                    );
+                this.page.play();
 
-                    //Disable all of the scenes interactions
-                    this.disableAllInteractions();
+                //Trigger the book's dialogue
+                this.parent_scene.dialogue.display("livre3");
+                break;
 
-                    //Trigger the phone's dialogue
-                    this.parent_scene.dialogue.display("telephone");
-                    break;
+            case GRANDMA_STATES.PHONE:
+                this.grandma_sprite = this.parent_scene.add.image(
+                    GRANDMA_POS.x,
+                    GRANDMA_POS.y,
+                    "grandma_phone"
+                );
 
-                default:
-                    break;
+                //Disable all of the scenes interactions
+                this.disableAllInteractions();
+
+                //Trigger the phone's dialogue
+                this.parent_scene.dialogue.display("telephone");
+                break;
+
+            default:
+                break;
             }
         }
     }

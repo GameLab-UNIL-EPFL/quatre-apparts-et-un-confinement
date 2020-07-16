@@ -137,18 +137,18 @@ export class IndepScene extends Phaser.Scene {
 
             //Set the correct card
             switch(data.cardIdx) {
-                case IndepCards.IDLE_CARD:
-                    this.cardIdx = IndepCards.IDLE_CARD;
-                    this.current_card = this.idle_card;
-                    break;
+            case IndepCards.IDLE_CARD:
+                this.cardIdx = IndepCards.IDLE_CARD;
+                this.current_card = this.idle_card;
+                break;
 
-                case IndepCards.TV_CARD:
-                    this.cardIdx = IndepCards.TV_CARD;
-                    this.current_card = this.tv_card;
-                    break;
+            case IndepCards.TV_CARD:
+                this.cardIdx = IndepCards.TV_CARD;
+                this.current_card = this.tv_card;
+                break;
 
-                default:
-                    break;
+            default:
+                break;
             }
         }
     }
