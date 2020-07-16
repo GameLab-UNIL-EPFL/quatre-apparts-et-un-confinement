@@ -90,7 +90,7 @@ export class ProtoScene extends Phaser.Scene {
         this.current_card = this.introCard;
 
         //Create the dialogue controller
-        this.dialogue = new DialogueController(this);
+        this.dialogue = new DialogueController(this, "damienDialogMarch");
     }
 
     /**

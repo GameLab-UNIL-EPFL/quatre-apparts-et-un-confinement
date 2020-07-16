@@ -42,28 +42,7 @@ export class MessageCard extends Card {
     preload() {
         super.preload();
 
-        //Load in the phone message sprites
-        this.parent_scene.load.image("promptBox1", "sprites/UI/Messages/SelectionMessage_01.png");
-        this.parent_scene.load.image("promptBox2", "sprites/UI/Messages/SelectionMessage_02.png");
-        this.parent_scene.load.image("promptBox3", "sprites/UI/Messages/SelectionMessage_03.png");
-
-        this.parent_scene.load.image("sentMsg1", "sprites/UI/Messages/SendMessage_01.png");
-        this.parent_scene.load.image("sentMsg2", "sprites/UI/Messages/SendMessage_02.png");
-        this.parent_scene.load.image("sentMsg3", "sprites/UI/Messages/SendMessage_03.png");
-        this.parent_scene.load.image("sentMsg4", "sprites/UI/Messages/SendMessage_04.png");
-        this.parent_scene.load.image("sentMsg5", "sprites/UI/Messages/SendMessage_05.png");
-        this.parent_scene.load.image("sentMsg6", "sprites/UI/Messages/SendMessage_06.png");
-        this.parent_scene.load.image("sentMsg7", "sprites/UI/Messages/SendMessage_07.png");
-
-        this.parent_scene.load.image("recievedMsg1", "sprites/UI/Messages/ReceivedMessage_01.png");
-        this.parent_scene.load.image("recievedMsg2", "sprites/UI/Messages/ReceivedMessage_02.png");
-        this.parent_scene.load.image("recievedMsg3", "sprites/UI/Messages/ReceivedMessage_03.png");
-        this.parent_scene.load.image("recievedMsg4", "sprites/UI/Messages/ReceivedMessage_04.png");
-        this.parent_scene.load.image("recievedMsg5", "sprites/UI/Messages/ReceivedMessage_05.png");
-        this.parent_scene.load.image("recievedMsg6", "sprites/UI/Messages/ReceivedMessage_06.png");
-        this.parent_scene.load.image("recievedMsg7", "sprites/UI/Messages/ReceivedMessage_07.png");
-
-        this.parent_scene.load.image("typing", "sprites/UI/Messages/typing.png");
+        this.parent_scene.dialogue.preloadMessages();
     }
 
     /**
@@ -72,19 +51,7 @@ export class MessageCard extends Card {
     create() {
         super.create();
 
-        //Create dialogue background
-        const bg = new Phaser.Geom.Rectangle(
-            -600,
-            -800,
-            5000,
-            5000
-        );
-        
-        const prompt_sprite = this.parent_scene.add.graphics({ fillStyle: { color: 0xf8f2df }});
-        prompt_sprite.fillRectShape(bg);
-
-        prompt_sprite.setDepth(-2);
-
+        this.parent_scene.dialogue.createMessageBG();
         this.parent_scene.dialogue.displayMessage("hello", true);
     }
 }

@@ -1,6 +1,7 @@
 import { Card } from "../card";
 import { Background } from "../../objects/background";
 import { CardObject } from "../../objects/cardObject";
+import { Scenes } from "../../../core/player";
 
 const N_NOTIFICATION = 10;
 const N_DISTRACTIONS = 19;
@@ -10,9 +11,20 @@ const NOTIF_OFFSET = 180-600;
 
 const BEG_Y_ZONE = 500;
 
-const INIT_FOCUS = 5;
-const SPAWN_DELAY = 1000;
-const NUM_SPAWNS = 50;
+const INIT_FOCUS = {
+    MARCH: 5,
+    INIT: 10
+};
+
+const SPAWN_DELAY = {
+    MARCH: 1000,
+    INIT: 2000
+};
+
+const NUM_SPAWNS = {
+    MARCH: 50,
+    INIT: 25
+};
 
 const FOCUS_BAR_COLOR = {
     FULL: 0x2EC62E,
@@ -36,8 +48,9 @@ export class ZoomMiniGameCard extends Card {
     /**
      * @brief Constructs a group of objects in the scene
      * @param {Phaser.Scene} parent_scene, the Scene which this card belongs to
+     * @param {Scenes} scene_key the name of the scene which this card belongs to
      */
-    constructor(parent_scene) {
+    constructor(parent_scene, scene_key) {
         //Initialize children array
         const children = [
             new CardObject(
@@ -71,6 +84,7 @@ export class ZoomMiniGameCard extends Card {
         super(parent_scene, children, null, true);
 
         this.messages = [];
+        this.scene_key = scene_key;
 
         //Add all notifications to the card
         for(let i = 0; i < N_NOTIFICATION; ++i) {
@@ -121,12 +135,15 @@ export class ZoomMiniGameCard extends Card {
         this.cur_msg_idx = 0;
 
         //Used to update the bar
-        this.focus_bar_health = INIT_FOCUS;
-        this.num_spaws = NUM_SPAWNS;
+        this.focus_bar_health = this.scene_key === Scenes.DAMIEN_INIT ? INIT_FOCUS.INIT : INIT_FOCUS.MARCH;
+        this.init_focus = this.scene_key === Scenes.DAMIEN_INIT ? INIT_FOCUS.INIT : INIT_FOCUS.MARCH;
+
+        this.spawn_delay = this.scene_key === Scenes.DAMIEN_INIT ? SPAWN_DELAY.INIT : SPAWN_DELAY.MARCH;
+        this.num_spaws = this.scene_key === Scenes.DAMIEN_INIT ? NUM_SPAWNS.INIT : NUM_SPAWNS.MARCH;
 
         //Mutex to avoid multiple game ends
         this.lock = false;
-        this.final_health = INIT_FOCUS;
+        this.final_health = this.scene_key === Scenes.DAMIEN_INIT ? INIT_FOCUS.INIT : INIT_FOCUS.MARCH;
 
         this.anim_count = 0;
         this.sprites = [];
@@ -219,6 +236,7 @@ export class ZoomMiniGameCard extends Card {
 
                         //Make sure that the player didn't miss a class notification
                         if(this.messages[msg_idx].type === MessageType.Cours) {
+                            this.wrong.play();
 
                             //Check that the health bar doesn't drop below 0
                             if(--this.focus_bar_health <= 0) {
@@ -228,7 +246,7 @@ export class ZoomMiniGameCard extends Card {
                             }
 
                             //Resize the health bar
-                            this.children[3].sprite.displayWidth -= this.focus_bar_width / INIT_FOCUS;
+                            this.children[3].sprite.displayWidth -= this.focus_bar_width / this.init_focus;
                             this.children[3].sprite.tint = FOCUS_BAR_COLOR.MID;
 
                             if(this.children[3].sprite.displayWidth < 300) {
@@ -241,13 +259,13 @@ export class ZoomMiniGameCard extends Card {
                         this.cur_msg.filter((val, _) => val === msg_idx);
                     }
 
-                        //Check if the game is over
-                        if(--this.num_spaws === 0) {
-                            if(typeof callback === "function") {
-                                callback(this, false);
-                                this.lose.play();
-                            }
+                    //Check if the game is over
+                    if(--this.num_spaws === 0) {
+                        if(typeof callback === "function") {
+                            callback(this, false);
+                            this.lose.play();
                         }
+                    }
                 },
                 onCompleteScope: this
             });
@@ -296,7 +314,7 @@ export class ZoomMiniGameCard extends Card {
                                     }
                                 }
 
-                                this.children[3].sprite.displayWidth -= this.focus_bar_width / INIT_FOCUS;
+                                this.children[3].sprite.displayWidth -= this.focus_bar_width / this.init_focus;
                                 this.children[3].sprite.tint = FOCUS_BAR_COLOR.MID;
 
                                 if(this.children[3].sprite.displayWidth < 300) {
@@ -399,8 +417,8 @@ export class ZoomMiniGameCard extends Card {
 
                     //Create the timer event and start the game
                     this.msg_spawner = this.parent_scene.time.addEvent({
-                        delay: SPAWN_DELAY,
-                        repeat: NUM_SPAWNS,
+                        delay: this.spawn_delay,
+                        repeat: this.num_spaws,
                         callback: this.createMessage,
                         callbackScope: this,
                         args: [this.endMiniGame]
@@ -459,8 +477,18 @@ export class ZoomMiniGameCard extends Card {
         this.children[1].sprite.setDepth(1);
 
         //Start with the tutorial
-        this.showTutorial();
-
+        if(this.scene_key === Scenes.DAMIEN_INIT) {
+            this.showTutorial();
+        } else {
+            //Create the timer event and start the game
+            this.msg_spawner = this.parent_scene.time.addEvent({
+                delay: this.spawn_delay,
+                repeat: this.num_spaws,
+                callback: this.createMessage,
+                callbackScope: this,
+                args: [this.endMiniGame]
+            });
+        }
     }
 
     destroy() {

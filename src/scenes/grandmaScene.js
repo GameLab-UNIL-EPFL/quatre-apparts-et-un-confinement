@@ -6,6 +6,7 @@ import { player } from "../index.js";
 import { Scenes } from "../core/player.js";
 import { LivingRoomCard } from "./cards/GrandmaScene/livingRoomCard.js";
 import { DialogueController } from "../core/dialogueController.js";
+import { WindowState, Months } from "./buildingScene.js";
 import { HallwayCards } from "./hallwayScene.js";
 
 export const GrandmaCards = {
@@ -70,19 +71,26 @@ export class GrandmaScene extends Phaser.Scene {
 
         this.current_card = this.livingRoomCard;
         this.card_idx = GrandmaCards.LIVING_ROOM;
-
-        //Create the scene's dialogue controller
-        this.dialogue = new DialogueController(this, "grandmaDialogMarch");
     }
 
     /**
      * @brief Preloads the scene using saved data (if any)
-     * @param {JSON} data { cardIdx, clothes, food }
+     * @param {JSON} data { cardIdx, month }
      */
     init(data) {
         //Check if any saved data exists
         if(data.cardIdx) {
             this.cardIdx = data.cardIdx;
+        }
+
+        this.month = data.month;
+
+        if(data.month === Months.MARCH) {
+            //Create the scene's dialogue controller
+            this.dialogue = new DialogueController(this, "grandmaDialogMarch");
+        } else {
+            //Create the scene's dialogue controller
+            this.dialogue = new DialogueController(this, "grandmaDialogApril");
         }
     }
 
@@ -175,10 +183,31 @@ export class GrandmaScene extends Phaser.Scene {
     }
 
     nextScene() {
-        this.scene.start(Scenes.HALLWAY, {
-            cardIdx: HallwayCards.DAMIEN_CLOSED,
-            damien_gone: false
-        });
+        this.cameras.main.fadeOut(1000);
+        if(this.month === Months.MARCH) {
+            this.scene.start(Scenes.BUILDING, {
+                mainMenu: false,
+                stage: 1,
+                windows: {
+                    damien: WindowState.OFF,
+                    grandma: WindowState.OFF,
+                    family: WindowState.OFF,
+                    indep: WindowState.ON
+                },
+                month: Months.MARCH,
+                nextScene: {
+                    damien: null,
+                    grandma: null,
+                    family: null,
+                    indep: Scenes.INDEP
+                }
+            });
+        } else {
+            this.scene.start(
+                Scenes.HALLWAY,
+                { cardIdx: HallwayCards.DAMIEN_CLOSED, damien_gone: Math.random() > 0.5 }
+            );
+        }
     }
 
     /**
