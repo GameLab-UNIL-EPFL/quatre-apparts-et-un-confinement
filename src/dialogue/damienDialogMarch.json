@@ -19,7 +19,7 @@
 	"habit": {
 		"name": "Damien",
 		"text": [
-			"Est-ce qu'il faut vraiment que je m’habille?"
+			"Est-ce qu'il faut vraiment que je m’habille?",
 			"* baille *"
 		],
 		"choices": [],
@@ -77,7 +77,7 @@
 	"repFausse": {
 		"name": "Prof",
 		"text": [
-			"Non! Il s'agissait des chapitres 11 et 12"
+			"Non! Il s'agissait des chapitres 11 et 12",
 			"J’espère que vous ferez l'effort d'éteindre Netflix dorénavant."
 		],
 		"choices": {},
