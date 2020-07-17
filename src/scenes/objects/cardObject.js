@@ -75,7 +75,7 @@ export class CardObject {
                 yoyo: true,
                 loop: -1
             });
-            
+
             this.highlight_sprite.setInteractive();
             this.highlight_sprite.setDepth(this.depth);
         }
@@ -85,7 +85,9 @@ export class CardObject {
 
             const interaction = () => {
                 //Only trigger interaction if the dialogue is done
-                if(this.parent_scene.dialogue.isDone()) {
+                let interactionReady = this.parent_scene.dialogue ? this.parent_scene.dialogue.isDone() : true;
+
+                if(interactionReady) {
                     //Check if the callback exists
                     if(this.onClickCallback !== null) {
 
