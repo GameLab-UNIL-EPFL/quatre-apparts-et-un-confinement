@@ -11,7 +11,7 @@
 		"name": "Damien",
 		"text": [
 			"Ha purée! J’ai oublié de désactiver mon réveil hier soir.",
-			"Pourtant je n'ai plus besoin de me préparer. Il n'y a pas de bus à prendre ce matin."
+			"Pourtant je n'ai plus besoin de me préparer. C'est fini le bus à prendre le matin."
 		],
 		"choices": [],
 		"goto": []
@@ -27,7 +27,10 @@
 	},
 	"frigo": {
 		"name": "Damien",
-		"text": ["Hop hop. Bien commencer la journée. Que vais-je me préparer pour le déjeuner?"],
+		"text": [
+			"Hop hop on se motive. C'est important de bien commencer la journée.",
+			"Que vais-je me préparer pour le déjeuner?"
+		],
 		"choices": [],
 		"goto": []
 	},
@@ -201,8 +204,8 @@
 				"goto": "sortir"
 			},
 			"trql": {
-				"text": ["Ha ha ouais, mais au moins on n'a plus besoin de prendre le bus!"],
-				"preview": "Plus de bus à prendre",
+				"text": ["Hé hé au moins on n'a plus de bus à prendre!"],
+				"preview": "Fini les bus à prendre",
 				"goto": "sortir"
 			}
 		},
@@ -239,7 +242,7 @@
 	},
 	"sortir1": {
 		"name": "Copine",
-		"text": ["Si si mais t’inquiète, tu restes à 2 mètres et c’est bon."],
+		"text": ["Si si mais t’inquiète. Si tu restes à 2 mètres c’est bon."],
 		"choices": {
 			"bosser": {
 				"text": ["Mais il continue à bosser en plus, non?"],
@@ -251,7 +254,7 @@
 	},
 	"sortir2": {
 		"name": "Copine",
-		"text": ["Euh… ouais 😕 mais c’est calme là comme plus personne prend le taxi."],
+		"text": ["Euh… ouais 😕 mais c’est calme là. Plus personne ne prend le taxi."],
 		"choices": {
 			"chaud": {
 				"text": ["Du coup c’est chaud financièrement?"],
@@ -263,7 +266,7 @@
 	},
 	"sortir3": {
 		"name": "Copine",
-		"text": ["Ouais on sait pas trop encore… mais bon, tu viens? T’as promis de m’aider à étudier!"],
+		"text": ["Ouais on sait pas trop encore… Bon, tu viens? T’as promis de m’aider à étudier!"],
 		"choices": {
 			"oui": {
 				"text": ["Oui oui, à toute!"],
@@ -271,8 +274,8 @@
 				"goto": "repOui"
 			},
 			"maybe": {
-				"text": ["Je sais pas, t’es sûre que c’est ok pour tes parents?"],
-				"preview": "Je sais pas",
+				"text": ["Je ne sais pas. T’es sûre que c’est ok pour tes parents?"],
+				"preview": "J'hésite'",
 				"goto": "repMaybe"
 			},
 			"non": {
@@ -285,13 +288,13 @@
 	},
 	"repOui": {
 		"name": "Copine",
-		"text": ["Cool! À toute!"],
+		"text": ["Cool! À toute! 😘"],
 		"choices":{},
 		"goto": []
 	},
 	"repMaybe": {
 		"name": "Copine",
-		"text": ["Mais oui c’est bon! Sinon tu dois m’expliquer en ligne et c’est plus compliqué."],
+		"text": ["Mais oui c’est bon! Sinon tu vas devoir m’expliquer en ligne et c’est plus compliqué."],
 		"choices":{
 			"oui": {
 				"text": ["Bon, ok"],
