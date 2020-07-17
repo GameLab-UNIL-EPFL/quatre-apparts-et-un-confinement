@@ -23,7 +23,7 @@ export class StoreScene extends Phaser.Scene {
 
         /* === FIRST SHELF === */
         this.firstShelf = new Card(
-            this, 
+            this,
             [
                 new Background(
                     this,
@@ -135,7 +135,7 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("sac02"),
                     this
                 ),
-                    
+
                 new CardObject(
                     this,
                     { name: "pate06", url: "sprites/StoreScene/part1/rayon01_03_pate06.png" },
@@ -217,7 +217,7 @@ export class StoreScene extends Phaser.Scene {
         );
 
         /* === SECOND SHELF === */
-        
+
         this.secondShelf = new Card(
             this,
             [
@@ -467,7 +467,7 @@ export class StoreScene extends Phaser.Scene {
                 )
             ]
         );
-        
+
         this.thirdShelf = new Card(
             this,
             [
@@ -475,7 +475,7 @@ export class StoreScene extends Phaser.Scene {
                     this,
                     "sprites/StoreScene/part3/rayon03_01_rayonnage.jpg",
                     "storeBg3"
-                ), 
+                ),
                 new CardObject(
                     this,
                     { name: "lessive01", url: "sprites/StoreScene/part3/rayon03_03_lessive01.png" },
@@ -646,7 +646,7 @@ export class StoreScene extends Phaser.Scene {
                 )
             ]
         );
-        
+
         this.checklist_done = {
             'pate': {
                 position_x: -276,
@@ -669,7 +669,7 @@ export class StoreScene extends Phaser.Scene {
                 done: false
             },
         };
-        
+
         this.cards = [
             this.firstShelf,
             this.secondShelf,
@@ -696,9 +696,9 @@ export class StoreScene extends Phaser.Scene {
         this.load.image('liste', "sprites/StoreScene/part1/rayon01_04_liste.png");
         this.load.image('basket', "sprites/StoreScene/part1/rayon01_02_panier.png");
         this.load.image('basket-front', "sprites/StoreScene/part1/rayon01_02_panier-02front.png");
-        
+
         this.load.image('rature', "sprites/StoreScene/part1/rayon01_05_rature.png");
-        
+
         this.nextCardArrow = this.load.spritesheet(
             'next-card-arrow',
             'sprites/StoreScene/part1/rayon01_06-rayonsuivant-spritesheet_100x100.png',
@@ -721,7 +721,7 @@ export class StoreScene extends Phaser.Scene {
             120,
             'next-card-arrow'
         ).play('next-card-anim');
-        
+
         this.nextCardButton.depth = 4;
 
         let scene = this;
@@ -729,20 +729,18 @@ export class StoreScene extends Phaser.Scene {
     }
 
     takeObject(object_name) {
-      
-        console.log('take', object_name);
+
         let object = this.children.getByName(object_name);
         object.depth = 5;
-      
+
         let yDistance = this.basket.y - object.y; // between 280 and 1340
-        console.log('yDistance:', yDistance);
-        
+
         let target_objects = [object];
         if(object_name === 'pate_spaghetti01') {
             // also move the other pack
             target_objects.push(this.children.getByName('pate_spaghetti02'));
         }
-      
+
         // Move to basket
         this.tweens.add({
             targets: target_objects,
@@ -758,7 +756,6 @@ export class StoreScene extends Phaser.Scene {
                 for (const item in this.checklist_done) {
                     if(object_name.indexOf(item) >= 0) {
                         if(!this.checklist_done[item].done) {
-                            console.log('ajout rature', item);
 
                             this.rature = this.add.image(
                                 this.checklist_done[item].position_x,
@@ -771,7 +768,7 @@ export class StoreScene extends Phaser.Scene {
                         }
                     }
                 }
-              
+
                 // Animate basket
                 this.tweens.add({
                     targets: [this.basket, this.basket_front],
@@ -794,25 +791,25 @@ export class StoreScene extends Phaser.Scene {
             this.current_card.create();
             this.addArrow();
         }
-        
+
         this.checklist = this.add.image(-this.cameras.main.width * 0.255, 489, 'liste');
         this.checklist.depth = 20;
-        
+
         this.basket = this.add.image(this.cameras.main.width * 0.24166, 700, 'basket');
         this.basket.depth = 4;
-        
+
         this.basket_front = this.add.image(this.cameras.main.width * 0.24166, 700, 'basket-front');
         this.basket_front.depth = 25;
-        
+
         // Update the saved data
         // @TODO
-        // player.setData() 
+        // player.setData()
         // player.cur_scene = Scenes.STORE;
     }
 
     nextCard() {
         if(this.cardIdx < this.cards.length - 1) {
-        
+
             // move previous card
             let container = this.add.container();
             container.depth = 2;
@@ -831,7 +828,7 @@ export class StoreScene extends Phaser.Scene {
                 yoyo: false,
                 loop: 0
             });
-        
+
             this.cardIdx++;
             this.current_card = this.cards[this.cardIdx];
             this.current_card.create();
@@ -839,7 +836,7 @@ export class StoreScene extends Phaser.Scene {
             this.nextScene();
         }
     }
-    
+
     nextScene() {
         this.scene.start(Scenes.HALLWAY, {cardIdx: HallwayCards.INDEP_GRANDMA, damien_gone: false});
     }
