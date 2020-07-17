@@ -90,7 +90,7 @@ export class TVCard extends Card {
         ).play('simonetta-anim').setVisible(false);
 
         //Play the animation
-       this.conseil_anim = this.parent_scene.add.sprite(
+        this.conseil_anim = this.parent_scene.add.sprite(
             -4,
             -1,
             'conseil'
