@@ -75,7 +75,7 @@ export class CardObject {
                 yoyo: true,
                 loop: -1
             });
-            
+
             this.highlight_sprite.setInteractive();
             this.highlight_sprite.setDepth(this.depth);
         }
@@ -84,20 +84,23 @@ export class CardObject {
         if(this.choice !== -1 || this.onClickCallback !== null) {
 
             const interaction = () => {
-                //Only trigger interaction if the dialogue is done
-                if(this.parent_scene.dialogue.isDone()) {
-                    //Check if the callback exists
-                    if(this.onClickCallback !== null) {
-
-                        //Check for arguments
-                        if(this.onClickArgs !== null) {
-                            this.onClickCallback(this.onClickArgs);
+                
+                //Only trigger interaction if the dialogue (when dialogue exists)
+                if(this.parent_scene.dialogue) {
+                    if(this.parent_scene.dialogue.isDone()) {
+                        //Check if the callback exists
+                        if(this.onClickCallback !== null) {
+    
+                            //Check for arguments
+                            if(this.onClickArgs !== null) {
+                                this.onClickCallback(this.onClickArgs);
+                            } else {
+                                this.onClickCallback();
+                            }
                         } else {
-                            this.onClickCallback();
+                            this.parent_scene.endCard();
+                            this.parent_scene.nextCard(this.choice);
                         }
-                    } else {
-                        this.parent_scene.endCard();
-                        this.parent_scene.nextCard(this.choice);
                     }
                 }
             };
