@@ -11,7 +11,7 @@
 		"name": "Damien",
 		"text": [
 			"Ha purée! J’ai oublié de désactiver mon réveil hier soir.",
-			"Pourtant je n'ai pas besoin de me préparer. Il n'y plus de bus à prendre…"
+			"Pourtant je n'ai plus besoin de me préparer. Il n'y a pas de bus à prendre ce matin."
 		],
 		"choices": [],
 		"goto": []
@@ -27,7 +27,7 @@
 	},
 	"frigo": {
 		"name": "Damien",
-		"text": ["Maintenant, place au déjeuner."],
+		"text": ["Hop hop. Bien commencer la journée. Que vais-je me préparer pour le déjeuner?"],
 		"choices": [],
 		"goto": []
 	},
@@ -116,8 +116,8 @@
 				"goto": "repTrql"
 			},
 			"pyjama": {
-				"text": ["Je suis encore en pyjama lol"],
-				"preview": "En pyjama",
+				"text": ["Difficile de quitter mon pyjama lol"],
+				"preview": "La vie en pyjama",
 				"goto": "repPyjama"
 			}
 		},
@@ -159,7 +159,7 @@
 	},
 	"repPyjama": {
 		"name": "Copine",
-		"text": ["Haha rhoo tu pourrais t’habiller quand même"],
+		"text": ["Haha tu pourrais faire un effort quand même 😜"],
 		"choices":{
 			"rep": {
 				"text": ["😜"],
@@ -180,7 +180,7 @@
 		"choices": {
 			"bof": {
 				"text": ["Je n'aime pas du tout!"],
-				"preview": "J'aime pas",
+				"preview": "J'aime pas.",
 				"goto": "aimePas"
 			},
 			"trql": {
@@ -202,7 +202,7 @@
 			},
 			"trql": {
 				"text": ["Ha ha ouais, mais au moins on n'a plus besoin de prendre le bus!"],
-				"preview": "Plus besoin de bus",
+				"preview": "Plus de bus à prendre",
 				"goto": "sortir"
 			}
 		},
@@ -210,7 +210,7 @@
 	},
 	"aime": {
 		"name": "Copine",
-		"text": ["C'est vrai! Plus besoin de s'habiller... ni de prendre le bus"],
+		"text": ["C'est vrai! Plus besoin de s'habiller… ni de prendre le bus"],
 		"choices": {
 			"bof": {
 				"text": ["Ha ha ouais, le bus me manque pas du tout!"],
