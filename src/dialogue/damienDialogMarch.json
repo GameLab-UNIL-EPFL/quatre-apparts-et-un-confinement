@@ -213,7 +213,7 @@
 	},
 	"aime": {
 		"name": "Copine",
-		"text": ["C'est vrai! Plus besoin de s'habiller… ni de prendre le bus"],
+		"text": ["C'est vrai! Plus besoin d'enfiler son pantalon… ni de prendre le bus."],
 		"choices": {
 			"bof": {
 				"text": ["Ha ha ouais, le bus me manque pas du tout!"],
@@ -221,7 +221,7 @@
 				"goto": "sortir"
 			},
 			"trql": {
-				"text": ["Hi hi les pantalons c'était dans le monde d'avant. De nos jours c'est optionnel."],
+				"text": ["Hi hi des pantalons? Je ne sais même plus de quoi ça a l'air."],
 				"preview": "Plus besoin de pantalon",
 				"goto": "sortir"
 			}
