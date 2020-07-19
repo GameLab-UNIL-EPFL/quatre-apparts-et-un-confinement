@@ -88,7 +88,7 @@
 	},
 	"repJuste": {
 		"name": "Prof",
-		"text": ["C'est bien ça, Damien. Félicitations pour votre concentration exemplaire."],
+		"text": ["C'est juste, Damien. Toutes mes félicitations pour votre concentration exemplaire."],
 		"choices": {},
 		"goto": []
 	},
@@ -221,7 +221,7 @@
 				"goto": "sortir"
 			},
 			"trql": {
-				"text": ["Hi hi le pantalon c'est so 2019! De nos jours c'est optionnel."],
+				"text": ["Hi hi les pantalons c'était dans le monde d'avant. De nos jours c'est optionnel."],
 				"preview": "Plus besoin de pantalon",
 				"goto": "sortir"
 			}
@@ -275,7 +275,7 @@
 			},
 			"maybe": {
 				"text": ["Je ne sais pas. T’es sûre que c’est ok pour tes parents?"],
-				"preview": "J'hésite'",
+				"preview": "J'hésite",
 				"goto": "repMaybe"
 			},
 			"non": {

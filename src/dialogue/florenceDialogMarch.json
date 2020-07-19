@@ -4,7 +4,7 @@
 		"text": [
 			"Ok, vous n'avez plus l'école, mais…",
             "Ça ne veut pas dire que vous êtes en vacances!",
-            "Vous avez reçu des devoirs à faire, par exemple."
+            "La maîtresse m'a écrit.\nVous avez reçu des devoirs à faire."
 		],
 		"choices": [],
 		"goto": ["kids"]
@@ -13,7 +13,7 @@
 		"name": "Maxime et Liliane",
 		"text": [
             "Mais Maman, ça fait trop longtemps qu'on n'est pas sortis!", 
-            "On peut allez au jouer au parc, s'il te plaît? Alleeeeeeeez.",
+            "On peut allez au jouer au parc avant, s'il te plaît? Alleeeeeeeez.",
             "On fera attention, promis!"
 		],
 		"choices": [
