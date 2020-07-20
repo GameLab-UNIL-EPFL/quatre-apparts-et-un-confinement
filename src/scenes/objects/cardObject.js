@@ -86,21 +86,19 @@ export class CardObject {
             const interaction = () => {
                 
                 //Only trigger interaction if the dialogue (when dialogue exists)
-                if(this.parent_scene.dialogue) {
-                    if(this.parent_scene.dialogue.isDone()) {
-                        //Check if the callback exists
-                        if(this.onClickCallback !== null) {
-    
-                            //Check for arguments
-                            if(this.onClickArgs !== null) {
-                                this.onClickCallback(this.onClickArgs);
-                            } else {
-                                this.onClickCallback();
-                            }
+                if(this.parent_scene.dialogue ? this.parent_scene.dialogue.isDone() : true) {
+                    //Check if the callback exists
+                    if(this.onClickCallback !== null) {
+
+                        //Check for arguments
+                        if(this.onClickArgs !== null) {
+                            this.onClickCallback(this.onClickArgs);
                         } else {
-                            this.parent_scene.endCard();
-                            this.parent_scene.nextCard(this.choice);
+                            this.onClickCallback();
                         }
+                    } else {
+                        this.parent_scene.endCard();
+                        this.parent_scene.nextCard(this.choice);
                     }
                 }
             };

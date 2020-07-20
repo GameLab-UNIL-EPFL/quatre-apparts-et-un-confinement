@@ -306,12 +306,6 @@ export class HallwayScene extends Phaser.Scene {
      */
     nextCard(choice=-1) {
 
-        //Data that will be saved
-        let savable_data = {
-            cardIdx: this.cardIdx,
-            damien_gone: this.damien_gone
-        };
-
         if(this.current_card.isDone()) {
             this.current_card.destroy();
 
@@ -372,14 +366,7 @@ export class HallwayScene extends Phaser.Scene {
             default:
                 break;
             }
-
-            //Save the card and clothes choices
-            savable_data.cardIdx = this.cardIdx;
         }
-
-        //Store the saved data
-        player.setData(savable_data);
-        player.saveGame();
     }
 
     /**

@@ -576,7 +576,7 @@ export class DialogueController {
             (lr ? MIN_LEFT_X.text : MIN_RIGHT_X.text),
             ypos.text,
             cur_text,
-            {font: (36 * window.horizontalRatio) + "px OpenSans ", fill: lr ? "black" : "white", wordWrap: { width: 350 }}
+            {font: (30) + "px OpenSans ", fill: lr ? "black" : "white", wordWrap: { width: 350 }}
         );
 
         //Move the messages back
@@ -625,15 +625,15 @@ export class DialogueController {
         //Display the correct prompt box
         if(Object.keys(dialogue.choices).length <= 1) {
             this.parent_scene.add.image(-7, 616, 'promptBox1');
-            font_size = 76 * window.horizontalRatio;
+            font_size = 65;
             prompt_ypos = [579];
         } else if(Object.keys(dialogue.choices).length <= 2) {
             this.parent_scene.add.image(-7, 616, 'promptBox2');
-            font_size = 56 * window.horizontalRatio;
+            font_size = 56;
             prompt_ypos = [497, 677];
         } else {
             this.parent_scene.add.image(-7, 1416, 'promptBox3');
-            font_size = 46 * window.horizontalRatio;
+            font_size = 46;
             prompt_ypos = [476, 592, 711];
         }
 

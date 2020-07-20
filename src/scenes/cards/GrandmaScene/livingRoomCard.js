@@ -357,6 +357,19 @@ export class LivingRoomCard extends Card {
             }
         }
     }
+
+    destroy() {
+        super.destroy();
+        
+        //Destroy the grandma and the cat
+        this.cat_anim.destroy();
+        this.grandma_sprite.destroy();
+
+        //Destroy arrow if needed
+        if(this.arrow) {
+            this.arrow.destroy();
+        }
+    }
 }
 
 
