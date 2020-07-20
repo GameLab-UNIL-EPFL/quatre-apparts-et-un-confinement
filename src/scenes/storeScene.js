@@ -699,6 +699,9 @@ export class StoreScene extends Phaser.Scene {
 
         this.load.image('rature', "sprites/StoreScene/part1/rayon01_05_rature.png");
 
+        //Load in the music
+        this.load.audio('bg_music', 'sounds/Supermarket.mp3');
+
         this.nextCardArrow = this.load.spritesheet(
             'next-card-arrow',
             'sprites/StoreScene/part1/rayon01_06-rayonsuivant-spritesheet_100x100.png',
@@ -800,6 +803,10 @@ export class StoreScene extends Phaser.Scene {
 
         this.basket_front = this.add.image(this.cameras.main.width * 0.24166, 700, 'basket-front');
         this.basket_front.depth = 25;
+
+        //Create and play the background music
+        this.music = this.sound.add('bg_music');
+        this.music.play();
 
         // Update the saved data
         // @TODO
