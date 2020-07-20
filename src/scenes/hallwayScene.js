@@ -50,7 +50,12 @@ export class HallwayScene extends Phaser.Scene {
                     },
                     this,
                     0,
-                    { name: "damienHallwayDoor_h", url: "sprites/HallwayScenes/Palier-Etudiant-Ferme/door_h.png" }
+                    {
+                        name: 'damien_hallway_door_h',
+                        url: "sprites/UI/01_Interactions/03_Palier/02_Spritesheets/01-Palier-Frapper-Spritesheet_255x188.png",
+                        size: { frameWidth: 225, frameHeight: 188 },
+                        pos: new Phaser.Math.Vector2(-107, -466)
+                    }
                 ),
                 new CardObject(
                     this,
@@ -98,7 +103,12 @@ export class HallwayScene extends Phaser.Scene {
                     null,
                     null,
                     0,
-                    { name: "indepHallwayDoor_h", url: "sprites/HallwayScenes/Palier-Independant-Ferme/door_h.png" }
+                    {
+                        name: 'indep_hallway_door_h',
+                        url: "sprites/UI/01_Interactions/03_Palier/02_Spritesheets/02-Palier-Frapper-Spritesheet_250x150.png",
+                        size: { frameWidth: 250, frameHeight: 150 },
+                        pos: new Phaser.Math.Vector2(23, -456)
+                    }
                 ),
                 new CardObject(
                     this,

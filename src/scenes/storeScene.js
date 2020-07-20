@@ -2,8 +2,6 @@ import Phaser from "phaser";
 import { Card } from "./cards/card.js";
 import { CardObject } from "./objects/cardObject.js";
 import { Background } from "./objects/background.js";
-import { player } from "../index.js";
-import { WindowState, Months } from "./buildingScene.js";
 import { Scenes } from "../core/player.js";
 import { HallwayCards } from "./hallwayScene.js";
 
