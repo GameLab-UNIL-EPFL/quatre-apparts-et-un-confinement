@@ -845,6 +845,7 @@ export class StoreScene extends Phaser.Scene {
     }
 
     nextScene() {
+        this.music.stop();
         this.scene.start(Scenes.HALLWAY, {cardIdx: HallwayCards.INDEP_GRANDMA, damien_gone: false});
     }
 }
