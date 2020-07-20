@@ -86,7 +86,7 @@ export class CardObject {
 
             const interaction = () => {
                 
-                //Only trigger interaction if the dialogue (when dialogue exists)
+                //Only trigger interaction if the dialogue is done (when dialogue exists)
                 if(this.parent_scene.dialogue ? this.parent_scene.dialogue.isDone() : true) {
                     //Check if the callback exists
                     if(this.onClickCallback !== null) {
