@@ -1,6 +1,6 @@
 {
     "Natel": {
-		"name": "Natel",
+		"name": "Damien",
 		"text": ["Oh, 3 appels manqués."],
 		"choices": {},
 		"goto": []
@@ -190,7 +190,7 @@
 		"choices": {
             "rep":
 			{
-				"text": ["D'ac. J'espère que ça va aller et qu'il va vite s'en remettre."],
+				"text": ["D'acc. J'espère que ça va aller et qu'il va vite s'en remettre."],
 				"preview": "J'espère que ça va aller.",
 				"goto": ""
             }
