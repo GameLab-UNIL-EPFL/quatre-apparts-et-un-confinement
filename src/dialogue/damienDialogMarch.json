@@ -73,6 +73,9 @@
 			}, {
 				"text": "12 et 13",
 				"goto": "repFausse"
+			}, {
+				"text": "13 et 14",
+				"goto": "repFausse"
 			}
 		],
 		"goto": ["repJuste", "repFausse"]
