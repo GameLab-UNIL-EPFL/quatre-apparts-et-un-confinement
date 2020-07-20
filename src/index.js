@@ -23,7 +23,7 @@ let plugins = [{
     mapping: 'rexUI'
 }];
 
-const OBJECT_DEBUG = true;
+const OBJECT_DEBUG = false;
 
 if(OBJECT_DEBUG === true) {
     plugins.push({
