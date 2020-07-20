@@ -44,27 +44,21 @@ export class LivingRoomCard extends Card {
                 { name: "book_01", url: "sprites/GrandmaScene/books_01.png" },
                 new Phaser.Math.Vector2(-131, -262),
                 (card) => card.changeGrandma(GRANDMA_STATES.BOOK_1),
-                this,
-                -1,
-                { name: "book_01_h", url: "sprites/GrandmaScene/books_01_h.png" }
+                this
             ),
             new CardObject(
                 parent_scene,
                 { name: "book_02", url: "sprites/GrandmaScene/books_02.png" },
                 new Phaser.Math.Vector2(-134, -92),
                 (card) => card.changeGrandma(GRANDMA_STATES.BOOK_2),
-                this,
-                -1,
-                { name: "book_02_h", url: "sprites/GrandmaScene/books_02_h.png" }
+                this
             ),
             new CardObject(
                 parent_scene,
                 { name: "book_03", url: "sprites/GrandmaScene/books_03.png" },
                 new Phaser.Math.Vector2(-131, 57),
                 (card) => card.changeGrandma(GRANDMA_STATES.BOOK_3),
-                this,
-                -1,
-                { name: "book_03_h", url: "sprites/GrandmaScene/books_03_h.png" }
+                this
             ),
             new CardObject(
                 parent_scene,
@@ -73,7 +67,12 @@ export class LivingRoomCard extends Card {
                 (scene) => scene.nextCard(GrandmaCards.RADIO),
                 parent_scene,
                 -1,
-                { name: "radio_h", url: "sprites/GrandmaScene/radio_h.png" }
+                {
+                    name: 'radio_h',
+                    url: 'sprites/UI/01_Interactions/02_Grand-mere/02_Spritesheets/03-Grand-Mere-Radio-Spritesheet_228x140.png',
+                    size: { frameWidth: 228, frameHeight: 140 },
+                    pos: new Phaser.Math.Vector2(-259, 186)
+                }
             ),
             new CardObject(
                 parent_scene,
@@ -82,7 +81,12 @@ export class LivingRoomCard extends Card {
                 (scene) => scene.nextCard(GrandmaCards.CALENDAR),
                 parent_scene,
                 -1,
-                { name: "calendar_h", url: "sprites/GrandmaScene/calendar_h.png" }
+                {
+                    name: 'calendar_h',
+                    url: 'sprites/UI/01_Interactions/02_Grand-mere/02_Spritesheets/02-Grand-Mere-Calendrier-Spritesheet_294x160.png',
+                    size: { frameWidth: 294, frameHeight: 160 },
+                    pos: new Phaser.Math.Vector2(-294, 409)
+                }
             ),
             new CardObject(
                 parent_scene,
@@ -91,7 +95,12 @@ export class LivingRoomCard extends Card {
                 (card) => card.changeGrandma(GRANDMA_STATES.PHONE),
                 this,
                 -1,
-                { name: "phone_grandma_h", url: "sprites/GrandmaScene/phone_h.png" }
+                {
+                    name: 'phone_grandma_h',
+                    url: "sprites/UI/01_Interactions/02_Grand-mere/02_Spritesheets/01-Grand-Mere-Telephone-Spritesheet_300x200.png",
+                    size: { frameWidth: 300, frameHeight: 200 },
+                    pos: new Phaser.Math.Vector2(270, 487)
+                }
             ),
             new CardObject(
                 parent_scene,
@@ -116,6 +125,13 @@ export class LivingRoomCard extends Card {
         this.parent_scene.load.image("grandma_book3", "sprites/GrandmaScene/grandma_book_03.png");
 
         this.parent_scene.load.audio("pageTurn", "sounds/grandma/pageTurn.wav");
+
+        //Load in the phone highlight
+        this.parent_scene.load.spritesheet(
+            'books_h',
+            'sprites/UI/01_Interactions/02_Grand-mere/02_Spritesheets/04-Grand-Mere-Livre-Spritesheet_200x140.png',
+            { frameWidth: 200, frameHeight: 140 }
+        );
 
         //Load the cat animation spritesheet
         this.parent_scene.load.spritesheet(
@@ -162,6 +178,21 @@ export class LivingRoomCard extends Card {
             677,
             'cat'
         ).play('cat-tail');
+
+        // Create ring sprites
+        this.parent_scene.anims.create({
+            key: 'books_h_anim',
+            frameRate: 7,
+            frames: this.parent_scene.anims.generateFrameNames('books_h'),
+            repeat: -1
+        });
+
+        //Play the cat animation
+        this.books_h = this.parent_scene.add.sprite(
+            31,
+            -121,
+            'books_h'
+        ).play('books_h_anim');
 
         //Update the phone's onclickcallback
         this.children[7].updateOnClickCallback(
