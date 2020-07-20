@@ -167,7 +167,7 @@
       "text": ["Hahaha je devrais faire pareil"],
       "choices":[
           {
-              "text": ["Oui 😊"],
+              "text": ["Oui!"],
               "preview": "Oui",
               "goto": "oui"
           }
