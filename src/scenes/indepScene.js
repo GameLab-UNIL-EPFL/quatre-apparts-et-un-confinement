@@ -311,7 +311,12 @@ export class IndepScene extends Phaser.Scene {
         this.cameras.main.fadeOut(3000, 0, 0, 0,
             () => this.scene.start(Scenes.BUILDING, {
                 mainMenu: false,
-                names: false,
+                names: {
+                    damien: false,
+                    grandma: false,
+                    family: false,
+                    indep: false
+                },
                 stage: 1,
                 windows: {
                     damien: WindowState.ON,

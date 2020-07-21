@@ -27,8 +27,13 @@ export class BuildingScene extends Phaser.Scene {
         //Information about what's shown in the scene
         this.info = {
             mainMenu: true,
-            names: false,
             stage: 1,
+            names: {
+                damien: false,
+                grandma: false,
+                family: false,
+                indep: false
+            },
             windows: {
                 damien: WindowState.ON,
                 grandma: WindowState.ON,
@@ -63,8 +68,10 @@ export class BuildingScene extends Phaser.Scene {
      */
     init(data) {
         //Check if any saved data exists
-        if(data.stage && data.windows && data.month && data.nextScene) {
+        if(data.stage && data.windows && data.month && data.nextScene && data.names) {
             this.info = data;
+        } else {
+            console.error("BUILDING_SCENE: Invalid configuration JSON");
         }
     }
 
@@ -278,43 +285,36 @@ export class BuildingScene extends Phaser.Scene {
         //Center the new game box
         this.sprites['new_game_text'].setOrigin(0.5, 0.5);
 
-        //Make new game button start a new game
-        this.sprites['new_game_text'].setInteractive();
-        this.sprites['menu_new_game'].setInteractive();
-
-        this.input.on(
-            'gameobjectdown',
-            (_, gameObject) => {
-                //Check that we clicked on the right button
-                if(gameObject === this.sprites['menu_new_game'] ||
-                   gameObject === this.sprites['new_game_text'])
-                {
-                    //Sart a new game
-                    this.scene.start(
-                        Scenes.BUILDING,
-                        {
-                            mainMenu: false,
-                            names: true,
-                            stage: 1,
-                            windows: {
-                                damien: WindowState.ON,
-                                grandma: WindowState.ON,
-                                family: WindowState.ON,
-                                indep: WindowState.ON
-                            },
-                            month: Months.MAY,
-                            nextScene: {
-                                damien: Scenes.DAMIEN_INIT,
-                                grandma: null,
-                                family: null,
-                                indep: null
-                            }
-                        }
-                    );
+        const interaction = () => this.scene.start(
+            Scenes.BUILDING,
+            {
+                mainMenu: false,
+                names: {
+                    damien: true,
+                    grandma: false,
+                    family: false,
+                    indep: false
+                },
+                stage: 1,
+                windows: {
+                    damien: WindowState.ON,
+                    grandma: WindowState.OFF,
+                    family: WindowState.OFF,
+                    indep: WindowState.OFF
+                },
+                month: Months.MAY,
+                nextScene: {
+                    damien: Scenes.DAMIEN_INIT,
+                    grandma: null,
+                    family: null,
+                    indep: null
                 }
-            },
-            this
+            }
         );
+
+        //Make new game button start a new game
+        this.sprites['new_game_text'].setInteractive().on('pointerdown', interaction, this);
+        this.sprites['menu_new_game'].setInteractive().on('pointerdown', interaction, this);
     }
 
     /**
@@ -322,78 +322,91 @@ export class BuildingScene extends Phaser.Scene {
      * @param {boolean} interact Whether or not to take into account player interaction
      */
     addCharacterNames(interact = false) {
-        //Create interaction animations
-        this.anims.create({
-            key: 'damien_interaction_anim',
-            frameRate: 7,
-            frames: this.anims.generateFrameNames('damien_interaction'),
-            repeat: -1
-        });
-        this.anims.create({
-            key: 'grandma_interaction_anim',
-            frameRate: 7,
-            frames: this.anims.generateFrameNames('grandma_interaction'),
-            repeat: -1
-        });
-        this.anims.create({
-            key: 'mother_interaction_anim',
-            frameRate: 7,
-            frames: this.anims.generateFrameNames('mother_interaction'),
-            repeat: -1
-        });
-        this.anims.create({
-            key: 'indep_interaction_anim',
-            frameRate: 7,
-            frames: this.anims.generateFrameNames('indep_interaction'),
-            repeat: -1
-        });
 
-        //Add interaction arrows
-        this.sprites['damien_interaction'] = this.add.sprite(
-            -211,
-            -337,
-            'damien_interaction'
-        ).play('damien_interaction_anim');
+        if(this.info.names.damien) {
+            //Create interaction animations
+            this.anims.create({
+                key: 'damien_interaction_anim',
+                frameRate: 7,
+                frames: this.anims.generateFrameNames('damien_interaction'),
+                repeat: -1
+            });
 
-        this.sprites['grandma_interaction'] = this.add.sprite(
-            22,
-            -370,
-            'grandma_interaction'
-        ).play('grandma_interaction_anim');
+            //Add interaction arrows
+            this.sprites['damien_interaction'] = this.add.sprite(
+                -211,
+                -337,
+                'damien_interaction'
+            ).play('damien_interaction_anim');
 
-        this.sprites['mother_interaction'] = this.add.sprite(
-            291,
-            103,
-            'mother_interaction'
-        ).play('mother_interaction_anim');
-
-        this.sprites['indep_interaction'] = this.add.sprite(
-            294,
-            447,
-            'indep_interaction'
-        ).play('indep_interaction_anim');
-
-        //Handle player interaction
-        if(interact) {
-            if(this.interactions['damien']) {
+            //Add interaction if needed
+            if(this.interactions['damien'] && interact) {
                 this.sprites['damien_interaction']
                     .setInteractive()
                     .on('pointerdown', this.interactions['damien'], this);
             }
+        }
 
-            if(this.interactions['grandma']) {
+        //Handle the grandma's name
+        if(this.info.names.grandma) {
+            this.anims.create({
+                key: 'grandma_interaction_anim',
+                frameRate: 7,
+                frames: this.anims.generateFrameNames('grandma_interaction'),
+                repeat: -1
+            });
+
+            this.sprites['grandma_interaction'] = this.add.sprite(
+                22,
+                -370,
+                'grandma_interaction'
+            ).play('grandma_interaction_anim');
+
+            if(this.interactions['grandma'] && interact) {
                 this.sprites['grandma_interaction']
                     .setInteractive()
                     .on('pointerdown', this.interactions['grandma'], this);
             }
+        }
 
-            if(this.interactions['mother']) {
+        //Handle the mother's name
+        if(this.info.names.family) {
+            this.anims.create({
+                key: 'mother_interaction_anim',
+                frameRate: 7,
+                frames: this.anims.generateFrameNames('mother_interaction'),
+                repeat: -1
+            });
+
+            this.sprites['mother_interaction'] = this.add.sprite(
+                291,
+                103,
+                'mother_interaction'
+            ).play('mother_interaction_anim');
+
+            if(this.interactions['mother'] && interact) {
                 this.sprites['mother_interaction']
                     .setInteractive()
                     .on('pointerdown', this.interactions['mother'], this);
             }
+        }
 
-            if(this.interactions['indep']) {
+        //Handle the freelancer's name
+        if(this.info.names.indep) {
+            this.anims.create({
+                key: 'indep_interaction_anim',
+                frameRate: 7,
+                frames: this.anims.generateFrameNames('indep_interaction'),
+                repeat: -1
+            });
+
+            this.sprites['indep_interaction'] = this.add.sprite(
+                294,
+                447,
+                'indep_interaction'
+            ).play('indep_interaction_anim');
+
+            if(this.interactions['indep'] && interact) {
                 this.sprites['indep_interaction']
                     .setInteractive()
                     .on('pointerdown', this.interactions['indep'], this);
@@ -624,34 +637,6 @@ export class BuildingScene extends Phaser.Scene {
         if(this.info.names) {
             //Create interaction animations
             this.addCharacterNames();
-
-            //Create the timer event and start the game
-            this.msg_spawner = this.time.addEvent({
-                delay: 5000,
-                repeat: 0,
-                callback: () => this.scene.start(
-                    Scenes.BUILDING,
-                    {
-                        mainMenu: false,
-                        names: false,
-                        stage: 1,
-                        windows: {
-                            damien: WindowState.ON,
-                            grandma: WindowState.OFF,
-                            family: WindowState.OFF,
-                            indep: WindowState.OFF
-                        },
-                        month: Months.MAY,
-                        nextScene: {
-                            damien: Scenes.DAMIEN_INIT,
-                            grandma: null,
-                            family: null,
-                            indep: null
-                        }
-                    }
-                ),
-                callbackScope: this
-            });
         }
     }
 

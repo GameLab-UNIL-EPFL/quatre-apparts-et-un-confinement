@@ -392,7 +392,12 @@ export class HallwayScene extends Phaser.Scene {
         case HallwayCards.INDEP_GRANDMA:
             this.scene.start(Scenes.BUILDING, {
                 mainMenu: true,
-                names: false,
+                names: {
+                    damien: false,
+                    grandma: false,
+                    family: false,
+                    indep: false
+                },
                 stage: 1,
                 windows: {
                     damien: WindowState.OFF,
