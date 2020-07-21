@@ -68,7 +68,7 @@
 	},
 	"bleiben": {
 		"name": "Radio",
-		"text": ["*musique* Bleiben Sie zuhause"],
+		"text": ["🎶 Bleiben Sie zuhause 🎶\n🎶 Bleiben Sie zuhause 🎶"],
 		"choices": [],
 		"goto": []
 	},

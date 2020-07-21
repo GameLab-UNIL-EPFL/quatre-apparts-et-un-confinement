@@ -2,7 +2,8 @@
 	"dvd1": {
 		"name": "",
 		"text": [
-            "Intouchables (2011)"
+            "I am Legend (2007)",
+            "Pas besoin qu'on me rappelle ma solitude."
 		],
 		"choices": [],
 		"goto": []
@@ -109,8 +110,8 @@
 		"name": "Nathan",
 		"text": [
 			"Écoute, c'est pas facile.",
-			"On est presque 24h sur 24 dans le même petit appart,",
-			"donc la tension monte vite."
+			"On est presque 24h sur 24 ensemble dans le même petit appart.",
+			"Au bout d'un moment on se prend la tête pour un rien."
 		],
 		"choices": [
 			{
