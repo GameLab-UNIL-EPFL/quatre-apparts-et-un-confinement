@@ -48,12 +48,12 @@
       "text": ["Que faire?"],
       "choices": [
           {
-              "text": ["écouter de la musique"],
+              "text": ["Écouter de la musique"],
               "preview": "Musique",
               "goto": "bleiben"
           },
           {
-              "text": ["écouter les nouvelles"],
+              "text": ["Écouter les nouvelles"],
               "preview": "Nouvelles",
               "goto": "news"
           }
@@ -63,14 +63,14 @@
   "news": {
       "name": "Radio",
       "text": [
-          "27 Avril - réouverture des salons de coiffure et les magasins de bricolage et jardineries"
+          "27 Avril - Réouverture des salons de coiffure, des magasins de bricolage et des jardineries."
       ],
       "choices": [],
       "goto": []
   },
   "bleiben": {
       "name": "Radio",
-      "text": ["*musique* Bleiben Sie zuhause"],
+      "text": ["🎶 Bleiben Sie zuhause 🎶\n🎶 Bleiben Sie zuhause 🎶"],
       "choices": [],
       "goto": []
   },
@@ -101,12 +101,12 @@
       "text": ["Allo? Ah Salut Suzanne! Comment vas-tu?"],
       "choices": [
           {
-              "text": ["Toujours pareil"],
+              "text": ["Toujours pareil."],
               "preview": "Toujours pareil",
               "goto": "cava"
           },
           {
-              "text": ["Rien de nouveau"],
+              "text": ["Rien de nouveau."],
               "preview": "Rien de nouveau",
               "goto": "ennuie"
           },
@@ -123,17 +123,17 @@
       "text": ["Tu fais quoi pour t’occuper ces temps?"],
       "choices": [
           {
-              "text": ["Je lis"],
+              "text": ["Je lis."],
               "preview": "Je lis",
               "goto": "lire"
           },
           {
-              "text": ["J’écoute la radio"],
+              "text": ["J’écoute la radio."],
               "preview": "J’écoute la radio",
               "goto": "nouvelles"
           },
           {
-              "text": ["Je passe des coups de fil"],
+              "text": ["Je passe des coups de fil."],
               "preview": "Je passe des appels",
               "goto": "appel"
           }
@@ -150,8 +150,8 @@
               "goto": "oui"
           },
           {
-              "text": ["Les misérables de Hugo"],
-              "preview": "Les misérables de Hugo",
+              "text": ["Les Misérables de Hugo"],
+              "preview": "Les Misérables de Hugo",
               "goto": "oui"
           },
           {
@@ -167,7 +167,7 @@
       "text": ["Hahaha je devrais faire pareil"],
       "choices":[
           {
-              "text": ["Oui hahaha"],
+              "text": ["Oui!"],
               "preview": "Oui",
               "goto": "oui"
           }
@@ -198,7 +198,7 @@
   "nouvelles": {
       "name": "Françoise",
       "text": [
-          "Ah oui, ils ouvrent enfin les magasins de jardinage",
+          "Ah oui, ils ouvrent enfin les magasins de jardinage.",
           "J'avais besoin de fertilisant."
       ],
       "choices": [
@@ -235,13 +235,13 @@
       ],
       "choices":[
           {
-              "text": ["On peut aller se promener"],
-              "preview": "On peut aller se promener",
+              "text": ["On peut aller se promener si tu en as envie"],
+              "preview": "On peut aller se promener.",
               "goto": "malade"
           },
           {
-              "text": ["Tu peux venir chez moi boire un café"],
-              "preview": "Tu peux venir chez moi boire un café",
+              "text": ["Souhaiterais-tu passer à la maison boire une tisane?"],
+              "preview": "Tu peux venir chez moi boire un thé.",
               "goto": "malade"
           }
       ],
@@ -249,7 +249,7 @@
   },
   "malade": {
       "name": "Françoise",
-      "text": ["Oui ça me fera du bien!"],
+      "text": ["Oui, ça me fera du bien!"],
       "choices": [
           {
               "text": "A toute à l'heure!",
@@ -257,7 +257,7 @@
               "goto": ""
           },
           {
-              "text": ["Oui à moi aussi! A plus tard!"],
+              "text": ["Oui, à moi aussi! À plus tard!"],
               "preview": "Oui à moi aussi! A plus tard!",
               "goto": ""
           }
@@ -301,7 +301,7 @@
   "conference": {
       "name": "Sophie",
       "text": [
-          "Il est entré tout nu dans le bureau de son père, alors qu'il était en pleine conférence zoom!"
+          "Il est entré tout nu dans le bureau de son père, alors qu'il était en pleine conférence Zoom!"
       ],
       "choices": [
           {
@@ -325,13 +325,13 @@
   "manque": {
       "name": "Sophie",
       "text": ["Ils ne savent plus quoi inventer...", 
-          "Ils arrêtent pas de me demander quand est-ce qu'il pourront te revoir.", 
+          "Ils arrêtent pas de me demander quand ils pourront te revoir.", 
           "Tu leur manques beaucoup."
       ],
       "choices": [
           {
-              "text": ["Ils me manquent aussi, fais-leur plein de bisous de ma part!"],
-              "preview": "Ils me manquent aussi, fais-leur plein de bisous de ma part!",
+              "text": ["Ils me manquent aussi. Fais-leur plein de bisous de ma part!"],
+              "preview": "Ils me manquent aussi. Fais-leur plein de bisous de ma part!",
               "goto": "bisous"
           }
       ],
@@ -340,9 +340,9 @@
   "bisous": {
       "name": "Sophie",
       "text": [
-          "Oui et on peut refaire un zoom bientôt!",
-          "Sinon, j'arrive pas à te commander de la nourriture cette semaine,",
-          "la file d'attente est trop longue pour la livraison.", 
+          "Oui, et on peut refaire un Zoom bientôt!",
+          "Sinon, j'arrive pas à te commander de la nourriture cette semaine.",
+          "Le temps d'attente pour la livraison est trop long.", 
           "Est-ce que t'arriverais à demander à quelqu'un? Un voisin peut-être?", 
           "Je veux surtout pas que tu ailles faire les courses toi-même!"
       ],
@@ -358,7 +358,7 @@
   "fin": {
       "name": "Sophie",
       "text": [
-          "Super! Bon faut que je te laisse, j'entends plus les loulous.", 
+          "Super! Bon, faut que je te laisse, j'entends plus les loulous.", 
           "Je pense qu'ils sont en train de faire des bêtises."],
       "choices": [
           {
@@ -388,7 +388,7 @@
       ],
       "choices": [
           {
-              "text": ["T'en a marre de tes racines blanches?"],
+              "text": ["T'en as déjà marre de tes racines blanches?"],
               "preview": "T'en as déjà marre de tes racines blanches?",
               "goto": "racine"
           },
@@ -398,8 +398,8 @@
               "goto": "long"
           },
           {
-              "text": ["Enfin! Je peux plus de ma coupe déformée!"],
-              "preview": "Enfin! Je peux plus de ma coupe déformée!",
+              "text": ["Enfin! Je n'en peux plus de ma coupe déformée!"],
+              "preview": "Enfin! Je n'en peux plus de ma coupe déformée!",
               "goto": "enfin"
           }
       ],
@@ -408,17 +408,17 @@
   "racine": {
       "name": "Gertrude",
       "text": [
-          "Ha! J'aurais bientôt la même coupe que toi!"
+          "Ha! J'aurai bientôt la même coupe que toi!"
       ],
       "choices": [
           {
-              "text": ["Ha! Moi au moins j'assume!"],
-              "preview": "Ha! Moi au moins j'assume!",
+              "text": ["Moi au moins j'assume, ma chère!"],
+              "preview": "Moi au moins j'assume!",
               "goto": "coupe"
           },
           {
-              "text": ["Ha! Je suis sûr que ça t'irait à merveille en plus!"],
-              "preview": "Ha! Je suis sûr que ça t'irait à merveille en plus!",
+              "text": ["Je suis sûr que ça t'irait à merveille, en plus!"],
+              "preview": "Je suis sûr que ça t'irait à merveille, en plus!",
               "goto": "coupe"
           }
       ],
@@ -436,8 +436,8 @@
               "goto": "coupe"
           },
           {
-              "text": ["N'oublie pas de tousser dans ton coude hein!"],
-              "preview": "N'oublie pas de tousser dans ton coude hein!",
+              "text": ["N'oublie pas de tousser dans ton coude, hein!"],
+              "preview": "N'oublie pas de tousser dans ton coude, hein!",
               "goto": "coupe"
           }
       ],
@@ -446,7 +446,7 @@
   "enfin": {
       "name": "Gertrude",
       "text": [
-          "Haha envoie-moi une photo!"
+          "Haha tu m'enverras une photo!"
       ],
       "choices": [
           {
