@@ -11,20 +11,26 @@ import { DamienComputerScene } from "./scenes/damienComputerScene.js";
 import { DamienKitchenClothesScene } from "./scenes/damienKitchenClothesScene.js";
 import { HallwayScene } from "./scenes/hallwayScene.js";
 import { StoreScene } from "./scenes/storeScene.js";
+import { IndepScene } from "./scenes/indepScene.js";
+import { MotherScene } from "./scenes/motherScene.js";
+import { DamienInitScene } from "./scenes/damienInitScene.js";
+import { IndepMessageScene } from "./scenes/indepMessageScene.js";
 
 let resizeTimeout;
-let plugins = [{
+const plugins = [{
     key: 'rexUI',
     plugin: RexUIPlugin,
     mapping: 'rexUI'
 }];
-const OBJECT_DEBUG = true;
-if(OBJECT_DEBUG === true){
-  plugins.push({
-    key: 'debugObjects',
-    plugin: DebugObjects,
-    mapping: 'debugObjects'
-  });
+
+const OBJECT_DEBUG = false;
+
+if(OBJECT_DEBUG === true) {
+    plugins.push({
+        key: 'debugObjects',
+        plugin: DebugObjects,
+        mapping: 'debugObjects'
+    });
 }
 
 /*
@@ -35,7 +41,7 @@ if(OBJECT_DEBUG === true){
 */
 
 function getScale(innerWidth, innerHeight) {
-    let innerRatio = innerWidth / innerHeight;
+    const innerRatio = innerWidth / innerHeight;
     const height = 1600; // default height
     let width = 1200; // default width
     const targetRatio = width / height;
@@ -69,13 +75,17 @@ const config = {
         scene: plugins
     },
     scene: [
-      BuildingScene,
-      ProtoScene,
-      DamienKitchenClothesScene,
-      DamienComputerScene,
-      GrandmaScene,
-      HallwayScene,
-      StoreScene,
+        BuildingScene,
+        ProtoScene,
+        DamienInitScene,
+        DamienKitchenClothesScene,
+        DamienComputerScene,
+        GrandmaScene,
+        HallwayScene,
+        IndepScene,
+        IndepMessageScene,
+        StoreScene,
+        MotherScene
     ],
     physics: {
         default: 'arcade'
@@ -95,12 +105,12 @@ game.horizontalRatio = scale.width / maxPictureWidth;
 window.horizontalOffset = (maxPictureWidth - scale.width) / 2;
 window.horizontalRatio = scale.width / maxPictureWidth;
 
-function resizeGame(){
-  console.log('Resize (wip)');
-  /*let newScale = getScale(window.innerWidth, window.innerHeight);
-  game.scale.resize(newScale.width, newScale.height);
-  window.horizontalOffset = (maxPictureWidth - newScale.width) / 2;
-  window.horizontalRatio = newScale.width / maxPictureWidth;*/
+function resizeGame() {
+    console.log('Resize (wip)');
+    /*let newScale = getScale(window.innerWidth, window.innerHeight);
+    game.scale.resize(newScale.width, newScale.height);
+    window.horizontalOffset = (maxPictureWidth - newScale.width) / 2;
+    window.horizontalRatio = newScale.width / maxPictureWidth;*/
 }
 
 // This resize implies we also resize scene sprites, or they’d stretch.

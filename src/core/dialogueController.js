@@ -78,7 +78,7 @@ const SPACING = 25;
 const MAX_N_PROMPTS = 3;
 
 const UP_POS = {
-    box: new Phaser.Math.Vector2(0, -650), // ici: multiplier par horizontalRatio
+    box: new Phaser.Math.Vector2(0, -650), 
     name: new Phaser.Math.Vector2(-488, -745),
     content: new Phaser.Math.Vector2(-488, -675)
 };
@@ -100,7 +100,7 @@ export class DialogueController {
      * @param {Phaser.Scene} parent_scene the scene in which the controller is contained
      * @param {string} dialogue_name the name of the dialogue JSON that will be loading in for the scene
      */
-    constructor(parent_scene, dialogue_name="dialogData") {
+    constructor(parent_scene, dialogue_name="example") {
         this.parent_scene = parent_scene;
         this.dialogueJSON = require("../dialogue/" + dialogue_name + ".json");
         this.current_conv_id = "";
@@ -133,6 +133,46 @@ export class DialogueController {
             "sprites/UI/prompts_2.png",
             DIALOGUE_BOX_SPRITE_SIZE.prompt
         );
+    }
+
+    preloadMessages() {
+        //Load in the phone message sprites
+        this.parent_scene.load.image("promptBox1", "sprites/UI/Messages/SelectionMessage_01.png");
+        this.parent_scene.load.image("promptBox2", "sprites/UI/Messages/SelectionMessage_02.png");
+        this.parent_scene.load.image("promptBox3", "sprites/UI/Messages/SelectionMessage_03.png");
+
+        this.parent_scene.load.image("sentMsg1", "sprites/UI/Messages/SendMessage_01.png");
+        this.parent_scene.load.image("sentMsg2", "sprites/UI/Messages/SendMessage_02.png");
+        this.parent_scene.load.image("sentMsg3", "sprites/UI/Messages/SendMessage_03.png");
+        this.parent_scene.load.image("sentMsg4", "sprites/UI/Messages/SendMessage_04.png");
+        this.parent_scene.load.image("sentMsg5", "sprites/UI/Messages/SendMessage_05.png");
+        this.parent_scene.load.image("sentMsg6", "sprites/UI/Messages/SendMessage_06.png");
+        this.parent_scene.load.image("sentMsg7", "sprites/UI/Messages/SendMessage_07.png");
+
+        this.parent_scene.load.image("recievedMsg1", "sprites/UI/Messages/ReceivedMessage_01.png");
+        this.parent_scene.load.image("recievedMsg2", "sprites/UI/Messages/ReceivedMessage_02.png");
+        this.parent_scene.load.image("recievedMsg3", "sprites/UI/Messages/ReceivedMessage_03.png");
+        this.parent_scene.load.image("recievedMsg4", "sprites/UI/Messages/ReceivedMessage_04.png");
+        this.parent_scene.load.image("recievedMsg5", "sprites/UI/Messages/ReceivedMessage_05.png");
+        this.parent_scene.load.image("recievedMsg6", "sprites/UI/Messages/ReceivedMessage_06.png");
+        this.parent_scene.load.image("recievedMsg7", "sprites/UI/Messages/ReceivedMessage_07.png");
+
+        this.parent_scene.load.image("typing", "sprites/UI/Messages/typing.png");
+    }
+
+    createMessageBG() {
+        //Create dialogue background
+        const bg = new Phaser.Geom.Rectangle(
+            -600,
+            -800,
+            5000,
+            5000
+        );
+        
+        const prompt_sprite = this.parent_scene.add.graphics({ fillStyle: { color: 0xf8f2df }});
+        prompt_sprite.fillRectShape(bg);
+
+        prompt_sprite.setDepth(-3);
     }
 
     /**
@@ -209,11 +249,20 @@ export class DialogueController {
      * @param {string} id the ID of the dialogue that we want to display
      * @param {boolean} up_down true if the dialogue will be placed on the top, false if on the bottom
      */
-    display(id, up_down=true) {
+    display(id, dontEnd=false, toMessage=false, up_down=true) {
         this.dialogue_pos = up_down ? UP_POS : DOWN_POS;
 
         this.current_conv_id = id;
         this.cur_state = DialogueState.DISPLAYED;
+
+        //Check if an objective was met
+        if(this.requestDialogue(id).objective) {
+            if(this.parent_scene.notifyObjectiveMet) {
+                this.parent_scene.notifyObjectiveMet();
+            } else {
+                console.error("DIALOG_OBJECTIVE: Parent scene doesn't implement notifyObjectiveMet");
+            }
+        }
 
         //Create background animation
         this.parent_scene.anims.create({
@@ -265,6 +314,16 @@ export class DialogueController {
         this.content.setDepth(5);
 
         const interaction = () => {
+            //Prompt user if necessary on interaction
+            if(this.requestDialogue(id).goto.length !== 0 && this.textIdx === this.text.length - 1) {
+                if(Object.keys(this.requestDialogue(id).choices).length !== 0) {
+                    this.promptAnswers(id, toMessage);
+                } else {
+                    this.display(this.requestDialogue(id).goto[0], false);
+                    return;
+                }
+            }
+
             //Check that we clicked on the text
             if(this.cur_state !== DialogueState.DONE) {
 
@@ -275,25 +334,22 @@ export class DialogueController {
 
                     //Check if we've shown all of the text
                     if(this.textIdx === this.text.length) {
-                        //Get rid of all dialogue elements
-                        this.content.destroy();
-                        this.name.destroy();
-                        this.background.destroy();
-                        this.content.disableInteractive();
-                        this.textIdx = 0;
 
-                        //Update dialogue state
-                        this.endDialogue();
+                        if(!dontEnd) {
+                            //Get rid of all dialogue elements
+                            this.content.destroy();
+                            this.name.destroy();
+                            this.background.destroy();
+                            this.content.disableInteractive();
+                            this.textIdx = 0;
 
+                            //Update dialogue state
+                            this.endDialogue();
+                        }
                     } else {
                         this.content.text = this.text[this.textIdx];
                     }
                 }
-            }
-
-            //Prompt user if necessary on interaction
-            if(this.requestDialogue(id).goto.length !== 0 && this.textIdx === this.text.length - 1) {
-                this.promptAnswers(id);
             }
         };
 
@@ -303,7 +359,12 @@ export class DialogueController {
 
         //Prompt user if necessary
         if(this.requestDialogue(id).goto.length !== 0 && this.textIdx === this.text.length - 1) {
-            this.promptAnswers(id);
+            if(Object.keys(this.requestDialogue(id).choices).length !== 0) {
+                this.promptAnswers(id, toMessage);
+            } else {
+                this.display(this.requestDialogue(id).goto[0], false);
+                return;
+            }
         }
     }
 
@@ -311,7 +372,7 @@ export class DialogueController {
      * @brief Shows (if any) the possible answers to a question
      * @param {string} id, the ID of the dialogue that requires a prompt
      */
-    promptAnswers(id) {
+    promptAnswers(id, toMessage = false) {
         //Retrieve the dialogue
         const cur_dialogue = this.requestDialogue(id);
 
@@ -397,7 +458,11 @@ export class DialogueController {
                     this.cur_state = DialogueState.DISPLAYED;
 
                     //Make a decision
-                    this.display(choice.goto);
+                    if(toMessage) {
+                        this.displayMessage(choice.goto, true);
+                    } else {
+                        this.display(choice.goto);
+                    }
 
                     //Save the dialogue entry
                     player.addDialogueTreeEntry({
@@ -443,11 +508,20 @@ export class DialogueController {
         this.cur_state = DialogueState.MSG;
 
         //Retrieve the dialogue
-        let cur_text = choice_id ?
-            this.requestDialogue(id).choices[choice_id].text :
+        const cur_text = choice_id ?
+            this.requestDialogue(id).choices[choice_id].text[0] :
             this.getText(id)[idx];
 
-        let cur_dialogue = this.requestDialogue(id);
+        const cur_dialogue = this.requestDialogue(id);
+
+        //Check if an objective was met
+        if(cur_dialogue.objective) {
+            if(this.parent_scene.notifyObjectiveMet) {
+                this.parent_scene.notifyObjectiveMet();
+            } else {
+                console.error("DIALOG_OBJECTIVE: Parent scene doesn't implement notifyObjectiveMet");
+            }
+        }
 
         //Decide which box to use
         let box = null;
@@ -510,22 +584,22 @@ export class DialogueController {
         this.moveDisplayedUp();
 
         //Create dialogue background
-        let box_elem = this.parent_scene.add.image(
+        const box_elem = this.parent_scene.add.image(
             lr ? MIN_LEFT_X.box : MIN_RIGHT_X.box,
             ypos.box,
             box
         );
 
-        let text_elem = this.parent_scene.add.text(
+        const text_elem = this.parent_scene.add.text(
             (lr ? MIN_LEFT_X.text : MIN_RIGHT_X.text),
             ypos.text,
             cur_text,
-            {font: (36 * window.horizontalRatio) + "px OpenSans ", fill: lr ? "black" : "white", wordWrap: { width: 360 * window.horizontalRatio }}
+            {font: (30) + "px OpenSans ", fill: lr ? "black" : "white", wordWrap: { width: 350 }}
         );
 
         //Move the messages back
-        box_elem.setDepth(-1);
-        text_elem.setDepth(-1);
+        box_elem.setDepth(-2);
+        text_elem.setDepth(-2);
 
         this.displayed.push(box_elem);
         this.displayed.push(text_elem);
@@ -569,15 +643,15 @@ export class DialogueController {
         //Display the correct prompt box
         if(Object.keys(dialogue.choices).length <= 1) {
             this.parent_scene.add.image(-7, 616, 'promptBox1');
-            font_size = 76 * window.horizontalRatio;
+            font_size = 65;
             prompt_ypos = [579];
         } else if(Object.keys(dialogue.choices).length <= 2) {
             this.parent_scene.add.image(-7, 616, 'promptBox2');
-            font_size = 56 * window.horizontalRatio;
+            font_size = 56;
             prompt_ypos = [497, 677];
         } else {
             this.parent_scene.add.image(-7, 1416, 'promptBox3');
-            font_size = 46 * window.horizontalRatio;
+            font_size = 46;
             prompt_ypos = [476, 592, 711];
         }
 
@@ -605,13 +679,45 @@ export class DialogueController {
                     //Goto the next dialogue
                     const next_id = dialogue.choices[choice_key].goto;
 
+                    //play sound
+                    this.sent = this.parent_scene.sound.add("sent");
+                    this.sent.play({volume: 0.5});
+                    //Retrieve dialiogue
+                    const next_msg = this.requestDialogue(next_id);
+
                     //Add a timer event to trigger the next message
                     this.parent_scene.time.addEvent({
                         delay: MSG_RESP_DELAY,
                         repeat: 0,
                         callback: () => {
                             if((next_id.length) > 0) {
-                                this.displayMessage(next_id, true);
+                                this.displayMessage(next_id, true, null, 0);
+
+                                if(next_msg.text.length > 1) {
+                                    this.parent_scene.time.addEvent({
+                                        delay: MSG_RESP_DELAY,
+                                        repeat: 0,
+                                        callback: () => {
+                                            if((next_id.length) > 0) {
+                                                this.displayMessage(next_id, true, null, 1);
+
+                                                if(next_msg.text.length > 2) {
+                                                    this.parent_scene.time.addEvent({
+                                                        delay: MSG_RESP_DELAY,
+                                                        repeat: 0,
+                                                        callback: () => {
+                                                            if((next_id.length) > 0) {
+                                                                this.displayMessage(next_id, true, null, 2);
+                                                            }
+                                                        },
+                                                        callbackScope: this,
+                                                    });
+                                                }
+                                            }
+                                        },
+                                        callbackScope: this,
+                                    });
+                                }
                             }
                         },
                         callbackScope: this,

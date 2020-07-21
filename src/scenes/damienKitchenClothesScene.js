@@ -1,4 +1,4 @@
-import Phaser from "phaser";
+import Phaser, { GameObjects } from "phaser";
 import { DialogueController } from "../core/dialogueController.js";
 import { Card } from "./cards/card.js";
 import { CardObject } from "./objects/cardObject.js";
@@ -17,17 +17,19 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
      * in said scene
      */
     constructor() {
-        super({key: 'DamienKitchenClothesScene'});
+        super({ key: Scenes.DAMIEN_KITCHEN_CLOTHES });
 
         //Keep track of the clothes that protoguy is wearing
         this.clothes = ProtoGuyClothes.PYJAMAS;
 
-        let characters = {
+        const characters = {
             'clothes': new ProtoGuy(this, 51, 115, ProtoGuyCard.CLOTHES),
             'kitchen': new ProtoGuy(this, -218, -32, ProtoGuyCard.KITCHEN)
         };
 
-        this.clothesCard = new Card(this, [
+        this.clothesCard = new Card(
+            this,
+            [
                 new Background(
                     this,
                     "sprites/ProtoScene/ClothesCard/bg.jpg",
@@ -40,7 +42,12 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
                     (scene) => scene.changeClothes(ProtoGuyClothes.CLEAN_CLOTHES),
                     this,
                     -1,
-                    { name: "clothes_h", url: "sprites/ProtoScene/ClothesCard/clothes_h.png" }
+                    {
+                        name: 'clothes_h',
+                        url: "sprites/UI/01_Interactions/01_Etudiants/02_Spritesheets/04-Etudiant-HabitsPropres-Spritesheet_400x210.png",
+                        size: { frameWidth: 400, frameHeight: 210 },
+                        pos: new Phaser.Math.Vector2(157, -649)
+                    }
                 ),
                 new CardObject(
                     this,
@@ -49,18 +56,25 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
                     (scene) => scene.changeClothes(ProtoGuyClothes.YESTERDAY_CLOTHES),
                     this,
                     -1,
-                    { name: "chair_h", url: "sprites/ProtoScene/ClothesCard/chair_h.png" }
+                    {
+                        name: 'chair_h',
+                        url: "sprites/UI/01_Interactions/01_Etudiants/02_Spritesheets/03-Etudiant-HabitsSales-Spritesheet_280x204.png",
+                        size: { frameWidth: 280, frameHeight: 204 },
+                        pos: new Phaser.Math.Vector2(-297, 40)
+                    }
                 ),
                 characters['clothes']
             ],
             characters['clothes']
         );
 
-        this.kitchenCard = new Card(this, [
+        this.kitchenCard = new Card(
+            this,
+            [
                 new Background(
                     this,
                     "sprites/ProtoScene/KitchenCard/bg.jpg",
-                    "KitchenBG",
+                    "KitchenBG"
                 ),
                 characters['kitchen'],
                 new CardObject(
@@ -70,7 +84,12 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
                     null,
                     null,
                     1,
-                    { name: "fridge_h", url: "sprites/ProtoScene/KitchenCard/frigo_h.png" }
+                    {
+                        name: 'fridge_h',
+                        url: "sprites/UI/01_Interactions/01_Etudiants/02_Spritesheets/07-Etudiant-Yogourt-Spritesheet_220x170.png",
+                        size: { frameWidth: 220, frameHeight: 170 },
+                        pos: new Phaser.Math.Vector2(111, -144)
+                    }
                 ),
                 new CardObject(
                     this,
@@ -89,7 +108,12 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
                     null,
                     null,
                     2,
-                    { name: "sink_h", url: "sprites/ProtoScene/KitchenCard/lavabo_h.png" }
+                    {
+                        name: 'sink_h',
+                        url: "sprites/UI/01_Interactions/01_Etudiants/02_Spritesheets/08-Etudiant-Verre-Spritesheet_295x180.png",
+                        size: { frameWidth: 295, frameHeight: 180 },
+                        pos: new Phaser.Math.Vector2(105, 593)
+                    }
                 ),
                 new CardObject(
                     this,
@@ -103,7 +127,12 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
                     null,
                     null,
                     0,
-                    { name: "toaster_h", url: "sprites/ProtoScene/KitchenCard/toaster_h.png" }
+                    {
+                        name: 'toast_h',
+                        url: "sprites/UI/01_Interactions/01_Etudiants/02_Spritesheets/06-Etudiant-Toast-Spritesheet_180x160.png",
+                        size: { frameWidth: 180, frameHeight: 160 },
+                        pos: new Phaser.Math.Vector2(-278, 556)
+                    }
                 ),
                 new CardObject(
                     this,
@@ -124,7 +153,7 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
         this.current_card = null;
 
         //Create the dialogue controller
-        this.dialogue = new DialogueController(this);
+        this.dialogue = new DialogueController(this, "damienDialogMarch");
     }
 
     /**
@@ -137,18 +166,18 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
 
             //Set the correct card
             switch(data.cardIdx) {
-                case ProtoCards.CLOTHES:
-                    this.current_card = this.clothesCard;
-                    this.cardIdx = ProtoCards.CLOTHES;
-                    break;
+            case ProtoCards.CLOTHES:
+                this.current_card = this.clothesCard;
+                this.cardIdx = ProtoCards.CLOTHES;
+                break;
 
-                case ProtoCards.KITCHEN:
-                    this.current_card = this.kitchenCard;
-                    this.cardIdx = ProtoCards.KITCHEN;
-                    break;
+            case ProtoCards.KITCHEN:
+                this.current_card = this.kitchenCard;
+                this.cardIdx = ProtoCards.KITCHEN;
+                break;
 
-                default:
-                    break;
+            default:
+                break;
             }
         }
     }
@@ -174,6 +203,19 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
 
         //Preload all of the cards
         this.current_card.preload();
+
+        //load sounds
+        this.load.audio("toast", "sounds/kitchen/toasterPop.wav");
+        this.load.audio("fridge", "sounds/kitchen/fridge.wav");
+        this.load.audio("glass", "sounds/kitchen/glass.wav");
+
+        if(this.cardIdx === ProtoCards.CLOTHES) {
+            this.load.spritesheet(
+                'pj_h',
+                'sprites/UI/01_Interactions/01_Etudiants/02_Spritesheets/05-Etudiant-Pyjama-Spritesheet_208x146.png',
+                { frameWidth: 208, frameHeight: 146 }
+            );
+        }
     }
 
     /**
@@ -190,6 +232,20 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
             //Trigger the dialogue
             if(this.cardIdx === ProtoCards.CLOTHES) {
                 this.dialogue.display("habit");
+                
+                this.anims.create({
+                    key: "pj_h_anim",
+                    frameRate: 7,
+                    frames: this.anims.generateFrameNames('pj_h'),
+                    repeat: -1
+                });
+
+                this.pj_h = this.add.sprite(
+                    96,
+                    -50,
+                    'pj_h'
+                ).play("pj_h_anim");
+
             } else {
                 this.dialogue.display("frigo");
             }
@@ -197,6 +253,27 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
 
         //Update the saved data
         player.cur_scene = Scenes.DAMIEN_KITCHEN_CLOTHES;
+
+        this.toast = this.sound.add("toast");
+        this.fridge = this.sound.add("fridge");
+        this.glass = this.sound.add("glass");
+
+        this.input.on(
+            'gameobjectdown',
+            (_, GameObject) => {
+                console.log(GameObject.texture.key);
+                if(GameObject.texture.key === "toaster_h") {
+                    this.toast.play();
+                }
+                else if(GameObject.texture.key === "fridge_h") {
+                    this.fridge.play();
+                }
+                else if(GameObject.texture.key === "sink_h") {
+                    this.glass.play();
+                }
+                
+            }
+        );
     }
 
     /**
@@ -242,22 +319,22 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
 
         switch(this.cardIdx) {
 
-            case ProtoCards.CLOTHES:
-                //Chose the next card depending on the user's choice
-                this.cardIdx = ProtoCards.COMPUTER;
-                this.nextScene({food: choice, clothes: this.clothes});
-                break;
+        case ProtoCards.CLOTHES:
+            //Chose the next card depending on the user's choice
+            this.cardIdx = ProtoCards.COMPUTER;
+            this.nextScene({food: choice, clothes: this.clothes});
+            break;
 
-            case ProtoCards.KITCHEN:
-                this.cardIdx = ProtoCards.COMPUTER;
-                this.nextScene({food: choice, clothes: this.clothes});
+        case ProtoCards.KITCHEN:
+            this.cardIdx = ProtoCards.COMPUTER;
+            this.nextScene({food: choice, clothes: this.clothes});
 
-                //Save the food choice
-                savable_data.food = choice;
-                break;
+            //Save the food choice
+            savable_data.food = choice;
+            break;
 
-            default:
-                break;
+        default:
+            break;
         }
 
         //Save the card and clothes choices
@@ -284,5 +361,7 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
      */
     destroy() {
         this.current_card.destroy();
+
+        this.pj_h.destroy();
     }
 }

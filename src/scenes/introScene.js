@@ -1,8 +1,9 @@
-import Phaser from "phaser";
+import Phaser, { Scene } from "phaser";
+import { Scenes } from "../core/player";
 
 export class IntroScene extends Phaser.Scene {
     constructor() {
-        super({ key: 'TitleScene' })
+        super({ key: Scenes.INTRO });
     }
 
     preload() {
@@ -14,7 +15,7 @@ export class IntroScene extends Phaser.Scene {
 
         let scene = this;
 
-        title.on('pointerdown', function(){
+        title.on('pointerdown', function() {
             scene.scene.start('Prototype');
         });
     }

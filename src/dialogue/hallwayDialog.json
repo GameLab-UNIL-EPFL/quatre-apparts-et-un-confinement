@@ -5,53 +5,60 @@
 			"Personne?",
 			"Hmm, je pensais que tout le monde serait à la maison en ce moment."
 		],
-		"choices": {},
+		"choices": [],
 		"goto": []
 	},
 	"damienHome": {
 		"name": "Suzanne",
 		"text": [
-            "Bonjour, j’aurais besoin de quelqu’un pour aller faire les courses pour moi.", 
+            "Bonjour Monsieur, j’aurais besoin de quelqu’un pour aller faire les courses pour moi.", 
             "Est-ce que vous seriez d’accord de m’aider?"
 		],
-		"choices": {},
-		"goto": []
+		"choices": [],
+		"goto": ["damienReply"]
 	},
 	"damienReply": {
 		"name": "Damien",
         "text": [
-            "Désolé madame, j’essaie de suivre un cours en ligne.", 
-            "Est-ce que vous pouvez demander à quelqu’un d’autre?"],
-		"choices": {},
+            "Désolé Madame, j’essaie de suivre un cours en ligne.", 
+            "Est-ce que vous pouvez demander à quelqu’un d’autre?",
+            "Sinon je le fais plus tard."
+        ],
+		"choices": [],
 		"goto": []
     },
     "PatrickHome": {
 		"name": "Suzanne",
         "text": [
             "Bonjour, est-ce que vous pourriez m’aider?", 
-            "J’aurais besoin que quelqu’un aille faire les courses pour moi."],
-		"choices": {},
-		"goto": []
+            "J’aurais besoin que quelqu’un fasse des courses pour moi."
+        ],
+		"choices": [],
+		"goto": ["patrickReply"]
     },
     "patrickReply": {
         "name": "Patrick",
         "text": [
-            "Oui, pas de problème madame, j’allais justement y aller aujourd’hui."
+            "Oui, pas de problème Madame. J’avais justement prévu d'y aller aujourd’hui."
         ],
-        "choices": {},
+        "choices": [],
         "goto": []
     },
     "patrickReturn": {
         "name": "Patrick",
         "text": [
             "Voilà vos courses et la monnaie."
-        ] 
+        ],
+        "choices": [],
+        "goto": ["suzanneReply"]
     },
     "suzanneReply": {
         "name": "Suzanne",
         "text": [
-            "Merci infiniment! C’est compliqué de plus pouvoir faire les courses.",
-            "N'hésitez pas à me demander s'il vous faut quoique ce soit!"
-        ] 
+            "Merci infiniment! C’est compliqué de ne plus pouvoir faire les courses.",
+            "N'hésitez pas à me demander s'il vous faut quoi que ce soit!"
+        ] ,
+        "choices": [],
+        "goto": []
     }
 }

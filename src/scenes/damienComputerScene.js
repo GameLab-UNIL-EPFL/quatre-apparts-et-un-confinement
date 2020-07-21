@@ -17,14 +17,14 @@ export class DamienComputerScene extends Phaser.Scene {
      * in said scene
      */
     constructor() {
-        super({key: 'DamienComputer'});
+        super({ key: Scenes.DAMIEN_COMPUTER });
 
         //Keep track of the clothes that protoguy is wearing
         this.clothes = ProtoGuyClothes.PYJAMAS;
 
-        this.computerCard = new ComputerCard(this);
+        this.computerCard = new ComputerCard(this, Scenes.DAMIEN_COMPUTER);
 
-        this.zoomMiniGame = new ZoomMiniGameCard(this);
+        this.zoomMiniGame = new ZoomMiniGameCard(this, Scenes.DAMIEN_COMPUTER);
 
         this.messageCard = new MessageCard(this);
 
@@ -40,7 +40,7 @@ export class DamienComputerScene extends Phaser.Scene {
         this.food = -1;
 
         //Create the dialogue controller
-        this.dialogue = new DialogueController(this);
+        this.dialogue = new DialogueController(this, "damienDialogMarch");
     }
 
     /**
@@ -54,26 +54,26 @@ export class DamienComputerScene extends Phaser.Scene {
             //Set the correct card
             switch(data.cardIdx) {
 
-                case ProtoCards.COMPUTER:
-                    this.current_card = this.computerCard;
-                    this.clothes = data.clothes;
-                    this.food = data.food;
-                    this.cardIdx = ProtoCards.COMPUTER;
-                    break;
+            case ProtoCards.COMPUTER:
+                this.current_card = this.computerCard;
+                this.clothes = data.clothes;
+                this.food = data.food;
+                this.cardIdx = ProtoCards.COMPUTER;
+                break;
 
-                case ProtoCards.MINI_GAME:
-                    this.current_card = this.zoomMiniGame;
-                    this.cardIdx = ProtoCards.MINI_GAME;
-                    break;
+            case ProtoCards.MINI_GAME:
+                this.current_card = this.zoomMiniGame;
+                this.cardIdx = ProtoCards.MINI_GAME;
+                break;
 
-                case ProtoCards.MESSAGE:
-                    this.current_card = this.messageCard;
-                    this.clothes = data.clothes;
-                    this.cardIdx = ProtoCards.MESSAGE;
-                    break;
+            case ProtoCards.MESSAGE:
+                this.current_card = this.messageCard;
+                this.clothes = data.clothes;
+                this.cardIdx = ProtoCards.MESSAGE;
+                break;
 
-                default:
-                    break;
+            default:
+                break;
             }
         }
     }
@@ -165,20 +165,20 @@ export class DamienComputerScene extends Phaser.Scene {
 
             switch(this.cardIdx) {
 
-                case ProtoCards.COMPUTER:
-                    this.cardIdx = ProtoCards.MINI_GAME;
-                    this.current_card = this.zoomMiniGame;
-                    this.current_card.create();
-                    break;
+            case ProtoCards.COMPUTER:
+                this.cardIdx = ProtoCards.MINI_GAME;
+                this.current_card = this.zoomMiniGame;
+                this.current_card.create();
+                break;
 
-                case ProtoCards.MINI_GAME:
-                    this.cardIdx = ProtoCards.MESSAGE;
-                    this.current_card = this.messageCard;
-                    this.current_card.create();
-                    break;
+            case ProtoCards.MINI_GAME:
+                this.cardIdx = ProtoCards.MESSAGE;
+                this.current_card = this.messageCard;
+                this.current_card.create();
+                break;
 
-                default:
-                    break;
+            default:
+                break;
             }
 
             //Save the card and clothes choices
@@ -191,22 +191,37 @@ export class DamienComputerScene extends Phaser.Scene {
         player.saveGame();
     }
 
+    /**
+     * @brief Updates the player damien_gone value
+     */
+    notifyObjectiveMet() {
+        player.damien_gone = true;
+        console.log("PLAYER_DAMIEN_GONE: " + player.damien_gone);
+        player.saveGame();
+    }
+
     nextScene() {
         this.cameras.main.fadeOut(1000);
-        this.scene.start("Building", {
+        this.scene.start(Scenes.BUILDING, {
             mainMenu: false,
-            stage: 3,
+            names: {
+                damien: false,
+                grandma: false,
+                family: true,
+                indep: false
+            },
+            stage: 1,
             windows: {
                 damien: WindowState.OFF,
-                grandma: WindowState.ON,
-                family: WindowState.OFF,
+                grandma: WindowState.OFF,
+                family: WindowState.ON,
                 indep: WindowState.OFF
             },
             month: Months.MARCH,
             nextScene: {
                 damien: null,
-                grandma: Scenes.GRANDMA,
-                family: null,
+                grandma: null,
+                family: Scenes.MOTHER,
                 indep: null
             }
         });

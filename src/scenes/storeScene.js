@@ -2,7 +2,8 @@ import Phaser from "phaser";
 import { Card } from "./cards/card.js";
 import { CardObject } from "./objects/cardObject.js";
 import { Background } from "./objects/background.js";
-import { DialogueController } from "../core/dialogueController.js";
+import { Scenes } from "../core/player.js";
+import { HallwayCards } from "./hallwayScene.js";
 
 export const StoreCards = {
     FIRST_SHELF: 0,
@@ -16,10 +17,12 @@ export class StoreScene extends Phaser.Scene {
      * in said scene
      */
     constructor() {
-        super({key: 'Store'});
+        super({key: Scenes.STORE});
 
         /* === FIRST SHELF === */
-        this.firstShelf = new Card(this, [
+        this.firstShelf = new Card(
+            this,
+            [
                 new Background(
                     this,
                     "sprites/StoreScene/part1/rayon01_01_rayonnage.jpg",
@@ -39,7 +42,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("pate02"),
                     this
                 ),
-                
                 new CardObject(
                     this,
                     { name: "pate03", url: "sprites/StoreScene/part1/rayon01_03_pate03.png" },
@@ -47,7 +49,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("pate03"),
                     this
                 ),
-                
                 new CardObject(
                     this,
                     { name: "pate04", url: "sprites/StoreScene/part1/rayon01_03_pate04.png" },
@@ -118,7 +119,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("farine08"),
                     this
                 ),
-                
                 new CardObject(
                     this,
                     { name: "sac01", url: "sprites/StoreScene/part1/rayon01_03_sac01.png" },
@@ -126,7 +126,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("sac01"),
                     this
                 ),
-                
                 new CardObject(
                     this,
                     { name: "sac02", url: "sprites/StoreScene/part1/rayon01_03_sac02.png" },
@@ -134,7 +133,7 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("sac02"),
                     this
                 ),
-                
+
                 new CardObject(
                     this,
                     { name: "pate06", url: "sprites/StoreScene/part1/rayon01_03_pate06.png" },
@@ -156,7 +155,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("pate10"),
                     this
                 ),
-                
                 new CardObject(
                     this,
                     { name: "pate11", url: "sprites/StoreScene/part1/rayon01_03_pate11.png" },
@@ -171,7 +169,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("pate12"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "sac03", url: "sprites/StoreScene/part1/rayon01_03_sac03.png" },
@@ -179,7 +176,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("sac03"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "pate_spaghetti01", url: "sprites/StoreScene/part1/rayon01_03_spaghetti01.png" },
@@ -194,7 +190,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("pate_spaghetti02"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "pate_spaghetti03", url: "sprites/StoreScene/part1/rayon01_03_spaghetti03.png" },
@@ -202,9 +197,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("pate_spaghetti03"),
                     this
                 ),
-
-
-
                 new CardObject(
                     this,
                     { name: "pate08", url: "sprites/StoreScene/part1/rayon01_03_pate08.png" },
@@ -218,13 +210,15 @@ export class StoreScene extends Phaser.Scene {
                     new Phaser.Math.Vector2(362, -125),
                     (scene) => scene.takeObject("pate09"),
                     this
-                ),
+                )
             ]
         );
 
         /* === SECOND SHELF === */
-        
-        this.secondShelf = new Card(this, [
+
+        this.secondShelf = new Card(
+            this,
+            [
                 new Background(
                     this,
                     "sprites/StoreScene/part2/rayon01_01_rayonnage.jpg",
@@ -237,7 +231,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("banane01"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "banane02", url: "sprites/StoreScene/part2/rayon01_02_banane02.png" },
@@ -245,7 +238,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("banane02"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "banane03", url: "sprites/StoreScene/part2/rayon01_02_banane03.png" },
@@ -253,7 +245,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("banane03"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "banane04", url: "sprites/StoreScene/part2/rayon01_02_banane04.png" },
@@ -261,7 +252,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("banane04"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "banane05", url: "sprites/StoreScene/part2/rayon01_02_banane05.png" },
@@ -269,7 +259,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("banane05"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "banane06", url: "sprites/StoreScene/part2/rayon01_02_banane06.png" },
@@ -277,7 +266,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("banane06"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "banane07", url: "sprites/StoreScene/part2/rayon01_02_banane07.png" },
@@ -285,7 +273,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("banane07"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "banane08", url: "sprites/StoreScene/part2/rayon01_02_banane08.png" },
@@ -293,7 +280,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("banane08"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "pain01", url: "sprites/StoreScene/part2/rayon01_02_pain01.png" },
@@ -301,7 +287,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("pain01"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "pain02", url: "sprites/StoreScene/part2/rayon01_02_pain02.png" },
@@ -309,7 +294,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("pain02"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "pain03", url: "sprites/StoreScene/part2/rayon01_02_pain03.png" },
@@ -317,7 +301,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("pain03"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "pain04", url: "sprites/StoreScene/part2/rayon01_02_pain04.png" },
@@ -325,7 +308,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("pain04"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "pain05", url: "sprites/StoreScene/part2/rayon01_02_pain05.png" },
@@ -333,7 +315,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("pain05"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "pain06", url: "sprites/StoreScene/part2/rayon01_02_pain06.png" },
@@ -341,7 +322,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("pain06"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "pain07", url: "sprites/StoreScene/part2/rayon01_02_pain07.png" },
@@ -357,7 +337,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("pain08"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "pain09", url: "sprites/StoreScene/part2/rayon01_02_pain09.png" },
@@ -365,7 +344,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("pain09"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "pain10", url: "sprites/StoreScene/part2/rayon01_02_pain10.png" },
@@ -373,7 +351,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("pain10"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "pain11", url: "sprites/StoreScene/part2/rayon01_02_pain11.png" },
@@ -381,7 +358,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("pain11"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "pain12", url: "sprites/StoreScene/part2/rayon01_02_pain12.png" },
@@ -389,7 +365,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("pain12"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "pain13", url: "sprites/StoreScene/part2/rayon01_02_pain13.png" },
@@ -397,7 +372,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("pain13"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "pain14", url: "sprites/StoreScene/part2/rayon01_02_pain14.png" },
@@ -405,7 +379,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("pain14"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "pain15", url: "sprites/StoreScene/part2/rayon01_02_pain15.png" },
@@ -413,7 +386,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("pain15"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "pain16", url: "sprites/StoreScene/part2/rayon01_02_pain16.png" },
@@ -421,7 +393,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("pain16"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "pain17", url: "sprites/StoreScene/part2/rayon01_02_pain17.png" },
@@ -429,7 +400,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("pain17"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "pain18", url: "sprites/StoreScene/part2/rayon01_02_pain18.png" },
@@ -437,7 +407,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("pain18"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "pain19", url: "sprites/StoreScene/part2/rayon01_02_pain19.png" },
@@ -445,7 +414,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("pain19"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "pain20", url: "sprites/StoreScene/part2/rayon01_02_pain20.png" },
@@ -453,7 +421,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("pain20"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "pomme01", url: "sprites/StoreScene/part2/rayon01_02_pomme01.png" },
@@ -461,7 +428,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("pomme01"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "pomme02", url: "sprites/StoreScene/part2/rayon01_02_pomme02.png" },
@@ -469,7 +435,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("pomme02"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "pomme03", url: "sprites/StoreScene/part2/rayon01_02_pomme03.png" },
@@ -477,7 +442,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("pomme03"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "pomme04", url: "sprites/StoreScene/part2/rayon01_02_pomme04.png" },
@@ -485,7 +449,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("pomme04"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "pomme05", url: "sprites/StoreScene/part2/rayon01_02_pomme05.png" },
@@ -493,24 +456,24 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("pomme05"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "pomme06", url: "sprites/StoreScene/part2/rayon01_02_pomme06.png" },
                     new Phaser.Math.Vector2(208, 122),
                     (scene) => scene.takeObject("pomme06"),
                     this
-                ),
+                )
             ]
         );
-        
-        this.thirdShelf = new Card(this, [
+
+        this.thirdShelf = new Card(
+            this,
+            [
                 new Background(
                     this,
                     "sprites/StoreScene/part3/rayon03_01_rayonnage.jpg",
                     "storeBg3"
                 ),
-                
                 new CardObject(
                     this,
                     { name: "lessive01", url: "sprites/StoreScene/part3/rayon03_03_lessive01.png" },
@@ -518,7 +481,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("lessive01"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "lessive02", url: "sprites/StoreScene/part3/rayon03_03_lessive02.png" },
@@ -526,7 +488,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("lessive02"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "lessive03", url: "sprites/StoreScene/part3/rayon03_03_lessive03.png" },
@@ -534,7 +495,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("lessive03"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "lessive04", url: "sprites/StoreScene/part3/rayon03_03_lessive04.png" },
@@ -542,7 +502,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("lessive04"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "lessive05", url: "sprites/StoreScene/part3/rayon03_03_lessive05.png" },
@@ -550,7 +509,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("lessive05"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "lessive06", url: "sprites/StoreScene/part3/rayon03_03_lessive06.png" },
@@ -558,7 +516,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("lessive06"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "lessive07", url: "sprites/StoreScene/part3/rayon03_03_lessive07.png" },
@@ -566,7 +523,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("lessive07"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "lessive08", url: "sprites/StoreScene/part3/rayon03_03_lessive08.png" },
@@ -574,7 +530,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("lessive08"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "lessive09", url: "sprites/StoreScene/part3/rayon03_03_lessive09.png" },
@@ -582,7 +537,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("lessive09"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "lessive10", url: "sprites/StoreScene/part3/rayon03_03_lessive10.png" },
@@ -590,7 +544,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("lessive10"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "lessive11", url: "sprites/StoreScene/part3/rayon03_03_lessive11.png" },
@@ -598,7 +551,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("lessive11"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "lessive12", url: "sprites/StoreScene/part3/rayon03_03_lessive12.png" },
@@ -606,7 +558,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("lessive12"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "papier01", url: "sprites/StoreScene/part3/rayon03_03_papier01.png" },
@@ -614,7 +565,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("papier01"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "papier02", url: "sprites/StoreScene/part3/rayon03_03_papier02.png" },
@@ -622,7 +572,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("papier02"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "papier03", url: "sprites/StoreScene/part3/rayon03_03_papier03.png" },
@@ -630,7 +579,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("papier03"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "papier04", url: "sprites/StoreScene/part3/rayon03_03_papier04.png" },
@@ -638,7 +586,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("papier04"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "papier05", url: "sprites/StoreScene/part3/rayon03_03_papier05.png" },
@@ -646,7 +593,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("papier05"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "papier06", url: "sprites/StoreScene/part3/rayon03_03_papier06.png" },
@@ -654,7 +600,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("papier06"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "papier07", url: "sprites/StoreScene/part3/rayon03_03_papier07.png" },
@@ -662,7 +607,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("papier07"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "papier08", url: "sprites/StoreScene/part3/rayon03_03_papier08.png" },
@@ -670,7 +614,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("papier08"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "papier09", url: "sprites/StoreScene/part3/rayon03_03_papier09.png" },
@@ -678,7 +621,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("papier09"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "papier10", url: "sprites/StoreScene/part3/rayon03_03_papier10.png" },
@@ -686,7 +628,6 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("papier10"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "papier11", url: "sprites/StoreScene/part3/rayon03_03_papier11.png" },
@@ -694,42 +635,39 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("papier11"),
                     this
                 ),
-
                 new CardObject(
                     this,
                     { name: "papier12", url: "sprites/StoreScene/part3/rayon03_03_papier12.png" },
                     new Phaser.Math.Vector2(401, -111),
                     (scene) => scene.takeObject("papier12"),
                     this
-                ),
-
-          
+                )
             ]
         );
-        
+
         this.checklist_done = {
-          'pate': {
-            position_x: -276,
-            position_y: 234,
-            done: false
-          },
-          'banane': {
-            position_x: -276,
-            position_y: 300,
-            done: false
-          },
-          'pain': {
-            position_x: -276,
-            position_y: 373,
-            done: false
-          },
-          'papier': {
-            position_x: -261,
-            position_y: 422,
-            done: false
-          },
-        }
-        
+            'pate': {
+                position_x: -276,
+                position_y: 234,
+                done: false
+            },
+            'banane': {
+                position_x: -276,
+                position_y: 300,
+                done: false
+            },
+            'pain': {
+                position_x: -276,
+                position_y: 373,
+                done: false
+            },
+            'papier': {
+                position_x: -261,
+                position_y: 422,
+                done: false
+            },
+        };
+
         this.cards = [
             this.firstShelf,
             this.secondShelf,
@@ -739,9 +677,6 @@ export class StoreScene extends Phaser.Scene {
         //Keep track of wich card is displayed
         this.cardIdx = StoreCards.FIRST_SHELF;
         this.current_card = this.firstShelf;
-
-        //Create the dialogue controller
-        this.dialogue = new DialogueController(this);
     }
 
     init(data) {
@@ -752,9 +687,6 @@ export class StoreScene extends Phaser.Scene {
     }
 
     preload() {
-        //Preload the dialogue controller
-        this.dialogue.preload();
-
         //Preload all of the cards
         this.cards.forEach(card => card.preload());
 
@@ -762,9 +694,11 @@ export class StoreScene extends Phaser.Scene {
         this.load.image('liste', "sprites/StoreScene/part1/rayon01_04_liste.png");
         this.load.image('basket', "sprites/StoreScene/part1/rayon01_02_panier.png");
         this.load.image('basket-front', "sprites/StoreScene/part1/rayon01_02_panier-02front.png");
-        
+
         this.load.image('rature', "sprites/StoreScene/part1/rayon01_05_rature.png");
-        
+
+        //Load in the music
+        this.load.audio('bg_music', 'sounds/Supermarket.mp3');
 
         this.nextCardArrow = this.load.spritesheet(
             'next-card-arrow',
@@ -788,7 +722,7 @@ export class StoreScene extends Phaser.Scene {
             120,
             'next-card-arrow'
         ).play('next-card-anim');
-        
+
         this.nextCardButton.depth = 4;
 
         let scene = this;
@@ -796,59 +730,58 @@ export class StoreScene extends Phaser.Scene {
     }
 
     takeObject(object_name) {
-      // return; // debug
-      
-      console.log('take', object_name);
-      let object = this.children.getByName(object_name);
-      object.depth = 5;
-      
-      let yDistance = this.basket.y - object.y; // between 280 and 1340
-      console.log('yDistance:', yDistance)
-      let target_objects = [object]
-      if(object_name == 'pate_spaghetti01'){
-        // also move the other pack
-        target_objects.push(this.children.getByName('pate_spaghetti02'));
-      }
-      
-      // Move to basket
-      this.tweens.add({
-          targets: target_objects,
-          x: this.basket.x + (Math.random() * 50),
-          y: this.basket.y + 25 + (Math.random() * 25),
-          duration: 150 + (yDistance / 8),
-          ease: 'Quadratic',
-          yoyo: false,
-          loop: 0,
-          onComplete: () => {
-              // this.rature = this.add.image(this.listPositions[object_name], 'rature')
-              // todo: add flag
-              for (const item in this.checklist_done) {
-                if(object_name.indexOf(item) >= 0){
-                  if(this.checklist_done[item].done == false) {
-                    console.log('ajout rature', item)
-                    this.rature = this.add.image(this.checklist_done[item].position_x, this.checklist_done[item].position_y, 'rature')
-                    this.rature.depth = 20;
-                    this.checklist_done[item].done = true;
-                  } else {
-                    console.log('rature deja ajoutée')
-                  }
-                }else{
-                  console.log('pas de', item)
+
+        let object = this.children.getByName(object_name);
+        object.depth = 5;
+
+        let yDistance = this.basket.y - object.y; // between 280 and 1340
+
+        let target_objects = [object];
+        if(object_name === 'pate_spaghetti01') {
+            // also move the other pack
+            target_objects.push(this.children.getByName('pate_spaghetti02'));
+        }
+
+        // Move to basket
+        this.tweens.add({
+            targets: target_objects,
+            x: this.basket.x + (Math.random() * 50),
+            y: this.basket.y + 25 + (Math.random() * 25),
+            duration: 150 + (yDistance / 8),
+            ease: 'Quadratic',
+            yoyo: false,
+            loop: 0,
+            onComplete: () => {
+                // this.rature = this.add.image(this.listPositions[object_name], 'rature')
+                // todo: add flag
+                for (const item in this.checklist_done) {
+                    if(object_name.indexOf(item) >= 0) {
+                        if(!this.checklist_done[item].done) {
+
+                            this.rature = this.add.image(
+                                this.checklist_done[item].position_x,
+                                this.checklist_done[item].position_y,
+                                'rature'
+                            );
+
+                            this.rature.depth = 20;
+                            this.checklist_done[item].done = true;
+                        }
+                    }
                 }
-              }
-              
-              // Animate basket
-              this.tweens.add({
-                targets: [this.basket, this.basket_front],
-                scale: 1.2,
-                duration: 100,
-                ease: 'Quadratic',
-                yoyo: true,
-                loop: 0
-              })
-          },
-          onCompleteScope: this
-      });
+
+                // Animate basket
+                this.tweens.add({
+                    targets: [this.basket, this.basket_front],
+                    scale: 1.2,
+                    duration: 100,
+                    ease: 'Quadratic',
+                    yoyo: true,
+                    loop: 0
+                });
+            },
+            onCompleteScope: this
+        });
     }
 
     create() {
@@ -857,60 +790,60 @@ export class StoreScene extends Phaser.Scene {
 
         if(this.current_card.isLoaded()) {
             this.current_card.create();
-            this.addArrow()
+            this.addArrow();
         }
-        
+
         this.checklist = this.add.image(-this.cameras.main.width * 0.255, 489, 'liste');
         this.checklist.depth = 20;
-        
-        
+
         this.basket = this.add.image(this.cameras.main.width * 0.24166, 700, 'basket');
         this.basket.depth = 4;
-        
+
         this.basket_front = this.add.image(this.cameras.main.width * 0.24166, 700, 'basket-front');
         this.basket_front.depth = 25;
-        
+
+        //Create and play the background music
+        this.music = this.sound.add('bg_music');
+        this.music.play();
+
         // Update the saved data
-        // ! Cette scene apparaitra pour deux personnages: independant, etudiant
+        // @TODO
+        // player.setData()
         // player.cur_scene = Scenes.STORE;
     }
 
-    nextCard(){
-        if(this.cardIdx < this.cards.length - 1){
-        
-        // move previous card
-        let container = this.add.container();
-        container.depth = 2;
-        for(let i in this.current_card.children){
-          if(this.current_card.children[i].sprite.depth != 5){
-            container.add(this.current_card.children[i].sprite)
-          }
+    nextCard() {
+        if(this.cardIdx < this.cards.length - 1) {
+
+            // move previous card
+            let container = this.add.container();
+            container.depth = 2;
+
+            for(let i in this.current_card.children) {
+                if(this.current_card.children[i].sprite.depth != 5) {
+                    container.add(this.current_card.children[i].sprite);
+                }
+            }
+
+            this.tweens.add({
+                targets: container,
+                x: -1200,
+                duration: 500,
+                ease: 'Quadratic',
+                yoyo: false,
+                loop: 0
+            });
+
+            this.cardIdx++;
+            this.current_card = this.cards[this.cardIdx];
+            this.current_card.create();
+        } else {
+            this.nextScene();
         }
-        this.tweens.add({
-          targets: container,
-          x: -1200,
-          duration: 500,
-          ease: 'Quadratic',
-          yoyo: false,
-          loop: 0
-        })
-        
-        this.cardIdx++;
-        this.current_card = this.cards[this.cardIdx];
-        this.current_card.create();
-        if(this.cardIdx >= this.cards.length - 1){
-          console.log('remove arrow')
-          this.nextCardButton.destroy();
-          // ici: prochaine scène
-        }
-      }
     }
-    
-    nextScene(cardIdx) {
-        // TODO -- depends on current position in story
-        /*this.cameras.main.fadeOut(3000, 0, 0, 0,
-            () => this.scene.start(Scenes.XXXX, { cardIdx: cardIdx }),
-            this
-        );*/
+
+    nextScene() {
+        this.music.stop();
+        this.scene.start(Scenes.HALLWAY, {cardIdx: HallwayCards.INDEP_GRANDMA, damien_gone: false});
     }
 }

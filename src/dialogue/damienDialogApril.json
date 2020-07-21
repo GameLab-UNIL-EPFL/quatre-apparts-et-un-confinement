@@ -1,0 +1,200 @@
+{
+    "Natel": {
+		"name": "Damien",
+		"text": ["Oh, 3 appels manqués."],
+		"choices": {},
+		"goto": []
+	},
+	"sorti": {
+		"name": "Copine",
+		"text": ["Damien!? Pourquoi tu réponds pas?"],
+		"choices": {
+            "rep":
+			{
+				"text": ["Désolé, j'étais en train de faire les courses. Qu'est-ce qu'il y a?"],
+				"preview": "Faire les courses.",
+				"goto": "covid"
+            },
+            "rep2":
+			{
+				"text": ["Désolé, j'ai pas entendu mon natel."],
+				"preview": "Pas entendu.",
+				"goto": "covid"
+			}
+        },
+		"goto": ["covid"]
+	},
+	"covid": {
+		"name": "Copine",
+		"text": ["Mon père a le covid…"],
+		"choices": {
+            "rep":
+			{
+				"text": ["Comment ça???"],
+				"preview": "Comment ça?",
+				"goto": "toi"
+            },
+            "rep2":
+			{
+				"text": ["Quoi??? Mais comment c'est possible?"],
+				"preview": "Quoi?",
+				"goto": "toi"
+			}
+        },
+		"goto": ["toi"]
+	},
+	"toi": {
+		"name": "Copine",
+        "text": [
+            "Ben on ne sait pas. Ça pourrait venir de n'importe qui. Un de ses clients, ou même toi ou moi…"
+        ],
+		"choices": {
+            "rep":
+			{
+				"text": ["Mais il portait un masque au travail, non?"],
+				"preview": "Il portait un masque.",
+				"goto": "masque"
+            },
+            "rep2":
+			{
+				"text": ["Ça peut pas être nous, on n'est pas malades."],
+				"preview": "On n'est pas malades.",
+				"goto": "malade"
+            }
+        },
+		"goto": ["masque", "malade"]
+    },
+    "masque": {
+		"name": "Copine",
+        "text": [
+			"Ben le masque ça ne protège pas forcément. Et…",
+			"… j'aurais pas dû t'inviter. Même si ça ne vient pas de toi, j'ai pris des risques inutiles."
+        ],
+		"choices": {
+            "rep":
+			{
+				"text": ["Je suis vraiment désolé. T'as raison, je n'aurais pas dû venir chez toi."],
+				"preview": "J'aurais pas dû.",
+				"goto": ""
+            },
+            "rep2":
+			{
+				"text": ["J'espère que ça va aller et qu'il va s'en remettre."],
+				"preview": "J'espère que ça va aller.",
+				"goto": ""
+            }
+        },
+		"goto": []
+    },
+    "malade": {
+		"name": "Copine",
+        "text": [
+			"Si ça se trouve on est asymptomatique…",
+			"Mais j'aurais pas dû t'inviter. Même si ça ne vient pas de toi, j'ai pris des risques inutiles."
+        ],
+		"choices": {
+            "rep":
+			{
+				"text": ["Je suis vraiment désolé. T'as raison, j'aurais pas dû venir chez toi."],
+				"preview": "J'aurais pas dû.",
+				"goto": ""
+            },
+            "rep2":
+			{
+				"text": ["J'espère que ça va aller et qu'il va s'en remettre."],
+				"preview": "J'espère que ça va aller.",
+				"goto": ""
+            }
+        },
+        "goto": []
+    },
+    "pasSorti": {
+		"name": "Copine",
+		"text": ["Damien!? Pourquoi tu réponds pas?"],
+		"choices": {
+            "rep":
+			{
+				"text": ["Désolé, j'étais en train de faire les courses. Qu'est-ce qu'il y a?"],
+				"preview": "Faire les courses",
+				"goto": "covid"
+            },
+            "rep2":
+			{
+				"text": ["Désolé, j'ai pas entendu mon natel."],
+				"preview": "Pas entendu",
+				"goto": "covid"
+			}
+        },
+		"goto": ["covid"]
+	},
+	"pere": {
+		"name": "Copine",
+		"text": ["Mon père a le covid…"],
+		"choices": {
+            "rep":
+			{
+				"text": ["Comment ça???"],
+				"preview": "Comment ça?",
+				"goto": "toi"
+            },
+            "rep2":
+			{
+				"text": ["Quoi??? Mais comment c'est possible?"],
+				"preview": "Quoi?",
+				"goto": "toi"
+			}
+        },
+		"goto": ["toi"]
+	},
+	"client": {
+		"name": "Copine",
+        "text": [
+            "On ne sait pas et c'est difficile à dire. Peut-être un de ses clients…"
+        ],
+		"choices": {
+            "rep":
+			{
+				"text": ["Mais il portait un masque au travail, non?"],
+				"preview": "Il portait un masque.",
+				"goto": "masque2"
+            }
+        },
+		"goto": ["masque2"]
+    },
+    "masque2": {
+		"name": "Copine",
+        "text": [
+            "Ben le masque ça protège pas forcément…"
+        ],
+		"choices": {
+            "rep":
+			{
+				"text": ["J'arrive pas à y croire… et toi ça va?"],
+				"preview": "Toi, ça va?",
+				"goto": "asymp"
+            },
+            "rep2":
+			{
+				"text": ["C'est horrible… T'es sûr que ça va?"],
+				"preview": "C'est horrible.",
+				"goto": "asymp"
+            }
+        },
+		"goto": []
+    },
+    "asymp": {
+		"name": "Copine",
+        "text": [
+            "Oui, ça va. Mais je ne peux pas risquer de contaminer d'autres personnes."
+        ],
+		"choices": {
+            "rep":
+			{
+				"text": ["D'acc. J'espère que ça va aller et qu'il va vite s'en remettre."],
+				"preview": "J'espère que ça va aller.",
+				"goto": ""
+            }
+        },
+        "goto": []
+    }
+}
