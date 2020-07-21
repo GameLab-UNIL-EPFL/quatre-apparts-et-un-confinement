@@ -1,492 +1,493 @@
 {
     "calendrier": {
-        "name": "Suzanne",
-        "text": [
-            "Toujours rien de prévu...",
-            "On dirait bien que je vais fêter Pâques toute seule...",
-            "Ou peut-être en ligne sur Zoom"
-        ],
-        "choices": [],
-        "goto": []
-    },
-    "livre1": {
-        "name": "",
-        "text": [
-            "La Covédie Humaine - Honoré De Balzac",
-            "Ces débris jetaient dans le tableau des effets d'une poésie ravissante,",
-            "et des idées rêveuses dans l'âme du spectateur.",
-            "Un poète serait resté là plongé dans une longue mélancolie,",
-            "en admirant ce désordre plein d'harmonies, cette destruction qui n'était pas sans grâce."
-        ],
-        "choices": [],
-        "goto": []
-    },
-    "livre2": {
-        "name": "",
-        "text": [
-            "Les Misérables - Victor Hugo",
-            "Rien n'est stupide comme vaincre; la vraie gloire est convaincre.",
-            "La vie, le malheur, l'isolement, l'abandon, la pauvreté,",
-            "sont des champs de bataille qui ont leurs héros;",
-            "héros obscurs plus grands parfois que les héros illustres."
-        ],
-        "choices": [],
-        "goto": []
-    },
-    "livre3": {
-        "name": "",
-        "text": [
-            "Les Métamorphoses - Covide",
-            "Je vous dirai que, dans l'univers entier, il n'est rien qui dure.",
-            "Tout s'écoule, et les êtres ne revêtent qu'une forme fugitive."
-        ],
-        "choices": [],
-        "goto": []
-    },
-    "radio": {
-        "name": "Radio",
-        "text": ["Que faire?"],
-        "choices": [
-            {
-                "text": ["écouter de la musique"],
-                "preview": "Musique",
-                "goto": "bleiben"
-            },
-            {
-                "text": ["écouter les nouvelles"],
-                "preview": "Nouvelles",
-                "goto": "news"
-            }
-        ],
-        "goto": ["bleiben", "news"]
-    },
-    "news": {
-        "name": "Radio",
-        "text": [
-            "27 Avril - réouverture des salons de coiffure et les magasins de bricolage et jardineries"
-        ],
-        "choices": [],
-        "goto": []
-    },
-    "bleiben": {
-        "name": "Radio",
-        "text": ["*musique* Bleiben Sie zuhause"],
-        "choices": [],
-        "goto": []
-    },
-    "telephone": {
-        "name": "Suzanne",
-        "text": ["Bon, qui est-ce que je pourrais appeler?"],
-        "choices":[
-            {
-                "text": ["Françoise"],
-                "preview": "Françoise",
-                "goto": "francoise"
-            },
-            {
-                "text": ["Sophie"],
-                "preview": "Sophie",
-                "goto": "sophie"
-            },
-            {
-                "text": ["Gertrude"],
-                "preview": "Gertrude",
-                "goto": "gertrude"
-            }
-        ],
-        "goto": ["francoise", "sophie", "gertrude"]
-    },
-    "francoise": {
-        "name": "Françoise",
-        "text": ["Allo? Ah Salut Suzanne! Comment vas-tu?"],
-        "choices": [
-            {
-                "text": ["Toujours pareil"],
-                "preview": "Toujours pareil",
-                "goto": "cava"
-            },
-            {
-                "text": ["Rien de nouveau"],
-                "preview": "Rien de nouveau",
-                "goto": "ennuie"
-            },
-            {
-                "text": ["T’as écouté les nouvelles?"],
-                "preview": "T’as écouté les nouvelles?",
-                "goto": "nouvelles"
-            }
-        ],
-        "goto": ["cava", "ennuie", "nouvelles"]
-    },
-    "cava": {
-        "name": "Françoise",
-        "text": ["Tu fais quoi pour t’occuper ces temps?"],
-        "choices": [
-            {
-                "text": ["Je lis"],
-                "preview": "Je lis",
-                "goto": "lire"
-            },
-            {
-                "text": ["J’écoute la radio"],
-                "preview": "J’écoute la radio",
-                "goto": "nouvelles"
-            },
-            {
-                "text": ["Je passe des coups de fil"],
-                "preview": "Je passe des appels",
-                "goto": "appel"
-            }
-        ],
-        "goto": ["lire", "nouvelles", "appel"]
-    },
-    "lire": {
-        "name": "Françoise",
-        "text": ["Qu’est-ce que tu lis?"],
-        "choices":[
-            {
-                "text": ["La Comédie Humaine de Balzac"],
-                "preview": "La Comédie Humaine de Balzac",
-                "goto": "oui"
-            },
-            {
-                "text": ["Les misérables de Hugo"],
-                "preview": "Les misérables de Hugo",
-                "goto": "oui"
-            },
-            {
-                "text": ["Les Métamorphose d'Ovide"],
-                "preview": "Les Métamorphose d'Ovide",
-                "goto": "oui"
-            }
-        ],
-        "goto": ["oui"]
-    },
-    "appel": {
-        "name": "Françoise",
-        "text": ["Hahaha je devrais faire pareil"],
-        "choices":[
-            {
-                "text": ["Oui hahaha"],
-                "preview": "Oui",
-                "goto": "oui"
-            }
-        ],
-        "goto": ["oui"]
-    },
-    "ennuie": {
-        "name": "Françoise",
-        "text": [
-            "De même. J'ai fini de relire tous mes livres!",
-            "Je m'ennuie tellement que je commence à parler à mes plantes.",
-            "Heureusement que tu m'as appelée!"
-        ],
-        "choices":[
-            {
-                "text": ["Ah oui moi je discute avec Caramel mais au moins elle me répond."],
-                "preview": "Ah oui moi je discute avec Caramel mais au moins elle me répond",
-                "goto": "oui"
-            },
-            {
-                "text": ["Ah oui, j'ai besoin de nouveaux livres aussi"],
-                "preview": "Ah oui, j'ai besoin de nouveaux livres aussi",
-                "goto": "oui"
-            }
-        ],
-        "goto": ["oui"]
-    },
-    "nouvelles": {
-        "name": "Françoise",
-        "text": [
-            "Ah oui, ils ouvrent enfin les magasins de jardinage",
-            "J'avais besoin de fertilisant."
-        ],
-        "choices": [
-            {
-                "text": ["Et les salons de coiffures aussi!"],
-                "preview": "Et les salons de coiffures",
-                "goto": "oui"
-            },
-            {
-                "text": ["T'habiteras bientôt dans la jungle avec toutes tes plantes"],
-                "preview": "T'habiteras bientôt dans une jungle avec toutes ces plantes!",
-                "goto": "pandemie"
-            }
-        ],
-        "goto": ["oui", "pandemie"]
-    },
-    "pandemie": {
-        "name": "Françoise",
-        "text": ["C'est ma solution pour amener l'extérieur à l'intérieur!"],
-        "choices": [
-            {
-                "text": ["Oui oui"],
-                "preview": "Oui",
-                "goto": "oui"
-            }
-        ],
-        "goto": ["oui"]
-    },
-    "oui": {
-        "name": "Françoise",
-        "text": [
-            "Je suis bientôt à bout.",
-            "J’en peux plus de rester à la maison"
-        ],
-        "choices":[
-            {
-                "text": ["On peut aller se promener"],
-                "preview": "On peut aller se promener",
-                "goto": "malade"
-            },
-            {
-                "text": ["Tu peux venir chez moi boire un café"],
-                "preview": "Tu peux venir chez moi boire un café",
-                "goto": "malade"
-            }
-        ],
-        "goto": ["malade"]
-    },
-    "malade": {
-        "name": "Françoise",
-        "text": ["Oui ça me fera du bien!"],
-        "choices": [
-            {
-                "text": "A toute à l'heure!",
-                "preview": "A toute à l'heure!",
-                "goto": ""
-            },
-            {
-                "text": ["Oui à moi aussi! A plus tard!"],
-                "preview": "Oui à moi aussi! A plus tard!",
-                "goto": ""
-            }
-        ],
-        "goto": []
-    },
-    "sophie": {
-        "name": "Sophie",
-        "text": ["Allo maman?"],
-        "choices": [
-            {
-                "text": ["Hello!"],
-                "preview": "Hello!",
-                "goto": "zoom"
-            },
-            {
-                "text": ["Salut Sophie!"],
-                "preview": "Salut Sophie!",
-                "goto": "zoom"
-            }
-        ],
-        "goto": ["zoom"]
-    },
-    "zoom": {
-        "name": "Sophie",
-        "text": ["Tu sais pas ce que Maxime a fait l'autre jour!"],
-        "choices": [
-            {
-                "text": ["Je crains le pire..."],
-                "preview": "Je crains le pire...",
-                "goto": "conference"
-            },
-            {
-                "text": ["Qu'est-ce qu'il a encore fait?"],
-                "preview": "Qu'est-ce qu'il a encore fait?",
-                "goto": "conference"
-            }
-        ],
-        "goto": ["conference"]
-    },
-    "conference": {
-        "name": "Sophie",
-        "text": [
-            "Il est entré tout nu dans le bureau de son père, alors qu'il était en pleine conférence zoom!"
-        ],
-        "choices": [
-            {
-                "text": ["Il est incroyable cet enfant!"],
-                "preview": "Il est incroyable cet enfant!",
-                "goto": "manque"
-            },
-            {
-                "text": ["Ça ne m'étonne pas de lui!"],
-                "preview": "Ça ne m'étonne pas de lui!",
-                "goto": "manque"
-            },
-            {
-                "text": ["Oh non!"],
-                "preview": "Oh non!",
-                "goto": "manque"
-            }
-        ],
-        "goto": ["manque"]
-    },
-    "manque": {
-        "name": "Sophie",
-        "text": ["Ils ne savent plus quoi inventer...", 
-            "Ils arrêtent pas de me demander quand est-ce qu'il pourront te revoir.", 
-            "Tu leur manques beaucoup."
-        ],
-        "choices": [
-            {
-                "text": ["Ils me manquent aussi, fais-leur plein de bisous de ma part!"],
-                "preview": "Ils me manquent aussi, fais-leur plein de bisous de ma part!",
-                "goto": "bisous"
-            }
-        ],
-        "goto": ["bisous"]
-    },
-    "bisous": {
-        "name": "Sophie",
-        "text": [
-            "Oui et on peut refaire un zoom bientôt!",
-            "Sinon, j'arrive pas à te commander de la nourriture cette semaine,",
-            "la file d'attente est trop longue pour la livraison.", 
-            "Est-ce que t'arriverais à demander à quelqu'un? Un voisin peut-être?", 
-            "Je veux surtout pas que tu ailles faire les courses toi-même!"
-        ],
-        "choices": [
-            {
-                "text": ["D'accord, je vais demander au voisin alors."],
-                "preview": "D'accord, je vais demander au voisin alors.",
-                "goto": "fin"
-            }
-        ],
-        "goto": ["fin"]
-    },
-    "fin": {
-        "name": "Sophie",
-        "text": [
-            "Super! Bon faut que je te laisse, j'entends plus les loulous.", 
-            "Je pense qu'ils sont en train de faire des bêtises."],
-        "choices": [
-            {
-                "text": ["Ok, bisous à toute la famille!"],
-                "preview": "Ok, bisous à toute la famille!",
-                "goto": ""
-            }
-        ],
-        "goto": []
-    },
-    "gertrude": {
-        "name": "Gertrude",
-        "text": ["Allo?"],
-        "choices": [
-            {
-                "text": ["Hello Gertrude! Comment vas-tu?"],
-                "preview": "Hello Gertrude! Comment vas-tu?",
-                "goto": "coiffeur"
-            }
-        ],
-        "goto": ["coiffeur"]
-    },
-    "coiffeur": {
-        "name": "Gertrude",
-        "text": [
-            "Oui, t'as vu que les coiffeurs allait rouvrir le 27 Avril?"
-        ],
-        "choices": [
-            {
-                "text": ["T'en a marre de tes racines blanches?"],
-                "preview": "T'en as déjà marre de tes racines blanches?",
-                "goto": "racine"
-            },
-            {
-                "text": ["Oui j'ai vu, mais j'aime bien avoir les cheveux plus longs finalement."],
-                "preview": "Oui j'ai vu, mais j'aime bien avoir les cheveux plus longs finalement.",
-                "goto": "long"
-            },
-            {
-                "text": ["Enfin! Je peux plus de ma coupe déformée!"],
-                "preview": "Enfin! Je peux plus de ma coupe déformée!",
-                "goto": "enfin"
-            }
-        ],
-        "goto": ["racine", "long", "enfin"]
-    },
-    "racine": {
-        "name": "Gertrude",
-        "text": [
-            "Ha! J'aurais bientôt la même coupe que toi!"
-        ],
-        "choices": [
-            {
-                "text": ["Ha! Moi au moins j'assume!"],
-                "preview": "Ha! Moi au moins j'assume!",
-                "goto": "coupe"
-            },
-            {
-                "text": ["Ha! Je suis sûr que ça t'irait à merveille en plus!"],
-                "preview": "Ha! Je suis sûr que ça t'irait à merveille en plus!",
-                "goto": "coupe"
-            }
-        ],
-        "goto": ["coupe"]
-    },
-    "long": {
-        "name": "Gertrude",
-        "text": [
-            "Moi je n'en peux plus! Il faut vraiment que j'y retourne!"
-        ],
-        "choices": [
-            {
-                "text": ["N'oublie pas de prendre un masque, c'est obligatoire."],
-                "preview": "N'oublie pas de prendre un masque, c'est obligatoire.",
-                "goto": "coupe"
-            },
-            {
-                "text": ["N'oublie pas de tousser dans ton coude hein!"],
-                "preview": "N'oublie pas de tousser dans ton coude hein!",
-                "goto": "coupe"
-            }
-        ],
-        "goto": ["coupe"]
-    },
-    "enfin": {
-        "name": "Gertrude",
-        "text": [
-            "Haha envoie-moi une photo!"
-        ],
-        "choices": [
-            {
-                "text": ["Dans tes rêves!"],
-                "preview": "Dans tes rêves!",
-                "goto": "coupe"
-            },
-            {
-                "text": ["Jamais!"],
-                "preview": "Jamais!",
-                "goto": "coupe"
-            }
-        ],
-        "goto": ["coupe"]
-    },
-    "coupe": {
-        "name": "Gertrude",
-        "text": [
-            "Tu vas y aller du coup?"
-        ],
-        "choices": [
-            {
-                "text": ["Oui, j'ai déplacé mon rendez-vous annulé."],
-                "preview": "Oui, j'ai déplacé mon rendez-vous annulé.",
-                "goto": "bye"
-            },
-            {
-                "text": ["Non, c'est encore trop risqué."],
-                "preview": "Non, c'est encore trop risqué.",
-                "goto": "bye"
-            }
-        ],
-        "goto": ["bye"]
-    },
-    "bye": {
-        "name": "Gertrude",
-        "text": [
-            "Ok, prend soin de toi! Je dois y aller! A bientôt!"
-        ],
-        "choices": [],
-        "goto": []
-    }
+      "name": "Suzanne",
+      "text": [
+          "Toujours rien de prévu...",
+          "On dirait bien que je vais fêter Pâques toute seule...",
+          "Ou peut-être en ligne sur Zoom"
+      ],
+      "choices": [],
+      "goto": []
+  },
+  "livre1": {
+      "name": "",
+      "text": [
+          "La Covédie Humaine - Honoré De Balzac",
+          "Ces débris jetaient dans le tableau des effets d'une poésie ravissante,",
+          "et des idées rêveuses dans l'âme du spectateur.",
+          "Un poète serait resté là plongé dans une longue mélancolie,",
+          "en admirant ce désordre plein d'harmonies, cette destruction qui n'était pas sans grâce."
+      ],
+      "choices": [],
+      "goto": []
+  },
+  "livre2": {
+      "name": "",
+      "text": [
+          "Les Misérables - Victor Hugo",
+          "Rien n'est stupide comme vaincre; la vraie gloire est convaincre.",
+          "La vie, le malheur, l'isolement, l'abandon, la pauvreté,",
+          "sont des champs de bataille qui ont leurs héros;",
+          "héros obscurs plus grands parfois que les héros illustres."
+      ],
+      "choices": [],
+      "goto": []
+  },
+  "livre3": {
+      "name": "",
+      "text": [
+          "Les Métamorphoses - Covide",
+          "Je vous dirai que, dans l'univers entier, il n'est rien qui dure.",
+          "Tout s'écoule, et les êtres ne revêtent qu'une forme fugitive."
+      ],
+      "choices": [],
+      "goto": []
+  },
+  "radio": {
+      "name": "Radio",
+      "text": ["Que faire?"],
+      "choices": [
+          {
+              "text": ["Écouter de la musique"],
+              "preview": "Musique",
+              "goto": "bleiben"
+          },
+          {
+              "text": ["Écouter les nouvelles"],
+              "preview": "Nouvelles",
+              "goto": "news"
+          }
+      ],
+      "goto": ["bleiben", "news"]
+  },
+  "news": {
+      "name": "Radio",
+      "text": [
+          "27 Avril - Réouverture des salons de coiffure, des magasins de bricolage et des jardineries."
+      ],
+      "choices": [],
+      "goto": []
+  },
+  "bleiben": {
+      "name": "Radio",
+      "text": ["🎶 Bleiben Sie zuhause 🎶\n🎶 Bleiben Sie zuhause 🎶"],
+      "choices": [],
+      "goto": []
+  },
+  "telephone": {
+      "name": "Suzanne",
+      "text": ["Bon, qui est-ce que je pourrais appeler?"],
+      "choices":[
+          {
+              "text": ["Françoise"],
+              "preview": "Françoise",
+              "goto": "francoise"
+          },
+          {
+              "text": ["Sophie"],
+              "preview": "Sophie",
+              "goto": "sophie"
+          },
+          {
+              "text": ["Gertrude"],
+              "preview": "Gertrude",
+              "goto": "gertrude"
+          }
+      ],
+      "goto": ["francoise", "sophie", "gertrude"]
+  },
+  "francoise": {
+      "name": "Françoise",
+      "text": ["Allo? Ah Salut Suzanne! Comment vas-tu?"],
+      "choices": [
+          {
+              "text": ["Toujours pareil."],
+              "preview": "Toujours pareil",
+              "goto": "cava"
+          },
+          {
+              "text": ["Rien de nouveau."],
+              "preview": "Rien de nouveau",
+              "goto": "ennuie"
+          },
+          {
+              "text": ["T’as écouté les nouvelles?"],
+              "preview": "T’as écouté les nouvelles?",
+              "goto": "nouvelles"
+          }
+      ],
+      "goto": ["cava", "ennuie", "nouvelles"]
+  },
+  "cava": {
+      "name": "Françoise",
+      "text": ["Tu fais quoi pour t’occuper ces temps?"],
+      "choices": [
+          {
+              "text": ["Je lis."],
+              "preview": "Je lis",
+              "goto": "lire"
+          },
+          {
+              "text": ["J’écoute la radio."],
+              "preview": "J’écoute la radio",
+              "goto": "nouvelles"
+          },
+          {
+              "text": ["Je passe des coups de fil."],
+              "preview": "Je passe des appels",
+              "goto": "appel"
+          }
+      ],
+      "goto": ["lire", "nouvelles", "appel"]
+  },
+  "lire": {
+      "name": "Françoise",
+      "text": ["Qu’est-ce que tu lis?"],
+      "choices":[
+          {
+              "text": ["La Comédie Humaine de Balzac"],
+              "preview": "La Comédie Humaine de Balzac",
+              "goto": "oui"
+          },
+          {
+              "text": ["Les Misérables de Hugo"],
+              "preview": "Les Misérables de Hugo",
+              "goto": "oui"
+          },
+          {
+              "text": ["Les Métamorphose d'Ovide"],
+              "preview": "Les Métamorphose d'Ovide",
+              "goto": "oui"
+          }
+      ],
+      "goto": ["oui"]
+  },
+  "appel": {
+      "name": "Françoise",
+      "text": ["Hahaha je devrais faire pareil"],
+      "choices":[
+          {
+              "text": ["Oui!"],
+              "preview": "Oui",
+              "goto": "oui"
+          }
+      ],
+      "goto": ["oui"]
+  },
+  "ennuie": {
+      "name": "Françoise",
+      "text": [
+          "De même. J'ai fini de relire tous mes livres!",
+          "Je m'ennuie tellement que je commence à parler à mes plantes.",
+          "Heureusement que tu m'as appelée!"
+      ],
+      "choices":[
+          {
+              "text": ["Ah oui moi je discute avec Caramel mais au moins elle me répond."],
+              "preview": "Ah oui moi je discute avec Caramel mais au moins elle me répond",
+              "goto": "oui"
+          },
+          {
+              "text": ["Ah oui, j'ai besoin de nouveaux livres aussi"],
+              "preview": "Ah oui, j'ai besoin de nouveaux livres aussi",
+              "goto": "oui"
+          }
+      ],
+      "goto": ["oui"]
+  },
+  "nouvelles": {
+      "name": "Françoise",
+      "text": [
+          "Ah oui, ils ouvrent enfin les magasins de jardinage.",
+          "J'avais besoin de fertilisant."
+      ],
+      "choices": [
+          {
+              "text": ["Et les salons de coiffures aussi!"],
+              "preview": "Et les salons de coiffures",
+              "goto": "oui"
+          },
+          {
+              "text": ["T'habiteras bientôt dans la jungle avec toutes tes plantes!"],
+              "preview": "T'habiteras bientôt dans une jungle avec toutes ces plantes!",
+              "goto": "pandemie"
+          }
+      ],
+      "goto": ["oui", "pandemie"]
+  },
+  "pandemie": {
+      "name": "Françoise",
+      "text": ["C'est ma solution pour amener l'extérieur à l'intérieur!"],
+      "choices": [
+          {
+              "text": ["Oui oui"],
+              "preview": "Oui",
+              "goto": "oui"
+          }
+      ],
+      "goto": ["oui"]
+  },
+  "oui": {
+      "name": "Françoise",
+      "text": [
+          "Je suis bientôt à bout.",
+          "J’en peux plus de rester à la maison"
+      ],
+      "choices":[
+          {
+              "text": ["On peut aller se promener si tu en as envie"],
+              "preview": "On peut aller se promener.",
+              "goto": "malade"
+          },
+          {
+              "text": ["Souhaiterais-tu passer à la maison boire une tisane?"],
+              "preview": "Tu peux venir chez moi boire un thé.",
+              "goto": "malade"
+          }
+      ],
+      "goto": ["malade"]
+  },
+  "malade": {
+      "name": "Françoise",
+      "text": ["Oui, ça me fera du bien!"],
+      "choices": [
+          {
+              "text": "A toute à l'heure!",
+              "preview": "A toute à l'heure!",
+              "goto": ""
+          },
+          {
+              "text": ["Oui, à moi aussi! À plus tard!"],
+              "preview": "Oui à moi aussi! A plus tard!",
+              "goto": ""
+          }
+      ],
+      "goto": []
+  },
+  "sophie": {
+      "name": "Sophie",
+      "text": ["Allo maman?"],
+      "choices": [
+          {
+              "text": ["Hello!"],
+              "preview": "Hello!",
+              "goto": "zoom"
+          },
+          {
+              "text": ["Salut Sophie!"],
+              "preview": "Salut Sophie!",
+              "goto": "zoom"
+          }
+      ],
+      "goto": ["zoom"],
+      "objective": true
+  },
+  "zoom": {
+      "name": "Sophie",
+      "text": ["Tu sais pas ce que Maxime a fait l'autre jour!"],
+      "choices": [
+          {
+              "text": ["Je crains le pire..."],
+              "preview": "Je crains le pire...",
+              "goto": "conference"
+          },
+          {
+              "text": ["Qu'est-ce qu'il a encore fait?"],
+              "preview": "Qu'est-ce qu'il a encore fait?",
+              "goto": "conference"
+          }
+      ],
+      "goto": ["conference"]
+  },
+  "conference": {
+      "name": "Sophie",
+      "text": [
+          "Il est entré tout nu dans le bureau de son père, alors qu'il était en pleine conférence Zoom!"
+      ],
+      "choices": [
+          {
+              "text": ["Il est incroyable cet enfant!"],
+              "preview": "Il est incroyable cet enfant!",
+              "goto": "manque"
+          },
+          {
+              "text": ["Ça ne m'étonne pas de lui!"],
+              "preview": "Ça ne m'étonne pas de lui!",
+              "goto": "manque"
+          },
+          {
+              "text": ["Oh non!"],
+              "preview": "Oh non!",
+              "goto": "manque"
+          }
+      ],
+      "goto": ["manque"]
+  },
+  "manque": {
+      "name": "Sophie",
+      "text": ["Ils ne savent plus quoi inventer...", 
+          "Ils arrêtent pas de me demander quand ils pourront te revoir.", 
+          "Tu leur manques beaucoup."
+      ],
+      "choices": [
+          {
+              "text": ["Ils me manquent aussi. Fais-leur plein de bisous de ma part!"],
+              "preview": "Ils me manquent aussi. Fais-leur plein de bisous de ma part!",
+              "goto": "bisous"
+          }
+      ],
+      "goto": ["bisous"]
+  },
+  "bisous": {
+      "name": "Sophie",
+      "text": [
+          "Oui, et on peut refaire un Zoom bientôt!",
+          "Sinon, j'arrive pas à te commander de la nourriture cette semaine.",
+          "Le temps d'attente pour la livraison est trop long.", 
+          "Est-ce que t'arriverais à demander à quelqu'un? Un voisin peut-être?", 
+          "Je veux surtout pas que tu ailles faire les courses toi-même!"
+      ],
+      "choices": [
+          {
+              "text": ["D'accord, je vais demander au voisin alors."],
+              "preview": "D'accord, je vais demander au voisin alors.",
+              "goto": "fin"
+          }
+      ],
+      "goto": ["fin"]
+  },
+  "fin": {
+      "name": "Sophie",
+      "text": [
+          "Super! Bon, faut que je te laisse, j'entends plus les loulous.", 
+          "Je pense qu'ils sont en train de faire des bêtises."],
+      "choices": [
+          {
+              "text": ["Ok, bisous à toute la famille!"],
+              "preview": "Ok, bisous à toute la famille!",
+              "goto": ""
+          }
+      ],
+      "goto": []
+  },
+  "gertrude": {
+      "name": "Gertrude",
+      "text": ["Allo?"],
+      "choices": [
+          {
+              "text": ["Hello Gertrude! Comment vas-tu?"],
+              "preview": "Hello Gertrude! Comment vas-tu?",
+              "goto": "coiffeur"
+          }
+      ],
+      "goto": ["coiffeur"]
+  },
+  "coiffeur": {
+      "name": "Gertrude",
+      "text": [
+          "Oui, t'as vu que les coiffeurs allait rouvrir le 27 Avril?"
+      ],
+      "choices": [
+          {
+              "text": ["T'en as déjà marre de tes racines blanches?"],
+              "preview": "T'en as déjà marre de tes racines blanches?",
+              "goto": "racine"
+          },
+          {
+              "text": ["Oui j'ai vu, mais j'aime bien avoir les cheveux plus longs finalement."],
+              "preview": "Oui j'ai vu, mais j'aime bien avoir les cheveux plus longs finalement.",
+              "goto": "long"
+          },
+          {
+              "text": ["Enfin! Je n'en peux plus de ma coupe déformée!"],
+              "preview": "Enfin! Je n'en peux plus de ma coupe déformée!",
+              "goto": "enfin"
+          }
+      ],
+      "goto": ["racine", "long", "enfin"]
+  },
+  "racine": {
+      "name": "Gertrude",
+      "text": [
+          "Ha! J'aurai bientôt la même coupe que toi!"
+      ],
+      "choices": [
+          {
+              "text": ["Moi au moins j'assume, ma chère!"],
+              "preview": "Moi au moins j'assume!",
+              "goto": "coupe"
+          },
+          {
+              "text": ["Je suis sûr que ça t'irait à merveille, en plus!"],
+              "preview": "Je suis sûr que ça t'irait à merveille, en plus!",
+              "goto": "coupe"
+          }
+      ],
+      "goto": ["coupe"]
+  },
+  "long": {
+      "name": "Gertrude",
+      "text": [
+          "Moi je n'en peux plus! Il faut vraiment que j'y retourne!"
+      ],
+      "choices": [
+          {
+              "text": ["N'oublie pas de prendre un masque, c'est obligatoire."],
+              "preview": "N'oublie pas de prendre un masque, c'est obligatoire.",
+              "goto": "coupe"
+          },
+          {
+              "text": ["N'oublie pas de tousser dans ton coude, hein!"],
+              "preview": "N'oublie pas de tousser dans ton coude, hein!",
+              "goto": "coupe"
+          }
+      ],
+      "goto": ["coupe"]
+  },
+  "enfin": {
+      "name": "Gertrude",
+      "text": [
+          "Haha tu m'enverras une photo!"
+      ],
+      "choices": [
+          {
+              "text": ["Dans tes rêves!"],
+              "preview": "Dans tes rêves!",
+              "goto": "coupe"
+          },
+          {
+              "text": ["Jamais!"],
+              "preview": "Jamais!",
+              "goto": "coupe"
+          }
+      ],
+      "goto": ["coupe"]
+  },
+  "coupe": {
+      "name": "Gertrude",
+      "text": [
+          "Tu vas y aller du coup?"
+      ],
+      "choices": [
+          {
+              "text": ["Oui, j'ai déplacé mon rendez-vous annulé."],
+              "preview": "Oui, j'ai déplacé mon rendez-vous annulé.",
+              "goto": "bye"
+          },
+          {
+              "text": ["Non, c'est encore trop risqué."],
+              "preview": "Non, c'est encore trop risqué.",
+              "goto": "bye"
+          }
+      ],
+      "goto": ["bye"]
+  },
+  "bye": {
+      "name": "Gertrude",
+      "text": [
+          "Ok, prend soin de toi! Je dois y aller! A bientôt!"
+      ],
+      "choices": [],
+      "goto": []
+  }
 }

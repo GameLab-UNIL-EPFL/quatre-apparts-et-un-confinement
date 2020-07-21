@@ -40,7 +40,7 @@ export class HallwayScene extends Phaser.Scene {
                     { name: "damienHallwayDoor", url: "sprites/HallwayScenes/Palier-Etudiant-Ferme/door.png" },
                     new Phaser.Math.Vector2(-215, -80),
                     (scene) => {
-                        if(scene.damien_gone) {
+                        if(player.damien_gone) {
                             scene.dialogue.display("damienAway");
                             scene.damien_closed_card.dialogueSensitive = true;
                         } else {
@@ -50,7 +50,12 @@ export class HallwayScene extends Phaser.Scene {
                     },
                     this,
                     0,
-                    { name: "damienHallwayDoor_h", url: "sprites/HallwayScenes/Palier-Etudiant-Ferme/door_h.png" }
+                    {
+                        name: 'damien_hallway_door_h',
+                        url: "sprites/UI/01_Interactions/03_Palier/02_Spritesheets/01-Palier-Frapper-Spritesheet_255x188.png",
+                        size: { frameWidth: 225, frameHeight: 188 },
+                        pos: new Phaser.Math.Vector2(-107, -466)
+                    }
                 ),
                 new CardObject(
                     this,
@@ -98,7 +103,12 @@ export class HallwayScene extends Phaser.Scene {
                     null,
                     null,
                     0,
-                    { name: "indepHallwayDoor_h", url: "sprites/HallwayScenes/Palier-Independant-Ferme/door_h.png" }
+                    {
+                        name: 'indep_hallway_door_h',
+                        url: "sprites/UI/01_Interactions/03_Palier/02_Spritesheets/02-Palier-Frapper-Spritesheet_250x150.png",
+                        size: { frameWidth: 250, frameHeight: 150 },
+                        pos: new Phaser.Math.Vector2(23, -456)
+                    }
                 ),
                 new CardObject(
                     this,
@@ -166,9 +176,6 @@ export class HallwayScene extends Phaser.Scene {
         this.cardIdx = HallwayCards.DAMIEN_CLOSED;
         this.current_card = this.damien_closed_card;
 
-        //Whether or not Damien is at his appartment
-        this.damien_gone = false;
-
         //Create the dialogue controller
         this.dialogue = new DialogueController(this, "hallwayDialog");
     }
@@ -180,10 +187,6 @@ export class HallwayScene extends Phaser.Scene {
     init(data) {
         //Check if any saved data exists
         if(data) {
-            //Get damien's status
-            if(data.damien_gone) {
-                this.damien_gone = data.damien_gone;
-            }
 
             //Set the correct card
             switch(data.cardIdx) {
@@ -266,8 +269,7 @@ export class HallwayScene extends Phaser.Scene {
 
         //Data that will be saved
         const savable_data = {
-            cardIdx: this.cardIdx,
-            damien_gone: this.damien_gone
+            cardIdx: this.cardIdx
         };
 
         player.setData(savable_data);
@@ -305,12 +307,7 @@ export class HallwayScene extends Phaser.Scene {
      * @param {Number} choice the choice that was made
      */
     nextCard(choice=-1) {
-
-        //Data that will be saved
-        let savable_data = {
-            cardIdx: this.cardIdx,
-            damien_gone: this.damien_gone
-        };
+        console.log("PLAYER_DAMIEN_GONE HALLWAY: " + player.damien_gone);
 
         if(this.current_card.isDone()) {
             this.current_card.destroy();
@@ -324,7 +321,7 @@ export class HallwayScene extends Phaser.Scene {
                 this.door.play();
 
                 //Check if Damien is home or not
-                if(this.damien_gone) {
+                if(player.damien_gone) {
                     this.cardIdx = HallwayCards.INDEP_CLOSED;
                     this.current_card = this.indep_closed_card;
 
@@ -372,14 +369,7 @@ export class HallwayScene extends Phaser.Scene {
             default:
                 break;
             }
-
-            //Save the card and clothes choices
-            savable_data.cardIdx = this.cardIdx;
         }
-
-        //Store the saved data
-        player.setData(savable_data);
-        player.saveGame();
     }
 
     /**
@@ -395,6 +385,12 @@ export class HallwayScene extends Phaser.Scene {
         case HallwayCards.INDEP_GRANDMA:
             this.scene.start(Scenes.BUILDING, {
                 mainMenu: true,
+                names: {
+                    damien: false,
+                    grandma: false,
+                    family: false,
+                    indep: false
+                },
                 stage: 1,
                 windows: {
                     damien: WindowState.OFF,

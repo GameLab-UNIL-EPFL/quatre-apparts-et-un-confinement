@@ -1,0 +1,10 @@
+{
+    "telephone": {
+		"name": "Patrick",
+        "text": [
+            "Bonjour, oui, j'appelle bien les pompes funèbres?"
+		],
+        "choices": [],
+		"goto": []
+	}
+}

@@ -71,7 +71,14 @@ export class IndepScene extends Phaser.Scene {
                         scene.changeIndep();
                         scene.dialogue.display("telephone");
                     },
-                    this
+                    this,
+                    -1,
+                    {
+                        name: 'indep_idle_phone_h',
+                        url: "sprites/UI/01_Interactions/04_Independant/02_Spritesheets/01-Independant-Telephone-Spritesheet_280x160.png",
+                        size: { frameWidth: 280, frameHeight: 160 },
+                        pos: new Phaser.Math.Vector2(336, 325)
+                    }
                 ),
                 new CardObject(
                     this,
@@ -304,6 +311,12 @@ export class IndepScene extends Phaser.Scene {
         this.cameras.main.fadeOut(3000, 0, 0, 0,
             () => this.scene.start(Scenes.BUILDING, {
                 mainMenu: false,
+                names: {
+                    damien: false,
+                    grandma: false,
+                    family: false,
+                    indep: false
+                },
                 stage: 1,
                 windows: {
                     damien: WindowState.ON,

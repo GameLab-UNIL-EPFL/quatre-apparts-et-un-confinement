@@ -17,7 +17,7 @@ import { DamienInitScene } from "./scenes/damienInitScene.js";
 import { IndepMessageScene } from "./scenes/indepMessageScene.js";
 
 let resizeTimeout;
-let plugins = [{
+const plugins = [{
     key: 'rexUI',
     plugin: RexUIPlugin,
     mapping: 'rexUI'
@@ -41,7 +41,7 @@ if(OBJECT_DEBUG === true) {
 */
 
 function getScale(innerWidth, innerHeight) {
-    let innerRatio = innerWidth / innerHeight;
+    const innerRatio = innerWidth / innerHeight;
     const height = 1600; // default height
     let width = 1200; // default width
     const targetRatio = width / height;

@@ -1,12 +1,12 @@
 {
     "copine": {
 		"name": "Copine",
-		"text": ["Hey ça va?"],
+		"text": ["Hey, ça va?"],
 		"choices": {
             "rep":
 			{
-				"text": ["Oui et toi? et ton père il va mieux?"],
-				"preview": "ton père va mieux?",
+				"text": ["Oui, et toi? Ton père va mieux?"],
+				"preview": "Ton père va mieux?",
 				"goto": "mieux"
             }
         },
@@ -14,18 +14,18 @@
 	},
 	"mieux": {
 		"name": "Copine",
-		"text": ["Mon père va beaucoup mieux, mais il s'essouffle encore assez vite."],
+		"text": ["Mon père va beaucoup mieux, merci ! Mais il s'essouffle encore très vite 😟"],
 		"choices": {
             "rep":
 			{
-				"text": ["Ah ouais je vois"],
-				"preview": "je vois",
+				"text": ["Ah ouais, je vois."],
+				"preview": "Je vois.",
 				"goto": "toi"
             },
             "rep2":
 			{
-				"text": ["Purée... mais heureusement qu'il s'en est sorti"],
-				"preview": "il s'en est sorti",
+				"text": ["Purée… en tout cas c'est génial qu'il s'en soit sorti!"],
+				"preview": "Il s'en est sorti.",
 				"goto": "toi"
 			}
         },
@@ -33,18 +33,18 @@
     },
     "toi": {
 		"name": "Copine",
-		"text": ["Ça va prendre un moment avant qu’il s’en remette complètement..."],
+		"text": ["Ça va prendre un moment avant qu’il s’en remette complètement…"],
 		"choices": {
             "rep":
 			{
-				"text": ["C'est sûr"],
-				"preview": "C'est sûr",
+				"text": ["C'est sûr."],
+				"preview": "C'est sûr.",
 				"goto": "merci"
             },
             "rep2":
 			{
-				"text": ["C'est violent"],
-				"preview": "C'est violent",
+				"text": ["C'est violent."],
+				"preview": "C'est violent.",
 				"goto": "merci"
 			}
         },
@@ -52,7 +52,7 @@
     },
     "merci": {
 		"name": "Copine",
-		"text": ["Merci d’avoir été là pour moi, je sais pas comment j’aurais fait sans toi ❤️️"],
+		"text": ["Merci d’avoir été là pour moi! Je sais pas comment j’aurais fait sans toi ❤️️"],
 		"choices": {
             "rep":
 			{
