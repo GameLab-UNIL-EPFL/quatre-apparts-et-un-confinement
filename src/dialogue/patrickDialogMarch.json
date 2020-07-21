@@ -141,7 +141,7 @@
             },
 			{
 				"text": ["Je pense que vous devez juste prendre un peu de temps pour vous."],
-				"preview": "prendre du temps pour vous.",
+				"preview": "Prendre du temps pour vous.",
 				"goto": "fin"
 			}
 		],
