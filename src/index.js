@@ -17,7 +17,7 @@ import { DamienInitScene } from "./scenes/damienInitScene.js";
 import { IndepMessageScene } from "./scenes/indepMessageScene.js";
 
 let resizeTimeout;
-let plugins = [{
+const plugins = [{
     key: 'rexUI',
     plugin: RexUIPlugin,
     mapping: 'rexUI'
