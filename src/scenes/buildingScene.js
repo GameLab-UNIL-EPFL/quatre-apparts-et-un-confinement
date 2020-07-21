@@ -67,11 +67,13 @@ export class BuildingScene extends Phaser.Scene {
      * }
      */
     init(data) {
-        //Check if any saved data exists
-        if(data.stage && data.windows && data.month && data.nextScene && data.names) {
-            this.info = data;
-        } else {
-            console.error("BUILDING_SCENE: Invalid configuration JSON");
+        if(data.names) {
+            //Check if any saved data exists
+            if(data.windows && data.nextScene) {
+                this.info = data;
+            } else {
+                console.error("BUILDING_SCENE: Invalid configuration JSON");
+            }
         }
     }
 

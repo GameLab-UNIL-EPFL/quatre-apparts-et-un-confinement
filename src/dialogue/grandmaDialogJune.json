@@ -286,7 +286,8 @@
 				"goto": "comment"
 			}
 		],
-		"goto": ["comment"]
+		"goto": ["comment"],
+		"objective": true
 	},
 	"comment": {
 		"name": "Sophie",

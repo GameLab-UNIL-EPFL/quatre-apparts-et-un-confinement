@@ -71,6 +71,8 @@ export class GrandmaScene extends Phaser.Scene {
 
         this.current_card = this.livingRoomCard;
         this.card_idx = GrandmaCards.LIVING_ROOM;
+
+        this.objective = false;
     }
 
     /**
@@ -148,6 +150,15 @@ export class GrandmaScene extends Phaser.Scene {
     }
 
     /**
+     * @brief Notifies the current card that the dialogue objective was met
+     */
+    notifyObjectiveMet() {
+        if(this.current_card.notifyObjectiveMet) {
+            this.current_card.notifyObjectiveMet();
+        }
+    }
+
+    /**
      * @brief moves to the next card
      * @param {GrandmaCards} card the next card to show
      */
@@ -211,7 +222,7 @@ export class GrandmaScene extends Phaser.Scene {
         } else {
             this.scene.start(
                 Scenes.HALLWAY,
-                { cardIdx: HallwayCards.DAMIEN_CLOSED, damien_gone: Math.random() > 0.5 }
+                { cardIdx: HallwayCards.DAMIEN_CLOSED }
             );
         }
     }

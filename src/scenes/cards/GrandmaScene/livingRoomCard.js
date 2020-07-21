@@ -194,6 +194,8 @@ export class LivingRoomCard extends Card {
             'books_h'
         ).play('books_h_anim');
 
+        this.page = this.parent_scene.sound.add("pageTurn");
+
         //Update the phone's onclickcallback
         this.children[7].updateOnClickCallback(
             (args) => {
@@ -274,12 +276,13 @@ export class LivingRoomCard extends Card {
             this.children[7].sprite.setActive(true).setVisible(true);
             this.children[7].highlight_sprite.setActive(true).setVisible(true);
 
-            this.enableAllInteractions();
-
             //Reset grandma
             this.changeGrandma(GRANDMA_STATES.IDLE);
 
-            this.showArrow();
+            //Only show the arrow if we spoke to Sophie
+            if(this.objective_complete) {
+                this.showArrow();
+            }
             break;
 
         default:
@@ -287,31 +290,11 @@ export class LivingRoomCard extends Card {
         }
     }
 
-    disableAllInteractions() {
-        this.children.forEach(child => {
-
-            if(child.sprite) {
-                child.sprite.disableInteractive();
-            }
-
-            if(child.highlight_sprite) {
-                child.highlight_sprite.disableInteractive();
-            }
-        });
-    }
-
-    enableAllInteractions(except=null) {
-        this.children.forEach(child => {
-            if(child !== except) {
-                if(child.sprite) {
-                    child.sprite.setInteractive();
-                }
-
-                if(child.highlight_sprite) {
-                    child.highlight_sprite.setInteractive();
-                }
-            }
-        });
+    /**
+     * @brief Updates the objective complete attribute
+     */
+    notifyObjectiveMet() {
+        this.objective_complete = true;
     }
 
     changeGrandma(state) {
@@ -336,7 +319,6 @@ export class LivingRoomCard extends Card {
                     "grandma_book1"
                 );
 
-                this.page = this.parent_scene.sound.add("pageTurn");
                 this.page.play();
 
                 //Trigger the book's dialogue
@@ -375,9 +357,6 @@ export class LivingRoomCard extends Card {
                     GRANDMA_POS.y,
                     "grandma_phone"
                 );
-
-                //Disable all of the scenes interactions
-                this.disableAllInteractions();
 
                 //Trigger the phone's dialogue
                 this.parent_scene.dialogue.display("telephone");

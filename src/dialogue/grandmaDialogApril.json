@@ -279,7 +279,8 @@
               "goto": "zoom"
           }
       ],
-      "goto": ["zoom"]
+      "goto": ["zoom"],
+      "objective": true
   },
   "zoom": {
       "name": "Sophie",
