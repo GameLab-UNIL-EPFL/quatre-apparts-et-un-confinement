@@ -255,6 +255,15 @@ export class DialogueController {
         this.current_conv_id = id;
         this.cur_state = DialogueState.DISPLAYED;
 
+        //Check if an objective was met
+        if(this.requestDialogue(id).objective) {
+            if(this.parent_scene.notifyObjectiveMet) {
+                this.parent_scene.notifyObjectiveMet();
+            } else {
+                console.error("DIALOG_OBJECTIVE: Parent scene doesn't implement notifyObjectiveMet");
+            }
+        }
+
         //Create background animation
         this.parent_scene.anims.create({
             key: D_BOX_ANIMATION_KEY,
@@ -499,11 +508,20 @@ export class DialogueController {
         this.cur_state = DialogueState.MSG;
 
         //Retrieve the dialogue
-        let cur_text = choice_id ?
+        const cur_text = choice_id ?
             this.requestDialogue(id).choices[choice_id].text[0] :
             this.getText(id)[idx];
 
-        let cur_dialogue = this.requestDialogue(id);
+        const cur_dialogue = this.requestDialogue(id);
+
+        //Check if an objective was met
+        if(cur_dialogue.objective) {
+            if(this.parent_scene.notifyObjectiveMet) {
+                this.parent_scene.notifyObjectiveMet();
+            } else {
+                console.error("DIALOG_OBJECTIVE: Parent scene doesn't implement notifyObjectiveMet");
+            }
+        }
 
         //Decide which box to use
         let box = null;

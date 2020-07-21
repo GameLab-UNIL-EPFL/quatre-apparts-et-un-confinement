@@ -283,7 +283,8 @@
 		"name": "Copine",
 		"text": ["Cool! A toute!"],
 		"choices":{},
-		"goto": []
+		"goto": [],
+		"objective": true
 	},
 	"repMaybe": {
 		"name": "Copine",

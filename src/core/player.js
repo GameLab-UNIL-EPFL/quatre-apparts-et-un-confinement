@@ -26,6 +26,7 @@ export class Player {
         this.cur_scene = Scenes.INTRO;
         this.scene_data = {};
         this.dialogue_tree = {};
+        this.damien_gone = false;
     }
 
     /**
@@ -84,6 +85,7 @@ export class Player {
             scene: this.cur_scene,
             data: this.scene_data,
             tree: this.dialogue_tree,
+            damien_gone: this.damien_gone
         };
 
         //Encode the data in base 64 before saving it
@@ -114,6 +116,7 @@ export class Player {
                 this.dialogue_tree = game_data.tree;
                 this.cur_scene = game_data.scene;
                 this.scene_data = game_data.data;
+                this.damien_gone = game_data.damien_gone;
 
                 //Start the loaded scene
                 game.scene.start(game_data.scene, game_data.data);
