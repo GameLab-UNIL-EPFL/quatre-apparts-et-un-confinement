@@ -187,6 +187,12 @@ export class GrandmaScene extends Phaser.Scene {
         if(this.month === Months.MARCH) {
             this.scene.start(Scenes.BUILDING, {
                 mainMenu: false,
+                names: {
+                    damien: false,
+                    grandma: false,
+                    family: false,
+                    indep: true
+                },
                 stage: 1,
                 windows: {
                     damien: WindowState.OFF,

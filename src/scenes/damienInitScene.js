@@ -183,6 +183,12 @@ export class DamienInitScene extends Phaser.Scene {
         this.cameras.main.fadeOut(1000);
         this.scene.start(Scenes.BUILDING, {
             mainMenu: false,
+            names: {
+                damien: false,
+                grandma: true,
+                family: false,
+                indep: false
+            },
             stage: 1,
             windows: {
                 damien: WindowState.OFF,
