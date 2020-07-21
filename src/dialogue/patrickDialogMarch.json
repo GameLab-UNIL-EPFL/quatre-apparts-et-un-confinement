@@ -130,11 +130,11 @@
 		"name": "Nathan",
 		"text": [
 			"Je ne sais vraiment pas quoi faire.",
-			"Si on ne trouve pas une solution, on va pas tenir jusqu'au déconfinement."
+			"Si on ne trouve pas une solution, on ne va pas tenir jusqu'au déconfinement."
 		],
 		"choices": [
 			{
-				"text": ["Je pense que tu dois juste être plus attentionné, c'est ce que toutes les femmes veulent."],
+				"text": ["Je pense que tu dois juste être plus attentionné. Montre-lui ton côté romantique!"],
 				"preview": "Plus attentionné",
 				"goto": "fin"
             },

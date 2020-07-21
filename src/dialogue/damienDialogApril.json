@@ -46,7 +46,7 @@
 	"toi": {
 		"name": "Copine",
         "text": [
-            "Ben on ne sait pas. Ça pourrait venir de n'importe qui. Un de ces clients, ou même toi ou moi…"
+            "Ben on ne sait pas. Ça pourrait venir de n'importe qui. Un de ses clients, ou même toi ou moi…"
         ],
 		"choices": {
             "rep":
@@ -149,7 +149,7 @@
 	"client": {
 		"name": "Copine",
         "text": [
-            "On ne sait pas et c'est difficile à dire. Peut-être un de ces clients…"
+            "On ne sait pas et c'est difficile à dire. Peut-être un de ses clients…"
         ],
 		"choices": {
             "rep":
