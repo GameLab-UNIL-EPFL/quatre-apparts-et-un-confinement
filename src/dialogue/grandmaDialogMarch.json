@@ -2,9 +2,9 @@
 	"calendrier": {
 		"name": "Suzanne",
 		"text": [
-			"Rien de prévu.",
-            "28 mars\nHmm, j’avais rendez-vous chez le coiffeur…",
-            "C’est mercredi, normalement je vois mes petits-enfants."
+            "Hmm, le 28 mars j’avais rendez-vous chez le coiffeur…",
+            "Et c’est mercredi. Normalement ce jour-là je vois mes petits-enfants.",
+            "Je n'ai plus rien de prévu."
 		],
 		"choices": [],
 		"goto": []
@@ -13,8 +13,8 @@
 		"name": "",
 		"text": [
 			"La peste - Albert Camus",
-			"Du reste, le docteur Rieux, par exemple, considérait que c’était cela le malheur,",
-			"et que l’habitude du confinement est pire que le confinement lui-même."
+			"« Du reste, le docteur Rieux, par exemple, considérait que c’était cela le malheur,",
+			"et que l’habitude du confinement est pire que le confinement lui-même. »"
 		],
 		"choices": [],
 		"goto": []
@@ -23,9 +23,9 @@
 		"name": "",
         "text": [
 			"A La Recherche du Temps Perdu - Marcel Proust",
-			"Certes, il y a dans ma maison toutes les choses inutiles.",
+			"« Certes, il y a dans ma maison toutes les choses inutiles.",
 			"Il n’y manque que le nécessaire, un grand morceau de ciel comme ici.",
-			"Tâchez de garder toujours un morceau de ciel au-dessus de votre vie…"
+			"Tâchez de garder toujours un morceau de ciel au-dessus de votre vie… »"
 		],
         "choices": [],
 		"goto": []
@@ -34,10 +34,10 @@
 		"name": "",
         "text": [
 			"Le Misanthrope - Molière",
-			"Je ne trouve partout que lâche flatterie,",
+			"« Je ne trouve partout que lâche flatterie,",
 			"Qu’injustice, intérêt, trahison, fourberie;",
 			"Je n’y puis plus tenir, j’enrage, et mon dessein",
-			"Est de rompre en visière à tout le genre humain."
+			"Est de rompre en visière à tout le genre humain. »"
 		],
         "choices": [],
 		"goto": []
@@ -62,8 +62,8 @@
 	"news": {
 		"name": "Radio",
 		"text": [
-			"17 mars - La Suisse se trouve dans une situation extraordinaire.",
-			"Restez chez vous."
+			"🔈 17 mars - La Suisse se trouve dans une situation extraordinaire.",
+			"🔈 Veuillez rester chez vous."
 		],
 		"choices": [],
 		"goto": []

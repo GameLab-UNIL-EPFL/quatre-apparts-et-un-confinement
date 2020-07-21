@@ -2,9 +2,9 @@
     "calendrier": {
       "name": "Suzanne",
       "text": [
-          "Toujours rien de prévu...",
-          "On dirait bien que je vais fêter Pâques toute seule...",
-          "Ou peut-être en ligne sur Zoom"
+          "Toujours rien de prévu…",
+          "On dirait bien que je vais fêter Pâques toute seule…",
+          "Ou peut-être en ligne sur Zoom."
       ],
       "choices": [],
       "goto": []
@@ -13,10 +13,10 @@
       "name": "",
       "text": [
           "La Covédie Humaine - Honoré De Balzac",
-          "Ces débris jetaient dans le tableau des effets d'une poésie ravissante,",
+          "« Ces débris jetaient dans le tableau des effets d'une poésie ravissante,",
           "et des idées rêveuses dans l'âme du spectateur.",
           "Un poète serait resté là plongé dans une longue mélancolie,",
-          "en admirant ce désordre plein d'harmonies, cette destruction qui n'était pas sans grâce."
+          "en admirant ce désordre plein d'harmonies, cette destruction qui n'était pas sans grâce. »"
       ],
       "choices": [],
       "goto": []
@@ -25,10 +25,10 @@
       "name": "",
       "text": [
           "Les Misérables - Victor Hugo",
-          "Rien n'est stupide comme vaincre; la vraie gloire est convaincre.",
+          "« Rien n'est stupide comme vaincre; la vraie gloire est convaincre.",
           "La vie, le malheur, l'isolement, l'abandon, la pauvreté,",
           "sont des champs de bataille qui ont leurs héros;",
-          "héros obscurs plus grands parfois que les héros illustres."
+          "héros obscurs plus grands parfois que les héros illustres. »"
       ],
       "choices": [],
       "goto": []
@@ -37,8 +37,8 @@
       "name": "",
       "text": [
           "Les Métamorphoses - Covide",
-          "Je vous dirai que, dans l'univers entier, il n'est rien qui dure.",
-          "Tout s'écoule, et les êtres ne revêtent qu'une forme fugitive."
+          "« Je vous dirai que, dans l'univers entier, il n'est rien qui dure.",
+          "Tout s'écoule, et les êtres ne revêtent qu'une forme fugitive. »"
       ],
       "choices": [],
       "goto": []
@@ -63,7 +63,7 @@
   "news": {
       "name": "Radio",
       "text": [
-          "27 Avril - Réouverture des salons de coiffure, des magasins de bricolage et des jardineries."
+          "🔈 27 avril - Réouverture des salons de coiffure, des magasins de bricolage et des jardineries."
       ],
       "choices": [],
       "goto": []
