@@ -1,8 +1,18 @@
 {
+	"debut": {
+		"name": "Patrick",
+		"text": [
+			"Ça m’a fait plaisir de pouvoir aider la voisine.", 
+			"Il faudrait peut-être que j’appelle ma mère pour voir si tout va bien."
+		],
+		"choices": [],
+		"goto": []
+	},
     "dvd1": {
 		"name": "",
 		"text": [
-            "Intouchables (2011)"
+            "I am Legend (2007)",
+            "Pas besoin qu'on me rappelle ma solitude."
 		],
 		"choices": [],
 		"goto": []
