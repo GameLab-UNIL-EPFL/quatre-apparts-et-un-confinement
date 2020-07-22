@@ -76,7 +76,7 @@ const config = {
         scene: plugins
     },
     scene: [
-        // TitleScene,
+        TitleScene,
         BuildingScene,
         ProtoScene,
         DamienInitScene,

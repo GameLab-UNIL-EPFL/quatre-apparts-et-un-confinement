@@ -8,19 +8,37 @@ export class TitleScene extends Phaser.Scene {
 
     preload() {
         this.load.image('title', 'sprites/TitleScene/CVD0087_Placeholder_Logo.png');
+        this.load.spritesheet('start', 'sprites/TitleScene/01-Accueil-Demarrer-Spritesheet_260x85.png', {frameWidth: 260, frameHeight: 85});
     }
 
     create() {
+        this.cameras.main.centerOn(0, 0);
         this.cameras.main.setBackgroundColor('#ffffff');
 
-        let title = this.add.sprite(this.cameras.main.centerX, this.cameras.main.centerY, 'title').setInteractive();
+        let title = this.add.sprite(0, -200, 'title');
         title.setScale(0.8);
-        let scene = this;
 
-        title.on('pointerdown', function() {
-            scene.scene.start(Scenes.BUILDING);
+        this.anims.create({
+            key: 'start-anim',
+            frameRate: 7,
+            frames: this.anims.generateFrameNames('start'),
+            repeat: -1
         });
 
+        let start = this.add.sprite(
+            0,
+            200,
+            'start'
+        ).play('start-anim');
+
+
+        let scene = this;
+        title.setInteractive().on('pointerdown', function() {
+            this.scene.start(Scenes.BUILDING);
+        }, this);
+        start.setInteractive().on('pointerdown', function() {
+            this.scene.start(Scenes.BUILDING);
+        }, this);
     }
 
 }
