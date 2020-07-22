@@ -23,6 +23,8 @@ export class Player {
      * @brief Constructor for the player class
      */
     constructor() {
+        // THIS IS TEMPORARY: We should actually query the database to get an ID without risking collisions
+        this.id = Math.random().toString(36).substr(2, 9);
         this.cur_scene = Scenes.INTRO;
         this.scene_data = {};
         this.dialogue_tree = {};
@@ -78,7 +80,7 @@ export class Player {
     }
 
     /**
-     * @brief Writes the current game data to a cookie
+     * @brief Writes the current game data to local storage
      */
     saveGame() {
         let serialized_data = {
@@ -95,7 +97,7 @@ export class Player {
     }
 
     /**
-     * @brief Loads the game state from a cookie if any
+     * @brief Loads the game state from local storage if any
      */
     loadGame() {
         //Retrieve the save file
@@ -123,5 +125,31 @@ export class Player {
             }
         }
     }
-}
 
+    sendChoices(payload) {
+        /*
+        Payload must match these SQL columns:
+        ['player_id', 'damien_stay_home', 'damien_food', 'damien_game_score_mean', 'damien_clothes', 'damien_see_grandma', 'mother_stay_home', 'mother_game_score', 'freelancer_food_set', 'freelancer_food_amount', 'freelancer_love_advice', 'freelancer_game_score', 'grandma_books', 'grandma_advice'];
+
+        example:
+        payload = {
+            'player_id': 1235, // required!
+            'damien_clothes': 1
+        };
+        */
+
+        (async () => {
+            const rawResponse = await fetch('https://labs.letemps.ch/interactive/2020/_sandbox/_covidou_server/add_choices.php', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            });
+            const content = await rawResponse.json();
+            // Tells if database was successfully updated
+            console.log(content);
+        })();
+    }
+}
