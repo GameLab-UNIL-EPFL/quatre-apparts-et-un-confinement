@@ -13,7 +13,7 @@ export class TitleScene extends Phaser.Scene {
 
     create() {
         this.cameras.main.centerOn(0, 0);
-        this.cameras.main.setBackgroundColor('#ffffff');
+        this.cameras.main.setBackgroundColor('#f4e1c5');
 
         let title = this.add.sprite(0, -200, 'title');
         title.setScale(0.8);
