@@ -11,7 +11,10 @@ export class TitleScene extends Phaser.Scene {
     }
 
     create() {
+        this.cameras.main.setBackgroundColor('#ffffff');
+
         let title = this.add.sprite(this.cameras.main.centerX, this.cameras.main.centerY, 'title').setInteractive();
+        title.setScale(0.8);
         let scene = this;
 
         title.on('pointerdown', function() {
