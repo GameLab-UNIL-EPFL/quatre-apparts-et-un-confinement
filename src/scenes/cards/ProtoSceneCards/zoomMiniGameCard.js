@@ -8,7 +8,7 @@ const N_DISTRACTIONS = 19;
 
 const N_MSG = {
     MARCH: (N_NOTIFICATION * 3) + N_DISTRACTIONS,
-    INIT: (N_NOTIFICATION * 3)
+    INIT: (N_NOTIFICATION)
 };
 
 const NOTIF_SPREAD = 900;
@@ -37,8 +37,15 @@ const FOCUS_BAR_COLOR = {
     LOW: 0xE53D3D
 };
 
-const END_ZOOM_CALL_ID = "endZoom";
-const LOSER_ID = "loseZoom";
+const END_ZOOM_CALL_ID = {
+    INIT: "endHomework",
+    ZOOM: "endZoom"
+};
+
+const LOSER_ID = {
+    INIT: "loseHomework",
+    ZOOM: "loseZoom"
+};
 
 const MessageType = {
     Cours: 1,
@@ -60,7 +67,12 @@ export class ZoomMiniGameCard extends Card {
         const children = [
             new CardObject(
                 parent_scene,
-                { name: "zoom_bg", url: "sprites/ProtoScene/ZoomMiniGameCard/zoom_bg.png" },
+                {
+                    name: "zoom_bg",
+                    url: scene_key !== Scenes.DAMIEN_INIT ? 
+                        "sprites/ProtoScene/ZoomMiniGameCard/zoom_bg.png" :
+                        "sprites/ProtoScene/ZoomMiniGameCard/init_computer_bg.jpg"
+                },
                 new Phaser.Math.Vector2(0, -14),
                 null,
                 null,
@@ -107,25 +119,27 @@ export class ZoomMiniGameCard extends Card {
                 isDestroyed: false
             });
 
-            //Push the notif again
-            this.messages.push({
-                name: "notification_" + i,
-                url: "sprites/ProtoScene/ZoomMiniGameCard/notif_" + i + ".png" ,
-                pos: new Phaser.Math.Vector2(-600, -1000),
-                sprite: null,
-                type: MessageType.Cours,
-                isDestroyed: false
-            });
+            if(this.scene_key !== Scenes.DAMIEN_INIT) {
+                //Push the notif again
+                this.messages.push({
+                    name: "notification_" + i,
+                    url: "sprites/ProtoScene/ZoomMiniGameCard/notif_" + i + ".png" ,
+                    pos: new Phaser.Math.Vector2(-600, -1000),
+                    sprite: null,
+                    type: MessageType.Cours,
+                    isDestroyed: false
+                });
 
-            //Push the notif again
-            this.messages.push({
-                name: "notification_" + i,
-                url: "sprites/ProtoScene/ZoomMiniGameCard/notif_" + i + ".png" ,
-                pos: new Phaser.Math.Vector2(-600, -1000),
-                sprite: null,
-                type: MessageType.Cours,
-                isDestroyed: false
-            });
+                //Push the notif again
+                this.messages.push({
+                    name: "notification_" + i,
+                    url: "sprites/ProtoScene/ZoomMiniGameCard/notif_" + i + ".png" ,
+                    pos: new Phaser.Math.Vector2(-600, -1000),
+                    sprite: null,
+                    type: MessageType.Cours,
+                    isDestroyed: false
+                });
+            }
         }
 
         if(this.scene_key !== Scenes.DAMIEN_INIT) {
@@ -356,9 +370,13 @@ export class ZoomMiniGameCard extends Card {
 
             card.lock = true;
 
+            //Pick the correct text to display
+            const lose_key = card.scene_key === Scenes.DAMIEN_INIT ? LOSER_ID.INIT : LOSER_ID.ZOOM;
+            const win_key = card.scene_key === Scenes.DAMIEN_INIT ? END_ZOOM_CALL_ID.INIT : END_ZOOM_CALL_ID.ZOOM;
+
             //Open the dialogue
             card.parent_scene.dialogue.display(
-                lose ? LOSER_ID : END_ZOOM_CALL_ID
+                lose ? lose_key : win_key
             );
 
             //Save the card's health in case not all the notifications are gone
