@@ -2,6 +2,7 @@ import { game } from "..";
 
 export const Scenes = {
     INTRO: 'TitleScene',
+    BUS: 'BusScene',
     DAMIEN_INIT: 'DamienInit',
     PROTOTYPE: 'Prototype',
     DAMIEN_KITCHEN_CLOTHES: 'DamienKitchenClothesScene',

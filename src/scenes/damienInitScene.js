@@ -19,7 +19,7 @@ export class DamienInitScene extends Phaser.Scene {
         super({ key: Scenes.DAMIEN_INIT });
 
         //Keep track of the clothes that protoguy is wearing
-        this.clothes = ProtoGuyClothes.YESTERDAY_CLOTHES;
+        this.clothes = ProtoGuyClothes.CLEAN_CLOTHES;
 
         this.computerCard = new ComputerCard(this, Scenes.DAMIEN_INIT);
 

@@ -3,6 +3,7 @@ import { Scenes } from "../core/player";
 import { DIALOGUE_BOX_KEY, D_BOX_ANIMATION_KEY, DIALOGUE_BOX_SPRITE_SIZE } from "../core/dialogueController";
 import { player } from "..";
 import { GrandmaCards } from "./grandmaScene";
+import { BusCards } from "./busScene";
 
 export const Months = {
     MARCH: 'march',
@@ -288,30 +289,8 @@ export class BuildingScene extends Phaser.Scene {
         this.sprites['new_game_text'].setOrigin(0.5, 0.5);
 
         const interaction = () => this.scene.start(
-            Scenes.BUILDING,
-            {
-                mainMenu: false,
-                names: {
-                    damien: true,
-                    grandma: false,
-                    family: false,
-                    indep: false
-                },
-                stage: 1,
-                windows: {
-                    damien: WindowState.ON,
-                    grandma: WindowState.OFF,
-                    family: WindowState.OFF,
-                    indep: WindowState.OFF
-                },
-                month: Months.MAY,
-                nextScene: {
-                    damien: Scenes.DAMIEN_INIT,
-                    grandma: null,
-                    family: null,
-                    indep: null
-                }
-            }
+            Scenes.BUS,
+            { cardIdx: BusCards.MARCH_CARD }
         );
 
         //Make new game button start a new game
