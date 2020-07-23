@@ -18,30 +18,48 @@
 		],
 		"choices": [
             {
-                "text": "Bon, d'accord! Mais vous devez d'abord ranger votre chambre.",
+                "text": "Bon, d'accord!",
                 "goto": "merci"
             },
             {
-                "text": "Non, je vous ai déjà expliqué pourquoi. Et vous devez ranger votre chambre!",
+                "text": "Non. Je vous ai déjà expliqué pourquoi.",
                 "goto": "oh"
             }
         ],
 		"goto": ["merci", "oh"]
-    },
-    "merci": {
-		"name": "Maxime et Liliane",
-		"text": [
-			"Merci Maman!"
-		],
-		"choices": [],
-		"goto": []
-    },
-    "oh": {
-		"name": "Maxime et Liliane",
-		"text": [
-			"Mais rhooo! Maman, t'es pas gentille."
-		],
-		"choices": [],
-		"goto": []
-	}
-}
+    }, 
+    "merci": { 
+    	"name": "Maxime et Liliane", 
+    	"text": [ 
+    		"Merci Maman!",
+    		"Merci Maman!" 
+    		], 
+    	"choices": [], 
+    	"goto": ["finOui"]
+    }, 
+    "finOui": { 
+    	"name": "Florence", 
+    	"text": [ 
+    		"Mais vous devez d'abord ranger votre chambre." 
+    		], 
+    	"choices": [], 
+    	"goto": [] 
+    }, 
+    "oh": { 
+    	"name": "Maxime et Liliane", 
+    	"text": [ 
+    		"Mais rhooo! Maman, t'es pas gentille.",
+    		"Mais rhooo! Maman, t'es pas gentille."  
+    		], 
+    	"choices": [], 
+    	"goto": ["finNon"]
+    }, 
+    "finNon": { 
+    	"name": "Florence", 
+    	"text": [ 
+    		"Et vous allez me faire le plaisir de ranger votre chambre." 
+    		], 
+    	"choices": [], 
+    	"goto": [] 
+    } 
+} 
