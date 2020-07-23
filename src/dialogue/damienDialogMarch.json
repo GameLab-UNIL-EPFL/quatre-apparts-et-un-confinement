@@ -249,7 +249,7 @@
 		"choices": {
 			"risque": {
 				"text": ["Ton père était pas une personne à risque ?"],
-				"preview": "C’est risqué?",
+				"preview": "Personne à risque?",
 				"goto": "sortir1"
 			}
 		},

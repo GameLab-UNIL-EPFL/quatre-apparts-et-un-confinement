@@ -4,6 +4,7 @@ import { CardObject } from "./objects/cardObject.js";
 import { Background } from "./objects/background.js";
 import { Scenes } from "../core/player.js";
 import { HallwayCards } from "./hallwayScene.js";
+import { player } from "../index.js";
 
 export const StoreCards = {
     FIRST_SHELF: 0,
@@ -18,6 +19,8 @@ export class StoreScene extends Phaser.Scene {
      */
     constructor() {
         super({key: Scenes.STORE});
+
+        this.shoppingBasket = [];
 
         /* === FIRST SHELF === */
         this.firstShelf = new Card(
@@ -647,22 +650,22 @@ export class StoreScene extends Phaser.Scene {
 
         this.checklist_done = {
             'pate': {
-                position_x: -276,
+                position_x: -0.23, // Will be multiplied by this.cameras.main.width (<= 1200px). Calculation for -0.23: (-276 / 1200)
                 position_y: 234,
                 done: false
             },
             'banane': {
-                position_x: -276,
-                position_y: 300,
+                position_x: -0.23,
+                position_y: 280,
                 done: false
             },
             'pain': {
-                position_x: -276,
+                position_x: -0.23,
                 position_y: 373,
                 done: false
             },
             'papier': {
-                position_x: -261,
+                position_x: -0.23,
                 position_y: 422,
                 done: false
             },
@@ -683,6 +686,12 @@ export class StoreScene extends Phaser.Scene {
         //Check if any saved data exists
         if(data) {
             console.log("INIT_STORE");
+            console.log(indepShoppingBasket); // contains shoppingBasket
+            /*
+                @TODO:
+                - is it Patrick or Damien?
+                - if Damien: remove sprites by name using indepShoppingBasket
+            */
         }
     }
 
@@ -698,7 +707,7 @@ export class StoreScene extends Phaser.Scene {
         this.load.image('rature', "sprites/StoreScene/part1/rayon01_05_rature.png");
 
         //Load in the music
-        this.load.audio('bg_music', 'sounds/Supermarket.mp3');
+        this.load.audio('bg_music', 'sounds/supermarket/Supermarket.mp3');
 
         this.nextCardArrow = this.load.spritesheet(
             'next-card-arrow',
@@ -731,6 +740,8 @@ export class StoreScene extends Phaser.Scene {
 
     takeObject(object_name) {
 
+        this.shoppingBasket.push(object_name);
+
         let object = this.children.getByName(object_name);
         object.depth = 5;
 
@@ -740,6 +751,7 @@ export class StoreScene extends Phaser.Scene {
         if(object_name === 'pate_spaghetti01') {
             // also move the other pack
             target_objects.push(this.children.getByName('pate_spaghetti02'));
+            this.shoppingBasket.push('pate_spaghetti02');
         }
 
         // Move to basket
@@ -757,9 +769,8 @@ export class StoreScene extends Phaser.Scene {
                 for (const item in this.checklist_done) {
                     if(object_name.indexOf(item) >= 0) {
                         if(!this.checklist_done[item].done) {
-
                             this.rature = this.add.image(
-                                this.checklist_done[item].position_x,
+                                this.cameras.main.width * this.checklist_done[item].position_x,
                                 this.checklist_done[item].position_y,
                                 'rature'
                             );
@@ -793,7 +804,7 @@ export class StoreScene extends Phaser.Scene {
             this.addArrow();
         }
 
-        this.checklist = this.add.image(-this.cameras.main.width * 0.255, 489, 'liste');
+        this.checklist = this.add.image(this.cameras.main.width * -0.255, 489, 'liste');
         this.checklist.depth = 20;
 
         this.basket = this.add.image(this.cameras.main.width * 0.24166, 700, 'basket');
@@ -807,9 +818,8 @@ export class StoreScene extends Phaser.Scene {
         this.music.play();
 
         // Update the saved data
-        // @TODO
-        // player.setData()
-        // player.cur_scene = Scenes.STORE;
+        player.cur_scene = Scenes.STORE;
+        player.saveGame();
     }
 
     nextCard() {
@@ -838,6 +848,10 @@ export class StoreScene extends Phaser.Scene {
             this.current_card = this.cards[this.cardIdx];
             this.current_card.create();
         } else {
+            // TODO: if current character is Patrick
+            player.setData({ indepShoppingBasket: this.shoppingBasket });
+            player.saveGame();
+            player.sendChoices({ player_id: player.id, freelancer_food_set: this.shoppingBasket.join(','), freelancer_food_amount: this.shoppingBasket.length });
             this.nextScene();
         }
     }
