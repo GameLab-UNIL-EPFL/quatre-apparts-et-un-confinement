@@ -69,9 +69,9 @@ export class ZoomMiniGameCard extends Card {
                 parent_scene,
                 {
                     name: "zoom_bg",
-                    url: scene_key !== Scenes.DAMIEN_INIT ? 
-                        "sprites/ProtoScene/ZoomMiniGameCard/zoom_bg.png" :
-                        "sprites/ProtoScene/ZoomMiniGameCard/init_computer_bg.jpg"
+                    url: scene_key === Scenes.DAMIEN_INIT ? 
+                    "sprites/ProtoScene/ZoomMiniGameCard/init_computer_bg.jpg" :
+                        "sprites/ProtoScene/ZoomMiniGameCard/zoom_bg.png"
                 },
                 new Phaser.Math.Vector2(0, -14),
                 null,
