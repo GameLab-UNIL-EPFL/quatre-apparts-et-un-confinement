@@ -686,7 +686,7 @@ export class StoreScene extends Phaser.Scene {
         //Check if any saved data exists
         if(data) {
             console.log("INIT_STORE");
-            console.log(indepShoppingBasket); // contains shoppingBasket
+            console.log(this.shoppingBasket); // contains shoppingBasket
             /*
                 @TODO:
                 - is it Patrick or Damien?
