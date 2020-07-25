@@ -17,6 +17,7 @@ import { MotherScene } from "./scenes/motherScene.js";
 import { DamienInitScene } from "./scenes/damienInitScene.js";
 import { IndepMessageScene } from "./scenes/indepMessageScene.js";
 import { BusScene } from "./scenes/busScene.js";
+import { StoreExtScene } from "./scenes/storeExtScene.js";
 
 let resizeTimeout;
 const plugins = [{
@@ -25,7 +26,7 @@ const plugins = [{
     mapping: 'rexUI'
 }];
 
-const OBJECT_DEBUG = false;
+const OBJECT_DEBUG = true;
 
 if(OBJECT_DEBUG === true) {
     plugins.push({
@@ -89,6 +90,7 @@ const config = {
         IndepScene,
         IndepMessageScene,
         StoreScene,
+        StoreExtScene,
         MotherScene
     ],
     physics: {

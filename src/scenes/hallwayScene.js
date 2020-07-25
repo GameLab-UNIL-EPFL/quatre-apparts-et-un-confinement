@@ -379,7 +379,7 @@ export class HallwayScene extends Phaser.Scene {
     nextScene(cardIdx) {
         switch(cardIdx) {
         case HallwayCards.INDEP_OPEN:
-            this.scene.start(Scenes.STORE);
+            this.scene.start(Scenes.STORE_EXT);
             break;
 
         case HallwayCards.INDEP_GRANDMA:

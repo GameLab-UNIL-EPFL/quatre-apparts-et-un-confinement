@@ -28,40 +28,50 @@ export class StoreExtScene extends Phaser.Scene {
                 new CardObject(
                     this,
                     { name: 'busExt', url: 'sprites/StoreExteriorScene/bus.png' },
-                    new Phaser.Math.Vector2(0, 0)
+                    new Phaser.Math.Vector2(-364, -236)
                 ),
                 new CardObject(
                     this,
                     { name: 'car01Ext', url: 'sprites/StoreExteriorScene/car01.png' },
-                    new Phaser.Math.Vector2(0, 0)
+                    new Phaser.Math.Vector2(319, 429)
                 ),
                 new CardObject(
                     this,
                     { name: 'car02Ext', url: 'sprites/StoreExteriorScene/car02.png' },
-                    new Phaser.Math.Vector2(0, 0)
+                    new Phaser.Math.Vector2(189, 355)
                 ),
                 new CardObject(
                     this,
                     { name: 'car03Ext', url: 'sprites/StoreExteriorScene/car03.png' },
-                    new Phaser.Math.Vector2(0, 0)
+                    new Phaser.Math.Vector2(-28, 260)
                 ),
                 new CardObject(
                     this,
                     { name: 'car04Ext', url: 'sprites/StoreExteriorScene/car04.png' },
-                    new Phaser.Math.Vector2(0, 0)
+                    new Phaser.Math.Vector2(415, 52)
                 )
             ]
         );
+
+        this.june_pos = [
+            new Phaser.Math.Vector2(-800, -200),
+            new Phaser.Math.Vector2(319, 429),
+            new Phaser.Math.Vector2(-50, 471),
+            new Phaser.Math.Vector2(421, 47),
+            new Phaser.Math.Vector2(-36, 259),
+        ];
     }
 
     /**
      * @brief Preloads the scene using saved data (if any)
-     * @param {JSON} data { cardIdx, damien_gone }
+     * @param {JSON} data { month }
      */
     init(data) {
         //Check if any saved data exists
-        if(data) {
-            this.month = data.month;
+        if(data.month === Months.MAY) {
+            this.month = Months.MAY;
+        } else if(data.month === Months.MARCH) {
+            this.month = Months.MARCH;
         }
     }
 
@@ -84,6 +94,14 @@ export class StoreExtScene extends Phaser.Scene {
 
         if(this.current_card.isLoaded()) {
             this.current_card.create();
+
+            if(this.month === Months.MAY) {
+                //Give all of the sprites their june positions
+                for(let i = 0; i < this.current_card.children.length - 1; ++i) {
+                    this.current_card.children[i + 1].sprite.x = this.june_pos[i].x;
+                    this.current_card.children[i + 1].sprite.y = this.june_pos[i].y;
+                }
+            }
 
             //Make the entire screen interactive
             this.input.on('pointerdown', this.nextScene, this);

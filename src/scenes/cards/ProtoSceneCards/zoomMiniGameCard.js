@@ -3,12 +3,19 @@ import { Background } from "../../objects/background";
 import { CardObject } from "../../objects/cardObject";
 import { Scenes } from "../../../core/player";
 
-const N_NOTIFICATION = 10;
-const N_DISTRACTIONS = 19;
+const N_NOTIFICATION = {
+    DAMIEN: 10,
+    INDEP: 20
+};
+const N_DISTRACTIONS = {
+    DAMIEN: 19,
+    INDEP: 28
+};
 
 const N_MSG = {
-    MARCH: (N_NOTIFICATION * 3) + N_DISTRACTIONS,
-    INIT: (N_NOTIFICATION)
+    MARCH: (N_NOTIFICATION.DAMIEN * 3) + N_DISTRACTIONS.DAMIEN,
+    INIT: (N_NOTIFICATION.DAMIEN),
+    INDEP: N_NOTIFICATION.INDEP + N_DISTRACTIONS.INDEP
 };
 
 const NOTIF_SPREAD = 900;
@@ -18,17 +25,20 @@ const BEG_Y_ZONE = 500;
 
 const INIT_FOCUS = {
     MARCH: 5,
-    INIT: 10
+    INIT: 10,
+    INDEP: 3
 };
 
 const SPAWN_DELAY = {
     MARCH: 1000,
-    INIT: 2000
+    INIT: 2000,
+    INDEP: 500,
 };
 
 const NUM_SPAWNS = {
     MARCH: 50,
-    INIT: 25
+    INIT: 25,
+    INDEP: 300
 };
 
 const FOCUS_BAR_COLOR = {
@@ -39,12 +49,14 @@ const FOCUS_BAR_COLOR = {
 
 const END_ZOOM_CALL_ID = {
     INIT: "endHomework",
-    ZOOM: "endZoom"
+    ZOOM: "endZoom",
+    INDEP: ""
 };
 
 const LOSER_ID = {
     INIT: "loseHomework",
-    ZOOM: "loseZoom"
+    ZOOM: "loseZoom",
+    INDEP: ""
 };
 
 const MessageType = {
@@ -71,7 +83,9 @@ export class ZoomMiniGameCard extends Card {
                     name: "zoom_bg",
                     url: scene_key === Scenes.DAMIEN_INIT ? 
                         "sprites/ProtoScene/ZoomMiniGameCard/init_computer_bg.jpg" :
-                        "sprites/ProtoScene/ZoomMiniGameCard/zoom_bg.png"
+                        scene_key === Scenes.INDEP_COMPUTER ? 
+                            "sprites/IndepComputerScene/05_Mini-jeu/mini_game_bg.jpg" :
+                            "sprites/ProtoScene/ZoomMiniGameCard/zoom_bg.png"
                 },
                 new Phaser.Math.Vector2(0, -14),
                 null,
@@ -82,25 +96,39 @@ export class ZoomMiniGameCard extends Card {
             ),
             new Background(
                 parent_scene,
-                "sprites/ProtoScene/ZoomMiniGameCard/computer_screen.png",
+                scene_key === Scenes.INDEP_COMPUTER ?
+                    "sprites/IndepComputerScene/05_Mini-jeu/computer_bg.png" : 
+                    "sprites/ProtoScene/ZoomMiniGameCard/computer_screen.png",
                 "computer_bg"
             ),
             new CardObject(
                 parent_scene,
-                { name: "bar_bg", url: "sprites/ProtoScene/ZoomMiniGameCard/bar_bg.png" },
-                new Phaser.Math.Vector2(12, -633)
-            ),
-            new CardObject(
-                parent_scene,
-                { name: "bar_fill", url: "sprites/ProtoScene/ZoomMiniGameCard/bar_fill.png" },
-                new Phaser.Math.Vector2(12, -633)
-            ),
-            new CardObject(
-                parent_scene,
-                { name: "line", url: "sprites/ProtoScene/ZoomMiniGameCard/line.png" },
+                {
+                    name: "line",
+                    url: scene_key === Scenes.INDEP_COMPUTER ?
+                        "sprites/IndepComputerScene/05_Mini-jeu/bar.png" :
+                        "sprites/ProtoScene/ZoomMiniGameCard/line.png"
+                },
                 new Phaser.Math.Vector2(-7, 509)
             )
         ];
+
+        if(scene_key !== Scenes.INDEP_COMPUTER) {
+            children.push(
+                new CardObject(
+                    parent_scene,
+                    { name: "bar_fill", url: "sprites/ProtoScene/ZoomMiniGameCard/bar_fill.png" },
+                    new Phaser.Math.Vector2(12, -633)
+                )
+            );
+            children.push(
+                new CardObject(
+                    parent_scene,
+                    { name: "bar_fill", url: "sprites/ProtoScene/ZoomMiniGameCard/bar_fill.png" },
+                    new Phaser.Math.Vector2(12, -633)
+                )
+            );
+        }
 
         //Call base constructor
         super(parent_scene, children, null, true);
@@ -119,7 +147,7 @@ export class ZoomMiniGameCard extends Card {
                 isDestroyed: false
             });
 
-            if(this.scene_key !== Scenes.DAMIEN_INIT) {
+            if(this.scene_key === Scenes.PROTOTYPE) {
                 //Push the notif again
                 this.messages.push({
                     name: "notification_" + i,
@@ -161,16 +189,43 @@ export class ZoomMiniGameCard extends Card {
         this.cur_msg_idx = 0;
 
         //Used to update the bar
-        this.focus_bar_health = this.scene_key === Scenes.DAMIEN_INIT ? INIT_FOCUS.INIT : INIT_FOCUS.MARCH;
-        this.init_focus = this.scene_key === Scenes.DAMIEN_INIT ? INIT_FOCUS.INIT : INIT_FOCUS.MARCH;
+        this.focus_bar_health = this.scene_key === Scenes.DAMIEN_INIT ?
+            INIT_FOCUS.INIT :
+            this.scene_key === Scenes.INDEP_COMPUTER ?
+                INIT_FOCUS.INDEP :
+                INIT_FOCUS.MARCH;
 
-        this.spawn_delay = this.scene_key === Scenes.DAMIEN_INIT ? SPAWN_DELAY.INIT : SPAWN_DELAY.MARCH;
-        this.num_spaws = this.scene_key === Scenes.DAMIEN_INIT ? NUM_SPAWNS.INIT : NUM_SPAWNS.MARCH;
-        this.n_msg = this.scene_key === Scenes.DAMIEN_INIT ? N_MSG.INIT : N_MSG.MARCH;
+        this.init_focus = this.scene_key === Scenes.DAMIEN_INIT ?
+            INIT_FOCUS.INIT :
+            this.scene_key === Scenes.INDEP_COMPUTER ?
+                INIT_FOCUS.INDEP :
+                INIT_FOCUS.MARCH;
+
+        this.spawn_delay = this.scene_key === Scenes.DAMIEN_INIT ?
+            SPAWN_DELAY.INIT :
+            this.scene_key === Scenes.INDEP_COMPUTER ?
+                SPAWN_DELAY.INDEP :
+                SPAWN_DELAY.MARCH;
+
+        this.num_spaws = this.scene_key === Scenes.DAMIEN_INIT ?
+            NUM_SPAWNS.INIT :
+            this.scene_key === Scenes.INDEP_COMPUTER ?
+                NUM_SPAWNS.INDEP :
+                NUM_SPAWNS.MARCH;
+        
+        this.n_msg = this.scene_key === Scenes.DAMIEN_INIT ?
+            N_MSG.INIT :
+            this.scene_key === Scenes.INDEP_COMPUTER ?
+                N_MSG.INDEP :
+                N_MSG.MARCH;
 
         //Mutex to avoid multiple game ends
         this.lock = false;
-        this.final_health = this.scene_key === Scenes.DAMIEN_INIT ? INIT_FOCUS.INIT : INIT_FOCUS.MARCH;
+        this.final_health = this.scene_key === Scenes.DAMIEN_INIT ?
+            INIT_FOCUS.INIT :
+            this.scene_key === Scenes.INDEP_COMPUTER ?
+                INIT_FOCUS.INDEP :
+                INIT_FOCUS.MARCH;
 
         this.anim_count = 0;
         this.sprites = [];
@@ -226,7 +281,7 @@ export class ZoomMiniGameCard extends Card {
     createMessage(callback = () => {}) {
         if(!this.lock) {
             //Select the message to show
-            let msg_idx = Math.round(Math.random() * (this.n_msg - 1));
+            const msg_idx = Math.round(Math.random() * (this.n_msg - 1));
 
             //Make sure that the current message isn't already displayed
             let max_loop = this.n_msg / 2;
