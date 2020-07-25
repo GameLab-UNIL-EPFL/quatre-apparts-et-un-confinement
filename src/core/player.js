@@ -12,6 +12,7 @@ export const Scenes = {
     INDEP: 'Indep',
     INDEP_MSG: 'IndepMsg',
     STORE: 'Store',
+    STORE_EXT : 'Store_ext',
     MOTHER: 'Mother'
 };
 
