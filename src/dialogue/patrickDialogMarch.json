@@ -1,16 +1,9 @@
 {
-    "tv": {
-		"name": "TV",
-		"text": [
-			"..."
-		],
-		"choices": [],
-		"goto": []
-	},
 	"dvd1": {
 		"name": "",
 		"text": [
-            "Intouchables (2011)"
+            "I am Legend (2007)",
+            "Pas besoin qu'on me rappelle ma solitude."
 		],
 		"choices": [],
 		"goto": []
@@ -101,7 +94,8 @@
 		"name": "Nathan",
         "text": [
             "Moi je continue à travailler depuis la maison et Elise aussi…", 
-            "Donc autant te dire que c'est loin d'être des vacances."
+            "Donc autant te dire que c'est loin d'être des vacances.",
+            "Il y a parfois des moments tendus entre nous."
         ],
 		"choices": [
 			{
@@ -116,8 +110,8 @@
 		"name": "Nathan",
 		"text": [
 			"Écoute, c'est pas facile.",
-			"On est presque 24h sur 24 dans le même petit appart,",
-			"donc la tension monte vite."
+			"On est presque 24h sur 24 ensemble dans le même petit appart.",
+			"Au bout d'un moment on se prend la tête pour un rien."
 		],
 		"choices": [
 			{
@@ -137,17 +131,17 @@
 		"name": "Nathan",
 		"text": [
 			"Je ne sais vraiment pas quoi faire.",
-			"Si on ne trouve pas une solution, on va pas tenir jusqu'au déconfinement."
+			"Si on ne trouve pas une solution, on ne va pas tenir jusqu'au déconfinement."
 		],
 		"choices": [
 			{
-				"text": ["Je pense que tu dois juste être plus attentionné, c'est ce que toutes les femmes veulent."],
+				"text": ["Je pense que tu dois juste être plus attentionné. Montre-lui ton côté romantique!"],
 				"preview": "Plus attentionné",
 				"goto": "fin"
             },
 			{
 				"text": ["Je pense que vous devez juste prendre un peu de temps pour vous."],
-				"preview": "prendre du temps pour vous.",
+				"preview": "Prendre du temps pour vous.",
 				"goto": "fin"
 			}
 		],

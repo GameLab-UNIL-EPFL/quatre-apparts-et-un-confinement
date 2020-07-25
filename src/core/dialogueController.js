@@ -255,6 +255,15 @@ export class DialogueController {
         this.current_conv_id = id;
         this.cur_state = DialogueState.DISPLAYED;
 
+        //Check if an objective was met
+        if(this.requestDialogue(id).objective) {
+            if(this.parent_scene.notifyObjectiveMet) {
+                this.parent_scene.notifyObjectiveMet();
+            } else {
+                console.error("DIALOG_OBJECTIVE: Parent scene doesn't implement notifyObjectiveMet");
+            }
+        }
+
         //Create background animation
         this.parent_scene.anims.create({
             key: D_BOX_ANIMATION_KEY,
@@ -499,11 +508,20 @@ export class DialogueController {
         this.cur_state = DialogueState.MSG;
 
         //Retrieve the dialogue
-        let cur_text = choice_id ?
+        const cur_text = choice_id ?
             this.requestDialogue(id).choices[choice_id].text[0] :
             this.getText(id)[idx];
 
-        let cur_dialogue = this.requestDialogue(id);
+        const cur_dialogue = this.requestDialogue(id);
+
+        //Check if an objective was met
+        if(cur_dialogue.objective) {
+            if(this.parent_scene.notifyObjectiveMet) {
+                this.parent_scene.notifyObjectiveMet();
+            } else {
+                console.error("DIALOG_OBJECTIVE: Parent scene doesn't implement notifyObjectiveMet");
+            }
+        }
 
         //Decide which box to use
         let box = null;
@@ -576,7 +594,7 @@ export class DialogueController {
             (lr ? MIN_LEFT_X.text : MIN_RIGHT_X.text),
             ypos.text,
             cur_text,
-            {font: (36 * window.horizontalRatio) + "px OpenSans ", fill: lr ? "black" : "white", wordWrap: { width: 350 }}
+            {font: (30) + "px OpenSans ", fill: lr ? "black" : "white", wordWrap: { width: 350 }}
         );
 
         //Move the messages back
@@ -625,15 +643,15 @@ export class DialogueController {
         //Display the correct prompt box
         if(Object.keys(dialogue.choices).length <= 1) {
             this.parent_scene.add.image(-7, 616, 'promptBox1');
-            font_size = 76 * window.horizontalRatio;
+            font_size = 65;
             prompt_ypos = [579];
         } else if(Object.keys(dialogue.choices).length <= 2) {
             this.parent_scene.add.image(-7, 616, 'promptBox2');
-            font_size = 56 * window.horizontalRatio;
+            font_size = 56;
             prompt_ypos = [497, 677];
         } else {
             this.parent_scene.add.image(-7, 1416, 'promptBox3');
-            font_size = 46 * window.horizontalRatio;
+            font_size = 46;
             prompt_ypos = [476, 592, 711];
         }
 
@@ -661,6 +679,9 @@ export class DialogueController {
                     //Goto the next dialogue
                     const next_id = dialogue.choices[choice_key].goto;
 
+                    //play sound
+                    this.sent = this.parent_scene.sound.add("sent");
+                    this.sent.play({volume: 0.5});
                     //Retrieve dialiogue
                     const next_msg = this.requestDialogue(next_id);
 

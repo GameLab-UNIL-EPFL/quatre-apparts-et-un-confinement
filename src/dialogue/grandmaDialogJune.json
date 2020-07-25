@@ -1,0 +1,321 @@
+{
+    "calendrier": {
+		"name": "Suzanne",
+		"text": [
+			"Je vois enfin mes petits-enfants aujourd'hui!",
+            "Samedi, je vais boire un café avec Françoise."
+		],
+		"choices": [],
+		"goto": []
+	},
+	"livre1": {
+		"name": "",
+		"text": [
+			"Candide - Voltaire",
+			"« Il s'avisa un beau jour de printemps de s'aller promener,",
+			"marchant tout droit devant lui, croyant que c'était un privilège de l'espèce humaine,",
+			"comme de l'espèce animale, de se servir de ses jambes à son plaisir. »"
+		],
+		"choices": [],
+		"goto": []
+	},
+	"livre2": {
+		"name": "",
+        "text": [
+			"Covigula - Albert Camus",
+			"« Ce monde, tel qu'il est fait, n'est pas supportable.",
+			"J'ai donc besoin de la lune, ou du bonheur, ou de l'immortalité,",
+			"de quelque chose qui soit dément peut-être, mais qui ne soit pas de ce monde. »"
+		],
+        "choices": [],
+		"goto": []
+	},
+	"livre3": {
+		"name": "",
+        "text": [
+			"Voyage au bout de la nuit - Lois-Ferdinand Céline",
+			"« Voyager c'est bien utile, ça fait travailler l'imagination.",
+			"Tout le reste n'est que déceptions et fatigues.",
+			"Notre voyage à nous est entièrement imaginaire. »"
+		],
+        "choices": [],
+		"goto": []
+	},
+	"radio": {
+		"name": "Radio",
+		"text": ["Que faire?"],
+		"choices": [
+			{
+				"text": ["écouter de la musique"],
+				"preview": "Musique",
+				"goto": "bleiben"
+			},
+			{
+				"text": ["écouter les nouvelles"],
+				"preview": "Nouvelles",
+				"goto": "news"
+			}
+		],
+		"goto": ["bleiben", "news"]
+	},
+	"news": {
+		"name": "Radio",
+		"text": [
+			"🔈 6 Juin - Réouverture des restaurants, boîtes de nuit, musées, cinémas et piscines."
+		],
+		"choices": [],
+		"goto": []
+	},
+	"bleiben": {
+		"name": "Radio",
+		"text": ["🎶 Bleiben Sie zuhause 🎶\n🎶 Bleiben Sie zuhause 🎶"],
+		"choices": [],
+		"goto": []
+	},
+	"telephone": {
+		"name": "Suzanne",
+		"text": ["Bon, qui est-ce que je pourrais appeler?"],
+		"choices":[
+			{
+				"text": ["Françoise"],
+				"preview": "Françoise",
+				"goto": "francoise"
+            },
+            {
+				"text": ["Sophie"],
+				"preview": "Sophie",
+				"goto": "sophie"
+            },
+            {
+				"text": ["Marc"],
+				"preview": "Marc",
+				"goto": "marc"
+			}
+		],
+		"goto": ["francoise", "sophie", "marc"]
+    },
+    "francoise": {
+        "name": "Françoise",
+        "text": ["Allo? Ah Salut Suzanne! Comment vas-tu?"],
+        "choices": [
+			{
+				"text": ["Super!"],
+				"preview": "Super!",
+				"goto": "cava"
+			},
+			{
+				"text": ["Tu fais quoi de beau?"],
+				"preview": "Tu fais quoi de beau?",
+				"goto": "ennuie"
+            },
+            {
+				"text": ["T’as écouté les nouvelles?"],
+				"preview": "T’as écouté les nouvelles?",
+				"goto": "nouvelles"
+            }
+		],
+		"goto": ["cava", "ennuie", "nouvelles"]
+    },
+    "cava": {
+        "name": "Françoise",
+        "text": ["Oui, qu'est-ce que t'as de prévu ces temps?"],
+        "choices": [
+			{
+				"text": ["Je lis"],
+				"preview": "Je lis",
+				"goto": "lire"
+			},
+			{
+				"text": ["J’écoute la radio"],
+				"preview": "J’écoute la radio",
+				"goto": "nouvelles"
+            },
+            {
+				"text": ["Je sors enfin!"],
+				"preview": "Je sors enfin!",
+				"goto": "appel"
+            }
+		],
+		"goto": ["lire", "nouvelles", "appel"]
+    },
+    "lire": {
+        "name": "Françoise",
+        "text": ["Quel livre as-tu préféré lire pendant ce confinement?"],
+        "choices":[
+			{
+				"text": ["La Comédie Humaine"],
+				"preview": "La Comédie Humaine",
+				"goto": "oui"
+			},
+			{
+				"text": ["La Peste"],
+				"preview": "La Peste",
+				"goto": "oui"
+            },
+            {
+				"text": ["A la Recherche du Temps Perdu"],
+				"preview": "A la Recherche du Temps Perdu",
+				"goto": "oui"
+            }
+		],
+		"goto": ["oui"]
+    },
+    "appel": {
+        "name": "Françoise",
+        "text": ["Moi aussi, les discussions commençaient à tourner en rond avec mes petites plantes."],
+        "choices":[
+			{
+				"text": ["Hahaha, Caramel avait l'air inquiet quand je suis sortie la première fois"],
+				"preview": "Oui",
+				"goto": "oui"
+			}
+		],
+		"goto": ["oui"]
+    },
+    "ennuie": {
+        "name": "Françoise",
+        "text": [
+			"Ben écoute, j'ai revu Alain l'autre jour.",
+			"On a hésité à aller se baigner comme il faisait beau.",
+			"T'es déjà allée?"
+		],
+        "choices":[
+			{
+				"text": ["Oui! L'eau était étonnamment bonne!"],
+				"preview": "Oui peut-être",
+				"goto": "oui"
+			},
+			{
+				"text": ["Non pas encore, j'ai trop hâte!"],
+				"preview": "Oui",
+				"goto": "oui"
+            }
+		],
+		"goto": ["oui"]
+    },
+    "nouvelles": {
+        "name": "Françoise",
+		"text": [
+			"Oui, on dirait bien que cette fameuse vague aille dans la bonne direction.",
+			"J'ai hâte que tout ça ne soit plus qu'un souvenir étrange."
+		],
+        "choices": [
+            {
+				"text": ["Oui vraiment..."],
+				"preview": "Oui",
+				"goto": "oui"
+			},
+			{
+				"text": ["J'ai peur que ça ne soit qu'un moment de répit mais bon espérons!"],
+				"preview": "C’est pas la première fois",
+				"goto": "pandemie"
+            }
+		],
+		"goto": ["oui", "pandemie"]
+    },
+    "pandemie": {
+        "name": "Françoise",
+        "text": ["Oui bien sûr, l'avenir est encore flou."],
+        "choices": [
+            {
+				"text": ["Oui"],
+				"preview": "Oui",
+				"goto": "oui"
+			}
+		],
+		"goto": ["oui"]
+    },
+    "oui": {
+        "name": "Françoise",
+		"text": [
+			"C'est marrant, ça faisait tellement longtemps que j'étais pas sortie",
+			"que j'ai eu l'impression de redécouvrir le monde."
+		],
+        "choices":[
+			{
+				"text": ["Oui, j'ai eu cette impression aussi!"],
+				"preview": "Super",
+				"goto": "malade"
+			},
+			{
+				"text": ["Ah bon? "],
+				"preview": "Oui",
+				"goto": "malade"
+            }
+		],
+		"goto": ["malade"]
+    },
+    "malade": {
+        "name": "Françoise",
+        "text": ["On s'organise une petite sortie bientôt?"],
+        "choices": [
+			{
+				"text": "Oui, on pourrait aller visiter un musée!",
+				"preview": "Non",
+				"goto": "bye"
+			},
+			{
+				"text": ["Oui on pourrait aller faire une balade en montagne!"],
+				"preview": "Oui",
+				"goto": "bye"
+            }
+		],
+		"goto": ["non", "peur"]
+    },
+    "bye": {
+        "name": "Françoise",
+		"text": [
+			"Ça marche! Je dois y aller! Salut Suzanne"
+		],
+        "choices": [
+			{
+				"text": ["Merci! Ok, à bientôt!"],
+				"preview": "Merci!",
+				"goto": ""
+			}
+		],
+		"goto": []
+    },
+	"sophie": {
+		"name": "Sophie",
+		"text": ["Allo?"],
+		"choices": [
+			{
+				"text": ["Ah Sophie! Vous êtes en chemin?"],
+				"preview": "ça va?",
+				"goto": "comment"
+			}
+		],
+		"goto": ["comment"],
+		"objective": true
+	},
+	"comment": {
+		"name": "Sophie",
+		"text": ["Maman... Il y a eu un cas de covid à la crèche de Maxime."],
+		"choices": [],
+		"goto": []
+	},
+	"marc": {
+		"name": "Marc",
+		"text": ["Allo?"],
+		"choices": [
+			{
+				"text": ["Allo Marc? Comment ce mariage? Félicitations encore!"],
+				"preview": "Allo?",
+				"goto": "desole"
+			}
+		],
+		"goto": ["desole"]
+	},
+	"desole": {
+		"name": "Marc",
+		"text": [
+			"Merci! Oui superbe! On a bien pu fêter même si c'était en petit commité.",
+			"Je t'enverrai les photos. On a eu un temps magnifique!",
+			"Et Marion dans sa robe était juste sublime!"
+		],
+		"choices": [],
+		"goto": []
+	}
+}
+

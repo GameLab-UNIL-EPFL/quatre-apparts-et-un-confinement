@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import {ProtoGuyClothes} from "../scenes/protoScene.js"
+import {ProtoGuyClothes} from "../scenes/protoScene.js";
 
 const ProtoGuyState = {
     IDLE: 'idle',
@@ -39,76 +39,76 @@ export class ProtoGuy {
         this.sprites = [];
 
         switch(card) {
-            case ProtoGuyCard.WAKE_UP:
-                this.base_url = "sprites/ProtoScene/WakeUpCard/character_body.png";
-                this.base_name = "character_body";
-                this.base_offset_x = 0;
-                this.base_offset_y = 0;
+        case ProtoGuyCard.WAKE_UP:
+            this.base_url = "sprites/ProtoScene/WakeUpCard/character_body.png";
+            this.base_name = "character_body";
+            this.base_offset_x = 0;
+            this.base_offset_y = 0;
 
-                this.head_url = "sprites/ProtoScene/WakeUpCard/character_head.png";
-                this.head_name = "character_head";
-                this.head_offset_x = -55;
-                this.head_offset_y = -519;
+            this.head_url = "sprites/ProtoScene/WakeUpCard/character_head.png";
+            this.head_name = "character_head";
+            this.head_offset_x = -55;
+            this.head_offset_y = -519;
 
-                this.arm_url = "sprites/ProtoScene/WakeUpCard/character_arm.png";
-                this.arm_name = "chracter_arm";
-                this.arm_offset_x = 595 - this.x;
-                this.arm_offset_y = -105 - this.y;
+            this.arm_url = "sprites/ProtoScene/WakeUpCard/character_arm.png";
+            this.arm_name = "chracter_arm";
+            this.arm_offset_x = 595 - this.x;
+            this.arm_offset_y = -105 - this.y;
 
-                 //Initialize the different FSMs
-                this.cur_state = ProtoGuyState.IDLE;
-                this.rotate = 0;
-                break;
+            //Initialize the different FSMs
+            this.cur_state = ProtoGuyState.IDLE;
+            this.rotate = 0;
+            break;
 
-            case ProtoGuyCard.CHOSE_PATH:
-                this.name = "chosePathProtoGuy";
-                this.url = "sprites/ProtoScene/ChosePathCard/damien.png";
-                break;
+        case ProtoGuyCard.CHOSE_PATH:
+            this.name = "chosePathProtoGuy";
+            this.url = "sprites/ProtoScene/ChosePathCard/damien.png";
+            break;
 
-            case ProtoGuyCard.CLOTHES:
+        case ProtoGuyCard.CLOTHES:
 
-                this.dirty_name = "clothesProtoGuy_dirty";
-                this.dirty_url = "sprites/ProtoScene/ClothesCard/damien_Y.png";
+            this.dirty_name = "clothesProtoGuy_dirty";
+            this.dirty_url = "sprites/ProtoScene/ClothesCard/damien_Y.png";
 
-                this.clean_name = "clothesProtoGuy_clean";
-                this.clean_url = "sprites/ProtoScene/ClothesCard/damien_G.png";
+            this.clean_name = "clothesProtoGuy_clean";
+            this.clean_url = "sprites/ProtoScene/ClothesCard/damien_G.png";
 
-                this.pj_name = "clothesProtoGuy_pj";
-                this.pj_url = "sprites/ProtoScene/ClothesCard/damien_pj.png";
-                break;
+            this.pj_name = "clothesProtoGuy_pj";
+            this.pj_url = "sprites/ProtoScene/ClothesCard/damien_pj.png";
+            break;
 
-            case ProtoGuyCard.KITCHEN:
-                this.name = "kitchenProtoGuy";
-                this.url = "sprites/ProtoScene/KitchenCard/damien.png";
-                break;
+        case ProtoGuyCard.KITCHEN:
+            this.name = "kitchenProtoGuy";
+            this.url = "sprites/ProtoScene/KitchenCard/damien.png";
+            break;
 
-            case ProtoGuyCard.COMPUTER:
-                this.dirty_name = "computeProtoGuyDirty";
-                this.dirty_url = "sprites/ProtoScene/ComputerCard/damien_Y.png";
+        case ProtoGuyCard.COMPUTER:
+            this.dirty_name = "computeProtoGuyDirty";
+            this.dirty_url = "sprites/ProtoScene/ComputerCard/damien_Y.png";
 
-                this.clean_name = "computeProtoGuyClean";
-                this.clean_url = "sprites/ProtoScene/ComputerCard/damien_G.png";
+            this.clean_name = "computeProtoGuyClean";
+            this.clean_url = "sprites/ProtoScene/ComputerCard/damien_G.png";
 
-                this.pj_name = "computeProtoGuyPJ";
-                this.pj_url = "sprites/ProtoScene/ComputerCard/damien_pj.png";
-                break;
+            this.pj_name = "computeProtoGuyPJ";
+            this.pj_url = "sprites/ProtoScene/ComputerCard/damien_pj.png";
+            break;
 
-            case ProtoGuyCard.MINI_GAME:
-                break;
+        case ProtoGuyCard.MINI_GAME:
+            break;
 
-            case ProtoGuyCard.MESSAGE:
-                this.dirty_name = "computeProtoGuyDirty_msg";
-                this.dirty_url = "sprites/ProtoScene/MessageCard/damien_Y.png";
+        case ProtoGuyCard.MESSAGE:
+            this.dirty_name = "computeProtoGuyDirty_msg";
+            this.dirty_url = "sprites/ProtoScene/MessageCard/damien_Y.png";
 
-                this.clean_name = "computeProtoGuyClean_msg";
-                this.clean_url = "sprites/ProtoScene/MessageCard/damien_G.png";
+            this.clean_name = "computeProtoGuyClean_msg";
+            this.clean_url = "sprites/ProtoScene/MessageCard/damien_G.png";
 
-                this.pj_name = "computeProtoGuyPJ_msg";
-                this.pj_url = "sprites/ProtoScene/MessageCard/damien_pj.png";
-                break;
+            this.pj_name = "computeProtoGuyPJ_msg";
+            this.pj_url = "sprites/ProtoScene/MessageCard/damien_pj.png";
+            break;
 
-            default:
-                break;
+        default:
+            break;
         }
     }
 
@@ -119,25 +119,27 @@ export class ProtoGuy {
         //Get rid of the existing protoGuy
         this.destroy();
 
+        this.zipper.play();
+
         //Chose which clothes to wear
         switch(this.parent_scene.clothes) {
-            case ProtoGuyClothes.PYJAMAS:
-                this.sprite = this.parent_scene.add.image(this.x, this.y, this.pj_name);
-                this.sprite.setInteractive();
-                break;
+        case ProtoGuyClothes.PYJAMAS:
+            this.sprite = this.parent_scene.add.image(this.x, this.y, this.pj_name);
+            this.sprite.setInteractive();
+            break;
 
-            case ProtoGuyClothes.YESTERDAY_CLOTHES:
-                this.sprite = this.parent_scene.add.image(this.x, this.y, this.dirty_name);
-                this.sprite.setInteractive();
-                break;
+        case ProtoGuyClothes.YESTERDAY_CLOTHES:
+            this.sprite = this.parent_scene.add.image(this.x, this.y, this.dirty_name);
+            this.sprite.setInteractive();
+            break;
 
-            case ProtoGuyClothes.CLEAN_CLOTHES:
-                this.sprite = this.parent_scene.add.image(this.x, this.y, this.clean_name);
-                this.sprite.setInteractive();
-                break;
+        case ProtoGuyClothes.CLEAN_CLOTHES:
+            this.sprite = this.parent_scene.add.image(this.x, this.y, this.clean_name);
+            this.sprite.setInteractive();
+            break;
 
-            default:
-                break;
+        default:
+            break;
         }
 
         //Store sprite
@@ -158,148 +160,155 @@ export class ProtoGuy {
      */
     preload() {
         switch(this.card) {
-            case ProtoGuyCard.WAKE_UP:
-                this.parent_scene.load.image(this.base_name, this.base_url);
-                this.parent_scene.load.image(this.arm_name, this.arm_url);
-                this.parent_scene.load.image(this.head_name, this.head_url);
-                break;
+        case ProtoGuyCard.WAKE_UP:
+            this.parent_scene.load.image(this.base_name, this.base_url);
+            this.parent_scene.load.image(this.arm_name, this.arm_url);
+            this.parent_scene.load.image(this.head_name, this.head_url);
+            break;
 
-            case ProtoGuyCard.CHOSE_PATH:
-                this.parent_scene.load.image(this.name, this.url);
-                break;
+        case ProtoGuyCard.CHOSE_PATH:
+            this.parent_scene.load.image(this.name, this.url);
+            break;
 
-            case ProtoGuyCard.CLOTHES:
-                this.loadManyClothes();
-                break;
+        case ProtoGuyCard.CLOTHES:
+            this.loadManyClothes();
+            break;
 
-            case ProtoGuyCard.KITCHEN:
-                this.parent_scene.load.image(this.name, this.url);
-                break;
+        case ProtoGuyCard.KITCHEN:
+            this.parent_scene.load.image(this.name, this.url);
+            break;
 
-            case ProtoGuyCard.COMPUTER:
-                this.loadManyClothes();
-                break;
+        case ProtoGuyCard.COMPUTER:
+            this.loadManyClothes();
+            break;
 
-            case ProtoGuyCard.MINI_GAME:
-                break;
+        case ProtoGuyCard.MINI_GAME:
+            break;
 
-            case ProtoGuyCard.MESSAGE:
-                this.loadManyClothes();
-                break;
+        case ProtoGuyCard.MESSAGE:
+            this.loadManyClothes();
+            break;
 
-            default:
-                break;
+        default:
+            break;
         }
+
+        //Load the sounds
+        this.parent_scene.load.audio("zipper", "sounds/damien/zipper.wav");
     }
 
     /**
      * @brief Draws and places all of the character's images in the scene
      */
     create() {
+
+        this.zipper = this.parent_scene.sound.add("zipper");
+
+
         switch(this.card) {
-            case ProtoGuyCard.WAKE_UP:
-                //Create the different sprites that make up the character
-                this.base_sprite = this.parent_scene.add.image(this.x, this.y, this.base_name);
-                this.arm_sprite = this.parent_scene.add.image(this.x + this.arm_offset_x, this.y + this.arm_offset_y, this.arm_name);
-                this.head_sprite = this.parent_scene.add.image(this.x + this.head_offset_x, this.y + this.head_offset_y, this.head_name);
+        case ProtoGuyCard.WAKE_UP:
+            //Create the different sprites that make up the character
+            this.base_sprite = this.parent_scene.add.image(this.x, this.y, this.base_name);
+            this.arm_sprite = this.parent_scene.add.image(this.x + this.arm_offset_x, this.y + this.arm_offset_y, this.arm_name);
+            this.head_sprite = this.parent_scene.add.image(this.x + this.head_offset_x, this.y + this.head_offset_y, this.head_name);
 
-                this.sprites = [this.base_sprite, this.arm_sprite, this.head_sprite];
+            this.sprites = [this.base_sprite, this.arm_sprite, this.head_sprite];
 
-                this.arm_sprite.setOrigin(0, 0);
-                this.arm_sprite.angle += 190;
-                this.arm_sprite.x -= 10;
-                this.arm_sprite.y += 10;
-                this.cur_state = ProtoGuyState.SCRATCH_DOWN;
+            this.arm_sprite.setOrigin(0, 0);
+            this.arm_sprite.angle += 190;
+            this.arm_sprite.x -= 10;
+            this.arm_sprite.y += 10;
+            this.cur_state = ProtoGuyState.SCRATCH_DOWN;
 
-                //Set wake up card animation
-                this.parent_scene.tweens.add({
-                    targets: this.arm_sprite,
-                    angle: this.arm_sprite.angle - 10,
-                    x: this.arm_sprite.x + 5,
-                    y: this.arm_sprite.y - 5,
-                    duration: 500,
-                    ease: "Linear",
-                    yoyo: true,
-                    loop: -1
-                });
+            //Set wake up card animation
+            this.parent_scene.tweens.add({
+                targets: this.arm_sprite,
+                angle: this.arm_sprite.angle - 10,
+                x: this.arm_sprite.x + 5,
+                y: this.arm_sprite.y - 5,
+                duration: 500,
+                ease: "Linear",
+                yoyo: true,
+                loop: -1
+            });
 
-                break;
+            break;
 
-            case ProtoGuyCard.CHOSE_PATH:
-                this.sprite = this.parent_scene.add.image(this.x, this.y, this.name);
-                this.sprites = [this.sprite];
-                break;
+        case ProtoGuyCard.CHOSE_PATH:
+            this.sprite = this.parent_scene.add.image(this.x, this.y, this.name);
+            this.sprites = [this.sprite];
+            break;
 
-            case ProtoGuyCard.CLOTHES:
+        case ProtoGuyCard.CLOTHES:
+            this.sprite = this.parent_scene.add.image(this.x, this.y, this.pj_name);
+            this.sprites = [this.sprite];
+
+            //Make protoguy trigger a card change
+            this.sprite.setInteractive();
+            this.parent_scene.input.on(
+                'gameobjectdown',
+                (pointer, gameObject) => {
+                    //Check that we clicked on the closet
+                    if(gameObject === this.sprite) {
+                        console.log("click protoGuy");
+
+                        //Go to the next scene
+                        this.parent_scene.endCard();
+                        this.parent_scene.nextCard();
+                    }
+                },
+                this.parent_scene
+            );
+            break;
+
+        case ProtoGuyCard.KITCHEN:
+            this.sprite = this.parent_scene.add.image(this.x, this.y, this.name);
+            this.sprites = [this.sprite];
+            break;
+
+        case ProtoGuyCard.COMPUTER:
+            //Show the version of the character wearing the selected clothes
+            switch(this.parent_scene.clothes) {
+            case ProtoGuyClothes.PYJAMAS:
                 this.sprite = this.parent_scene.add.image(this.x, this.y, this.pj_name);
-                this.sprites = [this.sprite];
-
-                //Make protoguy trigger a card change
-                this.sprite.setInteractive();
-                this.parent_scene.input.on(
-                    'gameobjectdown',
-                    (pointer, gameObject) => {
-                        //Check that we clicked on the closet
-                        if(gameObject === this.sprite) {
-                            console.log("click protoGuy");
-
-                            //Go to the next scene
-                            this.parent_scene.endCard();
-                            this.parent_scene.nextCard();
-                        }
-                    },
-                    this.parent_scene
-                );
                 break;
 
-            case ProtoGuyCard.KITCHEN:
-                this.sprite = this.parent_scene.add.image(this.x, this.y, this.name);
-                this.sprites = [this.sprite];
+            case ProtoGuyClothes.CLEAN_CLOTHES:
+                this.sprite = this.parent_scene.add.image(this.x, this.y, this.clean_name);
                 break;
 
-            case ProtoGuyCard.COMPUTER:
-                //Show the version of the character wearing the selected clothes
-                switch(this.parent_scene.clothes) {
-                    case ProtoGuyClothes.PYJAMAS:
-                        this.sprite = this.parent_scene.add.image(this.x, this.y, this.pj_name);
-                        break;
+            case ProtoGuyClothes.YESTERDAY_CLOTHES:
+                this.sprite = this.parent_scene.add.image(this.x, this.y, this.dirty_name);
+                break;
+            }
 
-                    case ProtoGuyClothes.CLEAN_CLOTHES:
-                        this.sprite = this.parent_scene.add.image(this.x, this.y, this.clean_name);
-                        break;
+            this.sprites = [this.sprite];
+            break;
 
-                    case ProtoGuyClothes.YESTERDAY_CLOTHES:
-                        this.sprite = this.parent_scene.add.image(this.x, this.y, this.dirty_name);
-                        break;
-                }
+        case ProtoGuyCard.MINI_GAME:
+            break;
 
-                this.sprites = [this.sprite];
+        case ProtoGuyCard.MESSAGE:
+            //Show the version of the character wearing the selected clothes
+            switch(this.parent_scene.clothes) {
+            case ProtoGuyClothes.PYJAMAS:
+                this.sprite = this.parent_scene.add.image(this.x, this.y, this.pj_name);
                 break;
 
-            case ProtoGuyCard.MINI_GAME:
+            case ProtoGuyClothes.CLEAN_CLOTHES:
+                this.sprite = this.parent_scene.add.image(this.x, this.y, this.clean_name);
                 break;
 
-            case ProtoGuyCard.MESSAGE:
-                 //Show the version of the character wearing the selected clothes
-                 switch(this.parent_scene.clothes) {
-                    case ProtoGuyClothes.PYJAMAS:
-                        this.sprite = this.parent_scene.add.image(this.x, this.y, this.pj_name);
-                        break;
-
-                    case ProtoGuyClothes.CLEAN_CLOTHES:
-                        this.sprite = this.parent_scene.add.image(this.x, this.y, this.clean_name);
-                        break;
-
-                    case ProtoGuyClothes.YESTERDAY_CLOTHES:
-                        this.sprite = this.parent_scene.add.image(this.x, this.y, this.dirty_name);
-                        break;
-                }
-
-                this.sprites = [this.sprite];
+            case ProtoGuyClothes.YESTERDAY_CLOTHES:
+                this.sprite = this.parent_scene.add.image(this.x, this.y, this.dirty_name);
                 break;
+            }
 
-            default:
-                break;
+            this.sprites = [this.sprite];
+            break;
+
+        default:
+            break;
         }
     }
 

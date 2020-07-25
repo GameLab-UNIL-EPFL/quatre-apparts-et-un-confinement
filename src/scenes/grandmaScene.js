@@ -71,6 +71,8 @@ export class GrandmaScene extends Phaser.Scene {
 
         this.current_card = this.livingRoomCard;
         this.card_idx = GrandmaCards.LIVING_ROOM;
+
+        this.objective = false;
     }
 
     /**
@@ -148,6 +150,15 @@ export class GrandmaScene extends Phaser.Scene {
     }
 
     /**
+     * @brief Notifies the current card that the dialogue objective was met
+     */
+    notifyObjectiveMet() {
+        if(this.current_card.notifyObjectiveMet) {
+            this.current_card.notifyObjectiveMet();
+        }
+    }
+
+    /**
      * @brief moves to the next card
      * @param {GrandmaCards} card the next card to show
      */
@@ -160,19 +171,19 @@ export class GrandmaScene extends Phaser.Scene {
 
         //Choose which card to show next
         switch(card) {
-            case GrandmaCards.LIVING_ROOM:
-                this.current_card = this.livingRoomCard;
-                break;
+        case GrandmaCards.LIVING_ROOM:
+            this.current_card = this.livingRoomCard;
+            break;
 
-            case GrandmaCards.RADIO:
-                this.current_card = this.radioCard;
-                callback = (scene) => scene.dialogue.display("radio");
-                break;
+        case GrandmaCards.RADIO:
+            this.current_card = this.radioCard;
+            callback = (scene) => scene.dialogue.display("radio");
+            break;
 
-            case GrandmaCards.CALENDAR:
-                this.current_card = this.calendarCard;
-                callback = (scene) => scene.dialogue.display("calendrier");
-                break;
+        case GrandmaCards.CALENDAR:
+            this.current_card = this.calendarCard;
+            callback = (scene) => scene.dialogue.display("calendrier");
+            break;
         }
 
         //Create the new card
@@ -187,6 +198,12 @@ export class GrandmaScene extends Phaser.Scene {
         if(this.month === Months.MARCH) {
             this.scene.start(Scenes.BUILDING, {
                 mainMenu: false,
+                names: {
+                    damien: false,
+                    grandma: false,
+                    family: false,
+                    indep: true
+                },
                 stage: 1,
                 windows: {
                     damien: WindowState.OFF,
@@ -205,7 +222,7 @@ export class GrandmaScene extends Phaser.Scene {
         } else {
             this.scene.start(
                 Scenes.HALLWAY,
-                { cardIdx: HallwayCards.DAMIEN_CLOSED, damien_gone: Math.random() > 0.5 }
+                { cardIdx: HallwayCards.DAMIEN_CLOSED }
             );
         }
     }

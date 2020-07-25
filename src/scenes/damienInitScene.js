@@ -19,7 +19,7 @@ export class DamienInitScene extends Phaser.Scene {
         super({ key: Scenes.DAMIEN_INIT });
 
         //Keep track of the clothes that protoguy is wearing
-        this.clothes = ProtoGuyClothes.YESTERDAY_CLOTHES;
+        this.clothes = ProtoGuyClothes.CLEAN_CLOTHES;
 
         this.computerCard = new ComputerCard(this, Scenes.DAMIEN_INIT);
 
@@ -50,20 +50,20 @@ export class DamienInitScene extends Phaser.Scene {
             //Set the correct card
             switch(data.cardIdx) {
 
-                case ProtoCards.COMPUTER:
-                    this.current_card = this.computerCard;
-                    this.clothes = data.clothes;
-                    this.food = data.food;
-                    this.cardIdx = ProtoCards.COMPUTER;
-                    break;
+            case ProtoCards.COMPUTER:
+                this.current_card = this.computerCard;
+                this.clothes = data.clothes;
+                this.food = data.food;
+                this.cardIdx = ProtoCards.COMPUTER;
+                break;
 
-                case ProtoCards.MINI_GAME:
-                    this.current_card = this.zoomMiniGame;
-                    this.cardIdx = ProtoCards.MINI_GAME;
-                    break;
+            case ProtoCards.MINI_GAME:
+                this.current_card = this.zoomMiniGame;
+                this.cardIdx = ProtoCards.MINI_GAME;
+                break;
 
-                default:
-                    break;
+            default:
+                break;
             }
         }
     }
@@ -155,18 +155,18 @@ export class DamienInitScene extends Phaser.Scene {
 
             switch(this.cardIdx) {
 
-                case ProtoCards.COMPUTER:
-                    this.cardIdx = ProtoCards.MINI_GAME;
-                    this.current_card = this.zoomMiniGame;
-                    this.current_card.create();
-                    break;
+            case ProtoCards.COMPUTER:
+                this.cardIdx = ProtoCards.MINI_GAME;
+                this.current_card = this.zoomMiniGame;
+                this.current_card.create();
+                break;
 
-                case ProtoCards.MINI_GAME:
-                    this.nextScene();
-                    break;
+            case ProtoCards.MINI_GAME:
+                this.nextScene();
+                break;
 
-                default:
-                    break;
+            default:
+                break;
             }
 
             //Save the card and clothes choices
@@ -183,6 +183,12 @@ export class DamienInitScene extends Phaser.Scene {
         this.cameras.main.fadeOut(1000);
         this.scene.start(Scenes.BUILDING, {
             mainMenu: false,
+            names: {
+                damien: false,
+                grandma: true,
+                family: false,
+                indep: false
+            },
             stage: 1,
             windows: {
                 damien: WindowState.OFF,

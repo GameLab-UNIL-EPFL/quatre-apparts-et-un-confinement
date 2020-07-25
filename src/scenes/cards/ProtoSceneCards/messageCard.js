@@ -42,6 +42,10 @@ export class MessageCard extends Card {
     preload() {
         super.preload();
 
+        //Load in the sounds
+
+        this.parent_scene.load.audio("newMessage", "sounds/textMessages/newMessage.wav");
+        this.parent_scene.load.audio("sent", "sounds/textMessages/sentMessage.wav");
         this.parent_scene.dialogue.preloadMessages();
     }
 
@@ -51,6 +55,10 @@ export class MessageCard extends Card {
     create() {
         super.create();
 
+        this.message = this.parent_scene.sound.add("newMessage");
+        this.message.play();
+
+        
         this.parent_scene.dialogue.createMessageBG();
         this.parent_scene.dialogue.displayMessage("hello", true);
     }

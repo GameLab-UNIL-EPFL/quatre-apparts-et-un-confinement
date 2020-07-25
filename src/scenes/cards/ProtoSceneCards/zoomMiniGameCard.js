@@ -5,7 +5,12 @@ import { Scenes } from "../../../core/player";
 
 const N_NOTIFICATION = 10;
 const N_DISTRACTIONS = 19;
-const N_MSG = (N_NOTIFICATION * 3) + N_DISTRACTIONS;
+
+const N_MSG = {
+    MARCH: (N_NOTIFICATION * 3) + N_DISTRACTIONS,
+    INIT: (N_NOTIFICATION)
+};
+
 const NOTIF_SPREAD = 900;
 const NOTIF_OFFSET = 180-600;
 
@@ -32,8 +37,15 @@ const FOCUS_BAR_COLOR = {
     LOW: 0xE53D3D
 };
 
-const END_ZOOM_CALL_ID = "endZoom";
-const LOSER_ID = "loseZoom";
+const END_ZOOM_CALL_ID = {
+    INIT: "endHomework",
+    ZOOM: "endZoom"
+};
+
+const LOSER_ID = {
+    INIT: "loseHomework",
+    ZOOM: "loseZoom"
+};
 
 const MessageType = {
     Cours: 1,
@@ -55,8 +67,18 @@ export class ZoomMiniGameCard extends Card {
         const children = [
             new CardObject(
                 parent_scene,
-                { name: "zoom_bg", url: "sprites/ProtoScene/ZoomMiniGameCard/zoom_bg.png" },
-                new Phaser.Math.Vector2(0, -14)
+                {
+                    name: "zoom_bg",
+                    url: scene_key === Scenes.DAMIEN_INIT ? 
+                        "sprites/ProtoScene/ZoomMiniGameCard/init_computer_bg.jpg" :
+                        "sprites/ProtoScene/ZoomMiniGameCard/zoom_bg.png"
+                },
+                new Phaser.Math.Vector2(0, -14),
+                null,
+                null,
+                -1,
+                null,
+                -2
             ),
             new Background(
                 parent_scene,
@@ -97,37 +119,41 @@ export class ZoomMiniGameCard extends Card {
                 isDestroyed: false
             });
 
-            //Push the notif again
-            this.messages.push({
-                name: "notification_" + i,
-                url: "sprites/ProtoScene/ZoomMiniGameCard/notif_" + i + ".png" ,
-                pos: new Phaser.Math.Vector2(-600, -1000),
-                sprite: null,
-                type: MessageType.Cours,
-                isDestroyed: false
-            });
+            if(this.scene_key !== Scenes.DAMIEN_INIT) {
+                //Push the notif again
+                this.messages.push({
+                    name: "notification_" + i,
+                    url: "sprites/ProtoScene/ZoomMiniGameCard/notif_" + i + ".png" ,
+                    pos: new Phaser.Math.Vector2(-600, -1000),
+                    sprite: null,
+                    type: MessageType.Cours,
+                    isDestroyed: false
+                });
 
-            //Push the notif again
-            this.messages.push({
-                name: "notification_" + i,
-                url: "sprites/ProtoScene/ZoomMiniGameCard/notif_" + i + ".png" ,
-                pos: new Phaser.Math.Vector2(-600, -1000),
-                sprite: null,
-                type: MessageType.Cours,
-                isDestroyed: false
-            });
+                //Push the notif again
+                this.messages.push({
+                    name: "notification_" + i,
+                    url: "sprites/ProtoScene/ZoomMiniGameCard/notif_" + i + ".png" ,
+                    pos: new Phaser.Math.Vector2(-600, -1000),
+                    sprite: null,
+                    type: MessageType.Cours,
+                    isDestroyed: false
+                });
+            }
         }
 
-        //Add all distractions to the card
-        for(let i = 0; i < N_DISTRACTIONS; ++i) {
-            this.messages.push({
-                name: "distraction_" + i,
-                url: "sprites/ProtoScene/ZoomMiniGameCard/distraction_" + i + ".png" ,
-                pos: new Phaser.Math.Vector2(-600, -1000),
-                sprite: null,
-                type: MessageType.Distraction,
-                isDestroyed: false
-            });
+        if(this.scene_key !== Scenes.DAMIEN_INIT) {
+            //Add all distractions to the card
+            for(let i = 0; i < N_DISTRACTIONS; ++i) {
+                this.messages.push({
+                    name: "distraction_" + i,
+                    url: "sprites/ProtoScene/ZoomMiniGameCard/distraction_" + i + ".png" ,
+                    pos: new Phaser.Math.Vector2(-600, -1000),
+                    sprite: null,
+                    type: MessageType.Distraction,
+                    isDestroyed: false
+                });
+            }
         }
 
         //Array containing all of the sprites shown on the screen
@@ -140,6 +166,7 @@ export class ZoomMiniGameCard extends Card {
 
         this.spawn_delay = this.scene_key === Scenes.DAMIEN_INIT ? SPAWN_DELAY.INIT : SPAWN_DELAY.MARCH;
         this.num_spaws = this.scene_key === Scenes.DAMIEN_INIT ? NUM_SPAWNS.INIT : NUM_SPAWNS.MARCH;
+        this.n_msg = this.scene_key === Scenes.DAMIEN_INIT ? N_MSG.INIT : N_MSG.MARCH;
 
         //Mutex to avoid multiple game ends
         this.lock = false;
@@ -155,11 +182,13 @@ export class ZoomMiniGameCard extends Card {
     preload() {
         super.preload();
 
+        console.log("Loading sound");
+
         //Load sounds
-        this.parent_scene.load.audio("music", "sounds/zoomMiniGame/zoomMusic.mp3");
-        this.parent_scene.load.audio("wrong", "sounds/zoomMiniGame/wrong.wav");
-        this.parent_scene.load.audio("right", "sounds/zoomMiniGame/right.wav");
-        this.parent_scene.load.audio("lose", "sounds/zoomMiniGame/lose.wav");
+        this.parent_scene.load.audio("music", "sounds/ZoomMiniGame/ZoomMusic.mp3");
+        this.parent_scene.load.audio("wrong", "sounds/ZoomMiniGame/wrong.wav");
+        this.parent_scene.load.audio("right", "sounds/ZoomMiniGame/right.wav");
+        this.parent_scene.load.audio("lose", "sounds/ZoomMiniGame/Lose.wav");
 
         //Load all of the messages in
         this.messages.forEach(msg => {
@@ -197,16 +226,16 @@ export class ZoomMiniGameCard extends Card {
     createMessage(callback = () => {}) {
         if(!this.lock) {
             //Select the message to show
-            let msg_idx = Math.round(Math.random() * (N_MSG - 1));
+            let msg_idx = Math.round(Math.random() * (this.n_msg - 1));
 
             //Make sure that the current message isn't already displayed
-            let max_loop = N_MSG / 2;
+            let max_loop = this.n_msg / 2;
             while(msg_idx in this.cur_msg) {
                 //Make sure that we can't get stuck in the loop
                 if(--max_loop <= 0) {
                     break;
                 }
-                msg_idx = Math.round(Math.random() * (N_MSG - 1));
+                msg_idx = Math.round(Math.random() * (this.n_msg - 1));
             }
 
             this.cur_msg.push(msg_idx);
@@ -341,9 +370,13 @@ export class ZoomMiniGameCard extends Card {
 
             card.lock = true;
 
+            //Pick the correct text to display
+            const lose_key = card.scene_key === Scenes.DAMIEN_INIT ? LOSER_ID.INIT : LOSER_ID.ZOOM;
+            const win_key = card.scene_key === Scenes.DAMIEN_INIT ? END_ZOOM_CALL_ID.INIT : END_ZOOM_CALL_ID.ZOOM;
+
             //Open the dialogue
             card.parent_scene.dialogue.display(
-                lose ? LOSER_ID : END_ZOOM_CALL_ID
+                lose ? lose_key : win_key
             );
 
             //Save the card's health in case not all the notifications are gone

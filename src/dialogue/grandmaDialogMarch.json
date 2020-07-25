@@ -2,9 +2,9 @@
 	"calendrier": {
 		"name": "Suzanne",
 		"text": [
-			"Rien de prévu...",
-            "28 mars\nHmm, j’avais rendez-vous chez le coiffeur...",
-            "C’est mercredi, normalement je vois mes petits-enfants."
+            "Hmm, le 28 mars j’avais rendez-vous chez le coiffeur…",
+            "Et c’est mercredi. Normalement ce jour-là je vois mes petits-enfants.",
+            "Je n'ai plus rien de prévu."
 		],
 		"choices": [],
 		"goto": []
@@ -13,8 +13,8 @@
 		"name": "",
 		"text": [
 			"La peste - Albert Camus",
-			"Du reste, le docteur Rieux, par exemple, considérait que c’était cela le malheur,",
-			"et que l’habitude du confinement est pire que le confinement lui-même."
+			"« Du reste, le docteur Rieux, par exemple, considérait que c’était cela le malheur,",
+			"et que l’habitude du confinement est pire que le confinement lui-même. »"
 		],
 		"choices": [],
 		"goto": []
@@ -23,9 +23,9 @@
 		"name": "",
         "text": [
 			"A La Recherche du Temps Perdu - Marcel Proust",
-			"Certes, il y a dans ma maison toutes les choses inutiles.",
+			"« Certes, il y a dans ma maison toutes les choses inutiles.",
 			"Il n’y manque que le nécessaire, un grand morceau de ciel comme ici.",
-			"Tâchez de garder toujours un morceau de ciel au-dessus de votre vie…"
+			"Tâchez de garder toujours un morceau de ciel au-dessus de votre vie… »"
 		],
         "choices": [],
 		"goto": []
@@ -34,10 +34,10 @@
 		"name": "",
         "text": [
 			"Le Misanthrope - Molière",
-			"Je ne trouve partout que lâche flatterie,",
+			"« Je ne trouve partout que lâche flatterie,",
 			"Qu’injustice, intérêt, trahison, fourberie;",
 			"Je n’y puis plus tenir, j’enrage, et mon dessein",
-			"Est de rompre en visière à tout le genre humain."
+			"Est de rompre en visière à tout le genre humain. »"
 		],
         "choices": [],
 		"goto": []
@@ -47,12 +47,12 @@
 		"text": ["Que faire?"],
 		"choices": [
 			{
-				"text": ["écouter de la musique"],
+				"text": ["Écouter de la musique."],
 				"preview": "Musique",
 				"goto": "bleiben"
 			},
 			{
-				"text": ["écouter les nouvelles"],
+				"text": ["Écouter les nouvelles."],
 				"preview": "Nouvelles",
 				"goto": "news"
 			}
@@ -62,15 +62,15 @@
 	"news": {
 		"name": "Radio",
 		"text": [
-			"17 mars - La Suisse se trouve dans une situation extraordinaire",
-			"Restez chez vous"
+			"🔈 17 mars - La Suisse se trouve dans une situation extraordinaire.",
+			"🔈 Veuillez rester chez vous."
 		],
 		"choices": [],
 		"goto": []
 	},
 	"bleiben": {
 		"name": "Radio",
-		"text": ["*musique* Bleiben Sie zuhause"],
+		"text": ["🎶 Bleiben Sie zuhause 🎶\n🎶 Bleiben Sie zuhause 🎶"],
 		"choices": [],
 		"goto": []
 	},
@@ -101,13 +101,13 @@
         "text": ["Allo? Ah Salut Suzanne! Comment vas-tu?"],
         "choices": [
 			{
-				"text": ["Ça va, ça va"],
-				"preview": "Ça va, ça va",
+				"text": ["Ça va, ça va."],
+				"preview": "Ça va, ça va.",
 				"goto": "cava"
 			},
 			{
-				"text": ["Je m’ennuie..."],
-				"preview": "Je m’ennuie...",
+				"text": ["Je m’ennuie…"],
+				"preview": "Je m’ennuie…",
 				"goto": "ennuie"
             },
             {
@@ -123,18 +123,18 @@
         "text": ["Tu fais quoi pour t’occuper ces temps?"],
         "choices": [
 			{
-				"text": ["Je lis"],
-				"preview": "Je lis",
+				"text": ["Je lis."],
+				"preview": "Je lis.",
 				"goto": "lire"
 			},
 			{
-				"text": ["J’écoute la radio"],
-				"preview": "J’écoute la radio",
+				"text": ["J’écoute la radio."],
+				"preview": "J’écoute la radio.",
 				"goto": "nouvelles"
             },
             {
-				"text": ["Je passe des coups de fil"],
-				"preview": "Je passe des appels",
+				"text": ["Je passe des coups de fil."],
+				"preview": "Je passe des appels.",
 				"goto": "appel"
             }
 		],
@@ -155,8 +155,8 @@
 				"goto": "oui"
             },
             {
-				"text": ["A la Recherche du Temps Perdu - Marcel Proust"],
-				"preview": "A la Recherche du Temps Perdu - Proust",
+				"text": ["À la Recherche du Temps Perdu de Marcel Proust"],
+				"preview": "À la Recherche du Temps Perdu - Proust",
 				"goto": "oui"
             }
 		],
@@ -167,7 +167,7 @@
         "text": ["Hahaha je devrais faire pareil"],
         "choices":[
 			{
-				"text": ["Oui hahaha"],
+				"text": ["Oui hahaha."],
 				"preview": "Oui",
 				"goto": "oui"
 			}
@@ -182,12 +182,12 @@
 		],
         "choices":[
 			{
-				"text": ["Ah oui je dois l’avoir quelque part"],
+				"text": ["Ah oui, je dois l’avoir quelque part."],
 				"preview": "Oui peut-être",
 				"goto": "oui"
 			},
 			{
-				"text": ["Oui, je l’ai déjà lu"],
+				"text": ["Oui, je l’ai déjà lu."],
 				"preview": "Oui",
 				"goto": "oui"
             }
@@ -202,13 +202,13 @@
 		],
         "choices": [
             {
-				"text": ["Oui vraiment..."],
-				"preview": "Oui",
+				"text": ["Oui vraiment…"],
+				"preview": "Oui.",
 				"goto": "oui"
 			},
 			{
-				"text": ["Bon c’est pas la première pandémie non plus"],
-				"preview": "C’est pas la première fois",
+				"text": ["Bon, c’est pas la première pandémie non plus."],
+				"preview": "C’est pas la première fois.",
 				"goto": "pandemie"
             }
 		],
@@ -216,11 +216,11 @@
     },
     "pandemie": {
         "name": "Françoise",
-        "text": ["Oui d’accord mais pour notre époque avec les avions et tout ça, c’est différent!"],
+        "text": ["Oui d’accord, mais pour notre époque, plus de voitures ni d'avions… C’est différent!"],
         "choices": [
             {
-				"text": ["Oui oui"],
-				"preview": "Oui",
+				"text": ["Oui oui."],
+				"preview": "Oui.",
 				"goto": "oui"
 			}
 		],
@@ -235,13 +235,13 @@
 		],
         "choices":[
 			{
-				"text": ["Super! Oui ma fille a réussi à m’expliquer comment l’installer aussi"],
-				"preview": "Super",
+				"text": ["Super! Oui, ma fille a réussi à m’expliquer comment l’installer aussi."],
+				"preview": "Super.",
 				"goto": "malade"
 			},
 			{
 				"text": ["Oui, on en fait toutes les semaines!"],
-				"preview": "Oui",
+				"preview": "Oui.",
 				"goto": "malade"
             }
 		],
@@ -249,15 +249,15 @@
     },
     "malade": {
         "name": "Françoise",
-        "text": ["T’as pas peur de tomber malade’?"],
+        "text": ["T’as pas peur de tomber malade?"],
         "choices": [
 			{
-				"text": "Non, je fais attention",
-				"preview": "Non",
+				"text": "Non, je fais attention.",
+				"preview": "Non.",
 				"goto": "non"
 			},
 			{
-				"text": ["Oui bien sûr! Je ne pense pas pouvoir m’en remettre..."],
+				"text": ["Oui, bien sûr! Je ne pense pas que je pourrais m’en remettre…"],
 				"preview": "Oui",
 				"goto": "peur"
             }
@@ -282,7 +282,7 @@
     "peur": {
         "name": "Françoise",
 		"text": [
-			"Oui, c’est normal. On peut y passer...",
+			"Oui, c’est normal. On peut y passer…",
 			"Fais bien attention et prend bien soin de toi!"
 		],
         "choices": [
@@ -300,7 +300,7 @@
 		"choices": [
 			{
 				"text": ["Comment ça va?"],
-				"preview": "ça va?",
+				"preview": "Ça va?",
 				"goto": "comment"
 			},
 			{
@@ -309,11 +309,12 @@
 				"goto": "enfants"
 			}
 		],
-		"goto": ["comment", "enfants"]
+		"goto": ["comment", "enfants"],
+		"objective": true
 	},
 	"comment": {
 		"name": "Sophie",
-		"text": ["Oui enfin... Je suis bien occupée avec les enfants."],
+		"text": ["Oui, enfin… Je suis bien occupée avec les enfants."],
 		"choices": [
 			{
 				"text": ["Les enfants vont bien?"],
@@ -326,7 +327,7 @@
 	"enfants": {
 		"name": "Sophie",
 		"text": [
-			"Oui ils vont bien, mais c’est pas facile de les avoir à la maison toute la journée.",
+			"Oui, ils vont bien, mais c’est pas facile de les avoir à la maison toute la journée.",
 			"Matt me demande de les sortir parce que sinon il n’arrive pas à travailler."
 		],
 		"choices": [
@@ -340,7 +341,7 @@
 	},
 	"video": {
 		"name": "Sophie",
-		"text": ["Oui on peut faire ça ce week-end!"],
+		"text": ["Oui, on peut faire ça ce week-end!"],
 		"choices": [
 			{
 				"text": ["Super! J’ai hâte! Sinon vous êtes tous en bonne santé?"],
@@ -352,16 +353,16 @@
 	},
 	"sante": {
 		"name": "Sophie",
-		"text": ["Oui, ben on n'est pas vraiment sorti encore donc à part la fatigue, tout vas bien."],
+		"text": ["Oui, ben on n'est pas vraiment sorti encore donc à part la fatigue, tout va bien."],
 		"choices": [
 			{
 				"text": ["Tant mieux, mais n'oublie pas de boire du jus de gingembre et de curcuma!"],
-				"preview": "Tant mieux",
+				"preview": "Tant mieux (gingembre)",
 				"goto": "fin"
 			},
 			{
 				"text": ["Tant mieux, mais n'oublie pas de manger de la soupe à l’ortie!"],
-				"preview": "Tant mieux",
+				"preview": "Tant mieux (ortie)",
 				"goto": "fin"
 			}
 		],
@@ -369,10 +370,10 @@
 	},
 	"fin": {
 		"name": "Sophie",
-		"text": ["Oui oui maman, allez je dois y aller! Bisous"],
+		"text": ["Oui oui Maman, allez je dois y aller! Bisous"],
 		"choices": [
 			{
-				"text": ["D’accord! Bisous à Maxime et Liliane"],
+				"text": ["D’accord! Bisous à Maxime et Liliane."],
 				"preview": "D’accord!",
 				"goto": ""
 			}
@@ -394,7 +395,7 @@
 	"desole": {
 		"name": "Marc",
 		"text": [
-			"Ah Salut Suzanne, désolé je n'ai vraiment pas le temps là.",
+			"Ah salut Suzanne, désolé je n'ai vraiment pas le temps là.",
 			"On doit tout réorganiser pour le mariage, c’est vraiment compliqué.",
 			"Marion est stressée comme pas possible. Je te laisse!"
 		],

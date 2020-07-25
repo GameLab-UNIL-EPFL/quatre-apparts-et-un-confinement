@@ -2,6 +2,7 @@ import { game } from "..";
 
 export const Scenes = {
     INTRO: 'TitleScene',
+    BUS: 'BusScene',
     DAMIEN_INIT: 'DamienInit',
     PROTOTYPE: 'Prototype',
     DAMIEN_KITCHEN_CLOTHES: 'DamienKitchenClothesScene',
@@ -24,9 +25,12 @@ export class Player {
      * @brief Constructor for the player class
      */
     constructor() {
+        // THIS IS TEMPORARY: We should actually query the database to get an ID without risking collisions
+        this.id = Math.random().toString(36).substr(2, 9);
         this.cur_scene = Scenes.INTRO;
         this.scene_data = {};
         this.dialogue_tree = {};
+        this.damien_gone = false;
     }
 
     /**
@@ -78,13 +82,14 @@ export class Player {
     }
 
     /**
-     * @brief Writes the current game data to a cookie
+     * @brief Writes the current game data to local storage
      */
     saveGame() {
         let serialized_data = {
             scene: this.cur_scene,
             data: this.scene_data,
             tree: this.dialogue_tree,
+            damien_gone: this.damien_gone
         };
 
         //Encode the data in base 64 before saving it
@@ -94,7 +99,7 @@ export class Player {
     }
 
     /**
-     * @brief Loads the game state from a cookie if any
+     * @brief Loads the game state from local storage if any
      */
     loadGame() {
         //Retrieve the save file
@@ -115,11 +120,38 @@ export class Player {
                 this.dialogue_tree = game_data.tree;
                 this.cur_scene = game_data.scene;
                 this.scene_data = game_data.data;
+                this.damien_gone = game_data.damien_gone;
 
                 //Start the loaded scene
                 game.scene.start(game_data.scene, game_data.data);
             }
         }
     }
-}
 
+    sendChoices(payload) {
+        /*
+        Payload must match these SQL columns:
+        ['player_id', 'damien_stay_home', 'damien_food', 'damien_game_score_mean', 'damien_clothes', 'damien_see_grandma', 'mother_stay_home', 'mother_game_score', 'freelancer_food_set', 'freelancer_food_amount', 'freelancer_love_advice', 'freelancer_game_score', 'grandma_books', 'grandma_advice'];
+
+        example:
+        payload = {
+            'player_id': 1235, // required!
+            'damien_clothes': 1
+        };
+        */
+
+        (async () => {
+            const rawResponse = await fetch('https://labs.letemps.ch/interactive/2020/_sandbox/_covidou_server/add_choices.php', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            });
+            const content = await rawResponse.json();
+            // Tells if database was successfully updated
+            console.log(content);
+        })();
+    }
+}
