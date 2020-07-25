@@ -383,29 +383,7 @@ export class HallwayScene extends Phaser.Scene {
             break;
 
         case HallwayCards.INDEP_GRANDMA:
-            this.scene.start(Scenes.BUILDING, {
-                mainMenu: true,
-                names: {
-                    damien: false,
-                    grandma: false,
-                    family: false,
-                    indep: false
-                },
-                stage: 1,
-                windows: {
-                    damien: WindowState.OFF,
-                    grandma: WindowState.OFF,
-                    family: WindowState.OFF,
-                    indep: WindowState.OFF
-                },
-                month: Months.MARCH,
-                nextScene: {
-                    damien: null,
-                    grandma: null,
-                    family: null,
-                    indep: null
-                }
-            });
+            this.scene.start(Scenes.INDEP_COMPUTER);
             break;
             
         default:

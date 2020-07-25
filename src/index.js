@@ -18,6 +18,7 @@ import { DamienInitScene } from "./scenes/damienInitScene.js";
 import { IndepMessageScene } from "./scenes/indepMessageScene.js";
 import { BusScene } from "./scenes/busScene.js";
 import { StoreExtScene } from "./scenes/storeExtScene.js";
+import { IndepComputerScene } from "./scenes/indepComputerScene.js";
 
 let resizeTimeout;
 const plugins = [{
@@ -26,7 +27,7 @@ const plugins = [{
     mapping: 'rexUI'
 }];
 
-const OBJECT_DEBUG = true;
+const OBJECT_DEBUG = false;
 
 if(OBJECT_DEBUG === true) {
     plugins.push({
@@ -89,6 +90,7 @@ const config = {
         HallwayScene,
         IndepScene,
         IndepMessageScene,
+        IndepComputerScene,
         StoreScene,
         StoreExtScene,
         MotherScene

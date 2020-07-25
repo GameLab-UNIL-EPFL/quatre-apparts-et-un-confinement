@@ -13,15 +13,17 @@ const N_DISTRACTIONS = {
 };
 
 const N_MSG = {
-    MARCH: (N_NOTIFICATION.DAMIEN * 3) + N_DISTRACTIONS.DAMIEN,
+    MARCH: (N_NOTIFICATION.DAMIEN) + N_DISTRACTIONS.DAMIEN,
     INIT: (N_NOTIFICATION.DAMIEN),
     INDEP: N_NOTIFICATION.INDEP + N_DISTRACTIONS.INDEP
 };
 
-const NOTIF_SPREAD = 900;
-const NOTIF_OFFSET = 180-600;
+const NOTIF_SPREAD = 350;
 
-const BEG_Y_ZONE = 500;
+const BEG_Y_ZONE = {
+    DAMIEN: 500,
+    INDEP: 300
+};
 
 const INIT_FOCUS = {
     MARCH: 5,
@@ -109,73 +111,59 @@ export class ZoomMiniGameCard extends Card {
                         "sprites/IndepComputerScene/05_Mini-jeu/bar.png" :
                         "sprites/ProtoScene/ZoomMiniGameCard/line.png"
                 },
-                new Phaser.Math.Vector2(-7, 509)
+                scene_key === Scenes.INDEP_COMPUTER ? 
+                    new Phaser.Math.Vector2(-7, 294) :
+                    new Phaser.Math.Vector2(-7, 509)
+            ),
+            new CardObject(
+                parent_scene,
+                { name: "bar_fill", url: "sprites/ProtoScene/ZoomMiniGameCard/bar_fill.png" },
+                new Phaser.Math.Vector2(12, -633)
+            ),
+            new CardObject(
+                parent_scene,
+                { name: "bar_bg", url: "sprites/ProtoScene/ZoomMiniGameCard/bar_bg.png" },
+                new Phaser.Math.Vector2(12, -633)
             )
         ];
-
-        if(scene_key !== Scenes.INDEP_COMPUTER) {
-            children.push(
-                new CardObject(
-                    parent_scene,
-                    { name: "bar_fill", url: "sprites/ProtoScene/ZoomMiniGameCard/bar_fill.png" },
-                    new Phaser.Math.Vector2(12, -633)
-                )
-            );
-            children.push(
-                new CardObject(
-                    parent_scene,
-                    { name: "bar_fill", url: "sprites/ProtoScene/ZoomMiniGameCard/bar_fill.png" },
-                    new Phaser.Math.Vector2(12, -633)
-                )
-            );
-        }
 
         //Call base constructor
         super(parent_scene, children, null, true);
 
-        this.messages = [];
+        this.messages_stack_1 = [];
+        this.messages_stack_2 = [];
+        this.whichStack = false;
+
         this.scene_key = scene_key;
 
+        const n_notif = scene_key === Scenes.INDEP_COMPUTER ? 
+            N_NOTIFICATION.INDEP : N_NOTIFICATION.DAMIEN;
+
+        const n_distr = scene_key === Scenes.INDEP_COMPUTER ? 
+            N_DISTRACTIONS.INDEP : N_DISTRACTIONS.DAMIEN;
+
         //Add all notifications to the card
-        for(let i = 0; i < N_NOTIFICATION; ++i) {
-            this.messages.push({
+        for(let i = 0; i < n_notif; ++i) {
+            this.messages_stack_1.push({
                 name: "notification_" + i,
-                url: "sprites/ProtoScene/ZoomMiniGameCard/notif_" + i + ".png" ,
+                url: scene_key === Scenes.INDEP_COMPUTER ? 
+                    "sprites/IndepComputerScene/05_Mini-jeu/notification_" + (i + 1) + ".png" :
+                    "sprites/ProtoScene/ZoomMiniGameCard/notif_" + i + ".png",
                 pos: new Phaser.Math.Vector2(-600, -1000),
                 sprite: null,
                 type: MessageType.Cours,
                 isDestroyed: false
             });
-
-            if(this.scene_key === Scenes.PROTOTYPE) {
-                //Push the notif again
-                this.messages.push({
-                    name: "notification_" + i,
-                    url: "sprites/ProtoScene/ZoomMiniGameCard/notif_" + i + ".png" ,
-                    pos: new Phaser.Math.Vector2(-600, -1000),
-                    sprite: null,
-                    type: MessageType.Cours,
-                    isDestroyed: false
-                });
-
-                //Push the notif again
-                this.messages.push({
-                    name: "notification_" + i,
-                    url: "sprites/ProtoScene/ZoomMiniGameCard/notif_" + i + ".png" ,
-                    pos: new Phaser.Math.Vector2(-600, -1000),
-                    sprite: null,
-                    type: MessageType.Cours,
-                    isDestroyed: false
-                });
-            }
         }
 
         if(this.scene_key !== Scenes.DAMIEN_INIT) {
             //Add all distractions to the card
-            for(let i = 0; i < N_DISTRACTIONS; ++i) {
-                this.messages.push({
+            for(let i = 0; i < n_distr; ++i) {
+                this.messages_stack_1.push({
                     name: "distraction_" + i,
-                    url: "sprites/ProtoScene/ZoomMiniGameCard/distraction_" + i + ".png" ,
+                    url: scene_key === Scenes.INDEP_COMPUTER ?
+                        "sprites/IndepComputerScene/05_Mini-jeu/distraction_" + (i + 1) + ".png" :
+                        "sprites/ProtoScene/ZoomMiniGameCard/distraction_" + i + ".png",
                     pos: new Phaser.Math.Vector2(-600, -1000),
                     sprite: null,
                     type: MessageType.Distraction,
@@ -184,9 +172,8 @@ export class ZoomMiniGameCard extends Card {
             }
         }
 
-        //Array containing all of the sprites shown on the screen
-        this.cur_msg = [];
-        this.cur_msg_idx = 0;
+        //Shuffle the current stack
+        this.shuffle(this.messages_stack_1);
 
         //Used to update the bar
         this.focus_bar_health = this.scene_key === Scenes.DAMIEN_INIT ?
@@ -246,7 +233,7 @@ export class ZoomMiniGameCard extends Card {
         this.parent_scene.load.audio("lose", "sounds/ZoomMiniGame/Lose.wav");
 
         //Load all of the messages in
-        this.messages.forEach(msg => {
+        this.messages_stack_1.forEach(msg => {
             this.parent_scene.load.image(msg.name, msg.url);
         });
 
@@ -275,137 +262,157 @@ export class ZoomMiniGameCard extends Card {
     }
 
     /**
+     * @brief Shuffles a given array using the Fisher-Yates algorithm
+     * @param {array<Any>} array the array that will be shuffles (in place)
+     */
+    shuffle(array) {
+        let cur_idx = array.length, temp, rand_idx;
+
+        //Shuffle as long as there are elements
+        while(cur_idx !== 0) {
+            //Pick a remaining element
+            rand_idx = Math.floor(Math.random() * cur_idx);
+            cur_idx--;
+
+            //Swap the element with the current one
+            temp = array[cur_idx];
+            array[cur_idx] = array[rand_idx];
+            array[rand_idx] = temp;
+        }
+    }
+
+    resize_health() {
+        //Resize the health bar
+        this.children[3].sprite.displayWidth -= this.focus_bar_width / this.init_focus;
+        this.children[3].sprite.tint = FOCUS_BAR_COLOR.MID;
+
+        if(this.children[3].sprite.displayWidth < 300) {
+            this.children[3].sprite.tint = FOCUS_BAR_COLOR.LOW;
+        }
+    }
+
+    /**
      * @brief handles the creation of a single message card
      * @param {Function} callback what will be done at the end of the minigame
      */
     createMessage(callback = () => {}) {
         if(!this.lock) {
-            //Select the message to show
-            const msg_idx = Math.round(Math.random() * (this.n_msg - 1));
+            //Pick which stack we will be drawing from 
+            let stack = this.whichStack ? this.messages_stack_2 : this.messages_stack_1;
+            let target_stack = this.whichStack ? this.messages_stack_1 : this.messages_stack_2;
 
-            //Make sure that the current message isn't already displayed
-            let max_loop = this.n_msg / 2;
-            while(msg_idx in this.cur_msg) {
-                //Make sure that we can't get stuck in the loop
-                if(--max_loop <= 0) {
-                    break;
-                }
-                msg_idx = Math.round(Math.random() * (this.n_msg - 1));
-            }
-
-            this.cur_msg.push(msg_idx);
+            //Pick our element
+            let elem = stack.pop();
 
             //Create the msg at a random location
-            this.messages[msg_idx].pos.x = Math.round(Math.random() * NOTIF_SPREAD) + NOTIF_OFFSET;
+            const sign = Math.round(Math.random()) === 1 ? 1 : -1;
+            elem.pos.x = Math.round(Math.random() * NOTIF_SPREAD) * sign;
 
             const sprite = this.parent_scene.add.image(
-                this.messages[msg_idx].pos.x,
-                this.messages[msg_idx].pos.y,
-                this.messages[msg_idx].name
+                elem.pos.x,
+                elem.pos.y,
+                elem.name
             );
 
             this.sprites.push(sprite);
 
-            this.messages[msg_idx].sprite = sprite;
-            this.messages[msg_idx].isDestroyed = false;
+            elem.sprite = sprite;
+            elem.isDestroyed = false;
+
+            target_stack.push(elem);
+
+            if(stack.length === 0) {
+                this.whichStack = !this.whichStack;
+
+                //Shuffle the new stack
+                this.shuffle(target_stack);
+            }
+
+            const duration = this.scene_key === Scenes.INDEP_COMPUTER ? 5000 : 9000;
+            const end_y = this.scene_key === Scenes.INDEP_COMPUTER ? 590 : 800;
 
             //Animate the msg
             this.parent_scene.tweens.add({
-                targets: this.messages[msg_idx].sprite,
-                y: 800,
-                duration: 9000,
+                targets: sprite,
+                y: end_y,
+                duration: duration,
                 hideOnComplete: true,
                 onComplete: () => {
-                    if(!this.messages[msg_idx].isDestroyed) {
+                    if(!elem.isDestroyed) {
 
                         //Make sure that the player didn't miss a class notification
-                        if(this.messages[msg_idx].type === MessageType.Cours) {
+                        if(elem.type === MessageType.Cours) {
                             this.wrong.play();
+
+                            this.resize_health();
 
                             //Check that the health bar doesn't drop below 0
                             if(--this.focus_bar_health <= 0) {
+                                //End the minigame
                                 if(typeof callback === "function") {
                                     callback(this, true);
                                 }
-                            }
-
-                            //Resize the health bar
-                            this.children[3].sprite.displayWidth -= this.focus_bar_width / this.init_focus;
-                            this.children[3].sprite.tint = FOCUS_BAR_COLOR.MID;
-
-                            if(this.children[3].sprite.displayWidth < 300) {
-                                this.children[3].sprite.tint = FOCUS_BAR_COLOR.LOW;
-                            }
-
+                            } 
                         }
 
-                        //Remove the elelment in question
-                        this.cur_msg.filter((val, _) => val === msg_idx);
-                    }
-
-                    //Check if the game is over
-                    if(--this.num_spaws === 0) {
-                        if(typeof callback === "function") {
-                            callback(this, false);
-                            this.lose.play();
+                        //Check if the game is over
+                        if(this.num_spaws-- <= 0) {
+                            if(typeof callback === "function") {
+                                callback(this, false);
+                            }
                         }
                     }
+
                 },
                 onCompleteScope: this
             });
 
             //Activate interactivity
-            this.messages[msg_idx].sprite.setInteractive();
+            sprite.setInteractive().on(
+                'pointerdown',
+                () => {
+                    //Check the pointer's location
+                    const beg_y = this.scene_key === Scenes.INDEP_COMPUTER ? 
+                        BEG_Y_ZONE.INDEP : BEG_Y_ZONE.DAMIEN;
 
-            //Make the card interactive
-            this.parent_scene.input.on(
-                'gameobjectdown',
-                (_, gameObject) => {
-                    //Check that we clicked the object
-                    if(gameObject === this.messages[msg_idx].sprite) {
-                        if(this.anim) {
-                            this.anim.destroy();
+                    if(sprite.y >= beg_y) {
+                        sprite.destroy();
+                        this.num_spaws--;
+
+                        this.parent_scene.add.sprite(
+                            sprite.x,
+                            sprite.y,
+                            "notif-pop"
+                        ).play('pop');
+
+                        if(elem.type === MessageType.Cours) {
+                            this.right.play();
                         }
 
-                        //Check the pointer's location
-                        if(gameObject.y >= BEG_Y_ZONE) {
-                            gameObject.destroy();
+                        //Make sure that the player didn't miss a class notification
+                        if(elem.type === MessageType.Distraction) {
 
-                            this.anim = this.parent_scene.add.sprite(
-                                gameObject.x,
-                                gameObject.y,
-                                "notif-pop"
-                            ).play('pop');
+                            //play sound
+                            this.wrong.play();
 
-                            //Remove the elelment in question
-                            this.cur_msg.filter((val, _) => val === msg_idx);
+                            this.resize_health();
 
-                            if(this.messages[msg_idx].type === MessageType.Cours) {
-                                this.right.play();
+                            //Check that the health bar doesn't drop below 0
+                            if(--this.focus_bar_health <= 0) {
+                                //End the minigame
+                                if(typeof callback === "function") {
+                                    callback(this, true);
+                                    this.lose.play();
+                                }
                             }
 
-                            //Make sure that the player didn't miss a class notification
-                            if(this.messages[msg_idx].type === MessageType.Distraction) {
+                        } else {
+                            elem.isDestroyed = true;
+                        }
 
-                                //play sound
-                                this.wrong.play();
-
-                                //Check that the health bar doesn't drop below 0
-                                if(--this.focus_bar_health <= 0) {
-                                    if(typeof callback === "function") {
-                                        callback(this, true);
-                                        this.lose.play();
-                                    }
-                                }
-
-                                this.children[3].sprite.displayWidth -= this.focus_bar_width / this.init_focus;
-                                this.children[3].sprite.tint = FOCUS_BAR_COLOR.MID;
-
-                                if(this.children[3].sprite.displayWidth < 300) {
-                                    this.children[3].sprite.tint = FOCUS_BAR_COLOR.LOW;
-                                }
-                            } else {
-                                this.messages[msg_idx].isDestroyed = true;
+                        if(this.num_spaws <= 0) {
+                            if(typeof callback === "function") {
+                                callback(this, false);
                             }
                         }
                     }
@@ -420,14 +427,21 @@ export class ZoomMiniGameCard extends Card {
      */
     endMiniGame(card, lose=false) {
         if(!card.lock) {
-
+            card.lose.play();
             card.sprites.forEach(sprite => sprite.destroy());
 
             card.lock = true;
 
             //Pick the correct text to display
-            const lose_key = card.scene_key === Scenes.DAMIEN_INIT ? LOSER_ID.INIT : LOSER_ID.ZOOM;
-            const win_key = card.scene_key === Scenes.DAMIEN_INIT ? END_ZOOM_CALL_ID.INIT : END_ZOOM_CALL_ID.ZOOM;
+            let lose_key;
+            let win_key;
+            if(card.scene_key === Scenes.INDEP_COMPUTER) {
+                lose_key = "patrick_mini_lose";
+                win_key = "patrick_mini_win";
+            } else {
+                lose_key = card.scene_key === Scenes.DAMIEN_INIT ? LOSER_ID.INIT : LOSER_ID.ZOOM;
+                win_key = card.scene_key === Scenes.DAMIEN_INIT ? END_ZOOM_CALL_ID.INIT : END_ZOOM_CALL_ID.ZOOM;
+            }
 
             //Open the dialogue
             card.parent_scene.dialogue.display(
@@ -449,7 +463,7 @@ export class ZoomMiniGameCard extends Card {
     }
 
     showTutorial() {
-        const bg = new Phaser.Geom.Rectangle(-600, BEG_Y_ZONE, 1200, 300);
+        const bg = new Phaser.Geom.Rectangle(-600, BEG_Y_ZONE.DAMIEN, 1200, 300);
         const hitzone = this.parent_scene.add.graphics({ fillStyle: { color: 0xfff8a1, alpha: 0.9 } });
         hitzone.fillRectShape(bg);
 
@@ -490,7 +504,7 @@ export class ZoomMiniGameCard extends Card {
                 const interaction = () => {
 
                     //Play pop animation
-                    this.anim = this.parent_scene.add.sprite(
+                    this.parent_scene.add.sprite(
                         tutorial_sprite.x,
                         tutorial_sprite.y,
                         "notif-pop"
@@ -506,7 +520,7 @@ export class ZoomMiniGameCard extends Card {
                     //Create the timer event and start the game
                     this.msg_spawner = this.parent_scene.time.addEvent({
                         delay: this.spawn_delay,
-                        repeat: this.num_spaws,
+                        repeat: this.num_spaws - 2,
                         callback: this.createMessage,
                         callbackScope: this,
                         args: [this.endMiniGame]
