@@ -164,8 +164,8 @@ export class LivingRoomCard extends Card {
         this.children[this.children.length - 2].highlight_sprite.setDepth(3);
 
         //Add sound to the scene
-        this.page = this.parent_scene.sound.add("meow");
         this.page = this.parent_scene.sound.add("pageTurn");
+        this.page = this.parent_scene.sound.add("meow");
 
         //=========HANDLE_ANIMATIONS=========
 
