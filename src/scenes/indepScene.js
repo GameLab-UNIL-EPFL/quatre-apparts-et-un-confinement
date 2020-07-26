@@ -91,14 +91,27 @@ export class IndepScene extends Phaser.Scene {
                     new Phaser.Math.Vector2(-218, 431),
                     null,
                     null,
-                    0
+                    0,
+                    {
+                        name: 'indepIdleTV_h',
+                        url: "sprites/UI/01_Interactions/04_Independant/02_Spritesheets/03-Independant-Television-Spritesheet_270x170.png",
+                        size: { frameWidth: 270, frameHeight: 170 },
+                        pos: new Phaser.Math.Vector2(-240, 80)
+                    }
                 ),
                 new CardObject(
                     this,
                     { name: "indepIdleDVD1", url: "sprites/IndepScene/01_IDLE/dvd_1.png" },
                     new Phaser.Math.Vector2(31, 761),
                     (scene) => scene.dialogue.display("dvd1"),
-                    this
+                    this,
+                    -1,
+                    {
+                        name: 'dvd_h',
+                        url: "sprites/UI/01_Interactions/04_Independant/02_Spritesheets/02-Independant-Dvd-Spritesheet_340x180.png",
+                        size: { frameWidth: 340, frameHeight: 180 },
+                        pos: new Phaser.Math.Vector2(-38, 678)
+                    }
                 ),
                 new CardObject(
                     this,
@@ -172,6 +185,7 @@ export class IndepScene extends Phaser.Scene {
         //Toggle the guy idle sprite
         this.current_card.children[4].sprite.setActive(!this.onPhone).setVisible(!this.onPhone);
         this.current_card.children[7].sprite.setActive(!this.onPhone).setVisible(!this.onPhone);
+        this.current_card.children[7].highlight_sprite.setActive(!this.onPhone).setVisible(!this.onPhone);
     }
 
     /**
@@ -341,5 +355,7 @@ export class IndepScene extends Phaser.Scene {
      */
     destroy() {
         this.current_card.destroy();
+
+        this.dvd_h.destroy();
     }
 }

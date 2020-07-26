@@ -3,6 +3,7 @@ import RexUIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
 import DebugObjects from './plugins/debugObjects.js';
 import './style.scss';
 
+import { TitleScene } from "./scenes/titleScene.js";
 import { ProtoScene } from "./scenes/protoScene.js";
 import { BuildingScene } from "./scenes/buildingScene.js";
 import { Player } from "./core/player.js";
@@ -15,6 +16,7 @@ import { IndepScene } from "./scenes/indepScene.js";
 import { MotherScene } from "./scenes/motherScene.js";
 import { DamienInitScene } from "./scenes/damienInitScene.js";
 import { IndepMessageScene } from "./scenes/indepMessageScene.js";
+import { BusScene } from "./scenes/busScene.js";
 
 let resizeTimeout;
 const plugins = [{
@@ -75,7 +77,9 @@ const config = {
         scene: plugins
     },
     scene: [
+        TitleScene,
         BuildingScene,
+        BusScene,
         ProtoScene,
         DamienInitScene,
         DamienKitchenClothesScene,
