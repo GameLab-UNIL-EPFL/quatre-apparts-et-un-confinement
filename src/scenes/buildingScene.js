@@ -239,15 +239,6 @@ export class BuildingScene extends Phaser.Scene {
                    gameObject === this.sprites['continue_text'])
                 {
 
-                    //music fade out
-                    this.tweens.add({
-                        targets:  this.theme,
-                        volume:   0,
-                        duration: 800
-                    });
-
-                    this.theme.stop();
-
                     //Show a loading screen
                     this.showLoading();
 
@@ -307,8 +298,6 @@ export class BuildingScene extends Phaser.Scene {
         //Make new game button start a new game
         this.sprites['new_game_text'].setInteractive().on('pointerdown', interaction, this);
         this.sprites['menu_new_game'].setInteractive().on('pointerdown', interaction, this);
-
-        this.sprites['new_game_text'].on('pointerdown', () => this.theme.stop());
     }
 
     /**
@@ -420,6 +409,22 @@ export class BuildingScene extends Phaser.Scene {
         this.theme = this.sound.add("theme");
         //this.bird.play({volume: 0.3});
         this.theme.play();
+
+        this.input.on('gameobjectdown',
+            (_, gameObject) => {
+                if(gameObject.input.enabled) {
+                    
+                    //need to make this work
+                    this.tweens.add({
+                        targets:  this.theme,
+                        volume:   0,
+                        duration: 800
+                    });
+
+                    this.theme.stop();
+                } 
+            }   
+        );
             
         
 
