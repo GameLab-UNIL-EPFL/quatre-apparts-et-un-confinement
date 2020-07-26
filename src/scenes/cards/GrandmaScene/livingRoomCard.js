@@ -125,6 +125,7 @@ export class LivingRoomCard extends Card {
         this.parent_scene.load.image("grandma_book3", "sprites/GrandmaScene/grandma_book_03.png");
 
         this.parent_scene.load.audio("pageTurn", "sounds/grandma/pageTurn.wav");
+        this.parent_scene.load.audio("meow", "sounds/grandma/meow.wav");
 
         //Load in the phone highlight
         this.parent_scene.load.spritesheet(
@@ -163,6 +164,7 @@ export class LivingRoomCard extends Card {
         this.children[this.children.length - 2].highlight_sprite.setDepth(3);
 
         //Add sound to the scene
+        this.page = this.parent_scene.sound.add("meow");
         this.page = this.parent_scene.sound.add("pageTurn");
 
         //=========HANDLE_ANIMATIONS=========
@@ -181,6 +183,8 @@ export class LivingRoomCard extends Card {
             677,
             'cat'
         ).play('cat-tail');
+
+        this.page = this.parent_scene.sound.add("meow");
 
         // Create ring sprites
         this.parent_scene.anims.create({
