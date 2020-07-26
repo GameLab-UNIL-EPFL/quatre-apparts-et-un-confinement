@@ -165,7 +165,7 @@ export class LivingRoomCard extends Card {
 
         //Add sound to the scene
         this.page = this.parent_scene.sound.add("pageTurn");
-        this.page = this.parent_scene.sound.add("meow");
+        this.meow = this.parent_scene.sound.add("meow");
 
         //=========HANDLE_ANIMATIONS=========
 
@@ -177,14 +177,16 @@ export class LivingRoomCard extends Card {
             repeat: -1
         });
 
-        //Play the cat animation
+        //Play the cat animation and the sound on click
         this.cat_anim = this.parent_scene.add.sprite(
             11,
             677,
             'cat'
-        ).play('cat-tail');
+        ).play('cat-tail')
+            .setInteractive()
+            .on('pointerdown', () => this.meow.play());
 
-        this.page = this.parent_scene.sound.add("meow");
+    
 
         // Create ring sprites
         this.parent_scene.anims.create({

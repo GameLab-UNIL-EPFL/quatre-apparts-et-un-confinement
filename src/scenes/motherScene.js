@@ -123,6 +123,18 @@ export class MotherScene extends Phaser.Scene {
         const obj_pos = new Phaser.Math.Vector2(cardObj.x, cardObj.y);
         cardObj.destroy();
 
+        if (cardObj.name === 'motherSceneBed_d') {
+            this.sound.add("clothes").play();
+        } else if (cardObj.name === 'motherSceneHamper_d') {
+            this.sound.add("cupboard").play();
+        } else if (cardObj.name === 'motherSceneBox_d' || cardObj.name === 'motherSceneXwing_d') {
+            this.sound.add("toys").play();
+        } else if (cardObj.name === 'motherSceneBooks_d' || cardObj.name === 'motherSceneColoring_d') {
+            this.sound.add("paper").play({volume: 0.5});
+        } else if (cardObj.name === 'motherSceneSwitch_d' || cardObj.name === 'motherSceneGlobe_d') {
+            this.sound.add("click").play({volume: 0.5});
+        }
+
         //Create the new sprite at the old position
         const clean_obj = this.add.image(obj_pos.x, obj_pos.y, cleanName);
         clean_obj.setDepth(cleanPos.z);
@@ -167,6 +179,13 @@ export class MotherScene extends Phaser.Scene {
         this.load.image("motherSceneHamper_c", "sprites/MotherScene/01_Chambre-Enfants/hamper_c.png");
         this.load.image("motherSceneSwitch_c", "sprites/MotherScene/01_Chambre-Enfants/switch_c.png");
         this.load.image("motherSceneGlobe_c", "sprites/MotherScene/01_Chambre-Enfants/globe_c.png");
+
+        //Load in the sounds
+        this.load.audio("clothes", "sounds/room/clothes.wav");
+        this.load.audio("toys", "sounds/room/toys.wav");
+        this.load.audio("paper", "sounds/grandma/pageTurn.wav");
+        this.load.audio("cupboard", "sounds/room/cupboard.wav");
+        this.load.audio("click", "sounds/UI/click01.wav");
 
         //Load the arrow animation spritesheet
         this.load.spritesheet(

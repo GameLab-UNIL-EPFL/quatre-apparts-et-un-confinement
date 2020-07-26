@@ -115,6 +115,7 @@ export class BuildingScene extends Phaser.Scene {
 
         //load sounds
         this.load.audio("bird", "sounds/building/birdTraffic.mp3");
+        this.load.audio("theme", "sounds/building/theme.mp3");
 
         //Load in all of the sprites needed for this scene
         switch(this.info.month) {
@@ -236,6 +237,16 @@ export class BuildingScene extends Phaser.Scene {
                 if(gameObject === this.sprites['menu_continue'] ||
                    gameObject === this.sprites['continue_text'])
                 {
+
+                    //music fade out
+                    this.tweens.add({
+                        targets:  this.theme,
+                        volume:   0,
+                        duration: 800
+                    });
+
+                    this.theme.stop();
+
                     //Show a loading screen
                     this.showLoading();
 
@@ -317,6 +328,8 @@ export class BuildingScene extends Phaser.Scene {
         //Make new game button start a new game
         this.sprites['new_game_text'].setInteractive().on('pointerdown', interaction, this);
         this.sprites['menu_new_game'].setInteractive().on('pointerdown', interaction, this);
+
+        this.sprites['new_game_text'].on('pointerdown', () => this.theme.stop());
     }
 
     /**
@@ -424,8 +437,12 @@ export class BuildingScene extends Phaser.Scene {
         this.cameras.main.fadeIn(1000);
 
         // TODO: rerecord birdTraffic sound
-        //this.bird = this.sound.add("bird");
+        this.bird = this.sound.add("bird");
+        this.theme = this.sound.add("theme");
         //this.bird.play({volume: 0.3});
+        this.theme.play();
+            
+        
 
         switch(this.info.month) {
         case Months.MARCH:
