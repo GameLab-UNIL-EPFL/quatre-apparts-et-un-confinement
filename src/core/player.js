@@ -15,7 +15,8 @@ export const Scenes = {
     INDEP_MSG: 'IndepMsg',
     STORE: 'Store',
     STORE_EXT : 'Store_ext',
-    MOTHER: 'Mother'
+    MOTHER: 'Mother',
+    END_SCENE: 'EndScene'
 };
 
 /**
@@ -32,6 +33,7 @@ export class Player {
         this.scene_data = {};
         this.dialogue_tree = {};
         this.damien_gone = false;
+        this.nathan_failed = false;
     }
 
     /**
@@ -90,7 +92,8 @@ export class Player {
             scene: this.cur_scene,
             data: this.scene_data,
             tree: this.dialogue_tree,
-            damien_gone: this.damien_gone
+            damien_gone: this.damien_gone,
+            nathan_failed: this.nathan_failed
         };
 
         //Encode the data in base 64 before saving it
@@ -122,6 +125,7 @@ export class Player {
                 this.cur_scene = game_data.scene;
                 this.scene_data = game_data.data;
                 this.damien_gone = game_data.damien_gone;
+                this.nathan_failed = game_data.nathan_failed;
 
                 //Start the loaded scene
                 game.scene.start(game_data.scene, game_data.data);

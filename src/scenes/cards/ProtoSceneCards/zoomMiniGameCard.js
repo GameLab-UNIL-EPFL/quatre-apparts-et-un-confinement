@@ -34,13 +34,13 @@ const INIT_FOCUS = {
 const SPAWN_DELAY = {
     MARCH: 1000,
     INIT: 2000,
-    INDEP: 500,
+    INDEP: 300,
 };
 
 const NUM_SPAWNS = {
     MARCH: 50,
     INIT: 25,
-    INDEP: 300
+    INDEP: 10000
 };
 
 const FOCUS_BAR_COLOR = {
@@ -82,7 +82,11 @@ export class ZoomMiniGameCard extends Card {
             new CardObject(
                 parent_scene,
                 {
-                    name: "zoom_bg",
+                    name: scene_key === Scenes.DAMIEN_INIT ? 
+                        "homework_bg" :
+                        scene_key === Scenes.INDEP_COMPUTER ?
+                            "taxes_bg" :
+                            "zoom_bg",
                     url: scene_key === Scenes.DAMIEN_INIT ? 
                         "sprites/ProtoScene/ZoomMiniGameCard/init_computer_bg.jpg" :
                         scene_key === Scenes.INDEP_COMPUTER ? 
@@ -101,12 +105,14 @@ export class ZoomMiniGameCard extends Card {
                 scene_key === Scenes.INDEP_COMPUTER ?
                     "sprites/IndepComputerScene/05_Mini-jeu/computer_bg.png" : 
                     "sprites/ProtoScene/ZoomMiniGameCard/computer_screen.png",
-                "computer_bg"
+                scene_key === Scenes.INDEP_COMPUTER ?
+                    "computer_bg_patrick" : "computer_bg"
             ),
             new CardObject(
                 parent_scene,
                 {
-                    name: "line",
+                    name: scene_key === Scenes.INDEP_COMPUTER ?
+                        "indep_line" : "line",
                     url: scene_key === Scenes.INDEP_COMPUTER ?
                         "sprites/IndepComputerScene/05_Mini-jeu/bar.png" :
                         "sprites/ProtoScene/ZoomMiniGameCard/line.png"
@@ -145,7 +151,9 @@ export class ZoomMiniGameCard extends Card {
         //Add all notifications to the card
         for(let i = 0; i < n_notif; ++i) {
             this.messages_stack_1.push({
-                name: "notification_" + i,
+                name: scene_key === Scenes.INDEP_COMPUTER ? 
+                    "notification_patrick_" + i : 
+                    "notification_" + i,
                 url: scene_key === Scenes.INDEP_COMPUTER ? 
                     "sprites/IndepComputerScene/05_Mini-jeu/notification_" + (i + 1) + ".png" :
                     "sprites/ProtoScene/ZoomMiniGameCard/notif_" + i + ".png",
@@ -160,7 +168,9 @@ export class ZoomMiniGameCard extends Card {
             //Add all distractions to the card
             for(let i = 0; i < n_distr; ++i) {
                 this.messages_stack_1.push({
-                    name: "distraction_" + i,
+                    name: scene_key === Scenes.INDEP_COMPUTER ?
+                        "distraction_patrick_" + i :
+                        "distraction_" + i,
                     url: scene_key === Scenes.INDEP_COMPUTER ?
                         "sprites/IndepComputerScene/05_Mini-jeu/distraction_" + (i + 1) + ".png" :
                         "sprites/ProtoScene/ZoomMiniGameCard/distraction_" + i + ".png",
@@ -328,7 +338,7 @@ export class ZoomMiniGameCard extends Card {
                 this.shuffle(target_stack);
             }
 
-            const duration = this.scene_key === Scenes.INDEP_COMPUTER ? 5000 : 9000;
+            const duration = this.scene_key === Scenes.INDEP_COMPUTER ? 3000 : 9000;
             const end_y = this.scene_key === Scenes.INDEP_COMPUTER ? 590 : 800;
 
             //Animate the msg
@@ -342,7 +352,9 @@ export class ZoomMiniGameCard extends Card {
 
                         //Make sure that the player didn't miss a class notification
                         if(elem.type === MessageType.Cours) {
-                            this.wrong.play();
+                            if(!this.lock) {
+                                this.wrong.play();
+                            }
 
                             this.resize_health();
 
@@ -393,7 +405,9 @@ export class ZoomMiniGameCard extends Card {
                         if(elem.type === MessageType.Distraction) {
 
                             //play sound
-                            this.wrong.play();
+                            if(!this.lock) {
+                                this.wrong.play();
+                            }
 
                             this.resize_health();
 
@@ -520,7 +534,7 @@ export class ZoomMiniGameCard extends Card {
                     //Create the timer event and start the game
                     this.msg_spawner = this.parent_scene.time.addEvent({
                         delay: this.spawn_delay,
-                        repeat: this.num_spaws - 2,
+                        repeat: this.num_spaws,
                         callback: this.createMessage,
                         callbackScope: this,
                         args: [this.endMiniGame]
@@ -547,7 +561,7 @@ export class ZoomMiniGameCard extends Card {
         this.right = this.parent_scene.sound.add("right");
         this.lose = this.parent_scene.sound.add("lose");
 
-        this.music.play();
+        this.music.play({loop: true});
 
         //Save the bar's initial info
         this.focus_bar_width = this.children[3].sprite.width;

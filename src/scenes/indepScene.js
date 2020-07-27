@@ -7,6 +7,7 @@ import { player } from "../index.js";
 import { Scenes } from "../core/player.js";
 import { TVCard } from "./cards/IndepScene/tvCard.js";
 import { WindowState, Months } from "./buildingScene.js";
+import { IndepComputerCards } from "./indepComputerScene.js";
 
 export const IndepCards = {
     IDLE_CARD: 0,
@@ -142,6 +143,7 @@ export class IndepScene extends Phaser.Scene {
         this.current_card = this.idle_card;
 
         this.onPhone = false;
+        this.objective = false;
 
         //Create the dialogue controller
         this.dialogue = new DialogueController(this, "patrickDialogMarch");
@@ -277,8 +279,24 @@ export class IndepScene extends Phaser.Scene {
     notifyDialogueEnd() {
         //Notify the current card if it is interested
         if(this.onPhone) {
-            this.showArrow();
+            //Only show the arrow if we spoke to Nathan
+            if(this.objective) {
+                this.showArrow();
+            }
             this.changeIndep();
+        }
+    }
+
+    /**
+     * @brief Notifies the current card that the dialogue objective was met
+     * @param {boolean} status whether or not the objective was successful
+     */
+    notifyObjectiveMet(status) {
+        if(this.cardIdx === IndepCards.IDLE_CARD) {
+            this.objective = true;
+
+            player.nathan_failed = status;
+            player.saveGame();
         }
     }
 

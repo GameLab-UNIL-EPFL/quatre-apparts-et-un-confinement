@@ -310,7 +310,9 @@
 			}
 		],
 		"goto": ["comment", "enfants"],
-		"objective": true
+		"objective": {
+			"status": true
+		}
 	},
 	"comment": {
 		"name": "Sophie",
