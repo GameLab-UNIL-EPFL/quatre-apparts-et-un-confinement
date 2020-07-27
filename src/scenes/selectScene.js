@@ -6,7 +6,7 @@ import { player } from "../index.js";
 
 export class SelectScene extends Phaser.Scene {
     constructor() {
-        super({ key: 'Select' });
+        super({ key: Scenes.SELECT });
 
         this.levels = [
             { key: Scenes.STORE, data: {month: Months.MARCH}, text: "Store Patrick" },
@@ -42,6 +42,8 @@ export class SelectScene extends Phaser.Scene {
                 player.cur_scene = level.key;
                 player.setData(level.data);
                 player.saveGame();
+
+                this.destroy();
 
                 player.loadGame();
             });
