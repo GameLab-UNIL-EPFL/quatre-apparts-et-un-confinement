@@ -2,6 +2,7 @@ import Phaser from "phaser";
 import { Scenes } from "../core/player.js";
 import { Months } from "./buildingScene.js";
 import { IndepComputerCards } from "./indepComputerScene.js";
+import { player } from "../index.js";
 
 export class SelectScene extends Phaser.Scene {
     constructor() {
@@ -37,7 +38,13 @@ export class SelectScene extends Phaser.Scene {
             y_offset += offset;
 
             text.setOrigin(0.5, 0.5);
-            text.setInteractive().on('pointerdown', () => this.scene.start(level.key, level.data));
+            text.setInteractive().on('pointerdown', () => {
+                player.cur_scene = level.key;
+                player.setData(level.data);
+                player.saveGame();
+
+                player.loadGame();
+            });
 
             this.texts.push();
         });
