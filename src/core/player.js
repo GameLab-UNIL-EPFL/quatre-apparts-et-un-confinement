@@ -35,6 +35,7 @@ export class Player {
         this.dialogue_tree = {};
         this.damien_gone = false;
         this.nathan_failed = false;
+        this.indep_shopping_basket = [];
     }
 
     /**
@@ -94,7 +95,8 @@ export class Player {
             data: this.scene_data,
             tree: this.dialogue_tree,
             damien_gone: this.damien_gone,
-            nathan_failed: this.nathan_failed
+            nathan_failed: this.nathan_failed,
+            indep_shopping_basket: this.indep_shopping_basket,
         };
 
         //Encode the data in base 64 before saving it
