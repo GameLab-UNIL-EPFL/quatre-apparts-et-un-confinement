@@ -324,6 +324,8 @@ export class IndepComputerScene extends Phaser.Scene {
      */
     nextCard(choice=-1) {
 
+        let dontSave = false;
+
         //Data that will be saved
         const savable_data = {
             cardIdx: this.cardIdx
@@ -336,6 +338,8 @@ export class IndepComputerScene extends Phaser.Scene {
         if(this.cardIdx === IndepComputerCards.COMPUTER_CARD) {
             this.cardIdx = IndepComputerCards.MINI_GAME;
             this.current_card = this.mini_game_card;
+
+            dontSave = true;
 
             this.current_card.create();
         } else if(this.cardIdx === IndepComputerCards.TV_CARD) {
@@ -373,14 +377,16 @@ export class IndepComputerScene extends Phaser.Scene {
 
             this.current_card.create();
             callback();
-            
+
         } else {
             this.nextScene();
         }
 
         //Store the saved data
-        player.setData(savable_data);
-        player.saveGame();
+        if(!dontSave) {
+            player.setData(savable_data);
+            player.saveGame();
+        }
     }
 
     /**

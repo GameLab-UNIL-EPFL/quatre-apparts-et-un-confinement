@@ -387,7 +387,7 @@ export class DialogueController {
         this.prompts = [];
 
         //Check the amount of possible answers
-        const num_answers = cur_dialogue.goto.length;
+        const num_answers = Object.keys(cur_dialogue.choices).length;
         if(num_answers !== 0) {
             this.cur_state = DialogueState.PROMPT;
             cur_dialogue.choices.forEach(choice => {

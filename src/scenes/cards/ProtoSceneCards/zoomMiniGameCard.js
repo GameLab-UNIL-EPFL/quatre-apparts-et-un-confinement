@@ -105,12 +105,14 @@ export class ZoomMiniGameCard extends Card {
                 scene_key === Scenes.INDEP_COMPUTER ?
                     "sprites/IndepComputerScene/05_Mini-jeu/computer_bg.png" : 
                     "sprites/ProtoScene/ZoomMiniGameCard/computer_screen.png",
-                "computer_bg"
+                scene_key === Scenes.INDEP_COMPUTER ?
+                    "computer_bg_patrick" : "computer_bg"
             ),
             new CardObject(
                 parent_scene,
                 {
-                    name: "line",
+                    name: scene_key === Scenes.INDEP_COMPUTER ?
+                        "indep_line" : "line",
                     url: scene_key === Scenes.INDEP_COMPUTER ?
                         "sprites/IndepComputerScene/05_Mini-jeu/bar.png" :
                         "sprites/ProtoScene/ZoomMiniGameCard/line.png"
@@ -149,7 +151,9 @@ export class ZoomMiniGameCard extends Card {
         //Add all notifications to the card
         for(let i = 0; i < n_notif; ++i) {
             this.messages_stack_1.push({
-                name: "notification_" + i,
+                name: scene_key === Scenes.INDEP_COMPUTER ? 
+                    "notification_patrick_" + i : 
+                    "notification_" + i,
                 url: scene_key === Scenes.INDEP_COMPUTER ? 
                     "sprites/IndepComputerScene/05_Mini-jeu/notification_" + (i + 1) + ".png" :
                     "sprites/ProtoScene/ZoomMiniGameCard/notif_" + i + ".png",
@@ -164,7 +168,9 @@ export class ZoomMiniGameCard extends Card {
             //Add all distractions to the card
             for(let i = 0; i < n_distr; ++i) {
                 this.messages_stack_1.push({
-                    name: "distraction_" + i,
+                    name: scene_key === Scenes.INDEP_COMPUTER ?
+                        "distraction_patrick_" + i :
+                        "distraction_" + i,
                     url: scene_key === Scenes.INDEP_COMPUTER ?
                         "sprites/IndepComputerScene/05_Mini-jeu/distraction_" + (i + 1) + ".png" :
                         "sprites/ProtoScene/ZoomMiniGameCard/distraction_" + i + ".png",
