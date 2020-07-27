@@ -446,6 +446,8 @@ export class ZoomMiniGameCard extends Card {
 
             card.lock = true;
 
+            console.log("NUM_CARDS_LEFT:" + card.num_spaws);
+
             //Pick the correct text to display
             let lose_key;
             let win_key;
