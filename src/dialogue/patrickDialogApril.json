@@ -72,7 +72,7 @@
 			{
 				"text": ["Nathan"],
 				"preview": "Nathan",
-				"goto": "nathanMauvais"
+				"goto": "nathanBon"
             },
             {
 				"text": ["Sandrine"],
@@ -139,7 +139,7 @@
 		"choices": [
 			{
 				"text": ["Salut!"],
-				"preview": "Oh non!",
+				"preview": "Salut!",
 				"goto": ""
             }
         ],
@@ -152,10 +152,10 @@
 			{
 				"text": ["Ah trop bien!"],
 				"preview": "Ah trop bien!",
-				"goto": "couple"
+				"goto": "bien"
             }
         ],
-		"goto": ["couple"]
+		"goto": ["bien"]
 	},
 	"bien": {
 		"name": "Nathan",
@@ -172,7 +172,7 @@
 				"goto": "super"
 			}
         ],
-		"goto": ["suivi"]
+		"goto": ["super"]
 	},
 	"super": {
 		"name": "Nathan",
@@ -181,6 +181,18 @@
 			{
 				"text": ["Ouais à fond!"],
 				"preview": "Ouais à fond!",
+				"goto": "finBonNathan"
+            }
+        ],
+		"goto": ["finBonNathan"]
+	},
+	"finBonNathan": {
+		"name": "Nathan",
+		"text": ["Cool à bientôt alors!"],
+		"choices": [
+			{
+				"text": ["Salut!"],
+				"preview": "Salut!",
 				"goto": ""
             }
         ],
@@ -247,6 +259,33 @@
     "maman": {
 		"name": "Patrick",
 		"text": ["... Pas de réponse, c'est bizarre."],
+		"choices": [],
+		"goto": [],
+		"objective": {
+			"status": true
+		}
+	},
+	"patrick_computer": {
+		"name": "Patrick",
+		"text": [
+			"J'ai beaucoup trop de factures à régler..."
+		],
+		"choices": [],
+		"goto": []
+	},
+	"patrick_mini_lose": {
+		"name": "Patrick",
+		"text": [
+			"Je ne vais jamais y arriver, je ne suis pas du tout concentré"
+		],
+		"choices": [],
+		"goto": []
+	},
+	"patrick_mini_win": {
+		"name": "Patrick",
+		"text": [
+			"Oh wow, je ne pensais vraiment jamais réussir cette tâche qui était sensé être impossible!"
+		],
 		"choices": [],
 		"goto": []
 	}

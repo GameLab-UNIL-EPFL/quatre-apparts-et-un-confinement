@@ -137,27 +137,45 @@
 			{
 				"text": ["Je pense que tu dois juste être plus attentionné. Montre-lui ton côté romantique!"],
 				"preview": "Plus attentionné",
-				"goto": "fin"
+				"goto": "finBon"
             },
 			{
 				"text": ["Je pense que vous devez juste prendre un peu de temps pour vous."],
 				"preview": "Prendre du temps pour vous.",
-				"goto": "fin"
+				"goto": "finMauvais"
 			}
 		],
-		"goto": ["fin"]
+		"goto": ["finBon", "finMauvais"]
 	},
-	"fin": {
+	"finMauvais": {
 		"name": "Nathan",
 		"text": ["Ah merci! Je vais suivre ton conseil alors! J'y vais, salut!"],
 		"choices": [
 			{
 				"text": ["Ouais! Tu me tiens au courant! A bientôt!"],
 				"preview": "Ouais!",
-				"goto": "sortir"
+				"goto": ""
 			}
 		],
-		"goto": []
+		"goto": [],
+		"objective": {
+			"status": true
+		}
+	},
+	"finBon": {
+		"name": "Nathan",
+		"text": ["Ah merci! Je vais suivre ton conseil alors! J'y vais, salut!"],
+		"choices": [
+			{
+				"text": ["Ouais! Tu me tiens au courant! A bientôt!"],
+				"preview": "Ouais!",
+				"goto": ""
+			}
+		],
+		"goto": [],
+		"objective": {
+			"status": false
+		}
     },
     "sandrine": {
         "name": "Sandrine",
@@ -270,30 +288,6 @@
 			"Hello Paul, désolé je n'ai pas beaucoup de temps en ce moment.",
 			"Je travaille sur un nouveau projet en lien avec le covid.",
 			"Je t'en reparle une prochaine fois! Ciao."
-		],
-		"choices": [],
-		"goto": []
-	},
-	"patrick_computer": {
-		"name": "Patrick",
-		"text": [
-			"J'ai beaucoup trop de factures à régler..."
-		],
-		"choices": [],
-		"goto": []
-	},
-	"patrick_mini_lose": {
-		"name": "Patrick",
-		"text": [
-			"Je ne vais jamais y arriver, je ne suis pas du tout concentré"
-		],
-		"choices": [],
-		"goto": []
-	},
-	"patrick_mini_win": {
-		"name": "Patrick",
-		"text": [
-			"Oh wow, je ne pensais vraiment jamais réussir cette tâche qui était sensé être impossible!"
 		],
 		"choices": [],
 		"goto": []
