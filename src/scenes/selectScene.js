@@ -53,6 +53,7 @@ export class SelectScene extends Phaser.Scene {
     }
     
     destroy() {
+        this.cameras.main.setBackgroundColor("black");
         this.texts.forEach(text => text.destroy());
     }
 
