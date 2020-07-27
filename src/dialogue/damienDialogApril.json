@@ -1,8 +1,14 @@
 {
+	"frigo": {
+		"name": "Damien",
+		"text": ["J’ai plus rien à manger, faut vraiment que j’aille faire les courses"],
+		"choices": [],
+		"goto": []
+	},
     "Natel": {
 		"name": "Damien",
 		"text": ["Oh, 3 appels manqués."],
-		"choices": {},
+		"choices": [],
 		"goto": []
 	},
 	"sorti": {

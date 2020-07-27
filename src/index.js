@@ -20,6 +20,7 @@ import { BusScene } from "./scenes/busScene.js";
 import { StoreExtScene } from "./scenes/storeExtScene.js";
 import { IndepComputerScene } from "./scenes/indepComputerScene.js";
 import { EndScene } from "./scenes/endScene.js";
+import { DamienKitchenNoFood } from "./scenes/damienKitchenNoFoodScene.js";
 
 let resizeTimeout;
 const plugins = [{
@@ -87,6 +88,7 @@ const config = {
         DamienInitScene,
         DamienKitchenClothesScene,
         DamienComputerScene,
+        DamienKitchenNoFood,
         GrandmaScene,
         HallwayScene,
         IndepScene,

@@ -5,6 +5,7 @@ import { Background } from "./objects/background.js";
 import { Scenes } from "../core/player.js";
 import { HallwayCards } from "./hallwayScene.js";
 import { player } from "../index.js";
+import { Months } from "./buildingScene.js";
 
 export const StoreCards = {
     FIRST_SHELF: 0,
@@ -680,6 +681,8 @@ export class StoreScene extends Phaser.Scene {
         //Keep track of wich card is displayed
         this.cardIdx = StoreCards.FIRST_SHELF;
         this.current_card = this.firstShelf;
+
+        this.month = Months.MARCH;
     }
 
     init(data) {
@@ -687,6 +690,12 @@ export class StoreScene extends Phaser.Scene {
         if(data) {
             console.log("INIT_STORE");
             console.log(this.shoppingBasket); // contains shoppingBasket
+
+            if(data.month === Months.MARCH) {
+                this.month = Months.MARCH;
+            } else if(data.month === Months.MAY) {
+                this.month = Months.MAY;
+            }
             /*
                 @TODO:
                 - is it Patrick or Damien?
@@ -815,7 +824,7 @@ export class StoreScene extends Phaser.Scene {
 
         //Create and play the background music
         this.music = this.sound.add('bg_music');
-        this.music.play();
+        this.music.play({loop: true});
 
         // Update the saved data
         player.cur_scene = Scenes.STORE;
@@ -848,16 +857,29 @@ export class StoreScene extends Phaser.Scene {
             this.current_card = this.cards[this.cardIdx];
             this.current_card.create();
         } else {
-            // TODO: if current character is Patrick
-            player.setData({ indepShoppingBasket: this.shoppingBasket });
-            player.saveGame();
-            player.sendChoices({ player_id: player.id, freelancer_food_set: this.shoppingBasket.join(','), freelancer_food_amount: this.shoppingBasket.length });
-            this.nextScene();
+            this.nextCardButton.destroy();
+            this.tweens.add({
+                targets:  this.music,
+                volume:   0,
+                duration: 800,
+                onComplete: () => {
+                    // TODO: if current character is Patrick
+                    player.setData({ indepShoppingBasket: this.shoppingBasket });
+                    player.saveGame();
+                    player.sendChoices({ player_id: player.id, freelancer_food_set: this.shoppingBasket.join(','), freelancer_food_amount: this.shoppingBasket.length });
+                    this.nextScene();
+                },
+                onCompleteScope: this
+            });
         }
     }
 
     nextScene() {
         this.music.stop();
-        this.scene.start(Scenes.HALLWAY, {cardIdx: HallwayCards.INDEP_GRANDMA, damien_gone: false});
+        if(this.month === Months.MARCH) {
+            this.scene.start(Scenes.HALLWAY, {cardIdx: HallwayCards.INDEP_GRANDMA, damien_gone: false});
+        } else {
+            this.scene.start(Scenes.END_SCENE);
+        }
     }
 }
