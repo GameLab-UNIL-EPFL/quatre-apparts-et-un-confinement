@@ -11,8 +11,10 @@ export const Scenes = {
     GRANDMA: 'Grandma',
     HALLWAY: 'Hallway',
     INDEP: 'Indep',
+    INDEP_COMPUTER: 'IndepComputer',
     INDEP_MSG: 'IndepMsg',
     STORE: 'Store',
+    STORE_EXT : 'Store_ext',
     MOTHER: 'Mother'
 };
 
