@@ -48,7 +48,7 @@ export class SelectScene extends Phaser.Scene {
                 player.loadGame();
             });
 
-            this.texts.push();
+            this.texts.push(text);
         });
     }
     
