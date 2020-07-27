@@ -15,7 +15,8 @@ export const Scenes = {
     INDEP_MSG: 'IndepMsg',
     STORE: 'Store',
     STORE_EXT : 'Store_ext',
-    MOTHER: 'Mother'
+    MOTHER: 'Mother',
+    END_SCENE: 'EndScene'
 };
 
 /**

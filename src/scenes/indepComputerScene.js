@@ -394,29 +394,7 @@ export class IndepComputerScene extends Phaser.Scene {
      */
     nextScene() {
         this.cameras.main.fadeOut(3000, 0, 0, 0,
-            () => this.scene.start(Scenes.BUILDING, {
-                mainMenu: true,
-                names: {
-                    damien: false,
-                    grandma: false,
-                    family: false,
-                    indep: false
-                },
-                stage: 1,
-                windows: {
-                    damien: WindowState.OFF,
-                    grandma: WindowState.OFF,
-                    family: WindowState.OFF,
-                    indep: WindowState.OFF
-                },
-                month: Months.MARCH,
-                nextScene: {
-                    damien: null,
-                    grandma: null,
-                    family: null,
-                    indep: null
-                }
-            }),
+            () => this.scene.start(Scenes.END_SCENE),
             this
         );        
     }
