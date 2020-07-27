@@ -227,21 +227,19 @@
         "text": [
             "Oups désolé, sujet sensible. J'ai une bonne nouvelle par contre, on organise une petite soirée chez Carlos.",
             "Tu veux venir?"
-    ],
-		"choices": {
-            "rep":
+    	],
+		"choices": [
 			{
 				"text": ["Non, c'est encore trop risqué."],
 				"preview": "Non, c'est encore trop risqué.",
 				"goto": "non"
             },
-            "rep2":
             {
 				"text": ["Oui, il faut abolument que je sorte et pense à autre chose!"],
 				"preview": "Oui, il faut abolument que je sorte et pense à autre chose!",
 				"goto": "oui"
 			}
-        },
+		],
 		"goto": ["aide"]
     },
     "oui": {
