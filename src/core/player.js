@@ -59,6 +59,11 @@ export class Player {
         return this.scene_data;
     }
 
+    getBasket() {
+      console.log(this);
+        return this.indep_shopping_basket;
+    }
+
     /**
      * @brief Sets the player's dialogue tree
      * @param {JSON} dialogue_tree the decisions made by the player up until now
@@ -130,7 +135,8 @@ export class Player {
                 this.scene_data = game_data.data;
                 this.damien_gone = game_data.damien_gone;
                 this.nathan_failed = game_data.nathan_failed;
-
+                this.indep_shopping_basket = game_data.indep_shopping_basket;
+                
                 //Start the loaded scene
                 game.scene.start(game_data.scene, game_data.data);
             }
