@@ -85,6 +85,14 @@ export class BuildingScene extends Phaser.Scene {
     preload() {
         //Load in the dialogue box if needed
         if(this.info.mainMenu) {
+
+            //Load the arrow animation spritesheet
+            this.load.spritesheet(
+                'arrow',
+                'sprites/UI/arrow.png',
+                { frameWidth: 100, frameHeight: 100 }
+            );
+
             this.load.spritesheet(
                 DIALOGUE_BOX_KEY,
                 "sprites/UI/dialogueBox.png",
@@ -296,6 +304,34 @@ export class BuildingScene extends Phaser.Scene {
         //Make new game button start a new game
         this.sprites['new_game_text'].setInteractive().on('pointerdown', interaction, this);
         this.sprites['menu_new_game'].setInteractive().on('pointerdown', interaction, this);
+    }
+
+    /**
+     * @brief shows the arrow that sends the user back to the building scene
+     */
+    showArrow() {
+
+        // Create ring sprites
+        this.anims.create({
+            key: 'arrow_anim',
+            frameRate: 15,
+            frames: this.anims.generateFrameNames('arrow'),
+            repeat: -1
+        });
+
+        //Play the cat animation
+        this.arrow = this.add.sprite(
+            245,
+            716,
+            'arrow'
+        ).play('arrow_anim');
+
+        //Make the arrow end the scene
+        this.arrow.setInteractive().on(
+            'pointerdown',
+            () => this.scene.start('Select'),
+            this
+        );
     }
 
     /**
@@ -612,6 +648,8 @@ export class BuildingScene extends Phaser.Scene {
         //Add menu buttons if needed
         if(this.info.mainMenu) {
             this.createMainMenu();
+
+            this.showArrow();
         }
 
         //Handle the special "names" case
