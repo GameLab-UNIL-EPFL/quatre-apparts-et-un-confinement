@@ -63,7 +63,12 @@ export class ProtoScene extends Phaser.Scene {
                     null,
                     null,
                     1,
-                    { name: "kitchen_h", url: "sprites/ProtoScene/ChosePathCard/kitchen_h.png" }
+                    {
+                        name: 'kitchen_h',
+                        url: "sprites/UI/01_Interactions/01_Etudiants/02_Spritesheets/01-Etudiant-Dejeuner-Spritesheet_250x160.png",
+                        size: { frameWidth: 250, frameHeight: 160 },
+                        pos: new Phaser.Math.Vector2(78, -232)
+                    }
                 ),
                 new CardObject(
                     this,
@@ -72,7 +77,12 @@ export class ProtoScene extends Phaser.Scene {
                     null,
                     null,
                     0,
-                    { name: "closet_h", url: "sprites/ProtoScene/ChosePathCard/closet_h.png" }
+                    {
+                        name: 'closet_h',
+                        url: "sprites/UI/01_Interactions/01_Etudiants/02_Spritesheets/02-Etudiant-Habiller-Spritesheet_250x164.png",
+                        size: { frameWidth: 250, frameHeight: 164 },
+                        pos: new Phaser.Math.Vector2(-90, -425)
+                    }
                 ),
                 characters['chosePath'],
             ],

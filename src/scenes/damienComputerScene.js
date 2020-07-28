@@ -191,10 +191,25 @@ export class DamienComputerScene extends Phaser.Scene {
         player.saveGame();
     }
 
+    /**
+     * @brief Updates the player damien_gone value
+     */
+    notifyObjectiveMet() {
+        player.damien_gone = true;
+        console.log("PLAYER_DAMIEN_GONE: " + player.damien_gone);
+        player.saveGame();
+    }
+
     nextScene() {
         this.cameras.main.fadeOut(1000);
         this.scene.start(Scenes.BUILDING, {
             mainMenu: false,
+            names: {
+                damien: false,
+                grandma: false,
+                family: true,
+                indep: false
+            },
             stage: 1,
             windows: {
                 damien: WindowState.OFF,

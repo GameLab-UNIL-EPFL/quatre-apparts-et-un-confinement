@@ -309,7 +309,10 @@
 				"goto": "enfants"
 			}
 		],
-		"goto": ["comment", "enfants"]
+		"goto": ["comment", "enfants"],
+		"objective": {
+			"status": false
+		}
 	},
 	"comment": {
 		"name": "Sophie",

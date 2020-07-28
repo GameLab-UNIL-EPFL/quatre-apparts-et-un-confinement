@@ -42,7 +42,12 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
                     (scene) => scene.changeClothes(ProtoGuyClothes.CLEAN_CLOTHES),
                     this,
                     -1,
-                    { name: "clothes_h", url: "sprites/ProtoScene/ClothesCard/clothes_h.png" }
+                    {
+                        name: 'clothes_h',
+                        url: "sprites/UI/01_Interactions/01_Etudiants/02_Spritesheets/04-Etudiant-HabitsPropres-Spritesheet_400x210.png",
+                        size: { frameWidth: 400, frameHeight: 210 },
+                        pos: new Phaser.Math.Vector2(157, -649)
+                    }
                 ),
                 new CardObject(
                     this,
@@ -51,7 +56,12 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
                     (scene) => scene.changeClothes(ProtoGuyClothes.YESTERDAY_CLOTHES),
                     this,
                     -1,
-                    { name: "chair_h", url: "sprites/ProtoScene/ClothesCard/chair_h.png" }
+                    {
+                        name: 'chair_h',
+                        url: "sprites/UI/01_Interactions/01_Etudiants/02_Spritesheets/03-Etudiant-HabitsSales-Spritesheet_280x204.png",
+                        size: { frameWidth: 280, frameHeight: 204 },
+                        pos: new Phaser.Math.Vector2(-297, 40)
+                    }
                 ),
                 characters['clothes']
             ],
@@ -74,7 +84,12 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
                     null,
                     null,
                     1,
-                    { name: "fridge_h", url: "sprites/ProtoScene/KitchenCard/frigo_h.png" }
+                    {
+                        name: 'fridge_h',
+                        url: "sprites/UI/01_Interactions/01_Etudiants/02_Spritesheets/07-Etudiant-Yogourt-Spritesheet_220x170.png",
+                        size: { frameWidth: 220, frameHeight: 170 },
+                        pos: new Phaser.Math.Vector2(111, -144)
+                    }
                 ),
                 new CardObject(
                     this,
@@ -93,7 +108,12 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
                     null,
                     null,
                     2,
-                    { name: "sink_h", url: "sprites/ProtoScene/KitchenCard/lavabo_h.png" }
+                    {
+                        name: 'sink_h',
+                        url: "sprites/UI/01_Interactions/01_Etudiants/02_Spritesheets/08-Etudiant-Verre-Spritesheet_295x180.png",
+                        size: { frameWidth: 295, frameHeight: 180 },
+                        pos: new Phaser.Math.Vector2(105, 593)
+                    }
                 ),
                 new CardObject(
                     this,
@@ -107,7 +127,12 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
                     null,
                     null,
                     0,
-                    { name: "toaster_h", url: "sprites/ProtoScene/KitchenCard/toaster_h.png" }
+                    {
+                        name: 'toast_h',
+                        url: "sprites/UI/01_Interactions/01_Etudiants/02_Spritesheets/06-Etudiant-Toast-Spritesheet_180x160.png",
+                        size: { frameWidth: 180, frameHeight: 160 },
+                        pos: new Phaser.Math.Vector2(-278, 556)
+                    }
                 ),
                 new CardObject(
                     this,
@@ -183,6 +208,14 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
         this.load.audio("toast", "sounds/kitchen/toasterPop.wav");
         this.load.audio("fridge", "sounds/kitchen/fridge.wav");
         this.load.audio("glass", "sounds/kitchen/glass.wav");
+
+        if(this.cardIdx === ProtoCards.CLOTHES) {
+            this.load.spritesheet(
+                'pj_h',
+                'sprites/UI/01_Interactions/01_Etudiants/02_Spritesheets/05-Etudiant-Pyjama-Spritesheet_208x146.png',
+                { frameWidth: 208, frameHeight: 146 }
+            );
+        }
     }
 
     /**
@@ -199,6 +232,20 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
             //Trigger the dialogue
             if(this.cardIdx === ProtoCards.CLOTHES) {
                 this.dialogue.display("habit");
+                
+                this.anims.create({
+                    key: "pj_h_anim",
+                    frameRate: 7,
+                    frames: this.anims.generateFrameNames('pj_h'),
+                    repeat: -1
+                });
+
+                this.pj_h = this.add.sprite(
+                    96,
+                    -50,
+                    'pj_h'
+                ).play("pj_h_anim");
+
             } else {
                 this.dialogue.display("frigo");
             }
@@ -314,5 +361,7 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
      */
     destroy() {
         this.current_card.destroy();
+
+        this.pj_h.destroy();
     }
 }

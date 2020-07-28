@@ -19,7 +19,7 @@ export class DamienInitScene extends Phaser.Scene {
         super({ key: Scenes.DAMIEN_INIT });
 
         //Keep track of the clothes that protoguy is wearing
-        this.clothes = ProtoGuyClothes.YESTERDAY_CLOTHES;
+        this.clothes = ProtoGuyClothes.CLEAN_CLOTHES;
 
         this.computerCard = new ComputerCard(this, Scenes.DAMIEN_INIT);
 
@@ -183,6 +183,12 @@ export class DamienInitScene extends Phaser.Scene {
         this.cameras.main.fadeOut(1000);
         this.scene.start(Scenes.BUILDING, {
             mainMenu: false,
+            names: {
+                damien: false,
+                grandma: true,
+                family: false,
+                indep: false
+            },
             stage: 1,
             windows: {
                 damien: WindowState.OFF,

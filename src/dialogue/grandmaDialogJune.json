@@ -286,7 +286,10 @@
 				"goto": "comment"
 			}
 		],
-		"goto": ["comment"]
+		"goto": ["comment"],
+		"objective": {
+			"status": false
+		}
 	},
 	"comment": {
 		"name": "Sophie",

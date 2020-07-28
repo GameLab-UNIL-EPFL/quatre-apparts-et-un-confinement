@@ -28,8 +28,7 @@ export class WakeUpCard extends Card {
                 new Phaser.Math.Vector2(-153, 60),
                 () => {},
                 null,
-                -1,
-                { name: "phone_h", url: "sprites/ProtoScene/WakeUpCard/phone_h.png" }
+                -1
             ),
             character
         ];
@@ -46,7 +45,7 @@ export class WakeUpCard extends Card {
         //Load the sounds
         this.parent_scene.load.audio("alarm", "sounds/damien/alarmClock.wav");
         this.parent_scene.load.audio("vibrate", "sounds/damien/vibration.wav");
-        this.parent_scene.load.audio("click", "sounds/click01.wav");
+        this.parent_scene.load.audio("click", "sounds/UI/click01.wav");
 
         //Load the ring animation spritesheet
         this.parent_scene.load.spritesheet(
@@ -110,42 +109,29 @@ export class WakeUpCard extends Card {
 
         //========= HANDLE_INTERACTION =========
         //Make the phone interactive
-        this.children[1].sprite.setInteractive();
-        this.children[1].highlight_sprite.setInteractive();
+        this.children[1].sprite.setInteractive().on('pointerdown', () => {
+            this.phone_ring = false;
 
-        //Set an event listener for clicking on the phone
-        this.parent_scene.input.on(
-            'gameobjectdown',
-            (_, gameObject) => {
-                //Check that we clicked on the phone
+            this.click.play();
+            this.alarm.stop();
+            this.vibrate.stop();
 
-                if((gameObject === this.children[1].sprite || gameObject === this.children[1].highlight_sprite) && this.phone_ring) {
-                    this.phone_ring = false;
-                    this.children[1].highlight_sprite.destroy();
+            this.parent_scene.tweens.add({
+                targets: [this.children[1].sprite, this.children[1].highlight_sprite],
+                y: '+= 10',
+                duration: 30,
+                ease: "Quad.easeOut",
+                yoyo: true,
+                loop: 0,
+                onComplete: () => {
+                    this.highlight.destroy();
 
-                    this.click.play();
-                    this.alarm.stop();
-                    this.vibrate.stop();
-
-                    this.parent_scene.tweens.add({
-                        targets: [this.children[1].sprite, this.children[1].highlight_sprite],
-                        y: '+= 10',
-                        duration: 30,
-                        ease: "Quad.easeOut",
-                        yoyo: true,
-                        loop: 0,
-                        onComplete: () => {
-                            this.highlight.destroy();
-
-                            //Trigger the dialogue
-                            this.parent_scene.dialogue.display(WAKE_UP_ID);
-                        },
-                        onCompleteScope: this
-                    });
-                }
-            },
-            this.parent_scene
-        );
+                    //Trigger the dialogue
+                    this.parent_scene.dialogue.display(WAKE_UP_ID);
+                },
+                onCompleteScope: this
+            });
+        }, this);
     }
 
     destroy() {

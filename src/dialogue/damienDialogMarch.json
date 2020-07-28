@@ -2,7 +2,7 @@
 	"init": {
 		"name": "Damien",
 		"text": [
-			"Il est interminable ce cours."
+			"Allez, j'ai encore des devoirs à finir…"
 		],
 		"choices": [],
 		"goto": []
@@ -58,6 +58,18 @@
 	"endZoom": {
 		"name": "Prof",
 		"text": ["Merci pour votre attention et bonne journée!"],
+		"choices": [],
+		"goto": []
+	},
+	"endHomework": {
+		"name": "Damien",
+		"text": ["Chouette! Enfin fini!"],
+		"choices": [],
+		"goto": []
+	},
+	"loseHomework": {
+		"name": "Damien",
+		"text": ["Mince... J'arrive vraiment plus à me concentrer..."],
 		"choices": [],
 		"goto": []
 	},
@@ -293,7 +305,8 @@
 		"name": "Copine",
 		"text": ["Cool! À toute! 😘"],
 		"choices":{},
-		"goto": []
+		"goto": [],
+		"objective": true
 	},
 	"repMaybe": {
 		"name": "Copine",

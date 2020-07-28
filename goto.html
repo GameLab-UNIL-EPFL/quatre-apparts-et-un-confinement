@@ -1,0 +1,44 @@
+<html>
+<head>
+	<meta charset="utf-8" />
+	<style>
+	*{
+		margin: 0;
+		padding: 0;
+	}
+	body{
+		background: #111016;
+		color: #fff;
+		font-family: "Menlo", "Lucida Grande", sans-serif;
+		font-size: x-large;
+	}
+	</style>
+</head>
+<body>
+  <ul>
+		<li>
+      <button data-atob="eyJzY2VuZSI6IkdyYW5kbWEiLCJkYXRhIjp7ImNhcmRJZHgiOjB9LCJ0cmVlIjp7fSwiZGFtaWVuX2dvbmUiOnRydWV9">Grand-mère, mars</button>
+    </li>
+  	<li>
+      <button data-atob="eyJzY2VuZSI6IkdyYW5kbWEiLCJkYXRhIjp7ImNhcmRJZHgiOjB9LCJ0cmVlIjp7fSwiZGFtaWVuX2dvbmUiOnRydWV9">Grand-mère, avril</button>
+    </li>
+		<li>
+      <button data-atob="eyJzY2VuZSI6IlN0b3JlX2V4dCIsImRhdGEiOnsibW9udGgiOiJtYXJjaCJ9LCJ0cmVlIjp7fSwiZGFtaWVuX2dvbmUiOnRydWV9">Courses de l’indépendant</button>
+    </li>
+		<li>
+      <button data-atob="eyJzY2VuZSI6IkhhbGx3YXkiLCJkYXRhIjp7ImNhcmRJZHgiOjR9LCJ0cmVlIjp7fSwiZGFtaWVuX2dvbmUiOnRydWUsImluZGVwX3Nob3BwaW5nX2Jhc2tldCI6WyJwYXRlMDMiLCJwYXRlMDQiLCJwYXRlMDUiLCJwYXRlMDEiLCJwYXRlMDIiLCJwYWluMTgiLCJwYWluMTciLCJwYXBpZXIwOCIsInBhcGllcjA5IiwicGFwaWVyMTAiXX0=">Après les courses de l’indépendant</button>
+    </li>
+		<li>
+			<button data-atob="eyJzY2VuZSI6IkJ1c1NjZW5lIiwiZGF0YSI6eyJjYXJkSWR4IjoxfSwidHJlZSI6e30sImRhbWllbl9nb25lIjp0cnVlLCJpbmRlcF9zaG9wcGluZ19iYXNrZXQiOlsicGF0ZTAzIiwicGF0ZTA0IiwicGF0ZTA1IiwicGF0ZTAxIiwicGF0ZTAyIiwicGFpbjE4IiwicGFpbjE3IiwicGFwaWVyMDgiLCJwYXBpZXIwOSIsInBhcGllcjEwIl19">Damien part faire les courses</button>
+		</li>
+  </ul>
+	<!-- jquery slim -->
+	<script src="https://code.jquery.com/jquery-git.min.js"></script>
+	<script>
+	$('button').click(function(){
+		console.log( $(this).data('atob') );
+		localStorage.setItem('game', $(this).data('atob') );
+	})
+	</script>
+</body>
+</html>

@@ -7,6 +7,7 @@ import { player } from "../index.js";
 import { Scenes } from "../core/player.js";
 import { TVCard } from "./cards/IndepScene/tvCard.js";
 import { WindowState, Months } from "./buildingScene.js";
+import { IndepComputerCards } from "./indepComputerScene.js";
 
 export const IndepCards = {
     IDLE_CARD: 0,
@@ -71,7 +72,14 @@ export class IndepScene extends Phaser.Scene {
                         scene.changeIndep();
                         scene.dialogue.display("telephone");
                     },
-                    this
+                    this,
+                    -1,
+                    {
+                        name: 'indep_idle_phone_h',
+                        url: "sprites/UI/01_Interactions/04_Independant/02_Spritesheets/01-Independant-Telephone-Spritesheet_280x160.png",
+                        size: { frameWidth: 280, frameHeight: 160 },
+                        pos: new Phaser.Math.Vector2(336, 325)
+                    }
                 ),
                 new CardObject(
                     this,
@@ -84,14 +92,27 @@ export class IndepScene extends Phaser.Scene {
                     new Phaser.Math.Vector2(-218, 431),
                     null,
                     null,
-                    0
+                    0,
+                    {
+                        name: 'indepIdleTV_h',
+                        url: "sprites/UI/01_Interactions/04_Independant/02_Spritesheets/03-Independant-Television-Spritesheet_270x170.png",
+                        size: { frameWidth: 270, frameHeight: 170 },
+                        pos: new Phaser.Math.Vector2(-240, 80)
+                    }
                 ),
                 new CardObject(
                     this,
                     { name: "indepIdleDVD1", url: "sprites/IndepScene/01_IDLE/dvd_1.png" },
                     new Phaser.Math.Vector2(31, 761),
                     (scene) => scene.dialogue.display("dvd1"),
-                    this
+                    this,
+                    -1,
+                    {
+                        name: 'dvd_h',
+                        url: "sprites/UI/01_Interactions/04_Independant/02_Spritesheets/02-Independant-Dvd-Spritesheet_340x180.png",
+                        size: { frameWidth: 340, frameHeight: 180 },
+                        pos: new Phaser.Math.Vector2(-38, 678)
+                    }
                 ),
                 new CardObject(
                     this,
@@ -122,6 +143,7 @@ export class IndepScene extends Phaser.Scene {
         this.current_card = this.idle_card;
 
         this.onPhone = false;
+        this.objective = false;
 
         //Create the dialogue controller
         this.dialogue = new DialogueController(this, "patrickDialogMarch");
@@ -165,6 +187,7 @@ export class IndepScene extends Phaser.Scene {
         //Toggle the guy idle sprite
         this.current_card.children[4].sprite.setActive(!this.onPhone).setVisible(!this.onPhone);
         this.current_card.children[7].sprite.setActive(!this.onPhone).setVisible(!this.onPhone);
+        this.current_card.children[7].highlight_sprite.setActive(!this.onPhone).setVisible(!this.onPhone);
     }
 
     /**
@@ -256,8 +279,24 @@ export class IndepScene extends Phaser.Scene {
     notifyDialogueEnd() {
         //Notify the current card if it is interested
         if(this.onPhone) {
-            this.showArrow();
+            //Only show the arrow if we spoke to Nathan
+            if(this.objective) {
+                this.showArrow();
+            }
             this.changeIndep();
+        }
+    }
+
+    /**
+     * @brief Notifies the current card that the dialogue objective was met
+     * @param {boolean} status whether or not the objective was successful
+     */
+    notifyObjectiveMet(status) {
+        if(this.cardIdx === IndepCards.IDLE_CARD) {
+            this.objective = true;
+
+            player.nathan_failed = status;
+            player.saveGame();
         }
     }
 
@@ -304,6 +343,12 @@ export class IndepScene extends Phaser.Scene {
         this.cameras.main.fadeOut(3000, 0, 0, 0,
             () => this.scene.start(Scenes.BUILDING, {
                 mainMenu: false,
+                names: {
+                    damien: false,
+                    grandma: false,
+                    family: false,
+                    indep: false
+                },
                 stage: 1,
                 windows: {
                     damien: WindowState.ON,
@@ -328,5 +373,7 @@ export class IndepScene extends Phaser.Scene {
      */
     destroy() {
         this.current_card.destroy();
+
+        this.dvd_h.destroy();
     }
 }

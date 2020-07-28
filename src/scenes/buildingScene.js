@@ -3,9 +3,11 @@ import { Scenes } from "../core/player";
 import { DIALOGUE_BOX_KEY, D_BOX_ANIMATION_KEY, DIALOGUE_BOX_SPRITE_SIZE } from "../core/dialogueController";
 import { player } from "..";
 import { GrandmaCards } from "./grandmaScene";
+import { BusCards } from "./busScene";
 
 export const Months = {
     MARCH: 'march',
+    APRIL: 'april',
     MAY: 'may'
 };
 
@@ -28,24 +30,30 @@ export class BuildingScene extends Phaser.Scene {
         this.info = {
             mainMenu: true,
             stage: 1,
+            names: {
+                damien: false,
+                grandma: false,
+                family: false,
+                indep: false
+            },
             windows: {
-                damien: WindowState.ON,
-                grandma: WindowState.ON,
-                family: WindowState.ON,
-                indep: WindowState.ON
+                damien: WindowState.OFF,
+                grandma: WindowState.OFF,
+                family: WindowState.OFF,
+                indep: WindowState.OFF
             },
             month: Months.MARCH,
             nextScene: {
-                damien: Scenes.PROTOTYPE,
-                grandma: Scenes.GRANDMA,
-                family: Scenes.MOTHER,
-                indep: Scenes.INDEP
+                damien: null,
+                grandma: null,
+                family: null,
+                indep: null
             }
         };
 
         //Dictionnary containing all of the scene's sprites
         this.sprites = {};
-
+        this.interactions = {};
     }
 
     /**
@@ -61,9 +69,13 @@ export class BuildingScene extends Phaser.Scene {
      * }
      */
     init(data) {
-        //Check if any saved data exists
-        if(data.stage && data.windows && data.month && data.nextScene) {
-            this.info = data;
+        if(data.names) {
+            //Check if any saved data exists
+            if(data.windows && data.nextScene) {
+                this.info = data;
+            } else {
+                console.error("BUILDING_SCENE: Invalid configuration JSON");
+            }
         }
     }
 
@@ -74,10 +86,40 @@ export class BuildingScene extends Phaser.Scene {
     preload() {
         //Load in the dialogue box if needed
         if(this.info.mainMenu) {
+
+            //Load the arrow animation spritesheet
+            this.load.spritesheet(
+                'arrow',
+                'sprites/UI/arrow.png',
+                { frameWidth: 100, frameHeight: 100 }
+            );
+
             this.load.spritesheet(
                 DIALOGUE_BOX_KEY,
                 "sprites/UI/dialogueBox.png",
                 DIALOGUE_BOX_SPRITE_SIZE.bg
+            );
+
+            //Load in interaction arrows
+            this.load.spritesheet(
+                'damien_interaction',
+                "sprites/UI/01_Interactions/00_Immeuble/02_Spritesheets/01-Immeuble-Damien-Spritesheet_240x210.png",
+                {frameWidth: 240, frameHeight: 210}
+            );
+            this.load.spritesheet(
+                'grandma_interaction',
+                "sprites/UI/01_Interactions/00_Immeuble/02_Spritesheets/02-Immeuble-Suzanne-Spritesheet_240x190.png",
+                {frameWidth: 240, frameHeight: 190}
+            );
+            this.load.spritesheet(
+                'mother_interaction',
+                "sprites/UI/01_Interactions/00_Immeuble/02_Spritesheets/05-Immeuble-Florence-Spritesheet_220x153.png",
+                {frameWidth: 220, frameHeight: 153}
+            );
+            this.load.spritesheet(
+                'indep_interaction',
+                "sprites/UI/01_Interactions/00_Immeuble/02_Spritesheets/04-Immeuble-Patrick-Spritesheet_260x170.png",
+                {frameWidth: 260, frameHeight: 170}
             );
         }
 
@@ -85,8 +127,7 @@ export class BuildingScene extends Phaser.Scene {
         this.load.audio("bird", "sounds/building/birdTraffic.mp3");
 
         //Load in all of the sprites needed for this scene
-        switch(this.info.month) {
-        case Months.MARCH:
+        if(this.info.month === Months.MARCH) {
             this.load.image("building_bg_march", "sprites/BuildingScene/building_bg_winter.jpg");
 
             //Load in clouds
@@ -94,9 +135,7 @@ export class BuildingScene extends Phaser.Scene {
             this.load.image("cloud_02_march", "sprites/BuildingScene/building_cloud02_winter.png");
             this.load.image("cloud_03_march", "sprites/BuildingScene/building_cloud03_winter.png");
             this.load.image("cloud_04_march", "sprites/BuildingScene/building_cloud04_winter.png");
-            break;
-
-        case Months.MAY:
+        } else {
             this.load.image("building_bg_may", "sprites/BuildingScene/building_bg_summer.jpg");
 
             //Load in the clouds
@@ -104,10 +143,6 @@ export class BuildingScene extends Phaser.Scene {
             this.load.image("cloud_02_may", "sprites/BuildingScene/building_cloud02_summer.png");
             this.load.image("cloud_03_may", "sprites/BuildingScene/building_cloud03_summer.png");
             this.load.image("cloud_04_may", "sprites/BuildingScene/building_cloud04_summer.png");
-            break;
-
-        default:
-            break;
         }
 
         //Load in everything needed no matter the month
@@ -255,42 +290,139 @@ export class BuildingScene extends Phaser.Scene {
         //Center the new game box
         this.sprites['new_game_text'].setOrigin(0.5, 0.5);
 
-        //Make new game button start a new game
-        this.sprites['new_game_text'].setInteractive();
-        this.sprites['menu_new_game'].setInteractive();
+        const interaction = () => this.scene.start(
+            Scenes.BUS,
+            { cardIdx: BusCards.MARCH_CARD }
+        );
 
-        this.input.on(
-            'gameobjectdown',
-            (_, gameObject) => {
-                //Check that we clicked on the right button
-                if(gameObject === this.sprites['menu_new_game'] ||
-                   gameObject === this.sprites['new_game_text'])
-                {
-                    //Sart a new game
-                    this.scene.start(
-                        Scenes.BUILDING,
-                        {
-                            mainMenu: false,
-                            stage: 1,
-                            windows: {
-                                damien: WindowState.ON,
-                                grandma: WindowState.OFF,
-                                family: WindowState.OFF,
-                                indep: WindowState.OFF
-                            },
-                            month: Months.MAY,
-                            nextScene: {
-                                damien: Scenes.DAMIEN_INIT,
-                                grandma: null,
-                                family: null,
-                                indep: null
-                            }
-                        }
-                    );
-                }
-            },
+        //Make new game button start a new game
+        this.sprites['new_game_text'].setInteractive().on('pointerdown', interaction, this);
+        this.sprites['menu_new_game'].setInteractive().on('pointerdown', interaction, this);
+    }
+
+    /**
+     * @brief shows the arrow that sends the user back to the building scene
+     */
+    showArrow() {
+
+        // Create ring sprites
+        this.anims.create({
+            key: 'arrow_anim',
+            frameRate: 15,
+            frames: this.anims.generateFrameNames('arrow'),
+            repeat: -1
+        });
+
+        //Play the cat animation
+        this.arrow = this.add.sprite(
+            245,
+            716,
+            'arrow'
+        ).play('arrow_anim');
+
+        //Make the arrow end the scene
+        this.arrow.setInteractive().on(
+            'pointerdown',
+            () => this.scene.start('Select'),
             this
         );
+    }
+
+    /**
+     * @brief Adds in the character names in the building scene
+     * @param {boolean} interact Whether or not to take into account player interaction
+     */
+    addCharacterNames(interact = false) {
+
+        if(this.info.names.damien) {
+            //Create interaction animations
+            this.anims.create({
+                key: 'damien_interaction_anim',
+                frameRate: 7,
+                frames: this.anims.generateFrameNames('damien_interaction'),
+                repeat: -1
+            });
+
+            //Add interaction arrows
+            this.sprites['damien_interaction'] = this.add.sprite(
+                -211,
+                -337,
+                'damien_interaction'
+            ).play('damien_interaction_anim');
+
+            //Add interaction if needed
+            if(this.interactions['damien'] && interact) {
+                this.sprites['damien_interaction']
+                    .setInteractive()
+                    .on('pointerdown', this.interactions['damien'], this);
+            }
+        }
+
+        //Handle the grandma's name
+        if(this.info.names.grandma) {
+            this.anims.create({
+                key: 'grandma_interaction_anim',
+                frameRate: 7,
+                frames: this.anims.generateFrameNames('grandma_interaction'),
+                repeat: -1
+            });
+
+            this.sprites['grandma_interaction'] = this.add.sprite(
+                22,
+                -370,
+                'grandma_interaction'
+            ).play('grandma_interaction_anim');
+
+            if(this.interactions['grandma'] && interact) {
+                this.sprites['grandma_interaction']
+                    .setInteractive()
+                    .on('pointerdown', this.interactions['grandma'], this);
+            }
+        }
+
+        //Handle the mother's name
+        if(this.info.names.family) {
+            this.anims.create({
+                key: 'mother_interaction_anim',
+                frameRate: 7,
+                frames: this.anims.generateFrameNames('mother_interaction'),
+                repeat: -1
+            });
+
+            this.sprites['mother_interaction'] = this.add.sprite(
+                291,
+                103,
+                'mother_interaction'
+            ).play('mother_interaction_anim');
+
+            if(this.interactions['mother'] && interact) {
+                this.sprites['mother_interaction']
+                    .setInteractive()
+                    .on('pointerdown', this.interactions['mother'], this);
+            }
+        }
+
+        //Handle the freelancer's name
+        if(this.info.names.indep) {
+            this.anims.create({
+                key: 'indep_interaction_anim',
+                frameRate: 7,
+                frames: this.anims.generateFrameNames('indep_interaction'),
+                repeat: -1
+            });
+
+            this.sprites['indep_interaction'] = this.add.sprite(
+                294,
+                447,
+                'indep_interaction'
+            ).play('indep_interaction_anim');
+
+            if(this.interactions['indep'] && interact) {
+                this.sprites['indep_interaction']
+                    .setInteractive()
+                    .on('pointerdown', this.interactions['indep'], this);
+            }
+        }
     }
 
     /**
@@ -304,8 +436,7 @@ export class BuildingScene extends Phaser.Scene {
         //this.bird = this.sound.add("bird");
         //this.bird.play({volume: 0.3});
 
-        switch(this.info.month) {
-        case Months.MARCH:
+        if(this.info.month === Months.MARCH) {
             this.sprites['building_bg'] = this.add.image(0, 0, "building_bg_march");
 
             //Load in clouds
@@ -313,19 +444,13 @@ export class BuildingScene extends Phaser.Scene {
             this.sprites['cloud_02'] = this.add.image(1020, -155, "cloud_02_march");
             this.sprites['cloud_03'] = this.add.image(2065, -162, "cloud_03_march");
             this.sprites['cloud_04'] = this.add.image(1348, -686, "cloud_04_march");
-            break;
-
-        case Months.MAY:
+        } else {
             this.sprites['building_bg'] = this.add.image(0, 0, "building_bg_may");
             //Load in the clouds
             this.sprites['cloud_01'] = this.add.image(1983, -479, "cloud_01_may");
             this.sprites['cloud_02'] = this.add.image(1020, -155, "cloud_02_may");
             this.sprites['cloud_03'] = this.add.image(2065, -162, "cloud_03_may");
             this.sprites['cloud_04'] = this.add.image(1348, -686, "cloud_04_may");
-            break;
-
-        default:
-            break;
         }
 
         //Center the background
@@ -363,19 +488,11 @@ export class BuildingScene extends Phaser.Scene {
 
             //Make window interactive
             if(this.info.nextScene.family) {
-                this.sprites['family_window'].setInteractive();
-                this.sprites['family_window_mid'].setInteractive();
 
-                this.input.on(
-                    'gameobjectdown',
-                    (_, gameObject) => {
-                        //Check that we clicked on the right window
-                        if(gameObject === this.sprites['family_window'] || gameObject === this.sprites['family_window_mid']) {
-                            this.scene.start(this.info.nextScene.family);
-                        }
-                    },
-                    this
-                );
+                this.interactions['mother'] = () => this.scene.start(this.info.nextScene.family);
+
+                this.sprites['family_window'].setInteractive().on('pointerdown', this.interactions['mother'], this);
+                this.sprites['family_window_mid'].setInteractive().on('pointerdown', this.interactions['mother'], this);
             }
             break;
 
@@ -403,20 +520,11 @@ export class BuildingScene extends Phaser.Scene {
 
             //Make window interactive
             if(this.info.nextScene.damien) {
-                this.sprites['damien_window'].setInteractive();
-                this.sprites['damien_window_mid'].setInteractive();
 
-                this.input.on(
-                    'gameobjectdown',
-                    (_, gameObject) => {
-                        //Check that we clicked on the right window
-                        if(gameObject === this.sprites['damien_window'] || gameObject === this.sprites['damien_window_mid']) {
+                this.interactions['damien'] = () => this.scene.start(this.info.nextScene.damien);
 
-                            this.scene.start(this.info.nextScene.damien);
-                        }
-                    },
-                    this
-                );
+                this.sprites['damien_window'].setInteractive().on('pointerdown', this.interactions['damien'], this);
+                this.sprites['damien_window_mid'].setInteractive().on('pointerdown', this.interactions['damien'], this);
             }
             break;
 
@@ -444,22 +552,14 @@ export class BuildingScene extends Phaser.Scene {
 
             //Make window interactive
             if(this.info.nextScene.grandma) {
-                this.sprites['grandma_window'].setInteractive();
-                this.sprites['grandma_window_mid'].setInteractive();
 
-                this.input.on(
-                    'gameobjectdown',
-                    (_, gameObject) => {
-                        //Check that we clicked on the right window
-                        if(gameObject === this.sprites['grandma_window'] || gameObject === this.sprites['grandma_window_mid']) {
-                            this.scene.start(
-                                this.info.nextScene.grandma,
-                                { cardIdx: GrandmaCards.LIVING_ROOM, month: this.info.month }
-                            );
-                        }
-                    },
-                    this
+                this.interactions['grandma'] = () => this.scene.start(
+                    this.info.nextScene.grandma,
+                    { cardIdx: GrandmaCards.LIVING_ROOM, month: this.info.month }
                 );
+
+                this.sprites['grandma_window'].setInteractive().on('pointerdown', this.interactions['grandma'], this);
+                this.sprites['grandma_window_mid'].setInteractive().on('pointerdown', this.interactions['grandma'], this);
             }
             break;
 
@@ -487,10 +587,10 @@ export class BuildingScene extends Phaser.Scene {
 
             //Make window interactive
             if(this.info.nextScene.indep) {
-                const interaction = () => this.scene.start(this.info.nextScene.indep);
+                this.interactions['indep'] = () => this.scene.start(this.info.nextScene.indep);
 
-                this.sprites['indep_window'].setInteractive().on('pointerdown', interaction, this);
-                this.sprites['indep_window_mid'].setInteractive().on('pointerdown', interaction, this);
+                this.sprites['indep_window'].setInteractive().on('pointerdown', this.interactions['indep'], this);
+                this.sprites['indep_window_mid'].setInteractive().on('pointerdown', this.interactions['indep'], this);
             }
             break;
 
@@ -535,6 +635,14 @@ export class BuildingScene extends Phaser.Scene {
         //Add menu buttons if needed
         if(this.info.mainMenu) {
             this.createMainMenu();
+
+            //this.showArrow();
+        }
+
+        //Handle the special "names" case
+        if(this.info.names) {
+            //Create interaction animations
+            this.addCharacterNames();
         }
     }
 

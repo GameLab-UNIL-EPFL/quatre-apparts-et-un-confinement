@@ -2,6 +2,8 @@ import { Background } from "../../objects/background";
 import { Card } from "../card";
 import { CardObject } from "../../objects/cardObject";
 import { GrandmaCards } from "../../grandmaScene";
+import { player } from "../../..";
+import { Months } from "../../buildingScene";
 
 const GRANDMA_STATES = {
     IDLE: 0,
@@ -44,27 +46,21 @@ export class LivingRoomCard extends Card {
                 { name: "book_01", url: "sprites/GrandmaScene/books_01.png" },
                 new Phaser.Math.Vector2(-131, -262),
                 (card) => card.changeGrandma(GRANDMA_STATES.BOOK_1),
-                this,
-                -1,
-                { name: "book_01_h", url: "sprites/GrandmaScene/books_01_h.png" }
+                this
             ),
             new CardObject(
                 parent_scene,
                 { name: "book_02", url: "sprites/GrandmaScene/books_02.png" },
                 new Phaser.Math.Vector2(-134, -92),
                 (card) => card.changeGrandma(GRANDMA_STATES.BOOK_2),
-                this,
-                -1,
-                { name: "book_02_h", url: "sprites/GrandmaScene/books_02_h.png" }
+                this
             ),
             new CardObject(
                 parent_scene,
                 { name: "book_03", url: "sprites/GrandmaScene/books_03.png" },
                 new Phaser.Math.Vector2(-131, 57),
                 (card) => card.changeGrandma(GRANDMA_STATES.BOOK_3),
-                this,
-                -1,
-                { name: "book_03_h", url: "sprites/GrandmaScene/books_03_h.png" }
+                this
             ),
             new CardObject(
                 parent_scene,
@@ -73,7 +69,12 @@ export class LivingRoomCard extends Card {
                 (scene) => scene.nextCard(GrandmaCards.RADIO),
                 parent_scene,
                 -1,
-                { name: "radio_h", url: "sprites/GrandmaScene/radio_h.png" }
+                {
+                    name: 'radio_h',
+                    url: 'sprites/UI/01_Interactions/02_Grand-mere/02_Spritesheets/03-Grand-Mere-Radio-Spritesheet_228x140.png',
+                    size: { frameWidth: 228, frameHeight: 140 },
+                    pos: new Phaser.Math.Vector2(-259, 186)
+                }
             ),
             new CardObject(
                 parent_scene,
@@ -82,7 +83,12 @@ export class LivingRoomCard extends Card {
                 (scene) => scene.nextCard(GrandmaCards.CALENDAR),
                 parent_scene,
                 -1,
-                { name: "calendar_h", url: "sprites/GrandmaScene/calendar_h.png" }
+                {
+                    name: 'calendar_h',
+                    url: 'sprites/UI/01_Interactions/02_Grand-mere/02_Spritesheets/02-Grand-Mere-Calendrier-Spritesheet_294x160.png',
+                    size: { frameWidth: 294, frameHeight: 160 },
+                    pos: new Phaser.Math.Vector2(-294, 409)
+                }
             ),
             new CardObject(
                 parent_scene,
@@ -91,7 +97,12 @@ export class LivingRoomCard extends Card {
                 (card) => card.changeGrandma(GRANDMA_STATES.PHONE),
                 this,
                 -1,
-                { name: "phone_grandma_h", url: "sprites/GrandmaScene/phone_h.png" }
+                {
+                    name: 'phone_grandma_h',
+                    url: "sprites/UI/01_Interactions/02_Grand-mere/02_Spritesheets/01-Grand-Mere-Telephone-Spritesheet_300x200.png",
+                    size: { frameWidth: 300, frameHeight: 200 },
+                    pos: new Phaser.Math.Vector2(270, 487)
+                }
             ),
             new CardObject(
                 parent_scene,
@@ -117,6 +128,13 @@ export class LivingRoomCard extends Card {
 
         this.parent_scene.load.audio("pageTurn", "sounds/grandma/pageTurn.wav");
 
+        //Load in the phone highlight
+        this.parent_scene.load.spritesheet(
+            'books_h',
+            'sprites/UI/01_Interactions/02_Grand-mere/02_Spritesheets/04-Grand-Mere-Livre-Spritesheet_200x140.png',
+            { frameWidth: 200, frameHeight: 140 }
+        );
+
         //Load the cat animation spritesheet
         this.parent_scene.load.spritesheet(
             'cat',
@@ -138,13 +156,26 @@ export class LivingRoomCard extends Card {
     create() {
         super.create();
 
+        //Hide all highlights if it's not march
+        if(this.parent_scene.month !== Months.MARCH) {
+            this.children[5].highlight_sprite.setActive(false).setVisible(false);
+            this.children[6].highlight_sprite.setActive(false).setVisible(false);
+            this.children[7].highlight_sprite.setActive(false).setVisible(false);
+        }
+
         //Add in the initial grandma
         this.grandma_sprite = this.parent_scene.add.image(GRANDMA_POS.x, GRANDMA_POS.y, "grandma_idle");
 
         //Bring the phone and the
         this.children[this.children.length - 1].sprite.setDepth(2);
         this.children[this.children.length - 2].sprite.setDepth(3);
-        this.children[this.children.length - 2].highlight_sprite.setDepth(3);
+
+        if(this.parent_scene.month === Months.MARCH) {
+            this.children[this.children.length - 2].highlight_sprite.setDepth(3);
+        }
+
+        //Add sound to the scene
+        this.page = this.parent_scene.sound.add("pageTurn");
 
         //=========HANDLE_ANIMATIONS=========
 
@@ -162,6 +193,25 @@ export class LivingRoomCard extends Card {
             677,
             'cat'
         ).play('cat-tail');
+        
+        if(this.parent_scene.month === Months.MARCH) {
+            // Create book highlight sprites
+            this.parent_scene.anims.create({
+                key: 'books_h_anim',
+                frameRate: 7,
+                frames: this.parent_scene.anims.generateFrameNames('books_h'),
+                repeat: -1
+            });
+
+            //Play the book highlight animation
+            this.books_h = this.parent_scene.add.sprite(
+                31,
+                -121,
+                'books_h'
+            ).play('books_h_anim');
+        }
+
+        this.page = this.parent_scene.sound.add("pageTurn");
 
         //Update the phone's onclickcallback
         this.children[7].updateOnClickCallback(
@@ -176,9 +226,15 @@ export class LivingRoomCard extends Card {
 
                 //hide the phone
                 sprite.setActive(false).setVisible(false);
-                highlight.setActive(false).setVisible(false);
+                if(highlight !== null) {
+                    highlight.setActive(false).setVisible(false);
+                }
             },
-            [this, this.children[7].sprite, this.children[7].highlight_sprite]
+            [
+                this,
+                this.children[7].sprite,
+                this.parent_scene.month === Months.MARCH ? this.children[7].highlight_sprite : null
+            ]
         );
     }
 
@@ -186,7 +242,7 @@ export class LivingRoomCard extends Card {
      * @brief shows the arrow that sends the user back to the building scene
      */
     showArrow() {
-        // Create ring sprites
+        // Create cat sprites
         this.parent_scene.anims.create({
             key: 'arrow_anim',
             frameRate: 15,
@@ -241,14 +297,18 @@ export class LivingRoomCard extends Card {
 
             //show the phone
             this.children[7].sprite.setActive(true).setVisible(true);
-            this.children[7].highlight_sprite.setActive(true).setVisible(true);
 
-            this.enableAllInteractions();
+            if(this.parent_scene.month === Months.MARCH) {
+                this.children[7].highlight_sprite.setActive(true).setVisible(true);
+            }
 
             //Reset grandma
             this.changeGrandma(GRANDMA_STATES.IDLE);
 
-            this.showArrow();
+            //Only show the arrow if we spoke to Sophie
+            if(this.objective_complete) {
+                this.showArrow();
+            }
             break;
 
         default:
@@ -256,31 +316,21 @@ export class LivingRoomCard extends Card {
         }
     }
 
-    disableAllInteractions() {
-        this.children.forEach(child => {
+    /**
+     * @brief Updates the objective complete attribute
+     */
+    notifyObjectiveMet(status) {
+        if(!status && !this.objective_complete) {
+            this.objective_complete = true;
+        }
 
-            if(child.sprite) {
-                child.sprite.disableInteractive();
-            }
+        if(status) {
+            player.suzanne_hair = true;
+            player.saveGame();
 
-            if(child.highlight_sprite) {
-                child.highlight_sprite.disableInteractive();
-            }
-        });
-    }
-
-    enableAllInteractions(except=null) {
-        this.children.forEach(child => {
-            if(child !== except) {
-                if(child.sprite) {
-                    child.sprite.setInteractive();
-                }
-
-                if(child.highlight_sprite) {
-                    child.highlight_sprite.setInteractive();
-                }
-            }
-        });
+            //Send new information to the DB
+            player.sendChoices({ player_id: player.id, grandma_hairdresser: +status });
+        }
     }
 
     changeGrandma(state) {
@@ -305,7 +355,6 @@ export class LivingRoomCard extends Card {
                     "grandma_book1"
                 );
 
-                this.page = this.parent_scene.sound.add("pageTurn");
                 this.page.play();
 
                 //Trigger the book's dialogue
@@ -345,9 +394,6 @@ export class LivingRoomCard extends Card {
                     "grandma_phone"
                 );
 
-                //Disable all of the scenes interactions
-                this.disableAllInteractions();
-
                 //Trigger the phone's dialogue
                 this.parent_scene.dialogue.display("telephone");
                 break;
@@ -355,6 +401,19 @@ export class LivingRoomCard extends Card {
             default:
                 break;
             }
+        }
+    }
+
+    destroy() {
+        super.destroy();
+        
+        //Destroy the grandma and the cat
+        this.cat_anim.destroy();
+        this.grandma_sprite.destroy();
+
+        //Destroy arrow if needed
+        if(this.arrow) {
+            this.arrow.destroy();
         }
     }
 }

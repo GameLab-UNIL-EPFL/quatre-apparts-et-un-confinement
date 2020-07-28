@@ -2,10 +2,10 @@ import Phaser from "phaser";
 import { Card } from "./cards/card.js";
 import { CardObject } from "./objects/cardObject.js";
 import { Background } from "./objects/background.js";
-import { player } from "../index.js";
-import { WindowState, Months } from "./buildingScene.js";
 import { Scenes } from "../core/player.js";
 import { HallwayCards } from "./hallwayScene.js";
+import { player } from "../index.js";
+import { Months } from "./buildingScene.js";
 
 export const StoreCards = {
     FIRST_SHELF: 0,
@@ -21,9 +21,11 @@ export class StoreScene extends Phaser.Scene {
     constructor() {
         super({key: Scenes.STORE});
 
+        this.shoppingBasket = [];
+
         /* === FIRST SHELF === */
         this.firstShelf = new Card(
-            this, 
+            this,
             [
                 new Background(
                     this,
@@ -135,7 +137,7 @@ export class StoreScene extends Phaser.Scene {
                     (scene) => scene.takeObject("sac02"),
                     this
                 ),
-                    
+
                 new CardObject(
                     this,
                     { name: "pate06", url: "sprites/StoreScene/part1/rayon01_03_pate06.png" },
@@ -217,7 +219,7 @@ export class StoreScene extends Phaser.Scene {
         );
 
         /* === SECOND SHELF === */
-        
+
         this.secondShelf = new Card(
             this,
             [
@@ -467,7 +469,7 @@ export class StoreScene extends Phaser.Scene {
                 )
             ]
         );
-        
+
         this.thirdShelf = new Card(
             this,
             [
@@ -475,7 +477,7 @@ export class StoreScene extends Phaser.Scene {
                     this,
                     "sprites/StoreScene/part3/rayon03_01_rayonnage.jpg",
                     "storeBg3"
-                ), 
+                ),
                 new CardObject(
                     this,
                     { name: "lessive01", url: "sprites/StoreScene/part3/rayon03_03_lessive01.png" },
@@ -646,30 +648,30 @@ export class StoreScene extends Phaser.Scene {
                 )
             ]
         );
-        
+
         this.checklist_done = {
             'pate': {
-                position_x: -276,
+                position_x: -0.23, // Will be multiplied by this.cameras.main.width (<= 1200px). Calculation for -0.23: (-276 / 1200)
                 position_y: 234,
                 done: false
             },
             'banane': {
-                position_x: -276,
-                position_y: 300,
+                position_x: -0.23,
+                position_y: 280,
                 done: false
             },
             'pain': {
-                position_x: -276,
+                position_x: -0.23,
                 position_y: 373,
                 done: false
             },
             'papier': {
-                position_x: -261,
+                position_x: -0.23,
                 position_y: 422,
                 done: false
             },
         };
-        
+
         this.cards = [
             this.firstShelf,
             this.secondShelf,
@@ -679,12 +681,30 @@ export class StoreScene extends Phaser.Scene {
         //Keep track of wich card is displayed
         this.cardIdx = StoreCards.FIRST_SHELF;
         this.current_card = this.firstShelf;
+
+        this.month = Months.APRIL;
     }
 
     init(data) {
+        console.log("INIT_STORE");
         //Check if any saved data exists
         if(data) {
-            console.log("INIT_STORE");
+            this.cardIdx = StoreCards.FIRST_SHELF;
+            this.current_card = this.firstShelf;
+            this.month = data.month;
+            this.shoppingBasket = [];
+            Object.keys(this.checklist_done).forEach(item => this.checklist_done[item].done = false);
+
+            if(this.month === 'may') {
+                let indepShoppingBasket = player.getBasket();
+
+                if ( indepShoppingBasket.length > 0 ) {
+                    // Remove basket items from cards
+                    this.firstShelf.children = this.firstShelf.children.filter(cardObject => ! indepShoppingBasket.includes( cardObject.name ) );
+                    this.secondShelf.children = this.secondShelf.children.filter(cardObject => ! indepShoppingBasket.includes( cardObject.name ) );
+                    this.thirdShelf.children = this.thirdShelf.children.filter(cardObject => ! indepShoppingBasket.includes( cardObject.name ) );
+                }
+            }
         }
     }
 
@@ -696,9 +716,12 @@ export class StoreScene extends Phaser.Scene {
         this.load.image('liste', "sprites/StoreScene/part1/rayon01_04_liste.png");
         this.load.image('basket', "sprites/StoreScene/part1/rayon01_02_panier.png");
         this.load.image('basket-front', "sprites/StoreScene/part1/rayon01_02_panier-02front.png");
-        
+
         this.load.image('rature', "sprites/StoreScene/part1/rayon01_05_rature.png");
-        
+
+        //Load in the music
+        this.load.audio('bg_music', 'sounds/supermarket/Supermarket.mp3');
+
         this.nextCardArrow = this.load.spritesheet(
             'next-card-arrow',
             'sprites/StoreScene/part1/rayon01_06-rayonsuivant-spritesheet_100x100.png',
@@ -721,7 +744,7 @@ export class StoreScene extends Phaser.Scene {
             120,
             'next-card-arrow'
         ).play('next-card-anim');
-        
+
         this.nextCardButton.depth = 4;
 
         let scene = this;
@@ -729,61 +752,60 @@ export class StoreScene extends Phaser.Scene {
     }
 
     takeObject(object_name) {
-      
-        console.log('take', object_name);
-        let object = this.children.getByName(object_name);
-        object.depth = 5;
-      
-        let yDistance = this.basket.y - object.y; // between 280 and 1340
-        console.log('yDistance:', yDistance);
-        
-        let target_objects = [object];
-        if(object_name === 'pate_spaghetti01') {
-            // also move the other pack
-            target_objects.push(this.children.getByName('pate_spaghetti02'));
-        }
-      
-        // Move to basket
-        this.tweens.add({
-            targets: target_objects,
-            x: this.basket.x + (Math.random() * 50),
-            y: this.basket.y + 25 + (Math.random() * 25),
-            duration: 150 + (yDistance / 8),
-            ease: 'Quadratic',
-            yoyo: false,
-            loop: 0,
-            onComplete: () => {
-                // this.rature = this.add.image(this.listPositions[object_name], 'rature')
-                // todo: add flag
-                for (const item in this.checklist_done) {
-                    if(object_name.indexOf(item) >= 0) {
-                        if(!this.checklist_done[item].done) {
-                            console.log('ajout rature', item);
 
-                            this.rature = this.add.image(
-                                this.checklist_done[item].position_x,
-                                this.checklist_done[item].position_y,
-                                'rature'
-                            );
+        if( ! this.shoppingBasket.includes(object_name) ) {
+            this.shoppingBasket.push(object_name);
 
-                            this.rature.depth = 20;
-                            this.checklist_done[item].done = true;
+            let object = this.children.getByName(object_name);
+            object.depth = 5;
+
+            let yDistance = this.basket.y - object.y; // between 280 and 1340
+
+            let target_objects = [object];
+            if(object_name === 'pate_spaghetti01') {
+                // also move the other pack
+                target_objects.push(this.children.getByName('pate_spaghetti02'));
+                this.shoppingBasket.push('pate_spaghetti02');
+            }
+
+            // Move to basket
+            this.tweens.add({
+                targets: target_objects,
+                x: this.basket.x + (Math.random() * 50),
+                y: this.basket.y + 25 + (Math.random() * 25),
+                duration: 150 + (yDistance / 8),
+                ease: 'Quadratic',
+                yoyo: false,
+                loop: 0,
+                onComplete: () => {
+                    for (const item in this.checklist_done) {
+                        if(object_name.indexOf(item) >= 0) {
+                            if(!this.checklist_done[item].done) {
+                                this.rature = this.add.image(
+                                    this.cameras.main.width * this.checklist_done[item].position_x,
+                                    this.checklist_done[item].position_y,
+                                    'rature'
+                                );
+
+                                this.rature.depth = 20;
+                                this.checklist_done[item].done = true;
+                            }
                         }
                     }
-                }
-              
-                // Animate basket
-                this.tweens.add({
-                    targets: [this.basket, this.basket_front],
-                    scale: 1.2,
-                    duration: 100,
-                    ease: 'Quadratic',
-                    yoyo: true,
-                    loop: 0
-                });
-            },
-            onCompleteScope: this
-        });
+
+                    // Animate basket
+                    this.tweens.add({
+                        targets: [this.basket, this.basket_front],
+                        scale: 1.2,
+                        duration: 100,
+                        ease: 'Quadratic',
+                        yoyo: true,
+                        loop: 0
+                    });
+                },
+                onCompleteScope: this
+            });
+        }
     }
 
     create() {
@@ -794,30 +816,34 @@ export class StoreScene extends Phaser.Scene {
             this.current_card.create();
             this.addArrow();
         }
-        
-        this.checklist = this.add.image(-this.cameras.main.width * 0.255, 489, 'liste');
+
+        this.checklist = this.add.image(this.cameras.main.width * -0.255, 489, 'liste');
         this.checklist.depth = 20;
-        
+
         this.basket = this.add.image(this.cameras.main.width * 0.24166, 700, 'basket');
         this.basket.depth = 4;
-        
+
         this.basket_front = this.add.image(this.cameras.main.width * 0.24166, 700, 'basket-front');
         this.basket_front.depth = 25;
-        
+
+        //Create and play the background music
+        this.music = this.sound.add('bg_music');
+        this.music.play({loop: true});
+
         // Update the saved data
-        // @TODO
-        // player.setData() 
-        // player.cur_scene = Scenes.STORE;
+        player.cur_scene = Scenes.STORE;
+        player.saveGame();
     }
 
     nextCard() {
         if(this.cardIdx < this.cards.length - 1) {
-        
+
             // move previous card
             let container = this.add.container();
             container.depth = 2;
 
             for(let i in this.current_card.children) {
+                // If not moved to basket
                 if(this.current_card.children[i].sprite.depth != 5) {
                     container.add(this.current_card.children[i].sprite);
                 }
@@ -831,16 +857,36 @@ export class StoreScene extends Phaser.Scene {
                 yoyo: false,
                 loop: 0
             });
-        
+
             this.cardIdx++;
             this.current_card = this.cards[this.cardIdx];
             this.current_card.create();
         } else {
-            this.nextScene();
+            this.nextCardButton.destroy();
+            this.tweens.add({
+                targets:  this.music,
+                volume:   0,
+                duration: 800,
+                onComplete: () => {
+                    if(this.month === Months.APRIL) {
+                        player.indep_shopping_basket = this.shoppingBasket;
+                        player.saveGame();
+                        // Send Patrick’s choices to database
+                        player.sendChoices({ player_id: player.id, freelancer_food_set: this.shoppingBasket.join(','), freelancer_food_amount: this.shoppingBasket.length });
+                    }
+                    this.nextScene();
+                },
+                onCompleteScope: this
+            });
         }
     }
-    
+
     nextScene() {
-        this.scene.start(Scenes.HALLWAY, {cardIdx: HallwayCards.INDEP_GRANDMA, damien_gone: false});
+        this.music.stop();
+        if(this.month === Months.APRIL) {
+            this.scene.start(Scenes.HALLWAY, {cardIdx: HallwayCards.INDEP_GRANDMA, damien_gone: false});
+        } else {
+            this.scene.start(Scenes.END_SCENE);
+        }
     }
 }

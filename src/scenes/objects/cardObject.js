@@ -12,7 +12,7 @@ export class CardObject {
      * @param {Function} onClickCallback callback set as an onclick response for this object
      * @param {Array} onClickArgs arguments that will be passed to the onClick callback
      * @param {Number} choice, the path that this item will entail (only if !-1)
-     * @param {JSON} highlight {name, url} of the highlighted version of the sprite (can be null)
+     * @param {JSON} highlight {name, url, size: {frameWidth, frameHeight}, pos: Phaser.Math.Vector2} of the highlighted version of the sprite (can be null)
      * @param {Number} depth the z coordinate of the card object
      */
     constructor(parent_scene, sprite, position, onClickCallback=null, onClickArgs=null, choice=-1, highlight=null, depth=0) {
@@ -46,7 +46,11 @@ export class CardObject {
 
         //Load the highlight if it exists
         if(this.highlight) {
-            this.parent_scene.load.image(this.highlight.name, this.highlight.url);
+            this.parent_scene.load.spritesheet(
+                this.highlight.name,
+                this.highlight.url,
+                this.highlight.size
+            );
         }
     }
 
@@ -62,30 +66,28 @@ export class CardObject {
 
         //Create the highlight and animation if needed
         if(this.highlight) {
-            this.highlight_sprite = this.parent_scene.add.image(
-                this.position.x,
-                this.position.y,
-                this.highlight.name);
 
-            this.parent_scene.tweens.add({
-                targets: this.highlight_sprite,
-                alpha: 0,
-                duration: 2000,
-                ease: "Quadratic",
-                yoyo: true,
-                loop: -1
+            this.parent_scene.anims.create({
+                key: this.highlight.name + "_anim",
+                frameRate: 7,
+                frames: this.parent_scene.anims.generateFrameNames(this.highlight.name),
+                repeat: -1
             });
-            
-            this.highlight_sprite.setInteractive();
-            this.highlight_sprite.setDepth(this.depth);
+
+            this.highlight_sprite = this.parent_scene.add.sprite(
+                this.highlight.pos.x,
+                this.highlight.pos.y,
+                this.highlight.name
+            ).play(this.highlight.name + "_anim");
         }
 
         //Add a choice if needed
         if(this.choice !== -1 || this.onClickCallback !== null) {
 
             const interaction = () => {
-                //Only trigger interaction if the dialogue is done
-                if(this.parent_scene.dialogue.isDone()) {
+                
+                //Only trigger interaction if the dialogue is done (when dialogue exists)
+                if(this.parent_scene.dialogue ? this.parent_scene.dialogue.isDone() : true) {
                     //Check if the callback exists
                     if(this.onClickCallback !== null) {
 
@@ -104,7 +106,7 @@ export class CardObject {
 
             //Make the sprites interactive
             if(this.highlight_sprite) {
-                this.highlight_sprite.setInteractive().on('pointerdown', interaction, this);
+                //this.highlight_sprite.setInteractive().on('pointerdown', interaction, this);
             }
             this.sprite.setInteractive().on('pointerdown', interaction, this);
         }
