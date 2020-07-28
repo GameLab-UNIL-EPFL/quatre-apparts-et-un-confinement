@@ -29,7 +29,7 @@ $query_values = join(", :", array_keys($data) );
 $inserted_count = 0;
 
 try{
-    $pdo = new PDO('sqlite:'.dirname(__FILE__).'/dabatase.db');
+    $pdo = new PDO('sqlite:'.dirname(__FILE__).'/database.db');
     $pdo->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC);
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION); // ERRMODE_WARNING | ERRMODE_EXCEPTION | ERRMODE_SILENT
 } catch(Exception $e) {
@@ -38,15 +38,17 @@ try{
 }
 
 // INSERT
+$statement_text = '';
 
 try {
     $pdo->beginTransaction();
 
 		// prepare add statement
-		$add_stmt = $pdo->prepare("INSERT OR REPLACE INTO player_choice " .
+    $statement_text = "INSERT OR REPLACE INTO player_choice " .
 			"(" . $query_columns . ") " .
 			"VALUES" .
-			"(:" . $query_values . ")");
+			"(:" . $query_values . ")";
+		$add_stmt = $pdo->prepare($statement_text);
 
 		$add_stmt->execute($data);
 
@@ -57,4 +59,4 @@ try {
     die('{"result": "error at INSERT: ' . $ex->getMessage() . '"}'); // send back errors
 }
 
-echo '{"result": "success", "inserted_rows": "' . $inserted_count . '"}';
+echo '{"result": "success", "inserted_rows": "' . $inserted_count . '", "statement": "' . $statement_text . '", "values": "' . join(", ", $data) . '"}';
