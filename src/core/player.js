@@ -35,8 +35,10 @@ export class Player {
         this.cur_scene = Scenes.INTRO;
         this.scene_data = {};
         this.dialogue_tree = {};
-        this.damien_gone = false;
-        this.nathan_failed = false;
+        this.damien_gone = false;       //Whether or not damien chose to go see his gf
+        this.nathan_failed = false;     //Whether or not Patrick gave bad dating advice
+        this.kids_park = false;         //Whether or not Florence chose to take her kids to the park
+        this.suzanne_hair = false;      //Whether or not Suzanne chose to go to the hair-dresser
         this.indep_shopping_basket = [];
     }
 
@@ -61,7 +63,7 @@ export class Player {
     }
 
     getBasket() {
-      console.log(this);
+        console.log(this);
         return this.indep_shopping_basket;
     }
 
@@ -103,6 +105,8 @@ export class Player {
             tree: this.dialogue_tree,
             damien_gone: this.damien_gone,
             nathan_failed: this.nathan_failed,
+            kids_park: this.kids_park,
+            suzanne_hair: this.suzanne_hair,
             indep_shopping_basket: this.indep_shopping_basket,
         };
 
@@ -117,7 +121,7 @@ export class Player {
      */
     loadGame() {
         //Retrieve the save file
-        let storedGame = localStorage.getItem('game');
+        const storedGame = localStorage.getItem('game');
         let game_data;
 
         //Check if said file exists
@@ -136,6 +140,8 @@ export class Player {
                 this.scene_data = game_data.data;
                 this.damien_gone = game_data.damien_gone;
                 this.nathan_failed = game_data.nathan_failed;
+                this.kids_park = game_data.kids_park;
+                this.suzanne_hair = game_data.suzanne_hair;
                 this.indep_shopping_basket = game_data.indep_shopping_basket;
 
                 //Start the loaded scene

@@ -281,7 +281,7 @@
         ],
         "goto": ["zoom"],
         "objective": {
-            "status": true
+            "status": false
         }
     },
     "zoom": {
@@ -474,22 +474,36 @@
             {
                 "text": ["Oui, j'ai déplacé mon rendez-vous annulé."],
                 "preview": "Oui, j'ai déplacé mon rendez-vous annulé.",
-                "goto": "bye"
+                "goto": "byeYes"
             },
             {
                 "text": ["Non, c'est encore trop risqué."],
                 "preview": "Non, c'est encore trop risqué.",
-                "goto": "bye"
+                "goto": "byeNo"
             }
         ],
-        "goto": ["bye"]
+        "goto": ["byeYes", "byeNo"]
     },
-    "bye": {
+    "byeYes": {
         "name": "Gertrude",
         "text": [
             "Ok, prend soin de toi! Je dois y aller! A bientôt!"
         ],
         "choices": [],
-        "goto": []
+        "goto": [],
+        "objective": {
+            "status": true
+        }
+    },
+    "byeNo": {
+        "name": "Gertrude",
+        "text": [
+            "Ok, prend soin de toi! Je dois y aller! A bientôt!"
+        ],
+        "choices": [],
+        "goto": [],
+        "objective": {
+            "status": false
+        }
     }
 }

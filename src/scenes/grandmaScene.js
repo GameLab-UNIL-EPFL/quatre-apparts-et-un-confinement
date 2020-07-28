@@ -90,9 +90,20 @@ export class GrandmaScene extends Phaser.Scene {
         if(data.month === Months.MARCH) {
             //Create the scene's dialogue controller
             this.dialogue = new DialogueController(this, "grandmaDialogMarch");
-        } else {
+        } else if(data.month === Months.APRIL) {
             //Create the scene's dialogue controller
             this.dialogue = new DialogueController(this, "grandmaDialogApril");
+
+            //Change the calendar sprite and name
+            this.calendarCard.children[1].name = "calendar_april";
+            this.calendarCard.children[1].url = "sprites/GrandmaScene/Calendar/calendrier02_02-calendrier.png";
+        } else {
+            //Create the scene's dialogue controller
+            this.dialogue = new DialogueController(this, "grandmaDialogJune");
+
+            //Change the calendar sprite and name
+            this.calendarCard.children[1].name = "calendar_mai";
+            this.calendarCard.children[1].url = "sprites/GrandmaScene/Calendar/calendrier03_02-calendrier.png";
         }
     }
 
@@ -154,7 +165,7 @@ export class GrandmaScene extends Phaser.Scene {
      */
     notifyObjectiveMet(status) {
         if(this.current_card.notifyObjectiveMet) {
-            this.current_card.notifyObjectiveMet();
+            this.current_card.notifyObjectiveMet(status);
         }
     }
 
