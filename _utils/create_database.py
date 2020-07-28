@@ -27,11 +27,11 @@ def create_table(conn, create_table_sql):
         print(e)
 
 def main():
-    database = "../server/dabatase.db"
+    database = "../server/database.db"
 
     sql_create_choices_table = """CREATE TABLE IF NOT EXISTS player_choice(
 id	INTEGER	PRIMARY KEY AUTOINCREMENT,
-player_id   INTEGER NOT NULL,
+player_id   TEXT NOT NULL,
 damien_stay_home	INTEGER	,
 damien_food	INTEGER	,
 damien_game_score_mean	REAL	,
