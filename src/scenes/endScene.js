@@ -8,8 +8,8 @@ export class EndScene extends Phaser.Scene {
     }
 
     preload() {
-         //Load the cat animation spritesheet
-         this.load.spritesheet(
+        //Load the cat animation spritesheet
+        this.load.spritesheet(
             'cat',
             'sprites/GrandmaScene/cat.png',
             { frameWidth: 320, frameHeight: 240 }

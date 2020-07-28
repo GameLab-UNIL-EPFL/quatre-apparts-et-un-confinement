@@ -1,4 +1,4 @@
-import Phaser from "phaser";
+import Phaser, { Scene } from "phaser";
 import { Scenes } from "../core/player.js";
 import { Months } from "./buildingScene.js";
 import { IndepComputerCards } from "./indepComputerScene.js";
@@ -11,7 +11,8 @@ export class SelectScene extends Phaser.Scene {
         this.levels = [
             { key: Scenes.STORE, data: {month: Months.MARCH}, text: "Store Patrick" },
             { key: Scenes.STORE, data: {month: Months.MAY}, text: "Store Damien" },
-            { key: Scenes.INDEP_COMPUTER, data: {cardIdx: IndepComputerCards.IDLE_CARD}, text: "Patrick April" }
+            { key: Scenes.INDEP_COMPUTER, data: {cardIdx: IndepComputerCards.IDLE_CARD}, text: "Patrick April" },
+            { key: Scenes.GRANDMA, data: { month: Months.APRIL }, text: "Grandma April" }
         ];
 
         this.texts = [];

@@ -90,9 +90,12 @@ export class GrandmaScene extends Phaser.Scene {
         if(data.month === Months.MARCH) {
             //Create the scene's dialogue controller
             this.dialogue = new DialogueController(this, "grandmaDialogMarch");
-        } else {
+        } else if(data.month === Months.APRIL) {
             //Create the scene's dialogue controller
             this.dialogue = new DialogueController(this, "grandmaDialogApril");
+        } else {
+            //Create the scene's dialogue controller
+            this.dialogue = new DialogueController(this, "grandmaDialogJune");
         }
     }
 
@@ -153,8 +156,10 @@ export class GrandmaScene extends Phaser.Scene {
      * @brief Notifies the current card that the dialogue objective was met
      */
     notifyObjectiveMet(status) {
+        console.log("Scene notified: " + status);
         if(this.current_card.notifyObjectiveMet) {
-            this.current_card.notifyObjectiveMet();
+            console.log("Notifying card...");
+            this.current_card.notifyObjectiveMet(status);
         }
     }
 
