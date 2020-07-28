@@ -297,6 +297,9 @@ export class IndepScene extends Phaser.Scene {
 
             player.nathan_failed = status;
             player.saveGame();
+
+            // Send result to db as integer
+            player.sendChoices({ player_id: player.id, freelancer_love_advice: +status });
         }
     }
 
@@ -365,7 +368,7 @@ export class IndepScene extends Phaser.Scene {
                 }
             }),
             this
-        );        
+        );
     }
 
     /**
