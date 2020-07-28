@@ -106,6 +106,9 @@ export class DamienInitScene extends Phaser.Scene {
         //Update the saved data
         player.cur_scene = Scenes.DAMIEN_INIT;
 
+        console.log('test data');
+        player.checkPlayerId();
+
         //Handle the loaded food case
         if(this.cardIdx === ProtoCards.COMPUTER) {
             this.current_card.showItem();
