@@ -12,7 +12,7 @@ $data = json_decode(file_get_contents('php://input'), true);
   ];*/
 
 // format: {'damien_clothes': 1}
-$allowed_columns = ['player_id', 'damien_stay_home', 'damien_food', 'damien_game_score_mean', 'damien_clothes', 'damien_see_grandma', 'mother_stay_home', 'mother_game_score', 'freelancer_food_set', 'freelancer_food_amount', 'freelancer_love_advice', 'freelancer_game_score', 'grandma_books', 'grandma_advice'];
+$allowed_columns = ['player_id', 'damien_stay_home', 'damien_food', 'damien_game_score_mean', 'damien_clothes', 'damien_see_grandma', 'kids_park', 'freelancer_food_set', 'freelancer_food_amount', 'freelancer_good_love_advice', 'freelancer_game_score', 'grandma_hairdresser', 'grandma_books', 'grandma_advice'];
 
 // Cf. https://stackoverflow.com/questions/134099/are-pdo-prepared-statements-sufficient-to-prevent-sql-injection
 // @TODO
