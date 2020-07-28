@@ -127,8 +127,7 @@ export class BuildingScene extends Phaser.Scene {
         this.load.audio("bird", "sounds/building/birdTraffic.mp3");
 
         //Load in all of the sprites needed for this scene
-        switch(this.info.month) {
-        case Months.MARCH:
+        if(this.info.month === Months.MARCH) {
             this.load.image("building_bg_march", "sprites/BuildingScene/building_bg_winter.jpg");
 
             //Load in clouds
@@ -136,9 +135,7 @@ export class BuildingScene extends Phaser.Scene {
             this.load.image("cloud_02_march", "sprites/BuildingScene/building_cloud02_winter.png");
             this.load.image("cloud_03_march", "sprites/BuildingScene/building_cloud03_winter.png");
             this.load.image("cloud_04_march", "sprites/BuildingScene/building_cloud04_winter.png");
-            break;
-
-        case Months.MAY:
+        } else {
             this.load.image("building_bg_may", "sprites/BuildingScene/building_bg_summer.jpg");
 
             //Load in the clouds
@@ -146,10 +143,6 @@ export class BuildingScene extends Phaser.Scene {
             this.load.image("cloud_02_may", "sprites/BuildingScene/building_cloud02_summer.png");
             this.load.image("cloud_03_may", "sprites/BuildingScene/building_cloud03_summer.png");
             this.load.image("cloud_04_may", "sprites/BuildingScene/building_cloud04_summer.png");
-            break;
-
-        default:
-            break;
         }
 
         //Load in everything needed no matter the month
@@ -443,8 +436,7 @@ export class BuildingScene extends Phaser.Scene {
         //this.bird = this.sound.add("bird");
         //this.bird.play({volume: 0.3});
 
-        switch(this.info.month) {
-        case Months.MARCH:
+        if(this.info.month === Months.MARCH) {
             this.sprites['building_bg'] = this.add.image(0, 0, "building_bg_march");
 
             //Load in clouds
@@ -452,19 +444,13 @@ export class BuildingScene extends Phaser.Scene {
             this.sprites['cloud_02'] = this.add.image(1020, -155, "cloud_02_march");
             this.sprites['cloud_03'] = this.add.image(2065, -162, "cloud_03_march");
             this.sprites['cloud_04'] = this.add.image(1348, -686, "cloud_04_march");
-            break;
-
-        case Months.MAY:
+        } else {
             this.sprites['building_bg'] = this.add.image(0, 0, "building_bg_may");
             //Load in the clouds
             this.sprites['cloud_01'] = this.add.image(1983, -479, "cloud_01_may");
             this.sprites['cloud_02'] = this.add.image(1020, -155, "cloud_02_may");
             this.sprites['cloud_03'] = this.add.image(2065, -162, "cloud_03_may");
             this.sprites['cloud_04'] = this.add.image(1348, -686, "cloud_04_may");
-            break;
-
-        default:
-            break;
         }
 
         //Center the background

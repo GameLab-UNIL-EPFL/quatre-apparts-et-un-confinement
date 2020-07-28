@@ -69,12 +69,12 @@ export class LivingRoomCard extends Card {
                 (scene) => scene.nextCard(GrandmaCards.RADIO),
                 parent_scene,
                 -1,
-                parent_scene.month === Months.MARCH ? {
+                {
                     name: 'radio_h',
                     url: 'sprites/UI/01_Interactions/02_Grand-mere/02_Spritesheets/03-Grand-Mere-Radio-Spritesheet_228x140.png',
                     size: { frameWidth: 228, frameHeight: 140 },
                     pos: new Phaser.Math.Vector2(-259, 186)
-                } : null
+                }
             ),
             new CardObject(
                 parent_scene,
@@ -83,12 +83,12 @@ export class LivingRoomCard extends Card {
                 (scene) => scene.nextCard(GrandmaCards.CALENDAR),
                 parent_scene,
                 -1,
-                parent_scene.month === Months.MARCH ? {
+                {
                     name: 'calendar_h',
                     url: 'sprites/UI/01_Interactions/02_Grand-mere/02_Spritesheets/02-Grand-Mere-Calendrier-Spritesheet_294x160.png',
                     size: { frameWidth: 294, frameHeight: 160 },
                     pos: new Phaser.Math.Vector2(-294, 409)
-                } : null
+                }
             ),
             new CardObject(
                 parent_scene,
@@ -97,12 +97,12 @@ export class LivingRoomCard extends Card {
                 (card) => card.changeGrandma(GRANDMA_STATES.PHONE),
                 this,
                 -1,
-                parent_scene.month === Months.MARCH ? {
+                {
                     name: 'phone_grandma_h',
                     url: "sprites/UI/01_Interactions/02_Grand-mere/02_Spritesheets/01-Grand-Mere-Telephone-Spritesheet_300x200.png",
                     size: { frameWidth: 300, frameHeight: 200 },
                     pos: new Phaser.Math.Vector2(270, 487)
-                } : null
+                }
             ),
             new CardObject(
                 parent_scene,
@@ -155,6 +155,13 @@ export class LivingRoomCard extends Card {
      */
     create() {
         super.create();
+
+        //Hide all highlights if it's not march
+        if(this.parent_scene.month !== Months.MARCH) {
+            this.children[5].highlight_sprite.setActive(false).setVisible(false);
+            this.children[6].highlight_sprite.setActive(false).setVisible(false);
+            this.children[7].highlight_sprite.setActive(false).setVisible(false);
+        }
 
         //Add in the initial grandma
         this.grandma_sprite = this.parent_scene.add.image(GRANDMA_POS.x, GRANDMA_POS.y, "grandma_idle");

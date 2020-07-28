@@ -689,6 +689,8 @@ export class StoreScene extends Phaser.Scene {
         console.log("INIT_STORE");
         //Check if any saved data exists
         if(data) {
+            this.cardIdx = StoreCards.FIRST_SHELF;
+            this.current_card = this.firstShelf;
             this.month = data.month;
 
             if(this.month === 'may') {
