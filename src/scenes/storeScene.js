@@ -692,6 +692,8 @@ export class StoreScene extends Phaser.Scene {
             this.cardIdx = StoreCards.FIRST_SHELF;
             this.current_card = this.firstShelf;
             this.month = data.month;
+            this.shoppingBasket = [];
+            Object.keys(this.checklist_done).forEach(item => this.checklist_done[item].done = false);
 
             if(this.month === 'may') {
                 let indepShoppingBasket = player.getBasket();
