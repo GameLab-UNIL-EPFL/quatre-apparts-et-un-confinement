@@ -329,6 +329,7 @@
 		"name": "Copine",
 		"text": ["Rhoo 💔"],
 		"choices":{},
-		"goto": []
+		"goto": [],
+		"objective": false
 	}
 }
