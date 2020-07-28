@@ -13,7 +13,7 @@ try{
 
     $get_stmt = $pdo->query(<<<EOF
     SELECT
-    ROUND( (count(*) *100 ) / (SELECT count(*) FROM player_choice ) ), percentage_kids_park
+    ROUND( (count(*) *100 ) / (SELECT count(*) FROM player_choice ) )
     AS percentage_kids_park
     FROM player_choice
     WHERE kids_park = 1
