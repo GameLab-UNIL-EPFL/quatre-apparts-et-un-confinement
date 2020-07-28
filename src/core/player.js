@@ -213,12 +213,7 @@ export class Player {
     getStats() {
         (async () => {
             const rawResponse = await fetch('https://labs.letemps.ch/interactive/2020/_sandbox/_covidou_server/get_choice_stats.php', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(payload)
+                method: 'GET'
             });
             const content = await rawResponse.json();
             // Example output: [{"choice":"kids_park","percentage":"35.0"},{"choice":"grandma_hairdresser","percentage":"39.0"},{"choice":"damien_stay_home","percentage":"0.0"},{"choice":"freelancer_good_love_advice","percentage":"28.0"}]
