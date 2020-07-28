@@ -37,17 +37,17 @@ export class BuildingScene extends Phaser.Scene {
                 indep: false
             },
             windows: {
-                damien: WindowState.ON,
-                grandma: WindowState.ON,
-                family: WindowState.ON,
-                indep: WindowState.ON
+                damien: WindowState.OFF,
+                grandma: WindowState.OFF,
+                family: WindowState.OFF,
+                indep: WindowState.OFF
             },
             month: Months.MARCH,
             nextScene: {
-                damien: Scenes.PROTOTYPE,
-                grandma: Scenes.GRANDMA,
-                family: Scenes.MOTHER,
-                indep: Scenes.INDEP
+                damien: null,
+                grandma: null,
+                family: null,
+                indep: null
             }
         };
 
@@ -636,7 +636,7 @@ export class BuildingScene extends Phaser.Scene {
         if(this.info.mainMenu) {
             this.createMainMenu();
 
-            this.showArrow();
+            //this.showArrow();
         }
 
         //Handle the special "names" case
