@@ -14,7 +14,6 @@ try{
     $get_stmt = $pdo->query(<<<EOF
     SELECT *
     FROM player_choice
-    LIMIT 10;
 EOF
 );
     $get_stmt->execute();
