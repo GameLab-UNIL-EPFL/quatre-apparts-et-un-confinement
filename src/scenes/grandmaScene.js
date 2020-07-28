@@ -156,9 +156,7 @@ export class GrandmaScene extends Phaser.Scene {
      * @brief Notifies the current card that the dialogue objective was met
      */
     notifyObjectiveMet(status) {
-        console.log("Scene notified: " + status);
         if(this.current_card.notifyObjectiveMet) {
-            console.log("Notifying card...");
             this.current_card.notifyObjectiveMet(status);
         }
     }

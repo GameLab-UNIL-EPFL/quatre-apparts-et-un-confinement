@@ -318,14 +318,11 @@ export class LivingRoomCard extends Card {
         }
 
         if(status) {
-            console.log("Card notified");
-            
             player.suzanne_hair = true;
             player.saveGame();
 
             //Send new information to the DB
             player.sendChoices({ player_id: player.id, suzanne_hair: +status });
-            console.log("Sent info to db, awaiting response...");
         }
     }
 
