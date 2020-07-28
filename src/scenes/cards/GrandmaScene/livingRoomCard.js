@@ -329,7 +329,7 @@ export class LivingRoomCard extends Card {
             player.saveGame();
 
             //Send new information to the DB
-            player.sendChoices({ player_id: player.id, suzanne_hair: +status });
+            player.sendChoices({ player_id: player.id, grandma_hairdresser: +status });
         }
     }
 
