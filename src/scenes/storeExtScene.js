@@ -15,7 +15,7 @@ export class StoreExtScene extends Phaser.Scene {
     constructor() {
         super({ key: Scenes.STORE_EXT });
 
-        this.month = Months.MARCH;
+        this.month = Months.APRIL;
 
         this.current_card = new Card(
             this,
@@ -70,8 +70,8 @@ export class StoreExtScene extends Phaser.Scene {
         //Check if any saved data exists
         if(data.month === Months.MAY) {
             this.month = Months.MAY;
-        } else if(data.month === Months.MARCH) {
-            this.month = Months.MARCH;
+        } else if(data.month === Months.APRIL) {
+            this.month = Months.APRIL;
         }
     }
 
@@ -139,7 +139,7 @@ export class StoreExtScene extends Phaser.Scene {
      * @brief Triggers the next scene
      */
     nextScene() {
-        this.scene.start(Scenes.STORE, { month: this.month });    
+        this.scene.start(Scenes.STORE, { month: this.month });
     }
 
     /**

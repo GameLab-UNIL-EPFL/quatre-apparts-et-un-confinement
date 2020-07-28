@@ -7,6 +7,7 @@ import { BusCards } from "./busScene";
 
 export const Months = {
     MARCH: 'march',
+    APRIL: 'april',
     MAY: 'may'
 };
 
@@ -85,6 +86,14 @@ export class BuildingScene extends Phaser.Scene {
     preload() {
         //Load in the dialogue box if needed
         if(this.info.mainMenu) {
+
+            //Load the arrow animation spritesheet
+            this.load.spritesheet(
+                'arrow',
+                'sprites/UI/arrow.png',
+                { frameWidth: 100, frameHeight: 100 }
+            );
+
             this.load.spritesheet(
                 DIALOGUE_BOX_KEY,
                 "sprites/UI/dialogueBox.png",
@@ -118,8 +127,7 @@ export class BuildingScene extends Phaser.Scene {
         this.load.audio("bird", "sounds/building/birdTraffic.mp3");
 
         //Load in all of the sprites needed for this scene
-        switch(this.info.month) {
-        case Months.MARCH:
+        if(this.info.month === Months.MARCH) {
             this.load.image("building_bg_march", "sprites/BuildingScene/building_bg_winter.jpg");
 
             //Load in clouds
@@ -127,9 +135,7 @@ export class BuildingScene extends Phaser.Scene {
             this.load.image("cloud_02_march", "sprites/BuildingScene/building_cloud02_winter.png");
             this.load.image("cloud_03_march", "sprites/BuildingScene/building_cloud03_winter.png");
             this.load.image("cloud_04_march", "sprites/BuildingScene/building_cloud04_winter.png");
-            break;
-
-        case Months.MAY:
+        } else {
             this.load.image("building_bg_may", "sprites/BuildingScene/building_bg_summer.jpg");
 
             //Load in the clouds
@@ -137,10 +143,6 @@ export class BuildingScene extends Phaser.Scene {
             this.load.image("cloud_02_may", "sprites/BuildingScene/building_cloud02_summer.png");
             this.load.image("cloud_03_may", "sprites/BuildingScene/building_cloud03_summer.png");
             this.load.image("cloud_04_may", "sprites/BuildingScene/building_cloud04_summer.png");
-            break;
-
-        default:
-            break;
         }
 
         //Load in everything needed no matter the month
@@ -299,6 +301,34 @@ export class BuildingScene extends Phaser.Scene {
     }
 
     /**
+     * @brief shows the arrow that sends the user back to the building scene
+     */
+    showArrow() {
+
+        // Create ring sprites
+        this.anims.create({
+            key: 'arrow_anim',
+            frameRate: 15,
+            frames: this.anims.generateFrameNames('arrow'),
+            repeat: -1
+        });
+
+        //Play the cat animation
+        this.arrow = this.add.sprite(
+            245,
+            716,
+            'arrow'
+        ).play('arrow_anim');
+
+        //Make the arrow end the scene
+        this.arrow.setInteractive().on(
+            'pointerdown',
+            () => this.scene.start('Select'),
+            this
+        );
+    }
+
+    /**
      * @brief Adds in the character names in the building scene
      * @param {boolean} interact Whether or not to take into account player interaction
      */
@@ -406,8 +436,7 @@ export class BuildingScene extends Phaser.Scene {
         //this.bird = this.sound.add("bird");
         //this.bird.play({volume: 0.3});
 
-        switch(this.info.month) {
-        case Months.MARCH:
+        if(this.info.month === Months.MARCH) {
             this.sprites['building_bg'] = this.add.image(0, 0, "building_bg_march");
 
             //Load in clouds
@@ -415,19 +444,13 @@ export class BuildingScene extends Phaser.Scene {
             this.sprites['cloud_02'] = this.add.image(1020, -155, "cloud_02_march");
             this.sprites['cloud_03'] = this.add.image(2065, -162, "cloud_03_march");
             this.sprites['cloud_04'] = this.add.image(1348, -686, "cloud_04_march");
-            break;
-
-        case Months.MAY:
+        } else {
             this.sprites['building_bg'] = this.add.image(0, 0, "building_bg_may");
             //Load in the clouds
             this.sprites['cloud_01'] = this.add.image(1983, -479, "cloud_01_may");
             this.sprites['cloud_02'] = this.add.image(1020, -155, "cloud_02_may");
             this.sprites['cloud_03'] = this.add.image(2065, -162, "cloud_03_may");
             this.sprites['cloud_04'] = this.add.image(1348, -686, "cloud_04_may");
-            break;
-
-        default:
-            break;
         }
 
         //Center the background
@@ -612,6 +635,8 @@ export class BuildingScene extends Phaser.Scene {
         //Add menu buttons if needed
         if(this.info.mainMenu) {
             this.createMainMenu();
+
+            this.showArrow();
         }
 
         //Handle the special "names" case

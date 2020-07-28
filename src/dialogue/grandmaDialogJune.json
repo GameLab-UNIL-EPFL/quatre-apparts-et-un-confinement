@@ -288,7 +288,7 @@
 		],
 		"goto": ["comment"],
 		"objective": {
-			"status": true
+			"status": false
 		}
 	},
 	"comment": {

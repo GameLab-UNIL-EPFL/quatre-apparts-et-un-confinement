@@ -2,6 +2,8 @@ import { Background } from "../../objects/background";
 import { Card } from "../card";
 import { CardObject } from "../../objects/cardObject";
 import { GrandmaCards } from "../../grandmaScene";
+import { player } from "../../..";
+import { Months } from "../../buildingScene";
 
 const GRANDMA_STATES = {
     IDLE: 0,
@@ -154,13 +156,23 @@ export class LivingRoomCard extends Card {
     create() {
         super.create();
 
+        //Hide all highlights if it's not march
+        if(this.parent_scene.month !== Months.MARCH) {
+            this.children[5].highlight_sprite.setActive(false).setVisible(false);
+            this.children[6].highlight_sprite.setActive(false).setVisible(false);
+            this.children[7].highlight_sprite.setActive(false).setVisible(false);
+        }
+
         //Add in the initial grandma
         this.grandma_sprite = this.parent_scene.add.image(GRANDMA_POS.x, GRANDMA_POS.y, "grandma_idle");
 
         //Bring the phone and the
         this.children[this.children.length - 1].sprite.setDepth(2);
         this.children[this.children.length - 2].sprite.setDepth(3);
-        this.children[this.children.length - 2].highlight_sprite.setDepth(3);
+
+        if(this.parent_scene.month === Months.MARCH) {
+            this.children[this.children.length - 2].highlight_sprite.setDepth(3);
+        }
 
         //Add sound to the scene
         this.page = this.parent_scene.sound.add("pageTurn");
@@ -181,21 +193,23 @@ export class LivingRoomCard extends Card {
             677,
             'cat'
         ).play('cat-tail');
+        
+        if(this.parent_scene.month === Months.MARCH) {
+            // Create book highlight sprites
+            this.parent_scene.anims.create({
+                key: 'books_h_anim',
+                frameRate: 7,
+                frames: this.parent_scene.anims.generateFrameNames('books_h'),
+                repeat: -1
+            });
 
-        // Create ring sprites
-        this.parent_scene.anims.create({
-            key: 'books_h_anim',
-            frameRate: 7,
-            frames: this.parent_scene.anims.generateFrameNames('books_h'),
-            repeat: -1
-        });
-
-        //Play the cat animation
-        this.books_h = this.parent_scene.add.sprite(
-            31,
-            -121,
-            'books_h'
-        ).play('books_h_anim');
+            //Play the book highlight animation
+            this.books_h = this.parent_scene.add.sprite(
+                31,
+                -121,
+                'books_h'
+            ).play('books_h_anim');
+        }
 
         this.page = this.parent_scene.sound.add("pageTurn");
 
@@ -212,9 +226,15 @@ export class LivingRoomCard extends Card {
 
                 //hide the phone
                 sprite.setActive(false).setVisible(false);
-                highlight.setActive(false).setVisible(false);
+                if(highlight !== null) {
+                    highlight.setActive(false).setVisible(false);
+                }
             },
-            [this, this.children[7].sprite, this.children[7].highlight_sprite]
+            [
+                this,
+                this.children[7].sprite,
+                this.parent_scene.month === Months.MARCH ? this.children[7].highlight_sprite : null
+            ]
         );
     }
 
@@ -222,7 +242,7 @@ export class LivingRoomCard extends Card {
      * @brief shows the arrow that sends the user back to the building scene
      */
     showArrow() {
-        // Create ring sprites
+        // Create cat sprites
         this.parent_scene.anims.create({
             key: 'arrow_anim',
             frameRate: 15,
@@ -277,7 +297,10 @@ export class LivingRoomCard extends Card {
 
             //show the phone
             this.children[7].sprite.setActive(true).setVisible(true);
-            this.children[7].highlight_sprite.setActive(true).setVisible(true);
+
+            if(this.parent_scene.month === Months.MARCH) {
+                this.children[7].highlight_sprite.setActive(true).setVisible(true);
+            }
 
             //Reset grandma
             this.changeGrandma(GRANDMA_STATES.IDLE);
@@ -296,8 +319,18 @@ export class LivingRoomCard extends Card {
     /**
      * @brief Updates the objective complete attribute
      */
-    notifyObjectiveMet() {
-        this.objective_complete = true;
+    notifyObjectiveMet(status) {
+        if(!status && !this.objective_complete) {
+            this.objective_complete = true;
+        }
+
+        if(status) {
+            player.suzanne_hair = true;
+            player.saveGame();
+
+            //Send new information to the DB
+            player.sendChoices({ player_id: player.id, grandma_hairdresser: +status });
+        }
     }
 
     changeGrandma(state) {

@@ -394,7 +394,7 @@ export class IndepComputerScene extends Phaser.Scene {
      */
     nextScene() {
         this.cameras.main.fadeOut(3000, 0, 0, 0,
-            () => this.scene.start(Scenes.END_SCENE),
+            () => this.scene.start(Scenes.DAMIEN_NO_FOOD),
             this
         );        
     }

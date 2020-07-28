@@ -255,10 +255,12 @@ export class DialogueController {
         this.current_conv_id = id;
         this.cur_state = DialogueState.DISPLAYED;
 
+        const cur_dialogue = this.requestDialogue(id);
+
         //Check if an objective was met
-        if(this.requestDialogue(id).objective) {
+        if(cur_dialogue.objective) {
             if(this.parent_scene.notifyObjectiveMet) {
-                this.parent_scene.notifyObjectiveMet();
+                this.parent_scene.notifyObjectiveMet(cur_dialogue.objective.status);
             } else {
                 console.error("DIALOG_OBJECTIVE: Parent scene doesn't implement notifyObjectiveMet");
             }
