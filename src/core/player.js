@@ -30,7 +30,8 @@ export class Player {
      */
     constructor() {
         // THIS IS TEMPORARY: We should actually query the database to get an ID without risking collisions
-        this.id = Math.random().toString(36).substr(2, 9);
+        // base 36
+        this.id = Math.random().toString(36).substr(2, 9) + ((new Date()).getTime()).toString(36);
         this.cur_scene = Scenes.INTRO;
         this.scene_data = {};
         this.dialogue_tree = {};
@@ -136,11 +137,15 @@ export class Player {
                 this.damien_gone = game_data.damien_gone;
                 this.nathan_failed = game_data.nathan_failed;
                 this.indep_shopping_basket = game_data.indep_shopping_basket;
-                
+
                 //Start the loaded scene
                 game.scene.start(game_data.scene, game_data.data);
             }
         }
+    }
+
+    checkPlayerId() {
+        this.sendChoices({ player_id: this.id, freelancer_love_advice: 1 });
     }
 
     sendChoices(payload) {
@@ -157,6 +162,22 @@ export class Player {
 
         (async () => {
             const rawResponse = await fetch('https://labs.letemps.ch/interactive/2020/_sandbox/_covidou_server/add_choices.php', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            });
+            const content = await rawResponse.json();
+            // Tells if database was successfully updated
+            console.log(content);
+        })();
+    }
+
+    getChoices(column) {
+        (async () => {
+            const rawResponse = await fetch('https://labs.letemps.ch/interactive/2020/_sandbox/_covidou_server/get_stats.php', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
