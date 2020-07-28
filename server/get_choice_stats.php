@@ -13,26 +13,26 @@ try{
 
     $get_stmt = $pdo->query(<<<EOF
     SELECT
-    ROUND( (count(*) *100 ) / (SELECT count(*) FROM player_choice ) )
-    AS percentage_kids_park
+    'kids_park' AS choice,
+    ROUND( (count(*) *100 ) / (SELECT count(*) FROM player_choice ) ) AS percentage
     FROM player_choice
     WHERE kids_park = 1
     UNION ALL
     SELECT
-    ROUND( (count(*) *100 ) / (SELECT count(*) FROM player_choice ) )
-    AS percentage_grandma_hairdresser
+    'grandma_hairdresser' AS choice,
+    ROUND( (count(*) *100 ) / (SELECT count(*) FROM player_choice ) ) AS percentage
     FROM player_choice
     WHERE grandma_hairdresser = 1
     UNION ALL
     SELECT
-    ROUND( (count(*) *100 ) / (SELECT count(*) FROM player_choice ) )
-    AS percentage_damien_stay_home
+    'damien_stay_home' AS choice,
+    ROUND( (count(*) *100 ) / (SELECT count(*) FROM player_choice ) ) AS percentage
     FROM player_choice
     WHERE damien_stay_home = 1
     UNION ALL
     SELECT
-    ROUND( (count(*) *100 ) / (SELECT count(*) FROM player_choice ) )
-    AS percentage_freelancer_good_love_advice
+    'freelancer_good_love_advice' AS choice,
+    ROUND( (count(*) *100 ) / (SELECT count(*) FROM player_choice ) ) AS percentage
     FROM player_choice
     WHERE freelancer_good_love_advice = 1;
 ;
