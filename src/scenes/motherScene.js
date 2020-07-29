@@ -124,15 +124,15 @@ export class MotherScene extends Phaser.Scene {
         cardObj.destroy();
 
         if (cardObj.name === 'motherSceneBed_d') {
-            this.sound.add("clothes").play();
+            this.clothesSound.play();
         } else if (cardObj.name === 'motherSceneHamper_d') {
-            this.sound.add("cupboard").play();
+            this.cupboardSound.play();
         } else if (cardObj.name === 'motherSceneBox_d' || cardObj.name === 'motherSceneXwing_d') {
-            this.sound.add("toys").play();
+            this.toysSound.play();
         } else if (cardObj.name === 'motherSceneBooks_d' || cardObj.name === 'motherSceneColoring_d') {
-            this.sound.add("paper").play({volume: 0.5});
+            this.paperSound.play({volume: 0.5});
         } else if (cardObj.name === 'motherSceneSwitch_d' || cardObj.name === 'motherSceneGlobe_d') {
-            this.sound.add("click").play({volume: 0.5});
+            this.clickSound.play({volume: 0.5});
         }
 
         //Create the new sprite at the old position
@@ -203,6 +203,13 @@ export class MotherScene extends Phaser.Scene {
 
         this.cameras.main.centerOn(0, 0);
         this.cameras.main.fadeIn(1000);
+
+        // add sounds
+        this.clothesSound = this.sound.add("clothes");
+        this.cupboardSound = this.sound.add("cupboard");
+        this.toysSound = this.sound.add("toys");
+        this.paperSound = this.sound.add("paper");
+        this.clickSound = this.sound.add("click");
 
         if(this.current_card.isLoaded()) {
             this.current_card.create();
