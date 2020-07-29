@@ -645,7 +645,6 @@ export class DialogueController {
         let prompt_xpos = -277;
 
         //Display the correct prompt box
-        // TODO: clickable box / larger physics body
         if(Object.keys(dialogue.choices).length <= 1) {
             this.parent_scene.add.image(-7, 616, 'promptBox1');
             font_size = 46;
@@ -655,7 +654,7 @@ export class DialogueController {
             font_size = 42;
             prompt_ypos = [497, 677];
         } else {
-            this.parent_scene.add.image(-7, 1416, 'promptBox3');
+            this.parent_scene.add.image(-7, 616, 'promptBox3');
             font_size = 40;
             prompt_ypos = [476, 592, 711];
         }
