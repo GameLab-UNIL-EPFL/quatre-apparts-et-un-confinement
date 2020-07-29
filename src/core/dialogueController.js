@@ -739,7 +739,6 @@ export class DialogueController {
             text_msg_elem.setInteractive(
                 new Phaser.Geom.Rectangle(-30, -30, 580, 100), Phaser.Geom.Rectangle.Contains
             ).on('pointerdown', touchMsgAnswer, this);
-            this.parent_scene.input.enableDebug(text_msg_elem);
         }
     }
 
