@@ -300,7 +300,7 @@ export class IndepScene extends Phaser.Scene {
 
             // Send result to db as integer
             console.log('Send choice to db:', status);
-            player.sendChoices({ player_id: player.id, freelancer_love_advice: +status });
+            player.sendChoices({ player_id: player.id, freelancer_good_love_advice: +status });
         }
     }
 
