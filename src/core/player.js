@@ -156,10 +156,10 @@ export class Player {
     }
 
     checkIdCallback(data, iteration) {
-        if(data['count'] !== "0" && iteration < 10){
+        if(data['count'] !== "0" && iteration < 10) {
             iteration++;
             this.player_id = this.generateId();
-            setTimeout(function(_this){
+            setTimeout(function(_this) {
                 _this.checkPlayerId(iteration);
             }, 500, this);
         } else {
