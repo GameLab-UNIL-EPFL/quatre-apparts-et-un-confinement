@@ -298,17 +298,13 @@ export class MotherScene extends Phaser.Scene {
      * @param {boolean} status whether or not the objective was successful
      */
     notifyObjectiveMet(status) {
-        if(this.cardIdx === IndepCards.IDLE_CARD) {
-            this.objective = true;
+        // Save choice in local storage
+        player.kids_park = status;
+        player.saveGame();
 
-            // todo: save it
-            // player.nathan_failed = status;
-            // player.saveGame();
-
-            // Send result to db as integer
-            console.log('Send choice to db (kids_park):', status);
-            player.sendChoices({ player_id: player.id, kids_park: +status });
-        }
+        // Send result to db as integer
+        console.log('Send choice to db (kids_park):', status);
+        player.sendChoices({ player_id: player.id, kids_park: +status });
     }
 
     /**
