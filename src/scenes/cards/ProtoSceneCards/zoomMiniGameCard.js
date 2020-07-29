@@ -82,14 +82,14 @@ export class ZoomMiniGameCard extends Card {
             new CardObject(
                 parent_scene,
                 {
-                    name: scene_key === Scenes.DAMIEN_INIT ? 
+                    name: scene_key === Scenes.DAMIEN_INIT ?
                         "homework_bg" :
                         scene_key === Scenes.INDEP_COMPUTER ?
                             "taxes_bg" :
                             "zoom_bg",
-                    url: scene_key === Scenes.DAMIEN_INIT ? 
+                    url: scene_key === Scenes.DAMIEN_INIT ?
                         "sprites/ProtoScene/ZoomMiniGameCard/init_computer_bg.jpg" :
-                        scene_key === Scenes.INDEP_COMPUTER ? 
+                        scene_key === Scenes.INDEP_COMPUTER ?
                             "sprites/IndepComputerScene/05_Mini-jeu/mini_game_bg.jpg" :
                             "sprites/ProtoScene/ZoomMiniGameCard/zoom_bg.png"
                 },
@@ -103,7 +103,7 @@ export class ZoomMiniGameCard extends Card {
             new Background(
                 parent_scene,
                 scene_key === Scenes.INDEP_COMPUTER ?
-                    "sprites/IndepComputerScene/05_Mini-jeu/computer_bg.png" : 
+                    "sprites/IndepComputerScene/05_Mini-jeu/computer_bg.png" :
                     "sprites/ProtoScene/ZoomMiniGameCard/computer_screen.png",
                 scene_key === Scenes.INDEP_COMPUTER ?
                     "computer_bg_patrick" : "computer_bg"
@@ -117,7 +117,7 @@ export class ZoomMiniGameCard extends Card {
                         "sprites/IndepComputerScene/05_Mini-jeu/bar.png" :
                         "sprites/ProtoScene/ZoomMiniGameCard/line.png"
                 },
-                scene_key === Scenes.INDEP_COMPUTER ? 
+                scene_key === Scenes.INDEP_COMPUTER ?
                     new Phaser.Math.Vector2(-7, 294) :
                     new Phaser.Math.Vector2(-7, 509)
             ),
@@ -142,19 +142,19 @@ export class ZoomMiniGameCard extends Card {
 
         this.scene_key = scene_key;
 
-        const n_notif = scene_key === Scenes.INDEP_COMPUTER ? 
+        const n_notif = scene_key === Scenes.INDEP_COMPUTER ?
             N_NOTIFICATION.INDEP : N_NOTIFICATION.DAMIEN;
 
-        const n_distr = scene_key === Scenes.INDEP_COMPUTER ? 
+        const n_distr = scene_key === Scenes.INDEP_COMPUTER ?
             N_DISTRACTIONS.INDEP : N_DISTRACTIONS.DAMIEN;
 
         //Add all notifications to the card
         for(let i = 0; i < n_notif; ++i) {
             this.messages_stack_1.push({
-                name: scene_key === Scenes.INDEP_COMPUTER ? 
-                    "notification_patrick_" + i : 
+                name: scene_key === Scenes.INDEP_COMPUTER ?
+                    "notification_patrick_" + i :
                     "notification_" + i,
-                url: scene_key === Scenes.INDEP_COMPUTER ? 
+                url: scene_key === Scenes.INDEP_COMPUTER ?
                     "sprites/IndepComputerScene/05_Mini-jeu/notification_" + (i + 1) + ".png" :
                     "sprites/ProtoScene/ZoomMiniGameCard/notif_" + i + ".png",
                 pos: new Phaser.Math.Vector2(-600, -1000),
@@ -209,7 +209,7 @@ export class ZoomMiniGameCard extends Card {
             this.scene_key === Scenes.INDEP_COMPUTER ?
                 NUM_SPAWNS.INDEP :
                 NUM_SPAWNS.MARCH;
-        
+
         this.n_msg = this.scene_key === Scenes.DAMIEN_INIT ?
             N_MSG.INIT :
             this.scene_key === Scenes.INDEP_COMPUTER ?
@@ -307,7 +307,7 @@ export class ZoomMiniGameCard extends Card {
      */
     createMessage(callback = () => {}) {
         if(!this.lock) {
-            //Pick which stack we will be drawing from 
+            //Pick which stack we will be drawing from
             let stack = this.whichStack ? this.messages_stack_2 : this.messages_stack_1;
             let target_stack = this.whichStack ? this.messages_stack_1 : this.messages_stack_2;
 
@@ -342,10 +342,26 @@ export class ZoomMiniGameCard extends Card {
             const end_y = this.scene_key === Scenes.INDEP_COMPUTER ? 590 : 800;
 
             //Animate the msg
-            this.parent_scene.tweens.add({
+            let timeline = this.parent_scene.tweens.createTimeline();
+
+            //1) Move to clickable area
+            timeline.add({
+                targets: sprite,
+                y: end_y - 200,
+                duration: duration * 0.89
+            });
+
+            timeline.add({
+                targets: sprite,
+                scale: 1.1,
+                duration: duration * 0.01,
+                yoyo: true
+            });
+
+            timeline.add({
                 targets: sprite,
                 y: end_y,
-                duration: duration,
+                duration: duration * 0.1,
                 hideOnComplete: true,
                 onComplete: () => {
                     if(!elem.isDestroyed) {
@@ -364,7 +380,7 @@ export class ZoomMiniGameCard extends Card {
                                 if(typeof callback === "function") {
                                     callback(this, true);
                                 }
-                            } 
+                            }
                         }
 
                         //Check if the game is over
@@ -379,12 +395,14 @@ export class ZoomMiniGameCard extends Card {
                 onCompleteScope: this
             });
 
+            timeline.play();
+
             //Activate interactivity
             sprite.setInteractive().on(
                 'pointerdown',
                 () => {
                     //Check the pointer's location
-                    const beg_y = this.scene_key === Scenes.INDEP_COMPUTER ? 
+                    const beg_y = this.scene_key === Scenes.INDEP_COMPUTER ?
                         BEG_Y_ZONE.INDEP : BEG_Y_ZONE.DAMIEN;
 
                     if(sprite.y >= beg_y) {
