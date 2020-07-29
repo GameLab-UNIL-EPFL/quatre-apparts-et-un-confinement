@@ -251,7 +251,6 @@ export class BusScene extends Phaser.Scene {
         this.busCough.stop();
         switch(this.cardIdx) {
         case BusCards.MARCH_CARD:
-            console.log('march card');
             this.scene.start(Scenes.BUILDING, {
                 mainMenu: false,
                 names: {

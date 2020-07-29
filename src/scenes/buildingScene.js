@@ -70,8 +70,6 @@ export class BuildingScene extends Phaser.Scene {
      * }
      */
     init(data) {
-        console.log('data is', data);
-        console.log(data);
         if(data.names) {
             //Check if any saved data exists
             if(data.windows && data.nextScene) {
@@ -421,7 +419,6 @@ export class BuildingScene extends Phaser.Scene {
         this.theme = this.sound.add("theme");
         this.clickSound = this.sound.add("click");
         // this.bird.play({volume: 0.3});
-        console.log('Building theme on?', this.buildingSound);
         if(this.buildingSound) {
             this.theme.play();
         }
