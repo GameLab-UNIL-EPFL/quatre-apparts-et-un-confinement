@@ -145,7 +145,7 @@ export class MotherScene extends Phaser.Scene {
         if(--this.cleanable_objects === 0) {
             this.showArrow();
         }
-    } 
+    }
 
     /**
      * @brief preload all of the elements of all of the cards
@@ -228,7 +228,7 @@ export class MotherScene extends Phaser.Scene {
                             clean_positions[i],
                             clean_names[i],
                             (i !== 0 && i !== 5) //don't animate the bed and the hamper
-                        );  
+                        );
                     }
                 },
                 this
@@ -294,6 +294,20 @@ export class MotherScene extends Phaser.Scene {
     }
 
     /**
+     * @brief Notifies the current card that the dialogue objective was met
+     * @param {boolean} status whether or not the objective was successful
+     */
+    notifyObjectiveMet(status) {
+        // Save choice in local storage
+        player.kids_park = status;
+        player.saveGame();
+
+        // Send result to db as integer
+        console.log('Send choice to db (kids_park):', status);
+        player.sendChoices({ player_id: player.id, kids_park: +status });
+    }
+
+    /**
      * @brief moves to the next card
      * @param {Number} choice the choice that was made
      */
@@ -337,7 +351,7 @@ export class MotherScene extends Phaser.Scene {
                 }
             }),
             this
-        );        
+        );
     }
 
     /**

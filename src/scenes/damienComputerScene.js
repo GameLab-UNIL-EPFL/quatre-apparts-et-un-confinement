@@ -194,10 +194,15 @@ export class DamienComputerScene extends Phaser.Scene {
     /**
      * @brief Updates the player damien_gone value
      */
-    notifyObjectiveMet() {
-        player.damien_gone = true;
+    notifyObjectiveMet(status) {
+        console.log(status);
+        player.damien_gone = status;
         console.log("PLAYER_DAMIEN_GONE: " + player.damien_gone);
         player.saveGame();
+
+        // Send result to db as integer
+        console.log('Send choice to db: Damien stays home =', !status, 'as', +!status);
+        player.sendChoices({ player_id: player.id, damien_stay_home: +!status });
     }
 
     nextScene() {

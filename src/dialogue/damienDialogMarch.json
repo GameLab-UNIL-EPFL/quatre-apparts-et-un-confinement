@@ -306,7 +306,9 @@
 		"text": ["Cool! À toute! 😘"],
 		"choices":{},
 		"goto": [],
-		"objective": true
+		"objective": {
+			"status": true
+		}
 	},
 	"repMaybe": {
 		"name": "Copine",
@@ -329,6 +331,9 @@
 		"name": "Copine",
 		"text": ["Rhoo 💔"],
 		"choices":{},
-		"goto": []
+		"goto": [],
+		"objective": {
+			"status": false
+		}
 	}
 }

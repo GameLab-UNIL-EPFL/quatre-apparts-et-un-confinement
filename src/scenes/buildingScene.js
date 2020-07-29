@@ -290,10 +290,13 @@ export class BuildingScene extends Phaser.Scene {
         //Center the new game box
         this.sprites['new_game_text'].setOrigin(0.5, 0.5);
 
-        const interaction = () => this.scene.start(
-            Scenes.BUS,
-            { cardIdx: BusCards.MARCH_CARD }
-        );
+        const interaction = () => {
+            player.checkPlayerId();
+            this.scene.start(
+                Scenes.BUS,
+                { cardIdx: BusCards.MARCH_CARD }
+            );
+        };
 
         //Make new game button start a new game
         this.sprites['new_game_text'].setInteractive().on('pointerdown', interaction, this);
