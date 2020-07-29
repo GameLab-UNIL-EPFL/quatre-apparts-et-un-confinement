@@ -78,7 +78,7 @@ const SPACING = 25;
 const MAX_N_PROMPTS = 3;
 
 const UP_POS = {
-    box: new Phaser.Math.Vector2(0, -650), 
+    box: new Phaser.Math.Vector2(0, -650),
     name: new Phaser.Math.Vector2(-488, -745),
     content: new Phaser.Math.Vector2(-488, -675)
 };
@@ -168,7 +168,7 @@ export class DialogueController {
             5000,
             5000
         );
-        
+
         const prompt_sprite = this.parent_scene.add.graphics({ fillStyle: { color: 0xf8f2df }});
         prompt_sprite.fillRectShape(bg);
 
@@ -519,6 +519,7 @@ export class DialogueController {
         //Check if an objective was met
         if(cur_dialogue.objective) {
             if(this.parent_scene.notifyObjectiveMet) {
+                console.log('Status:', cur_dialogue.objective.status);
                 this.parent_scene.notifyObjectiveMet(cur_dialogue.objective.status);
             } else {
                 console.error("DIALOG_OBJECTIVE: Parent scene doesn't implement notifyObjectiveMet");
