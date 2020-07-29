@@ -50,6 +50,8 @@ export class BuildingScene extends Phaser.Scene {
             }
         };
 
+        this.buildingSound = true;
+
         //Dictionnary containing all of the scene's sprites
         this.sprites = {};
         this.interactions = {};
@@ -68,6 +70,8 @@ export class BuildingScene extends Phaser.Scene {
      * }
      */
     init(data) {
+        console.log('data is', data);
+        console.log(data);
         if(data.names) {
             //Check if any saved data exists
             if(data.windows && data.nextScene) {
@@ -75,6 +79,9 @@ export class BuildingScene extends Phaser.Scene {
             } else {
                 console.error("BUILDING_SCENE: Invalid configuration JSON");
             }
+        }
+        if( data.hasOwnProperty('buildingSound') ) {
+            this.buildingSound = data.buildingSound;
         }
     }
 
@@ -117,6 +124,7 @@ export class BuildingScene extends Phaser.Scene {
         //load sounds
         this.load.audio("bird", "sounds/building/birdTraffic.mp3");
         this.load.audio("theme", "sounds/building/theme.mp3");
+        this.load.audio("click", "sounds/UI/UIClick.wav");
 
         //Load in all of the sprites needed for this scene
         switch(this.info.month) {
@@ -238,6 +246,7 @@ export class BuildingScene extends Phaser.Scene {
                 if(gameObject === this.sprites['menu_continue'] ||
                    gameObject === this.sprites['continue_text'])
                 {
+                    this.clickSound.play();
 
                     //Show a loading screen
                     this.showLoading();
@@ -290,10 +299,13 @@ export class BuildingScene extends Phaser.Scene {
         //Center the new game box
         this.sprites['new_game_text'].setOrigin(0.5, 0.5);
 
-        const interaction = () => this.scene.start(
-            Scenes.BUS,
-            { cardIdx: BusCards.MARCH_CARD }
-        );
+        const interaction = () => {
+            this.clickSound.play();
+            this.scene.start(
+                Scenes.BUS,
+                { cardIdx: BusCards.MARCH_CARD }
+            );
+        };
 
         //Make new game button start a new game
         this.sprites['new_game_text'].setInteractive().on('pointerdown', interaction, this);
@@ -407,13 +419,17 @@ export class BuildingScene extends Phaser.Scene {
         // TODO: rerecord birdTraffic sound
         this.bird = this.sound.add("bird");
         this.theme = this.sound.add("theme");
-        //this.bird.play({volume: 0.3});
-        this.theme.play();
+        this.clickSound = this.sound.add("click");
+        // this.bird.play({volume: 0.3});
+        console.log('Building theme on?', this.buildingSound);
+        if(this.buildingSound) {
+            this.theme.play();
+        }
 
         this.input.on('gameobjectdown',
             (_, gameObject) => {
                 if(gameObject.input.enabled) {
-                    
+
                     //need to make this work
                     this.tweens.add({
                         targets:  this.theme,
@@ -422,11 +438,11 @@ export class BuildingScene extends Phaser.Scene {
                     });
 
                     this.theme.stop();
-                } 
-            }   
+                }
+            }
         );
-            
-        
+
+
 
         switch(this.info.month) {
         case Months.MARCH:

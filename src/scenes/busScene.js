@@ -248,8 +248,10 @@ export class BusScene extends Phaser.Scene {
      * @brief Triggers the next scene
      */
     nextScene() {
+        this.busCough.stop();
         switch(this.cardIdx) {
         case BusCards.MARCH_CARD:
+            console.log('march card');
             this.scene.start(Scenes.BUILDING, {
                 mainMenu: false,
                 names: {
@@ -271,7 +273,8 @@ export class BusScene extends Phaser.Scene {
                     grandma: null,
                     family: null,
                     indep: null
-                }
+                },
+                buildingSound: false
             });
             break;
 
