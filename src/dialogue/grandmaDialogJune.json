@@ -61,7 +61,7 @@
 	"news": {
 		"name": "Radio",
 		"text": [
-			"🔈 6 Juin - Réouverture des restaurants, boîtes de nuit, musées, cinémas et piscines."
+			"🔈 6 juin - Réouverture des restaurants, boîtes de nuit, musées, cinémas et piscines."
 		],
 		"choices": [],
 		"goto": []
@@ -312,7 +312,7 @@
 	"desole": {
 		"name": "Marc",
 		"text": [
-			"Merci! Oui superbe! On a bien pu fêter même si c'était en petit commité.",
+			"Merci! Oui superbe! On a bien pu fêter même si c'était en petit comité.",
 			"Je t'enverrai les photos. On a eu un temps magnifique!",
 			"Et Marion dans sa robe était juste sublime!"
 		],
@@ -320,4 +320,3 @@
 		"goto": []
 	}
 }
-

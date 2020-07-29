@@ -1,36 +1,36 @@
 {
-    "florence": {
-		"name": "Florence",
-		"text": [
-			"Heureusement que l'école reprend bientôt!!",
-            "Je n'en peux plus de ce rythme infernal!",
-            "Vous aussi vous vous réjouissez de revoir vos camarades, hein?"
-		],
-		"choices": [],
-		"goto": ["kids"]
-    },
-    "kids": {
-		"name": "Maxime et Liliane",
-		"text": [
-			"Ouiiiii!"
-		],
-		"choices": [],
-		"goto": ["ranger"]
-    },
-    "ranger": {
-		"name": "Florence",
-		"text": [
-			"Mais aujourd'hui vous devez m'aidez à ranger."
-		],
-		"choices": ["non"],
-		"goto": []
-    },
-    "non": {
-		"name": "Maxime et Liliane",
-		"text": [
-			"Nooooon!"
-		],
-		"choices": [],
-		"goto": []
-    }
+  "florence": {
+    "name": "Florence",
+    "text": [
+      "Heureusement que l'école reprend bientôt!!",
+      "Je n'en peux plus de ce rythme infernal!",
+      "Vous aussi vous vous réjouissez de revoir vos camarades, hein?"
+    ],
+    "choices": [],
+    "goto": ["kids"]
+  },
+  "kids": {
+    "name": "Maxime et Liliane",
+    "text": [
+      "Ouiiiii!"
+    ],
+    "choices": [],
+    "goto": []
+  },
+  "ranger": {
+    "name": "Florence",
+    "text": [
+      "Mais aujourd'hui vous devez m'aidez à ranger."
+    ],
+    "choices": ["non"],
+    "goto": []
+  },
+  "non": {
+    "name": "Maxime et Liliane",
+    "text": [
+      "Nooooon!"
+    ],
+    "choices": [],
+    "goto": []
+  }
 }
