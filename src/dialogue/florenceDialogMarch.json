@@ -34,7 +34,7 @@
 			"Merci Maman!"
 		],
 		"choices": [],
-		"goto": [],
+		"goto": ["oui-rangez"],
 		"objective": {
 			"status": true
 		}
@@ -45,7 +45,7 @@
 			"Mais rhooo! Maman, t'es pas gentille."
 		],
 		"choices": [],
-		"goto": [],
+		"goto": ["non-rangez"],
 		"objective": {
 			"status": false
 		}
