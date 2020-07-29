@@ -418,9 +418,10 @@ export class BuildingScene extends Phaser.Scene {
         this.bird = this.sound.add("bird");
         this.theme = this.sound.add("theme");
         this.clickSound = this.sound.add("click");
-        // this.bird.play({volume: 0.3});
+        this.bird.play({volume: 0.3});
+
         if(this.buildingSound) {
-            this.theme.play();
+            this.theme.play({volume: 0.8});
         }
 
         this.input.on('gameobjectdown',
@@ -435,6 +436,7 @@ export class BuildingScene extends Phaser.Scene {
                     });
 
                     this.theme.stop();
+                    this.bird.stop();
                 }
             }
         );
