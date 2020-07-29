@@ -93,7 +93,7 @@
 	"couple": {
 		"name": "Nathan",
         "text": [
-            "Moi je continue à travailler depuis la maison et Elise aussi…", 
+            "Moi je continue à travailler depuis la maison et Elise aussi…",
             "Donc autant te dire que c'est loin d'être des vacances.",
             "Il y a parfois des moments tendus entre nous."
         ],
@@ -159,7 +159,7 @@
 		],
 		"goto": [],
 		"objective": {
-			"status": true
+			"status": false
 		}
 	},
 	"finBon": {
@@ -174,7 +174,7 @@
 		],
 		"goto": [],
 		"objective": {
-			"status": false
+			"status": true
 		}
     },
     "sandrine": {
