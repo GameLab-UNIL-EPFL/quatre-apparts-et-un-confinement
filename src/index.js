@@ -17,6 +17,11 @@ import { MotherScene } from "./scenes/motherScene.js";
 import { DamienInitScene } from "./scenes/damienInitScene.js";
 import { IndepMessageScene } from "./scenes/indepMessageScene.js";
 import { BusScene } from "./scenes/busScene.js";
+import { StoreExtScene } from "./scenes/storeExtScene.js";
+import { IndepComputerScene } from "./scenes/indepComputerScene.js";
+import { EndScene } from "./scenes/endScene.js";
+import { DamienKitchenNoFood } from "./scenes/damienKitchenNoFoodScene.js";
+import { SelectScene } from "./scenes/selectScene.js";
 
 let resizeTimeout;
 const plugins = [{
@@ -78,18 +83,23 @@ const config = {
     },
     scene: [
         TitleScene,
+        SelectScene,
         BuildingScene,
         BusScene,
         ProtoScene,
         DamienInitScene,
         DamienKitchenClothesScene,
         DamienComputerScene,
+        DamienKitchenNoFood,
         GrandmaScene,
         HallwayScene,
         IndepScene,
         IndepMessageScene,
+        IndepComputerScene,
         StoreScene,
-        MotherScene
+        StoreExtScene,
+        MotherScene,
+        EndScene
     ],
     physics: {
         default: 'arcade'

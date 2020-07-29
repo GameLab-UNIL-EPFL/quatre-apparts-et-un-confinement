@@ -63,7 +63,7 @@ module.exports = {
         ])
     ],
     stats: {
-        logging: 'verbose',
-        maxModules: 10000
+        logging: 'warn', // 'verbose',
+        maxModules: 100 // 10000
     }
 };

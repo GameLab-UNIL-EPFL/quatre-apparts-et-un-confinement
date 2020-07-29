@@ -5,6 +5,7 @@ import { Background } from "./objects/background.js";
 import { Scenes } from "../core/player.js";
 import { HallwayCards } from "./hallwayScene.js";
 import { player } from "../index.js";
+import { Months } from "./buildingScene.js";
 
 export const StoreCards = {
     FIRST_SHELF: 0,
@@ -680,18 +681,30 @@ export class StoreScene extends Phaser.Scene {
         //Keep track of wich card is displayed
         this.cardIdx = StoreCards.FIRST_SHELF;
         this.current_card = this.firstShelf;
+
+        this.month = Months.APRIL;
     }
 
     init(data) {
+        console.log("INIT_STORE");
         //Check if any saved data exists
         if(data) {
-            console.log("INIT_STORE");
-            console.log(this.shoppingBasket); // contains shoppingBasket
-            /*
-                @TODO:
-                - is it Patrick or Damien?
-                - if Damien: remove sprites by name using indepShoppingBasket
-            */
+            this.cardIdx = StoreCards.FIRST_SHELF;
+            this.current_card = this.firstShelf;
+            this.month = data.month;
+            this.shoppingBasket = [];
+            Object.keys(this.checklist_done).forEach(item => this.checklist_done[item].done = false);
+
+            if(this.month === 'may') {
+                let indepShoppingBasket = player.getBasket();
+
+                if ( indepShoppingBasket.length > 0 ) {
+                    // Remove basket items from cards
+                    this.firstShelf.children = this.firstShelf.children.filter(cardObject => ! indepShoppingBasket.includes( cardObject.name ) );
+                    this.secondShelf.children = this.secondShelf.children.filter(cardObject => ! indepShoppingBasket.includes( cardObject.name ) );
+                    this.thirdShelf.children = this.thirdShelf.children.filter(cardObject => ! indepShoppingBasket.includes( cardObject.name ) );
+                }
+            }
         }
     }
 
@@ -740,59 +753,59 @@ export class StoreScene extends Phaser.Scene {
 
     takeObject(object_name) {
 
-        this.shoppingBasket.push(object_name);
+        if( ! this.shoppingBasket.includes(object_name) ) {
+            this.shoppingBasket.push(object_name);
 
-        let object = this.children.getByName(object_name);
-        object.depth = 5;
+            let object = this.children.getByName(object_name);
+            object.depth = 5;
 
-        let yDistance = this.basket.y - object.y; // between 280 and 1340
+            let yDistance = this.basket.y - object.y; // between 280 and 1340
 
-        let target_objects = [object];
-        if(object_name === 'pate_spaghetti01') {
-            // also move the other pack
-            target_objects.push(this.children.getByName('pate_spaghetti02'));
-            this.shoppingBasket.push('pate_spaghetti02');
-        }
+            let target_objects = [object];
+            if(object_name === 'pate_spaghetti01') {
+                // also move the other pack
+                target_objects.push(this.children.getByName('pate_spaghetti02'));
+                this.shoppingBasket.push('pate_spaghetti02');
+            }
 
-        // Move to basket
-        this.tweens.add({
-            targets: target_objects,
-            x: this.basket.x + (Math.random() * 50),
-            y: this.basket.y + 25 + (Math.random() * 25),
-            duration: 150 + (yDistance / 8),
-            ease: 'Quadratic',
-            yoyo: false,
-            loop: 0,
-            onComplete: () => {
-                // this.rature = this.add.image(this.listPositions[object_name], 'rature')
-                // todo: add flag
-                for (const item in this.checklist_done) {
-                    if(object_name.indexOf(item) >= 0) {
-                        if(!this.checklist_done[item].done) {
-                            this.rature = this.add.image(
-                                this.cameras.main.width * this.checklist_done[item].position_x,
-                                this.checklist_done[item].position_y,
-                                'rature'
-                            );
+            // Move to basket
+            this.tweens.add({
+                targets: target_objects,
+                x: this.basket.x + (Math.random() * 50),
+                y: this.basket.y + 25 + (Math.random() * 25),
+                duration: 150 + (yDistance / 8),
+                ease: 'Quadratic',
+                yoyo: false,
+                loop: 0,
+                onComplete: () => {
+                    for (const item in this.checklist_done) {
+                        if(object_name.indexOf(item) >= 0) {
+                            if(!this.checklist_done[item].done) {
+                                this.rature = this.add.image(
+                                    this.cameras.main.width * this.checklist_done[item].position_x,
+                                    this.checklist_done[item].position_y,
+                                    'rature'
+                                );
 
-                            this.rature.depth = 20;
-                            this.checklist_done[item].done = true;
+                                this.rature.depth = 20;
+                                this.checklist_done[item].done = true;
+                            }
                         }
                     }
-                }
 
-                // Animate basket
-                this.tweens.add({
-                    targets: [this.basket, this.basket_front],
-                    scale: 1.2,
-                    duration: 100,
-                    ease: 'Quadratic',
-                    yoyo: true,
-                    loop: 0
-                });
-            },
-            onCompleteScope: this
-        });
+                    // Animate basket
+                    this.tweens.add({
+                        targets: [this.basket, this.basket_front],
+                        scale: 1.2,
+                        duration: 100,
+                        ease: 'Quadratic',
+                        yoyo: true,
+                        loop: 0
+                    });
+                },
+                onCompleteScope: this
+            });
+        }
     }
 
     create() {
@@ -815,7 +828,7 @@ export class StoreScene extends Phaser.Scene {
 
         //Create and play the background music
         this.music = this.sound.add('bg_music');
-        this.music.play();
+        this.music.play({loop: true});
 
         // Update the saved data
         player.cur_scene = Scenes.STORE;
@@ -830,6 +843,7 @@ export class StoreScene extends Phaser.Scene {
             container.depth = 2;
 
             for(let i in this.current_card.children) {
+                // If not moved to basket
                 if(this.current_card.children[i].sprite.depth != 5) {
                     container.add(this.current_card.children[i].sprite);
                 }
@@ -848,16 +862,31 @@ export class StoreScene extends Phaser.Scene {
             this.current_card = this.cards[this.cardIdx];
             this.current_card.create();
         } else {
-            // TODO: if current character is Patrick
-            player.setData({ indepShoppingBasket: this.shoppingBasket });
-            player.saveGame();
-            player.sendChoices({ player_id: player.id, freelancer_food_set: this.shoppingBasket.join(','), freelancer_food_amount: this.shoppingBasket.length });
-            this.nextScene();
+            this.nextCardButton.destroy();
+            this.tweens.add({
+                targets:  this.music,
+                volume:   0,
+                duration: 800,
+                onComplete: () => {
+                    if(this.month === Months.APRIL) {
+                        player.indep_shopping_basket = this.shoppingBasket;
+                        player.saveGame();
+                        // Send Patrick’s choices to database
+                        player.sendChoices({ player_id: player.id, freelancer_food_set: this.shoppingBasket.join(','), freelancer_food_amount: this.shoppingBasket.length });
+                    }
+                    this.nextScene();
+                },
+                onCompleteScope: this
+            });
         }
     }
 
     nextScene() {
         this.music.stop();
-        this.scene.start(Scenes.HALLWAY, {cardIdx: HallwayCards.INDEP_GRANDMA, damien_gone: false});
+        if(this.month === Months.APRIL) {
+            this.scene.start(Scenes.HALLWAY, {cardIdx: HallwayCards.INDEP_GRANDMA, damien_gone: false});
+        } else {
+            this.scene.start(Scenes.END_SCENE);
+        }
     }
 }

@@ -3,8 +3,8 @@
 		"name": "Florence",
 		"text": [
 			"Ok, vous n'avez plus l'école, mais…",
-            "Ça ne veut pas dire que vous êtes en vacances!",
-            "La maîtresse m'a écrit.\nVous avez reçu des devoirs à faire."
+			"Ça ne veut pas dire que vous êtes en vacances!",
+			"La maîtresse m'a écrit.\nVous avez reçu des devoirs à faire."
 		],
 		"choices": [],
 		"goto": ["kids"]
@@ -12,36 +12,42 @@
 	"kids": {
 		"name": "Maxime et Liliane",
 		"text": [
-            "Mais Maman, ça fait trop longtemps qu'on n'est pas sortis!", 
-            "On peut aller au jouer au parc avant, s'il te plaît? Alleeeeeeeez.",
-            "On fera attention, promis!"
+			"Mais Maman, ça fait trop longtemps qu'on n'est pas sortis!",
+			"On peut aller au jouer au parc avant, s'il te plaît? Alleeeeeeeez.",
+			"On fera attention, promis!"
 		],
 		"choices": [
-            {
-                "text": "Bon, d'accord! Mais vous devez d'abord ranger votre chambre.",
-                "goto": "merci"
-            },
-            {
-                "text": "Non, je vous ai déjà expliqué pourquoi. Et vous devez ranger votre chambre!",
-                "goto": "oh"
-            }
-        ],
+			{
+				"text": "Bon, d'accord! Mais vous devez d'abord ranger votre chambre.",
+				"goto": "merci"
+			},
+			{
+				"text": "Non, je vous ai déjà expliqué pourquoi. Et vous devez ranger votre chambre!",
+				"goto": "oh"
+			}
+		],
 		"goto": ["merci", "oh"]
-    },
-    "merci": {
+	},
+	"merci": {
 		"name": "Maxime et Liliane",
 		"text": [
 			"Merci Maman!"
 		],
 		"choices": [],
-		"goto": []
-    },
-    "oh": {
+		"goto": [],
+		"objective": {
+			"status": true
+		}
+	},
+	"oh": {
 		"name": "Maxime et Liliane",
 		"text": [
 			"Mais rhooo! Maman, t'es pas gentille."
 		],
 		"choices": [],
-		"goto": []
+		"goto": [],
+		"objective": {
+			"status": false
+		}
 	}
 }

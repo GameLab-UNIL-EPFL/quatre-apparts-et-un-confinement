@@ -278,29 +278,7 @@ export class BusScene extends Phaser.Scene {
             break;
 
         case BusCards.JUNE_CARD:
-            this.scene.start(Scenes.BUILDING, {
-                mainMenu: true,
-                names: {
-                    damien: false,
-                    grandma: false,
-                    family: false,
-                    indep: false
-                },
-                stage: 1,
-                windows: {
-                    damien: WindowState.OFF,
-                    grandma: WindowState.OFF,
-                    family: WindowState.OFF,
-                    indep: WindowState.OFF
-                },
-                month: Months.MARCH,
-                nextScene: {
-                    damien: null,
-                    grandma: null,
-                    family: null,
-                    indep: null
-                }
-            });
+            this.scene.start(Scenes.STORE_EXT, {month: Months.MAY});
             break;
 
         default:
