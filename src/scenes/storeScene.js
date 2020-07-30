@@ -816,7 +816,7 @@ export class StoreScene extends Phaser.Scene {
 
         if(this.current_card.isLoaded()) {
             this.current_card.create();
-            if(this.month !== Months.APRIL){
+            if(this.month !== Months.APRIL) {
                 this.addArrow();
             }
         }
