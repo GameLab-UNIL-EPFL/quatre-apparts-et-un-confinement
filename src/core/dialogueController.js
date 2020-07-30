@@ -289,12 +289,13 @@ export class DialogueController {
         this.background.alpha = .9;
         this.background.setDepth(5);
 
+        console.log('add name text')
         //Add name text
         this.name = this.parent_scene.add.text(
             this.dialogue_pos.name.x,
             this.dialogue_pos.name.y,
             this.getName(id),
-            {font: (55) + "px OpenSans", fill: "black"}
+            {font: "44px OpenSans-Bold", fill: "#27303a"}
         );
 
         this.name.setDepth(5);
@@ -308,8 +309,8 @@ export class DialogueController {
             this.dialogue_pos.content.y,
             this.text[this.textIdx],
             {
-                font: (44) + "px OpenSans",
-                fill: "black",
+                font: "44px OpenSans",
+                fill: "#27303a",
                 wordWrap: { width: (this.background.displayWidth - (SPACING * 8)) }
             }
         );
