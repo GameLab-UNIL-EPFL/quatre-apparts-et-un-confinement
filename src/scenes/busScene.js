@@ -155,6 +155,8 @@ export class BusScene extends Phaser.Scene {
                 { frameWidth: 1200, frameHeight: 595 }
             );
         }
+
+        this.load.audio('bus_cough', 'sounds/other/busCough.mp3');
     }
 
     /**
@@ -164,7 +166,7 @@ export class BusScene extends Phaser.Scene {
     createMovingBG(name) {
         this.anims.create({
             key: name + "_anim",
-            frameRate: 
+            frameRate:
             15,
             frames: this.anims.generateFrameNames(name),
             repeat: -1
@@ -189,6 +191,9 @@ export class BusScene extends Phaser.Scene {
 
         this.cameras.main.centerOn(0, 0);
         this.cameras.main.fadeIn(1000);
+
+        this.busCough = this.sound.add('bus_cough', {loop: false});
+        this.busCough.play();
 
         if(this.current_card.isLoaded()) {
             this.current_card.create();
@@ -243,6 +248,7 @@ export class BusScene extends Phaser.Scene {
      * @brief Triggers the next scene
      */
     nextScene() {
+        this.busCough.stop();
         switch(this.cardIdx) {
         case BusCards.MARCH_CARD:
             this.scene.start(Scenes.BUILDING, {
@@ -266,17 +272,18 @@ export class BusScene extends Phaser.Scene {
                     grandma: null,
                     family: null,
                     indep: null
-                }
+                },
+                buildingSound: false
             });
             break;
 
         case BusCards.JUNE_CARD:
             this.scene.start(Scenes.STORE_EXT, {month: Months.MAY});
             break;
-            
+
         default:
             break;
-        }      
+        }
     }
 
     /**
