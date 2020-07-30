@@ -129,7 +129,7 @@ export class StatsScene extends Phaser.Scene {
         //Create the box
         const choice_box = this.add.sprite(
             0,
-            - 3 * window.innerHeight / 5,
+            -600,
             DIALOGUE_BOX_KEY
         ).play(D_BOX_ANIMATION_KEY);
 
@@ -144,15 +144,15 @@ export class StatsScene extends Phaser.Scene {
             choice_box.x,
             choice_box.y,
             "Vos choix",
-            {font: (44) + "px OpenSans-Bold", fill: "black"}
+            {font: "44px OpenSans-Bold", fill: "black"}
         );
         choice_text.setOrigin(0.5, 0.5);
         choice_text.setDepth(10);
 
         //Retrieve the statistics
         const stats = player.getStats();
-        const offset = 1600 / 8;
-        let y_offset = - 2 * (window.innerHeight / 5);
+        const offset = 200;
+        let y_offset = -400;
 
         stats.then(result => result.forEach(stat => {
             const choice = stat.choice;
@@ -175,7 +175,7 @@ export class StatsScene extends Phaser.Scene {
                 break;
 
             case 'grandma_hairdresser':
-                name = "Suzannne";
+                name = "Suzanne";
 
                 if(player.suzanne_hair) {
                     text = "Vous et " + percent + "% avez choisi d'aller chez le coiffeur";
@@ -221,7 +221,7 @@ export class StatsScene extends Phaser.Scene {
                 box.x - (2 * box.displayWidth / 5),
                 50 + box.y - box.displayHeight / 2,
                 name,
-                {font: (44) + "px OpenSans", fill: "black"}
+                {font: (44) + "px OpenSans-Bold", fill: "black"}
             );
             name_sprite.setDepth(10);
 
@@ -253,7 +253,7 @@ export class StatsScene extends Phaser.Scene {
      */
     create() {
         this.cameras.main.centerOn(0, 0);
-        this.cameras.main.fadeIn(1000);
+        this.cameras.main.flash(1000);
 
         //Create the dialogue box animation
         this.anims.create({
