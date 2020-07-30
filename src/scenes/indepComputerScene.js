@@ -4,7 +4,6 @@ import { Card } from "./cards/card.js";
 import { Background } from "./objects/background.js";
 import { player } from "../index.js";
 import { Scenes } from "../core/player.js";
-import { WindowState, Months } from "./buildingScene.js";
 import { ZoomMiniGameCard } from "./cards/ProtoSceneCards/zoomMiniGameCard.js";
 import { CardObject } from "./objects/cardObject.js";
 import { TVCard } from "./cards/IndepScene/tvCard.js";

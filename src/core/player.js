@@ -16,9 +16,11 @@ export const Scenes = {
     STORE: 'Store',
     STORE_EXT : 'Store_ext',
     MOTHER: 'Mother',
+    MOTHER_KITCHEN: 'MotherKitchen',
     DAMIEN_NO_FOOD: 'DamienKitchenNoFood',
     END_SCENE: 'EndScene',
-    SELECT: 'Select'
+    SELECT: 'Select',
+    STATS: 'Stats'
 };
 
 /**
@@ -210,14 +212,14 @@ export class Player {
         })();
     }
 
-    getStats() {
-        (async () => {
-            const rawResponse = await fetch('https://labs.letemps.ch/interactive/2020/_sandbox/_covidou_server/get_choice_stats.php', {
-                method: 'GET'
-            });
-            const content = await rawResponse.json();
-            // Example output: [{"choice":"kids_park","percentage":"35.0"},{"choice":"grandma_hairdresser","percentage":"39.0"},{"choice":"damien_stay_home","percentage":"0.0"},{"choice":"freelancer_good_love_advice","percentage":"28.0"}]
-            console.log(content);
-        })();
+    async getStats() {
+        
+        const rawResponse = await fetch('https://labs.letemps.ch/interactive/2020/_sandbox/_covidou_server/get_choice_stats.php', {
+            method: 'GET'
+        });
+        const content = await rawResponse.json();
+        // Example output: [{"choice":"kids_park","percentage":"35.0"},{"choice":"grandma_hairdresser","percentage":"39.0"},{"choice":"damien_stay_home","percentage":"0.0"},{"choice":"freelancer_good_love_advice","percentage":"28.0"}]
+        console.log(content);
+        return content;
     }
 }

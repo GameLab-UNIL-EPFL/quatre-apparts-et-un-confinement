@@ -249,7 +249,7 @@
 		"choices": {
 			"risque": {
 				"text": ["Ton père était pas une personne à risque ?"],
-				"preview": "Personne à risque?",
+				"preview": "Mais ton père est à risque?",
 				"goto": "sortir1"
 			}
 		},
@@ -273,7 +273,7 @@
 		"choices": {
 			"chaud": {
 				"text": ["Du coup c’est chaud financièrement?"],
-				"preview": "C’est chaud non?",
+				"preview": "C’est chaud financièrement?",
 				"goto": "sortir3"
 			}
 		},

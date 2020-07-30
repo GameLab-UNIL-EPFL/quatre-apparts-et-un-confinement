@@ -893,7 +893,7 @@ export class StoreScene extends Phaser.Scene {
         if(this.month === Months.APRIL) {
             this.scene.start(Scenes.HALLWAY, {cardIdx: HallwayCards.INDEP_GRANDMA, damien_gone: false});
         } else {
-            this.scene.start(Scenes.END_SCENE);
+            this.scene.start(Scenes.STATS);
         }
     }
 }

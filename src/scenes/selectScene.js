@@ -9,10 +9,12 @@ export class SelectScene extends Phaser.Scene {
         super({ key: Scenes.SELECT });
 
         this.levels = [
+            { key: Scenes.STATS, data: {}, text: "Stats" },
             { key: Scenes.STORE, data: {month: Months.MARCH}, text: "Store Patrick" },
             { key: Scenes.STORE, data: {month: Months.MAY}, text: "Store Damien" },
             { key: Scenes.INDEP_COMPUTER, data: {cardIdx: IndepComputerCards.IDLE_CARD}, text: "Patrick April" },
-            { key: Scenes.GRANDMA, data: { month: Months.APRIL }, text: "Grandma April" }
+            { key: Scenes.GRANDMA, data: { month: Months.APRIL }, text: "Grandma April" },
+            { key: Scenes.MOTHER_KITCHEN, data: {}, text: "Mother Kitchen April" }
         ];
 
         this.texts = [];

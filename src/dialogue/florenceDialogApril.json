@@ -22,7 +22,7 @@
     "text": [
       "Mais aujourd'hui vous devez m'aidez à ranger."
     ],
-    "choices": ["non"],
+    "choices": [],
     "goto": []
   },
   "non": {
