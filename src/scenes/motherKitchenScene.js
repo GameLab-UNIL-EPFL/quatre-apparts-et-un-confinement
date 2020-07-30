@@ -44,8 +44,8 @@ export class MotherKitchenScene extends Phaser.Scene {
                         url: 'sprites/MotherScene/02-Salon/mere-salon01_03-fille-turbulante.png'
                     },
                     new Phaser.Math.Vector2(-234, -11),
-                    (scene) => scene.nextCard(),
-                    this
+                    () => this.nextCard(),
+                    null
                 ),
                 new CardObject(
                     this,
@@ -54,8 +54,8 @@ export class MotherKitchenScene extends Phaser.Scene {
                         url: 'sprites/MotherScene/02-Salon/mere-salon01_04-corps-garcon-turbulant.png'
                     },
                     new Phaser.Math.Vector2(260, 55),
-                    (scene) => scene.nextCard(),
-                    this
+                    () => this.nextCard(),
+                    null
                 ),
                 new CardObject(
                     this,
@@ -72,11 +72,8 @@ export class MotherKitchenScene extends Phaser.Scene {
                         url: 'sprites/MotherScene/02-Salon/mere-salon01_06-setdetable-fille.png'
                     },
                     new Phaser.Math.Vector2(-144, 159),
-                    (scene) => { 
-                        this.nextCard();
-                        console.log("click");
-                    },
-                    this
+                    () => this.nextCard(),
+                    null
                 ),
                 new CardObject(
                     this,
@@ -85,8 +82,8 @@ export class MotherKitchenScene extends Phaser.Scene {
                         url: 'sprites/MotherScene/02-Salon/mere-salon01_06-setdetable-garcon.png'
                     },
                     new Phaser.Math.Vector2(217, 162),
-                    (scene) => scene.nextCard(),
-                    this
+                    () => this.nextCard(),
+                    null
                 ),
                 new CardObject(
                     this,
@@ -95,8 +92,8 @@ export class MotherKitchenScene extends Phaser.Scene {
                         url: 'sprites/MotherScene/02-Salon/mere-salon01_07-tete-garcon-turbulant.png'
                     },
                     new Phaser.Math.Vector2(123, 102),
-                    (scene) => scene.nextCard(),
-                    this
+                    () => this.nextCard(),
+                    null
                 ),
                 new CardObject(
                     this,
@@ -112,7 +109,9 @@ export class MotherKitchenScene extends Phaser.Scene {
                         name: 'caraffeKitchenDirty',
                         url: 'sprites/MotherScene/02-Salon/mere-salon01_11-caraffe-reversee.png'
                     },
-                    new Phaser.Math.Vector2(-290, 305)
+                    new Phaser.Math.Vector2(-290, 305),
+                    () => this.nextCard(),
+                    null
                 ),
                 new CardObject(
                     this,
@@ -120,7 +119,9 @@ export class MotherKitchenScene extends Phaser.Scene {
                         name: 'breadKitchenDirty',
                         url: 'sprites/MotherScene/02-Salon/mere-salon01_13-pain.png'
                     },
-                    new Phaser.Math.Vector2(5, 343)
+                    new Phaser.Math.Vector2(5, 343),
+                    () => this.nextCard(),
+                    null
                 ),
                 new CardObject(
                     this,
@@ -128,7 +129,9 @@ export class MotherKitchenScene extends Phaser.Scene {
                         name: 'toyKitchenDirty',
                         url: 'sprites/MotherScene/02-Salon/mere-salon01_15-jouet.png'
                     },
-                    new Phaser.Math.Vector2(138, 263)
+                    new Phaser.Math.Vector2(138, 263),
+                    () => this.nextCard(),
+                    null
                 )
             ]
         );
