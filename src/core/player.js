@@ -1,4 +1,4 @@
-import { game, player } from "..";
+import { game } from "..";
 
 export const Scenes = {
     INTRO: 'TitleScene',
