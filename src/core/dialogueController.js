@@ -289,7 +289,6 @@ export class DialogueController {
         this.background.alpha = .9;
         this.background.setDepth(5);
 
-        console.log('add name text');
         //Add name text
         this.name = this.parent_scene.add.text(
             this.dialogue_pos.name.x,
@@ -521,7 +520,6 @@ export class DialogueController {
         //Check if an objective was met
         if(cur_dialogue.objective) {
             if(this.parent_scene.notifyObjectiveMet) {
-                console.log('Status:', cur_dialogue.objective.status);
                 this.parent_scene.notifyObjectiveMet(cur_dialogue.objective.status);
             } else {
                 console.error("DIALOG_OBJECTIVE: Parent scene doesn't implement notifyObjectiveMet");
