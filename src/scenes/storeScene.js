@@ -22,6 +22,7 @@ export class StoreScene extends Phaser.Scene {
         super({key: Scenes.STORE});
 
         this.shoppingBasket = [];
+        this.arrowVisible = false;
 
         /* === FIRST SHELF === */
         this.firstShelf = new Card(
@@ -814,7 +815,9 @@ export class StoreScene extends Phaser.Scene {
 
         if(this.current_card.isLoaded()) {
             this.current_card.create();
-            this.addArrow();
+            if(this.month === Months.MAY){
+                this.addArrow();
+            }
         }
 
         this.checklist = this.add.image(this.cameras.main.width * -0.255, 489, 'liste');
