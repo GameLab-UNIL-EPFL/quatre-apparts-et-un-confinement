@@ -39,8 +39,8 @@ const SPAWN_DELAY = {
 
 const NUM_SPAWNS = {
     MARCH: 50,
-    INIT: 25,
-    INDEP: 10000
+    INIT: 15,
+    INDEP: 500
 };
 
 const FOCUS_BAR_COLOR = {

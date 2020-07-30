@@ -430,7 +430,7 @@ export class DialogueController {
                     prompt_sprite.y,
                     choice.text,
                     {
-                        font: (54 * window.horizontalRatio) + "px OpenSans ",
+                        font: (54 * window.horizontalRatio) + "px OpenSans",
                         fill: "white",
                         wordWrap: { width: this.background.displayWidth - (4 * SPACING) }
                     }
@@ -597,7 +597,7 @@ export class DialogueController {
             (lr ? MIN_LEFT_X.text : MIN_RIGHT_X.text),
             ypos.text,
             cur_text,
-            {font: (30) + "px OpenSans ", fill: lr ? "black" : "white", wordWrap: { width: 350 }}
+            {font: (30) + "px OpenSans", fill: lr ? "black" : "white", wordWrap: { width: 350 }}
         );
 
         //Move the messages back
@@ -666,7 +666,7 @@ export class DialogueController {
                 prompt_xpos,
                 prompt_ypos[n_prompts++],
                 dialogue.choices[choice_key].preview,
-                {font: font_size + "px OpenSans ", fill: "white"}
+                {font: font_size + "px OpenSans", fill: "white"}
             );
 
             this.msg_prompts.push(text_msg_elem);
