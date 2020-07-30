@@ -66,7 +66,7 @@ export class StatsScene extends Phaser.Scene {
 
         //load sounds
         this.load.audio("bird", "sounds/building/birdTraffic.mp3");
-        
+
         this.load.image("building_bg_may", "sprites/BuildingScene/building_bg_summer.jpg");
 
         //Load in the clouds
@@ -124,7 +124,7 @@ export class StatsScene extends Phaser.Scene {
 
         this.sprites['interact_arrow'] = this.arrow;
     }
-    
+
     showStats() {
         //Create the box
         const choice_box = this.add.sprite(
@@ -144,7 +144,7 @@ export class StatsScene extends Phaser.Scene {
             choice_box.x,
             choice_box.y,
             "Vos choix",
-            {font: (44) + "px OpenSans", fill: "black"}
+            {font: (44) + "px OpenSans-Bold", fill: "black"}
         );
         choice_text.setOrigin(0.5, 0.5);
         choice_text.setDepth(10);
@@ -164,45 +164,45 @@ export class StatsScene extends Phaser.Scene {
             let text = "";
 
             switch(choice) {
-                case 'kids_park':
-                    name = "Florence";
+            case 'kids_park':
+                name = "Florence";
 
-                    if(player.kids_park) {
-                        text = "Vous et " + percent + "% avez choisi d'aller au parc";
-                    } else {
-                        text = "Vous et " + (100 - percent) + "% avez choisi de ne pas aller au parc";
-                    }
-                    break;
+                if(player.kids_park) {
+                    text = "Vous et " + percent + "% avez choisi d’amener les enfants au parc";
+                } else {
+                    text = "Vous et " + (100 - percent) + "% avez choisi de ne pas aller au parc";
+                }
+                break;
 
-                case 'grandma_hairdresser':
-                    name = "Suzannne";
+            case 'grandma_hairdresser':
+                name = "Suzannne";
 
-                    if(player.suzanne_hair) {
-                        text = "Vous et " + percent + "% avez choisi d'aller chez le coiffeur";
-                    } else {
-                        text = "Vous et " + (100 - percent) + "% avez choisi de ne pas aller chez le coiffeur";
-                    }
-                    break;
+                if(player.suzanne_hair) {
+                    text = "Vous et " + percent + "% avez choisi d'aller chez le coiffeur";
+                } else {
+                    text = "Vous et " + (100 - percent) + "% avez choisi de ne pas aller chez le coiffeur";
+                }
+                break;
 
-                case 'damien_stay_home':
-                    name = "Damien";
+            case 'damien_stay_home':
+                name = "Damien";
 
-                    if(player.damien_gone) {
-                        text = "Vous et " + (100 - percent) + "% avez choisi de ne pas aller chez votre copine";
-                    } else {
-                        text = "Vous et " + percent + "% avez choisi d'aller chez votre copine";
-                    }
-                    break;
+                if(player.damien_gone) {
+                    text = "Vous et " + (100 - percent) + "% avez choisi de rester à la maison";
+                } else {
+                    text = "Vous et " + percent + "% avez choisi de sortir voir votre copine";
+                }
+                break;
 
-                case 'freelancer_good_love_advice':
-                    name = "Patrick";
+            case 'freelancer_good_love_advice':
+                name = "Patrick";
 
-                    if(player.nathan_failed) {
-                        text = "Le conseil que vous et " + (100 - percent) + "% avez choisi a brisé un couple";
-                    } else {
-                        text = "Le conseil que vous et " + percent + "% avez choisi a sauvé un couple";
-                    }
-                    break;
+                if(player.nathan_failed) {
+                    text = "Vos conseils et ceux de " + (100 - percent) + "% des joueurs ont brisé un couple";
+                } else {
+                    text = "Vos conseils et ceux de " + percent + "% des joueurs ont sauvé un couple";
+                }
+                break;
             }
 
             //Create the box
@@ -224,7 +224,7 @@ export class StatsScene extends Phaser.Scene {
                 {font: (44) + "px OpenSans", fill: "black"}
             );
             name_sprite.setDepth(10);
-            
+
             //Add dialogue content
             const text_sprite = this.add.text(
                 name_sprite.x,
@@ -239,11 +239,11 @@ export class StatsScene extends Phaser.Scene {
             text_sprite.setDepth(10);
             //Update the vertical offset
             y_offset += offset * 1.5;
-            
+
             this.texts.push(name_sprite);
             this.texts.push(text_sprite);
             this.boxes.push(box);
-                    
+
             console.log("TEXT: " + text + " PERCENT: " + percent);
         }));
     }
@@ -291,7 +291,7 @@ export class StatsScene extends Phaser.Scene {
         this.sprites['damien_window'] = this.add.image(-305, -236, "damien_window_off");
         this.sprites['grandma_window'] = this.add.image(0, -212, "grandma_window_off");
         this.sprites['indep_window'] = this.add.image(0, 388, "indep_window_off");
- 
+
         //Create cloud animations
         this.tweens.add({
             targets: this.sprites['cloud_01'],
