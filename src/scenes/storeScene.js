@@ -22,7 +22,6 @@ export class StoreScene extends Phaser.Scene {
         super({key: Scenes.STORE});
 
         this.shoppingBasket = [];
-        this.arrowVisible = false;
 
         /* === FIRST SHELF === */
         this.firstShelf = new Card(
@@ -748,8 +747,7 @@ export class StoreScene extends Phaser.Scene {
 
         this.nextCardButton.depth = 4;
 
-        let scene = this;
-        this.nextCardButton.setInteractive().on('pointerdown', () => scene.nextCard() );
+        this.nextCardButton.setInteractive().on('pointerdown', () => this.nextCard(), this );
     }
 
     takeObject(object_name) {
@@ -790,6 +788,9 @@ export class StoreScene extends Phaser.Scene {
 
                                 this.rature.depth = 20;
                                 this.checklist_done[item].done = true;
+
+                                // March: enable nextCard()
+                                this.addArrow();
                             }
                         }
                     }
@@ -815,7 +816,7 @@ export class StoreScene extends Phaser.Scene {
 
         if(this.current_card.isLoaded()) {
             this.current_card.create();
-            if(this.month === Months.MAY){
+            if(this.month !== Months.APRIL){
                 this.addArrow();
             }
         }
@@ -840,7 +841,10 @@ export class StoreScene extends Phaser.Scene {
 
     nextCard() {
         if(this.cardIdx < this.cards.length - 1) {
-
+            if(this.month === Months.APRIL) {
+                this.nextCardButton.destroy();
+            }
+            
             // move previous card
             let container = this.add.container();
             container.depth = 2;
