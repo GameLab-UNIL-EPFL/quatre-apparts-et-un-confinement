@@ -22,6 +22,7 @@ import { IndepComputerScene } from "./scenes/indepComputerScene.js";
 import { EndScene } from "./scenes/endScene.js";
 import { DamienKitchenNoFood } from "./scenes/damienKitchenNoFoodScene.js";
 import { SelectScene } from "./scenes/selectScene.js";
+import { MotherKitchenScene } from "./scenes/motherKitchenScene.js";
 
 let resizeTimeout;
 const plugins = [{
@@ -99,6 +100,7 @@ const config = {
         StoreScene,
         StoreExtScene,
         MotherScene,
+        MotherKitchenScene,
         EndScene
     ],
     physics: {

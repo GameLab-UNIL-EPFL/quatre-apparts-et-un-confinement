@@ -383,7 +383,7 @@ export class HallwayScene extends Phaser.Scene {
             break;
 
         case HallwayCards.INDEP_GRANDMA:
-            this.scene.start(Scenes.INDEP_COMPUTER);
+            this.scene.start(Scenes.MOTHER_KITCHEN);
             break;
             
         default:

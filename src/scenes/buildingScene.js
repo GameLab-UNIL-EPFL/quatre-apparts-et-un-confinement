@@ -329,6 +329,8 @@ export class BuildingScene extends Phaser.Scene {
             () => this.scene.start('Select'),
             this
         );
+
+        this.sprites['interact_arrow'] = this.arrow;
     }
 
     /**
@@ -639,7 +641,7 @@ export class BuildingScene extends Phaser.Scene {
         if(this.info.mainMenu) {
             this.createMainMenu();
 
-            //this.showArrow();
+            this.showArrow();
         }
 
         //Handle the special "names" case
