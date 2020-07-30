@@ -289,7 +289,7 @@ export class DialogueController {
         this.background.alpha = .9;
         this.background.setDepth(5);
 
-        console.log('add name text')
+        console.log('add name text');
         //Add name text
         this.name = this.parent_scene.add.text(
             this.dialogue_pos.name.x,
