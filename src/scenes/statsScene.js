@@ -198,9 +198,9 @@ export class StatsScene extends Phaser.Scene {
                 name = "Patrick";
 
                 if(player.nathan_failed) {
-                    text = "Vos conseils et ceux de " + (100 - percent) + "% des joueurs ont brisé un couple";
+                    text = "Vos conseils et ceux de " + (100 - percent) + "% des joueurs ont brisé un couple.";
                 } else {
-                    text = "Vos conseils et ceux de " + percent + "% des joueurs ont sauvé un couple";
+                    text = "Vos conseils et ceux de " + percent + "% des joueurs ont sauvé un couple.";
                 }
                 break;
             }
