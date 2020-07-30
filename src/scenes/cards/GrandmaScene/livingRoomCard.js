@@ -199,21 +199,22 @@ export class LivingRoomCard extends Card {
             .on('pointerdown', () => this.meow.play());
 
 
+        if(this.parent_scene.month === Months.MARCH) {
+            // Create book highlight sprites
+            this.parent_scene.anims.create({
+                key: 'books_h_anim',
+                frameRate: 7,
+                frames: this.parent_scene.anims.generateFrameNames('books_h'),
+                repeat: -1
+            });
 
-        // Create ring sprites
-        this.parent_scene.anims.create({
-            key: 'books_h_anim',
-            frameRate: 7,
-            frames: this.parent_scene.anims.generateFrameNames('books_h'),
-            repeat: -1
-        });
-
-        //Play the cat animation
-        this.books_h = this.parent_scene.add.sprite(
-            31,
-            -121,
-            'books_h'
-        ).play('books_h_anim');
+            //Play the book highlight animation
+            this.books_h = this.parent_scene.add.sprite(
+                31,
+                -121,
+                'books_h'
+            ).play('books_h_anim');
+        }
 
         this.page = this.parent_scene.sound.add("pageTurn");
 
