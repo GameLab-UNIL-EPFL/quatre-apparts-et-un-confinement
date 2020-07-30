@@ -226,7 +226,9 @@ export class DialogueController {
         this.cur_state = DialogueState.DONE;
 
         //Notify the parent scene
-        this.parent_scene.notifyDialogueEnd();
+        if(this.parent_scene.notifyDialogueEnd) {
+            this.parent_scene.notifyDialogueEnd();
+        }
     }
 
     /**
@@ -285,15 +287,14 @@ export class DialogueController {
         ).play(D_BOX_ANIMATION_KEY);
 
         this.background.alpha = .9;
-        this.background.displayWidth *= window.horizontalRatio;
         this.background.setDepth(5);
 
         //Add name text
         this.name = this.parent_scene.add.text(
-            this.dialogue_pos.name.x * window.horizontalRatio,
+            this.dialogue_pos.name.x,
             this.dialogue_pos.name.y,
             this.getName(id),
-            {font: (55 * window.horizontalRatio) + "px OpenSans", fill: "black"}
+            {font: (55) + "px OpenSans", fill: "black"}
         );
 
         this.name.setDepth(5);
@@ -303,11 +304,11 @@ export class DialogueController {
 
         //Add dialogue content
         this.content = this.parent_scene.add.text(
-            this.dialogue_pos.content.x * window.horizontalRatio,
+            this.dialogue_pos.content.x,
             this.dialogue_pos.content.y,
             this.text[this.textIdx],
             {
-                font: (44 * window.horizontalRatio) + "px OpenSans",
+                font: (44) + "px OpenSans",
                 fill: "black",
                 wordWrap: { width: (this.background.displayWidth - (SPACING * 8)) }
             }
@@ -430,7 +431,7 @@ export class DialogueController {
                     prompt_sprite.y,
                     choice.text,
                     {
-                        font: (54 * window.horizontalRatio) + "px OpenSans",
+                        font: (54) + "px OpenSans",
                         fill: "white",
                         wordWrap: { width: this.background.displayWidth - (4 * SPACING) }
                     }
@@ -647,15 +648,15 @@ export class DialogueController {
         //Display the correct prompt box
         if(Object.keys(dialogue.choices).length <= 1) {
             this.parent_scene.add.image(-7, 616, 'promptBox1');
-            font_size = 46;
+            font_size = 40;
             prompt_ypos = [584];
         } else if(Object.keys(dialogue.choices).length <= 2) {
             this.parent_scene.add.image(-7, 616, 'promptBox2');
-            font_size = 42;
+            font_size = 35;
             prompt_ypos = [497, 677];
         } else {
             this.parent_scene.add.image(-7, 616, 'promptBox3');
-            font_size = 40;
+            font_size = 30;
             prompt_ypos = [476, 592, 711];
         }
 
