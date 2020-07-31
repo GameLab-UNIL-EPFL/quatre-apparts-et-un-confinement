@@ -343,6 +343,7 @@ export class MotherScene extends Phaser.Scene {
                     indep: WindowState.OFF
                 },
                 month: Months.APRIL,
+                new_month: true,
                 nextScene: {
                     damien: null,
                     grandma: Scenes.GRANDMA,

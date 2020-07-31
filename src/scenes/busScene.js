@@ -261,6 +261,7 @@ export class BusScene extends Phaser.Scene {
                     indep: WindowState.OFF
                 },
                 month: Months.MARCH,
+                new_month: true,
                 nextScene: {
                     damien: Scenes.DAMIEN_INIT,
                     grandma: null,
