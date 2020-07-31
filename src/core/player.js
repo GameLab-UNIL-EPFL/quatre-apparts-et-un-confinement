@@ -17,6 +17,7 @@ export const Scenes = {
     STORE_EXT : 'Store_ext',
     MOTHER: 'Mother',
     MOTHER_KITCHEN: 'MotherKitchen',
+    MOTHER_COUCH: 'MotherCouch',
     DAMIEN_NO_FOOD: 'DamienKitchenNoFood',
     END_SCENE: 'EndScene',
     SELECT: 'Select',

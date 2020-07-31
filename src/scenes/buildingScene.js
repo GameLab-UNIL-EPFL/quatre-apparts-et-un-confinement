@@ -343,6 +343,48 @@ export class BuildingScene extends Phaser.Scene {
         this.sprites['interact_arrow'] = this.arrow;
     }
 
+    showMonth() {
+        let month_text = "";
+
+        //Pick which text to show
+        switch(this.info.month) {
+            case Months.MARCH:
+                month_text = "Mars 2020";
+                break;
+            case Months.APRIL:
+                month_text = "Avril 2020";
+                break;
+            default:
+                month_text = "Mai 2020";
+                break;
+        }
+
+        //Create the text sprite
+        const month_sprite = this.add.text(
+            0,
+            -650,
+            month_text,
+            { font: "65px OpenSans-Bold", fill: "black" }
+        );
+
+        month_sprite.setOrigin(0.5, 0.5);
+        const set_fadeOut = () => {
+            this.tweens.add({
+                targets: month_sprite,
+                alpha: 0,
+                duration: 2000
+            });
+        };
+
+        //Have it fade out after a few seconds
+        this.time.addEvent({
+            delay: 3000,
+            repeat: 0,
+            callback: set_fadeOut,
+            callbackScope: this
+        })
+    }
+
     /**
      * @brief Adds in the character names in the building scene
      * @param {boolean} interact Whether or not to take into account player interaction
@@ -677,6 +719,8 @@ export class BuildingScene extends Phaser.Scene {
             this.createMainMenu();
 
             this.showArrow();
+        } else if(this.info.new_month) {
+            this.showMonth();
         }
 
         //Handle the special "names" case

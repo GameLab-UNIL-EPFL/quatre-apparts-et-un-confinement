@@ -230,11 +230,13 @@ export class GrandmaScene extends Phaser.Scene {
                     indep: Scenes.INDEP
                 }
             });
-        } else {
+        } else if(this.month === Months.APRIL) {
             this.scene.start(
                 Scenes.HALLWAY,
                 { cardIdx: HallwayCards.DAMIEN_CLOSED }
             );
+        } else {
+            this.scene.start(Scenes.STATS);
         }
     }
 

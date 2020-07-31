@@ -24,6 +24,7 @@ import { DamienKitchenNoFood } from "./scenes/damienKitchenNoFoodScene.js";
 import { SelectScene } from "./scenes/selectScene.js";
 import { MotherKitchenScene } from "./scenes/motherKitchenScene.js";
 import { StatsScene } from "./scenes/statsScene.js";
+import { MotherCouchScene } from "./scenes/motherCouchScene.js";
 
 let resizeTimeout;
 const plugins = [{
@@ -102,6 +103,7 @@ const config = {
         StoreExtScene,
         MotherScene,
         MotherKitchenScene,
+        MotherCouchScene,
         EndScene,
         StatsScene
     ],

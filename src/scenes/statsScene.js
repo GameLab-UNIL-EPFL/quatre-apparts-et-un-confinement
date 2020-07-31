@@ -228,7 +228,7 @@ export class StatsScene extends Phaser.Scene {
             //Add dialogue content
             const text_sprite = this.add.text(
                 name_sprite.x,
-                name_sprite.y + (name_sprite.displayHeight * 1.5),
+                name_sprite.y + (name_sprite.displayHeight * 1.2),
                 text,
                 {
                     font: (44) + "px OpenSans",
