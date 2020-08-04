@@ -348,15 +348,15 @@ export class BuildingScene extends Phaser.Scene {
 
         //Pick which text to show
         switch(this.info.month) {
-            case Months.MARCH:
-                month_text = "Mars 2020";
-                break;
-            case Months.APRIL:
-                month_text = "Avril 2020";
-                break;
-            default:
-                month_text = "Mai 2020";
-                break;
+        case Months.MARCH:
+            month_text = "Mars 2020";
+            break;
+        case Months.APRIL:
+            month_text = "Avril 2020";
+            break;
+        default:
+            month_text = "Mai 2020";
+            break;
         }
 
         //Create the text sprite
@@ -382,7 +382,7 @@ export class BuildingScene extends Phaser.Scene {
             repeat: 0,
             callback: set_fadeOut,
             callbackScope: this
-        })
+        });
     }
 
     /**
