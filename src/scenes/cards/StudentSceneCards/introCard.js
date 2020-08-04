@@ -15,7 +15,7 @@ export class IntroCard extends Card {
 
         //Initialize children array
         this.name = "Intro";
-        this.url = "sprites/StudentScene/IntroBg.jpg";
+        this.url = "sprites/StudentScene/IntroCard/Case01-00-bkg.jpg";
     }
 
     /**
@@ -26,6 +26,12 @@ export class IntroCard extends Card {
         super.preload();
 
         this.parent_scene.load.image(this.name, this.url);
+
+        this.parent_scene.load.spritesheet(
+            'bipbip',
+            'sprites/StudentScene/IntroCard/Case01-01-spritesheet-sonnerie-280x180.png',
+            { frameWidth: 280, frameHeight: 180 }
+        );
     }
 
     /**
@@ -36,14 +42,28 @@ export class IntroCard extends Card {
         super.create();
 
         //Create and place the temp image correctly
-        this.sprite = this.parent_scene.add.image(0, 0, this.name);
-        this.sprite.setInteractive();
+        this.bg = this.parent_scene.add.image(0, 0, this.name);
+        this.bg.setInteractive();
+
+        // Create ring sprites
+        this.parent_scene.anims.create({
+            key: 'bipbip-anim',
+            frameRate: 15,
+            frames: this.parent_scene.anims.generateFrameNames('bipbip'),
+            repeat: -1
+        });
+
+        this.bipbipAnim = this.parent_scene.add.sprite(
+            0,
+            0,
+            'bipbip'
+        ).play('bipbip-anim');
 
         //Make said image interactive
         this.parent_scene.input.on(
             'gameobjectdown',
             (_, gameObject) => {
-                if(gameObject === this.sprite) {
+                if(gameObject === this.bg || gameObject === this.bipbipAnim) {
                     this.parent_scene.endCard();
                     this.parent_scene.nextCard();
                 }
@@ -58,7 +78,8 @@ export class IntroCard extends Card {
     destroy() {
         super.destroy();
 
-        //Destroy the temp image
-        this.sprite.destroy();
+        //Destroy the sprites
+        this.bg.destroy();
+        this.bipbipAnim.destroy();
     }
 }
