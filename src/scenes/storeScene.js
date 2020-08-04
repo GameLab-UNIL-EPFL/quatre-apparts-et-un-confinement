@@ -649,6 +649,17 @@ export class StoreScene extends Phaser.Scene {
             ]
         );
 
+        this.checkoutCard = new Card(
+            this,
+            [
+                new Background(
+                    this,
+                    "sprites/StoreScene/part4-checkout/caisse_bg.jpg",
+                    "storeCheckout"
+                )
+            ]
+        );
+
         this.checklist_done = {
             'pate': {
                 position_x: -0.23, // Will be multiplied by this.cameras.main.width (<= 1200px). Calculation for -0.23: (-276 / 1200)
@@ -675,7 +686,8 @@ export class StoreScene extends Phaser.Scene {
         this.cards = [
             this.firstShelf,
             this.secondShelf,
-            this.thirdShelf
+            this.thirdShelf,
+            this.checkoutCard
         ];
 
         //Keep track of wich card is displayed
@@ -841,10 +853,11 @@ export class StoreScene extends Phaser.Scene {
 
     nextCard() {
         if(this.cardIdx < this.cards.length - 1) {
+            console.log('Card index:', this.cardIdx);
             if(this.month === Months.APRIL) {
                 this.nextCardButton.destroy();
             }
-            
+
             // move previous card
             let container = this.add.container();
             container.depth = 2;
@@ -867,6 +880,44 @@ export class StoreScene extends Phaser.Scene {
 
             this.cardIdx++;
             this.current_card = this.cards[this.cardIdx];
+            if (this.cardIdx === this.cards.length - 1) {
+                // cashout scene
+                // TODO: animate
+                this.basket.destroy();
+                this.basket_front.destroy();
+                this.checklist.destroy();
+
+                let checkoutImage;
+
+                switch (true) {
+
+                case this.shoppingBasket.length < 10:
+                    checkoutImage = 'caisse01_05-prix01.png';
+                    break;
+
+                case this.shoppingBasket.length  < 20:
+                    checkoutImage = 'caisse01_05-prix02.png';
+                    break;
+
+                case this.shoppingBasket.length < 40:
+                    checkoutImage = 'caisse01_05-prix03.png';
+                    break;
+
+                default:
+                    checkoutImage = 'caisse01_05-prix04.png';
+                    break;
+                }
+
+                this.load.once('complete', () => this.add.image(-200, 0, 'price'), this);
+
+                this.load.image('price', "sprites/StoreScene/part4-checkout/" + checkoutImage);
+                this.load.start();
+
+                // this.checklist =
+
+                // this.checklist.depth = 20;
+
+            }
             this.current_card.create();
         } else {
             this.nextCardButton.destroy();
