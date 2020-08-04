@@ -853,7 +853,6 @@ export class StoreScene extends Phaser.Scene {
 
     nextCard() {
         if(this.cardIdx < this.cards.length - 1) {
-            console.log('Card index:', this.cardIdx);
             if(this.month === Months.APRIL) {
                 this.nextCardButton.destroy();
             }
@@ -882,10 +881,14 @@ export class StoreScene extends Phaser.Scene {
             this.current_card = this.cards[this.cardIdx];
             if (this.cardIdx === this.cards.length - 1) {
                 // cashout scene
-                // TODO: animate
                 this.basket.destroy();
                 this.basket_front.destroy();
                 this.checklist.destroy();
+
+                // Iterate through basket items and remove their sprites
+                for(let i in this.shoppingBasket) {
+                    this.children.getByName(this.shoppingBasket[i]).destroy();
+                }
 
                 let checkoutImage;
 
