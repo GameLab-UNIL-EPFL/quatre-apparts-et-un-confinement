@@ -22,6 +22,7 @@ export class StoreScene extends Phaser.Scene {
         super({key: Scenes.STORE});
 
         this.shoppingBasket = [];
+        this.crossOffContainer;
 
         /* === FIRST SHELF === */
         this.firstShelf = new Card(
@@ -792,16 +793,16 @@ export class StoreScene extends Phaser.Scene {
                     for (const item in this.checklist_done) {
                         if(object_name.indexOf(item) >= 0) {
                             if(!this.checklist_done[item].done) {
-                                this.rature = this.add.image(
+                                let rature = this.add.image(
                                     this.cameras.main.width * this.checklist_done[item].position_x,
                                     this.checklist_done[item].position_y,
                                     'rature'
                                 );
-
-                                this.rature.depth = 20;
+                                this.crossOffContainer.add(rature);
+                                rature.depth = 20;
                                 this.checklist_done[item].done = true;
 
-                                // March: enable nextCard()
+                                // April (Patrick): enable nextCard()
                                 this.addArrow();
                             }
                         }
@@ -825,6 +826,7 @@ export class StoreScene extends Phaser.Scene {
     create() {
         this.cameras.main.centerOn(0, 0);
         this.cameras.main.fadeIn(1000);
+        this.crossOffContainer = this.add.group();
 
         if(this.current_card.isLoaded()) {
             this.current_card.create();
@@ -879,8 +881,9 @@ export class StoreScene extends Phaser.Scene {
 
             this.cardIdx++;
             this.current_card = this.cards[this.cardIdx];
+
+            // cashout scene
             if (this.cardIdx === this.cards.length - 1) {
-                // cashout scene
                 this.basket.destroy();
                 this.basket_front.destroy();
                 this.checklist.destroy();
@@ -889,6 +892,8 @@ export class StoreScene extends Phaser.Scene {
                 for(let i in this.shoppingBasket) {
                     this.children.getByName(this.shoppingBasket[i]).destroy();
                 }
+
+                this.crossOffContainer.clear(true, true);
 
                 let checkoutImage;
 
@@ -916,9 +921,9 @@ export class StoreScene extends Phaser.Scene {
                 this.load.image('price', "sprites/StoreScene/part4-checkout/" + checkoutImage);
                 this.load.start();
 
-                // this.checklist =
-
-                // this.checklist.depth = 20;
+                if(this.month === Months.APRIL) {
+                    this.addArrow();
+                }
 
             }
             this.current_card.create();
@@ -944,6 +949,7 @@ export class StoreScene extends Phaser.Scene {
 
     nextScene() {
         this.music.stop();
+        console.log(this.month);
         if(this.month === Months.APRIL) {
             this.scene.start(Scenes.HALLWAY, {cardIdx: HallwayCards.INDEP_GRANDMA, damien_gone: false});
         } else {
