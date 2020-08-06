@@ -88,10 +88,10 @@ export class ZoomMiniGameCard extends Card {
                             "taxes_bg" :
                             "zoom_bg",
                     url: scene_key === Scenes.DAMIEN_INIT ? 
-                        "sprites/ProtoScene/ZoomMiniGameCard/init_computer_bg.jpg" :
+                        "sprites/StudentScene/ZoomMiniGameCard/init_computer_bg.jpg" :
                         scene_key === Scenes.INDEP_COMPUTER ? 
                             "sprites/IndepComputerScene/05_Mini-jeu/mini_game_bg.jpg" :
-                            "sprites/ProtoScene/ZoomMiniGameCard/zoom_bg.png"
+                            "sprites/StudentScene/ZoomMiniGameCard/zoom_bg.png"
                 },
                 new Phaser.Math.Vector2(0, -14),
                 null,
@@ -104,7 +104,7 @@ export class ZoomMiniGameCard extends Card {
                 parent_scene,
                 scene_key === Scenes.INDEP_COMPUTER ?
                     "sprites/IndepComputerScene/05_Mini-jeu/computer_bg.png" : 
-                    "sprites/ProtoScene/ZoomMiniGameCard/computer_screen.png",
+                    "sprites/StudentScene/ZoomMiniGameCard/computer_screen.png",
                 scene_key === Scenes.INDEP_COMPUTER ?
                     "computer_bg_patrick" : "computer_bg"
             ),
@@ -115,7 +115,7 @@ export class ZoomMiniGameCard extends Card {
                         "indep_line" : "line",
                     url: scene_key === Scenes.INDEP_COMPUTER ?
                         "sprites/IndepComputerScene/05_Mini-jeu/bar.png" :
-                        "sprites/ProtoScene/ZoomMiniGameCard/line.png"
+                        "sprites/StudentScene/ZoomMiniGameCard/line.png"
                 },
                 scene_key === Scenes.INDEP_COMPUTER ? 
                     new Phaser.Math.Vector2(-7, 294) :
@@ -123,12 +123,12 @@ export class ZoomMiniGameCard extends Card {
             ),
             new CardObject(
                 parent_scene,
-                { name: "bar_fill", url: "sprites/ProtoScene/ZoomMiniGameCard/bar_fill.png" },
+                { name: "bar_fill", url: "sprites/StudentScene/ZoomMiniGameCard/bar_fill.png" },
                 new Phaser.Math.Vector2(12, -633)
             ),
             new CardObject(
                 parent_scene,
-                { name: "bar_bg", url: "sprites/ProtoScene/ZoomMiniGameCard/bar_bg.png" },
+                { name: "bar_bg", url: "sprites/StudentScene/ZoomMiniGameCard/bar_bg.png" },
                 new Phaser.Math.Vector2(12, -633)
             )
         ];
@@ -156,7 +156,7 @@ export class ZoomMiniGameCard extends Card {
                     "notification_" + i,
                 url: scene_key === Scenes.INDEP_COMPUTER ? 
                     "sprites/IndepComputerScene/05_Mini-jeu/notification_" + (i + 1) + ".png" :
-                    "sprites/ProtoScene/ZoomMiniGameCard/notif_" + i + ".png",
+                    "sprites/StudentScene/ZoomMiniGameCard/notif_" + i + ".png",
                 pos: new Phaser.Math.Vector2(-600, -1000),
                 sprite: null,
                 type: MessageType.Cours,
@@ -173,7 +173,7 @@ export class ZoomMiniGameCard extends Card {
                         "distraction_" + i,
                     url: scene_key === Scenes.INDEP_COMPUTER ?
                         "sprites/IndepComputerScene/05_Mini-jeu/distraction_" + (i + 1) + ".png" :
-                        "sprites/ProtoScene/ZoomMiniGameCard/distraction_" + i + ".png",
+                        "sprites/StudentScene/ZoomMiniGameCard/distraction_" + i + ".png",
                     pos: new Phaser.Math.Vector2(-600, -1000),
                     sprite: null,
                     type: MessageType.Distraction,
@@ -250,7 +250,7 @@ export class ZoomMiniGameCard extends Card {
         //Load in the pop animation
         this.parent_scene.load.spritesheet(
             'notif-pop',
-            'sprites/ProtoScene/ZoomMiniGameCard/notif_pop.png',
+            'sprites/StudentScene/ZoomMiniGameCard/notif_pop.png',
             { frameWidth: 460, frameHeight: 160 }
         );
 

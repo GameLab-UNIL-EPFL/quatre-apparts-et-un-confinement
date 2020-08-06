@@ -188,9 +188,9 @@ export class StatsScene extends Phaser.Scene {
                 name = "Damien";
 
                 if(player.damien_gone) {
-                    text = "Vous et " + (100 - percent) + "% des joueurs avez choisi de rester à la maison.";
+                    text = "Vous et " + (100 - percent) + "% des joueurs avez choisi de sortir voir votre copine.";
                 } else {
-                    text = "Vous et " + percent + "% des joueurs avez choisi de sortir voir votre copine.";
+                    text = "Vous et " + percent + "% des joueurs avez choisi de rester à la maison.";
                 }
                 break;
 

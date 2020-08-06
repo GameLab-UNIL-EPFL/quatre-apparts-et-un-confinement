@@ -22,6 +22,7 @@ export class StoreScene extends Phaser.Scene {
         super({key: Scenes.STORE});
 
         this.shoppingBasket = [];
+        this.crossOffContainer;
 
         /* === FIRST SHELF === */
         this.firstShelf = new Card(
@@ -649,6 +650,17 @@ export class StoreScene extends Phaser.Scene {
             ]
         );
 
+        this.checkoutCard = new Card(
+            this,
+            [
+                new Background(
+                    this,
+                    "sprites/StoreScene/part4-checkout/caisse_bg.jpg",
+                    "storeCheckout"
+                )
+            ]
+        );
+
         this.checklist_done = {
             'pate': {
                 position_x: -0.23, // Will be multiplied by this.cameras.main.width (<= 1200px). Calculation for -0.23: (-276 / 1200)
@@ -675,7 +687,8 @@ export class StoreScene extends Phaser.Scene {
         this.cards = [
             this.firstShelf,
             this.secondShelf,
-            this.thirdShelf
+            this.thirdShelf,
+            this.checkoutCard
         ];
 
         //Keep track of wich card is displayed
@@ -780,16 +793,16 @@ export class StoreScene extends Phaser.Scene {
                     for (const item in this.checklist_done) {
                         if(object_name.indexOf(item) >= 0) {
                             if(!this.checklist_done[item].done) {
-                                this.rature = this.add.image(
+                                let rature = this.add.image(
                                     this.cameras.main.width * this.checklist_done[item].position_x,
                                     this.checklist_done[item].position_y,
                                     'rature'
                                 );
-
-                                this.rature.depth = 20;
+                                this.crossOffContainer.add(rature);
+                                rature.depth = 20;
                                 this.checklist_done[item].done = true;
 
-                                // March: enable nextCard()
+                                // April (Patrick): enable nextCard()
                                 this.addArrow();
                             }
                         }
@@ -813,6 +826,7 @@ export class StoreScene extends Phaser.Scene {
     create() {
         this.cameras.main.centerOn(0, 0);
         this.cameras.main.fadeIn(1000);
+        this.crossOffContainer = this.add.group();
 
         if(this.current_card.isLoaded()) {
             this.current_card.create();
@@ -844,7 +858,7 @@ export class StoreScene extends Phaser.Scene {
             if(this.month === Months.APRIL) {
                 this.nextCardButton.destroy();
             }
-            
+
             // move previous card
             let container = this.add.container();
             container.depth = 2;
@@ -867,6 +881,51 @@ export class StoreScene extends Phaser.Scene {
 
             this.cardIdx++;
             this.current_card = this.cards[this.cardIdx];
+
+            // cashout scene
+            if (this.cardIdx === this.cards.length - 1) {
+                this.basket.destroy();
+                this.basket_front.destroy();
+                this.checklist.destroy();
+
+                // Iterate through basket items and remove their sprites
+                for(let i in this.shoppingBasket) {
+                    this.children.getByName(this.shoppingBasket[i]).destroy();
+                }
+
+                this.crossOffContainer.clear(true, true);
+
+                let checkoutImage;
+
+                switch (true) {
+
+                case this.shoppingBasket.length < 10:
+                    checkoutImage = 'caisse01_05-prix01.png';
+                    break;
+
+                case this.shoppingBasket.length  < 20:
+                    checkoutImage = 'caisse01_05-prix02.png';
+                    break;
+
+                case this.shoppingBasket.length < 40:
+                    checkoutImage = 'caisse01_05-prix03.png';
+                    break;
+
+                default:
+                    checkoutImage = 'caisse01_05-prix04.png';
+                    break;
+                }
+
+                this.load.once('complete', () => this.add.image(-200, 0, 'price'), this);
+
+                this.load.image('price', "sprites/StoreScene/part4-checkout/" + checkoutImage);
+                this.load.start();
+
+                if(this.month === Months.APRIL) {
+                    this.addArrow();
+                }
+
+            }
             this.current_card.create();
         } else {
             this.nextCardButton.destroy();
@@ -890,6 +949,7 @@ export class StoreScene extends Phaser.Scene {
 
     nextScene() {
         this.music.stop();
+        console.log(this.month);
         if(this.month === Months.APRIL) {
             this.scene.start(Scenes.HALLWAY, {cardIdx: HallwayCards.INDEP_GRANDMA, damien_gone: false});
         } else {

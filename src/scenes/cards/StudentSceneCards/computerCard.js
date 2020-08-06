@@ -27,26 +27,26 @@ export class ComputerCard extends Card {
 
         //Initialize children array
         const children = [
-            new Background(parent_scene, "sprites/ProtoScene/ComputerCard/bg.jpg", "ComputerBG"),
+            new Background(parent_scene, "sprites/StudentScene/ComputerCard/bg.jpg", "ComputerBG"),
             character,
             new CardObject(
                 parent_scene,
-                { name: "Bureau", url: "sprites/ProtoScene/ComputerCard/bureau.png" },
+                { name: "Bureau", url: "sprites/StudentScene/ComputerCard/bureau.png" },
                 new Phaser.Math.Vector2(-1, 143)
             ),
             new CardObject(
                 parent_scene,
-                { name: "toast", url: "sprites/ProtoScene/ComputerCard/toast.png" },
+                { name: "toast", url: "sprites/StudentScene/ComputerCard/toast.png" },
                 new Phaser.Math.Vector2(387, 706)
             ),
             new CardObject(
                 parent_scene,
-                { name: "yoghourt", url: "sprites/ProtoScene/ComputerCard/yoghourt.png" },
+                { name: "yoghourt", url: "sprites/StudentScene/ComputerCard/yoghourt.png" },
                 new Phaser.Math.Vector2(380, 564)
             ),
             new CardObject(
                 parent_scene,
-                { name: "verre", url: "sprites/ProtoScene/ComputerCard/verre.png" },
+                { name: "verre", url: "sprites/StudentScene/ComputerCard/verre.png" },
                 new Phaser.Math.Vector2(141, 641)
             )
         ];

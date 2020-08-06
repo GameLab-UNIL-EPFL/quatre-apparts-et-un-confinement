@@ -6,7 +6,7 @@ import { Background } from "./objects/background.js";
 import { ProtoGuy, ProtoGuyCard } from "../characters/protoGuy.js";
 import { player } from "../index.js";
 import { Scenes } from "../core/player.js";
-import { ProtoGuyClothes, ProtoCards } from "./protoScene.js";
+import { ProtoGuyClothes, StudentCards } from "./studentScene.js";
 
 const NUM_CARDS = 2;
 
@@ -32,12 +32,12 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
             [
                 new Background(
                     this,
-                    "sprites/ProtoScene/ClothesCard/bg.jpg",
+                    "sprites/StudentScene/ClothesCard/bg.jpg",
                     "ClothesBG"
                 ),
                 new CardObject(
                     this,
-                    { name: "clothes", url: "sprites/ProtoScene/ClothesCard/clothes.png" },
+                    { name: "clothes", url: "sprites/StudentScene/ClothesCard/clothes.png" },
                     new Phaser.Math.Vector2(293, -15),
                     (scene) => scene.changeClothes(ProtoGuyClothes.CLEAN_CLOTHES),
                     this,
@@ -51,7 +51,7 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
                 ),
                 new CardObject(
                     this,
-                    { name: "chair", url: "sprites/ProtoScene/ClothesCard/chair.png" },
+                    { name: "chair", url: "sprites/StudentScene/ClothesCard/chair.png" },
                     new Phaser.Math.Vector2(-225, 385),
                     (scene) => scene.changeClothes(ProtoGuyClothes.YESTERDAY_CLOTHES),
                     this,
@@ -73,13 +73,13 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
             [
                 new Background(
                     this,
-                    "sprites/ProtoScene/KitchenCard/bg.jpg",
+                    "sprites/StudentScene/KitchenCard/bg.jpg",
                     "KitchenBG"
                 ),
                 characters['kitchen'],
                 new CardObject(
                     this,
-                    { name: "fridge", url: "sprites/ProtoScene/KitchenCard/frigo.png" },
+                    { name: "fridge", url: "sprites/StudentScene/KitchenCard/frigo.png" },
                     new Phaser.Math.Vector2(194, -151),
                     null,
                     null,
@@ -93,17 +93,17 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
                 ),
                 new CardObject(
                     this,
-                    { name: "table", url: "sprites/ProtoScene/KitchenCard/table.png" },
+                    { name: "table", url: "sprites/StudentScene/KitchenCard/table.png" },
                     new Phaser.Math.Vector2(-29, 388)
                 ),
                 new CardObject(
                     this,
-                    { name: "counter", url: "sprites/ProtoScene/KitchenCard/comptoire.png" },
+                    { name: "counter", url: "sprites/StudentScene/KitchenCard/comptoire.png" },
                     new Phaser.Math.Vector2(0, 482)
                 ),
                 new CardObject(
                     this,
-                    { name: "sink", url: "sprites/ProtoScene/KitchenCard/lavabo.png" },
+                    { name: "sink", url: "sprites/StudentScene/KitchenCard/lavabo.png" },
                     new Phaser.Math.Vector2(224, 607),
                     null,
                     null,
@@ -117,12 +117,12 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
                 ),
                 new CardObject(
                     this,
-                    { name: "counter_stuff", url: "sprites/ProtoScene/KitchenCard/objets.png" },
+                    { name: "counter_stuff", url: "sprites/StudentScene/KitchenCard/objets.png" },
                     new Phaser.Math.Vector2(145, 695)
                 ),
                 new CardObject(
                     this,
-                    { name: "toaster", url: "sprites/ProtoScene/KitchenCard/toaster.png" },
+                    { name: "toaster", url: "sprites/StudentScene/KitchenCard/toaster.png" },
                     new Phaser.Math.Vector2(-358, 653),
                     null,
                     null,
@@ -136,7 +136,7 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
                 ),
                 new CardObject(
                     this,
-                    { name: "lamp", url: "sprites/ProtoScene/KitchenCard/lampe.png" },
+                    { name: "lamp", url: "sprites/StudentScene/KitchenCard/lampe.png" },
                     new Phaser.Math.Vector2(93, -478)
                 )
             ],
@@ -166,14 +166,14 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
 
             //Set the correct card
             switch(data.cardIdx) {
-            case ProtoCards.CLOTHES:
+            case StudentCards.CLOTHES:
                 this.current_card = this.clothesCard;
-                this.cardIdx = ProtoCards.CLOTHES;
+                this.cardIdx = StudentCards.CLOTHES;
                 break;
 
-            case ProtoCards.KITCHEN:
+            case StudentCards.KITCHEN:
                 this.current_card = this.kitchenCard;
-                this.cardIdx = ProtoCards.KITCHEN;
+                this.cardIdx = StudentCards.KITCHEN;
                 break;
 
             default:
@@ -209,7 +209,7 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
         this.load.audio("fridge", "sounds/kitchen/fridge.wav");
         this.load.audio("glass", "sounds/kitchen/glass.wav");
 
-        if(this.cardIdx === ProtoCards.CLOTHES) {
+        if(this.cardIdx === StudentCards.CLOTHES) {
             this.load.spritesheet(
                 'pj_h',
                 'sprites/UI/01_Interactions/01_Etudiants/02_Spritesheets/05-Etudiant-Pyjama-Spritesheet_208x146.png',
@@ -230,7 +230,7 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
             this.current_card.create();
 
             //Trigger the dialogue
-            if(this.cardIdx === ProtoCards.CLOTHES) {
+            if(this.cardIdx === StudentCards.CLOTHES) {
                 this.dialogue.display("habit");
                 
                 this.anims.create({
@@ -319,14 +319,14 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
 
         switch(this.cardIdx) {
 
-        case ProtoCards.CLOTHES:
+        case StudentCards.CLOTHES:
             //Chose the next card depending on the user's choice
-            this.cardIdx = ProtoCards.COMPUTER;
+            this.cardIdx = StudentCards.COMPUTER;
             this.nextScene({food: choice, clothes: this.clothes});
             break;
 
-        case ProtoCards.KITCHEN:
-            this.cardIdx = ProtoCards.COMPUTER;
+        case StudentCards.KITCHEN:
+            this.cardIdx = StudentCards.COMPUTER;
             this.nextScene({food: choice, clothes: this.clothes});
 
             //Save the food choice
@@ -350,7 +350,7 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
         this.cameras.main.fadeOut(1000);
 
         this.scene.start(Scenes.DAMIEN_COMPUTER, {
-            cardIdx: ProtoCards.COMPUTER,
+            cardIdx: StudentCards.COMPUTER,
             clothes: choices.clothes,
             food: choices.food
         });
