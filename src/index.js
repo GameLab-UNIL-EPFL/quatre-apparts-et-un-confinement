@@ -25,6 +25,7 @@ import { SelectScene } from "./scenes/selectScene.js";
 import { MotherKitchenScene } from "./scenes/motherKitchenScene.js";
 import { StatsScene } from "./scenes/statsScene.js";
 import { MotherCouchScene } from "./scenes/motherCouchScene.js";
+import { DamienOutsideScene } from "./scenes/damienOutsideScene.js";
 
 let resizeTimeout;
 const plugins = [{
@@ -33,7 +34,7 @@ const plugins = [{
     mapping: 'rexUI'
 }];
 
-const OBJECT_DEBUG = false;
+const OBJECT_DEBUG = true;
 
 if(OBJECT_DEBUG === true) {
     plugins.push({
@@ -94,6 +95,7 @@ const config = {
         DamienKitchenClothesScene,
         DamienComputerScene,
         DamienKitchenNoFood,
+        DamienOutsideScene,
         GrandmaScene,
         HallwayScene,
         IndepScene,
