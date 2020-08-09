@@ -51,6 +51,8 @@ export class BuildingScene extends Phaser.Scene {
             }
         };
 
+        this.buildingSound = true;
+
         //Dictionnary containing all of the scene's sprites
         this.sprites = {};
         this.interactions = {};
@@ -76,6 +78,9 @@ export class BuildingScene extends Phaser.Scene {
             } else {
                 console.error("BUILDING_SCENE: Invalid configuration JSON");
             }
+        }
+        if( data.hasOwnProperty('buildingSound') ) {
+            this.buildingSound = data.buildingSound;
         }
     }
 
@@ -125,6 +130,8 @@ export class BuildingScene extends Phaser.Scene {
 
         //load sounds
         this.load.audio("bird", "sounds/building/birdTraffic.mp3");
+        this.load.audio("theme", "sounds/building/theme.mp3");
+        this.load.audio("click", "sounds/UI/UIClick.wav");
 
         //Load in all of the sprites needed for this scene
         if(this.info.month === Months.MARCH) {
@@ -239,6 +246,8 @@ export class BuildingScene extends Phaser.Scene {
                 if(gameObject === this.sprites['menu_continue'] ||
                    gameObject === this.sprites['continue_text'])
                 {
+                    this.clickSound.play();
+
                     //Show a loading screen
                     this.showLoading();
 
@@ -291,6 +300,7 @@ export class BuildingScene extends Phaser.Scene {
         this.sprites['new_game_text'].setOrigin(0.5, 0.5);
 
         const interaction = () => {
+            this.clickSound.play();
             player.checkPlayerId();
             this.scene.start(
                 Scenes.BUS,
@@ -338,15 +348,15 @@ export class BuildingScene extends Phaser.Scene {
 
         //Pick which text to show
         switch(this.info.month) {
-            case Months.MARCH:
-                month_text = "Mars 2020";
-                break;
-            case Months.APRIL:
-                month_text = "Avril 2020";
-                break;
-            default:
-                month_text = "Mai 2020";
-                break;
+        case Months.MARCH:
+            month_text = "Mars 2020";
+            break;
+        case Months.APRIL:
+            month_text = "Avril 2020";
+            break;
+        default:
+            month_text = "Mai 2020";
+            break;
         }
 
         //Create the text sprite
@@ -372,7 +382,7 @@ export class BuildingScene extends Phaser.Scene {
             repeat: 0,
             callback: set_fadeOut,
             callbackScope: this
-        })
+        });
     }
 
     /**
@@ -480,8 +490,33 @@ export class BuildingScene extends Phaser.Scene {
         this.cameras.main.fadeIn(1000);
 
         // TODO: rerecord birdTraffic sound
-        //this.bird = this.sound.add("bird");
-        //this.bird.play({volume: 0.3});
+        this.bird = this.sound.add("bird");
+        this.theme = this.sound.add("theme");
+        this.clickSound = this.sound.add("click");
+        this.bird.play({volume: 0.3});
+
+        if(this.buildingSound) {
+            this.theme.play({volume: 0.8});
+        }
+
+        this.input.on('gameobjectdown',
+            (_, gameObject) => {
+                if(gameObject.input.enabled) {
+
+                    //need to make this work
+                    this.tweens.add({
+                        targets:  this.theme,
+                        volume:   0,
+                        duration: 800
+                    });
+
+                    this.theme.stop();
+                    this.bird.stop();
+                }
+            }
+        );
+
+
 
         if(this.info.month === Months.MARCH) {
             this.sprites['building_bg'] = this.add.image(0, 0, "building_bg_march");

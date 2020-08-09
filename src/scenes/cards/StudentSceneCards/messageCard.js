@@ -19,11 +19,11 @@ export class MessageCard extends Card {
 
         //Initialize children array
         let children = [
-            new Background(parent_scene, "sprites/ProtoScene/MessageCard/bg.png", "MessageBG"),
+            new Background(parent_scene, "sprites/StudentScene/MessageCard/bg.png", "MessageBG"),
             character,
             new CardObject(
                 parent_scene,
-                { name: "phone-cover", url: "sprites/ProtoScene/MessageCard/phone.png" },
+                { name: "phone-cover", url: "sprites/StudentScene/MessageCard/phone.png" },
                 new Phaser.Math.Vector2(-2, 289)
             )
         ];

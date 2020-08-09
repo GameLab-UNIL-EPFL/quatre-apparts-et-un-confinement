@@ -1,7 +1,7 @@
 import Phaser from "phaser";
-import { WakeUpCard } from "./cards/ProtoSceneCards/wakeUpCard.js";
+import { WakeUpCard } from "./cards/StudentSceneCards/wakeUpCard.js";
 import { DialogueController } from "../core/dialogueController.js";
-import { IntroCard } from "./cards/ProtoSceneCards/introCard.js";
+import { IntroCard } from "./cards/StudentSceneCards/introCard.js";
 import { Card } from "./cards/card.js";
 import { CardObject } from "./objects/cardObject.js";
 import { Background } from "./objects/background.js";
@@ -9,7 +9,7 @@ import { ProtoGuy, ProtoGuyCard } from "../characters/protoGuy.js";
 import { player } from "../index.js";
 import { Scenes } from "../core/player.js";
 
-export const ProtoCards = {
+export const StudentCards = {
     INTRO: 0,
     WAKE_UP: 1,
     CHOSE_PATH: 2,
@@ -27,7 +27,7 @@ export const ProtoGuyClothes = {
     YESTERDAY_CLOTHES: 2
 };
 
-export class ProtoScene extends Phaser.Scene {
+export class StudentScene extends Phaser.Scene {
     /**
      * @brief initializes the different cards needed in the scene
      * and the index that will be used to know which card we are at
@@ -53,12 +53,12 @@ export class ProtoScene extends Phaser.Scene {
             [
                 new Background(
                     this,
-                    "sprites/ProtoScene/ChosePathCard/bg.jpg",
+                    "sprites/StudentScene/ChosePathCard/bg.jpg",
                     "choseBG"
                 ),
                 new CardObject(
                     this,
-                    { name: "kitchen", url: "sprites/ProtoScene/ChosePathCard/kitchen.png" },
+                    { name: "kitchen", url: "sprites/StudentScene/ChosePathCard/kitchen.png" },
                     new Phaser.Math.Vector2(231, -60),
                     null,
                     null,
@@ -72,7 +72,7 @@ export class ProtoScene extends Phaser.Scene {
                 ),
                 new CardObject(
                     this,
-                    { name: "closet", url: "sprites/ProtoScene/ChosePathCard/closet.png" },
+                    { name: "closet", url: "sprites/StudentScene/ChosePathCard/closet.png" },
                     new Phaser.Math.Vector2(-300, -17),
                     null,
                     null,
@@ -96,7 +96,7 @@ export class ProtoScene extends Phaser.Scene {
         ];
 
         //Keep track of wich card is displayed
-        this.cardIdx = ProtoCards.INTRO;
+        this.cardIdx = StudentCards.INTRO;
         this.current_card = this.introCard;
 
         //Create the dialogue controller
@@ -113,18 +113,18 @@ export class ProtoScene extends Phaser.Scene {
 
             //Set the correct card
             switch(data.cardIdx) {
-            case ProtoCards.INTRO:
-                this.cardIdx = ProtoCards.INTRO;
+            case StudentCards.INTRO:
+                this.cardIdx = StudentCards.INTRO;
                 break;
 
-            case ProtoCards.WAKE_UP:
+            case StudentCards.WAKE_UP:
                 this.current_card = this.wakeUpCard;
-                this.cardIdx = ProtoCards.WAKE_UP;
+                this.cardIdx = StudentCards.WAKE_UP;
                 break;
 
-            case ProtoCards.CHOSE_PATH:
+            case StudentCards.CHOSE_PATH:
                 this.current_card = this.chosePathCard;
-                this.cardIdx = ProtoCards.CHOSE_PATH;
+                this.cardIdx = StudentCards.CHOSE_PATH;
                 break;
 
             default:
@@ -219,35 +219,35 @@ export class ProtoScene extends Phaser.Scene {
             this.current_card.destroy();
 
             switch(this.cardIdx) {
-            case ProtoCards.INTRO:
-                this.cardIdx = ProtoCards.WAKE_UP;
+            case StudentCards.INTRO:
+                this.cardIdx = StudentCards.WAKE_UP;
                 this.current_card = this.wakeUpCard;
 
                 //Load the next card
                 this.current_card.create();
                 break;
 
-            case ProtoCards.WAKE_UP:
-                this.cardIdx = ProtoCards.CHOSE_PATH;
+            case StudentCards.WAKE_UP:
+                this.cardIdx = StudentCards.CHOSE_PATH;
                 this.current_card = this.chosePathCard;
 
                 //Load the next card
                 this.current_card.create();
                 break;
 
-            case ProtoCards.CHOSE_PATH:
+            case StudentCards.CHOSE_PATH:
 
                 //Chose the next card depending on the user's choice
                 switch(choice) {
                 //The Closet was selected
                 case 0:
-                    this.cardIdx = ProtoCards.CLOTHES;
+                    this.cardIdx = StudentCards.CLOTHES;
                     this.nextScene(this.cardIdx);
                     break;
 
                     //The kitchen was selected
                 case 1:
-                    this.cardIdx = ProtoCards.KITCHEN;
+                    this.cardIdx = StudentCards.KITCHEN;
                     this.nextScene(this.cardIdx);
                     break;
 
@@ -276,7 +276,7 @@ export class ProtoScene extends Phaser.Scene {
         this.cameras.main.fadeOut(3000, 0, 0, 0,
             () => this.scene.start(Scenes.DAMIEN_KITCHEN_CLOTHES, { cardIdx: cardIdx }),
             this
-        );        
+        );
     }
 
     /**

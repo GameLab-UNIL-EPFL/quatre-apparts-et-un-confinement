@@ -4,7 +4,7 @@ import DebugObjects from './plugins/debugObjects.js';
 import './style.scss';
 
 import { TitleScene } from "./scenes/titleScene.js";
-import { ProtoScene } from "./scenes/protoScene.js";
+import { StudentScene } from "./scenes/studentScene.js";
 import { BuildingScene } from "./scenes/buildingScene.js";
 import { Player } from "./core/player.js";
 import { GrandmaScene } from "./scenes/grandmaScene.js";
@@ -89,7 +89,7 @@ const config = {
         SelectScene,
         BuildingScene,
         BusScene,
-        ProtoScene,
+        StudentScene,
         DamienInitScene,
         DamienKitchenClothesScene,
         DamienComputerScene,
