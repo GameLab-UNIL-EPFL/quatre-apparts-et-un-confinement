@@ -1,0 +1,42 @@
+{
+	"init": {
+		"name": "Préférences",
+		"text": [
+			"A la fin de l'aventure, vous pourrez comparer vos choix à ceux des autres joueuses et joueurs.",
+			"Acceptez-vous de transmettre aussi vos choix, de manière anonyme?"
+		],
+		"choices": [
+			{
+				"text": "Oui",
+				"goto": "yes"
+			},
+			{
+				"text": "Non",
+				"goto": "no"
+			}
+		],
+		"goto": ["yes", "no"]
+	},
+	"yes": {
+		"name": "Préférences",
+		"text": [
+			"Votre choix a été enregistré"
+		],
+		"choices": [],
+		"goto": [],
+		"objective": {
+			"status": true
+		}
+	},
+	"no": {
+		"name": "Préférences",
+		"text": [
+			"Votre choix a été enregistré"
+		],
+		"choices": [],
+		"goto": [],
+		"objective": {
+			"status": false
+		}
+	}
+}

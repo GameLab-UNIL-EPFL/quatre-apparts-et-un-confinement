@@ -114,6 +114,9 @@ export class BusScene extends Phaser.Scene {
         //Keep track of wich card is displayed
         this.cardIdx = null;
         this.current_card = null;
+
+        //Create the dialogue controller
+        this.dialogue = new DialogueController(this, "introDialog");
     }
 
     /**
@@ -138,6 +141,9 @@ export class BusScene extends Phaser.Scene {
      * that will be shown in the scene
      */
     preload() {
+        //Preload the dialogue controller
+        this.dialogue.preload();
+
         //Preload all of the cards
         this.current_card.preload();
 
@@ -195,15 +201,19 @@ export class BusScene extends Phaser.Scene {
         this.busCough = this.sound.add('bus_cough', {loop: false});
         this.busCough.play();
 
+
         if(this.current_card.isLoaded()) {
             this.current_card.create();
 
             //Make entire screen interactive
-            this.input.on('pointerdown', () => this.nextScene(), this);
+            // this.input.on('pointerdown', () => this.nextScene(), this);
 
             //Create the moving background
             if(this.cardIdx === BusCards.MARCH_CARD) {
                 this.createMovingBG("bus_city_march");
+
+                //Display the intro dialogue
+                this.dialogue.display("init");
             } else {
                 this.createMovingBG("bus_city_june");
             }
