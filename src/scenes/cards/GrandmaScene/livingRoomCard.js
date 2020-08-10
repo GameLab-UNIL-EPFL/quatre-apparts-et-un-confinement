@@ -132,6 +132,7 @@ export class LivingRoomCard extends Card {
 
         this.parent_scene.load.audio("radioSound01", "sounds/grandma/" + this.parent_scene.month + "_radio.mp3");
         this.parent_scene.load.audio("radioSound02", "sounds/grandma/" + this.parent_scene.month + "2_radio.mp3");
+        this.parent_scene.load.audio("radioMusic", "sounds/grandma/" + this.parent_scene.month + "_music.mp3");
 
         //Load in the phone highlight
         this.parent_scene.load.spritesheet(
@@ -182,7 +183,9 @@ export class LivingRoomCard extends Card {
 
         this.radioSound01 = this.parent_scene.sound.add("radioSound01");
         // TODO this.radioSound02.play(); quand on appuie sur la radio -> écouter les nouvelles
+        // TODO this.radioMusic.play(); quand on appuie sur la radio -> écouter de la musique
         this.radioSound02 = this.parent_scene.sound.add("radioSound02");
+        this.radioMusic = this.parent_scene.sound.add("radioMusic");
 
         this.radioSound01.play();
        
