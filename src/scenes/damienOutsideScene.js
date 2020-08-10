@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 import { Scenes } from "../core/player.js";
+import { player } from "../index.js"
 import { DialogueController } from "../core/dialogueController.js";
 import { Card } from "./cards/card.js";
 import { Background } from "./objects/background.js";
@@ -86,6 +87,13 @@ export class DamienOutsideScene extends Phaser.Scene {
     }
 
     notifyDialogueEnd() {
+        if(this.cardIdx === DamienOutsideCards.MESSAGE) {
+            this.time.addEvent({
+                delay: 1500,
+                callback: () => this.nextCard(),
+                callbackScope: this
+            });
+        }
     }
 
     nextCard() {
@@ -101,7 +109,13 @@ export class DamienOutsideScene extends Phaser.Scene {
             this.message.play();
 
             this.dialogue.createMessageBG();
-            this.dialogue.displayMessage("sorti", true);
+
+            //Display the correct message depending on the player's previous decisions
+            if(player.damien_gone) {
+                this.dialogue.displayMessage("sorti", true);
+            } else {
+                this.dialogue.displayMessage("pasSorti", true);
+            }
             
         } else {
             this.nextScene();
