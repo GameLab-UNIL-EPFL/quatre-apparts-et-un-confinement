@@ -767,16 +767,17 @@ export class StoreScene extends Phaser.Scene {
 
         if( ! this.shoppingBasket.includes(object_name) ) {
             this.shoppingBasket.push(object_name);
-
             let object = this.children.getByName(object_name);
             object.depth = 5;
 
             let yDistance = this.basket.y - object.y; // between 280 and 1340
 
             let target_objects = [object];
-            if(object_name === 'pate_spaghetti01') {
+            if(object_name === 'pate_spaghetti01' && !this.shoppingBasket.includes('pate_spaghetti02')) {
                 // also move the other pack
-                target_objects.push(this.children.getByName('pate_spaghetti02'));
+                let secondObject = this.children.getByName('pate_spaghetti02');
+                secondObject.depth = 5;
+                target_objects.push(secondObject);
                 this.shoppingBasket.push('pate_spaghetti02');
             }
 
@@ -890,7 +891,10 @@ export class StoreScene extends Phaser.Scene {
 
                 // Iterate through basket items and remove their sprites
                 for(let i in this.shoppingBasket) {
-                    this.children.getByName(this.shoppingBasket[i]).destroy();
+                    let sprite = this.children.getByName(this.shoppingBasket[i]);
+                    if (sprite) {
+                        sprite.destroy();
+                    }
                 }
 
                 this.crossOffContainer.clear(true, true);
@@ -949,7 +953,6 @@ export class StoreScene extends Phaser.Scene {
 
     nextScene() {
         this.music.stop();
-        console.log(this.month);
         if(this.month === Months.APRIL) {
             this.scene.start(Scenes.HALLWAY, {cardIdx: HallwayCards.INDEP_GRANDMA, damien_gone: false});
         } else {

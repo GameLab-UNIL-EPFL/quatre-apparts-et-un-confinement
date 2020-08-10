@@ -32,14 +32,21 @@ export class EndScene extends Phaser.Scene {
         //Play the cat animation
         this.cat_anim = this.add.sprite(
             0,
-            233,
+            -367,
             'cat'
         ).play('cat-tail');
+
+        let divRepo = document.createElement('div');
+        // divRepo.style = '';
+        divRepo.classList.add('repo');
+        divRepo.innerHTML = 'Ce jeu est en licence libre, ce qui signifie que le code source, les dessins et les sons peuvent être réutilisés. <a target="_blank" href="https://github.com/IMI-initiative/quatre-apparts-et-un-confinement">En savoir plus</a> <br> <br> Ici peut-être qu’on a moyen de mettre du texte dans lequel on peut scroller? Ici peut-être qu’on a moyen de mettre du texte dans lequel on peut scroller?  Ici peut-être qu’on a moyen de mettre du texte dans lequel on peut scroller?  Ici peut-être qu’on a moyen de mettre du texte dans lequel on peut scroller?  Ici peut-être qu’on a moyen de mettre du texte dans lequel on peut scroller?  Ici peut-être qu’on a moyen de mettre du texte dans lequel on peut scroller?  Ici peut-être qu’on a moyen de mettre du texte dans lequel on peut scroller?  Ici peut-être qu’on a moyen de mettre du texte dans lequel on peut scroller?  Ici peut-être qu’on a moyen de mettre du texte dans lequel on peut scroller?  Ici peut-être qu’on a moyen de mettre du texte dans lequel on peut scroller?  Ici peut-être qu’on a moyen de mettre du texte dans lequel on peut scroller?  Ici peut-être qu’on a moyen de mettre du texte dans lequel on peut scroller?  Ici peut-être qu’on a moyen de mettre du texte dans lequel on peut scroller?  Ici peut-être qu’on a moyen de mettre du texte dans lequel on peut scroller?  Ici peut-être qu’on a moyen de mettre du texte dans lequel on peut scroller?  Ici peut-être qu’on a moyen de mettre du texte dans lequel on peut scroller?  Ici peut-être qu’on a moyen de mettre du texte dans lequel on peut scroller? ';
+
+        this.add.dom(0, 1000, divRepo);
 
         //Add name text
         this.text = this.add.text(
             0,
-            0,
+            -600,
             "Merci d'avoir joué !",
             {font: 55 + "px OpenSans", fill: "#27303A"}
         );
@@ -75,9 +82,9 @@ export class EndScene extends Phaser.Scene {
                 }
             }),
             this
-        );        
+        );
     }
-    
+
     destroy() {
         this.text.destroy();
         this.cat_anim.destroy();

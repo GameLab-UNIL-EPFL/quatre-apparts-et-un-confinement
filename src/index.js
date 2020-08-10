@@ -83,6 +83,10 @@ const config = {
         width: scale.width,
         height: scale.height
     },
+    parent: 'container',
+    dom: {
+        createContainer: true
+    },
     plugins: {
         scene: plugins
     },
@@ -119,13 +123,8 @@ const config = {
 export const game = new Phaser.Game(config);
 export const player = new Player();
 
-// We’re about to change picture width (1365 pixels wide)
 const maxPictureWidth = 1200.0;
 
-// si on veut le stocker dans game
-game.horizontalRatio = scale.width / maxPictureWidth;
-
-// ou betement dans window (puisque le jeu met du temps à s’instancier)
 window.horizontalOffset = (maxPictureWidth - scale.width) / 2;
 window.horizontalRatio = scale.width / maxPictureWidth;
 
