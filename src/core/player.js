@@ -8,6 +8,7 @@ export const Scenes = {
     DAMIEN_KITCHEN_CLOTHES: 'DamienKitchenClothesScene',
     DAMIEN_COMPUTER: 'DamienComputer',
     DAMIEN_OUTSIDE: 'DamienOutside',
+    DAMIEN_END_MESSAGE: 'DamienEndMessage',
     BUILDING: 'Building',
     GRANDMA: 'Grandma',
     HALLWAY: 'Hallway',

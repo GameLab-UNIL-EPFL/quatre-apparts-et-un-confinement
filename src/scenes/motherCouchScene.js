@@ -127,7 +127,7 @@ export class MotherCouchScene extends Phaser.Scene {
     }
 
     notifyDialogueEnd() {
-        this.showArrow();
+        this.nextScene();
     }
 
     /**
@@ -170,7 +170,7 @@ export class MotherCouchScene extends Phaser.Scene {
     nextScene() {
 
         this.cameras.main.fadeOut(3000, 0, 0, 0,
-            () => this.scene.start(Scenes.STATS)
+            () => this.scene.start(Scenes.DAMIEN_END_MESSAGE)
         );
     }
 

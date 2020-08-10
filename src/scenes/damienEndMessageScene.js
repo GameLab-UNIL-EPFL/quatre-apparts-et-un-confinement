@@ -1,31 +1,43 @@
 import Phaser from "phaser";
-import { Card } from "./cards/card.js";
-import { Background } from "./objects/background.js";
 import { player } from "../index.js";
 import { Scenes } from "../core/player.js";
 import { DialogueController } from "../core/dialogueController.js";
+import { Months } from "./buildingScene.js";
+import { Background } from "./objects/background.js";
+import { CardObject } from "./objects/cardObject.js";
+import { Card } from "./cards/card.js";
 
-export class IndepSadHomeScene extends Phaser.Scene {
+export class DamienEndMessageScene extends Phaser.Scene {
     /**
      * @brief initializes the different cards needed in the scene
      * and the index that will be used to know which card we are at
      * in said scene
      */
     constructor() {
-        super({ key: Scenes.INDEP_SAD_HOME });
+        super({ key: Scenes.DAMIEN_END_MESSAGE });
 
         this.current_card = new Card(
             this,
             [
                 new Background(
                     this,
-                    'sprites/IndepScene/01_IDLE/independant-salon02_00-model.jpg',
-                    'indepSadHomeBG'
+                    'sprites/StudentScene/MessageCard/bg.png',
+                    'DamienEndMessageBG'
+                ),
+                new CardObject(
+                    this,
+                    { name: 'DamienEndMessageDamien', url: 'sprites/StudentScene/MessageCard/damien_pj.png' },
+                    new Phaser.Math.Vector2(1, -1)
+                ),
+                new CardObject(
+                    this,
+                    { name: "phone-cover", url: "sprites/StudentScene/MessageCard/phone.png" },
+                    new Phaser.Math.Vector2(-2, 289)
                 )
             ]
         );
 
-        this.dialogue = new DialogueController(this, "patrickDialogJune");
+        this.dialogue = new DialogueController(this, "damienDialogJune");
     }
 
     /**
@@ -34,6 +46,7 @@ export class IndepSadHomeScene extends Phaser.Scene {
      */
     preload() {
         this.current_card.preload();
+        this.dialogue.preloadMessages();
     }
 
     /**
@@ -48,11 +61,12 @@ export class IndepSadHomeScene extends Phaser.Scene {
         if(this.current_card.isLoaded()) {
             this.current_card.create();
 
-            this.dialogue.display("telephone");
+            this.dialogue.createMessageBG();
+            this.dialogue.displayMessage("copine", true);
         }
 
         //Update the saved data
-        player.cur_scene = Scenes.INDEP_SAD_HOME;
+        player.cur_scene = Scenes.DAMIEN_END_MESSAGE;
         player.saveGame();
     }
 
@@ -80,7 +94,7 @@ export class IndepSadHomeScene extends Phaser.Scene {
      * @brief Triggers the next scene
      */
     nextScene() {
-        this.scene.start(Scenes.MOTHER_COUCH);
+        this.scene.start(Scenes.GRANDMA, { month: Months.MAY });
     }
 
     /**
@@ -88,5 +102,6 @@ export class IndepSadHomeScene extends Phaser.Scene {
      */
     destroy() {
         this.current_card.destroy();
+        this.dialogue.destroyAllDisplayed();
     }
 }
