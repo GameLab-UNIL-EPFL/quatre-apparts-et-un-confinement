@@ -58,15 +58,22 @@
 			{
 				"text": ["❤️"],
 				"preview": "❤️",
-				"goto": ""
+				"goto": "keur"
             },
             "rep2":
 			{
 				"text": ["💗"],
 				"preview": "💗",
-				"goto": ""
+				"goto": "keur"
 			}
         },
-		"goto": [""]
+		"goto": ["keur"]
+	},
+	"keur": {
+		"name": "Copine",
+		"text": ["💗"],
+		"choices": {
+        },
+		"goto": []
 	}
 }

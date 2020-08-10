@@ -325,6 +325,10 @@ export class LivingRoomCard extends Card {
      * @brief Updates the objective complete attribute
      */
     notifyObjectiveMet(status) {
+        if(status && this.month === Months.MAY) {
+            this.parent_scene.nextScene();
+        }
+
         if(!status && !this.objective_complete) {
             this.objective_complete = true;
         }
