@@ -41,11 +41,7 @@ export class MessageCard extends Card {
 
     preload() {
         super.preload();
-
-        //Load in the sounds
-
-        this.parent_scene.load.audio("newMessage", "sounds/textMessages/newMessage.wav");
-        this.parent_scene.load.audio("sent", "sounds/textMessages/sentMessage.wav");
+        
         this.parent_scene.dialogue.preloadMessages();
     }
 

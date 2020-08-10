@@ -52,7 +52,7 @@
 	"toi": {
 		"name": "Copine",
         "text": [
-            "Ben on ne sait pas. Ça pourrait venir de n'importe qui. Un de ses clients, ou même toi ou moi…"
+            "Ben on ne sait pas. Ça pourrait venir de n'importe qui…"
         ],
 		"choices": {
             "rep":
@@ -73,8 +73,22 @@
     "masque": {
 		"name": "Copine",
         "text": [
-			"Ben le masque ça ne protège pas forcément. Et…",
-			"… j'aurais pas dû t'inviter. Même si ça ne vient pas de toi, j'ai pris des risques inutiles."
+			"Ben le masque ça ne protège pas forcément. Et…"
+        ],
+		"choices": {
+            "rep":
+			{
+				"text": ["Et... ?"],
+				"preview": "Et... ?",
+				"goto": "masque_suite"
+            }
+        },
+		"goto": ["masque_suite"]
+	},
+	"masque_suite": {
+		"name": "Copine",
+        "text": [
+			"… j'aurais pas dû t'inviter. J'ai pris des risques inutiles."
         ],
 		"choices": {
             "rep":
@@ -95,8 +109,22 @@
     "malade": {
 		"name": "Copine",
         "text": [
-			"Si ça se trouve on est asymptomatique…",
-			"Mais j'aurais pas dû t'inviter. Même si ça ne vient pas de toi, j'ai pris des risques inutiles."
+			"Si ça se trouve on est asymptomatique…"
+        ],
+		"choices": {
+            "rep":
+			{
+				"text": ["C'est vrai..."],
+				"preview": "C'est vrai...",
+				"goto": "malade_suite"
+            }
+        },
+        "goto": ["malade_suite"]
+	},
+	"malade_suite": {
+		"name": "Copine",
+        "text": [
+			"Mais j'aurais pas dû t'inviter. J'ai pris des risques inutiles."
         ],
 		"choices": {
             "rep":

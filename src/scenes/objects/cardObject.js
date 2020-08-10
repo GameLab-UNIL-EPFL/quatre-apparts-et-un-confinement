@@ -106,7 +106,7 @@ export class CardObject {
 
             //Make the sprites interactive
             if(this.highlight_sprite) {
-                //this.highlight_sprite.setInteractive().on('pointerdown', interaction, this);
+                this.highlight_sprite.setInteractive().on('pointerdown', interaction, this);
             }
             this.sprite.setInteractive().on('pointerdown', interaction, this);
         }

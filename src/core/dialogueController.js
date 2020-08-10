@@ -136,6 +136,10 @@ export class DialogueController {
     }
 
     preloadMessages() {
+        //Load in message audio
+        this.parent_scene.load.audio("newMessage", "sounds/textMessages/newMessage.wav");
+        this.parent_scene.load.audio("sent", "sounds/textMessages/sentMessage.wav");
+        
         //Load in the phone message sprites
         this.parent_scene.load.image("promptBox1", "sprites/UI/Messages/SelectionMessage_01.png");
         this.parent_scene.load.image("promptBox2", "sprites/UI/Messages/SelectionMessage_02.png");
@@ -746,6 +750,5 @@ export class DialogueController {
      */
     destroyAllDisplayed() {
         this.displayed.forEach(dis => dis.destroy());
-
     }
 }

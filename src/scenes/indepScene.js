@@ -131,7 +131,7 @@ export class IndepScene extends Phaser.Scene {
             true
         );
 
-        this.tv_card = new TVCard(this);
+        this.tv_card = new TVCard(this, Scenes.INDEP);
 
         this.cards = [
             this.idle_card,

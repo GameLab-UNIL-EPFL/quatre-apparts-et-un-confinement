@@ -25,6 +25,8 @@ import { SelectScene } from "./scenes/selectScene.js";
 import { MotherKitchenScene } from "./scenes/motherKitchenScene.js";
 import { StatsScene } from "./scenes/statsScene.js";
 import { MotherCouchScene } from "./scenes/motherCouchScene.js";
+import { DamienOutsideScene } from "./scenes/damienOutsideScene.js";
+import { IndepSadHomeScene } from "./scenes/indepSadHomeScene.js";
 
 let resizeTimeout;
 const plugins = [{
@@ -94,11 +96,13 @@ const config = {
         DamienKitchenClothesScene,
         DamienComputerScene,
         DamienKitchenNoFood,
+        DamienOutsideScene,
         GrandmaScene,
         HallwayScene,
         IndepScene,
         IndepMessageScene,
         IndepComputerScene,
+        IndepSadHomeScene,
         StoreScene,
         StoreExtScene,
         MotherScene,
