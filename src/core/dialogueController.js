@@ -103,6 +103,15 @@ export class DialogueController {
     constructor(parent_scene, dialogue_name="example") {
         this.parent_scene = parent_scene;
         this.dialogueJSON = require("../dialogue/" + dialogue_name + ".json");
+
+        this.phone_dialogue_done = {};
+        if ("telephone" in this.dialogueJSON) {
+            if( "choices" in this.dialogueJSON["telephone"] ){
+                this.dialogueJSON["telephone"]["choices"].map(choice => this.phone_dialogue_done[choice.goto] = false);
+            }
+        }
+        console.log('Phone dialogue done:', this.phone_dialogue_done);
+
         this.current_conv_id = "";
         this.cur_state = DialogueState.NONE;
 
@@ -139,7 +148,7 @@ export class DialogueController {
         //Load in message audio
         this.parent_scene.load.audio("newMessage", "sounds/textMessages/newMessage.wav");
         this.parent_scene.load.audio("sent", "sounds/textMessages/sentMessage.wav");
-        
+
         //Load in the phone message sprites
         this.parent_scene.load.image("promptBox1", "sprites/UI/Messages/SelectionMessage_01.png");
         this.parent_scene.load.image("promptBox2", "sprites/UI/Messages/SelectionMessage_02.png");
@@ -398,6 +407,7 @@ export class DialogueController {
         if(num_answers !== 0) {
             this.cur_state = DialogueState.PROMPT;
             cur_dialogue.choices.forEach(choice => {
+                console.log('Choice:', choice.goto);
 
                 //Chose which of the two spritesheets to use
                 let prompts_name = "prompts_" + ((this.prompts.length % 2) + 1);
@@ -454,7 +464,19 @@ export class DialogueController {
                     prompt_sprite.displayHeight = prompt_text.displayHeight + SPACING;
                 }
 
+                if(this.phone_dialogue_done.hasOwnProperty(choice.goto)) {
+                    console.log('Top-level choice', choice.goto);
+                    if(this.phone_dialogue_done[choice.goto] === true) {
+                        console.log('less alpha');
+                        prompt_sprite.alpha = 0.5;
+                        prompt_text.alpha = 0.5;
+                    }
+                }
+
                 const interaction = () => {
+                    this.phone_dialogue_done[choice.goto] = true;
+                    console.log('Top-level choice saved:', choice.goto, '->', this.phone_dialogue_done);
+
                     //Destroy all prompts if clicked
                     this.prompts.forEach(prompt => {
                         prompt.text.destroy();
