@@ -750,6 +750,5 @@ export class DialogueController {
      */
     destroyAllDisplayed() {
         this.displayed.forEach(dis => dis.destroy());
-
     }
 }

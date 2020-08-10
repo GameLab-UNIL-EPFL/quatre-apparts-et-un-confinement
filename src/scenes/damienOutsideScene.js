@@ -5,6 +5,7 @@ import { DialogueController } from "../core/dialogueController.js";
 import { Card } from "./cards/card.js";
 import { Background } from "./objects/background.js";
 import { CardObject } from "./objects/cardObject.js";
+import { Months, WindowState } from "./buildingScene.js";
 
 const DamienOutsideCards = {
     IDLE: 0,
@@ -88,11 +89,7 @@ export class DamienOutsideScene extends Phaser.Scene {
 
     notifyDialogueEnd() {
         if(this.cardIdx === DamienOutsideCards.MESSAGE) {
-            this.time.addEvent({
-                delay: 1500,
-                callback: () => this.nextCard(),
-                callbackScope: this
-            });
+            this.nextCard();
         }
     }
 
@@ -123,12 +120,35 @@ export class DamienOutsideScene extends Phaser.Scene {
     }
 
     nextScene() {
-        this.cameras.main.fadeOut(3000, 0, 0, 0,
-            () => this.scene.start(Scenes.STATS)
-        );     
+        this.current_card.destroy();
+        this.scene.start(Scenes.BUILDING, {
+            mainMenu: false,
+            stage: 3,
+            names: {
+                damien: false,
+                grandma: false,
+                family: false,
+                indep: false
+            },
+            windows: {
+                damien: WindowState.OFF,
+                grandma: WindowState.OFF,
+                family: WindowState.OFF,
+                indep: WindowState.ON
+            },
+            month: Months.MAY,
+            new_month: true,
+            nextScene: {
+                damien: null,
+                grandma: null,
+                family: null,
+                indep: Scenes.INDEP_SAD_HOME,
+            }
+        }); 
     }
     
     destroy() {
         this.cards.forEach(card => card.destroy());
+        this.dialogue.destroyAllDisplayed();
     }
 }

@@ -26,6 +26,7 @@ import { MotherKitchenScene } from "./scenes/motherKitchenScene.js";
 import { StatsScene } from "./scenes/statsScene.js";
 import { MotherCouchScene } from "./scenes/motherCouchScene.js";
 import { DamienOutsideScene } from "./scenes/damienOutsideScene.js";
+import { IndepSadHomeScene } from "./scenes/indepSadHomeScene.js";
 
 let resizeTimeout;
 const plugins = [{
@@ -34,7 +35,7 @@ const plugins = [{
     mapping: 'rexUI'
 }];
 
-const OBJECT_DEBUG = true;
+const OBJECT_DEBUG = false;
 
 if(OBJECT_DEBUG === true) {
     plugins.push({
@@ -101,6 +102,7 @@ const config = {
         IndepScene,
         IndepMessageScene,
         IndepComputerScene,
+        IndepSadHomeScene,
         StoreScene,
         StoreExtScene,
         MotherScene,

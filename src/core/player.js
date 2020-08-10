@@ -14,6 +14,7 @@ export const Scenes = {
     INDEP: 'Indep',
     INDEP_COMPUTER: 'IndepComputer',
     INDEP_MSG: 'IndepMsg',
+    INDEP_SAD_HOME: 'IndepSadHome',
     STORE: 'Store',
     STORE_EXT : 'Store_ext',
     MOTHER: 'Mother',
