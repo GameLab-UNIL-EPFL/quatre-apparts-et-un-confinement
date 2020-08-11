@@ -898,7 +898,7 @@ export class StoreScene extends Phaser.Scene {
                 this.checklist.destroy();
 
                 // play the sound
-                this.cashierSound.play(); 
+                this.cashierSound.play();
 
                 // Iterate through basket items and remove their sprites
                 for(let i in this.shoppingBasket) {
@@ -964,6 +964,7 @@ export class StoreScene extends Phaser.Scene {
 
     nextScene() {
         this.music.stop();
+        this.cashierSound.stop(); 
         if(this.month === Months.APRIL) {
             this.scene.start(Scenes.HALLWAY, {cardIdx: HallwayCards.INDEP_GRANDMA, damien_gone: false});
         } else {
