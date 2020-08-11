@@ -103,6 +103,16 @@ export class DialogueController {
     constructor(parent_scene, dialogue_name="example") {
         this.parent_scene = parent_scene;
         this.dialogueJSON = require("../dialogue/" + dialogue_name + ".json");
+
+        this.phone_dialogue_done = {};
+        for (let telephone_key of ["telephone", "telephoneMauvais", "telephoneBon"]) {
+            if (telephone_key in this.dialogueJSON) {
+                if( "choices" in this.dialogueJSON[telephone_key] ) {
+                    this.dialogueJSON[telephone_key]["choices"].map(choice => this.phone_dialogue_done[choice.goto] = false);
+                }
+            }
+        }
+
         this.current_conv_id = "";
         this.cur_state = DialogueState.NONE;
 
@@ -133,13 +143,25 @@ export class DialogueController {
             "sprites/UI/prompts_2.png",
             DIALOGUE_BOX_SPRITE_SIZE.prompt
         );
+
+        this.parent_scene.load.spritesheet(
+            "prompts_1_done",
+            "sprites/UI/prompts_1_done.png",
+            DIALOGUE_BOX_SPRITE_SIZE.prompt
+        );
+
+        this.parent_scene.load.spritesheet(
+            "prompts_2_done",
+            "sprites/UI/prompts_2_done.png",
+            DIALOGUE_BOX_SPRITE_SIZE.prompt
+        );
     }
 
     preloadMessages() {
         //Load in message audio
         this.parent_scene.load.audio("newMessage", "sounds/textMessages/newMessage.wav");
         this.parent_scene.load.audio("sent", "sounds/textMessages/sentMessage.wav");
-        
+
         //Load in the phone message sprites
         this.parent_scene.load.image("promptBox1", "sprites/UI/Messages/SelectionMessage_01.png");
         this.parent_scene.load.image("promptBox2", "sprites/UI/Messages/SelectionMessage_02.png");
@@ -398,15 +420,22 @@ export class DialogueController {
         if(num_answers !== 0) {
             this.cur_state = DialogueState.PROMPT;
             cur_dialogue.choices.forEach(choice => {
-
                 //Chose which of the two spritesheets to use
                 let prompts_name = "prompts_" + ((this.prompts.length % 2) + 1);
 
+                // If dialogue already played: grey background
+                let dialogue_done_suffix = '';
+                if(this.phone_dialogue_done.hasOwnProperty(choice.goto)) {
+                    if(this.phone_dialogue_done[choice.goto] === true) {
+                        dialogue_done_suffix = '_done';
+                    }
+                }
+
                 //Create background animation
                 this.parent_scene.anims.create({
-                    key: "prompt_anim_" + this.prompts.length,
+                    key: "prompt_anim_" + this.prompts.length +  dialogue_done_suffix,
                     frameRate: 6,
-                    frames: this.parent_scene.anims.generateFrameNames(prompts_name),
+                    frames: this.parent_scene.anims.generateFrameNames(prompts_name + dialogue_done_suffix),
                     repeat: -1
                 });
 
@@ -423,7 +452,7 @@ export class DialogueController {
                     0,
                     prompt_position,
                     prompts_name
-                ).play("prompt_anim_" + this.prompts.length);
+                ).play("prompt_anim_" + this.prompts.length + dialogue_done_suffix);
 
                 //Center the box
                 prompt_sprite.setOrigin(0.5, 0.5);
@@ -455,6 +484,11 @@ export class DialogueController {
                 }
 
                 const interaction = () => {
+                    if(this.phone_dialogue_done.hasOwnProperty(choice.goto)) {
+                        // Save choice so it’ll appear grey next time
+                        this.phone_dialogue_done[choice.goto] = true;
+                    }
+
                     //Destroy all prompts if clicked
                     this.prompts.forEach(prompt => {
                         prompt.text.destroy();
