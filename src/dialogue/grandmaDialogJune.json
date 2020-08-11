@@ -64,13 +64,19 @@
 			"🔈 6 juin - Réouverture des restaurants, boîtes de nuit, musées, cinémas et piscines."
 		],
 		"choices": [],
-		"goto": []
+		"goto": [],
+    "objective": {
+      "status": "radio-news"
+    }
 	},
 	"bleiben": {
 		"name": "Radio",
 		"text": ["🎶 Bleiben Sie zuhause 🎶\n🎶 Bleiben Sie zuhause 🎶"],
 		"choices": [],
-		"goto": []
+		"goto": [],
+    "objective": {
+      "status": "radio-music"
+    }
 	},
 	"telephone": {
 		"name": "Suzanne",

@@ -130,9 +130,9 @@ export class MotherScene extends Phaser.Scene {
         } else if (cardObj.name === 'motherSceneBox_d' || cardObj.name === 'motherSceneXwing_d') {
             this.toysSound.play();
         } else if (cardObj.name === 'motherSceneBooks_d' || cardObj.name === 'motherSceneColoring_d') {
-            this.paperSound.play({volume: 0.5});
+            this.paperSound.play();
         } else if (cardObj.name === 'motherSceneSwitch_d' || cardObj.name === 'motherSceneGlobe_d') {
-            this.clickSound.play({volume: 0.5});
+            this.clickSound.play();
         }
 
         //Create the new sprite at the old position

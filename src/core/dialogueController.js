@@ -721,7 +721,7 @@ export class DialogueController {
 
                 //play sound
                 this.sent = this.parent_scene.sound.add("sent");
-                this.sent.play({volume: 0.5});
+                this.sent.play();
                 //Retrieve dialiogue
                 const next_msg = this.requestDialogue(next_id);
 
