@@ -105,9 +105,11 @@ export class DialogueController {
         this.dialogueJSON = require("../dialogue/" + dialogue_name + ".json");
 
         this.phone_dialogue_done = {};
-        if ("telephone" in this.dialogueJSON) {
-            if( "choices" in this.dialogueJSON["telephone"] ) {
-                this.dialogueJSON["telephone"]["choices"].map(choice => this.phone_dialogue_done[choice.goto] = false);
+        for (let telephone_key of ["telephone", "telephoneMauvais", "telephoneBon"]) {
+            if (telephone_key in this.dialogueJSON) {
+                if( "choices" in this.dialogueJSON[telephone_key] ) {
+                    this.dialogueJSON[telephone_key]["choices"].map(choice => this.phone_dialogue_done[choice.goto] = false);
+                }
             }
         }
 
@@ -418,8 +420,6 @@ export class DialogueController {
         if(num_answers !== 0) {
             this.cur_state = DialogueState.PROMPT;
             cur_dialogue.choices.forEach(choice => {
-                console.log('Choice:', choice.goto);
-
                 //Chose which of the two spritesheets to use
                 let prompts_name = "prompts_" + ((this.prompts.length % 2) + 1);
 
