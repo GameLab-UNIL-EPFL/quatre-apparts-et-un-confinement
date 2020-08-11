@@ -106,11 +106,10 @@ export class DialogueController {
 
         this.phone_dialogue_done = {};
         if ("telephone" in this.dialogueJSON) {
-            if( "choices" in this.dialogueJSON["telephone"] ){
+            if( "choices" in this.dialogueJSON["telephone"] ) {
                 this.dialogueJSON["telephone"]["choices"].map(choice => this.phone_dialogue_done[choice.goto] = false);
             }
         }
-        console.log('Phone dialogue done:', this.phone_dialogue_done);
 
         this.current_conv_id = "";
         this.cur_state = DialogueState.NONE;
@@ -140,6 +139,18 @@ export class DialogueController {
         this.parent_scene.load.spritesheet(
             "prompts_2",
             "sprites/UI/prompts_2.png",
+            DIALOGUE_BOX_SPRITE_SIZE.prompt
+        );
+
+        this.parent_scene.load.spritesheet(
+            "prompts_1_done",
+            "sprites/UI/prompts_1_done.png",
+            DIALOGUE_BOX_SPRITE_SIZE.prompt
+        );
+
+        this.parent_scene.load.spritesheet(
+            "prompts_2_done",
+            "sprites/UI/prompts_2_done.png",
             DIALOGUE_BOX_SPRITE_SIZE.prompt
         );
     }
@@ -412,11 +423,19 @@ export class DialogueController {
                 //Chose which of the two spritesheets to use
                 let prompts_name = "prompts_" + ((this.prompts.length % 2) + 1);
 
+                // If dialogue already played: grey background
+                let dialogue_done_suffix = '';
+                if(this.phone_dialogue_done.hasOwnProperty(choice.goto)) {
+                    if(this.phone_dialogue_done[choice.goto] === true) {
+                        dialogue_done_suffix = '_done';
+                    }
+                }
+
                 //Create background animation
                 this.parent_scene.anims.create({
-                    key: "prompt_anim_" + this.prompts.length,
+                    key: "prompt_anim_" + this.prompts.length +  dialogue_done_suffix,
                     frameRate: 6,
-                    frames: this.parent_scene.anims.generateFrameNames(prompts_name),
+                    frames: this.parent_scene.anims.generateFrameNames(prompts_name + dialogue_done_suffix),
                     repeat: -1
                 });
 
@@ -433,7 +452,7 @@ export class DialogueController {
                     0,
                     prompt_position,
                     prompts_name
-                ).play("prompt_anim_" + this.prompts.length);
+                ).play("prompt_anim_" + this.prompts.length + dialogue_done_suffix);
 
                 //Center the box
                 prompt_sprite.setOrigin(0.5, 0.5);
@@ -464,18 +483,11 @@ export class DialogueController {
                     prompt_sprite.displayHeight = prompt_text.displayHeight + SPACING;
                 }
 
-                if(this.phone_dialogue_done.hasOwnProperty(choice.goto)) {
-                    console.log('Top-level choice', choice.goto);
-                    if(this.phone_dialogue_done[choice.goto] === true) {
-                        console.log('less alpha');
-                        prompt_sprite.alpha = 0.5;
-                        prompt_text.alpha = 0.5;
-                    }
-                }
-
                 const interaction = () => {
-                    this.phone_dialogue_done[choice.goto] = true;
-                    console.log('Top-level choice saved:', choice.goto, '->', this.phone_dialogue_done);
+                    if(this.phone_dialogue_done.hasOwnProperty(choice.goto)) {
+                        // Save choice so it’ll appear grey next time
+                        this.phone_dialogue_done[choice.goto] = true;
+                    }
 
                     //Destroy all prompts if clicked
                     this.prompts.forEach(prompt => {
