@@ -10,7 +10,7 @@
 		"goto": ["kids"]
 	},
 	"kids": {
-		"name": "Maxime et Liliane",
+		"name": "Maurice et Léa",
 		"text": [
             "Mais Maman, ça fait trop longtemps qu'on n'est pas sortis!", 
             "On peut aller au jouer au parc avant, s'il te plaît? Alleeeeeeeez.",
@@ -27,39 +27,43 @@
             }
         ],
 		"goto": ["merci", "oh"]
-    }, 
-    "merci": { 
-    	"name": "Maxime et Liliane", 
-    	"text": [ 
-    		"Merci Maman!",
-    		"Merci Maman!" 
-    		], 
-    	"choices": [], 
-    	"goto": ["finOui"]
-    }, 
-    "finOui": { 
-    	"name": "Florence", 
-    	"text": [ 
-    		"Mais vous devez d'abord ranger votre chambre." 
-    		], 
-    	"choices": [], 
-    	"goto": [] 
-    }, 
-    "oh": { 
-    	"name": "Maxime et Liliane", 
-    	"text": [ 
-    		"Mais rhooo! Maman, t'es pas gentille.",
-    		"Mais rhooo! Maman, t'es pas gentille."  
-    		], 
-    	"choices": [], 
-    	"goto": ["finNon"]
-    }, 
-    "finNon": { 
-    	"name": "Florence", 
-    	"text": [ 
-    		"Et vous allez me faire le plaisir de ranger votre chambre." 
-    		], 
-    	"choices": [], 
-    	"goto": [] 
-    } 
-} 
+	},
+	"merci": {
+		"name": "Maurice et Léa",
+		"text": [
+			"Merci Maman!"
+		],
+		"choices": [],
+		"goto": ["oui-rangez"],
+		"objective": {
+			"status": true
+		}
+	},
+	"oh": {
+		"name": "Maurice et Léa",
+		"text": [
+			"Mais rhooo! Maman, t'es pas gentille."
+		],
+		"choices": [],
+		"goto": ["non-rangez"],
+		"objective": {
+			"status": false
+		}
+	},
+	"non-rangez": {
+		"name": "Florence",
+		"text": [
+			 "Et vous devez ranger votre chambre!"
+		],
+		"choices": [],
+		"goto": []
+	},
+	"oui-rangez": {
+		"name": "Florence",
+		"text": [
+			 "Mais vous devez d'abord ranger votre chambre."
+		],
+		"choices": [],
+		"goto": []
+	}
+}
