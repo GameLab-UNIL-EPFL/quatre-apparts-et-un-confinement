@@ -93,6 +93,10 @@ export class StatsScene extends Phaser.Scene {
         this.load.image("car_01", "sprites/BuildingScene/car_01.png");
         this.load.image("car_02", "sprites/BuildingScene/car_02.png");
         this.load.image("car_03", "sprites/BuildingScene/car_03.png");
+
+        //Load in percentage bar
+        this.load.image('percentage_bar_bg', "sprites/StudentScene/ZoomMiniGameCard/bar_bg.png");
+        this.load.image('percentage_bar_fill', "sprites/StudentScene/ZoomMiniGameCard/bar_fill.png");
     }
 
     /**
@@ -162,6 +166,7 @@ export class StatsScene extends Phaser.Scene {
 
             let name = "";
             let text = "";
+            let disaplayPercent = percent;
 
             switch(choice) {
             case 'kids_park':
@@ -170,7 +175,8 @@ export class StatsScene extends Phaser.Scene {
                 if(player.kids_park) {
                     text = "Vous et " + percent + "% des joueurs avez choisi d’amener les enfants au parc.";
                 } else {
-                    text = "Vous et " + (100 - percent) + "% des joueurs avez choisi de ne pas aller au parc.";
+                    disaplayPercent = (100 - percent);
+                    text = "Vous et " + disaplayPercent + "% des joueurs avez choisi de ne pas aller au parc.";
                 }
                 break;
 
@@ -180,7 +186,8 @@ export class StatsScene extends Phaser.Scene {
                 if(player.suzanne_hair) {
                     text = "Vous et " + percent + "% des joueurs avez choisi d'aller chez le coiffeur.";
                 } else {
-                    text = "Vous et " + (100 - percent) + "% des joueurs avez choisi de ne pas aller chez le coiffeur.";
+                    disaplayPercent = (100 - percent);
+                    text = "Vous et " + disaplayPercent + "% des joueurs avez choisi de ne pas aller chez le coiffeur.";
                 }
                 break;
 
@@ -188,7 +195,8 @@ export class StatsScene extends Phaser.Scene {
                 name = "Damien";
 
                 if(player.damien_gone) {
-                    text = "Vous et " + (100 - percent) + "% des joueurs avez choisi de sortir voir votre copine.";
+                    disaplayPercent = (100 - percent);
+                    text = "Vous et " + disaplayPercent + "% des joueurs avez choisi de sortir voir votre copine.";
                 } else {
                     text = "Vous et " + percent + "% des joueurs avez choisi de rester à la maison.";
                 }
@@ -198,7 +206,8 @@ export class StatsScene extends Phaser.Scene {
                 name = "Patrick";
 
                 if(player.nathan_failed) {
-                    text = "Vos conseils et ceux de " + (100 - percent) + "% des joueurs ont brisé un couple.";
+                    disaplayPercent = (100 - percent);
+                    text = "Vos conseils et ceux de " + disaplayPercent + "% des joueurs ont brisé un couple.";
                 } else {
                     text = "Vos conseils et ceux de " + percent + "% des joueurs ont sauvé un couple.";
                 }
@@ -213,7 +222,7 @@ export class StatsScene extends Phaser.Scene {
             ).play(D_BOX_ANIMATION_KEY);
 
             //Set origin of the box in the middle
-            box.setOrigin(0.5, 0.5);
+            box.setOrigin(0, 0);
             box.setDepth(10);
 
             //Add in the text
@@ -237,6 +246,50 @@ export class StatsScene extends Phaser.Scene {
                 }
             );
             text_sprite.setDepth(10);
+
+            box.y -= box.displayHeight / 2;
+            box.x -= box.displayWidth / 2;
+            box.displayHeight *= 1.25;
+                
+            //Add a percentage bar to each stat
+            const percentage_bar_bg = this.add.image(
+                name_sprite.x,
+                text_sprite.y + (text_sprite.displayHeight * 1.1),
+                'percentage_bar_bg'
+            );
+
+            const percentage_bar_fill = this.add.image(
+                percentage_bar_bg.x + 5,
+                percentage_bar_bg.y + 5,
+                'percentage_bar_fill'
+            );
+
+            percentage_bar_bg.setOrigin(0, 0);
+            percentage_bar_fill.setOrigin(0, 0);
+            
+            percentage_bar_bg.setDepth(10);
+            percentage_bar_fill.setDepth(10);
+            
+            percentage_bar_fill.displayWidth *= (disaplayPercent/100);
+            percentage_bar_fill.displayHeight *= 0.95;
+            
+            //Add the inverted fill for the rest of the bar
+            const percentage_bar_fill_wrong = this.add.image(
+                percentage_bar_fill.x + percentage_bar_fill.displayWidth - 3,
+                percentage_bar_fill.y,
+                'percentage_bar_fill'
+            );
+
+            percentage_bar_fill_wrong.setOrigin(0, 0);
+            percentage_bar_fill_wrong.setDepth(10);
+
+            percentage_bar_fill_wrong.displayWidth *= (1 - (disaplayPercent/100));
+            percentage_bar_fill_wrong.displayHeight *= 0.95; 
+
+            //Colors
+            percentage_bar_fill.setTint("0x00ff00");
+            percentage_bar_fill_wrong.setTint("0xff0000");
+
             //Update the vertical offset
             y_offset += offset * 1.5;
 
