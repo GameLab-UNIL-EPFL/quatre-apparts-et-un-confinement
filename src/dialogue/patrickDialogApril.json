@@ -31,12 +31,12 @@
 		"text": ["Qui pourrais-je bien appeler?"],
 		"choices":[
 			{
-				"text": ["Nathan"],
+				"text": ["Nathan (ami)"],
 				"preview": "Nathan",
 				"goto": "nathanMauvais"
             },
             {
-				"text": ["Sandrine"],
+				"text": ["Sandrine (amie)"],
 				"preview": "Sandrine",
 				"goto": "sandrine"
             },

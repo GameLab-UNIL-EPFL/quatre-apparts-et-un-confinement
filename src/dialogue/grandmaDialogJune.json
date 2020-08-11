@@ -77,17 +77,17 @@
 		"text": ["Bon, qui est-ce que je pourrais appeler?"],
 		"choices":[
 			{
-				"text": ["Françoise"],
+				"text": ["Françoise (amie)"],
 				"preview": "Françoise",
 				"goto": "francoise"
             },
             {
-				"text": ["Sophie"],
+				"text": ["Sophie (fille)"],
 				"preview": "Sophie",
 				"goto": "sophie"
             },
             {
-				"text": ["Marc"],
+				"text": ["Marc (ami)"],
 				"preview": "Marc",
 				"goto": "marc"
 			}

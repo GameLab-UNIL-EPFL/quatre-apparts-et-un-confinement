@@ -22,17 +22,17 @@
 		"text": ["Qui pourrais-je bien contacter?"],
 		"choices": [
 			{
-				"text": ["Nathan"],
+				"text": ["Nathan (ami)"],
 				"preview": "Nathan",
 				"goto": "nathan"
             },
             {
-				"text": ["Sandrine"],
+				"text": ["Sandrine (amie)"],
 				"preview": "Sandrine",
 				"goto": "sandrine"
             },
             {
-				"text": ["Paul"],
+				"text": ["Paul (cousin)"],
 				"preview": "Paul",
 				"goto": "paul"
 			}
