@@ -127,6 +127,7 @@ export class LivingRoomCard extends Card {
         this.parent_scene.load.image("grandma_book3", "sprites/GrandmaScene/grandma_book_03.png");
 
         this.parent_scene.load.audio("pageTurn", "sounds/grandma/pageTurn.wav");
+        this.parent_scene.load.audio("meow", "sounds/grandma/meow.wav");
 
         //Load in the phone highlight
         this.parent_scene.load.spritesheet(
@@ -176,6 +177,7 @@ export class LivingRoomCard extends Card {
 
         //Add sound to the scene
         this.page = this.parent_scene.sound.add("pageTurn");
+        this.meow = this.parent_scene.sound.add("meow");
 
         //=========HANDLE_ANIMATIONS=========
 
@@ -187,13 +189,16 @@ export class LivingRoomCard extends Card {
             repeat: -1
         });
 
-        //Play the cat animation
+        //Play the cat animation and the sound on click
         this.cat_anim = this.parent_scene.add.sprite(
             11,
             677,
             'cat'
-        ).play('cat-tail');
-        
+        ).play('cat-tail')
+            .setInteractive()
+            .on('pointerdown', () => this.meow.play());
+
+
         if(this.parent_scene.month === Months.MARCH) {
             // Create book highlight sprites
             this.parent_scene.anims.create({
@@ -320,6 +325,10 @@ export class LivingRoomCard extends Card {
      * @brief Updates the objective complete attribute
      */
     notifyObjectiveMet(status) {
+        if(status && this.month === Months.MAY) {
+            this.parent_scene.nextScene();
+        }
+
         if(!status && !this.objective_complete) {
             this.objective_complete = true;
         }
@@ -367,7 +376,7 @@ export class LivingRoomCard extends Card {
                     GRANDMA_POS.y,
                     "grandma_book2"
                 );
-                    
+
                 this.page.play();
 
                 //Trigger the book's dialogue
@@ -406,7 +415,7 @@ export class LivingRoomCard extends Card {
 
     destroy() {
         super.destroy();
-        
+
         //Destroy the grandma and the cat
         this.cat_anim.destroy();
         this.grandma_sprite.destroy();
@@ -417,5 +426,3 @@ export class LivingRoomCard extends Card {
         }
     }
 }
-
-

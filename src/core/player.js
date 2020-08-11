@@ -7,18 +7,24 @@ export const Scenes = {
     PROTOTYPE: 'Prototype',
     DAMIEN_KITCHEN_CLOTHES: 'DamienKitchenClothesScene',
     DAMIEN_COMPUTER: 'DamienComputer',
+    DAMIEN_OUTSIDE: 'DamienOutside',
+    DAMIEN_END_MESSAGE: 'DamienEndMessage',
     BUILDING: 'Building',
     GRANDMA: 'Grandma',
     HALLWAY: 'Hallway',
     INDEP: 'Indep',
     INDEP_COMPUTER: 'IndepComputer',
     INDEP_MSG: 'IndepMsg',
+    INDEP_SAD_HOME: 'IndepSadHome',
     STORE: 'Store',
     STORE_EXT : 'Store_ext',
     MOTHER: 'Mother',
+    MOTHER_KITCHEN: 'MotherKitchen',
+    MOTHER_COUCH: 'MotherCouch',
     DAMIEN_NO_FOOD: 'DamienKitchenNoFood',
     END_SCENE: 'EndScene',
-    SELECT: 'Select'
+    SELECT: 'Select',
+    STATS: 'Stats'
 };
 
 /**
@@ -30,7 +36,8 @@ export class Player {
      */
     constructor() {
         // THIS IS TEMPORARY: We should actually query the database to get an ID without risking collisions
-        this.id = Math.random().toString(36).substr(2, 9);
+        // base 36
+        this.id = this.generateId();
         this.cur_scene = Scenes.INTRO;
         this.scene_data = {};
         this.dialogue_tree = {};
@@ -44,9 +51,14 @@ export class Player {
     /**
      * @brief Sets the internal data of the player
      * @param {JSON} data the new data of the current scene (scene dependent)
-     * -- ProtoScene -- { cardIdx, clothes, food }
+     * -- StudentScene -- { cardIdx, clothes, food }
      * -- BuildingScene -- { mainMenu, stage, windows: { damien, grandma, family, indep }, month, nextScene: { damien, grandma, family, indep }}
      */
+
+    generateId() {
+        return Math.random().toString(36).substr(2, 9) + ((new Date()).getTime()).toString(36);
+    }
+
     setData(data) {
         if(data) {
             this.scene_data = data;
@@ -142,17 +154,45 @@ export class Player {
                 this.kids_park = game_data.kids_park;
                 this.suzanne_hair = game_data.suzanne_hair;
                 this.indep_shopping_basket = game_data.indep_shopping_basket;
-                
+
                 //Start the loaded scene
                 game.scene.start(game_data.scene, game_data.data);
             }
         }
     }
 
+    checkIdCallback(data, iteration) {
+        if(data['count'] !== "0" && iteration < 10) {
+            iteration++;
+            this.player_id = this.generateId();
+            setTimeout(function(_this) {
+                _this.checkPlayerId(iteration);
+            }, 500, this);
+        } else {
+            this.sendChoices({'player_id': this.player_id});
+        }
+    }
+
+    checkPlayerId(iteration = 0) {
+        (async () => {
+            const rawResponse = await fetch('https://labs.letemps.ch/interactive/2020/_sandbox/_covidou_server/check_player_id.php', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({'player_id': this.player_id})
+            });
+            const content = await rawResponse.json();
+            // Output if player_id already exists: {"result": "success", "count": "1"}
+            this.checkIdCallback(content, iteration);
+        })();
+    }
+
     sendChoices(payload) {
         /*
         Payload must match these SQL columns:
-        ['player_id', 'damien_stay_home', 'damien_food', 'damien_game_score_mean', 'damien_clothes', 'damien_see_grandma', 'mother_stay_home', 'mother_game_score', 'freelancer_food_set', 'freelancer_food_amount', 'freelancer_love_advice', 'freelancer_game_score', 'grandma_books', 'grandma_advice'];
+        ['player_id', 'damien_stay_home', 'damien_food', 'damien_game_score_mean', 'damien_clothes', 'damien_see_grandma', 'mother_stay_home', 'mother_game_score', 'freelancer_food_set', 'freelancer_food_amount', 'freelancer_love_advice', 'freelancer_game_score', 'grandma_hairdresser', 'grandma_books', 'grandma_advice'];
 
         example:
         payload = {
@@ -174,5 +214,16 @@ export class Player {
             // Tells if database was successfully updated
             console.log(content);
         })();
+    }
+
+    async getStats() {
+
+        const rawResponse = await fetch('https://labs.letemps.ch/interactive/2020/_sandbox/_covidou_server/get_choice_stats.php', {
+            method: 'GET'
+        });
+        const content = await rawResponse.json();
+        // Example output: [{"choice":"kids_park","percentage":"35.0"},{"choice":"grandma_hairdresser","percentage":"39.0"},{"choice":"damien_stay_home","percentage":"0.0"},{"choice":"freelancer_good_love_advice","percentage":"28.0"}]
+        console.log(content);
+        return content;
     }
 }

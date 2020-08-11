@@ -21,10 +21,10 @@ export class WakeUpCard extends Card {
 
         //Initialize children array
         const children = [
-            new Background(parent_scene, "sprites/ProtoScene/WakeUpCard/bg.jpg", "WakeUpBG"),
+            new Background(parent_scene, "sprites/StudentScene/WakeUpCard/bg.jpg", "WakeUpBG"),
             new CardObject(
                 parent_scene,
-                { name: "phone", url: "sprites/ProtoScene/WakeUpCard/phone.png" },
+                { name: "phone", url: "sprites/StudentScene/WakeUpCard/phone.png" },
                 new Phaser.Math.Vector2(-153, 60),
                 () => {},
                 null,
@@ -50,14 +50,14 @@ export class WakeUpCard extends Card {
         //Load the ring animation spritesheet
         this.parent_scene.load.spritesheet(
             'ring',
-            'sprites/ProtoScene/WakeUpCard/ring.png',
+            'sprites/StudentScene/WakeUpCard/ring.png',
             { frameWidth: 200, frameHeight: 80 }
         );
 
         //Load in the tired-bubble spritesheet
         this.parent_scene.load.spritesheet(
             'tired-bubble',
-            'sprites/ProtoScene/WakeUpCard/tired_bubbles.png',
+            'sprites/StudentScene/WakeUpCard/tired_bubbles.png',
             { frameWidth: 100, frameHeight: 100 }
         );
     }

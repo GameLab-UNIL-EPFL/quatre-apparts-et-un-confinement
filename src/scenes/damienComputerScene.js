@@ -1,12 +1,12 @@
 import Phaser from "phaser";
 import { DialogueController } from "../core/dialogueController.js";
-import { ComputerCard } from "./cards/ProtoSceneCards/computerCard.js";
-import { ZoomMiniGameCard } from "./cards/ProtoSceneCards/zoomMiniGameCard.js";
-import { MessageCard } from "./cards/ProtoSceneCards/messageCard.js";
+import { ComputerCard } from "./cards/StudentSceneCards/computerCard.js";
+import { ZoomMiniGameCard } from "./cards/StudentSceneCards/zoomMiniGameCard.js";
+import { MessageCard } from "./cards/StudentSceneCards/messageCard.js";
 import { player } from "../index.js";
 import { Scenes } from "../core/player.js";
 import { WindowState, Months } from "./buildingScene.js";
-import { ProtoGuyClothes, ProtoCards } from "./protoScene.js";
+import { ProtoGuyClothes, StudentCards } from "./studentScene.js";
 
 const NUM_CARDS = 3;
 
@@ -35,7 +35,7 @@ export class DamienComputerScene extends Phaser.Scene {
         ];
 
         //Keep track of wich card is displayed
-        this.cardIdx = ProtoCards.COMPUTER;
+        this.cardIdx = StudentCards.COMPUTER;
         this.current_card = this.computerCard;
         this.food = -1;
 
@@ -54,22 +54,22 @@ export class DamienComputerScene extends Phaser.Scene {
             //Set the correct card
             switch(data.cardIdx) {
 
-            case ProtoCards.COMPUTER:
+            case StudentCards.COMPUTER:
                 this.current_card = this.computerCard;
                 this.clothes = data.clothes;
                 this.food = data.food;
-                this.cardIdx = ProtoCards.COMPUTER;
+                this.cardIdx = StudentCards.COMPUTER;
                 break;
 
-            case ProtoCards.MINI_GAME:
+            case StudentCards.MINI_GAME:
                 this.current_card = this.zoomMiniGame;
-                this.cardIdx = ProtoCards.MINI_GAME;
+                this.cardIdx = StudentCards.MINI_GAME;
                 break;
 
-            case ProtoCards.MESSAGE:
+            case StudentCards.MESSAGE:
                 this.current_card = this.messageCard;
                 this.clothes = data.clothes;
-                this.cardIdx = ProtoCards.MESSAGE;
+                this.cardIdx = StudentCards.MESSAGE;
                 break;
 
             default:
@@ -117,7 +117,7 @@ export class DamienComputerScene extends Phaser.Scene {
         player.cur_scene = Scenes.DAMIEN_COMPUTER;
 
         //Handle the loaded food case
-        if(this.cardIdx === ProtoCards.COMPUTER) {
+        if(this.cardIdx === StudentCards.COMPUTER) {
             this.current_card.showItem(this.food);
         }
     }
@@ -165,14 +165,14 @@ export class DamienComputerScene extends Phaser.Scene {
 
             switch(this.cardIdx) {
 
-            case ProtoCards.COMPUTER:
-                this.cardIdx = ProtoCards.MINI_GAME;
+            case StudentCards.COMPUTER:
+                this.cardIdx = StudentCards.MINI_GAME;
                 this.current_card = this.zoomMiniGame;
                 this.current_card.create();
                 break;
 
-            case ProtoCards.MINI_GAME:
-                this.cardIdx = ProtoCards.MESSAGE;
+            case StudentCards.MINI_GAME:
+                this.cardIdx = StudentCards.MESSAGE;
                 this.current_card = this.messageCard;
                 this.current_card.create();
                 break;
@@ -194,10 +194,15 @@ export class DamienComputerScene extends Phaser.Scene {
     /**
      * @brief Updates the player damien_gone value
      */
-    notifyObjectiveMet() {
-        player.damien_gone = true;
+    notifyObjectiveMet(status) {
+        console.log(status);
+        player.damien_gone = status;
         console.log("PLAYER_DAMIEN_GONE: " + player.damien_gone);
         player.saveGame();
+
+        // Send result to db as integer
+        console.log('Send choice to db: Damien stays home =', !status, 'as', +!status);
+        player.sendChoices({ player_id: player.id, damien_stay_home: +!status });
     }
 
     nextScene() {

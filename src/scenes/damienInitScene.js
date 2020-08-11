@@ -1,11 +1,11 @@
 import Phaser from "phaser";
 import { DialogueController } from "../core/dialogueController.js";
-import { ComputerCard } from "./cards/ProtoSceneCards/computerCard.js";
-import { ZoomMiniGameCard } from "./cards/ProtoSceneCards/zoomMiniGameCard.js";
+import { ComputerCard } from "./cards/StudentSceneCards/computerCard.js";
+import { ZoomMiniGameCard } from "./cards/StudentSceneCards/zoomMiniGameCard.js";
 import { player } from "../index.js";
 import { Scenes } from "../core/player.js";
 import { WindowState, Months } from "./buildingScene.js";
-import { ProtoGuyClothes, ProtoCards } from "./protoScene.js";
+import { ProtoGuyClothes, StudentCards } from "./studentScene.js";
 
 const NUM_CARDS = 3;
 
@@ -31,7 +31,7 @@ export class DamienInitScene extends Phaser.Scene {
         ];
 
         //Keep track of wich card is displayed
-        this.cardIdx = ProtoCards.COMPUTER;
+        this.cardIdx = StudentCards.COMPUTER;
         this.current_card = this.computerCard;
         this.food = -1;
 
@@ -50,16 +50,16 @@ export class DamienInitScene extends Phaser.Scene {
             //Set the correct card
             switch(data.cardIdx) {
 
-            case ProtoCards.COMPUTER:
+            case StudentCards.COMPUTER:
                 this.current_card = this.computerCard;
                 this.clothes = data.clothes;
                 this.food = data.food;
-                this.cardIdx = ProtoCards.COMPUTER;
+                this.cardIdx = StudentCards.COMPUTER;
                 break;
 
-            case ProtoCards.MINI_GAME:
+            case StudentCards.MINI_GAME:
                 this.current_card = this.zoomMiniGame;
-                this.cardIdx = ProtoCards.MINI_GAME;
+                this.cardIdx = StudentCards.MINI_GAME;
                 break;
 
             default:
@@ -106,8 +106,11 @@ export class DamienInitScene extends Phaser.Scene {
         //Update the saved data
         player.cur_scene = Scenes.DAMIEN_INIT;
 
+        //Check if player id is available in database
+        player.checkPlayerId();
+
         //Handle the loaded food case
-        if(this.cardIdx === ProtoCards.COMPUTER) {
+        if(this.cardIdx === StudentCards.COMPUTER) {
             this.current_card.showItem();
         }
     }
@@ -155,13 +158,13 @@ export class DamienInitScene extends Phaser.Scene {
 
             switch(this.cardIdx) {
 
-            case ProtoCards.COMPUTER:
-                this.cardIdx = ProtoCards.MINI_GAME;
+            case StudentCards.COMPUTER:
+                this.cardIdx = StudentCards.MINI_GAME;
                 this.current_card = this.zoomMiniGame;
                 this.current_card.create();
                 break;
 
-            case ProtoCards.MINI_GAME:
+            case StudentCards.MINI_GAME:
                 this.nextScene();
                 break;
 

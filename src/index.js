@@ -4,7 +4,7 @@ import DebugObjects from './plugins/debugObjects.js';
 import './style.scss';
 
 import { TitleScene } from "./scenes/titleScene.js";
-import { ProtoScene } from "./scenes/protoScene.js";
+import { StudentScene } from "./scenes/studentScene.js";
 import { BuildingScene } from "./scenes/buildingScene.js";
 import { Player } from "./core/player.js";
 import { GrandmaScene } from "./scenes/grandmaScene.js";
@@ -22,6 +22,12 @@ import { IndepComputerScene } from "./scenes/indepComputerScene.js";
 import { EndScene } from "./scenes/endScene.js";
 import { DamienKitchenNoFood } from "./scenes/damienKitchenNoFoodScene.js";
 import { SelectScene } from "./scenes/selectScene.js";
+import { MotherKitchenScene } from "./scenes/motherKitchenScene.js";
+import { StatsScene } from "./scenes/statsScene.js";
+import { MotherCouchScene } from "./scenes/motherCouchScene.js";
+import { DamienOutsideScene } from "./scenes/damienOutsideScene.js";
+import { IndepSadHomeScene } from "./scenes/indepSadHomeScene.js";
+import { DamienEndMessageScene } from "./scenes/damienEndMessageScene.js";
 
 let resizeTimeout;
 const plugins = [{
@@ -78,6 +84,10 @@ const config = {
         width: scale.width,
         height: scale.height
     },
+    parent: 'container',
+    dom: {
+        createContainer: true
+    },
     plugins: {
         scene: plugins
     },
@@ -86,20 +96,26 @@ const config = {
         SelectScene,
         BuildingScene,
         BusScene,
-        ProtoScene,
+        StudentScene,
         DamienInitScene,
         DamienKitchenClothesScene,
         DamienComputerScene,
         DamienKitchenNoFood,
+        DamienOutsideScene,
+        DamienEndMessageScene,
         GrandmaScene,
         HallwayScene,
         IndepScene,
         IndepMessageScene,
         IndepComputerScene,
+        IndepSadHomeScene,
         StoreScene,
         StoreExtScene,
         MotherScene,
-        EndScene
+        MotherKitchenScene,
+        MotherCouchScene,
+        EndScene,
+        StatsScene
     ],
     physics: {
         default: 'arcade'
@@ -109,13 +125,8 @@ const config = {
 export const game = new Phaser.Game(config);
 export const player = new Player();
 
-// We’re about to change picture width (1365 pixels wide)
 const maxPictureWidth = 1200.0;
 
-// si on veut le stocker dans game
-game.horizontalRatio = scale.width / maxPictureWidth;
-
-// ou betement dans window (puisque le jeu met du temps à s’instancier)
 window.horizontalOffset = (maxPictureWidth - scale.width) / 2;
 window.horizontalRatio = scale.width / maxPictureWidth;
 

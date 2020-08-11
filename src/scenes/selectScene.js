@@ -3,16 +3,22 @@ import { Scenes } from "../core/player.js";
 import { Months } from "./buildingScene.js";
 import { IndepComputerCards } from "./indepComputerScene.js";
 import { player } from "../index.js";
+import { IndepCards } from "./indepScene.js";
 
 export class SelectScene extends Phaser.Scene {
     constructor() {
         super({ key: Scenes.SELECT });
 
         this.levels = [
-            { key: Scenes.STORE, data: {month: Months.MARCH}, text: "Store Patrick" },
+            { key: Scenes.STATS, data: {}, text: "Stats" },
+            { key: Scenes.STORE, data: {month: Months.APRIL}, text: "Store Patrick" },
             { key: Scenes.STORE, data: {month: Months.MAY}, text: "Store Damien" },
+            { key: Scenes.DAMIEN_OUTSIDE, data: {}, text: "Damien Outside" },
+            { key: Scenes.INDEP, data: {cardIdx: IndepCards.IDLE_CARD}, text: "Patrick March" },
             { key: Scenes.INDEP_COMPUTER, data: {cardIdx: IndepComputerCards.IDLE_CARD}, text: "Patrick April" },
-            { key: Scenes.GRANDMA, data: { month: Months.APRIL }, text: "Grandma April" }
+            { key: Scenes.GRANDMA, data: { month: Months.APRIL }, text: "Grandma April" },
+            { key: Scenes.MOTHER_KITCHEN, data: {}, text: "Mother Kitchen April" },
+            { key: Scenes.MOTHER_COUCH, data: {}, text: "Mother Couch June" }
         ];
 
         this.texts = [];
@@ -52,7 +58,7 @@ export class SelectScene extends Phaser.Scene {
             this.texts.push(text);
         });
     }
-    
+
     destroy() {
         this.cameras.main.setBackgroundColor("black");
         this.texts.forEach(text => text.destroy());

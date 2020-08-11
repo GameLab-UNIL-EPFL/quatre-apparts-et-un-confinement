@@ -19,11 +19,11 @@ export class MessageCard extends Card {
 
         //Initialize children array
         let children = [
-            new Background(parent_scene, "sprites/ProtoScene/MessageCard/bg.png", "MessageBG"),
+            new Background(parent_scene, "sprites/StudentScene/MessageCard/bg.png", "MessageBG"),
             character,
             new CardObject(
                 parent_scene,
-                { name: "phone-cover", url: "sprites/ProtoScene/MessageCard/phone.png" },
+                { name: "phone-cover", url: "sprites/StudentScene/MessageCard/phone.png" },
                 new Phaser.Math.Vector2(-2, 289)
             )
         ];
@@ -41,11 +41,7 @@ export class MessageCard extends Card {
 
     preload() {
         super.preload();
-
-        //Load in the sounds
-
-        this.parent_scene.load.audio("newMessage", "sounds/textMessages/newMessage.wav");
-        this.parent_scene.load.audio("sent", "sounds/textMessages/sentMessage.wav");
+        
         this.parent_scene.dialogue.preloadMessages();
     }
 

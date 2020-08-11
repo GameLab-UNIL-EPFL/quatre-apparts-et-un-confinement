@@ -131,7 +131,7 @@ export class IndepScene extends Phaser.Scene {
             true
         );
 
-        this.tv_card = new TVCard(this);
+        this.tv_card = new TVCard(this, Scenes.INDEP);
 
         this.cards = [
             this.idle_card,
@@ -297,6 +297,10 @@ export class IndepScene extends Phaser.Scene {
 
             player.nathan_failed = status;
             player.saveGame();
+
+            // Send result to db as integer
+            console.log('Send choice to db:', status);
+            player.sendChoices({ player_id: player.id, freelancer_good_love_advice: +status });
         }
     }
 
@@ -365,7 +369,7 @@ export class IndepScene extends Phaser.Scene {
                 }
             }),
             this
-        );        
+        );
     }
 
     /**

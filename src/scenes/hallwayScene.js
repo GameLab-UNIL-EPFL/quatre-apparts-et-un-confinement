@@ -317,9 +317,6 @@ export class HallwayScene extends Phaser.Scene {
             case HallwayCards.DAMIEN_CLOSED:
                 let callback = () => {};
 
-                this.door = this.sound.add("door");
-                this.door.play();
-
                 //Check if Damien is home or not
                 if(player.damien_gone) {
                     this.cardIdx = HallwayCards.INDEP_CLOSED;
@@ -328,6 +325,9 @@ export class HallwayScene extends Phaser.Scene {
                 } else {
                     this.cardIdx = HallwayCards.DAMIEN_OPEN;
                     this.current_card = this.damien_open_card;
+
+                    this.door = this.sound.add("door");
+                    this.door.play();
 
                     callback = () => this.dialogue.display("damienHome");
                 }
@@ -383,7 +383,7 @@ export class HallwayScene extends Phaser.Scene {
             break;
 
         case HallwayCards.INDEP_GRANDMA:
-            this.scene.start(Scenes.INDEP_COMPUTER);
+            this.scene.start(Scenes.MOTHER_KITCHEN);
             break;
             
         default:

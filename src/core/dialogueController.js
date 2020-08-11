@@ -78,7 +78,7 @@ const SPACING = 25;
 const MAX_N_PROMPTS = 3;
 
 const UP_POS = {
-    box: new Phaser.Math.Vector2(0, -650), 
+    box: new Phaser.Math.Vector2(0, -650),
     name: new Phaser.Math.Vector2(-488, -745),
     content: new Phaser.Math.Vector2(-488, -675)
 };
@@ -136,6 +136,10 @@ export class DialogueController {
     }
 
     preloadMessages() {
+        //Load in message audio
+        this.parent_scene.load.audio("newMessage", "sounds/textMessages/newMessage.wav");
+        this.parent_scene.load.audio("sent", "sounds/textMessages/sentMessage.wav");
+        
         //Load in the phone message sprites
         this.parent_scene.load.image("promptBox1", "sprites/UI/Messages/SelectionMessage_01.png");
         this.parent_scene.load.image("promptBox2", "sprites/UI/Messages/SelectionMessage_02.png");
@@ -168,7 +172,7 @@ export class DialogueController {
             5000,
             5000
         );
-        
+
         const prompt_sprite = this.parent_scene.add.graphics({ fillStyle: { color: 0xf8f2df }});
         prompt_sprite.fillRectShape(bg);
 
@@ -226,7 +230,9 @@ export class DialogueController {
         this.cur_state = DialogueState.DONE;
 
         //Notify the parent scene
-        this.parent_scene.notifyDialogueEnd();
+        if(this.parent_scene.notifyDialogueEnd) {
+            this.parent_scene.notifyDialogueEnd();
+        }
     }
 
     /**
@@ -285,15 +291,14 @@ export class DialogueController {
         ).play(D_BOX_ANIMATION_KEY);
 
         this.background.alpha = .9;
-        this.background.displayWidth *= window.horizontalRatio;
         this.background.setDepth(5);
 
         //Add name text
         this.name = this.parent_scene.add.text(
-            this.dialogue_pos.name.x * window.horizontalRatio,
+            this.dialogue_pos.name.x,
             this.dialogue_pos.name.y,
             this.getName(id),
-            {font: (55 * window.horizontalRatio) + "px OpenSans", fill: "black"}
+            {font: "44px OpenSans-Bold", fill: "#27303a"}
         );
 
         this.name.setDepth(5);
@@ -303,12 +308,12 @@ export class DialogueController {
 
         //Add dialogue content
         this.content = this.parent_scene.add.text(
-            this.dialogue_pos.content.x * window.horizontalRatio,
+            this.dialogue_pos.content.x,
             this.dialogue_pos.content.y,
             this.text[this.textIdx],
             {
-                font: (44 * window.horizontalRatio) + "px OpenSans",
-                fill: "black",
+                font: "44px OpenSans",
+                fill: "#27303a",
                 wordWrap: { width: (this.background.displayWidth - (SPACING * 8)) }
             }
         );
@@ -430,7 +435,7 @@ export class DialogueController {
                     prompt_sprite.y,
                     choice.text,
                     {
-                        font: (54 * window.horizontalRatio) + "px OpenSans ",
+                        font: (54) + "px OpenSans",
                         fill: "white",
                         wordWrap: { width: this.background.displayWidth - (4 * SPACING) }
                     }
@@ -596,7 +601,7 @@ export class DialogueController {
             (lr ? MIN_LEFT_X.text : MIN_RIGHT_X.text),
             ypos.text,
             cur_text,
-            {font: (30) + "px OpenSans ", fill: lr ? "black" : "white", wordWrap: { width: 350 }}
+            {font: (30) + "px OpenSans", fill: lr ? "black" : "white", wordWrap: { width: 350 }}
         );
 
         //Move the messages back
@@ -642,18 +647,19 @@ export class DialogueController {
         let font_size;
         let prompt_ypos = [];
         let prompt_xpos = -277;
+
         //Display the correct prompt box
         if(Object.keys(dialogue.choices).length <= 1) {
             this.parent_scene.add.image(-7, 616, 'promptBox1');
-            font_size = 55;
-            prompt_ypos = [579];
+            font_size = 40;
+            prompt_ypos = [584];
         } else if(Object.keys(dialogue.choices).length <= 2) {
             this.parent_scene.add.image(-7, 616, 'promptBox2');
-            font_size = 45;
+            font_size = 35;
             prompt_ypos = [497, 677];
         } else {
-            this.parent_scene.add.image(-7, 1416, 'promptBox3');
-            font_size = 40;
+            this.parent_scene.add.image(-7, 616, 'promptBox3');
+            font_size = 30;
             prompt_ypos = [476, 592, 711];
         }
 
@@ -664,75 +670,78 @@ export class DialogueController {
                 prompt_xpos,
                 prompt_ypos[n_prompts++],
                 dialogue.choices[choice_key].preview,
-                {font: font_size + "px OpenSans ", fill: "white"}
+                {font: font_size + "px OpenSans", fill: "white"}
             );
 
             this.msg_prompts.push(text_msg_elem);
 
-            //Make the element interactive
-            text_msg_elem.setInteractive().on(
-                'pointerdown',
-                () => {
-                    this.msg_prompts.forEach(msg => msg.destroy());
+            const touchMsgAnswer = () => {
+                // NICE TO HAVE: animate
+                this.msg_prompts.forEach(msg => msg.destroy());
 
-                    //Show the message above
-                    this.displayMessage(id, false, choice_key);
+                //Show the message above
+                this.displayMessage(id, false, choice_key);
 
-                    //Goto the next dialogue
-                    const next_id = dialogue.choices[choice_key].goto;
+                //Goto the next dialogue
+                const next_id = dialogue.choices[choice_key].goto;
 
-                    //play sound
-                    this.sent = this.parent_scene.sound.add("sent");
-                    this.sent.play({volume: 0.5});
-                    //Retrieve dialiogue
-                    const next_msg = this.requestDialogue(next_id);
+                //play sound
+                this.sent = this.parent_scene.sound.add("sent");
+                this.sent.play({volume: 0.5});
+                //Retrieve dialiogue
+                const next_msg = this.requestDialogue(next_id);
 
-                    //Add a timer event to trigger the next message
-                    this.parent_scene.time.addEvent({
-                        delay: MSG_RESP_DELAY,
-                        repeat: 0,
-                        callback: () => {
-                            if((next_id.length) > 0) {
-                                this.displayMessage(next_id, true, null, 0);
+                //Add a timer event to trigger the next message
+                this.parent_scene.time.addEvent({
+                    delay: MSG_RESP_DELAY,
+                    repeat: 0,
+                    callback: () => {
+                        if((next_id.length) > 0) {
+                            this.displayMessage(next_id, true, null, 0);
 
-                                if(next_msg.text.length > 1) {
-                                    this.parent_scene.time.addEvent({
-                                        delay: MSG_RESP_DELAY,
-                                        repeat: 0,
-                                        callback: () => {
-                                            if((next_id.length) > 0) {
-                                                this.displayMessage(next_id, true, null, 1);
+                            if(next_msg.text.length > 1) {
+                                this.parent_scene.time.addEvent({
+                                    delay: MSG_RESP_DELAY,
+                                    repeat: 0,
+                                    callback: () => {
+                                        if((next_id.length) > 0) {
+                                            this.displayMessage(next_id, true, null, 1);
 
-                                                if(next_msg.text.length > 2) {
-                                                    this.parent_scene.time.addEvent({
-                                                        delay: MSG_RESP_DELAY,
-                                                        repeat: 0,
-                                                        callback: () => {
-                                                            if((next_id.length) > 0) {
-                                                                this.displayMessage(next_id, true, null, 2);
-                                                            }
-                                                        },
-                                                        callbackScope: this,
-                                                    });
-                                                }
+                                            if(next_msg.text.length > 2) {
+                                                this.parent_scene.time.addEvent({
+                                                    delay: MSG_RESP_DELAY,
+                                                    repeat: 0,
+                                                    callback: () => {
+                                                        if((next_id.length) > 0) {
+                                                            this.displayMessage(next_id, true, null, 2);
+                                                        }
+                                                    },
+                                                    callbackScope: this,
+                                                });
                                             }
-                                        },
-                                        callbackScope: this,
-                                    });
-                                }
+                                        }
+                                    },
+                                    callbackScope: this,
+                                });
                             }
-                        },
-                        callbackScope: this,
-                    });
+                        }
+                    },
+                    callbackScope: this,
+                });
 
-                    //Save the dialogue entry
-                    player.addDialogueTreeEntry({
-                        id: id,
-                        next_id: next_id
-                    });
-                },
-                this
-            );
+                //Save the dialogue entry
+                player.addDialogueTreeEntry({
+                    id: id,
+                    next_id: next_id
+                });
+            };
+
+            //Make the element interactive
+
+            // prompt_sprite.setInteractive().on('pointerdown', touchMsgAnswer, this);
+            text_msg_elem.setInteractive(
+                new Phaser.Geom.Rectangle(-30, -30, 580, 100), Phaser.Geom.Rectangle.Contains
+            ).on('pointerdown', touchMsgAnswer, this);
         }
     }
 
@@ -741,6 +750,5 @@ export class DialogueController {
      */
     destroyAllDisplayed() {
         this.displayed.forEach(dis => dis.destroy());
-
     }
 }
