@@ -234,7 +234,7 @@ export class ZoomMiniGameCard extends Card {
     preload() {
         super.preload();
 
-        console.log("Loading sound for scene: ", this.scene_key);
+        console.log("Loading sound for month:", this.month);
 
         //Load sounds
         this.parent_scene.load.audio("music", "sounds/ZoomMiniGame/ZoomGame_" + this.scene_key + ".mp3");
@@ -563,8 +563,9 @@ export class ZoomMiniGameCard extends Card {
         let arrow = this.parent_scene.add.image(this.parent_scene.cameras.main.width * 0.41666, -700, 'arrow').setInteractive().on(
             'pointerdown',
             () => {
-                this.music.stop();
-                super.notifyDialogueEnd();
+                arrow.destroy();
+                this.endMiniGame(this, true);
+                this.music.stop(); // if fadeout doesnt complete
             },
             this
         );
