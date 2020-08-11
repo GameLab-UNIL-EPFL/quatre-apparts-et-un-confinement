@@ -8,7 +8,8 @@ import { BusCards } from "./busScene";
 export const Months = {
     MARCH: 'march',
     APRIL: 'april',
-    MAY: 'may'
+    MAY: 'may',
+    JUNE: 'june'
 };
 
 export const WindowState = {
