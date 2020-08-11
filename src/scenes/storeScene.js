@@ -734,6 +734,8 @@ export class StoreScene extends Phaser.Scene {
 
         //Load in the music
         this.load.audio('bg_music', 'sounds/supermarket/Supermarket.mp3');
+        this.load.audio('pickup', 'sounds/supermarket/pickup.wav');
+        this.load.audio('cashier', 'sounds/supermarket/cashier.mp3');
 
         this.nextCardArrow = this.load.spritesheet(
             'next-card-arrow',
@@ -780,6 +782,9 @@ export class StoreScene extends Phaser.Scene {
                 target_objects.push(secondObject);
                 this.shoppingBasket.push('pate_spaghetti02');
             }
+
+            // play the sound
+            this.pickupSound.play();
 
             // Move to basket
             this.tweens.add({
@@ -849,6 +854,9 @@ export class StoreScene extends Phaser.Scene {
         this.music = this.sound.add('bg_music');
         this.music.play({loop: true});
 
+        this.pickupSound = this.sound.add('pickup');
+        this.cashierSound = this.sound.add('cashier');
+
         // Update the saved data
         player.cur_scene = Scenes.STORE;
         player.saveGame();
@@ -888,6 +896,9 @@ export class StoreScene extends Phaser.Scene {
                 this.basket.destroy();
                 this.basket_front.destroy();
                 this.checklist.destroy();
+
+                // play the sound
+                this.cashierSound.play(); 
 
                 // Iterate through basket items and remove their sprites
                 for(let i in this.shoppingBasket) {
