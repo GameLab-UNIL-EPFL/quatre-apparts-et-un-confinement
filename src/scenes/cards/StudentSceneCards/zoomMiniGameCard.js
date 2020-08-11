@@ -234,7 +234,6 @@ export class ZoomMiniGameCard extends Card {
     preload() {
         super.preload();
 
-        console.log("Loading sound for month:", this.month);
         console.log("Loading sound for scene: ", this.scene_key);
 
         //Load sounds
