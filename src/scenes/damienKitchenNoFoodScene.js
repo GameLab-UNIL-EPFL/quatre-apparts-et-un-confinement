@@ -12,7 +12,7 @@ export class DamienKitchenNoFood extends Phaser.Scene {
 
     preload() {
         this.dialogue.preload();
-        this.load.image('damien_kitchen_no_food_bg', "sprites/StudentScene/KitchenCard/cuisine_01_00-model.jpg");
+        this.load.image('damien_kitchen_no_food_bg', "sprites/StudentScene/Frigo/frigo01_00-model.jpg");
     }
 
     create() {
