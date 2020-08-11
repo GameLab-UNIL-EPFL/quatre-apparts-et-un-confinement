@@ -166,7 +166,7 @@ export class StatsScene extends Phaser.Scene {
 
             let name = "";
             let text = "";
-            let disaplayPercent = percent;
+            let displayPercent = percent;
 
             switch(choice) {
             case 'kids_park':
@@ -175,8 +175,8 @@ export class StatsScene extends Phaser.Scene {
                 if(player.kids_park) {
                     text = "Vous et " + percent + "% des joueurs avez choisi d’amener les enfants au parc.";
                 } else {
-                    disaplayPercent = (100 - percent);
-                    text = "Vous et " + disaplayPercent + "% des joueurs avez choisi de ne pas aller au parc.";
+                    displayPercent = (100 - percent);
+                    text = "Vous et " + displayPercent + "% des joueurs avez choisi de ne pas aller au parc.";
                 }
                 break;
 
@@ -186,8 +186,8 @@ export class StatsScene extends Phaser.Scene {
                 if(player.suzanne_hair) {
                     text = "Vous et " + percent + "% des joueurs avez choisi d'aller chez le coiffeur.";
                 } else {
-                    disaplayPercent = (100 - percent);
-                    text = "Vous et " + disaplayPercent + "% des joueurs avez choisi de ne pas aller chez le coiffeur.";
+                    displayPercent = (100 - percent);
+                    text = "Vous et " + displayPercent + "% des joueurs avez choisi de ne pas aller chez le coiffeur.";
                 }
                 break;
 
@@ -195,8 +195,8 @@ export class StatsScene extends Phaser.Scene {
                 name = "Damien";
 
                 if(player.damien_gone) {
-                    disaplayPercent = (100 - percent);
-                    text = "Vous et " + disaplayPercent + "% des joueurs avez choisi de sortir voir votre copine.";
+                    displayPercent = (100 - percent);
+                    text = "Vous et " + displayPercent + "% des joueurs avez choisi de sortir voir votre copine.";
                 } else {
                     text = "Vous et " + percent + "% des joueurs avez choisi de rester à la maison.";
                 }
@@ -206,8 +206,8 @@ export class StatsScene extends Phaser.Scene {
                 name = "Patrick";
 
                 if(player.nathan_failed) {
-                    disaplayPercent = (100 - percent);
-                    text = "Vos conseils et ceux de " + disaplayPercent + "% des joueurs ont brisé un couple.";
+                    displayPercent = (100 - percent);
+                    text = "Vos conseils et ceux de " + displayPercent + "% des joueurs ont brisé un couple.";
                 } else {
                     text = "Vos conseils et ceux de " + percent + "% des joueurs ont sauvé un couple.";
                 }
@@ -259,7 +259,7 @@ export class StatsScene extends Phaser.Scene {
             );
 
             const percentage_bar_fill = this.add.image(
-                percentage_bar_bg.x + 5,
+                percentage_bar_bg.x + 3,
                 percentage_bar_bg.y + 5,
                 'percentage_bar_fill'
             );
@@ -270,7 +270,7 @@ export class StatsScene extends Phaser.Scene {
             percentage_bar_bg.setDepth(10);
             percentage_bar_fill.setDepth(10);
             
-            percentage_bar_fill.displayWidth *= (disaplayPercent/100);
+            percentage_bar_fill.displayWidth *= (displayPercent/100);
             percentage_bar_fill.displayHeight *= 0.95;
             
             //Add the inverted fill for the rest of the bar
@@ -283,12 +283,12 @@ export class StatsScene extends Phaser.Scene {
             percentage_bar_fill_wrong.setOrigin(0, 0);
             percentage_bar_fill_wrong.setDepth(10);
 
-            percentage_bar_fill_wrong.displayWidth *= (1 - (disaplayPercent/100));
+            percentage_bar_fill_wrong.displayWidth *= (1 - (displayPercent/100));
             percentage_bar_fill_wrong.displayHeight *= 0.95; 
 
             //Colors
-            percentage_bar_fill.setTint("0x00ff00");
-            percentage_bar_fill_wrong.setTint("0xff0000");
+            percentage_bar_fill.setTint("0xa2d9ce");
+            percentage_bar_fill_wrong.setTint("0xf8c471");
 
             //Update the vertical offset
             y_offset += offset * 1.5;
