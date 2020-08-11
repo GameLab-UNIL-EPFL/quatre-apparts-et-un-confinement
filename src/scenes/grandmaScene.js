@@ -72,6 +72,7 @@ export class GrandmaScene extends Phaser.Scene {
         this.current_card = this.livingRoomCard;
         this.card_idx = GrandmaCards.LIVING_ROOM;
 
+        this.current_sound = null;
         this.radioSound = null;
         this.radioSound02 = null;
         this.radioMusic = null;
@@ -90,8 +91,8 @@ export class GrandmaScene extends Phaser.Scene {
         }
 
         this.month = data.month;
-        this.month = Months.MARCH;
-        console.log(this.month);
+        console.log('Current month:', this.month);
+
         // load sound after preload()
         this.load.audio("radioSound", "sounds/grandma/" + this.month + "_radio.mp3");
         this.load.audio("radioSound02", "sounds/grandma/" + this.month + "2_radio.mp3");
@@ -101,6 +102,7 @@ export class GrandmaScene extends Phaser.Scene {
             if(file === 'radioSound') {
                 this.radioSound = this.sound.add('radioSound');
                 this.radioSound.play();
+                this.current_sound = this.radioSound;
             } else if (file === 'radioSound02') {
                 this.radioSound02 = this.sound.add('radioSound02');
             } else if (file === 'radioMusic') {
@@ -190,6 +192,24 @@ export class GrandmaScene extends Phaser.Scene {
         if(this.current_card.notifyObjectiveMet) {
             this.current_card.notifyObjectiveMet(status);
         }
+        console.log('Grandmascard radio?', this.card_idx === GrandmaCards.RADIO, this.card_idx);
+        if(this.card_idx === GrandmaCards.RADIO) {
+            console.log('Radio');
+            if(this.radioSound02 !== null) {
+                if(this.radioSound !== null) {
+                    this.radioSound.stop();
+                }
+            }
+            if(status === 'radio-music') {
+                this.current_sound.stop();
+                this.radioMusic.play();
+                this.current_sound = this.radioMusic;
+            } else {
+                this.current_sound.stop();
+                this.radioSound02.play();
+                this.current_sound = this.radioSound02;
+            }
+        }
     }
 
     /**
@@ -207,24 +227,18 @@ export class GrandmaScene extends Phaser.Scene {
         switch(card) {
         case GrandmaCards.LIVING_ROOM:
             this.current_card = this.livingRoomCard;
+            this.card_idx = GrandmaCards.LIVING_ROOM;
             break;
 
         case GrandmaCards.RADIO:
             this.current_card = this.radioCard;
+            this.card_idx = GrandmaCards.RADIO;
             callback = (scene) => scene.dialogue.display("radio");
-            if(this.radioSound02 !== null) {
-                if(this.radioSound !== null) {
-                    this.radioSound.stop();
-                }
-                // TODO: should depend on Grandma choice
-                this.radioSound02.play();
-                // or: this.radioMusic.play();
-            }
-
             break;
 
         case GrandmaCards.CALENDAR:
             this.current_card = this.calendarCard;
+            this.card_idx = GrandmaCards.CALENDAR;
             callback = (scene) => scene.dialogue.display("calendrier");
             break;
         }
@@ -238,6 +252,10 @@ export class GrandmaScene extends Phaser.Scene {
 
     nextScene() {
         this.cameras.main.fadeOut(1000);
+        if(this.current_sound !== null) {
+            this.current_sound.stop();
+        }
+
         if(this.month === Months.MARCH) {
             this.scene.start(Scenes.BUILDING, {
                 mainMenu: false,
