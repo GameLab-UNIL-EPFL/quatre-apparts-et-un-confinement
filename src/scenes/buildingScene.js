@@ -8,7 +8,8 @@ import { BusCards } from "./busScene";
 export const Months = {
     MARCH: 'march',
     APRIL: 'april',
-    MAY: 'may'
+    MAY: 'may',
+    JUNE: 'june'
 };
 
 export const WindowState = {
@@ -490,13 +491,13 @@ export class BuildingScene extends Phaser.Scene {
         this.cameras.main.fadeIn(1000);
 
         // TODO: rerecord birdTraffic sound
-        this.bird = this.sound.add("bird");
-        this.theme = this.sound.add("theme");
+        this.birdSound = this.sound.add("bird");
+        this.themeSong = this.sound.add("theme");
         this.clickSound = this.sound.add("click");
-        this.bird.play({volume: 0.3});
+        this.birdSound.play();
 
         if(this.buildingSound) {
-            this.theme.play({volume: 0.8});
+            this.themeSong.play({loop: true});
         }
 
         this.input.on('gameobjectdown',
@@ -510,8 +511,8 @@ export class BuildingScene extends Phaser.Scene {
                         duration: 800
                     });
 
-                    this.theme.stop();
-                    this.bird.stop();
+                    this.themeSong.stop();
+                    this.birdSound.stop();
                 }
             }
         );
