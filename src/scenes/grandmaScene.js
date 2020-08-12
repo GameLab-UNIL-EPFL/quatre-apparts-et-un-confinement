@@ -94,19 +94,19 @@ export class GrandmaScene extends Phaser.Scene {
         console.log('Current month:', this.month);
 
         // load sound after preload()
-        this.load.audio("radioSound", "sounds/grandma/" + this.month + "_radio.mp3");
-        this.load.audio("radioSound02", "sounds/grandma/" + this.month + "2_radio.mp3");
-        this.load.audio("radioMusic", "sounds/grandma/" + this.month + "_music.mp3");
+        this.load.audio("radioSound" + this.month, "sounds/grandma/" + this.month + "_radio.mp3");
+        this.load.audio("radioSound02" + this.month, "sounds/grandma/" + this.month + "2_radio.mp3");
+        this.load.audio("radioMusic" + this.month, "sounds/grandma/" + this.month + "_music.mp3");
 
         this.load.on('filecomplete', (file) => {
-            if(file === 'radioSound') {
-                this.radioSound = this.sound.add('radioSound');
+            if(file === 'radioSound' + this.month) {
+                this.radioSound = this.sound.add('radioSound' + this.month);
                 this.radioSound.play();
                 this.current_sound = this.radioSound;
-            } else if (file === 'radioSound02') {
-                this.radioSound02 = this.sound.add('radioSound02');
-            } else if (file === 'radioMusic') {
-                this.radioMusic = this.sound.add('radioMusic');
+            } else if (file === 'radioSound02' + this.month) {
+                this.radioSound02 = this.sound.add('radioSound02' + this.month);
+            } else if (file === 'radioMusic' + this.month) {
+                this.radioMusic = this.sound.add('radioMusic' + this.month);
             }
         },
         this);
