@@ -32,6 +32,10 @@ export class IntroCard extends Card {
             'sprites/StudentScene/IntroCard/Case01-01-spritesheet-sonnerie-280x180.png',
             { frameWidth: 280, frameHeight: 180 }
         );
+
+        //Load the sounds
+        this.parent_scene.load.audio("alarm", "sounds/damien/alarmClock.wav");
+        this.parent_scene.load.audio("vibrate", "sounds/damien/vibration.wav");
     }
 
     /**
@@ -70,6 +74,13 @@ export class IntroCard extends Card {
             },
             this.parent_scene
         );
+
+        // add sounds
+        this.alarmSound = this.parent_scene.sound.add("alarm");
+        this.vibrateSound = this.parent_scene.sound.add("vibrate");
+
+        this.alarmSound.play({loop: true});
+        this.vibrateSound.play({loop: true});
     }
 
     /**

@@ -126,6 +126,7 @@ export class LivingRoomCard extends Card {
         this.parent_scene.load.image("grandma_book2", "sprites/GrandmaScene/grandma_book_02.png");
         this.parent_scene.load.image("grandma_book3", "sprites/GrandmaScene/grandma_book_03.png");
 
+        // Load sounds
         this.parent_scene.load.audio("pageTurn", "sounds/grandma/pageTurn.wav");
         this.parent_scene.load.audio("meow", "sounds/grandma/meow.wav");
 
@@ -173,11 +174,22 @@ export class LivingRoomCard extends Card {
 
         if(this.parent_scene.month === Months.MARCH) {
             this.children[this.children.length - 2].highlight_sprite.setDepth(3);
+
         }
 
+        // this.radioSound01 = this.parent_scene.sound.add("radioSound01");
+
+        // TODO this.radioSound02.play(); quand on appuie sur la radio -> écouter les nouvelles
+        // TODO this.radioMusic.play(); quand on appuie sur la radio -> écouter de la musique
+        // this.radioSound02 = this.parent_scene.sound.add("radioSound02");
+        // this.radioMusic = this.parent_scene.sound.add("radioMusic");
+        //
+        // this.radioSound01.play();
+
+
         //Add sound to the scene
-        this.page = this.parent_scene.sound.add("pageTurn");
-        this.meow = this.parent_scene.sound.add("meow");
+        this.pageSound = this.parent_scene.sound.add("pageTurn");
+        this.meowSound = this.parent_scene.sound.add("meow");
 
         //=========HANDLE_ANIMATIONS=========
 
@@ -196,7 +208,7 @@ export class LivingRoomCard extends Card {
             'cat'
         ).play('cat-tail')
             .setInteractive()
-            .on('pointerdown', () => this.meow.play());
+            .on('pointerdown', () => this.meowSound.play());
 
 
         if(this.parent_scene.month === Months.MARCH) {
@@ -216,7 +228,6 @@ export class LivingRoomCard extends Card {
             ).play('books_h_anim');
         }
 
-        this.page = this.parent_scene.sound.add("pageTurn");
 
         //Update the phone's onclickcallback
         this.children[7].updateOnClickCallback(
@@ -364,7 +375,7 @@ export class LivingRoomCard extends Card {
                     "grandma_book1"
                 );
 
-                this.page.play();
+                this.pageSound.play();
 
                 //Trigger the book's dialogue
                 this.parent_scene.dialogue.display("livre1");
@@ -377,7 +388,7 @@ export class LivingRoomCard extends Card {
                     "grandma_book2"
                 );
 
-                this.page.play();
+                this.pageSound.play();
 
                 //Trigger the book's dialogue
                 this.parent_scene.dialogue.display("livre2");
@@ -390,7 +401,7 @@ export class LivingRoomCard extends Card {
                     "grandma_book3"
                 );
 
-                this.page.play();
+                this.pageSound.play();
 
                 //Trigger the book's dialogue
                 this.parent_scene.dialogue.display("livre3");
