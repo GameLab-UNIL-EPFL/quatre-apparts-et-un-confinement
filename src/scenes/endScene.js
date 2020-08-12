@@ -59,7 +59,7 @@ export class EndScene extends Phaser.Scene {
         Saara Jones: Récit, Conception sonore<br>
         Yannick Rochat: Gestion de projet, Conseil<br>
         Paul Ronga: Gestion de projet, Programmation</p>
-        <p>Vos commentaires sont les bienvenus à l’adresse: <a href="mailto:data@letemps.ch">data@letemps.ch</a></p>`
+        <p>Vos commentaires sont les bienvenus à l’adresse: <a href="mailto:data@letemps.ch">data@letemps.ch</a></p>`;
 
         divTeam.classList.add('team');
 
@@ -93,27 +93,27 @@ export class EndScene extends Phaser.Scene {
     }
 
     nextCard() {
-      console.log('nextCard()')
-      if(this.cardIdx === EndCards.FIRST_SCREEN) {
-          this.tweens.add({
-              targets: [this.firstScreenContainer],
-              x: -1200,
-              duration: 500,
-              ease: 'Quadratic',
-              yoyo: false,
-              loop: 0
-          });
-          this.tweens.add({
-              targets: [this.firstScreenContainer, this.divRepo],
-              y: 0,
-              duration: 500,
-              ease: 'Quadratic',
-              yoyo: false,
-              loop: 0
-          });
-      } else {
-          this.nextScene();
-      }
+        console.log('nextCard()');
+        if(this.cardIdx === EndCards.FIRST_SCREEN) {
+            this.tweens.add({
+                targets: [this.firstScreenContainer],
+                x: -1200,
+                duration: 500,
+                ease: 'Quadratic',
+                yoyo: false,
+                loop: 0
+            });
+            this.tweens.add({
+                targets: [this.firstScreenContainer, this.divRepo],
+                y: 0,
+                duration: 500,
+                ease: 'Quadratic',
+                yoyo: false,
+                loop: 0
+            });
+        } else {
+            this.nextScene();
+        }
     }
 
     nextScene() {
