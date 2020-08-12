@@ -95,16 +95,16 @@
 			{
 				"text": ["Je suis vraiment désolé. T'as raison, je n'aurais pas dû venir chez toi."],
 				"preview": "J'aurais pas dû.",
-				"goto": ""
+				"goto": "merci"
             },
             "rep2":
 			{
 				"text": ["J'espère que ça va aller et qu'il va s'en remettre."],
 				"preview": "J'espère que ça va aller.",
-				"goto": ""
+				"goto": "merci"
             }
         },
-		"goto": []
+		"goto": ["merci"]
     },
     "malade": {
 		"name": "Copine",
@@ -131,16 +131,16 @@
 			{
 				"text": ["Je suis vraiment désolé. T'as raison, j'aurais pas dû venir chez toi."],
 				"preview": "J'aurais pas dû.",
-				"goto": ""
+				"goto": "merci"
             },
             "rep2":
 			{
 				"text": ["J'espère que ça va aller et qu'il va s'en remettre."],
 				"preview": "J'espère que ça va aller.",
-				"goto": ""
+				"goto": "merci"
             }
         },
-        "goto": []
+        "goto": ["merci"]
     },
     "pasSorti": {
 		"name": "Copine",
@@ -150,16 +150,16 @@
 			{
 				"text": ["Désolé, j'étais en train de faire les courses. Qu'est-ce qu'il y a?"],
 				"preview": "Faire les courses",
-				"goto": "covid"
+				"goto": "pere"
             },
             "rep2":
 			{
 				"text": ["Désolé, j'ai pas entendu mon natel."],
 				"preview": "Pas entendu",
-				"goto": "covid"
+				"goto": "pere"
 			}
         },
-		"goto": ["covid"]
+		"goto": ["pere"]
 	},
 	"pere": {
 		"name": "Copine",
@@ -169,16 +169,16 @@
 			{
 				"text": ["Comment ça???"],
 				"preview": "Comment ça?",
-				"goto": "toi"
+				"goto": "client"
             },
             "rep2":
 			{
 				"text": ["Quoi??? Mais comment c'est possible?"],
 				"preview": "Quoi?",
-				"goto": "toi"
+				"goto": "client"
 			}
         },
-		"goto": ["toi"]
+		"goto": ["client"]
 	},
 	"client": {
 		"name": "Copine",
@@ -190,12 +190,12 @@
 			{
 				"text": ["Mais il portait un masque au travail, non?"],
 				"preview": "Il portait un masque.",
-				"goto": "masque2"
+				"goto": "leMasque"
             }
         },
-		"goto": ["masque2"]
+		"goto": ["leMasque"]
     },
-    "masque2": {
+    "leMasque": {
 		"name": "Copine",
         "text": [
             "Ben le masque ça protège pas forcément…"
@@ -214,7 +214,7 @@
 				"goto": "asymp"
             }
         },
-		"goto": []
+		"goto": ["asymp"]
     },
     "asymp": {
 		"name": "Copine",
@@ -226,9 +226,17 @@
 			{
 				"text": ["D'acc. J'espère que ça va aller et qu'il va vite s'en remettre."],
 				"preview": "J'espère que ça va aller.",
-				"goto": ""
+				"goto": "merci"
             }
         },
-        "goto": []
-    }
+        "goto": ["merci"]
+	},
+	"merci": {
+		"name": "Copine",
+		"text": [
+			"Merci, j'espère aussi."
+		],
+		"choices": {},
+		"goto": []
+	}
 }
