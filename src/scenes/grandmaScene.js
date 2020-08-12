@@ -94,61 +94,22 @@ export class GrandmaScene extends Phaser.Scene {
         console.log('Current month:', this.month);
 
         // load sound after preload()
-        if(this.month === Months.MARCH) {
-            this.load.audio("radioSound01", "sounds/grandma/" + this.month + "_radio.mp3");
-            this.load.audio("radioSound02", "sounds/grandma/" + this.month + "2_radio.mp3");
-            this.load.audio("radioMusic01", "sounds/grandma/" + this.month + "_music.mp3");
-        } else if(this.month === Months.APRIL) {
-            this.load.audio("radioSound03", "sounds/grandma/" + this.month + "_radio.mp3");
-            this.load.audio("radioSound04", "sounds/grandma/" + this.month + "2_radio.mp3");
-            this.load.audio("radioMusic02", "sounds/grandma/" + this.month + "_music.mp3");
-        } else {
-            this.load.audio("radioSound05", "sounds/grandma/" + this.month + "_radio.mp3");
-            this.load.audio("radioSound06", "sounds/grandma/" + this.month + "2_radio.mp3");
-            this.load.audio("radioMusic03", "sounds/grandma/" + this.month + "_music.mp3");
-        }
-        
-        if(this.month === Months.MARCH) {
-            this.load.on('filecomplete', (file) => {
-                if(file === 'radioSound01') {
-                    this.radioSound = this.sound.add('radioSound01');
-                    this.radioSound.play();
-                    this.current_sound = this.radioSound;
-                } else if (file === 'radioSound02') {
-                    this.radioSound02 = this.sound.add('radioSound02');
-                } else if (file === 'radioMusic01') {
-                    this.radioMusic = this.sound.add('radioMusic01');
-                }
-            },
-            this);
-        } else if(this.month === Months.APRIL) {
-            this.load.on('filecomplete', (file) => {
-                if(file === 'radioSound03') {
-                    this.radioSound = this.sound.add('radioSound03');
-                    this.radioSound.play();
-                    this.current_sound = this.radioSound;
-                } else if (file === 'radioSound04') {
-                    this.radioSound02 = this.sound.add('radioSound04');
-                } else if (file === 'radioMusic02') {
-                    this.radioMusic = this.sound.add('radioMusic02');
-                }
-            },
-            this);
-        } else {
-            this.load.on('filecomplete', (file) => {
-                if(file === 'radioSound05') {
-                    this.radioSound = this.sound.add('radioSound05');
-                    this.radioSound.play();
-                    this.current_sound = this.radioSound;
-                } else if (file === 'radioSound06') {
-                    this.radioSound02 = this.sound.add('radioSound06');
-                } else if (file === 'radioMusic') {
-                    this.radioMusic = this.sound.add('radioMusic03');
-                }
-            },
-            this);
-        }
-        
+        this.load.audio("radioSound", "sounds/grandma/" + this.month + "_radio.mp3");
+        this.load.audio("radioSound02", "sounds/grandma/" + this.month + "2_radio.mp3");
+        this.load.audio("radioMusic", "sounds/grandma/" + this.month + "_music.mp3");
+
+        this.load.on('filecomplete', (file) => {
+            if(file === 'radioSound') {
+                this.radioSound = this.sound.add('radioSound');
+                this.radioSound.play();
+                this.current_sound = this.radioSound;
+            } else if (file === 'radioSound02') {
+                this.radioSound02 = this.sound.add('radioSound02');
+            } else if (file === 'radioMusic') {
+                this.radioMusic = this.sound.add('radioMusic');
+            }
+        },
+        this);
         this.load.start();
 
         if(data.month === Months.MARCH) {

@@ -237,15 +237,7 @@ export class ZoomMiniGameCard extends Card {
         console.log("Loading sound for month:", this.month);
 
         //Load sounds
-        if(this.scene_key === Scenes.DAMIEN_INIT) {
-            this.parent_scene.load.audio("music1", "sounds/ZoomMiniGame/ZoomGame_" + this.scene_key + ".mp3");
-        } else if(this.scene_key === Scenes.DAMIEN_COMPUTER) {
-            this.parent_scene.load.audio("music2", "sounds/ZoomMiniGame/ZoomGame_" + this.scene_key + ".mp3");
-        } else {
-            console.log("else");
-            this.parent_scene.load.audio("music3", "sounds/ZoomMiniGame/ZoomGame_" + this.scene_key + ".mp3");
-        }
-        
+        this.parent_scene.load.audio("music", "sounds/ZoomMiniGame/ZoomGame_" + this.scene_key + ".mp3");
         this.parent_scene.load.audio("wrong", "sounds/ZoomMiniGame/wrong.wav");
         this.parent_scene.load.audio("right", "sounds/ZoomMiniGame/right.wav");
         this.parent_scene.load.audio("lose", "sounds/ZoomMiniGame/Lose.wav");
@@ -580,14 +572,7 @@ export class ZoomMiniGameCard extends Card {
         arrow.depth = 20;
 
         //starts the song at the beginning of the scene
-        if(this.scene_key === Scenes.DAMIEN_INIT) {
-            this.music = this.parent_scene.sound.add("music1");
-        } else if(this.scene_key === Scenes.DAMIEN_COMPUTER) {
-            this.music = this.parent_scene.sound.add("music2");
-        } else {
-            this.music = this.parent_scene.sound.add("music3");
-        }
-        
+        this.music = this.parent_scene.sound.add("music");
         this.wrong = this.parent_scene.sound.add("wrong");
         this.right = this.parent_scene.sound.add("right");
         this.lose = this.parent_scene.sound.add("lose");
