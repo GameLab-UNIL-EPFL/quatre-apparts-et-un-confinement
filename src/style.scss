@@ -34,10 +34,26 @@ body {
 canvas {
 	// border: 2px dashed orange;
 }
-div.repo {
+div.repo, div.team {
 	width: 800px;
 	max-width: 80%;
-	height: 2000px;
+	font-size: 40px;
+
+	p {
+		margin-top: 20px;
+	}
+
+	h4 {
+		margin-top: 40px;
+		font-family: "OpenSans-Bold";
+		font-size: 44px;
+	}
+}
+div.team {
+	height: 600px;
+}
+div.repo {
 	font-size: 44px;
-	overflow-y: scroll;
+	// overflow-y: scroll;
+	height: 1000px;
 }

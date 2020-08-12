@@ -2,6 +2,11 @@ import Phaser from "phaser";
 import { Scenes } from "../core/player.js";
 import { WindowState, Months } from "./buildingScene.js";
 
+export const EndCards = {
+    FIRST_SCREEN: 0,
+    SECOND_SCREEN: 1
+};
+
 export class EndScene extends Phaser.Scene {
     constructor() {
         super({ key: Scenes.END_SCENE });
@@ -14,12 +19,22 @@ export class EndScene extends Phaser.Scene {
             'sprites/GrandmaScene/cat.png',
             { frameWidth: 320, frameHeight: 240 }
         );
+
+        this.cardIdx = EndCards.FIRST_SCREEN;
     }
 
     create() {
         this.cameras.main.centerOn(0, 0);
         this.cameras.main.fadeIn(1000);
         this.cameras.main.setBackgroundColor("#f4e1c5");
+
+        this.thank_you = this.add.text(
+            0,
+            -600,
+            "Merci d'avoir joué !",
+            {font: 55 + "px OpenSans", fill: "#27303A"}
+        );
+        this.thank_you.setOrigin(0.5,0.5);
 
         // Create cat sprites
         this.anims.create({
@@ -36,24 +51,69 @@ export class EndScene extends Phaser.Scene {
             'cat'
         ).play('cat-tail');
 
+        let divTeam = document.createElement('div');
+
+        divTeam.innerHTML =  `<h4>Membres de l’équipe</h4>
+        <p>Andrew Dobis: Programmation<br>
+        Mathias Hängärtner: Graphisme<br>
+        Saara Jones: Récit, Conception sonore<br>
+        Yannick Rochat: Gestion de projet, Conseil<br>
+        Paul Ronga: Gestion de projet, Programmation</p>
+        <p>Vos commentaires sont les bienvenus à l’adresse: <a href="mailto:data@letemps.ch">data@letemps.ch</a></p>`;
+
+        divTeam.classList.add('team');
+
+        this.divTeam = this.add.dom(0, 200, divTeam);
+        this.divTeam.setOrigin(0.5, 0.5);
+
+        this.firstScreenContainer = this.add.container();
+        this.firstScreenContainer.add(this.cat_anim);
+        this.firstScreenContainer.add(this.divTeam);
+        this.firstScreenContainer.add(this.thank_you);
+
         let divRepo = document.createElement('div');
-        // divRepo.style = '';
         divRepo.classList.add('repo');
-        divRepo.innerHTML = 'Ce jeu est en licence libre, ce qui signifie que le code source, les dessins et les sons peuvent être réutilisés. <a target="_blank" href="https://github.com/IMI-initiative/quatre-apparts-et-un-confinement">En savoir plus</a> <br> <br> Ici peut-être qu’on a moyen de mettre du texte dans lequel on peut scroller? Ici peut-être qu’on a moyen de mettre du texte dans lequel on peut scroller?  Ici peut-être qu’on a moyen de mettre du texte dans lequel on peut scroller?  Ici peut-être qu’on a moyen de mettre du texte dans lequel on peut scroller?  Ici peut-être qu’on a moyen de mettre du texte dans lequel on peut scroller?  Ici peut-être qu’on a moyen de mettre du texte dans lequel on peut scroller?  Ici peut-être qu’on a moyen de mettre du texte dans lequel on peut scroller?  Ici peut-être qu’on a moyen de mettre du texte dans lequel on peut scroller?  Ici peut-être qu’on a moyen de mettre du texte dans lequel on peut scroller?  Ici peut-être qu’on a moyen de mettre du texte dans lequel on peut scroller?  Ici peut-être qu’on a moyen de mettre du texte dans lequel on peut scroller?  Ici peut-être qu’on a moyen de mettre du texte dans lequel on peut scroller?  Ici peut-être qu’on a moyen de mettre du texte dans lequel on peut scroller?  Ici peut-être qu’on a moyen de mettre du texte dans lequel on peut scroller?  Ici peut-être qu’on a moyen de mettre du texte dans lequel on peut scroller?  Ici peut-être qu’on a moyen de mettre du texte dans lequel on peut scroller?  Ici peut-être qu’on a moyen de mettre du texte dans lequel on peut scroller? ';
+        divRepo.innerHTML = `<p>Ce jeu est en licence libre, ce qui signifie que le code source, les dessins et les sons peuvent être réutilisés.
+        <a target="_blank" href="https://github.com/IMI-initiative/quatre-apparts-et-un-confinement">En savoir plus</a></p>
+        <h4>Organisation et soutien</h4>
+        <p><a href="https://www.media-initiative.ch">Initiative pour l’innovation dans les médias (IMI)</a><br>
+        <a href="https://www.letemps.ch">Le Temps</a><br>
+        <a href="https://www.epfl.ch/schools/cdh/fr/">Collège des humanités (CDH), EPFL</a>
+        <a href="https://wp.unil.ch/gamelab/">UNIL Gamelab</a></p>
 
-        this.add.dom(0, 1000, divRepo);
+        <h4>Un grand merci à nos testeurs</h4>
+        <p>Lesli__e, Vincent, Sashiro (formule pour remercier aussi tous ceux qui préféraient ne pas être mentionnés)</p>
+        `;
 
-        //Add name text
-        this.text = this.add.text(
-            0,
-            -600,
-            "Merci d'avoir joué !",
-            {font: 55 + "px OpenSans", fill: "#27303A"}
-        );
+        this.divRepo = this.add.dom(0, -2600, divRepo);
+        this.divRepo.setOrigin(0.5, 0.5);
 
-        this.text.setOrigin(0.5,0.5);
+        this.input.on('pointerdown', () => this.nextCard(), this);
+        this.divTeam.on('pointerdown', () => this.nextCard(), this);
+    }
 
-        this.input.on('pointerdown', () => this.nextScene(), this);
+    nextCard() {
+        console.log('nextCard()');
+        if(this.cardIdx === EndCards.FIRST_SCREEN) {
+            this.tweens.add({
+                targets: [this.firstScreenContainer],
+                x: -1200,
+                duration: 500,
+                ease: 'Quadratic',
+                yoyo: false,
+                loop: 0
+            });
+            this.tweens.add({
+                targets: [this.firstScreenContainer, this.divRepo],
+                y: 0,
+                duration: 500,
+                ease: 'Quadratic',
+                yoyo: false,
+                loop: 0
+            });
+        } else {
+            this.nextScene();
+        }
     }
 
     nextScene() {
