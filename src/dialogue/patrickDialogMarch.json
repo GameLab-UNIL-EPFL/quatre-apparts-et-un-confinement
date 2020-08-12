@@ -17,6 +17,15 @@
         "choices": [],
 		"goto": []
 	},
+	"hint": {
+		"name": "Patrick",
+		"text": [
+			"Plus de boulot, plus de sorties et plus rien à la télé...",
+			"Je m'ennuie... Peut-être que je pourrais appeler Nathan."
+		],
+		"choices": [],
+		"goto": []
+	},
     "telephone": {
 		"name": "Patrick",
 		"text": ["Qui pourrais-je bien contacter?"],
