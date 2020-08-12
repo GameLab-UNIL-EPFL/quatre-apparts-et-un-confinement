@@ -173,7 +173,7 @@ export class StatsScene extends Phaser.Scene {
                 name = "Florence";
 
                 if(player.kids_park) {
-                    text = "Vous et " + percent + "% des joueurs avez choisi d’amener les enfants au parc.";
+                    text = "Vous et " + displayPercent + "% des joueurs avez choisi d’amener les enfants au parc.";
                 } else {
                     displayPercent = (100 - percent);
                     text = "Vous et " + displayPercent + "% des joueurs avez choisi de ne pas aller au parc.";
@@ -184,7 +184,7 @@ export class StatsScene extends Phaser.Scene {
                 name = "Suzanne";
 
                 if(player.suzanne_hair) {
-                    text = "Vous et " + percent + "% des joueurs avez choisi d'aller chez le coiffeur.";
+                    text = "Vous et " + displayPercent + "% des joueurs avez choisi d'aller chez le coiffeur.";
                 } else {
                     displayPercent = (100 - percent);
                     text = "Vous et " + displayPercent + "% des joueurs avez choisi de ne pas aller chez le coiffeur.";
@@ -198,7 +198,7 @@ export class StatsScene extends Phaser.Scene {
                     displayPercent = (100 - percent);
                     text = "Vous et " + displayPercent + "% des joueurs avez choisi de sortir voir votre copine.";
                 } else {
-                    text = "Vous et " + percent + "% des joueurs avez choisi de rester à la maison.";
+                    text = "Vous et " + displayPercent + "% des joueurs avez choisi de rester à la maison.";
                 }
                 break;
 
@@ -209,7 +209,7 @@ export class StatsScene extends Phaser.Scene {
                     displayPercent = (100 - percent);
                     text = "Vos conseils et ceux de " + displayPercent + "% des joueurs ont brisé un couple.";
                 } else {
-                    text = "Vos conseils et ceux de " + percent + "% des joueurs ont sauvé un couple.";
+                    text = "Vos conseils et ceux de " + displayPercent + "% des joueurs ont sauvé un couple.";
                 }
                 break;
             }
