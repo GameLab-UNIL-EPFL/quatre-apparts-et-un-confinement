@@ -103,6 +103,25 @@
         },
 		"goto": ["personne", "elise"]
 	},
+	"personne": {
+		"name": "Nathan",
+		"text": ["Je dis que t'as de la chance de pas être coincé", "avec quelqu'un toute la journée dans le même petit appart"],
+		"choices": {
+            "rep":
+			{
+				"text": ["C'est le pire moment pour être célibataire! Je préférerais être confiné avec quelqu'un."],
+				"preview": "C'est le pire",
+				"goto": "elise"
+            },
+            "rep2":
+			{
+				"text": ["On veut toujours ce qu'on a pas hein?"],
+				"preview": "On veut toujours ce qu'on a pas hein?",
+				"goto": "elise"
+			}
+        },
+		"goto": ["elise"]
+	},
 	"couple": {
 		"name": "Nathan",
         "text": [

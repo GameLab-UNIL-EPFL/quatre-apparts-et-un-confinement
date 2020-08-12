@@ -71,7 +71,7 @@
 	},
 	"bleiben": {
 		"name": "Radio",
-		"text": ["🎶 Bleiben Sie zuhause 🎶\n🎶 Bleiben Sie zuhause 🎶"],
+		"text": ["🎶 Radio Chill spécial déconfinement 🎶"],
 		"choices": [],
 		"goto": [],
     "objective": {

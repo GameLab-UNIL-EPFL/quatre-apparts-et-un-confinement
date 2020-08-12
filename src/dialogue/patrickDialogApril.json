@@ -225,7 +225,8 @@
     "independant": {
         "name": "Sandrine",
         "text": [
-            "Oups désolé, sujet sensible. J'ai une bonne nouvelle par contre, on organise une petite soirée chez Carlos.",
+			"Oups désolé, sujet sensible.", 
+			"J'ai une bonne nouvelle par contre, on organise une petite soirée chez Carlos.",
             "Tu veux venir?"
     	],
 		"choices": [

@@ -73,7 +73,7 @@
     },
     "bleiben": {
         "name": "Radio",
-        "text": ["🎶 Bleiben Sie zuhause 🎶\n🎶 Bleiben Sie zuhause 🎶"],
+        "text": ["🎶 Radio Jazz spécial confinement 🎶"],
         "choices": [],
         "goto": [],
         "objective": {
