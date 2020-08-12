@@ -66,13 +66,19 @@
 			"🔈 Veuillez rester chez vous."
 		],
 		"choices": [],
-		"goto": []
+		"goto": [],
+		"objective": {
+			"status": "radio-news"
+		}
 	},
 	"bleiben": {
 		"name": "Radio",
 		"text": ["🎶 Bleiben Sie zuhause 🎶\n🎶 Bleiben Sie zuhause 🎶"],
 		"choices": [],
-		"goto": []
+		"goto": [],
+		"objective": {
+			"status": "radio-music"
+		}
 	},
 	"telephone": {
 		"name": "Suzanne",

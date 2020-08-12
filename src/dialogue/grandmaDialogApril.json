@@ -66,13 +66,19 @@
             "🔈 27 avril - Réouverture des salons de coiffure, des magasins de bricolage et des jardineries."
         ],
         "choices": [],
-        "goto": []
+        "goto": [],
+        "objective": {
+          "status": "radio-news"
+        }
     },
     "bleiben": {
         "name": "Radio",
         "text": ["🎶 Bleiben Sie zuhause 🎶\n🎶 Bleiben Sie zuhause 🎶"],
         "choices": [],
-        "goto": []
+        "goto": [],
+        "objective": {
+          "status": "radio-music"
+        }
     },
     "telephone": {
         "name": "Suzanne",
@@ -327,8 +333,8 @@
     },
     "manque": {
         "name": "Sophie",
-        "text": ["Ils ne savent plus quoi inventer...", 
-            "Ils arrêtent pas de me demander quand ils pourront te revoir.", 
+        "text": ["Ils ne savent plus quoi inventer...",
+            "Ils arrêtent pas de me demander quand ils pourront te revoir.",
             "Tu leur manques beaucoup."
         ],
         "choices": [
@@ -345,8 +351,8 @@
         "text": [
             "Oui, et on peut refaire un Zoom bientôt!",
             "Sinon, j'arrive pas à te commander de la nourriture cette semaine.",
-            "Le temps d'attente pour la livraison est trop long.", 
-            "Est-ce que t'arriverais à demander à quelqu'un? Un voisin peut-être?", 
+            "Le temps d'attente pour la livraison est trop long.",
+            "Est-ce que t'arriverais à demander à quelqu'un? Un voisin peut-être?",
             "Je veux surtout pas que tu ailles faire les courses toi-même!"
         ],
         "choices": [
@@ -361,7 +367,7 @@
     "fin": {
         "name": "Sophie",
         "text": [
-            "Super! Bon, faut que je te laisse, j'entends plus les loulous.", 
+            "Super! Bon, faut que je te laisse, j'entends plus les loulous.",
             "Je pense qu'ils sont en train de faire des bêtises."],
         "choices": [
             {

@@ -35,9 +35,8 @@ export class Player {
      * @brief Constructor for the player class
      */
     constructor() {
-        // THIS IS TEMPORARY: We should actually query the database to get an ID without risking collisions
-        // base 36
         this.id = this.generateId();
+        this.version = 0.2;
         this.cur_scene = Scenes.INTRO;
         this.scene_data = {};
         this.dialogue_tree = {};
@@ -103,6 +102,7 @@ export class Player {
      * @brief Returns whether or not a save file exists
      */
     saveExists() {
+        // TODO: check if has “version” property and if current version is high enough
         return localStorage.getItem('game') !== null;
     }
 
@@ -111,6 +111,8 @@ export class Player {
      */
     saveGame() {
         let serialized_data = {
+            id: this.id,
+            version: this.version,
             scene: this.cur_scene,
             data: this.scene_data,
             tree: this.dialogue_tree,
@@ -146,6 +148,8 @@ export class Player {
             if(game_data) {
 
                 //Load all data into the player
+                this.id = game_data.id;
+                this.version = game_data.version;
                 this.dialogue_tree = game_data.tree;
                 this.cur_scene = game_data.scene;
                 this.scene_data = game_data.data;
