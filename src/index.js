@@ -58,7 +58,8 @@ function getScale(innerWidth, innerHeight) {
     const height = 1600; // default height
     let width = 1200; // default width
     const targetRatio = width / height;
-    const minRatio = 0.45;
+    // Initial targeted ratio: 0.45
+    const minRatio = 0.51;
 
     if(innerRatio < targetRatio) {
         if(innerRatio >= minRatio) {
@@ -149,3 +150,12 @@ window.addEventListener(
     },
     false
 );
+
+function handleSticky(agree) {
+    if(agree === true) {
+        player.enableStats();
+    }
+    document.getElementById('sticky-container').classList.add('closed');
+}
+document.getElementById('stickyYes').addEventListener("click", () => handleSticky(true) );
+document.getElementById('stickyNo').addEventListener("click", () => handleSticky(false) );

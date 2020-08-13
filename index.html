@@ -2,6 +2,7 @@
 <html>
   <head>
     <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quatre apparts et un confinement</title>
     <link rel="apple-touch-icon" sizes="180x180" href="sprites/icons/apple-touch-icon.png">
     <link rel="icon" type="image/png" sizes="32x32" href="sprites/icons/favicon-32x32.png">
@@ -14,5 +15,12 @@
   <body>
     <div id="container"></div>
     <div class="font-preload" style="opacity: 0;">.</div>
+
+    <div id="sticky-container" style="opacity: 0;">
+      <div>
+        <p>Acceptez-vous que votre visite soit comptée et que vos actions soient inclues anonymement dans des statistiques présentées à la fin du jeu?</p>
+        <button id="stickyNo" class="no">Non</button><button id="stickyYes">Oui</button>
+      </div>
+    </div>
   </body>
 </html>
