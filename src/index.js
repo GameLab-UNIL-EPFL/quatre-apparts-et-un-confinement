@@ -129,6 +129,7 @@ const maxPictureWidth = 1200.0;
 
 window.horizontalOffset = (maxPictureWidth - scale.width) / 2;
 window.horizontalRatio = scale.width / maxPictureWidth;
+window.aspectRatio = scale.width / scale.height;
 
 function resizeGame() {
     console.log('Resize (wip)');
