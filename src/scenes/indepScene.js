@@ -216,6 +216,7 @@ export class IndepScene extends Phaser.Scene {
 
             this.onPhone = true;
             this.changeIndep();
+            this.dialogue.display("hint");
         }
 
         //Update the saved data

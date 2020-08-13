@@ -10,7 +10,7 @@
 		"goto": ["kids"]
 	},
 	"kids": {
-		"name": "Maxime et Liliane",
+		"name": "Maurice et Léa",
 		"text": [
 			"Mais Maman, ça fait trop longtemps qu'on n'est pas sortis!",
 			"On peut aller au jouer au parc avant, s'il te plaît? Alleeeeeeeez.",
@@ -29,9 +29,9 @@
 		"goto": ["merci", "oh"]
 	},
 	"merci": {
-		"name": "Maxime et Liliane",
+		"name": "Maurice et Léa",
 		"text": [
-			"Merci Maman!"
+			"Youpiiii!", "Merci Maman!"
 		],
 		"choices": [],
 		"goto": ["oui-rangez"],
@@ -40,9 +40,9 @@
 		}
 	},
 	"oh": {
-		"name": "Maxime et Liliane",
+		"name": "Maurice et Léa",
 		"text": [
-			"Mais rhooo! Maman, t'es pas gentille."
+			"Mais rhooo!", "Maman, t'es pas gentille."
 		],
 		"choices": [],
 		"goto": ["non-rangez"],

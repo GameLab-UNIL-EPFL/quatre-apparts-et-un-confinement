@@ -3,7 +3,8 @@
 		"name": "Patrick",
 		"text": [
 			"Ça m’a fait plaisir de pouvoir aider la voisine.", 
-			"Il faudrait peut-être que j’appelle ma mère pour voir si tout va bien."
+			"Il faudrait peut-être que j’appelle ma mère pour voir si tout va bien.",
+			"Et je me demande si Nathan et Elise ont tenu le coup."
 		],
 		"choices": [],
 		"goto": []
@@ -31,12 +32,12 @@
 		"text": ["Qui pourrais-je bien appeler?"],
 		"choices":[
 			{
-				"text": ["Nathan"],
+				"text": ["Nathan (ami)"],
 				"preview": "Nathan",
 				"goto": "nathanMauvais"
             },
             {
-				"text": ["Sandrine"],
+				"text": ["Sandrine (amie)"],
 				"preview": "Sandrine",
 				"goto": "sandrine"
             },
@@ -136,13 +137,7 @@
 	"suivi": {
 		"name": "Nathan",
 		"text": ["J'aurais pas dû t'écouter... Bon tcho, je te laisse"],
-		"choices": [
-			{
-				"text": ["Salut!"],
-				"preview": "Salut!",
-				"goto": ""
-            }
-        ],
+		"choices": [],
 		"goto": []
     },
     "bon": {
@@ -189,13 +184,7 @@
 	"finBonNathan": {
 		"name": "Nathan",
 		"text": ["Cool à bientôt alors!"],
-		"choices": [
-			{
-				"text": ["Salut!"],
-				"preview": "Salut!",
-				"goto": ""
-            }
-        ],
+		"choices": [],
 		"goto": []
 	},
     "sandrine": {
@@ -225,7 +214,8 @@
     "independant": {
         "name": "Sandrine",
         "text": [
-            "Oups désolé, sujet sensible. J'ai une bonne nouvelle par contre, on organise une petite soirée chez Carlos.",
+			"Oups désolé, sujet sensible.", 
+			"J'ai une bonne nouvelle par contre, on organise une petite soirée chez Carlos.",
             "Tu veux venir?"
     	],
 		"choices": [

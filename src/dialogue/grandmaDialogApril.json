@@ -63,39 +63,49 @@
     "news": {
         "name": "Radio",
         "text": [
-            "🔈 27 avril - Réouverture des salons de coiffure, des magasins de bricolage et des jardineries."
+            "🔈 27 avril - Réouverture des salons de coiffure,", "des magasins de bricolage et des jardineries."
         ],
         "choices": [],
-        "goto": [],
+        "goto": ["hint"],
         "objective": {
           "status": "radio-news"
         }
     },
     "bleiben": {
         "name": "Radio",
-        "text": ["🎶 Bleiben Sie zuhause 🎶\n🎶 Bleiben Sie zuhause 🎶"],
+        "text": ["🎶 Radio Jazz spécial confinement 🎶"],
         "choices": [],
         "goto": [],
         "objective": {
           "status": "radio-music"
         }
     },
+    "hint": {
+		"name": "Suzanne",
+		"text": [
+			"Ah tiens, je me demande si Gertrude a entendu les nouvelles.",
+            "Elle attend ça depuis longtemps!",
+            "Et il faudrait que j'appelle ma fille pour voir si elle m'a commandé à manger."
+		],
+		"choices": [],
+		"goto": []
+	},
     "telephone": {
         "name": "Suzanne",
         "text": ["Bon, qui est-ce que je pourrais appeler?"],
         "choices":[
             {
-                "text": ["Françoise"],
+                "text": ["Françoise (amie)"],
                 "preview": "Françoise",
                 "goto": "francoise"
             },
             {
-                "text": ["Sophie"],
+                "text": ["Sophie (fille)"],
                 "preview": "Sophie",
                 "goto": "sophie"
             },
             {
-                "text": ["Gertrude"],
+                "text": ["Gertrude (amie)"],
                 "preview": "Gertrude",
                 "goto": "gertrude"
             }

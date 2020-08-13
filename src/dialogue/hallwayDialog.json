@@ -47,7 +47,8 @@
     "patrickReturn": {
         "name": "Patrick",
         "text": [
-            "Voilà vos courses et la monnaie."
+            "Voilà vos courses et la monnaie.",
+            "J'espère que je n'ai rien oublié."
         ],
         "choices": [],
         "goto": ["suzanneReply"]
@@ -55,7 +56,7 @@
     "suzanneReply": {
         "name": "Suzanne",
         "text": [
-            "Merci infiniment! C’est compliqué de ne plus pouvoir faire les courses."
+            "Merci infiniment!", "C’est compliqué de ne plus pouvoir faire les courses."
         ],
         "choices": [],
         "goto": ["patrickFinalReply"]

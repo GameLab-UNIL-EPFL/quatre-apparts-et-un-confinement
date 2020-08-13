@@ -66,7 +66,7 @@
 			"🔈 Veuillez rester chez vous."
 		],
 		"choices": [],
-		"goto": [],
+		"goto": ["hint"],
 		"objective": {
 			"status": "radio-news"
 		}
@@ -80,22 +80,31 @@
 			"status": "radio-music"
 		}
 	},
+	"hint": {
+		"name": "Suzanne",
+		"text": [
+			"Oh non! Quand est-ce que je vais pouvoir revoir mes petits-enfants?",
+			"Je ferais bien d'appeler ma fille pour voir comment ils vont."
+		],
+		"choices": [],
+		"goto": []
+	},
 	"telephone": {
 		"name": "Suzanne",
 		"text": ["Bon, qui est-ce que je pourrais appeler?"],
 		"choices":[
 			{
-				"text": ["Françoise"],
+				"text": ["Françoise (amie)"],
 				"preview": "Françoise",
 				"goto": "francoise"
             },
             {
-				"text": ["Sophie"],
+				"text": ["Sophie (fille)"],
 				"preview": "Sophie",
 				"goto": "sophie"
             },
             {
-				"text": ["Marc"],
+				"text": ["Marc (ami)"],
 				"preview": "Marc",
 				"goto": "marc"
 			}

@@ -17,22 +17,31 @@
         "choices": [],
 		"goto": []
 	},
+	"hint": {
+		"name": "Patrick",
+		"text": [
+			"Plus de boulot, plus de sorties et plus rien à la télé...",
+			"Je m'ennuie... Peut-être que je pourrais appeler Nathan."
+		],
+		"choices": [],
+		"goto": []
+	},
     "telephone": {
 		"name": "Patrick",
 		"text": ["Qui pourrais-je bien contacter?"],
 		"choices": [
 			{
-				"text": ["Nathan"],
+				"text": ["Nathan (ami)"],
 				"preview": "Nathan",
 				"goto": "nathan"
             },
             {
-				"text": ["Sandrine"],
+				"text": ["Sandrine (amie)"],
 				"preview": "Sandrine",
 				"goto": "sandrine"
             },
             {
-				"text": ["Paul"],
+				"text": ["Paul (cousin)"],
 				"preview": "Paul",
 				"goto": "paul"
 			}
@@ -89,6 +98,23 @@
 			}
 		],
 		"goto": ["personne", "elise"]
+	},
+	"personne": {
+		"name": "Nathan",
+		"text": ["Je dis juste que t'as de la chance de ne pas être coincé", "avec la même personne tous les jours."],
+		"choices": [
+			{
+				"text": ["C'est le pire moment pour être célibataire! Je préférerais être confiné avec quelqu'un."],
+				"preview": "C'est le pire",
+				"goto": "elise"
+			},
+			{
+				"text": ["On veut toujours ce qu'on a pas hein?"],
+				"preview": "On veut toujours ce qu'on a pas hein?",
+				"goto": "elise"
+			}
+		],
+		"goto": ["elise"]
 	},
 	"couple": {
 		"name": "Nathan",

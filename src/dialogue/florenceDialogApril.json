@@ -10,7 +10,7 @@
     "goto": ["kids"]
   },
   "kids": {
-    "name": "Maxime et Liliane",
+    "name": "Maurice et Léa",
     "text": [
       "Ouiiiii!"
     ],
@@ -26,7 +26,7 @@
     "goto": []
   },
   "non": {
-    "name": "Maxime et Liliane",
+    "name": "Maurice et Léa",
     "text": [
       "Nooooon!"
     ],

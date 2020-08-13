@@ -71,7 +71,7 @@
 	},
 	"bleiben": {
 		"name": "Radio",
-		"text": ["🎶 Bleiben Sie zuhause 🎶\n🎶 Bleiben Sie zuhause 🎶"],
+		"text": ["🎶 Radio Chill spécial déconfinement 🎶"],
 		"choices": [],
 		"goto": [],
     "objective": {
@@ -83,17 +83,17 @@
 		"text": ["Bon, qui est-ce que je pourrais appeler?"],
 		"choices":[
 			{
-				"text": ["Françoise"],
+				"text": ["Françoise (amie)"],
 				"preview": "Françoise",
 				"goto": "francoise"
             },
             {
-				"text": ["Sophie"],
+				"text": ["Sophie (fille)"],
 				"preview": "Sophie",
 				"goto": "sophie"
             },
             {
-				"text": ["Marc"],
+				"text": ["Marc (ami)"],
 				"preview": "Marc",
 				"goto": "marc"
 			}
