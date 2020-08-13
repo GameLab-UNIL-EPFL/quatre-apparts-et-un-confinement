@@ -101,7 +101,7 @@ export class BuildingScene extends Phaser.Scene {
             );
 
             this.load.spritesheet(
-                DIALOGUE_BOX_KEY,
+                'BuildingDialogBox',
                 "sprites/UI/dialogueBox.png",
                 DIALOGUE_BOX_SPRITE_SIZE.bg
             );
