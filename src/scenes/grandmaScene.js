@@ -71,6 +71,13 @@ export class GrandmaScene extends Phaser.Scene {
 
         this.current_card = this.livingRoomCard;
         this.card_idx = GrandmaCards.LIVING_ROOM;
+
+        this.current_sound = null;
+        this.radioSound = null;
+        this.radioSound02 = null;
+        this.radioMusic = null;
+
+        this.objective = false;
     }
 
     /**
@@ -84,13 +91,44 @@ export class GrandmaScene extends Phaser.Scene {
         }
 
         this.month = data.month;
+        console.log('Current month:', this.month);
+
+        // load sound after preload()
+        this.load.audio("radioSound" + this.month, "sounds/grandma/" + this.month + "_radio.mp3");
+        this.load.audio("radioSound02" + this.month, "sounds/grandma/" + this.month + "2_radio.mp3");
+        this.load.audio("radioMusic" + this.month, "sounds/grandma/" + this.month + "_music.mp3");
+
+        this.load.on('filecomplete', (file) => {
+            if(file === 'radioSound' + this.month) {
+                this.radioSound = this.sound.add('radioSound' + this.month);
+                this.radioSound.play();
+                this.current_sound = this.radioSound;
+            } else if (file === 'radioSound02' + this.month) {
+                this.radioSound02 = this.sound.add('radioSound02' + this.month);
+            } else if (file === 'radioMusic' + this.month) {
+                this.radioMusic = this.sound.add('radioMusic' + this.month);
+            }
+        },
+        this);
+        this.load.start();
 
         if(data.month === Months.MARCH) {
             //Create the scene's dialogue controller
             this.dialogue = new DialogueController(this, "grandmaDialogMarch");
-        } else {
+        } else if(data.month === Months.APRIL) {
             //Create the scene's dialogue controller
             this.dialogue = new DialogueController(this, "grandmaDialogApril");
+
+            //Change the calendar sprite and name
+            this.calendarCard.children[1].name = "calendar_april";
+            this.calendarCard.children[1].url = "sprites/GrandmaScene/Calendar/calendrier02_02-calendrier.png";
+        } else {
+            //Create the scene's dialogue controller
+            this.dialogue = new DialogueController(this, "grandmaDialogJune");
+
+            //Change the calendar sprite and name
+            this.calendarCard.children[1].name = "calendar_mai";
+            this.calendarCard.children[1].url = "sprites/GrandmaScene/Calendar/calendrier03_02-calendrier.png";
         }
     }
 
@@ -148,6 +186,33 @@ export class GrandmaScene extends Phaser.Scene {
     }
 
     /**
+     * @brief Notifies the current card that the dialogue objective was met
+     */
+    notifyObjectiveMet(status) {
+        if(this.current_card.notifyObjectiveMet) {
+            this.current_card.notifyObjectiveMet(status);
+        }
+        console.log('Grandmascard radio?', this.card_idx === GrandmaCards.RADIO, this.card_idx);
+        if(this.card_idx === GrandmaCards.RADIO) {
+            console.log('Radio');
+            if(this.radioSound02 !== null) {
+                if(this.radioSound !== null) {
+                    this.radioSound.stop();
+                }
+            }
+            if(status === 'radio-music') {
+                this.current_sound.stop();
+                this.radioMusic.play();
+                this.current_sound = this.radioMusic;
+            } else {
+                this.current_sound.stop();
+                this.radioSound02.play();
+                this.current_sound = this.radioSound02;
+            }
+        }
+    }
+
+    /**
      * @brief moves to the next card
      * @param {GrandmaCards} card the next card to show
      */
@@ -162,15 +227,18 @@ export class GrandmaScene extends Phaser.Scene {
         switch(card) {
         case GrandmaCards.LIVING_ROOM:
             this.current_card = this.livingRoomCard;
+            this.card_idx = GrandmaCards.LIVING_ROOM;
             break;
 
         case GrandmaCards.RADIO:
             this.current_card = this.radioCard;
+            this.card_idx = GrandmaCards.RADIO;
             callback = (scene) => scene.dialogue.display("radio");
             break;
 
         case GrandmaCards.CALENDAR:
             this.current_card = this.calendarCard;
+            this.card_idx = GrandmaCards.CALENDAR;
             callback = (scene) => scene.dialogue.display("calendrier");
             break;
         }
@@ -184,9 +252,19 @@ export class GrandmaScene extends Phaser.Scene {
 
     nextScene() {
         this.cameras.main.fadeOut(1000);
+        if(this.current_sound !== null) {
+            this.current_sound.stop();
+        }
+
         if(this.month === Months.MARCH) {
             this.scene.start(Scenes.BUILDING, {
                 mainMenu: false,
+                names: {
+                    damien: false,
+                    grandma: false,
+                    family: false,
+                    indep: true
+                },
                 stage: 1,
                 windows: {
                     damien: WindowState.OFF,
@@ -202,11 +280,13 @@ export class GrandmaScene extends Phaser.Scene {
                     indep: Scenes.INDEP
                 }
             });
-        } else {
+        } else if(this.month === Months.APRIL) {
             this.scene.start(
                 Scenes.HALLWAY,
-                { cardIdx: HallwayCards.DAMIEN_CLOSED, damien_gone: Math.random() > 0.5 }
+                { cardIdx: HallwayCards.DAMIEN_CLOSED }
             );
+        } else {
+            this.scene.start(Scenes.STATS);
         }
     }
 

@@ -12,9 +12,9 @@
 		"name": "",
 		"text": [
 			"Candide - Voltaire",
-			"Il s'avisa un beau jour de printemps de s'aller promener,",
+			"« Il s'avisa un beau jour de printemps de s'aller promener,",
 			"marchant tout droit devant lui, croyant que c'était un privilège de l'espèce humaine,",
-			"comme de l'espèce animale, de se servir de ses jambes à son plaisir."
+			"comme de l'espèce animale, de se servir de ses jambes à son plaisir. »"
 		],
 		"choices": [],
 		"goto": []
@@ -23,9 +23,9 @@
 		"name": "",
         "text": [
 			"Covigula - Albert Camus",
-			"Ce monde, tel qu'il est fait, n'est pas supportable.",
+			"« Ce monde, tel qu'il est fait, n'est pas supportable.",
 			"J'ai donc besoin de la lune, ou du bonheur, ou de l'immortalité,",
-			"de quelque chose qui soit dément peut-être, mais qui ne soit pas de ce monde."
+			"de quelque chose qui soit dément peut-être, mais qui ne soit pas de ce monde. »"
 		],
         "choices": [],
 		"goto": []
@@ -34,9 +34,9 @@
 		"name": "",
         "text": [
 			"Voyage au bout de la nuit - Lois-Ferdinand Céline",
-			"Voyager c'est bien utile, ça fait travailler l'imagination.",
+			"« Voyager c'est bien utile, ça fait travailler l'imagination.",
 			"Tout le reste n'est que déceptions et fatigues.",
-			"Notre voyage à nous est entièrement imaginaires."
+			"Notre voyage à nous est entièrement imaginaire. »"
 		],
         "choices": [],
 		"goto": []
@@ -61,16 +61,22 @@
 	"news": {
 		"name": "Radio",
 		"text": [
-			"6 Juin - Réouverture des restaurants, boîtes de nuit, musées, cinémas et piscines."
+			"🔈 6 juin - Réouverture des restaurants, boîtes de nuit, musées, cinémas et piscines."
 		],
 		"choices": [],
-		"goto": []
+		"goto": [],
+    "objective": {
+      "status": "radio-news"
+    }
 	},
 	"bleiben": {
 		"name": "Radio",
-		"text": ["*musique* Bleiben Sie zuhause"],
+		"text": ["🎶 Bleiben Sie zuhause 🎶\n🎶 Bleiben Sie zuhause 🎶"],
 		"choices": [],
-		"goto": []
+		"goto": [],
+    "objective": {
+      "status": "radio-music"
+    }
 	},
 	"telephone": {
 		"name": "Suzanne",
@@ -286,7 +292,10 @@
 				"goto": "comment"
 			}
 		],
-		"goto": ["comment"]
+		"goto": ["comment"],
+		"objective": {
+			"status": false
+		}
 	},
 	"comment": {
 		"name": "Sophie",
@@ -309,7 +318,7 @@
 	"desole": {
 		"name": "Marc",
 		"text": [
-			"Merci! Oui superbe! On a bien pu fêter même si c'était en petit commité.",
+			"Merci! Oui superbe! On a bien pu fêter même si c'était en petit comité.",
 			"Je t'enverrai les photos. On a eu un temps magnifique!",
 			"Et Marion dans sa robe était juste sublime!"
 		],
@@ -317,4 +326,3 @@
 		"goto": []
 	}
 }
-

@@ -78,7 +78,7 @@ const SPACING = 25;
 const MAX_N_PROMPTS = 3;
 
 const UP_POS = {
-    box: new Phaser.Math.Vector2(0, -650), 
+    box: new Phaser.Math.Vector2(0, -650),
     name: new Phaser.Math.Vector2(-488, -745),
     content: new Phaser.Math.Vector2(-488, -675)
 };
@@ -103,6 +103,16 @@ export class DialogueController {
     constructor(parent_scene, dialogue_name="example") {
         this.parent_scene = parent_scene;
         this.dialogueJSON = require("../dialogue/" + dialogue_name + ".json");
+
+        this.phone_dialogue_done = {};
+        for (let telephone_key of ["telephone", "telephoneMauvais", "telephoneBon"]) {
+            if (telephone_key in this.dialogueJSON) {
+                if( "choices" in this.dialogueJSON[telephone_key] ) {
+                    this.dialogueJSON[telephone_key]["choices"].map(choice => this.phone_dialogue_done[choice.goto] = false);
+                }
+            }
+        }
+
         this.current_conv_id = "";
         this.cur_state = DialogueState.NONE;
 
@@ -133,9 +143,25 @@ export class DialogueController {
             "sprites/UI/prompts_2.png",
             DIALOGUE_BOX_SPRITE_SIZE.prompt
         );
+
+        this.parent_scene.load.spritesheet(
+            "prompts_1_done",
+            "sprites/UI/prompts_1_done.png",
+            DIALOGUE_BOX_SPRITE_SIZE.prompt
+        );
+
+        this.parent_scene.load.spritesheet(
+            "prompts_2_done",
+            "sprites/UI/prompts_2_done.png",
+            DIALOGUE_BOX_SPRITE_SIZE.prompt
+        );
     }
 
     preloadMessages() {
+        //Load in message audio
+        this.parent_scene.load.audio("newMessage", "sounds/textMessages/newMessage.wav");
+        this.parent_scene.load.audio("sent", "sounds/textMessages/sentMessage.wav");
+
         //Load in the phone message sprites
         this.parent_scene.load.image("promptBox1", "sprites/UI/Messages/SelectionMessage_01.png");
         this.parent_scene.load.image("promptBox2", "sprites/UI/Messages/SelectionMessage_02.png");
@@ -168,7 +194,7 @@ export class DialogueController {
             5000,
             5000
         );
-        
+
         const prompt_sprite = this.parent_scene.add.graphics({ fillStyle: { color: 0xf8f2df }});
         prompt_sprite.fillRectShape(bg);
 
@@ -226,7 +252,9 @@ export class DialogueController {
         this.cur_state = DialogueState.DONE;
 
         //Notify the parent scene
-        this.parent_scene.notifyDialogueEnd();
+        if(this.parent_scene.notifyDialogueEnd) {
+            this.parent_scene.notifyDialogueEnd();
+        }
     }
 
     /**
@@ -255,6 +283,17 @@ export class DialogueController {
         this.current_conv_id = id;
         this.cur_state = DialogueState.DISPLAYED;
 
+        const cur_dialogue = this.requestDialogue(id);
+
+        //Check if an objective was met
+        if(cur_dialogue.objective) {
+            if(this.parent_scene.notifyObjectiveMet) {
+                this.parent_scene.notifyObjectiveMet(cur_dialogue.objective.status);
+            } else {
+                console.error("DIALOG_OBJECTIVE: Parent scene doesn't implement notifyObjectiveMet");
+            }
+        }
+
         //Create background animation
         this.parent_scene.anims.create({
             key: D_BOX_ANIMATION_KEY,
@@ -274,15 +313,14 @@ export class DialogueController {
         ).play(D_BOX_ANIMATION_KEY);
 
         this.background.alpha = .9;
-        this.background.displayWidth *= window.horizontalRatio;
         this.background.setDepth(5);
 
         //Add name text
         this.name = this.parent_scene.add.text(
-            this.dialogue_pos.name.x * window.horizontalRatio,
+            this.dialogue_pos.name.x,
             this.dialogue_pos.name.y,
             this.getName(id),
-            {font: (55 * window.horizontalRatio) + "px OpenSans", fill: "black"}
+            {font: "44px OpenSans-Bold", fill: "#27303a"}
         );
 
         this.name.setDepth(5);
@@ -292,17 +330,32 @@ export class DialogueController {
 
         //Add dialogue content
         this.content = this.parent_scene.add.text(
-            this.dialogue_pos.content.x * window.horizontalRatio,
+            this.dialogue_pos.content.x,
             this.dialogue_pos.content.y,
             this.text[this.textIdx],
             {
-                font: (44 * window.horizontalRatio) + "px OpenSans",
-                fill: "black",
+                font: "44px OpenSans",
+                fill: "#27303a",
                 wordWrap: { width: (this.background.displayWidth - (SPACING * 8)) }
             }
         );
 
         this.content.setDepth(5);
+
+        this.background.displayWidth *= window.horizontalRatio;
+        this.content.displayWidth *= window.horizontalRatio;
+        this.name.displayWidth *= window.horizontalRatio;
+
+        this.content.displayHeight *= window.horizontalRatio;
+        this.name.displayHeight *= window.horizontalRatio;
+
+        this.content.setOrigin(0, 0);
+        this.name.setOrigin(0, 0);
+
+        this.name.x = this.background.x - 2 * this.background.displayWidth/5;
+        this.name.y = this.background.y - this.background.displayHeight/4;
+        this.content.x = this.name.x;
+        this.content.y = this.name.y + this.name.displayHeight * 1.2;
 
         const interaction = () => {
             //Prompt user if necessary on interaction
@@ -378,19 +431,26 @@ export class DialogueController {
         this.prompts = [];
 
         //Check the amount of possible answers
-        const num_answers = cur_dialogue.goto.length;
+        const num_answers = Object.keys(cur_dialogue.choices).length;
         if(num_answers !== 0) {
             this.cur_state = DialogueState.PROMPT;
             cur_dialogue.choices.forEach(choice => {
-
                 //Chose which of the two spritesheets to use
                 let prompts_name = "prompts_" + ((this.prompts.length % 2) + 1);
 
+                // If dialogue already played: grey background
+                let dialogue_done_suffix = '';
+                if(this.phone_dialogue_done.hasOwnProperty(choice.goto)) {
+                    if(this.phone_dialogue_done[choice.goto] === true) {
+                        dialogue_done_suffix = '_done';
+                    }
+                }
+
                 //Create background animation
                 this.parent_scene.anims.create({
-                    key: "prompt_anim_" + this.prompts.length,
+                    key: "prompt_anim_" + this.prompts.length +  dialogue_done_suffix,
                     frameRate: 6,
-                    frames: this.parent_scene.anims.generateFrameNames(prompts_name),
+                    frames: this.parent_scene.anims.generateFrameNames(prompts_name + dialogue_done_suffix),
                     repeat: -1
                 });
 
@@ -407,7 +467,7 @@ export class DialogueController {
                     0,
                     prompt_position,
                     prompts_name
-                ).play("prompt_anim_" + this.prompts.length);
+                ).play("prompt_anim_" + this.prompts.length + dialogue_done_suffix);
 
                 //Center the box
                 prompt_sprite.setOrigin(0.5, 0.5);
@@ -419,7 +479,7 @@ export class DialogueController {
                     prompt_sprite.y,
                     choice.text,
                     {
-                        font: (54 * window.horizontalRatio) + "px OpenSans ",
+                        font: (54) + "px OpenSans",
                         fill: "white",
                         wordWrap: { width: this.background.displayWidth - (4 * SPACING) }
                     }
@@ -428,6 +488,9 @@ export class DialogueController {
                 //Center the text
                 prompt_text.setOrigin(0.5, 0.5);
                 prompt_text.setDepth(5);
+
+                prompt_text.displayWidth *= window.horizontalRatio;
+                prompt_text.displayHeight *= window.horizontalRatio;
 
                 //Adapt the box size to fit the text if needed
                 if(prompt_text.displayWidth > prompt_sprite.displayWidth) {
@@ -439,6 +502,11 @@ export class DialogueController {
                 }
 
                 const interaction = () => {
+                    if(this.phone_dialogue_done.hasOwnProperty(choice.goto)) {
+                        // Save choice so it’ll appear grey next time
+                        this.phone_dialogue_done[choice.goto] = true;
+                    }
+
                     //Destroy all prompts if clicked
                     this.prompts.forEach(prompt => {
                         prompt.text.destroy();
@@ -499,11 +567,20 @@ export class DialogueController {
         this.cur_state = DialogueState.MSG;
 
         //Retrieve the dialogue
-        let cur_text = choice_id ?
+        const cur_text = choice_id ?
             this.requestDialogue(id).choices[choice_id].text[0] :
             this.getText(id)[idx];
 
-        let cur_dialogue = this.requestDialogue(id);
+        const cur_dialogue = this.requestDialogue(id);
+
+        //Check if an objective was met
+        if(cur_dialogue.objective) {
+            if(this.parent_scene.notifyObjectiveMet) {
+                this.parent_scene.notifyObjectiveMet(cur_dialogue.objective.status);
+            } else {
+                console.error("DIALOG_OBJECTIVE: Parent scene doesn't implement notifyObjectiveMet");
+            }
+        }
 
         //Decide which box to use
         let box = null;
@@ -576,7 +653,7 @@ export class DialogueController {
             (lr ? MIN_LEFT_X.text : MIN_RIGHT_X.text),
             ypos.text,
             cur_text,
-            {font: (36 * window.horizontalRatio) + "px OpenSans ", fill: lr ? "black" : "white", wordWrap: { width: 350 }}
+            {font: (30) + "px OpenSans", fill: lr ? "black" : "white", wordWrap: { width: 350 }}
         );
 
         //Move the messages back
@@ -622,18 +699,19 @@ export class DialogueController {
         let font_size;
         let prompt_ypos = [];
         let prompt_xpos = -277;
+
         //Display the correct prompt box
         if(Object.keys(dialogue.choices).length <= 1) {
             this.parent_scene.add.image(-7, 616, 'promptBox1');
-            font_size = 76 * window.horizontalRatio;
-            prompt_ypos = [579];
+            font_size = 40;
+            prompt_ypos = [584];
         } else if(Object.keys(dialogue.choices).length <= 2) {
             this.parent_scene.add.image(-7, 616, 'promptBox2');
-            font_size = 56 * window.horizontalRatio;
+            font_size = 35;
             prompt_ypos = [497, 677];
         } else {
-            this.parent_scene.add.image(-7, 1416, 'promptBox3');
-            font_size = 46 * window.horizontalRatio;
+            this.parent_scene.add.image(-7, 616, 'promptBox3');
+            font_size = 30;
             prompt_ypos = [476, 592, 711];
         }
 
@@ -644,75 +722,78 @@ export class DialogueController {
                 prompt_xpos,
                 prompt_ypos[n_prompts++],
                 dialogue.choices[choice_key].preview,
-                {font: font_size + "px OpenSans ", fill: "white"}
+                {font: font_size + "px OpenSans", fill: "white"}
             );
 
             this.msg_prompts.push(text_msg_elem);
 
-            //Make the element interactive
-            text_msg_elem.setInteractive().on(
-                'pointerdown',
-                () => {
-                    this.msg_prompts.forEach(msg => msg.destroy());
+            const touchMsgAnswer = () => {
+                // NICE TO HAVE: animate
+                this.msg_prompts.forEach(msg => msg.destroy());
 
-                    //Show the message above
-                    this.displayMessage(id, false, choice_key);
+                //Show the message above
+                this.displayMessage(id, false, choice_key);
 
-                    //Goto the next dialogue
-                    const next_id = dialogue.choices[choice_key].goto;
+                //Goto the next dialogue
+                const next_id = dialogue.choices[choice_key].goto;
 
-                    //play sound
-                    this.sent = this.parent_scene.sound.add("sent");
-                    this.sent.play({volume: 0.5});
-                    //Retrieve dialiogue
-                    const next_msg = this.requestDialogue(next_id);
+                //play sound
+                this.sent = this.parent_scene.sound.add("sent");
+                this.sent.play();
+                //Retrieve dialiogue
+                const next_msg = this.requestDialogue(next_id);
 
-                    //Add a timer event to trigger the next message
-                    this.parent_scene.time.addEvent({
-                        delay: MSG_RESP_DELAY,
-                        repeat: 0,
-                        callback: () => {
-                            if((next_id.length) > 0) {
-                                this.displayMessage(next_id, true, null, 0);
+                //Add a timer event to trigger the next message
+                this.parent_scene.time.addEvent({
+                    delay: MSG_RESP_DELAY,
+                    repeat: 0,
+                    callback: () => {
+                        if((next_id.length) > 0) {
+                            this.displayMessage(next_id, true, null, 0);
 
-                                if(next_msg.text.length > 1) {
-                                    this.parent_scene.time.addEvent({
-                                        delay: MSG_RESP_DELAY,
-                                        repeat: 0,
-                                        callback: () => {
-                                            if((next_id.length) > 0) {
-                                                this.displayMessage(next_id, true, null, 1);
+                            if(next_msg.text.length > 1) {
+                                this.parent_scene.time.addEvent({
+                                    delay: MSG_RESP_DELAY,
+                                    repeat: 0,
+                                    callback: () => {
+                                        if((next_id.length) > 0) {
+                                            this.displayMessage(next_id, true, null, 1);
 
-                                                if(next_msg.text.length > 2) {
-                                                    this.parent_scene.time.addEvent({
-                                                        delay: MSG_RESP_DELAY,
-                                                        repeat: 0,
-                                                        callback: () => {
-                                                            if((next_id.length) > 0) {
-                                                                this.displayMessage(next_id, true, null, 2);
-                                                            }
-                                                        },
-                                                        callbackScope: this,
-                                                    });
-                                                }
+                                            if(next_msg.text.length > 2) {
+                                                this.parent_scene.time.addEvent({
+                                                    delay: MSG_RESP_DELAY,
+                                                    repeat: 0,
+                                                    callback: () => {
+                                                        if((next_id.length) > 0) {
+                                                            this.displayMessage(next_id, true, null, 2);
+                                                        }
+                                                    },
+                                                    callbackScope: this,
+                                                });
                                             }
-                                        },
-                                        callbackScope: this,
-                                    });
-                                }
+                                        }
+                                    },
+                                    callbackScope: this,
+                                });
                             }
-                        },
-                        callbackScope: this,
-                    });
+                        }
+                    },
+                    callbackScope: this,
+                });
 
-                    //Save the dialogue entry
-                    player.addDialogueTreeEntry({
-                        id: id,
-                        next_id: next_id
-                    });
-                },
-                this
-            );
+                //Save the dialogue entry
+                player.addDialogueTreeEntry({
+                    id: id,
+                    next_id: next_id
+                });
+            };
+
+            //Make the element interactive
+
+            // prompt_sprite.setInteractive().on('pointerdown', touchMsgAnswer, this);
+            text_msg_elem.setInteractive(
+                new Phaser.Geom.Rectangle(-30, -30, 580, 100), Phaser.Geom.Rectangle.Contains
+            ).on('pointerdown', touchMsgAnswer, this);
         }
     }
 
@@ -721,6 +802,5 @@ export class DialogueController {
      */
     destroyAllDisplayed() {
         this.displayed.forEach(dis => dis.destroy());
-
     }
 }

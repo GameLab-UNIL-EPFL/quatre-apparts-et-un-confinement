@@ -2,10 +2,10 @@ import Phaser from "phaser";
 import { Card } from "./cards/card.js";
 import { CardObject } from "./objects/cardObject.js";
 import { Background } from "./objects/background.js";
-import { player } from "../index.js";
-import { WindowState, Months } from "./buildingScene.js";
 import { Scenes } from "../core/player.js";
 import { HallwayCards } from "./hallwayScene.js";
+import { player } from "../index.js";
+import { Months } from "./buildingScene.js";
 
 export const StoreCards = {
     FIRST_SHELF: 0,
@@ -20,6 +20,9 @@ export class StoreScene extends Phaser.Scene {
      */
     constructor() {
         super({key: Scenes.STORE});
+
+        this.shoppingBasket = [];
+        this.crossOffContainer;
 
         /* === FIRST SHELF === */
         this.firstShelf = new Card(
@@ -647,24 +650,35 @@ export class StoreScene extends Phaser.Scene {
             ]
         );
 
+        this.checkoutCard = new Card(
+            this,
+            [
+                new Background(
+                    this,
+                    "sprites/StoreScene/part4-checkout/caisse_bg.jpg",
+                    "storeCheckout"
+                )
+            ]
+        );
+
         this.checklist_done = {
             'pate': {
-                position_x: -276,
+                position_x: -0.23, // Will be multiplied by this.cameras.main.width (<= 1200px). Calculation for -0.23: (-276 / 1200)
                 position_y: 234,
                 done: false
             },
             'banane': {
-                position_x: -276,
-                position_y: 300,
+                position_x: -0.23,
+                position_y: 280,
                 done: false
             },
             'pain': {
-                position_x: -276,
+                position_x: -0.23,
                 position_y: 373,
                 done: false
             },
             'papier': {
-                position_x: -261,
+                position_x: -0.23,
                 position_y: 422,
                 done: false
             },
@@ -673,18 +687,37 @@ export class StoreScene extends Phaser.Scene {
         this.cards = [
             this.firstShelf,
             this.secondShelf,
-            this.thirdShelf
+            this.thirdShelf,
+            this.checkoutCard
         ];
 
         //Keep track of wich card is displayed
         this.cardIdx = StoreCards.FIRST_SHELF;
         this.current_card = this.firstShelf;
+
+        this.month = Months.APRIL;
     }
 
     init(data) {
+        console.log("INIT_STORE");
         //Check if any saved data exists
         if(data) {
-            console.log("INIT_STORE");
+            this.cardIdx = StoreCards.FIRST_SHELF;
+            this.current_card = this.firstShelf;
+            this.month = data.month;
+            this.shoppingBasket = [];
+            Object.keys(this.checklist_done).forEach(item => this.checklist_done[item].done = false);
+
+            if(this.month === 'may') {
+                let indepShoppingBasket = player.getBasket();
+
+                if ( indepShoppingBasket.length > 0 ) {
+                    // Remove basket items from cards
+                    this.firstShelf.children = this.firstShelf.children.filter(cardObject => ! indepShoppingBasket.includes( cardObject.name ) );
+                    this.secondShelf.children = this.secondShelf.children.filter(cardObject => ! indepShoppingBasket.includes( cardObject.name ) );
+                    this.thirdShelf.children = this.thirdShelf.children.filter(cardObject => ! indepShoppingBasket.includes( cardObject.name ) );
+                }
+            }
         }
     }
 
@@ -698,6 +731,11 @@ export class StoreScene extends Phaser.Scene {
         this.load.image('basket-front', "sprites/StoreScene/part1/rayon01_02_panier-02front.png");
 
         this.load.image('rature', "sprites/StoreScene/part1/rayon01_05_rature.png");
+
+        //Load in the music
+        this.load.audio('bg_music', 'sounds/supermarket/Supermarket.mp3');
+        this.load.audio('pickup', 'sounds/supermarket/pickup.wav');
+        this.load.audio('cashier', 'sounds/supermarket/cashier.mp3');
 
         this.nextCardArrow = this.load.spritesheet(
             'next-card-arrow',
@@ -724,75 +762,86 @@ export class StoreScene extends Phaser.Scene {
 
         this.nextCardButton.depth = 4;
 
-        let scene = this;
-        this.nextCardButton.setInteractive().on('pointerdown', () => scene.nextCard() );
+        this.nextCardButton.setInteractive().on('pointerdown', () => this.nextCard(), this );
     }
 
     takeObject(object_name) {
 
-        let object = this.children.getByName(object_name);
-        object.depth = 5;
+        if( ! this.shoppingBasket.includes(object_name) ) {
+            this.shoppingBasket.push(object_name);
+            let object = this.children.getByName(object_name);
+            object.depth = 5;
 
-        let yDistance = this.basket.y - object.y; // between 280 and 1340
+            let yDistance = this.basket.y - object.y; // between 280 and 1340
 
-        let target_objects = [object];
-        if(object_name === 'pate_spaghetti01') {
-            // also move the other pack
-            target_objects.push(this.children.getByName('pate_spaghetti02'));
-        }
+            let target_objects = [object];
+            if(object_name === 'pate_spaghetti01' && !this.shoppingBasket.includes('pate_spaghetti02')) {
+                // also move the other pack
+                let secondObject = this.children.getByName('pate_spaghetti02');
+                secondObject.depth = 5;
+                target_objects.push(secondObject);
+                this.shoppingBasket.push('pate_spaghetti02');
+            }
 
-        // Move to basket
-        this.tweens.add({
-            targets: target_objects,
-            x: this.basket.x + (Math.random() * 50),
-            y: this.basket.y + 25 + (Math.random() * 25),
-            duration: 150 + (yDistance / 8),
-            ease: 'Quadratic',
-            yoyo: false,
-            loop: 0,
-            onComplete: () => {
-                // this.rature = this.add.image(this.listPositions[object_name], 'rature')
-                // todo: add flag
-                for (const item in this.checklist_done) {
-                    if(object_name.indexOf(item) >= 0) {
-                        if(!this.checklist_done[item].done) {
+            // play the sound
+            this.pickupSound.play();
 
-                            this.rature = this.add.image(
-                                this.checklist_done[item].position_x,
-                                this.checklist_done[item].position_y,
-                                'rature'
-                            );
+            // Move to basket
+            this.tweens.add({
+                targets: target_objects,
+                x: this.basket.x + (Math.random() * 50),
+                y: this.basket.y + 25 + (Math.random() * 25),
+                duration: 150 + (yDistance / 8),
+                ease: 'Quadratic',
+                yoyo: false,
+                loop: 0,
+                onComplete: () => {
+                    for (const item in this.checklist_done) {
+                        if(object_name.indexOf(item) >= 0) {
+                            if(!this.checklist_done[item].done) {
+                                let rature = this.add.image(
+                                    this.cameras.main.width * this.checklist_done[item].position_x,
+                                    this.checklist_done[item].position_y,
+                                    'rature'
+                                );
+                                this.crossOffContainer.add(rature);
+                                rature.depth = 20;
+                                this.checklist_done[item].done = true;
 
-                            this.rature.depth = 20;
-                            this.checklist_done[item].done = true;
+                                // April (Patrick): enable nextCard()
+                                this.addArrow();
+                            }
                         }
                     }
-                }
 
-                // Animate basket
-                this.tweens.add({
-                    targets: [this.basket, this.basket_front],
-                    scale: 1.2,
-                    duration: 100,
-                    ease: 'Quadratic',
-                    yoyo: true,
-                    loop: 0
-                });
-            },
-            onCompleteScope: this
-        });
+                    // Animate basket
+                    this.tweens.add({
+                        targets: [this.basket, this.basket_front],
+                        scale: 1.2,
+                        duration: 100,
+                        ease: 'Quadratic',
+                        yoyo: true,
+                        loop: 0
+                    });
+                },
+                onCompleteScope: this
+            });
+        }
     }
 
     create() {
         this.cameras.main.centerOn(0, 0);
         this.cameras.main.fadeIn(1000);
+        this.crossOffContainer = this.add.group();
 
         if(this.current_card.isLoaded()) {
             this.current_card.create();
-            this.addArrow();
+            if(this.month !== Months.APRIL) {
+                this.addArrow();
+            }
         }
 
-        this.checklist = this.add.image(-this.cameras.main.width * 0.255, 489, 'liste');
+        this.checklist = this.add.image(this.cameras.main.width * -0.255, 489, 'liste');
         this.checklist.depth = 20;
 
         this.basket = this.add.image(this.cameras.main.width * 0.24166, 700, 'basket');
@@ -801,20 +850,30 @@ export class StoreScene extends Phaser.Scene {
         this.basket_front = this.add.image(this.cameras.main.width * 0.24166, 700, 'basket-front');
         this.basket_front.depth = 25;
 
+        //Create and play the background music
+        this.music = this.sound.add('bg_music');
+        this.music.play({loop: true});
+
+        this.pickupSound = this.sound.add('pickup');
+        this.cashierSound = this.sound.add('cashier');
+
         // Update the saved data
-        // @TODO
-        // player.setData()
-        // player.cur_scene = Scenes.STORE;
+        player.cur_scene = Scenes.STORE;
+        player.saveGame();
     }
 
     nextCard() {
         if(this.cardIdx < this.cards.length - 1) {
+            if(this.month === Months.APRIL) {
+                this.nextCardButton.destroy();
+            }
 
             // move previous card
             let container = this.add.container();
             container.depth = 2;
 
             for(let i in this.current_card.children) {
+                // If not moved to basket
                 if(this.current_card.children[i].sprite.depth != 5) {
                     container.add(this.current_card.children[i].sprite);
                 }
@@ -831,13 +890,85 @@ export class StoreScene extends Phaser.Scene {
 
             this.cardIdx++;
             this.current_card = this.cards[this.cardIdx];
+
+            // cashout scene
+            if (this.cardIdx === this.cards.length - 1) {
+                this.basket.destroy();
+                this.basket_front.destroy();
+                this.checklist.destroy();
+
+                // play the sound
+                this.cashierSound.play();
+
+                // Iterate through basket items and remove their sprites
+                for(let i in this.shoppingBasket) {
+                    let sprite = this.children.getByName(this.shoppingBasket[i]);
+                    if (sprite) {
+                        sprite.destroy();
+                    }
+                }
+
+                this.crossOffContainer.clear(true, true);
+
+                let checkoutImage;
+
+                switch (true) {
+
+                case this.shoppingBasket.length < 10:
+                    checkoutImage = 'caisse01_05-prix01.png';
+                    break;
+
+                case this.shoppingBasket.length  < 20:
+                    checkoutImage = 'caisse01_05-prix02.png';
+                    break;
+
+                case this.shoppingBasket.length < 40:
+                    checkoutImage = 'caisse01_05-prix03.png';
+                    break;
+
+                default:
+                    checkoutImage = 'caisse01_05-prix04.png';
+                    break;
+                }
+
+                this.load.once('complete', () => this.add.image(-200, 0, 'price'), this);
+
+                this.load.image('price', "sprites/StoreScene/part4-checkout/" + checkoutImage);
+                this.load.start();
+
+                if(this.month === Months.APRIL) {
+                    this.addArrow();
+                }
+
+            }
             this.current_card.create();
         } else {
-            this.nextScene();
+            this.nextCardButton.destroy();
+            this.tweens.add({
+                targets:  this.music,
+                volume:   0,
+                duration: 800,
+                onComplete: () => {
+                    if(this.month === Months.APRIL) {
+                        player.indep_shopping_basket = this.shoppingBasket;
+                        player.saveGame();
+                        // Send Patrick’s choices to database
+                        player.sendChoices({ player_id: player.id, freelancer_food_set: this.shoppingBasket.join(','), freelancer_food_amount: this.shoppingBasket.length });
+                    }
+                    this.nextScene();
+                },
+                onCompleteScope: this
+            });
         }
     }
 
     nextScene() {
-        this.scene.start(Scenes.HALLWAY, {cardIdx: HallwayCards.INDEP_GRANDMA, damien_gone: false});
+        this.music.stop();
+        this.cashierSound.stop(); 
+        if(this.month === Months.APRIL) {
+            this.scene.start(Scenes.HALLWAY, {cardIdx: HallwayCards.INDEP_GRANDMA, damien_gone: false});
+        } else {
+            this.scene.start(Scenes.DAMIEN_OUTSIDE);
+        }
     }
 }

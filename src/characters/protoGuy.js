@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import {ProtoGuyClothes} from "../scenes/protoScene.js";
+import {ProtoGuyClothes} from "../scenes/studentScene.js";
 
 const ProtoGuyState = {
     IDLE: 'idle',
@@ -40,17 +40,17 @@ export class ProtoGuy {
 
         switch(card) {
         case ProtoGuyCard.WAKE_UP:
-            this.base_url = "sprites/ProtoScene/WakeUpCard/character_body.png";
+            this.base_url = "sprites/StudentScene/WakeUpCard/character_body.png";
             this.base_name = "character_body";
             this.base_offset_x = 0;
             this.base_offset_y = 0;
 
-            this.head_url = "sprites/ProtoScene/WakeUpCard/character_head.png";
+            this.head_url = "sprites/StudentScene/WakeUpCard/character_head.png";
             this.head_name = "character_head";
             this.head_offset_x = -55;
             this.head_offset_y = -519;
 
-            this.arm_url = "sprites/ProtoScene/WakeUpCard/character_arm.png";
+            this.arm_url = "sprites/StudentScene/WakeUpCard/character_arm.png";
             this.arm_name = "chracter_arm";
             this.arm_offset_x = 595 - this.x;
             this.arm_offset_y = -105 - this.y;
@@ -62,35 +62,35 @@ export class ProtoGuy {
 
         case ProtoGuyCard.CHOSE_PATH:
             this.name = "chosePathProtoGuy";
-            this.url = "sprites/ProtoScene/ChosePathCard/damien.png";
+            this.url = "sprites/StudentScene/ChosePathCard/damien.png";
             break;
 
         case ProtoGuyCard.CLOTHES:
 
             this.dirty_name = "clothesProtoGuy_dirty";
-            this.dirty_url = "sprites/ProtoScene/ClothesCard/damien_Y.png";
+            this.dirty_url = "sprites/StudentScene/ClothesCard/damien_Y.png";
 
             this.clean_name = "clothesProtoGuy_clean";
-            this.clean_url = "sprites/ProtoScene/ClothesCard/damien_G.png";
+            this.clean_url = "sprites/StudentScene/ClothesCard/damien_G.png";
 
             this.pj_name = "clothesProtoGuy_pj";
-            this.pj_url = "sprites/ProtoScene/ClothesCard/damien_pj.png";
+            this.pj_url = "sprites/StudentScene/ClothesCard/damien_pj.png";
             break;
 
         case ProtoGuyCard.KITCHEN:
             this.name = "kitchenProtoGuy";
-            this.url = "sprites/ProtoScene/KitchenCard/damien.png";
+            this.url = "sprites/StudentScene/KitchenCard/damien.png";
             break;
 
         case ProtoGuyCard.COMPUTER:
             this.dirty_name = "computeProtoGuyDirty";
-            this.dirty_url = "sprites/ProtoScene/ComputerCard/damien_Y.png";
+            this.dirty_url = "sprites/StudentScene/ComputerCard/damien_Y.png";
 
             this.clean_name = "computeProtoGuyClean";
-            this.clean_url = "sprites/ProtoScene/ComputerCard/damien_G.png";
+            this.clean_url = "sprites/StudentScene/ComputerCard/damien_G.png";
 
             this.pj_name = "computeProtoGuyPJ";
-            this.pj_url = "sprites/ProtoScene/ComputerCard/damien_pj.png";
+            this.pj_url = "sprites/StudentScene/ComputerCard/damien_pj.png";
             break;
 
         case ProtoGuyCard.MINI_GAME:
@@ -98,13 +98,13 @@ export class ProtoGuy {
 
         case ProtoGuyCard.MESSAGE:
             this.dirty_name = "computeProtoGuyDirty_msg";
-            this.dirty_url = "sprites/ProtoScene/MessageCard/damien_Y.png";
+            this.dirty_url = "sprites/StudentScene/MessageCard/damien_Y.png";
 
             this.clean_name = "computeProtoGuyClean_msg";
-            this.clean_url = "sprites/ProtoScene/MessageCard/damien_G.png";
+            this.clean_url = "sprites/StudentScene/MessageCard/damien_G.png";
 
             this.pj_name = "computeProtoGuyPJ_msg";
-            this.pj_url = "sprites/ProtoScene/MessageCard/damien_pj.png";
+            this.pj_url = "sprites/StudentScene/MessageCard/damien_pj.png";
             break;
 
         default:

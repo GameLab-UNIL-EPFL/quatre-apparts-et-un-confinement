@@ -2,9 +2,9 @@
 	"florence": {
 		"name": "Florence",
 		"text": [
-			"Même si vous n'avez plus l'école,",
-            "ça ne veut pas dire que vous êtes en vancances!",
-            "Vous avez des devoirs à faire encore!"
+			"Ok, vous n'avez plus l'école, mais…",
+			"Ça ne veut pas dire que vous êtes en vacances!",
+			"La maîtresse m'a écrit.\nVous avez reçu des devoirs à faire."
 		],
 		"choices": [],
 		"goto": ["kids"]
@@ -12,34 +12,56 @@
 	"kids": {
 		"name": "Maxime et Liliane",
 		"text": [
-            "Mais maman! Ça fait trop longtemps qu'on est pas sorti!", 
-            "On peut allez au jouer au parc, s'il te plaît?",
-            "On fera attention promis!"
+			"Mais Maman, ça fait trop longtemps qu'on n'est pas sortis!",
+			"On peut aller au jouer au parc avant, s'il te plaît? Alleeeeeeeez.",
+			"On fera attention, promis!"
 		],
 		"choices": [
-            {
-                "text": "Bon d'accord! Mais vous devez ranger la chambre d'abord.",
-                "goto": "merci"
-            },
-            {
-                "text": "Non! Je vous ai déjà expliqué pourquoi et vous devez ranger votre chambre!",
-                "goto": "oh"
-            }
-        ],
+			{
+				"text": "Bon, d'accord!",
+				"goto": "merci"
+			},
+			{
+				"text": "Non, je vous ai déjà expliqué pourquoi.",
+				"goto": "oh"
+			}
+		],
 		"goto": ["merci", "oh"]
-    },
-    "merci": {
+	},
+	"merci": {
 		"name": "Maxime et Liliane",
 		"text": [
-			"Merci maman!"
+			"Merci Maman!"
+		],
+		"choices": [],
+		"goto": ["oui-rangez"],
+		"objective": {
+			"status": true
+		}
+	},
+	"oh": {
+		"name": "Maxime et Liliane",
+		"text": [
+			"Mais rhooo! Maman, t'es pas gentille."
+		],
+		"choices": [],
+		"goto": ["non-rangez"],
+		"objective": {
+			"status": false
+		}
+	},
+	"non-rangez": {
+		"name": "Florence",
+		"text": [
+			 "Et vous devez ranger votre chambre!"
 		],
 		"choices": [],
 		"goto": []
-    },
-    "oh": {
-		"name": "Maxime et Liliane",
+	},
+	"oui-rangez": {
+		"name": "Florence",
 		"text": [
-			"Mais rhooo!"
+			 "Mais vous devez d'abord ranger votre chambre."
 		],
 		"choices": [],
 		"goto": []

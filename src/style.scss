@@ -6,15 +6,54 @@
 	font-style: normal;
 }
 
+@font-face {
+	font-family: "OpenSans-Bold";
+	src:
+		url("../fonts/Open_Sans/OpenSans-Bold.ttf") format("truetype");
+	font-weight: normal;
+	font-style: normal;
+}
+
 body {
 	font-family: "OpenSans";
+	background: #000;
+}
+
+.font-preload {
+	font-family: "OpenSans-Bold";
+	opacity: 0;
+	position: fixed;
+	bottom: 0;
+	right: 0;
 }
 
 * {
 	margin: 0;
 	padding: 0;
-	background: #000;
 }
 canvas {
 	// border: 2px dashed orange;
+}
+div.repo, div.team {
+	width: 800px;
+	max-width: 80%;
+	font-size: 40px;
+
+	p {
+		margin-top: 20px;
+	}
+
+	h4 {
+		margin-top: 40px;
+		font-family: "OpenSans-Bold";
+		font-size: 44px;
+	}
+}
+div.team {
+	height: 600px;
+}
+div.repo {
+	font-size: 44px;
+	// overflow-y: scroll;
+	height: 1000px;
 }

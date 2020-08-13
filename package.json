@@ -1,54 +1,56 @@
 {
-	"name": "covidou",
-	"version": "0.1",
-	"description": "Free Open-Source web-based mobile game.",
-	"main": "src/index.js",
-	"scripts": {
-		"build": "webpack --config webpack/prod.js ",
-		"test": "jest --coverage",
-		"lint": "standard",
-		"dev": "webpack-dev-server --config webpack/base.js --open",
-		"start": "node ./server_for_heroku.js",
-		"stat": "webpack-dev-server --profile --config webpack/base.js --json > compilation-stats.json"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git+https://github.com/IMICovidou/Covidou"
-	},
-	"author": "Paul Ronga, Yanick Rochat, Mathias Hangartner, Saara Jones, Andrew Dobis",
-	"license": "GPLv3",
-	"licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.fr.html",
-	"bugs": {
-		"url": "https://github.com/IMICovidou/Covidou/issues"
-	},
-	"homepage": "https://dev.tcch.ch",
-	"devDependencies": {
-		"@babel/core": "^7.7.2",
-		"@babel/preset-env": "^7.7.1",
-		"babel-eslint": "^10.1.0",
-		"babel-loader": "^8.0.6",
-		"clean-webpack-plugin": "^3.0.0",
-		"copy-webpack-plugin": "^5.1.1",
-		"eslint": "^7.4.0",
-		"eslint-loader": "^4.0.2",
-		"file-loader": "^4.2.0",
-		"html-webpack-plugin": "^3.2.0",
-		"jest": "^26.0.1",
-		"raw-loader": "^3.1.0",
-		"sass": "^1.26.5",
-		"sass-loader": "^8.0.2",
-		"terser-webpack-plugin": "^2.2.1",
-		"webpack": "^4.43.0",
-		"webpack-cli": "^3.3.10",
-		"webpack-dev-server": "^3.11.0",
-		"webpack-merge": "^4.2.2"
-	},
-	"dependencies": {
-		"babel": "^6.23.0",
-		"css-loader": "^3.5.3",
-		"express": "^4.17.1",
-		"phaser": "^3.23.0",
-		"phaser3-rex-plugins": "^1.1.18",
-		"style-loader": "^1.2.1"
-	}
+  "name": "covidou",
+  "version": "0.0.1",
+  "description": "Free Open-Source web-based mobile game.",
+  "main": "src/index.js",
+  "scripts": {
+    "build": "webpack --config webpack/prod.js ",
+    "test": "jest --coverage",
+    "lint": "standard",
+    "dev": "webpack-dev-server --config webpack/base.js --open",
+    "start": "node ./server_for_heroku.js",
+    "stat": "webpack-dev-server --profile --config webpack/base.js --json > compilation-stats.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/IMICovidou/Covidou"
+  },
+  "author": "Paul Ronga, Yanick Rochat, Mathias Hangartner, Saara Jones, Andrew Dobis",
+  "license": "GPLv3",
+  "licenseUrl": "https://www.gnu.org/licenses/gpl-3.0.fr.html",
+  "bugs": {
+    "url": "https://github.com/IMICovidou/Covidou/issues"
+  },
+  "homepage": "https://dev.tcch.ch",
+  "devDependencies": {
+    "@babel/core": "^7.11.0",
+    "@babel/preset-env": "^7.11.0",
+    "babel-eslint": "^10.1.0",
+    "babel-loader": "^8.1.0",
+    "clean-webpack-plugin": "^3.0.0",
+    "copy-webpack-plugin": "^5.1.1",
+    "eslint-loader": "^4.0.2",
+    "file-loader": "^4.3.0",
+    "html-webpack-plugin": "^3.2.0",
+    "jest": "^26.2.2",
+    "raw-loader": "^3.1.0",
+    "sass": "^1.26.10",
+    "sass-loader": "^8.0.2",
+    "terser-webpack-plugin": "^2.3.7",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12",
+    "webpack-dev-server": "^3.11.0",
+    "webpack-merge": "^4.2.2"
+  },
+  "dependencies": {
+    "babel": "^6.23.0",
+    "babel-plugin-transform-runtime": "^6.23.0",
+    "css-loader": "^3.6.0",
+    "eslint": "^7.5.0",
+    "express": "^4.17.1",
+    "phaser": "^3.24.1",
+    "phaser3-rex-plugins": "^1.1.21",
+    "regenerator-runtime": "^0.13.7",
+    "style-loader": "^1.2.1"
+  }
 }
