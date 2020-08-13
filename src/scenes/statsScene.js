@@ -153,6 +153,11 @@ export class StatsScene extends Phaser.Scene {
         choice_text.setOrigin(0.5, 0.5);
         choice_text.setDepth(10);
 
+        choice_box.displayWidth *= window.horizontalRatio;
+        choice_text.displayWidth *= window.horizontalRatio;
+        choice_box.displayHeight *= window.horizontalRatio;
+        choice_text.displayHeight *= window.horizontalRatio;
+
         //Retrieve the statistics
         const stats = player.getStats();
         const offset = 200;
@@ -267,8 +272,8 @@ export class StatsScene extends Phaser.Scene {
             percentage_bar_bg.setOrigin(0, 0);
             percentage_bar_fill.setOrigin(0, 0);
             
-            percentage_bar_bg.setDepth(10);
-            percentage_bar_fill.setDepth(10);
+            percentage_bar_bg.setDepth(15);
+            percentage_bar_fill.setDepth(15);
             
             percentage_bar_fill.displayWidth *= (displayPercent/100);
             percentage_bar_fill.displayHeight *= 0.95;
@@ -289,6 +294,38 @@ export class StatsScene extends Phaser.Scene {
             //Colors
             percentage_bar_fill.setTint("0xa2d9ce");
             percentage_bar_fill_wrong.setTint("0xf8c471");
+
+            //Adapt the size for smaller screens
+            if(window.horizontalRatio < 0.75) {
+                box.displayWidth *= window.horizontalRatio;
+                name_sprite.displayWidth *= horizontalRatio;
+                text_sprite.displayWidth *= horizontalRatio;
+    
+                box.displayHeight *= window.horizontalRatio * 1.2;
+                name_sprite.displayHeight *= horizontalRatio;
+                text_sprite.displayHeight *= horizontalRatio;
+                
+                percentage_bar_bg.displayWidth *= horizontalRatio;
+                percentage_bar_fill.displayWidth *= horizontalRatio;
+                percentage_bar_fill_wrong.displayWidth *= horizontalRatio;
+    
+                box.setOrigin(0.5, 0);
+                text_sprite.setOrigin(0, 0);
+                name_sprite.setOrigin(0, 0);
+    
+                box.x = 0;
+    
+                name_sprite.x = box.x - 2 * box.displayWidth/5;
+                name_sprite.y = box.y + box.displayHeight / 5;
+                text_sprite.x = name_sprite.x;
+                text_sprite.y = name_sprite.y + name_sprite.displayHeight * 1.2;
+                percentage_bar_bg.x = text_sprite.x;
+                percentage_bar_fill.x = text_sprite.x + 2;
+                percentage_bar_fill_wrong.x = percentage_bar_fill.x + percentage_bar_fill.displayWidth;
+                percentage_bar_bg.y = text_sprite.y + text_sprite.displayHeight * 1.2;
+                percentage_bar_fill.y = text_sprite.y + text_sprite.displayHeight * 1.2 + 5;
+                percentage_bar_fill_wrong.y = text_sprite.y + text_sprite.displayHeight * 1.2 + 5;
+            }
 
             //Update the vertical offset
             y_offset += offset * 1.5;
