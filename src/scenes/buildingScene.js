@@ -101,7 +101,7 @@ export class BuildingScene extends Phaser.Scene {
             );
 
             this.load.spritesheet(
-                DIALOGUE_BOX_KEY,
+                'BuildingDialogBox',
                 "sprites/UI/dialogueBox.png",
                 DIALOGUE_BOX_SPRITE_SIZE.bg
             );
@@ -220,7 +220,7 @@ export class BuildingScene extends Phaser.Scene {
         this.sprites['menu_continue'] = this.add.sprite(
             0,
             -683,
-            DIALOGUE_BOX_KEY
+            'BuildingDialogBox'
         ).play(D_BOX_ANIMATION_KEY);
 
         //Resize the box
@@ -268,7 +268,7 @@ export class BuildingScene extends Phaser.Scene {
         this.anims.create({
             key: D_BOX_ANIMATION_KEY,
             frameRate: 6,
-            frames: this.anims.generateFrameNames(DIALOGUE_BOX_KEY),
+            frames: this.anims.generateFrameNames('BuildingDialogBox'),
             repeat: -1
         });
 
@@ -281,7 +281,7 @@ export class BuildingScene extends Phaser.Scene {
         this.sprites['menu_new_game'] = this.add.sprite(
             0,
             player.saveExists() ? -503 : -605,
-            DIALOGUE_BOX_KEY
+            'BuildingDialogBox'
         ).play(D_BOX_ANIMATION_KEY);
 
         //Resize the box

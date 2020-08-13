@@ -163,7 +163,7 @@ export class GrandmaScene extends Phaser.Scene {
         this.dialogue.display("news");
 
         //Save the new game state
-        player.setData({ cardIdx: GrandmaCards.LIVING_ROOM });
+        player.setData({ cardIdx: GrandmaCards.LIVING_ROOM, month: this.month });
         player.saveGame();
     }
 
