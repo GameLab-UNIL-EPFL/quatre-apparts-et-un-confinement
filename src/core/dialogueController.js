@@ -342,6 +342,21 @@ export class DialogueController {
 
         this.content.setDepth(5);
 
+        this.background.displayWidth *= window.horizontalRatio;
+        this.content.displayWidth *= window.horizontalRatio;
+        this.name.displayWidth *= window.horizontalRatio;
+
+        this.content.displayHeight *= window.horizontalRatio;
+        this.name.displayHeight *= window.horizontalRatio;
+
+        this.content.setOrigin(0, 0);
+        this.name.setOrigin(0, 0);
+
+        this.name.x = this.background.x - 2 * this.background.displayWidth/5;
+        this.name.y = this.background.y - this.background.displayHeight/4;
+        this.content.x = this.name.x;
+        this.content.y = this.name.y + this.name.displayHeight * 1.2;
+
         const interaction = () => {
             //Prompt user if necessary on interaction
             if(this.requestDialogue(id).goto.length !== 0 && this.textIdx === this.text.length - 1) {
@@ -473,6 +488,9 @@ export class DialogueController {
                 //Center the text
                 prompt_text.setOrigin(0.5, 0.5);
                 prompt_text.setDepth(5);
+
+                prompt_text.displayWidth *= window.horizontalRatio;
+                prompt_text.displayHeight *= window.horizontalRatio;
 
                 //Adapt the box size to fit the text if needed
                 if(prompt_text.displayWidth > prompt_sprite.displayWidth) {
