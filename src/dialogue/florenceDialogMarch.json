@@ -31,7 +31,7 @@
 	"merci": {
 		"name": "Maurice et Léa",
 		"text": [
-			"Merci Maman!"
+			"Youpiiii!", "Merci Maman!"
 		],
 		"choices": [],
 		"goto": ["oui-rangez"],
@@ -42,7 +42,7 @@
 	"oh": {
 		"name": "Maurice et Léa",
 		"text": [
-			"Mais rhooo! Maman, t'es pas gentille."
+			"Mais rhooo!", "Maman, t'es pas gentille."
 		],
 		"choices": [],
 		"goto": ["non-rangez"],

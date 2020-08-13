@@ -101,7 +101,7 @@
 	},
 	"personne": {
 		"name": "Nathan",
-		"text": ["Je dis que t'as de la chance de pas être coincé", "avec quelqu'un toute la journée dans le même petit appart"],
+		"text": ["Je dis juste que t'as de la chance de ne pas être coincé", "avec la même personne tous les jours."],
 		"choices": [
 			{
 				"text": ["C'est le pire moment pour être célibataire! Je préférerais être confiné avec quelqu'un."],

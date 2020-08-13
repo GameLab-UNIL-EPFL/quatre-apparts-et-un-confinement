@@ -137,13 +137,7 @@
 	"suivi": {
 		"name": "Nathan",
 		"text": ["J'aurais pas dû t'écouter... Bon tcho, je te laisse"],
-		"choices": [
-			{
-				"text": ["Salut!"],
-				"preview": "Salut!",
-				"goto": ""
-            }
-        ],
+		"choices": [],
 		"goto": []
     },
     "bon": {
@@ -190,13 +184,7 @@
 	"finBonNathan": {
 		"name": "Nathan",
 		"text": ["Cool à bientôt alors!"],
-		"choices": [
-			{
-				"text": ["Salut!"],
-				"preview": "Salut!",
-				"goto": ""
-            }
-        ],
+		"choices": [],
 		"goto": []
 	},
     "sandrine": {
