@@ -57,3 +57,58 @@ div.repo {
 	// overflow-y: scroll;
 	height: 1000px;
 }
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	50% {
+		opacity: 0;
+	}
+	100% {
+		opacity: 0.9;
+	}
+}
+@keyframes fadeOut {
+	0% {
+		opacity: 0.9;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+#sticky-container {
+	position: fixed;
+	width: 100%;
+	animation: fadeIn 1s ease-out forwards;
+	background: #fff;
+	&.closed {
+		animation: fadeOut 0.5s ease-out forwards;
+	}
+	div {
+		max-width: 60vh;
+		margin: auto;
+		margin-top: 4px;
+		font-size: 20px;
+		padding: 0 4px;
+
+		button {
+			width: 45%;
+			background: #27303a;
+			color: white;
+			border: 0;
+			border-radius: 3px;
+			font-size: 20px;
+			float: right;
+			padding: 4px 0;
+			margin: 10px 0;
+			&.no {
+				float: left;
+				background: #ddd;
+				color: #000;
+			}
+		}
+	}
+	bottom: 0;
+	left: 0;
+}

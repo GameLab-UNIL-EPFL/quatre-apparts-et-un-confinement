@@ -36,6 +36,7 @@ export class Player {
      */
     constructor() {
         this.id = this.generateId();
+        this.statsEnabled = false;
         this.version = 0.2;
         this.cur_scene = Scenes.INTRO;
         this.scene_data = {};
@@ -53,6 +54,19 @@ export class Player {
      * -- StudentScene -- { cardIdx, clothes, food }
      * -- BuildingScene -- { mainMenu, stage, windows: { damien, grandma, family, indep }, month, nextScene: { damien, grandma, family, indep }}
      */
+
+    enableStats() {
+        this.statsEnabled = true;
+
+        // analytics setup - experimental
+        (function(w,d,s,l,i) {w[l]=w[l]||[];w[l].push({'gtm.start':
+        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+        })(window,document,'script','dataLayer','GTM-TQ2B8Q');
+
+        console.log('Stats enabled');
+    }
 
     generateId() {
         return Math.random().toString(36).substr(2, 9) + ((new Date()).getTime()).toString(36);
@@ -112,6 +126,7 @@ export class Player {
     saveGame() {
         let serialized_data = {
             id: this.id,
+            statsEnabled: this.statsEnabled,
             version: this.version,
             scene: this.cur_scene,
             data: this.scene_data,
@@ -149,6 +164,7 @@ export class Player {
 
                 //Load all data into the player
                 this.id = game_data.id;
+                this.statsEnabled = game_data.statsEnabled;
                 this.version = game_data.version;
                 this.dialogue_tree = game_data.tree;
                 this.cur_scene = game_data.scene;
@@ -178,19 +194,23 @@ export class Player {
     }
 
     checkPlayerId(iteration = 0) {
-        (async () => {
-            const rawResponse = await fetch('https://labs.letemps.ch/interactive/2020/_sandbox/_covidou_server/check_player_id.php', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({'player_id': this.player_id})
-            });
-            const content = await rawResponse.json();
-            // Output if player_id already exists: {"result": "success", "count": "1"}
-            this.checkIdCallback(content, iteration);
-        })();
+        if (this.statsEnabled === true) {
+            (async () => {
+                const rawResponse = await fetch('https://labs.letemps.ch/interactive/2020/_sandbox/_covidou_server/check_player_id.php', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({'player_id': this.player_id})
+                });
+                const content = await rawResponse.json();
+                // Output if player_id already exists: {"result": "success", "count": "1"}
+                this.checkIdCallback(content, iteration);
+            })();
+        } else {
+            console.log('“No” to sticky => stats disabled');
+        }
     }
 
     sendChoices(payload) {
@@ -204,30 +224,31 @@ export class Player {
             'damien_clothes': 1
         };
         */
-
-        (async () => {
-            const rawResponse = await fetch('https://labs.letemps.ch/interactive/2020/_sandbox/_covidou_server/add_choices.php', {
-                method: 'POST',
-                headers: {
-                    'Accept': 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(payload)
-            });
-            const content = await rawResponse.json();
-            // Tells if database was successfully updated
-            console.log(content);
-        })();
+        if (this.statsEnabled) {
+            (async () => {
+                const rawResponse = await fetch('https://labs.letemps.ch/interactive/2020/_sandbox/_covidou_server/add_choices.php', {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(payload)
+                });
+                const content = await rawResponse.json();
+                // Tells if database was successfully updated
+                console.log(content);
+            })();
+        } else {
+            console.log('“No” to sticky => stats disabled');
+        }
     }
 
     async getStats() {
-
         const rawResponse = await fetch('https://labs.letemps.ch/interactive/2020/_sandbox/_covidou_server/get_choice_stats.php', {
             method: 'GET'
         });
         const content = await rawResponse.json();
         // Example output: [{"choice":"kids_park","percentage":"35.0"},{"choice":"grandma_hairdresser","percentage":"39.0"},{"choice":"damien_stay_home","percentage":"0.0"},{"choice":"freelancer_good_love_advice","percentage":"28.0"}]
-        console.log(content);
         return content;
     }
 }

@@ -356,7 +356,7 @@ export class BuildingScene extends Phaser.Scene {
             month_text = "Avril 2020";
             break;
         default:
-            month_text = "Mai 2020";
+            month_text = "Juin 2020";
             break;
         }
 

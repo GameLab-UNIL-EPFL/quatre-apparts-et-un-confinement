@@ -161,7 +161,7 @@ export class TVCard extends Card {
                 this.conseil_anim.setVisible(false);
                 this.simonetta_anim.setVisible(true);
                 this.which_anim = TV_STATE.SIMONETTA;
-            } else if(this.which_anim === TV_STATE.SIMONETTA){
+            } else if(this.which_anim === TV_STATE.SIMONETTA) {
                 this.simonetta_anim.setVisible(false);
                 this.graph_anim.setVisible(true);
                 this.which_anim = TV_STATE.GRAPH;
