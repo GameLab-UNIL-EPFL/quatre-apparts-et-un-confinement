@@ -124,12 +124,24 @@ export class DialogueController {
      * @brief loads in all of the data needed by the dialogue controller
      */
     preload() {
+        // "responsiveness" doesn't work because of hidden dependency (DIALOGUE_BOX_KEY used in BuildingScene which gets preloaded first)
+        let dialogueBoxSprite = "sprites/UI/dialogueBox-900px.png";
+        let dialogueBoxSpriteSize = DIALOGUE_BOX_SPRITE_SIZE.bg;
+        if (window.aspectRatio <= 0.5 ) {
+            dialogueBoxSprite = "sprites/UI/dialogueBox-900px.png";
+            dialogueBoxSpriteSize.frameWidth = 900;
+        }else if (window.aspectRatio < 0.6) {
+            dialogueBoxSprite = "sprites/UI/dialogueBox-1080px.png";
+            dialogueBoxSpriteSize.frameWidth = 1080;
+        }
+
         //Load in the dialogue box
         this.parent_scene.load.spritesheet(
             DIALOGUE_BOX_KEY,
-            "sprites/UI/dialogueBox.png",
-            DIALOGUE_BOX_SPRITE_SIZE.bg
+            dialogueBoxSprite,
+            dialogueBoxSpriteSize
         );
+        console.log('Dialogue box width is', dialogueBoxSpriteSize.frameWidth, dialogueBoxSprite);
 
         //Load in prompts
         this.parent_scene.load.spritesheet(
@@ -341,6 +353,9 @@ export class DialogueController {
         );
 
         this.content.setDepth(5);
+
+        // TODO: use appropriate bg width + font size
+        // shrink only what is necessary (difference between fixed bg width and current scene width)
 
         this.background.displayWidth *= window.horizontalRatio;
         this.content.displayWidth *= window.horizontalRatio;
