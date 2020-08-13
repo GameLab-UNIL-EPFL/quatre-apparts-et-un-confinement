@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 import { Scenes } from "../core/player.js";
-import { player } from "../index.js"
+import { player } from "../index.js";
 import { DialogueController } from "../core/dialogueController.js";
 import { Card } from "./cards/card.js";
 import { Background } from "./objects/background.js";
