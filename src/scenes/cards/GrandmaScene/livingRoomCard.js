@@ -158,13 +158,6 @@ export class LivingRoomCard extends Card {
     create() {
         super.create();
 
-        //Hide all highlights if it's not march
-        if(this.parent_scene.month !== Months.MARCH) {
-            this.children[5].highlight_sprite.setActive(false).setVisible(false);
-            this.children[6].highlight_sprite.setActive(false).setVisible(false);
-            this.children[7].highlight_sprite.setActive(false).setVisible(false);
-        }
-
         //Add in the initial grandma
         this.grandma_sprite = this.parent_scene.add.image(GRANDMA_POS.x, GRANDMA_POS.y, "grandma_idle");
 
