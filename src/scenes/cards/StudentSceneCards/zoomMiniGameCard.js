@@ -500,7 +500,7 @@ export class ZoomMiniGameCard extends Card {
         const tutorial_sprite = this.parent_scene.add.image(
             0,
             -1000,
-            'notification_1'
+            'notification_0'
         );
 
         tutorial_sprite.setDepth(1);
