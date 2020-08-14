@@ -37,7 +37,7 @@ export class Player {
     constructor() {
         this.id = this.generateId();
         this.statsEnabled = false;
-        this.version = 0.2;
+        this.version = 0.3;
         this.cur_scene = Scenes.INTRO;
         this.scene_data = {};
         this.dialogue_tree = {};
@@ -67,6 +67,8 @@ export class Player {
 
         console.log('Stats enabled');
     }
+
+
 
     generateId() {
         return Math.random().toString(36).substr(2, 9) + ((new Date()).getTime()).toString(36);
@@ -196,7 +198,7 @@ export class Player {
     checkPlayerId(iteration = 0) {
         if (this.statsEnabled === true) {
             (async () => {
-                const rawResponse = await fetch('https://labs.letemps.ch/interactive/2020/_sandbox/_covidou_server/check_player_id.php', {
+                const rawResponse = await fetch('https://labs.letemps.ch/interactive/2020/quatre-apparts-un-confinement/server/check_player_id.php', {
                     method: 'POST',
                     headers: {
                         'Accept': 'application/json',
@@ -226,7 +228,7 @@ export class Player {
         */
         if (this.statsEnabled) {
             (async () => {
-                const rawResponse = await fetch('https://labs.letemps.ch/interactive/2020/_sandbox/_covidou_server/add_choices.php', {
+                const rawResponse = await fetch('https://labs.letemps.ch/interactive/2020/quatre-apparts-un-confinement/server/add_choices.php', {
                     method: 'POST',
                     headers: {
                         'Accept': 'application/json',
@@ -244,7 +246,7 @@ export class Player {
     }
 
     async getStats() {
-        const rawResponse = await fetch('https://labs.letemps.ch/interactive/2020/_sandbox/_covidou_server/get_choice_stats.php', {
+        const rawResponse = await fetch('https://labs.letemps.ch/interactive/2020/quatre-apparts-un-confinement/server/get_choice_stats.php', {
             method: 'GET'
         });
         const content = await rawResponse.json();

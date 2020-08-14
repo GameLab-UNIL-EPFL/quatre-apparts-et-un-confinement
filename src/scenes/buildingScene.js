@@ -554,7 +554,7 @@ export class BuildingScene extends Phaser.Scene {
 
 
         if(this.info.month === Months.MARCH) {
-            this.sprites['building_bg'] = this.add.image(0, 500, "building_bg_march");
+            this.sprites['building_bg'] = this.add.image(0, 0, "building_bg_march");
 
             //Load in clouds
             this.sprites['cloud_01'] = this.add.image(1983, -479, "cloud_01_march");
@@ -755,6 +755,7 @@ export class BuildingScene extends Phaser.Scene {
             this.title_logo = this.add.image(0, -2000, 'title-logo');
             this.cameras.main.centerOn(0, -2000);
             this.cameras.main.setBackgroundColor('#f5e5cc');
+
             setTimeout(() => {
                 if (this.cameras.main) {
                     this.cameras.main.pan(0, 0, 3500, 'Cubic');
@@ -763,7 +764,7 @@ export class BuildingScene extends Phaser.Scene {
 
             this.createMainMenu();
 
-            this.showArrow();
+            // this.showArrow();
         } else if(this.info.new_month) {
             this.showMonth();
         }
