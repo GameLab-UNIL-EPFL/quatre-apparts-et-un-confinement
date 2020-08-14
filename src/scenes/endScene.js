@@ -10,6 +10,13 @@ export const EndCards = {
 export class EndScene extends Phaser.Scene {
     constructor() {
         super({ key: Scenes.END_SCENE });
+        this.title = 'Merci d’avoir joué!';
+    }
+
+    init(data) {
+        if (data.aboutTitle) {
+            this.title = 'A propos';
+        }
     }
 
     preload() {
@@ -31,7 +38,7 @@ export class EndScene extends Phaser.Scene {
         this.thank_you = this.add.text(
             0,
             -600,
-            "Merci d'avoir joué !",
+            this.title,
             {font: 55 + "px OpenSans", fill: "#27303A"}
         );
         this.thank_you.setOrigin(0.5,0.5);
@@ -59,7 +66,7 @@ export class EndScene extends Phaser.Scene {
         Saara Jones: Récit, Conception sonore<br>
         Yannick Rochat: Gestion de projet, Conseil<br>
         Paul Ronga: Gestion de projet, Programmation</p>
-        <p>Vos commentaires sont les bienvenus à l’adresse: <a href="mailto:data@letemps.ch">data@letemps.ch</a></p>`;
+        <p>Vos commentaires sont les bienvenus à l’adresse: <a target="_blank" href="mailto:data@letemps.ch">data@letemps.ch</a></p>`;
 
         divTeam.classList.add('team');
 
@@ -76,10 +83,10 @@ export class EndScene extends Phaser.Scene {
         divRepo.innerHTML = `<p>Ce jeu est en licence libre, ce qui signifie que le code source, les dessins et les sons peuvent être réutilisés.
         <a target="_blank" href="https://github.com/IMI-initiative/quatre-apparts-et-un-confinement">En savoir plus</a></p>
         <h4>Organisation et soutien</h4>
-        <p><a href="https://www.media-initiative.ch">Initiative pour l’innovation dans les médias (IMI)</a><br>
-        <a href="https://www.letemps.ch">Le Temps</a><br>
-        <a href="https://www.epfl.ch/schools/cdh/fr/">Collège des humanités (CDH), EPFL</a>
-        <a href="https://wp.unil.ch/gamelab/">UNIL Gamelab</a></p>
+        <p><a target="_blank" href="https://www.media-initiative.ch">Initiative pour l’innovation dans les médias (IMI)</a><br>
+        <a target="_blank" href="https://www.letemps.ch">Le Temps</a><br>
+        <a target="_blank" href="https://www.epfl.ch/schools/cdh/fr/">Collège des humanités (CDH), EPFL</a>
+        <a target="_blank" href="https://wp.unil.ch/gamelab/">UNIL Gamelab</a></p>
 
         <h4>Un grand merci à nos testeurs</h4>
         <p>Lesli__e, Vincent, Sashiro (formule pour remercier aussi tous ceux qui préféraient ne pas être mentionnés)</p>
@@ -87,6 +94,14 @@ export class EndScene extends Phaser.Scene {
 
         this.divRepo = this.add.dom(0, -2600, divRepo);
         this.divRepo.setOrigin(0.5, 0.5);
+
+        divTeam.addEventListener('click', () => this.nextCard(), this);
+        divRepo.addEventListener('click', () => this.nextCard(), this);
+        document.querySelectorAll('a').forEach((a, idx) => {
+            a.addEventListener('click', function (e) {
+                e.stopPropagation();
+            });
+        });
 
         this.input.on('pointerdown', () => this.nextCard(), this);
         this.divTeam.on('pointerdown', () => this.nextCard(), this);
@@ -111,12 +126,14 @@ export class EndScene extends Phaser.Scene {
                 yoyo: false,
                 loop: 0
             });
+            this.cardIdx++;
         } else {
             this.nextScene();
         }
     }
 
     nextScene() {
+        console.log('Go back to main menu');
         this.cameras.main.fadeOut(3000, 0, 0, 0,
             () => this.scene.start(Scenes.BUILDING, {
                 mainMenu: true,

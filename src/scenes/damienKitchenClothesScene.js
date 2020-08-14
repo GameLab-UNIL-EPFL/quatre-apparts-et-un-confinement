@@ -232,7 +232,7 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
             //Trigger the dialogue
             if(this.cardIdx === StudentCards.CLOTHES) {
                 this.dialogue.display("habit");
-                
+
                 this.anims.create({
                     key: "pj_h_anim",
                     frameRate: 7,
@@ -261,7 +261,6 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
         this.input.on(
             'gameobjectdown',
             (_, GameObject) => {
-                console.log(GameObject.texture.key);
                 if(GameObject.texture.key === "toaster_h") {
                     this.toast.play();
                 }
@@ -271,7 +270,7 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
                 else if(GameObject.texture.key === "sink_h") {
                     this.glass.play();
                 }
-                
+
             }
         );
     }

@@ -914,6 +914,10 @@ export class StoreScene extends Phaser.Scene {
 
                 switch (true) {
 
+                case this.shoppingBasket.length == 0:
+                    checkoutImage = 'caisse01_05-prix00.png';
+                    break;
+
                 case this.shoppingBasket.length < 10:
                     checkoutImage = 'caisse01_05-prix01.png';
                     break;
@@ -964,7 +968,7 @@ export class StoreScene extends Phaser.Scene {
 
     nextScene() {
         this.music.stop();
-        this.cashierSound.stop(); 
+        this.cashierSound.stop();
         if(this.month === Months.APRIL) {
             this.scene.start(Scenes.HALLWAY, {cardIdx: HallwayCards.INDEP_GRANDMA, damien_gone: false});
         } else {
