@@ -92,6 +92,7 @@ export class BuildingScene extends Phaser.Scene {
     preload() {
         //Load in the dialogue box if needed
         if(this.info.mainMenu) {
+            this.load.image("title-logo", "sprites/UI/immeuble00_08-logo.png");
 
             //Load the arrow animation spritesheet
             this.load.spritesheet(
@@ -280,7 +281,7 @@ export class BuildingScene extends Phaser.Scene {
         //Create new Game background sprite
         this.sprites['menu_new_game'] = this.add.sprite(
             0,
-            player.saveExists() ? -503 : -605,
+            player.saveExists() ? -535 : -605,
             'BuildingDialogBox'
         ).play(D_BOX_ANIMATION_KEY);
 
@@ -312,6 +313,39 @@ export class BuildingScene extends Phaser.Scene {
         //Make new game button start a new game
         this.sprites['new_game_text'].setInteractive().on('pointerdown', interaction, this);
         this.sprites['menu_new_game'].setInteractive().on('pointerdown', interaction, this);
+
+        //Create credits background sprite
+        this.sprites['menu_credits'] = this.add.sprite(
+            0,
+            player.saveExists() ? -390 : -450,
+            'BuildingDialogBox'
+        ).play(D_BOX_ANIMATION_KEY);
+
+        //Resize the box
+        this.sprites['menu_credits'].displayWidth *= .5;
+        this.sprites['menu_credits'].displayHeight *= .5;
+
+        //Add credits text
+        this.sprites['credits_text'] = this.add.text(
+            0,
+            this.sprites['menu_credits'].y,
+            "A propos",
+            {font: "54px OpenSans", fill: "black"}
+        );
+        this.sprites['credits_text'].setOrigin(0.5, 0.5);
+
+        const openCredits = () => {
+            console.log('Open credits');
+            this.clickSound.play();
+            this.scene.start(
+                Scenes.END_SCENE,
+                { aboutTitle: true }
+            );
+        };
+
+        //Make new game button start a new game
+        this.sprites['credits_text'].setInteractive().on('pointerdown', openCredits, this);
+        this.sprites['menu_credits'].setInteractive().on('pointerdown', openCredits, this);
     }
 
     /**
@@ -520,7 +554,7 @@ export class BuildingScene extends Phaser.Scene {
 
 
         if(this.info.month === Months.MARCH) {
-            this.sprites['building_bg'] = this.add.image(0, 0, "building_bg_march");
+            this.sprites['building_bg'] = this.add.image(0, 500, "building_bg_march");
 
             //Load in clouds
             this.sprites['cloud_01'] = this.add.image(1983, -479, "cloud_01_march");
@@ -717,6 +751,16 @@ export class BuildingScene extends Phaser.Scene {
 
         //Add menu buttons if needed
         if(this.info.mainMenu) {
+            // Title and pan effect
+            this.title_logo = this.add.image(0, -2000, 'title-logo');
+            this.cameras.main.centerOn(0, -2000);
+            this.cameras.main.setBackgroundColor('#f5e5cc');
+            setTimeout(() => {
+                if (this.cameras.main) {
+                    this.cameras.main.pan(0, 0, 3500, 'Cubic');
+                }
+            }, 1600, this);
+
             this.createMainMenu();
 
             this.showArrow();
