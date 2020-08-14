@@ -759,7 +759,7 @@ export class BuildingScene extends Phaser.Scene {
                 if (this.cameras.main) {
                     this.cameras.main.pan(0, 0, 3500, 'Cubic');
                 }
-            }, 1600, this);
+            }, 2000, this);
 
             this.createMainMenu();
 
