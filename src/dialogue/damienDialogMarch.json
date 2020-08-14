@@ -69,7 +69,7 @@
 	},
 	"loseHomework": {
 		"name": "Damien",
-		"text": ["Mince... J'arrive vraiment plus à me concentrer..."],
+		"text": ["Mince... Je n'arrive pas à me concentrer..."],
 		"choices": [],
 		"goto": []
 	},
