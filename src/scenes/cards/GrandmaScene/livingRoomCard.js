@@ -210,23 +210,20 @@ export class LivingRoomCard extends Card {
             .setInteractive()
             .on('pointerdown', () => this.meowSound.play());
 
+        // Create book highlight sprites
+        this.parent_scene.anims.create({
+            key: 'books_h_anim',
+            frameRate: 7,
+            frames: this.parent_scene.anims.generateFrameNames('books_h'),
+            repeat: -1
+        });
 
-        if(this.parent_scene.month === Months.MARCH) {
-            // Create book highlight sprites
-            this.parent_scene.anims.create({
-                key: 'books_h_anim',
-                frameRate: 7,
-                frames: this.parent_scene.anims.generateFrameNames('books_h'),
-                repeat: -1
-            });
-
-            //Play the book highlight animation
-            this.books_h = this.parent_scene.add.sprite(
-                31,
-                -121,
-                'books_h'
-            ).play('books_h_anim');
-        }
+        //Play the book highlight animation
+        this.books_h = this.parent_scene.add.sprite(
+            31,
+            -121,
+            'books_h'
+        ).play('books_h_anim');
 
 
         //Update the phone's onclickcallback
@@ -430,7 +427,7 @@ export class LivingRoomCard extends Card {
         //Destroy the grandma and the cat
         this.cat_anim.destroy();
         this.grandma_sprite.destroy();
-        //this.books_h.destroy();
+        this.books_h.destroy();
 
         //Destroy arrow if needed
         if(this.arrow) {
