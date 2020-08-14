@@ -158,13 +158,6 @@ export class LivingRoomCard extends Card {
     create() {
         super.create();
 
-        //Hide all highlights if it's not march
-        if(this.parent_scene.month !== Months.MARCH) {
-            this.children[5].highlight_sprite.setActive(false).setVisible(false);
-            this.children[6].highlight_sprite.setActive(false).setVisible(false);
-            this.children[7].highlight_sprite.setActive(false).setVisible(false);
-        }
-
         //Add in the initial grandma
         this.grandma_sprite = this.parent_scene.add.image(GRANDMA_POS.x, GRANDMA_POS.y, "grandma_idle");
 
@@ -210,23 +203,20 @@ export class LivingRoomCard extends Card {
             .setInteractive()
             .on('pointerdown', () => this.meowSound.play());
 
+        // Create book highlight sprites
+        this.parent_scene.anims.create({
+            key: 'books_h_anim',
+            frameRate: 7,
+            frames: this.parent_scene.anims.generateFrameNames('books_h'),
+            repeat: -1
+        });
 
-        if(this.parent_scene.month === Months.MARCH) {
-            // Create book highlight sprites
-            this.parent_scene.anims.create({
-                key: 'books_h_anim',
-                frameRate: 7,
-                frames: this.parent_scene.anims.generateFrameNames('books_h'),
-                repeat: -1
-            });
-
-            //Play the book highlight animation
-            this.books_h = this.parent_scene.add.sprite(
-                31,
-                -121,
-                'books_h'
-            ).play('books_h_anim');
-        }
+        //Play the book highlight animation
+        this.books_h = this.parent_scene.add.sprite(
+            31,
+            -121,
+            'books_h'
+        ).play('books_h_anim');
 
 
         //Update the phone's onclickcallback
