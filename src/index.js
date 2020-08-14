@@ -1,6 +1,6 @@
 import Phaser from "phaser";
 import RexUIPlugin from 'phaser3-rex-plugins/templates/ui/ui-plugin.js';
-import DebugObjects from './plugins/debugObjects.js';
+// import DebugObjects from './plugins/debugObjects.js';
 import './style.scss';
 
 import { TitleScene } from "./scenes/titleScene.js";
@@ -36,15 +36,15 @@ const plugins = [{
     mapping: 'rexUI'
 }];
 
-const OBJECT_DEBUG = false;
-
-if(OBJECT_DEBUG === true) {
-    plugins.push({
-        key: 'debugObjects',
-        plugin: DebugObjects,
-        mapping: 'debugObjects'
-    });
-}
+// const OBJECT_DEBUG = false;
+//
+// if(OBJECT_DEBUG === true) {
+//     plugins.push({
+//         key: 'debugObjects',
+//         plugin: DebugObjects,
+//         mapping: 'debugObjects'
+//     });
+// }
 
 /*
   What we want:
@@ -94,8 +94,8 @@ const config = {
     },
     scene: [
         TitleScene,
-        SelectScene,
         BuildingScene,
+        SelectScene,
         BusScene,
         StudentScene,
         DamienInitScene,
@@ -157,5 +157,7 @@ function handleSticky(agree) {
     }
     document.getElementById('sticky-container').classList.add('closed');
 }
+// if sticky already clicked:
+// document.getElementById('sticky-container').classList.add('closed');
 document.getElementById('stickyYes').addEventListener("click", () => handleSticky(true) );
 document.getElementById('stickyNo').addEventListener("click", () => handleSticky(false) );
