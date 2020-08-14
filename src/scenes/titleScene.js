@@ -7,7 +7,7 @@ export class TitleScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.image('title', 'sprites/TitleScene/CVD0087_Placeholder_Logo.png');
+        this.load.image('title', 'sprites/TitleScene/Intro_text.png');
         this.load.spritesheet('start', 'sprites/TitleScene/01-Accueil-Demarrer-Spritesheet_260x85.png', {frameWidth: 260, frameHeight: 85});
     }
 
@@ -16,7 +16,6 @@ export class TitleScene extends Phaser.Scene {
         this.cameras.main.setBackgroundColor('#f4e1c5');
 
         let title = this.add.sprite(0, -200, 'title');
-        title.setScale(0.8);
 
         this.anims.create({
             key: 'start-anim',
@@ -27,7 +26,7 @@ export class TitleScene extends Phaser.Scene {
 
         let start = this.add.sprite(
             0,
-            200,
+            400,
             'start'
         ).play('start-anim');
 
