@@ -12,8 +12,8 @@
     "dvd1": {
 		"name": "",
 		"text": [
-            "I am Legend (2007)",
-            "Pas besoin qu'on me rappelle ma solitude."
+            "Intouchables (2011)",
+            "Pas de bras, pas de corona."
 		],
 		"choices": [],
 		"goto": []
@@ -21,8 +21,8 @@
 	"dvd2": {
 		"name": "",
         "text": [
-            "The Mask (1994)",
-            "Du bon Jim Carrey, ça!"
+            "Silent Running (1972)",
+            "Tiens, pourquoi pas des robots pour me tenir compagnie."
 		],
         "choices": [],
 		"goto": []
