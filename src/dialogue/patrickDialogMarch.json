@@ -161,7 +161,7 @@
 		],
 		"choices": [
 			{
-				"text": ["Je pense que tu dois juste être plus attentionné. Montre-lui ton côté romantique!"],
+				"text": ["Je pense que tu dois juste être plus attentionné. Concentre-toi là-dessus."],
 				"preview": "Plus attentionné",
 				"goto": "finBon"
             },

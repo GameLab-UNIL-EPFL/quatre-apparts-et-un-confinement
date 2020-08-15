@@ -334,9 +334,10 @@ export class LivingRoomCard extends Card {
             this.objective_complete = true;
         }
 
-        if(status) {
-            player.suzanne_hair = true;
+        if(status !== undefined) {
+            player.suzanne_hair = +status;
             player.saveGame();
+            console.log('Hairdresser status:', status);
 
             //Send new information to the DB
             player.sendChoices({ player_id: player.id, grandma_hairdresser: +status });
