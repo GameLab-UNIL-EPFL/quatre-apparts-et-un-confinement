@@ -15,7 +15,7 @@ export class EndScene extends Phaser.Scene {
 
     init(data) {
         if (data.aboutTitle) {
-            this.title = 'À propos';
+            this.title = 'A propos';
         }
     }
 
@@ -60,14 +60,12 @@ export class EndScene extends Phaser.Scene {
 
         let divTeam = document.createElement('div');
 
-        divTeam.innerHTML =  `<h4>Programmation</h4>
-        Andrew Dobis, Paul Ronga
-        <h4>Graphisme</h4>
-        Mathias Hängärtner
-        <h4>Récit, conception sonore</h4>
-        Saara Jones
-        <h4>Gestion de projet</h4>
-        Yannick Rochat, Paul Ronga</br></br>
+        divTeam.innerHTML =  `<h4>Membres de l’équipe</h4>
+        <p>Andrew Dobis: Programmation<br>
+        Mathias Hängärtner: Graphisme<br>
+        Saara Jones: Récit, Conception sonore<br>
+        Yannick Rochat: Gestion de projet, Conseil<br>
+        Paul Ronga: Gestion de projet, Programmation</p>
         <p>Vos commentaires sont les bienvenus à l’adresse: <a target="_blank" href="mailto:data@letemps.ch">data@letemps.ch</a></p>`;
 
         divTeam.classList.add('team');
