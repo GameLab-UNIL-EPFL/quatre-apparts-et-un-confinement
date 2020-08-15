@@ -10,9 +10,8 @@
 		"goto": []
 	},
 	"livre1": {
-		"name": "",
+		"name": "La peste - Albert Camus",
 		"text": [
-			"La peste - Albert Camus",
 			"« Du reste, le docteur Rieux, par exemple, considérait que c’était cela le malheur,",
 			"et que l’habitude du confinement est pire que le confinement lui-même. »"
 		],
@@ -20,9 +19,8 @@
 		"goto": []
 	},
 	"livre2": {
-		"name": "",
+		"name": "A La Recherche du Temps Perdu - Marcel Proust",
         "text": [
-			"A La Recherche du Temps Perdu - Marcel Proust",
 			"« Certes, il y a dans ma maison toutes les choses inutiles.",
 			"Il n’y manque que le nécessaire, un grand morceau de ciel comme ici.",
 			"Tâchez de garder toujours un morceau de ciel au-dessus de votre vie… »"
@@ -31,9 +29,8 @@
 		"goto": []
 	},
 	"livre3": {
-		"name": "",
+		"name": "Le Misanthrope - Molière",
         "text": [
-			"Le Misanthrope - Molière",
 			"« Je ne trouve partout que lâche flatterie,",
 			"Qu’injustice, intérêt, trahison, fourberie;",
 			"Je n’y puis plus tenir, j’enrage, et mon dessein",
