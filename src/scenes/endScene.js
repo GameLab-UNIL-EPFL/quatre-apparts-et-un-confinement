@@ -134,37 +134,35 @@ export class EndScene extends Phaser.Scene {
 
     nextScene() {
         console.log('Go back to main menu');
-        this.cameras.main.fadeOut(3000, 0, 0, 0,
-            () => this.scene.start(Scenes.BUILDING, {
-                mainMenu: true,
-                names: {
-                    damien: false,
-                    grandma: false,
-                    family: false,
-                    indep: false
-                },
-                stage: 1,
-                windows: {
-                    damien: WindowState.OFF,
-                    grandma: WindowState.OFF,
-                    family: WindowState.OFF,
-                    indep: WindowState.OFF
-                },
-                month: Months.MARCH,
-                nextScene: {
-                    damien: null,
-                    grandma: null,
-                    family: null,
-                    indep: null
-                }
-            }),
-            this
-        );
+        this.destroy();
+        this.scene.start(Scenes.BUILDING, {
+            mainMenu: true,
+            names: {
+                damien: false,
+                grandma: false,
+                family: false,
+                indep: false
+            },
+            stage: 1,
+            windows: {
+                damien: WindowState.OFF,
+                grandma: WindowState.OFF,
+                family: WindowState.OFF,
+                indep: WindowState.OFF
+            },
+            month: Months.MARCH,
+            nextScene: {
+                damien: null,
+                grandma: null,
+                family: null,
+                indep: null
+            }
+        });
     }
 
     destroy() {
-        this.text.destroy();
-        this.cat_anim.destroy();
+        this.divRepo.destroy();
+        this.divTeam.destroy();
     }
 
 }

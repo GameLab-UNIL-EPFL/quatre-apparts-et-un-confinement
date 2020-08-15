@@ -208,9 +208,11 @@ export class BuildingScene extends Phaser.Scene {
         this.sprites['loading'] = this.add.text(
             0,
             0,
-            "Loading...",
-            {font: "80px OpenSans", fill: "white"}
+            "Chargement en cours...",
+            {font: "50px OpenSans", fill: "white", wordWrap: {width: this.cameras.main.displayWidth * 0.75}}
         );
+
+        this.sprites['loading'].setOrigin(0.5, 0.5);
     }
 
     /**
@@ -304,6 +306,7 @@ export class BuildingScene extends Phaser.Scene {
         const interaction = () => {
             this.clickSound.play();
             player.checkPlayerId();
+            this.showLoading();
             this.scene.start(
                 Scenes.BUS,
                 { cardIdx: BusCards.MARCH_CARD }
@@ -380,44 +383,43 @@ export class BuildingScene extends Phaser.Scene {
 
     showMonth() {
         let month_text = "";
+        let month_color = "";
 
         //Pick which text to show
         switch(this.info.month) {
         case Months.MARCH:
             month_text = "Mars 2020";
+            month_color = '#f5e5cc';
             break;
         case Months.APRIL:
             month_text = "Avril 2020";
+            month_color = '#d9e6ec';
             break;
         default:
             month_text = "Juin 2020";
+            month_color = '#d9e6ec';
             break;
         }
 
         //Create the text sprite
         const month_sprite = this.add.text(
             0,
-            -650,
+            -2000,
             month_text,
             { font: "65px OpenSans-Bold", fill: "black" }
         );
 
         month_sprite.setOrigin(0.5, 0.5);
-        const set_fadeOut = () => {
-            this.tweens.add({
-                targets: month_sprite,
-                alpha: 0,
-                duration: 2000
-            });
-        };
 
-        //Have it fade out after a few seconds
-        this.time.addEvent({
-            delay: 3000,
-            repeat: 0,
-            callback: set_fadeOut,
-            callbackScope: this
-        });
+        // month and pan effect
+        this.cameras.main.centerOn(0, -2000);
+        this.cameras.main.setBackgroundColor(month_color);
+
+        setTimeout(() => {
+            if (this.cameras.main) {
+                this.cameras.main.pan(0, 0, 3500, 'Cubic');
+            }
+        }, 2000, this);
     }
 
     /**
@@ -569,9 +571,6 @@ export class BuildingScene extends Phaser.Scene {
             this.sprites['cloud_03'] = this.add.image(2065, -162, "cloud_03_may");
             this.sprites['cloud_04'] = this.add.image(1348, -686, "cloud_04_may");
         }
-
-        //Center the background
-        // this.sprites['building_bg'].setOrigin(0, 0);
 
         //Load in everything needed no matter the month
         this.sprites['building'] = this.add.image(0, 200, "building");
@@ -764,7 +763,11 @@ export class BuildingScene extends Phaser.Scene {
 
             this.createMainMenu();
 
-            // this.showArrow();
+            //Show the menu selection if the game was ever completed
+            if(player.completed) {
+                //this.showArrow();
+            }
+
         } else if(this.info.new_month) {
             this.showMonth();
         }
@@ -780,6 +783,9 @@ export class BuildingScene extends Phaser.Scene {
      * @brief destroys the scene
      */
     destroy() {
+        this.cameras.main.setBackgroundColor("#000000");
+        this.themeSong.stop();
+        this.birdSound.stop();
         //Destroy all of the sprites in the scene
         for (var key in this.sprites) {
 

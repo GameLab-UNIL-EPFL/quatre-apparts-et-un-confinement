@@ -126,23 +126,23 @@ export class DamienOutsideScene extends Phaser.Scene {
             stage: 3,
             names: {
                 damien: false,
-                grandma: false,
+                grandma: true,
                 family: false,
                 indep: false
             },
             windows: {
                 damien: WindowState.OFF,
-                grandma: WindowState.OFF,
+                grandma: WindowState.ON,
                 family: WindowState.OFF,
-                indep: WindowState.ON
+                indep: WindowState.OFF
             },
-            month: Months.MAY,
+            month: Months.JUNE,
             new_month: true,
             nextScene: {
                 damien: null,
-                grandma: null,
+                grandma: Scenes.GRANDMA,
                 family: null,
-                indep: Scenes.INDEP_SAD_HOME,
+                indep: null,
             }
         }); 
     }

@@ -261,8 +261,12 @@ export class ZoomMiniGameCard extends Card {
             { frameWidth: 340, frameHeight: 340 }
         );
 
-        //Skip game arrow for debug
-        this.parent_scene.load.image('arrow', "sprites/UI/arrow-static.png/arrow-static");
+        //Skip game exit button for debug
+        this.parent_scene.load.spritesheet(
+            'exit_minigame',
+            'sprites/UI/Exit-Button-Spritesheet-100x100.png',
+            { frameWidth: 100, frameHeight: 100 }
+        );
     }
 
     /**
@@ -560,16 +564,28 @@ export class ZoomMiniGameCard extends Card {
     create() {
         super.create();
 
-        let arrow = this.parent_scene.add.image(this.parent_scene.cameras.main.width * 0.41666, -700, 'arrow').setInteractive().on(
+        this.parent_scene.anims.create({
+            key: 'exit_minigame-anim',
+            frameRate: 7,
+            frames: this.parent_scene.anims.generateFrameNames('exit_minigame'),
+            repeat: -1
+        });
+
+        this.exit = this.parent_scene.add.sprite(
+            this.parent_scene.cameras.main.width * 0.41666,
+            -700,
+            'exit_minigame'
+        ).play('exit_minigame-anim')
+        .setInteractive().on(
             'pointerdown',
             () => {
-                arrow.destroy();
+                this.exit.destroy();
                 this.endMiniGame(this, true);
                 this.music.stop(); // if fadeout doesnt complete
             },
             this
         );
-        arrow.depth = 20;
+        this.exit.setDepth(20);
 
         //starts the song at the beginning of the scene
         this.music = this.parent_scene.sound.add("music" + this.scene_key);
@@ -625,7 +641,9 @@ export class ZoomMiniGameCard extends Card {
 
     destroy() {
         super.destroy();
-
+        if(this.exit) {
+            this.exit.destroy();
+        }
         this.sprites.forEach(sprite => sprite.destroy());
     }
 }

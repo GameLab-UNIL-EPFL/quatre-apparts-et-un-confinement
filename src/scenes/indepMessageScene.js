@@ -198,7 +198,7 @@ export class IndepMessageScene extends Phaser.Scene {
             () => this.scene.start(Scenes.BUILDING, {
                 mainMenu: false,
                 names: {
-                    damien: false,
+                    damien: true,
                     grandma: false,
                     family: false,
                     indep: false

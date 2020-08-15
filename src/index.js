@@ -28,6 +28,7 @@ import { MotherCouchScene } from "./scenes/motherCouchScene.js";
 import { DamienOutsideScene } from "./scenes/damienOutsideScene.js";
 import { IndepSadHomeScene } from "./scenes/indepSadHomeScene.js";
 import { DamienEndMessageScene } from "./scenes/damienEndMessageScene.js";
+import { GrandmaEndScene } from "./scenes/grandmaEndScene";
 
 let resizeTimeout;
 const plugins = [{
@@ -81,7 +82,7 @@ const config = {
     resolution: 1, // we could use 2 for Retina
     scale: {
         mode: Phaser.Scale.FIT,
-        autoCenter: Phaser.Scale.CENTER_HORIZONTALLY,
+        autoCenter: Phaser.Scale.CENTER_BOTH,
         width: scale.width,
         height: scale.height
     },
@@ -105,6 +106,7 @@ const config = {
         DamienOutsideScene,
         DamienEndMessageScene,
         GrandmaScene,
+        GrandmaEndScene,
         HallwayScene,
         IndepScene,
         IndepMessageScene,
@@ -125,6 +127,8 @@ const config = {
 
 export const game = new Phaser.Game(config);
 export const player = new Player();
+
+player.loadSave();
 
 const maxPictureWidth = 1200.0;
 

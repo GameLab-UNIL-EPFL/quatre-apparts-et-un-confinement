@@ -62,7 +62,7 @@ export class IndepComputerScene extends Phaser.Scene {
                 new CardObject(
                     this,
                     { name: "indepIdleTable", url: "sprites/IndepScene/01_IDLE/table.png" },
-                    new Phaser.Math.Vector2(66, 464)
+                    new Phaser.Math.Vector2(75, 464)
                 ),
                 new CardObject(
                     this,
@@ -70,10 +70,10 @@ export class IndepComputerScene extends Phaser.Scene {
                     new Phaser.Math.Vector2(280, 375),
                     (scene) => {
                         scene.changeIndep();
-                        if(player.nathan_failed) {
-                            scene.dialogue.display("telephoneMauvais");
-                        } else {
+                        if(player.freelancer_good_love_advice) {
                             scene.dialogue.display("telephoneBon");
+                        } else {
+                            scene.dialogue.display("telephoneMauvais");
                         }
                     },
                     this

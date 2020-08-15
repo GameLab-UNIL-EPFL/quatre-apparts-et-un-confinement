@@ -280,7 +280,7 @@ export class GrandmaScene extends Phaser.Scene {
                 { cardIdx: HallwayCards.DAMIEN_CLOSED }
             );
         } else {
-            this.scene.start(Scenes.STATS);
+            this.scene.start(Scenes.INDEP_SAD_HOME);
         }
     }
 

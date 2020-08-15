@@ -210,11 +210,11 @@ export class StatsScene extends Phaser.Scene {
             case 'freelancer_good_love_advice':
                 name = "Patrick";
 
-                if(player.nathan_failed) {
+                if(player.freelancer_good_love_advice) {
+                    text = "Vos conseils et ceux de " + displayPercent + "% des joueurs ont sauvé un couple.";
+                } else {
                     displayPercent = (100 - percent);
                     text = "Vos conseils et ceux de " + displayPercent + "% des joueurs ont brisé un couple.";
-                } else {
-                    text = "Vos conseils et ceux de " + displayPercent + "% des joueurs ont sauvé un couple.";
                 }
                 break;
             }
@@ -345,6 +345,9 @@ export class StatsScene extends Phaser.Scene {
         this.cameras.main.centerOn(0, 0);
         this.cameras.main.flash(1000);
 
+        //save the fact that the game was completed
+        player.completed = true;
+
         //Create the dialogue box animation
         this.anims.create({
             key: D_BOX_ANIMATION_KEY,
@@ -412,7 +415,11 @@ export class StatsScene extends Phaser.Scene {
             loop: -1
         });
 
-        this.showArrow();
+        this.time.addEvent({
+            delay: 3000,
+            callback: this.showArrow,
+            callbackScope: this
+        });
         this.showStats();
     }
 

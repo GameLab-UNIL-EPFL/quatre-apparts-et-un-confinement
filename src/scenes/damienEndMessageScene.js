@@ -94,7 +94,7 @@ export class DamienEndMessageScene extends Phaser.Scene {
      * @brief Triggers the next scene
      */
     nextScene() {
-        this.scene.start(Scenes.GRANDMA, { month: Months.JUNE });
+        this.scene.start(Scenes.GRANDMA_END);
     }
 
     /**

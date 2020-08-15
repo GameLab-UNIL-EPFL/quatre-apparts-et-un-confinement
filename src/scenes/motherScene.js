@@ -357,7 +357,7 @@ export class MotherScene extends Phaser.Scene {
                 mainMenu: false,
                 names: {
                     damien: false,
-                    grandma: false,
+                    grandma: true,
                     family: false,
                     indep: false
                 },
