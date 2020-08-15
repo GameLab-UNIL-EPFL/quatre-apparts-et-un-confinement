@@ -415,7 +415,11 @@ export class StatsScene extends Phaser.Scene {
             loop: -1
         });
 
-        this.showArrow();
+        this.time.addEvent({
+            delay: 3000,
+            callback: this.showArrow,
+            callbackScope: this
+        });
         this.showStats();
     }
 
