@@ -81,7 +81,7 @@ const config = {
     resolution: 1, // we could use 2 for Retina
     scale: {
         mode: Phaser.Scale.FIT,
-        autoCenter: Phaser.Scale.CENTER_HORIZONTALLY,
+        autoCenter: Phaser.Scale.CENTER_BOTH,
         width: scale.width,
         height: scale.height
     },
