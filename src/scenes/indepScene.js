@@ -62,7 +62,7 @@ export class IndepScene extends Phaser.Scene {
                 new CardObject(
                     this,
                     { name: "indepIdleTable", url: "sprites/IndepScene/01_IDLE/table.png" },
-                    new Phaser.Math.Vector2(66, 464)
+                    new Phaser.Math.Vector2(75, 464)
                 ),
                 new CardObject(
                     this,

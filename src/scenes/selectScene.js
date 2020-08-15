@@ -16,6 +16,7 @@ export class SelectScene extends Phaser.Scene {
             { key: Scenes.DAMIEN_OUTSIDE, data: {}, text: "Damien Outside" },
             { key: Scenes.INDEP, data: {cardIdx: IndepCards.IDLE_CARD}, text: "Patrick March" },
             { key: Scenes.INDEP_COMPUTER, data: {cardIdx: IndepComputerCards.IDLE_CARD}, text: "Patrick April" },
+            { key: Scenes.INDEP_SAD_HOME, data: {}, text: "Patrick June" },
             { key: Scenes.GRANDMA, data: { month: Months.APRIL }, text: "Grandma April" },
             { key: Scenes.MOTHER_KITCHEN, data: {}, text: "Mother Kitchen April" },
             { key: Scenes.MOTHER_COUCH, data: {}, text: "Mother Couch June" }
