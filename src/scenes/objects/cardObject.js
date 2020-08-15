@@ -79,6 +79,8 @@ export class CardObject {
                 this.highlight.pos.y,
                 this.highlight.name
             ).play(this.highlight.name + "_anim");
+
+            this.highlight_sprite.setDepth(4);
         }
 
         //Add a choice if needed

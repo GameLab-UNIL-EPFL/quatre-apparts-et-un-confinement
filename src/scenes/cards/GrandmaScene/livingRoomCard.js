@@ -158,6 +158,15 @@ export class LivingRoomCard extends Card {
     create() {
         super.create();
 
+        this.children.forEach(child => {
+            child.sprite.setActive(true).setVisible(true);
+
+            //Make sure that all of the highlights are shown
+            if(child.highlight_sprite) {
+                child.highlight_sprite.setActive(true).setVisible(true);
+            }
+        });
+
         //Add in the initial grandma
         this.grandma_sprite = this.parent_scene.add.image(GRANDMA_POS.x, GRANDMA_POS.y, "grandma_idle");
 
@@ -169,16 +178,6 @@ export class LivingRoomCard extends Card {
             this.children[this.children.length - 2].highlight_sprite.setDepth(3);
 
         }
-
-        // this.radioSound01 = this.parent_scene.sound.add("radioSound01");
-
-        // TODO this.radioSound02.play(); quand on appuie sur la radio -> écouter les nouvelles
-        // TODO this.radioMusic.play(); quand on appuie sur la radio -> écouter de la musique
-        // this.radioSound02 = this.parent_scene.sound.add("radioSound02");
-        // this.radioMusic = this.parent_scene.sound.add("radioMusic");
-        //
-        // this.radioSound01.play();
-
 
         //Add sound to the scene
         this.pageSound = this.parent_scene.sound.add("pageTurn");

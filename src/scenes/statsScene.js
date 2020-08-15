@@ -345,6 +345,9 @@ export class StatsScene extends Phaser.Scene {
         this.cameras.main.centerOn(0, 0);
         this.cameras.main.flash(1000);
 
+        //save the fact that the game was completed
+        player.completed = true;
+
         //Create the dialogue box animation
         this.anims.create({
             key: D_BOX_ANIMATION_KEY,

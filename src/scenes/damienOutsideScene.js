@@ -128,7 +128,7 @@ export class DamienOutsideScene extends Phaser.Scene {
                 damien: false,
                 grandma: false,
                 family: false,
-                indep: false
+                indep: true
             },
             windows: {
                 damien: WindowState.OFF,

@@ -42,10 +42,11 @@ export class Player {
         this.scene_data = {};
         this.dialogue_tree = {};
         this.damien_gone = false;       //Whether or not damien chose to go see his gf
-        this.nathan_failed = false;     //Whether or not Patrick gave bad dating advice
+        this.freelancer_good_love_advice = false;     //Whether or not Patrick gave good dating advice
         this.kids_park = false;         //Whether or not Florence chose to take her kids to the park
         this.suzanne_hair = false;      //Whether or not Suzanne chose to go to the hair-dresser
         this.indep_shopping_basket = [];
+        this.completed = false;         //Whether or not the game was ever completed
     }
 
     /**
@@ -122,6 +123,25 @@ export class Player {
         return localStorage.getItem('game') !== null;
     }
 
+    loadSave() {
+        if(this.saveExists()) {
+            const game_data = JSON.parse(atob(localStorage.getItem('game')));
+
+            this.id = game_data.id;
+            this.statsEnabled = game_data.statsEnabled;
+            this.version = game_data.version;
+            this.dialogue_tree = game_data.tree;
+            this.cur_scene = game_data.scene;
+            this.scene_data = game_data.data;
+            this.damien_gone = game_data.damien_gone;
+            this.freelancer_good_love_advice = game_data.freelancer_good_love_advice;
+            this.kids_park = game_data.kids_park;
+            this.suzanne_hair = game_data.suzanne_hair;
+            this.indep_shopping_basket = game_data.indep_shopping_basket;
+            this.completed = game_data.completed;
+        }
+    }
+
     /**
      * @brief Writes the current game data to local storage
      */
@@ -138,6 +158,7 @@ export class Player {
             kids_park: this.kids_park,
             suzanne_hair: this.suzanne_hair,
             indep_shopping_basket: this.indep_shopping_basket,
+            completed: this.completed
         };
 
         //Encode the data in base 64 before saving it
@@ -176,6 +197,7 @@ export class Player {
                 this.kids_park = game_data.kids_park;
                 this.suzanne_hair = game_data.suzanne_hair;
                 this.indep_shopping_basket = game_data.indep_shopping_basket;
+                this.completed = game_data.completed;
 
                 //Start the loaded scene
                 game.scene.start(game_data.scene, game_data.data);

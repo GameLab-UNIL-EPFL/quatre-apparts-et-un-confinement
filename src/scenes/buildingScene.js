@@ -208,9 +208,11 @@ export class BuildingScene extends Phaser.Scene {
         this.sprites['loading'] = this.add.text(
             0,
             0,
-            "Loading...",
-            {font: "80px OpenSans", fill: "white"}
+            "Chargement en cours...",
+            {font: "50px OpenSans", fill: "white", wordWrap: {width: this.cameras.main.displayWidth * 0.75}}
         );
+
+        this.sprites['loading'].setOrigin(0.5, 0.5);
     }
 
     /**
@@ -569,9 +571,6 @@ export class BuildingScene extends Phaser.Scene {
             this.sprites['cloud_04'] = this.add.image(1348, -686, "cloud_04_may");
         }
 
-        //Center the background
-        // this.sprites['building_bg'].setOrigin(0, 0);
-
         //Load in everything needed no matter the month
         this.sprites['building'] = this.add.image(0, 200, "building");
 
@@ -763,7 +762,11 @@ export class BuildingScene extends Phaser.Scene {
 
             this.createMainMenu();
 
-            // this.showArrow();
+            //Show the menu selection if the game was ever completed
+            if(player.completed) {
+                //this.showArrow();
+            }
+
         } else if(this.info.new_month) {
             this.showMonth();
         }
@@ -779,6 +782,7 @@ export class BuildingScene extends Phaser.Scene {
      * @brief destroys the scene
      */
     destroy() {
+        this.cameras.main.setBackgroundColor("#000000");
         //Destroy all of the sprites in the scene
         for (var key in this.sprites) {
 

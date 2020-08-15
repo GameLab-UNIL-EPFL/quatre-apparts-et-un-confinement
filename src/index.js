@@ -126,6 +126,8 @@ const config = {
 export const game = new Phaser.Game(config);
 export const player = new Player();
 
+player.loadSave();
+
 const maxPictureWidth = 1200.0;
 
 window.horizontalOffset = (maxPictureWidth - scale.width) / 2;
