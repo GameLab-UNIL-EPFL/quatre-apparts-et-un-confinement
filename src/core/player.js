@@ -11,6 +11,7 @@ export const Scenes = {
     DAMIEN_END_MESSAGE: 'DamienEndMessage',
     BUILDING: 'Building',
     GRANDMA: 'Grandma',
+    GRANDMA_END: 'Grandma_End',
     HALLWAY: 'Hallway',
     INDEP: 'Indep',
     INDEP_COMPUTER: 'IndepComputer',

@@ -88,17 +88,15 @@
 				"goto": "francoise"
             },
             {
-				"text": ["Sophie (fille)"],
-				"preview": "Sophie",
-				"goto": "sophie"
-            },
-            {
 				"text": ["Marc (ami)"],
 				"preview": "Marc",
 				"goto": "marc"
 			}
 		],
-		"goto": ["francoise", "sophie", "marc"]
+		"goto": ["francoise", "sophie", "marc"],
+		"objective": {
+			"status": false
+		}
     },
     "francoise": {
         "name": "Françoise",

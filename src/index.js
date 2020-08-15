@@ -28,6 +28,7 @@ import { MotherCouchScene } from "./scenes/motherCouchScene.js";
 import { DamienOutsideScene } from "./scenes/damienOutsideScene.js";
 import { IndepSadHomeScene } from "./scenes/indepSadHomeScene.js";
 import { DamienEndMessageScene } from "./scenes/damienEndMessageScene.js";
+import { GrandmaEndScene } from "./scenes/grandmaEndScene";
 
 let resizeTimeout;
 const plugins = [{
@@ -105,6 +106,7 @@ const config = {
         DamienOutsideScene,
         DamienEndMessageScene,
         GrandmaScene,
+        GrandmaEndScene,
         HallwayScene,
         IndepScene,
         IndepMessageScene,

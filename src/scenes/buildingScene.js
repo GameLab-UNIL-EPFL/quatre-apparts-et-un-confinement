@@ -393,11 +393,11 @@ export class BuildingScene extends Phaser.Scene {
             break;
         case Months.APRIL:
             month_text = "Avril 2020";
-            month_color = '#dfeaee';
+            month_color = '#d9e6ec';
             break;
         default:
             month_text = "Juin 2020";
-            month_color = '#dfeaee';
+            month_color = '#d9e6ec';
             break;
         }
 
@@ -784,6 +784,8 @@ export class BuildingScene extends Phaser.Scene {
      */
     destroy() {
         this.cameras.main.setBackgroundColor("#000000");
+        this.themeSong.stop();
+        this.birdSound.stop();
         //Destroy all of the sprites in the scene
         for (var key in this.sprites) {
 
