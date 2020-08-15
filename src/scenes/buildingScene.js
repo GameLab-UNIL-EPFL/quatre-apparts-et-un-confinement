@@ -306,6 +306,7 @@ export class BuildingScene extends Phaser.Scene {
         const interaction = () => {
             this.clickSound.play();
             player.checkPlayerId();
+            this.showLoading();
             this.scene.start(
                 Scenes.BUS,
                 { cardIdx: BusCards.MARCH_CARD }
