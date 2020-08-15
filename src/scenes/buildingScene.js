@@ -332,7 +332,7 @@ export class BuildingScene extends Phaser.Scene {
         this.sprites['credits_text'] = this.add.text(
             0,
             this.sprites['menu_credits'].y,
-            "A propos",
+            "À propos",
             {font: "54px OpenSans", fill: "black"}
         );
         this.sprites['credits_text'].setOrigin(0.5, 0.5);
