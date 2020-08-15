@@ -93,25 +93,6 @@ export class GrandmaScene extends Phaser.Scene {
         this.month = data.month;
         console.log('Current month:', this.month);
 
-        // load sound after preload()
-        this.load.audio("radioSound", "sounds/grandma/" + this.month + "_radio.mp3");
-        this.load.audio("radioSound02", "sounds/grandma/" + this.month + "2_radio.mp3");
-        this.load.audio("radioMusic", "sounds/grandma/" + this.month + "_music.mp3");
-
-        this.load.on('filecomplete', (file) => {
-            if(file === 'radioSound') {
-                this.radioSound = this.sound.add('radioSound');
-                this.radioSound.play();
-                this.current_sound = this.radioSound;
-            } else if (file === 'radioSound02') {
-                this.radioSound02 = this.sound.add('radioSound02');
-            } else if (file === 'radioMusic') {
-                this.radioMusic = this.sound.add('radioMusic');
-            }
-        },
-        this);
-        this.load.start();
-
         if(data.month === Months.MARCH) {
             //Create the scene's dialogue controller
             this.dialogue = new DialogueController(this, "grandmaDialogMarch");
@@ -127,8 +108,8 @@ export class GrandmaScene extends Phaser.Scene {
             this.dialogue = new DialogueController(this, "grandmaDialogJune");
 
             //Change the calendar sprite and name
-            this.calendarCard.children[1].name = "calendar_mai";
-            this.calendarCard.children[1].url = "sprites/GrandmaScene/Calendar/calendrier03_02-calendrier.png";
+            this.calendarCard.children[1].name = "calendar_june";
+            this.calendarCard.children[1].url = "sprites/GrandmaScene/Calendar/calendar_june.png";
         }
     }
 
@@ -142,6 +123,11 @@ export class GrandmaScene extends Phaser.Scene {
 
         //Preload all of the cards
         this.cards.forEach(card => card.preload());
+
+        // load sound after preload()
+        this.load.audio("radioSound_" + this.month, "sounds/grandma/" + this.month + "_radio.mp3");
+        this.load.audio("radioSound02_" + this.month, "sounds/grandma/" + this.month + "2_radio.mp3");
+        this.load.audio("radioMusic_"  + this.month, "sounds/grandma/" + this.month + "_music.mp3");
     }
 
     /**
@@ -154,6 +140,14 @@ export class GrandmaScene extends Phaser.Scene {
 
         if(this.current_card.isLoaded()) {
             this.current_card.create();
+
+            this.radioSound = this.sound.add('radioSound_' + this.month);
+            this.radioSound.play();
+            this.current_sound = this.radioSound;
+
+            this.radioSound02 = this.sound.add('radioSound02_' + this.month);
+
+            this.radioMusic = this.sound.add('radioMusic_' + this.month);
         }
 
         //Update the saved data

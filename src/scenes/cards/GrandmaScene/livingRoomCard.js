@@ -430,7 +430,10 @@ export class LivingRoomCard extends Card {
         //Destroy the grandma and the cat
         this.cat_anim.destroy();
         this.grandma_sprite.destroy();
-        this.books_h.destroy();
+
+        if(this.books_h) {
+            this.books_h.destroy();
+        }
 
         //Destroy arrow if needed
         if(this.arrow) {
