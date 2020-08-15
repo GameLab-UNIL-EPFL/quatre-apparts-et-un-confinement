@@ -87,7 +87,7 @@ export class EndScene extends Phaser.Scene {
         <a target="_blank" href="https://wp.unil.ch/gamelab/">UNIL Gamelab</a></p>
 
         <h4>Un grand merci à nos testeurs</h4>
-        <p>Lesli__e, Vincent, Sashiro (formule pour remercier aussi tous ceux qui préféraient ne pas être mentionnés)</p>
+        <p>Lesli__e, Vincent, Sashiro, Sarah, Philippe, Dr. Game, et toutes les autres personnes qui nous ont aidé par leurs retours à construire cette expérience.</p>
         `;
 
         this.divRepo = this.add.dom(0, -2600, divRepo);
