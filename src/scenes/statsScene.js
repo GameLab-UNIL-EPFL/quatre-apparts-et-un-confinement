@@ -210,11 +210,11 @@ export class StatsScene extends Phaser.Scene {
             case 'freelancer_good_love_advice':
                 name = "Patrick";
 
-                if(player.nathan_failed) {
+                if(player.freelancer_good_love_advice) {
+                    text = "Vos conseils et ceux de " + displayPercent + "% des joueurs ont sauvé un couple.";
+                } else {
                     displayPercent = (100 - percent);
                     text = "Vos conseils et ceux de " + displayPercent + "% des joueurs ont brisé un couple.";
-                } else {
-                    text = "Vos conseils et ceux de " + displayPercent + "% des joueurs ont sauvé un couple.";
                 }
                 break;
             }

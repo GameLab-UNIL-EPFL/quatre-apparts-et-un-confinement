@@ -7,7 +7,6 @@ import { player } from "../index.js";
 import { Scenes } from "../core/player.js";
 import { TVCard } from "./cards/IndepScene/tvCard.js";
 import { WindowState, Months } from "./buildingScene.js";
-import { IndepComputerCards } from "./indepComputerScene.js";
 
 export const IndepCards = {
     IDLE_CARD: 0,
@@ -296,7 +295,7 @@ export class IndepScene extends Phaser.Scene {
         if(this.cardIdx === IndepCards.IDLE_CARD) {
             this.objective = true;
 
-            player.nathan_failed = status;
+            player.freelancer_good_love_advice = status;
             player.saveGame();
 
             // Send result to db as integer

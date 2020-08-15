@@ -134,7 +134,7 @@ export class Player {
             data: this.scene_data,
             tree: this.dialogue_tree,
             damien_gone: this.damien_gone,
-            nathan_failed: this.nathan_failed,
+            freelancer_good_love_advice: this.freelancer_good_love_advice,
             kids_park: this.kids_park,
             suzanne_hair: this.suzanne_hair,
             indep_shopping_basket: this.indep_shopping_basket,
@@ -172,7 +172,7 @@ export class Player {
                 this.cur_scene = game_data.scene;
                 this.scene_data = game_data.data;
                 this.damien_gone = game_data.damien_gone;
-                this.nathan_failed = game_data.nathan_failed;
+                this.freelancer_good_love_advice = game_data.freelancer_good_love_advice;
                 this.kids_park = game_data.kids_park;
                 this.suzanne_hair = game_data.suzanne_hair;
                 this.indep_shopping_basket = game_data.indep_shopping_basket;

@@ -326,7 +326,7 @@ export class LivingRoomCard extends Card {
      * @brief Updates the objective complete attribute
      */
     notifyObjectiveMet(status) {
-        if(status && this.month === Months.MAY) {
+        if(status && this.month === Months.JUNE) {
             this.parent_scene.nextScene();
         }
 
@@ -334,11 +334,12 @@ export class LivingRoomCard extends Card {
             this.objective_complete = true;
         }
 
-        if(status !== undefined) {
+        //Have to explicitly check for true, because status has a variable type
+        if(status === true) {
             player.suzanne_hair = +status;
             player.saveGame();
             console.log('Hairdresser status:', status);
-
+            
             //Send new information to the DB
             player.sendChoices({ player_id: player.id, grandma_hairdresser: +status });
         }

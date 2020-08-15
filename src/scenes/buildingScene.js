@@ -380,44 +380,43 @@ export class BuildingScene extends Phaser.Scene {
 
     showMonth() {
         let month_text = "";
+        let month_color = "";
 
         //Pick which text to show
         switch(this.info.month) {
         case Months.MARCH:
             month_text = "Mars 2020";
+            month_color = '#f5e5cc';
             break;
         case Months.APRIL:
             month_text = "Avril 2020";
+            month_color = '#dfeaee';
             break;
         default:
             month_text = "Juin 2020";
+            month_color = '#dfeaee';
             break;
         }
 
         //Create the text sprite
         const month_sprite = this.add.text(
             0,
-            -650,
+            -2000,
             month_text,
             { font: "65px OpenSans-Bold", fill: "black" }
         );
 
         month_sprite.setOrigin(0.5, 0.5);
-        const set_fadeOut = () => {
-            this.tweens.add({
-                targets: month_sprite,
-                alpha: 0,
-                duration: 2000
-            });
-        };
 
-        //Have it fade out after a few seconds
-        this.time.addEvent({
-            delay: 3000,
-            repeat: 0,
-            callback: set_fadeOut,
-            callbackScope: this
-        });
+        // month and pan effect
+        this.cameras.main.centerOn(0, -2000);
+        this.cameras.main.setBackgroundColor(month_color);
+
+        setTimeout(() => {
+            if (this.cameras.main) {
+                this.cameras.main.pan(0, 0, 3500, 'Cubic');
+            }
+        }, 2000, this);
     }
 
     /**
