@@ -13,7 +13,7 @@
 		"name": "",
 		"text": [
             "Intouchables (2011)",
-            "Pas de bras, pas de corona."
+            "Pas de bras, pas de corona!"
 		],
 		"choices": [],
 		"goto": []
@@ -21,8 +21,9 @@
 	"dvd2": {
 		"name": "",
         "text": [
-            "Silent Running (1972)",
-            "Tiens, pourquoi pas des robots pour me tenir compagnie."
+            "The Shining (1980)",
+            "“All work and no Play makes Jack a dull boy\nAll work and no play mmakes Jack a dull boy…”",
+            "Heureusement, je n'en suis pas encore là."
 		],
         "choices": [],
 		"goto": []
