@@ -106,11 +106,11 @@ export class MotherKitchenScene extends Phaser.Scene {
                 new CardObject(
                     this,
                     {
-                        name: 'caraffeKitchenDirty',
-                        url: 'sprites/MotherScene/02-Salon/mere-salon01_11-caraffe-reversee.png'
+                        name: 'carafeKitchenDirty',
+                        url: 'sprites/MotherScene/02-Salon/mere-salon01_11-carafe-reversee.png'
                     },
                     new Phaser.Math.Vector2(-290, 305),
-                    () => this.nextCard("caraffe"),
+                    () => this.nextCard("carafe"),
                     null
                 ),
                 new CardObject(
@@ -155,9 +155,9 @@ export class MotherKitchenScene extends Phaser.Scene {
                 pos: new Phaser.Math.Vector3(-88, 230, 0),
                 matching_sprites: [8]
             },
-            "caraffe": {
-                name: 'caraffeKitchenClean',
-                url: 'sprites/MotherScene/02-Salon/mere-salon01_12-caraffe-droite.png',
+            "carafe": {
+                name: 'carafeKitchenClean',
+                url: 'sprites/MotherScene/02-Salon/mere-salon01_12-carafe-droite.png',
                 pos: new Phaser.Math.Vector3(86, 228, 1),
                 matching_sprites: [9]
             },
@@ -176,7 +176,7 @@ export class MotherKitchenScene extends Phaser.Scene {
         };
 
         this.new_sprites = [];
-        this.cleanable = 6;
+        this.cleanable = 5;
 
         this.cardIdx = MotherKitchenCards.DIRTY_CARD;
         this.current_card = this.dirty_card;
@@ -253,7 +253,7 @@ export class MotherKitchenScene extends Phaser.Scene {
     }
 
     notifyDialogueEnd() {
-        //The dialogue controller isn't good at handling dialogue 
+        //The dialogue controller isn't good at handling dialogue
         //that doens't contain any prompts
         --this.dialogue_count;
         if(this.dialogue_count > 1) {
@@ -310,6 +310,8 @@ export class MotherKitchenScene extends Phaser.Scene {
                 targets.push(this.current_card.children[idx]);
             });
 
+            console.log(targets);
+
             this.tweens.add({
                 targets: targets,
                 x: new_sprite.pos.x,
@@ -323,7 +325,12 @@ export class MotherKitchenScene extends Phaser.Scene {
                     this.new_sprites.push(sprite);
 
                     //Check objective
-                    this.cleanable--;
+                    if (! this.clean_sprites[name].hasOwnProperty('cleaned') ) {
+                        this.cleanable--;
+                        // Prevent multiple calls if more than 1 target
+                        this.clean_sprites[name].cleaned = true;
+                    }
+
                     if(this.cleanable <= 0) {
                         this.showArrow();
                     }
