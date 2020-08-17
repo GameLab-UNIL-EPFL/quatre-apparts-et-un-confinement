@@ -190,7 +190,7 @@
         "name": "Françoise",
         "text": [
 			"T’as pas de quoi t’occuper?",
-			"Je te recommende de lire La Peste de Camus, c’est d’actualité."
+			"Je te recommande de lire La Peste de Camus, c’est d’actualité."
 		],
         "choices":[
 			{
@@ -280,7 +280,7 @@
         "name": "Françoise",
 		"text": [
 			"Ah c’est bien, mais on ne sait jamais.",
-			"Prend bien soin de toi en tout cas!"
+			"Prends bien soin de toi en tout cas!"
 		],
         "choices": [
 			{
@@ -295,7 +295,7 @@
         "name": "Françoise",
 		"text": [
 			"Oui, c’est normal. On peut y passer…",
-			"Fais bien attention et prend bien soin de toi!"
+			"Fais bien attention et prends bien soin de toi!"
 		],
         "choices": [
 			{

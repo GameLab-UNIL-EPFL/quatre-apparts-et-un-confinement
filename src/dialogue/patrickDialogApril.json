@@ -190,7 +190,7 @@
 	},
     "sandrine": {
         "name": "Sandrine",
-		"text": ["Coucou, ça va? T'as pû reprendre le travail?"],
+		"text": ["Coucou, ça va? T'as pu reprendre le travail?"],
 		"choices": [
 			{
 				"text": ["Hello! Ça va et toi? Non pas encore."],
