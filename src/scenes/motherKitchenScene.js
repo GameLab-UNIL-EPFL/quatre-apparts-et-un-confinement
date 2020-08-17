@@ -44,7 +44,7 @@ export class MotherKitchenScene extends Phaser.Scene {
                         url: 'sprites/MotherScene/02-Salon/mere-salon01_03-fille-turbulante.png'
                     },
                     new Phaser.Math.Vector2(-234, -11),
-                    () => this.nextCard(),
+                    () => this.nextCard("girl"),
                     null
                 ),
                 new CardObject(
@@ -54,7 +54,7 @@ export class MotherKitchenScene extends Phaser.Scene {
                         url: 'sprites/MotherScene/02-Salon/mere-salon01_04-corps-garcon-turbulant.png'
                     },
                     new Phaser.Math.Vector2(260, 55),
-                    () => this.nextCard(),
+                    () => this.nextCard("boy"),
                     null
                 ),
                 new CardObject(
@@ -72,7 +72,7 @@ export class MotherKitchenScene extends Phaser.Scene {
                         url: 'sprites/MotherScene/02-Salon/mere-salon01_06-setdetable-fille.png'
                     },
                     new Phaser.Math.Vector2(-144, 159),
-                    () => this.nextCard(),
+                    () => this.nextCard("girl"),
                     null
                 ),
                 new CardObject(
@@ -82,7 +82,7 @@ export class MotherKitchenScene extends Phaser.Scene {
                         url: 'sprites/MotherScene/02-Salon/mere-salon01_06-setdetable-garcon.png'
                     },
                     new Phaser.Math.Vector2(217, 162),
-                    () => this.nextCard(),
+                    () => this.nextCard("boy"),
                     null
                 ),
                 new CardObject(
@@ -92,7 +92,7 @@ export class MotherKitchenScene extends Phaser.Scene {
                         url: 'sprites/MotherScene/02-Salon/mere-salon01_07-tete-garcon-turbulant.png'
                     },
                     new Phaser.Math.Vector2(123, 102),
-                    () => this.nextCard(),
+                    () => this.nextCard("boy"),
                     null
                 ),
                 new CardObject(
@@ -106,11 +106,11 @@ export class MotherKitchenScene extends Phaser.Scene {
                 new CardObject(
                     this,
                     {
-                        name: 'caraffeKitchenDirty',
-                        url: 'sprites/MotherScene/02-Salon/mere-salon01_11-caraffe-reversee.png'
+                        name: 'carafeKitchenDirty',
+                        url: 'sprites/MotherScene/02-Salon/mere-salon01_11-carafe-reversee.png'
                     },
                     new Phaser.Math.Vector2(-290, 305),
-                    () => this.nextCard(),
+                    () => this.nextCard("carafe"),
                     null
                 ),
                 new CardObject(
@@ -120,7 +120,7 @@ export class MotherKitchenScene extends Phaser.Scene {
                         url: 'sprites/MotherScene/02-Salon/mere-salon01_13-pain.png'
                     },
                     new Phaser.Math.Vector2(5, 343),
-                    () => this.nextCard(),
+                    () => this.nextCard("bread"),
                     null
                 ),
                 new CardObject(
@@ -130,91 +130,53 @@ export class MotherKitchenScene extends Phaser.Scene {
                         url: 'sprites/MotherScene/02-Salon/mere-salon01_15-jouet.png'
                     },
                     new Phaser.Math.Vector2(138, 263),
-                    () => this.nextCard(),
+                    () => this.nextCard("toy"),
                     null
                 )
             ]
         );
 
-        this.clean_card = new Card(
-            this,
-            [
-                new Background(
-                    this,
-                    "sprites/MotherScene/02-Salon/mere-salon01_01-decor.jpg",
-                    "motherCleanKitchenBG"
-                ),
-                new CardObject(
-                    this,
-                    {
-                        name: 'motherKitchenCleanAngry',
-                        url: 'sprites/MotherScene/02-Salon/mere-salon01_02-mere.png'
-                    },
-                    new Phaser.Math.Vector2(-25, -177)
-                ),
-                new CardObject(
-                    this,
-                    {
-                        name: 'tableKitchenClean',
-                        url: 'sprites/MotherScene/02-Salon/mere-salon01_05-table.png'
-                    },
-                    new Phaser.Math.Vector2(-49, 431)
-                ),
-                new CardObject(
-                    this,
-                    {
-                        name: 'girlKitchenClean',
-                        url: 'sprites/MotherScene/02-Salon/mere-salon01_08-fille-calme.png'
-                    },
-                    new Phaser.Math.Vector2(-215, 70)
-                ),
-                new CardObject(
-                    this,
-                    {
-                        name: 'boyBodyKitchenClean',
-                        url: 'sprites/MotherScene/02-Salon/mere-salon01_09-garcon-calme.png'
-                    },
-                    new Phaser.Math.Vector2(193, 48)
-                ),
-                new CardObject(
-                    this,
-                    {
-                        name: 'saladBowlKitchenClean',
-                        url: 'sprites/MotherScene/02-Salon/mere-salon01_10-saladier.png'
-                    },
-                    new Phaser.Math.Vector2(-88, 230)
-                ),
-                new CardObject(
-                    this,
-                    {
-                        name: 'caraffeKitchenClean',
-                        url: 'sprites/MotherScene/02-Salon/mere-salon01_12-caraffe-droite.png'
-                    },
-                    new Phaser.Math.Vector2(86, 228)
-                ),
-                new CardObject(
-                    this,
-                    {
-                        name: 'breadKitchenClean',
-                        url: 'sprites/MotherScene/02-Salon/mere-salon01_14-pain-decoupe.png'
-                    },
-                    new Phaser.Math.Vector2(-6, 335)
-                ),
-                new CardObject(
-                    this,
-                    {
-                        name: 'toyKitchenClean',
-                        url: 'sprites/MotherScene/02-Salon/mere-salon01_16-jouet-range.png'
-                    },
-                    new Phaser.Math.Vector2(198, 717)
-                )
-            ]
-        );
+        this.clean_sprites = {
+            "girl"  : {
+                name: 'girlKitchenClean',
+                url: 'sprites/MotherScene/02-Salon/mere-salon01_08-fille-calme.png',
+                pos: new Phaser.Math.Vector3(-215, 70, 0),
+                matching_sprites: [2, 5],
+            },
+            "boy"   : {
+                name: 'boyBodyKitchenClean',
+                url: 'sprites/MotherScene/02-Salon/mere-salon01_09-garcon-calme.png',
+                pos: new Phaser.Math.Vector3(193, 48, 0),
+                matching_sprites: [3, 6, 7]
+            },
+            "salad" : {
+                name: 'saladBowlKitchenClean',
+                url: 'sprites/MotherScene/02-Salon/mere-salon01_10-saladier.png',
+                pos: new Phaser.Math.Vector3(-88, 230, 0),
+                matching_sprites: [8]
+            },
+            "carafe": {
+                name: 'carafeKitchenClean',
+                url: 'sprites/MotherScene/02-Salon/mere-salon01_12-carafe-droite.png',
+                pos: new Phaser.Math.Vector3(86, 228, 1),
+                matching_sprites: [9]
+            },
+            "bread": {
+                name: 'breadKitchenClean',
+                url: 'sprites/MotherScene/02-Salon/mere-salon01_14-pain-decoupe.png',
+                pos: new Phaser.Math.Vector3(-6, 335, 0),
+                matching_sprites: [10]
+            },
+            "toy" : {
+                name: 'toyKitchenClean',
+                url: 'sprites/MotherScene/02-Salon/mere-salon01_16-jouet-range.png',
+                pos: new Phaser.Math.Vector3(198, 717, 0),
+                matching_sprites: [11]
+            }
+        };
 
-        this.cards = [
-            this.dirty_card,
-            this.clean_card
-        ];
+        this.new_sprites = [];
+        this.cleanable = 5;
 
         this.cardIdx = MotherKitchenCards.DIRTY_CARD;
         this.current_card = this.dirty_card;
@@ -241,7 +203,16 @@ export class MotherKitchenScene extends Phaser.Scene {
         this.dialogue.preload();
 
         //Preload all of the cards
-        this.cards.forEach(card => card.preload());
+        this.current_card.preload();
+
+        //Load in all clean sprites
+        for(const clean_sprite_name in this.clean_sprites) {
+            const clean_sprite = this.clean_sprites[clean_sprite_name];
+
+            if(clean_sprite) {
+                this.load.image(clean_sprite.name, clean_sprite.url);
+            }
+        }
 
         //Load the arrow animation spritesheet
         this.load.spritesheet(
@@ -282,7 +253,7 @@ export class MotherKitchenScene extends Phaser.Scene {
     }
 
     notifyDialogueEnd() {
-        //The dialogue controller isn't good at handling dialogue 
+        //The dialogue controller isn't good at handling dialogue
         //that doens't contain any prompts
         --this.dialogue_count;
         if(this.dialogue_count > 1) {
@@ -328,29 +299,45 @@ export class MotherKitchenScene extends Phaser.Scene {
 
     /**
      * @brief moves to the next card
-     * @param {Number} choice the choice that was made
+     * @param {string} name the object that will be moved
      */
-    nextCard(choice=-1) {
+    nextCard(name) {
+        if(this.clean_sprites[name] !== undefined) {
+            const new_sprite = this.clean_sprites[name];
+            let targets = [];
 
-        this.current_card.endCard();
+            new_sprite.matching_sprites.forEach(idx => {
+                targets.push(this.current_card.children[idx]);
+            });
 
-        if(this.current_card.isDone()) {
-            this.current_card.destroy();
+            console.log(targets);
 
-            if(this.cardIdx === MotherKitchenCards.DIRTY_CARD) {
-                this.cardIdx = MotherKitchenCards.CLEAN_CARD;
-                this.current_card = this.clean_card;
+            this.tweens.add({
+                targets: targets,
+                x: new_sprite.pos.x,
+                y: new_sprite.pos.y,
+                z: new_sprite.pos.z,
+                duration: 3000,
+                callback: () => {
+                    targets.forEach(child => child.sprite.destroy());
+                    const sprite = this.add.image(new_sprite.pos.x, new_sprite.pos.y, new_sprite.name, new_sprite.url);
+                    sprite.setDepth(new_sprite.pos.z);
+                    this.new_sprites.push(sprite);
 
-                this.current_card.create();
-                this.showArrow();
+                    //Check objective
+                    if (! this.clean_sprites[name].hasOwnProperty('cleaned') ) {
+                        this.cleanable--;
+                        // Prevent multiple calls if more than 1 target
+                        this.clean_sprites[name].cleaned = true;
+                    }
 
-            } else {
-                this.nextScene();
-            }
+                    if(this.cleanable <= 0) {
+                        this.showArrow();
+                    }
+                },
+                callbackScope: this
+            });
         }
-
-        //Store the saved data
-        player.saveGame();
     }
 
     /**
@@ -368,5 +355,6 @@ export class MotherKitchenScene extends Phaser.Scene {
      */
     destroy() {
         this.current_card.destroy();
+        this.new_sprites.forEach(s => s.destroy());
     }
 }

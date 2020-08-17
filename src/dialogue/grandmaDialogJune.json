@@ -314,7 +314,11 @@
 		"text": ["Allo?"],
 		"choices": [
 			{
-				"text": ["Allo Marc? Comment ce mariage? Félicitations encore!"],
+				"text": [
+					"Allo Marc?", 
+					"Comment s’est passé votre mariage finalement?", 
+					"Toutes mes Felicitations!"
+				],
 				"preview": "Allo?",
 				"goto": "desole"
 			}
@@ -324,7 +328,7 @@
 	"desole": {
 		"name": "Marc",
 		"text": [
-			"Merci! Oui superbe! On a bien pu fêter même si c'était en très petit comité.",
+			"Merci! Oui, superbe! On a bien pu fêter même si c'était en très petit comité.",
 			"Je t'enverrai les photos. On a eu un temps magnifique.",
 			"Et Marion dans sa robe était juste sublime!"
 		],

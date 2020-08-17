@@ -2,9 +2,9 @@
   "florence": {
     "name": "Florence",
     "text": [
-      "Heureusement que l'école reprend bientôt!!",
+      "Heureusement que l'école reprend bientôt!",
       "Je n'en peux plus de ce rythme infernal!",
-      "Vous aussi vous vous réjouissez de revoir vos camarades, hein?"
+      "Vous aussi, vous vous réjouissez de revoir vos camarades, hein?"
     ],
     "choices": [],
     "goto": ["kids"]
@@ -20,7 +20,7 @@
   "ranger": {
     "name": "Florence",
     "text": [
-      "Mais aujourd'hui vous devez m'aidez à ranger."
+      "Mais aujourd'hui vous devez m'aider à ranger."
     ],
     "choices": [],
     "goto": []

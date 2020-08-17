@@ -777,6 +777,9 @@ export class BuildingScene extends Phaser.Scene {
             //Create interaction animations
             this.addCharacterNames();
         }
+        if(window.gameDebug) {
+            this.showArrow();
+        }
     }
 
     /**

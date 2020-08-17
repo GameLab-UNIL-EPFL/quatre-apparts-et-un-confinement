@@ -11,7 +11,7 @@
 	"damienHome": {
 		"name": "Suzanne",
 		"text": [
-            "Bonjour Monsieur, j’ai besoin de quelqu’un qui pourrait aller faire les courses pour moi.", 
+            "Bonjour monsieur, j’ai besoin de quelqu’un qui pourrait aller faire les courses pour moi.", 
             "Est-ce que vous seriez d’accord de m’aider?"
 		],
 		"choices": [],
@@ -20,7 +20,7 @@
 	"damienReply": {
 		"name": "Damien",
         "text": [
-            "Désolé Madame, j’essaie de suivre un cours en ligne.", 
+            "Désolé madame, j’essaie de suivre un cours en ligne.", 
             "Est-ce que vous pouvez demander à quelqu’un d’autre?",
             "Sinon je le fais plus tard."
         ],
@@ -39,7 +39,7 @@
     "patrickReply": {
         "name": "Patrick",
         "text": [
-            "Oui, pas de problème Madame. J’avais justement prévu d'y aller aujourd’hui."
+            "Oui, pas de problème madame. J’avais justement prévu d'y aller aujourd’hui."
         ],
         "choices": [],
         "goto": []

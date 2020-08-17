@@ -10,8 +10,8 @@
 	"reveil": {
 		"name": "Damien",
 		"text": [
-			"Ha purée! J’ai oublié de désactiver mon réveil hier soir.",
-			"Pourtant je n'ai plus besoin de me préparer. C'est fini le bus à prendre le matin."
+			"Ah, purée! J’ai oublié de désactiver mon réveil hier soir.",
+			"Pourtant, je n'ai plus besoin de me préparer. C'est fini, le bus à prendre le matin."
 		],
 		"choices": [],
 		"goto": []
@@ -20,7 +20,7 @@
 		"name": "Damien",
 		"text": [
 			"Est-ce qu'il faut vraiment que je m’habille?",
-			"* baille *"
+			"* bâille *"
 		],
 		"choices": [],
 		"goto": []
@@ -95,7 +95,7 @@
 	"repFausse": {
 		"name": "Prof",
 		"text": [
-			"Non! Il s'agissait des chapitres 11 et 12",
+			"Non! Il s'agissait des chapitres 11 et 12.",
 			"J’espère que vous ferez l'effort d'éteindre Netflix dorénavant."
 		],
 		"choices": {},
@@ -121,10 +121,10 @@
 	},
 	"texto": {
 		"name": "Copine",
-		"text": ["Ca va? 😊"],
+		"text": ["Ça va? 😊"],
 		"choices": {
 			"bof": {
-				"text": ["Bof, je m'ennuie là..."],
+				"text": ["Bof, je m'ennuie là."],
 				"preview": "Bof",
 				"goto": "repBof"
 			},
@@ -143,7 +143,7 @@
 	},
 	"repBof": {
 		"name": "Copine",
-		"text": ["Ouais moi aussi"],
+		"text": ["Ouais, moi aussi"],
 		"choices":{
 			"rep": {
 				"text": ["😩"],
@@ -294,8 +294,8 @@
 				"goto": "repMaybe"
 			},
 			"non": {
-				"text": ["Mmm… je ferais peut-être mieux de rester à la maison."],
-				"preview": "Non...",
+				"text": ["Mmm je ferais peut-être mieux de rester à la maison."],
+				"preview": "Non",
 				"goto": "repNon"
 			}
 		},
@@ -303,7 +303,7 @@
 	},
 	"repOui": {
 		"name": "Copine",
-		"text": ["Cool! À toute! 😘"],
+		"text": ["Cool! À tout! 😘"],
 		"choices":{},
 		"goto": [],
 		"objective": {
@@ -312,7 +312,7 @@
 	},
 	"repMaybe": {
 		"name": "Copine",
-		"text": ["Mais oui c’est bon! Sinon tu vas devoir m’expliquer en ligne et c’est plus compliqué."],
+		"text": ["Mais oui, c’est bon! Sinon tu vas devoir m’expliquer en ligne et c’est plus compliqué."],
 		"choices":{
 			"oui": {
 				"text": ["Bon, ok"],
@@ -320,8 +320,8 @@
 				"goto": "repOui"
 			},
 			"non": {
-				"text": ["Non… je ne préfère pas risquer… désolé 😔"],
-				"preview": "Non... désolé",
+				"text": ["Non je ne préfère pas risquer. Désolé 😔"],
+				"preview": "Non désolé",
 				"goto": "repNon"
 			}
 		},
