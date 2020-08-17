@@ -2,15 +2,15 @@
 	"calendrier": {
 		"name": "Suzanne",
 		"text": [
-            "Hmm, le 28 mars j’avais rendez-vous chez le coiffeur…",
-            "Et c’est mercredi. Normalement ce jour-là je vois mes petits-enfants.",
+            "Hmm, le 28 mars, j’avais rendez-vous chez le coiffeur…",
+            "Et c’est mercredi. Normalement, ce jour-là je vois mes petits-enfants.",
             "Je n'ai plus rien de prévu."
 		],
 		"choices": [],
 		"goto": []
 	},
 	"livre1": {
-		"name": "La peste - Albert Camus",
+		"name": "La Peste - Albert Camus",
 		"text": [
 			"« Du reste, le docteur Rieux, par exemple, considérait que c’était cela le malheur,",
 			"et que l’habitude du confinement est pire que le confinement lui-même. »"
@@ -19,7 +19,7 @@
 		"goto": []
 	},
 	"livre2": {
-		"name": "A La Recherche du Temps Perdu - M. Proust",
+		"name": "À la recherche du temps perdu - M. Proust",
         "text": [
 			"« Certes, il y a dans ma maison toutes les choses inutiles.",
 			"Il n’y manque que le nécessaire, un grand morceau de ciel comme ici.",
@@ -110,7 +110,7 @@
     },
     "francoise": {
         "name": "Françoise",
-        "text": ["Allo? Ah Salut Suzanne! Comment vas-tu?"],
+        "text": ["Allo? Ah, salut Suzanne! Comment vas-tu?"],
         "choices": [
 			{
 				"text": ["Ça va, ça va."],
@@ -176,7 +176,7 @@
     },
     "appel": {
         "name": "Françoise",
-        "text": ["Hahaha je devrais faire pareil"],
+        "text": ["Hahaha, je devrais faire pareil."],
         "choices":[
 			{
 				"text": ["Oui hahaha."],
@@ -190,7 +190,7 @@
         "name": "Françoise",
         "text": [
 			"T’as pas de quoi t’occuper?",
-			"Je te recommande de lire La Peste de Camus, c’est d’actualité."
+			"Je te recommande de lire La Peste, de Camus, c’est d’actualité."
 		],
         "choices":[
 			{
@@ -210,7 +210,7 @@
         "name": "Françoise",
 		"text": [
 			"Ah oui, je suis les actualités aussi.",
-			"Non mais on a jamais vécu ça! C’est fou!"
+			"Non, mais on a jamais vécu ça! C’est fou!"
 		],
         "choices": [
             {
@@ -342,7 +342,7 @@
 		"name": "Sophie",
 		"text": [
 			"Oui, ils vont bien, mais c’est pas facile de les avoir à la maison toute la journée.",
-			"Matt me demande de les sortir parce que sinon il n’arrive pas à travailler."
+			"Matt me demande de les sortir parce que, sinon, il n’arrive pas à travailler."
 		],
 		"choices": [
 			{
@@ -367,7 +367,7 @@
 	},
 	"sante": {
 		"name": "Sophie",
-		"text": ["Oui, ben on n'est pas vraiment sorti encore donc à part la fatigue, tout va bien."],
+		"text": ["Oui, ben on n'est pas vraiment sortis encore donc, à part la fatigue, tout va bien."],
 		"choices": [
 			{
 				"text": ["Tant mieux, mais n'oublie pas de boire du jus de gingembre et de curcuma!"],
@@ -384,7 +384,7 @@
 	},
 	"fin": {
 		"name": "Sophie",
-		"text": ["Oui oui Maman, allez je dois y aller! Bisous"],
+		"text": ["Oui, oui, maman. Allez, je dois y aller! Bisou!"],
 		"choices": [
 			{
 				"text": ["D’accord! Bisous à Maxime et Liliane."],
