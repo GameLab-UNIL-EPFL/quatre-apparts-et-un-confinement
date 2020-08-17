@@ -96,7 +96,7 @@
 		"choices": {
             "rep":
 			{
-				"text": ["Je suis vraiment désolé. T'as raison, je n'aurais pas dû venir chez toi."],
+				"text": ["Désolé, t'as raison, je n'aurais pas dû venir chez toi. J'espère qu'il va s'en sortir!"],
 				"preview": "Je n'aurais pas dû.",
 				"goto": "merci"
             },

@@ -314,7 +314,7 @@
 		"text": ["Allo?"],
 		"choices": [
 			{
-				"text": ["Allo Marc? Comment ce mariage? Félicitations encore!"],
+				"text": ["Allo Marc?", "Comment s’est passé votre mariage finalement?", "Toutes mes Felicitations!"],
 				"preview": "Allo?",
 				"goto": "desole"
 			}
