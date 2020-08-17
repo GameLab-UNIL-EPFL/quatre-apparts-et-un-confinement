@@ -1,13 +1,16 @@
 {
 	"frigo": {
 		"name": "Damien",
-		"text": ["J’ai plus rien à manger, faut vraiment que j’aille faire les courses"],
+		"text": [
+			"J’ai plus rien à manger, faut vraiment que j’aille faire les courses.",
+			"J'espère qu'il reste quelque chose sur les rayons."
+		],
 		"choices": [],
 		"goto": []
 	},
     "Natel": {
 		"name": "Damien",
-		"text": ["Oh, 3 appels manqués."],
+		"text": ["Oh, j'ai 3 appels manqués."],
 		"choices": [],
 		"goto": []
 	},
@@ -18,13 +21,13 @@
             "rep":
 			{
 				"text": ["Désolé, j'étais en train de faire les courses. Qu'est-ce qu'il y a?"],
-				"preview": "Faire les courses.",
+				"preview": "Je faisais les courses.",
 				"goto": "covid"
             },
             "rep2":
 			{
 				"text": ["Désolé, j'ai pas entendu mon natel."],
-				"preview": "Pas entendu.",
+				"preview": "Je n'ai pas entendu.",
 				"goto": "covid"
 			}
         },
@@ -32,7 +35,7 @@
 	},
 	"covid": {
 		"name": "Copine",
-		"text": ["Mon père a le covid…"],
+		"text": ["Mon père a le Covid…"],
 		"choices": {
             "rep":
 			{
@@ -42,7 +45,7 @@
             },
             "rep2":
 			{
-				"text": ["Quoi??? Mais comment c'est possible?"],
+				"text": ["Quoi??? Comment c'est possible?"],
 				"preview": "Quoi?",
 				"goto": "toi"
 			}
@@ -52,18 +55,18 @@
 	"toi": {
 		"name": "Copine",
         "text": [
-            "Ben on ne sait pas. Ça pourrait venir de n'importe qui…"
+            "Ben on ne sait pas. Ça a pu venir de n'importe qui…"
         ],
 		"choices": {
             "rep":
 			{
-				"text": ["Mais il portait un masque au travail, non?"],
+				"text": ["Mais… il portait un masque au travail, non?"],
 				"preview": "Il portait un masque.",
 				"goto": "masque"
             },
             "rep2":
 			{
-				"text": ["Ça peut pas être nous, on n'est pas malades."],
+				"text": ["Ça ne peut pas être nous, on n'est pas malades."],
 				"preview": "On n'est pas malades.",
 				"goto": "malade"
             }
@@ -73,13 +76,13 @@
     "masque": {
 		"name": "Copine",
         "text": [
-			"Ben le masque ça ne protège pas forcément. Et…"
+			"Ben d'après ce qu'on nous a dit le masque ne protège pas toujours. Et…"
         ],
 		"choices": {
             "rep":
 			{
-				"text": ["Et... ?"],
-				"preview": "Et... ?",
+				"text": ["Et… ?"],
+				"preview": "Et… ?",
 				"goto": "masque_suite"
             }
         },
@@ -94,7 +97,7 @@
             "rep":
 			{
 				"text": ["Je suis vraiment désolé. T'as raison, je n'aurais pas dû venir chez toi."],
-				"preview": "J'aurais pas dû.",
+				"preview": "Je n'aurais pas dû.",
 				"goto": "merci"
             },
             "rep2":
@@ -109,13 +112,13 @@
     "malade": {
 		"name": "Copine",
         "text": [
-			"Si ça se trouve on est asymptomatique…"
+			"Si ça se trouve on est asymptomatiques…"
         ],
 		"choices": {
             "rep":
 			{
-				"text": ["C'est vrai..."],
-				"preview": "C'est vrai...",
+				"text": ["C'est possible… en attendant ce n'est pas une raison pour prendre des risques."],
+				"preview": "C'est possible…",
 				"goto": "malade_suite"
             }
         },
@@ -129,8 +132,8 @@
 		"choices": {
             "rep":
 			{
-				"text": ["Je suis vraiment désolé. T'as raison, j'aurais pas dû venir chez toi."],
-				"preview": "J'aurais pas dû.",
+				"text": ["Je suis vraiment désolé. T'as raison, je n'aurais pas dû venir chez toi."],
+				"preview": "Je n'aurais pas dû.",
 				"goto": "merci"
             },
             "rep2":

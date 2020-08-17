@@ -2,7 +2,8 @@
     "telephone": {
 		"name": "Patrick",
         "text": [
-            "Bonjour, oui, j'appelle bien les pompes funèbres?"
+            "Bonjour, Patrick D. à l'appareil.",
+            "Je suis bien aux pompes funèbres?"
 		],
         "choices": [],
 		"goto": []

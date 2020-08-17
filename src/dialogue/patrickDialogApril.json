@@ -12,8 +12,8 @@
     "dvd1": {
 		"name": "",
 		"text": [
-            "I am Legend (2007)",
-            "Pas besoin qu'on me rappelle ma solitude."
+            "Intouchables (2011)",
+            "Pas de bras, pas de corona!"
 		],
 		"choices": [],
 		"goto": []
@@ -21,8 +21,9 @@
 	"dvd2": {
 		"name": "",
         "text": [
-            "The Mask (1994)",
-            "Du bon Jim Carrey, ça!"
+            "The Shining (1980)",
+            "“All work and no Play makes Jack a dull boy\nAll work and no play mmakes Jack a dull boy…”",
+            "Heureusement, je n'en suis pas encore là."
 		],
         "choices": [],
 		"goto": []

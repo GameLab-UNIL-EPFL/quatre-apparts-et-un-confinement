@@ -15,7 +15,7 @@ export class EndScene extends Phaser.Scene {
 
     init(data) {
         if (data.aboutTitle) {
-            this.title = 'A propos';
+            this.title = 'À propos';
         }
     }
 
@@ -60,12 +60,10 @@ export class EndScene extends Phaser.Scene {
 
         let divTeam = document.createElement('div');
 
-        divTeam.innerHTML =  `<h4>Membres de l’équipe</h4>
-        <p>Andrew Dobis: Programmation<br>
-        Mathias Hängärtner: Graphisme<br>
-        Saara Jones: Récit, Conception sonore<br>
-        Yannick Rochat: Gestion de projet, Conseil<br>
-        Paul Ronga: Gestion de projet, Programmation</p>
+        divTeam.innerHTML =  `<p><h4>Programmation</h4>Andrew Dobis, Paul Ronga
+        <h4>Graphisme</h4>Mathias Hängärtner
+        <h4>Récit, Conception sonore</h4>Saara Jones
+        <h4>Gestion de projet</h4>Yannick Rochat, Paul Ronga</p>
         <p>Vos commentaires sont les bienvenus à l’adresse: <a target="_blank" href="mailto:data@letemps.ch">data@letemps.ch</a></p>`;
 
         divTeam.classList.add('team');
@@ -89,7 +87,7 @@ export class EndScene extends Phaser.Scene {
         <a target="_blank" href="https://wp.unil.ch/gamelab/">UNIL Gamelab</a></p>
 
         <h4>Un grand merci à nos testeurs</h4>
-        <p>Lesli__e, Vincent, Sashiro (formule pour remercier aussi tous ceux qui préféraient ne pas être mentionnés)</p>
+        <p>Lesli__e, Vincent, Sashiro, Sarah, Philippe, Dr. Game, et toutes les autres personnes qui nous ont aidé par leurs retours à construire cette expérience.</p>
         `;
 
         this.divRepo = this.add.dom(0, -2600, divRepo);

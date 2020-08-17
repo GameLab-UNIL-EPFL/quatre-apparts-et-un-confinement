@@ -3,15 +3,14 @@
 		"name": "Suzanne",
 		"text": [
 			"Je vois enfin mes petits-enfants aujourd'hui!",
-            "Samedi, je vais boire un café avec Françoise."
+            "Et samedi, je vais boire un café avec Françoise."
 		],
 		"choices": [],
 		"goto": []
 	},
 	"livre1": {
-		"name": "",
+		"name": "Candide - Voltaire",
 		"text": [
-			"Candide - Voltaire",
 			"« Il s'avisa un beau jour de printemps de s'aller promener,",
 			"marchant tout droit devant lui, croyant que c'était un privilège de l'espèce humaine,",
 			"comme de l'espèce animale, de se servir de ses jambes à son plaisir. »"
@@ -20,9 +19,8 @@
 		"goto": []
 	},
 	"livre2": {
-		"name": "",
+		"name": "Covigula - Albert Camus",
         "text": [
-			"Covigula - Albert Camus",
 			"« Ce monde, tel qu'il est fait, n'est pas supportable.",
 			"J'ai donc besoin de la lune, ou du bonheur, ou de l'immortalité,",
 			"de quelque chose qui soit dément peut-être, mais qui ne soit pas de ce monde. »"
@@ -31,9 +29,8 @@
 		"goto": []
 	},
 	"livre3": {
-		"name": "",
+		"name": "Voyage au bout de la nuit - L.-F. Céline",
         "text": [
-			"Voyage au bout de la nuit - Lois-Ferdinand Céline",
 			"« Voyager c'est bien utile, ça fait travailler l'imagination.",
 			"Tout le reste n'est que déceptions et fatigues.",
 			"Notre voyage à nous est entièrement imaginaire. »"
@@ -46,12 +43,12 @@
 		"text": ["Que faire?"],
 		"choices": [
 			{
-				"text": ["écouter de la musique"],
+				"text": ["Écouter de la musique"],
 				"preview": "Musique",
 				"goto": "bleiben"
 			},
 			{
-				"text": ["écouter les nouvelles"],
+				"text": ["Écouter les nouvelles"],
 				"preview": "Nouvelles",
 				"goto": "news"
 			}
@@ -125,13 +122,13 @@
         "text": ["Oui, qu'est-ce que t'as de prévu ces temps?"],
         "choices": [
 			{
-				"text": ["Je lis"],
-				"preview": "Je lis",
+				"text": ["Je lis."],
+				"preview": "Je lis.",
 				"goto": "lire"
 			},
 			{
-				"text": ["J’écoute la radio"],
-				"preview": "J’écoute la radio",
+				"text": ["J’écoute la radio."],
+				"preview": "J’écoute la radio.",
 				"goto": "nouvelles"
             },
             {
@@ -147,18 +144,18 @@
         "text": ["Quel livre as-tu préféré lire pendant ce confinement?"],
         "choices":[
 			{
-				"text": ["La Comédie Humaine"],
+				"text": ["La Comédie Humaine."],
 				"preview": "La Comédie Humaine",
 				"goto": "oui"
 			},
 			{
-				"text": ["La Peste"],
+				"text": ["La Peste."],
 				"preview": "La Peste",
 				"goto": "oui"
             },
             {
-				"text": ["A la Recherche du Temps Perdu"],
-				"preview": "A la Recherche du Temps Perdu",
+				"text": ["À la Recherche du Temps Perdu."],
+				"preview": "À la Recherche du Temps Perdu",
 				"goto": "oui"
             }
 		],
@@ -181,17 +178,17 @@
         "text": [
 			"Ben écoute, j'ai revu Alain l'autre jour.",
 			"On a hésité à aller se baigner comme il faisait beau.",
-			"T'es déjà allée?"
+			"T'y es déjà retournée?"
 		],
         "choices":[
 			{
 				"text": ["Oui! L'eau était étonnamment bonne!"],
-				"preview": "Oui peut-être",
+				"preview": "Oui",
 				"goto": "oui"
 			},
 			{
 				"text": ["Non pas encore, j'ai trop hâte!"],
-				"preview": "Oui",
+				"preview": "Non, pas encore",
 				"goto": "oui"
             }
 		],
@@ -200,8 +197,8 @@
     "nouvelles": {
         "name": "Françoise",
 		"text": [
-			"Oui, on dirait bien que cette fameuse vague aille dans la bonne direction.",
-			"J'ai hâte que tout ça ne soit plus qu'un souvenir étrange."
+			"Oui, on dirait bien que cette fameuse vague va dans la bonne direction.",
+			"J'ai hâte que tout ça ne soit plus qu'un souvenir un peu étrange."
 		],
         "choices": [
             {
@@ -210,8 +207,8 @@
 				"goto": "oui"
 			},
 			{
-				"text": ["J'ai peur que ça ne soit qu'un moment de répit mais bon espérons!"],
-				"preview": "C’est pas la première fois",
+				"text": ["J'ai peur que ça ne soit qu'un moment de répit mais bon, espérons!"],
+				"preview": "J'ai peur…",
 				"goto": "pandemie"
             }
 		],
@@ -232,8 +229,8 @@
     "oui": {
         "name": "Françoise",
 		"text": [
-			"C'est marrant, ça faisait tellement longtemps que j'étais pas sortie",
-			"que j'ai eu l'impression de redécouvrir le monde."
+			"C'est marrant, ça faisait tellement longtemps que j'étais pas sortie.",
+			"J'ai eu l'impression de redécouvrir le monde."
 		],
         "choices":[
 			{
@@ -242,7 +239,7 @@
 				"goto": "malade"
 			},
 			{
-				"text": ["Ah bon? "],
+				"text": ["Ah bon?"],
 				"preview": "Oui",
 				"goto": "malade"
             }
@@ -254,13 +251,16 @@
         "text": ["On s'organise une petite sortie bientôt?"],
         "choices": [
 			{
-				"text": "Oui, on pourrait aller visiter un musée!",
-				"preview": "Non",
+				"text": [
+					"Oui, on pourrait aller visiter un musée.",
+					"Ou faire une balade en montagne!"
+				],
+				"preview": "Oui",
 				"goto": "bye"
 			},
 			{
-				"text": ["Oui on pourrait aller faire une balade en montagne!"],
-				"preview": "Oui",
+				"text": ["Je te propose d'attendre encore un peu. Bientôt!"],
+				"preview": "Non",
 				"goto": "bye"
             }
 		],
@@ -269,7 +269,7 @@
     "bye": {
         "name": "Françoise",
 		"text": [
-			"Ça marche! Je dois y aller! Salut Suzanne"
+			"Ça marche! Je dois y aller! Salut Suzanne."
 		],
         "choices": [
 			{
@@ -285,7 +285,10 @@
 		"text": ["Allo?"],
 		"choices": [
 			{
-				"text": ["Ah Sophie! Vous êtes en chemin?"],
+				"text": [
+					"Ah Sophie! Vous êtes en chemin?",
+					"Je me réjouis tellement de vous voir."
+				],
 				"preview": "ça va?",
 				"goto": "comment"
 			}
@@ -297,7 +300,12 @@
 	},
 	"comment": {
 		"name": "Sophie",
-		"text": ["Maman... Il y a eu un cas de covid à la crèche de Maxime."],
+		"text": [
+			"Maman…",
+			"Il y a eu un cas de Covid à la crèche de Maxime.",
+			"Il va falloir attendre encore un peu avant de se revoir.",
+			"Je suis désolée."
+		],
 		"choices": [],
 		"goto": []
 	},
@@ -316,8 +324,8 @@
 	"desole": {
 		"name": "Marc",
 		"text": [
-			"Merci! Oui superbe! On a bien pu fêter même si c'était en petit comité.",
-			"Je t'enverrai les photos. On a eu un temps magnifique!",
+			"Merci! Oui superbe! On a bien pu fêter même si c'était en très petit comité.",
+			"Je t'enverrai les photos. On a eu un temps magnifique.",
 			"Et Marion dans sa robe était juste sublime!"
 		],
 		"choices": [],
