@@ -10,7 +10,7 @@
       "goto": []
     },
     "livre1": {
-        "name": "La Covédie Humaine - Honoré De Balzac",
+        "name": "La Covédie humaine - Honoré de Balzac",
         "text": [
             "« Ces débris jetaient dans le tableau des effets d'une poésie ravissante,",
             "et des idées rêveuses dans l'âme du spectateur.",
@@ -24,7 +24,7 @@
         "name": "Les Misérables - Victor Hugo",
         "text": [
             "« Rien n'est stupide comme vaincre; la vraie gloire est convaincre.",
-            "La vie, le malheur, l'isolement, l'abandon, la pauvreté,",
+            "La vie, le malheur, l'isolement, l'abandon, la pauvreté",
             "sont des champs de bataille qui ont leurs héros;",
             "héros obscurs plus grands parfois que les héros illustres. »"
         ],
@@ -111,7 +111,7 @@
     },
     "francoise": {
         "name": "Françoise",
-        "text": ["Allo? Ah Salut Suzanne! Comment vas-tu?"],
+        "text": ["Allo? Ah, salut Suzanne! Comment vas-tu?"],
         "choices": [
             {
                 "text": ["Toujours pareil."],
@@ -177,7 +177,7 @@
     },
     "appel": {
         "name": "Françoise",
-        "text": ["Hahaha je devrais faire pareil"],
+        "text": ["Hahaha, je devrais faire pareil."],
         "choices":[
             {
                 "text": ["Oui!"],
@@ -244,7 +244,7 @@
         "name": "Françoise",
         "text": [
             "Je suis bientôt à bout.",
-            "J’en peux plus de rester à la maison"
+            "J’en peux plus de rester à la maison."
         ],
         "choices":[
             {
@@ -424,7 +424,7 @@
     "racine": {
         "name": "Gertrude",
         "text": [
-            "Ha! J'aurai bientôt la même coupe que toi!"
+            "Ah! J'aurai bientôt la même coupe que toi!"
         ],
         "choices": [
             {
@@ -443,7 +443,7 @@
     "long": {
         "name": "Gertrude",
         "text": [
-            "Moi je n'en peux plus! Il faut vraiment que j'y retourne!"
+            "Moi, je n'en peux plus! Il faut vraiment que j'y retourne!"
         ],
         "choices": [
             {
@@ -462,7 +462,7 @@
     "enfin": {
         "name": "Gertrude",
         "text": [
-            "Haha tu m'enverras une photo!"
+            "Haha, tu m'enverras une photo!"
         ],
         "choices": [
             {
@@ -500,7 +500,7 @@
     "byeYes": {
         "name": "Gertrude",
         "text": [
-            "Ok, prend soin de toi! Je dois y aller! A bientôt!"
+            "Ok, prends soin de toi! Je dois y aller! A bientôt!"
         ],
         "choices": [],
         "goto": [],
@@ -511,7 +511,7 @@
     "byeNo": {
         "name": "Gertrude",
         "text": [
-            "Ok, prend soin de toi! Je dois y aller! A bientôt!"
+            "Ok, prends soin de toi! Je dois y aller! A bientôt!"
         ],
         "choices": [],
         "goto": [],

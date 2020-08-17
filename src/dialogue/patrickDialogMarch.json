@@ -67,7 +67,7 @@
 	},
 	"bien": {
 		"name": "Nathan",
-		"text": ["Ouais t'as trop de la chance!"],
+		"text": ["Ouais, t'as trop de la chance!"],
 		"choices": [
 			{
 				"text": ["Ouais ouais, enfin… c'est des vacances à la maison."],
@@ -119,13 +119,13 @@
 	"couple": {
 		"name": "Nathan",
         "text": [
-            "Moi je continue à travailler depuis la maison et Elise aussi…",
+            "Moi, je continue à travailler depuis la maison et Élise aussi…",
             "Donc autant te dire que c'est loin d'être des vacances.",
             "Il y a parfois des moments tendus entre nous."
         ],
 		"choices": [
 			{
-				"text": ["Quoi? Ça ne se passe pas bien avec Elise?"],
+				"text": ["Quoi? Ça ne se passe pas bien avec Élise?"],
 				"preview": "Quoi?",
 				"goto": "elise"
 			}
@@ -137,7 +137,7 @@
 		"text": [
 			"Écoute, c'est pas facile.",
 			"On est presque 24h sur 24 ensemble dans le même petit appart.",
-			"Au bout d'un moment on se prend la tête pour un rien."
+			"Au bout d'un moment, on se prend la tête pour un rien."
 		],
 		"choices": [
 			{
@@ -269,7 +269,7 @@
     },
     "apero": {
         "name": "Sandrine",
-		"text": ["Ok! Sinon, j'organise un skypéro samedi avec les autres? T'es libre, j'imagine?"],
+		"text": ["Ok! Sinon, j'organise un Skypéro samedi avec les autres? T'es libre, j'imagine?"],
 		"choices": [
 			{
 				"text": ["Oui, compte sur moi!"],
@@ -312,7 +312,7 @@
 		"name": "Paul",
 		"text": [
 			"Hello Patrick, désolé je n'ai pas beaucoup de temps en ce moment.",
-			"Je travaille sur un nouveau projet en lien avec le covid.",
+			"Je travaille sur un nouveau projet en lien avec le Covid.",
 			"Je t'en reparle une prochaine fois! Ciao."
 		],
 		"choices": [],

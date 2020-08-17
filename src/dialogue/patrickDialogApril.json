@@ -4,7 +4,7 @@
 		"text": [
 			"Ça m’a fait plaisir de pouvoir aider la voisine.", 
 			"Il faudrait peut-être que j’appelle ma mère pour voir si tout va bien.",
-			"Et je me demande si Nathan et Elise ont tenu le coup."
+			"Et je me demande si Nathan et Élise ont tenu le coup."
 		],
 		"choices": [],
 		"goto": []
@@ -22,7 +22,7 @@
 		"name": "",
         "text": [
             "The Shining (1980)",
-            "“All work and no Play makes Jack a dull boy\nAll work and no play mmakes Jack a dull boy…”",
+            "All work and no Play makes Jack a dull boy\nAll work and no play mmakes Jack a dull boy…",
             "Heureusement, je n'en suis pas encore là."
 		],
         "choices": [],
@@ -108,7 +108,7 @@
 	},
 	"mauvais": {
 		"name": "Nathan",
-		"text": ["Pas très bien... Elise m'a quitté."],
+		"text": ["Pas très bien... Élise m'a quitté."],
 		"choices": [
 			{
 				"text": ["Quoi? Mais non!"],
@@ -128,8 +128,8 @@
 				"goto": "suivi"
             },
 			{
-				"text": ["Ah merde, je suis désolé"],
-				"preview": "Ah merde, je suis désolé",
+				"text": ["Ah merde, je suis désolé."],
+				"preview": "Ah merde, je suis désolé.",
 				"goto": "suivi"
 			}
         ],
@@ -137,13 +137,13 @@
 	},
 	"suivi": {
 		"name": "Nathan",
-		"text": ["J'aurais pas dû t'écouter... Bon tcho, je te laisse"],
+		"text": ["J'aurais pas dû t'écouter... Bon tcho, je te laisse."],
 		"choices": [],
 		"goto": []
     },
     "bon": {
 		"name": "Nathan",
-		"text": ["Oui super! Ça se passe beaucoup mieux avec Elise."],
+		"text": ["Oui, super! Ça se passe beaucoup mieux avec Élise."],
 		"choices": [
 			{
 				"text": ["Ah trop bien!"],
@@ -241,7 +241,7 @@
     },
     "non": {
         "name": "Sandrine",
-		"text": ["Pas de soucis! Salut!"],
+		"text": ["Pas de souci! Salut!"],
 		"choices": [],
 		"goto": []
     },
@@ -265,7 +265,7 @@
 	"patrick_mini_lose": {
 		"name": "Patrick",
 		"text": [
-			"Je ne vais jamais y arriver, je ne suis pas du tout concentré"
+			"Je ne vais jamais y arriver, je ne suis pas du tout concentré."
 		],
 		"choices": [],
 		"goto": []
@@ -273,7 +273,7 @@
 	"patrick_mini_win": {
 		"name": "Patrick",
 		"text": [
-			"Oh wow, je ne pensais vraiment jamais réussir cette tâche qui était sensé être impossible!"
+			"Oh wow, je ne pensais vraiment jamais réussir cette tâche qui était censée être impossible!"
 		],
 		"choices": [],
 		"goto": []

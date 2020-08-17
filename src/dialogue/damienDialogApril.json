@@ -10,7 +10,7 @@
 	},
     "Natel": {
 		"name": "Damien",
-		"text": ["Oh, j'ai 3 appels manqués."],
+		"text": ["Oh, j'ai trois appels manqués."],
 		"choices": [],
 		"goto": []
 	},
@@ -55,7 +55,7 @@
 	"toi": {
 		"name": "Copine",
         "text": [
-            "Ben on ne sait pas. Ça a pu venir de n'importe qui…"
+            "Ben,on ne sait pas. Ça a pu venir de n'importe qui."
         ],
 		"choices": {
             "rep":
@@ -91,7 +91,7 @@
 	"masque_suite": {
 		"name": "Copine",
         "text": [
-			"… j'aurais pas dû t'inviter. J'ai pris des risques inutiles."
+			"J'aurais pas dû t'inviter. J'ai pris des risques inutiles."
         ],
 		"choices": {
             "rep":
@@ -166,7 +166,7 @@
 	},
 	"pere": {
 		"name": "Copine",
-		"text": ["Mon père a le covid…"],
+		"text": ["Mon père a le Covid…"],
 		"choices": {
             "rep":
 			{
@@ -186,7 +186,7 @@
 	"client": {
 		"name": "Copine",
         "text": [
-            "On ne sait pas et c'est difficile à dire. Peut-être un de ses clients…"
+            "On ne sait pas et c'est difficile à dire. Peut-être un de ses clients."
         ],
 		"choices": {
             "rep":
@@ -201,18 +201,18 @@
     "leMasque": {
 		"name": "Copine",
         "text": [
-            "Ben le masque ça protège pas forcément…"
+            "Ben le masque ça protège pas forcément."
         ],
 		"choices": {
             "rep":
 			{
-				"text": ["J'arrive pas à y croire… et toi ça va?"],
+				"text": ["J'arrive pas à y croire. Et toi, ça va?"],
 				"preview": "Toi, ça va?",
 				"goto": "asymp"
             },
             "rep2":
 			{
-				"text": ["C'est horrible… T'es sûr que ça va?"],
+				"text": ["C'est horrible. T'es sûre que ça va?"],
 				"preview": "C'est horrible.",
 				"goto": "asymp"
             }
