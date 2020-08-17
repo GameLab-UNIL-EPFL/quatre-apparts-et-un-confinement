@@ -1,5 +1,5 @@
 {
-  "name": "Quatre apparts et un confinement",
+  "name": "quatre-apparts-et-un-confinement",
   "version": "1.0.0",
   "description": "Narrative game about COVID-19 lockdown in Switzerland.",
   "main": "src/index.js",
