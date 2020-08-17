@@ -196,13 +196,13 @@
         ],
         "choices":[
             {
-                "text": ["Ah oui je comprends complétement! Moi je disute avec mon chat Caramel."],
-                "preview": "Ah oui je comprends complétement! Moi je disute avec mon chat Caramel.",
+                "text": ["Ah oui je comprends complètement! Moi je discute avec mon chat Caramel."],
+                "preview": "Ah oui je comprends complètement! Moi je discute avec mon chat Caramel.",
                 "goto": "oui"
             },
             {
                 "text": ["Ah oui, j'ai besoin de nouveaux livres aussi."],
-                "preview": "Ah oui, j'ai besoin de nouveaux livres aussi",
+                "preview": "Ah oui, j'ai besoin de nouveaux livres aussi.",
                 "goto": "oui"
             }
         ],
