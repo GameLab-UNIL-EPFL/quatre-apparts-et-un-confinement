@@ -201,6 +201,8 @@ export class BusScene extends Phaser.Scene {
             //Make entire screen interactive
             this.input.on('pointerdown', () => this.nextScene(), this);
 
+            this.busCough.once('complete', () => this.nextScene());
+
             //Create the moving background
             if(this.cardIdx === BusCards.MARCH_CARD) {
                 this.createMovingBG("bus_city_march");
