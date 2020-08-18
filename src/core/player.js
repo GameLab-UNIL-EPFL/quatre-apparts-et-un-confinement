@@ -1,5 +1,7 @@
 import { game } from "..";
 
+const endpoint = location.hostname === "localhost"
+
 export const Scenes = {
     INTRO: 'TitleScene',
     BUS: 'BusScene',
@@ -228,10 +230,13 @@ export class Player {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify({'player_id': this.player_id})
-                });
-                const content = await rawResponse.json();
-                // Output if player_id already exists: {"result": "success", "count": "1"}
-                this.checkIdCallback(content, iteration);
+                }).catch( (e) => console.warn(e) );
+
+                if(rawResponse) {
+                    const content = await rawResponse.json();
+                    // Output if player_id already exists: {"result": "success", "count": "1"}
+                    this.checkIdCallback(content, iteration);
+                }
             })();
         } else {
             console.log('“No” to sticky => stats disabled');
@@ -258,10 +263,13 @@ export class Player {
                         'Content-Type': 'application/json'
                     },
                     body: JSON.stringify(payload)
-                });
-                const content = await rawResponse.json();
-                // Tells if database was successfully updated
-                console.log(content);
+                }).catch( (e) => console.warn(e) );
+
+                if(rawResponse) {
+                  const content = await rawResponse.json();
+                  // Tells if database was successfully updated
+                  console.log(content);
+                }
             })();
         } else {
             console.log('“No” to sticky => stats disabled');
@@ -271,9 +279,13 @@ export class Player {
     async getStats() {
         const rawResponse = await fetch('https://labs.letemps.ch/interactive/2020/quatre-apparts-un-confinement/server/get_choice_stats.php', {
             method: 'GET'
-        });
-        const content = await rawResponse.json();
-        // Example output: [{"choice":"kids_park","percentage":"35.0"},{"choice":"grandma_hairdresser","percentage":"39.0"},{"choice":"damien_stay_home","percentage":"0.0"},{"choice":"freelancer_good_love_advice","percentage":"28.0"}]
-        return content;
+        }).catch( (e) => console.warn(e) );
+
+        if(rawResponse) {
+            const content = await rawResponse.json();
+            // Example output: [{"choice":"kids_park","percentage":"35.0"},{"choice":"grandma_hairdresser","percentage":"39.0"},{"choice":"damien_stay_home","percentage":"0.0"},{"choice":"freelancer_good_love_advice","percentage":"28.0"}]
+            return content;
+        }
+        return false;
     }
 }
