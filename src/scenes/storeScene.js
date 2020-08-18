@@ -684,6 +684,29 @@ export class StoreScene extends Phaser.Scene {
             },
         };
 
+        this.checklist_done_2 = {
+            'farine': {
+                position_x: -0.23, // Will be multiplied by this.cameras.main.width (<= 1200px). Calculation for -0.23: (-276 / 1200)
+                position_y: 234,
+                done: false
+            },
+            'pate': {
+                position_x: -0.23,
+                position_y: 290,
+                done: false
+            },
+            'pain': {
+                position_x: -0.23,
+                position_y: 340,
+                done: false
+            },
+            'lessive': {
+                position_x: -0.23,
+                position_y: 398,
+                done: false
+            },
+        };
+
         this.cards = [
             this.firstShelf,
             this.secondShelf,
@@ -726,7 +749,13 @@ export class StoreScene extends Phaser.Scene {
         this.cards.forEach(card => card.preload());
 
         // Sprites for the whole scene (all 3 cards)
-        this.load.image('liste', "sprites/StoreScene/part1/rayon01_04_liste.png");
+        if(this.month === Months.APRIL) {
+            this.load.image('liste', "sprites/StoreScene/part1/rayon01_04_liste.png");
+        } else {
+            this.load.image('liste', "sprites/StoreScene/part1/rayon01_04_liste_02.png");
+            this.checklist_done = this.checklist_done_2;
+        }
+
         this.load.image('basket', "sprites/StoreScene/part1/rayon01_02_panier.png");
         this.load.image('basket-front', "sprites/StoreScene/part1/rayon01_02_panier-02front.png");
 
