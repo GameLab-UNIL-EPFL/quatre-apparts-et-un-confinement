@@ -25,8 +25,8 @@ export class TitleScene extends Phaser.Scene {
         });
 
         let title = this.add.sprite(
-            50,
-            -150,
+            0,
+            -300,
             'title'
         ).play('title-anim');
 
@@ -39,7 +39,7 @@ export class TitleScene extends Phaser.Scene {
 
         let start = this.add.sprite(
             0,
-            400,
+            150,
             'start'
         ).play('start-anim');
 
