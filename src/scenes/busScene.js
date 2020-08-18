@@ -146,7 +146,7 @@ export class BusScene extends Phaser.Scene {
             this.load.spritesheet(
                 'bus_city_march',
                 'sprites/BusScene/Bus01/00_Spritesheet/Bus01-00-spirtesheet-BKG-600x298.jpg',
-                { frameWidth: 1200, frameHeight: 595 }
+                { frameWidth: 600, frameHeight: 298 }
             );
         } else {
             this.load.spritesheet(
@@ -175,7 +175,7 @@ export class BusScene extends Phaser.Scene {
         //Play the city animation
         this.city_bg = this.add.sprite(
             0,
-            0,
+            -100,
             name
         ).play(name + "_anim");
         this.city_bg.setOrigin(0.5, 0.5);
