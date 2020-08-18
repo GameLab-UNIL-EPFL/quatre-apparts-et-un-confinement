@@ -160,6 +160,7 @@ function handleSticky(agree) {
         player.enableStats();
     }
     document.getElementById('sticky-container').classList.add('closed');
+    setTimeout(() => document.getElementById('sticky-container').remove(), 600);
 }
 // if sticky already clicked:
 // document.getElementById('sticky-container').classList.add('closed');
