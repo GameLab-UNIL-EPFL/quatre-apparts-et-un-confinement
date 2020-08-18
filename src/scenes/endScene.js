@@ -4,7 +4,8 @@ import { WindowState, Months } from "./buildingScene.js";
 
 export const EndCards = {
     FIRST_SCREEN: 0,
-    SECOND_SCREEN: 1
+    SECOND_SCREEN: 1,
+    THIRD_SCREEN: 2
 };
 
 export class EndScene extends Phaser.Scene {
@@ -51,20 +52,23 @@ export class EndScene extends Phaser.Scene {
             repeat: -1
         });
 
-        //Play the cat animation
+        // Play the cat animation
         this.cat_anim = this.add.sprite(
             0,
             -367,
             'cat'
         ).play('cat-tail');
 
+        // Team
+
         let divTeam = document.createElement('div');
 
-        divTeam.innerHTML =  `<p><h4>Programmation</h4>Andrew Dobis, Paul Ronga
+        divTeam.innerHTML =  `
+        <h4>Programmation</h4>Andrew Dobis, Paul Ronga
         <h4>Graphisme</h4>Mathias Hängärtner
         <h4>Récit, Conception sonore</h4>Saara Jones
-        <h4>Gestion de projet</h4>Yannick Rochat, Paul Ronga</p>
-        <p>Vos commentaires sont les bienvenus à l’adresse: <a target="_blank" href="mailto:data@letemps.ch">data@letemps.ch</a></p>`;
+        <h4>Gestion de projet</h4>Yannick Rochat, Paul Ronga
+        `;
 
         divTeam.classList.add('team');
 
@@ -76,25 +80,46 @@ export class EndScene extends Phaser.Scene {
         this.firstScreenContainer.add(this.divTeam);
         this.firstScreenContainer.add(this.thank_you);
 
+        // Comments are welcome, repo, and partners
+
         let divRepo = document.createElement('div');
-        divRepo.classList.add('repo');
-        divRepo.innerHTML = `<p>Ce jeu est en licence libre, ce qui signifie que le code source, les dessins et les sons peuvent être réutilisés.
+
+        divRepo.innerHTML = `
+        <p>Vos commentaires sont les bienvenus à l’adresse: <a target="_blank" href="mailto:data@letemps.ch">data@letemps.ch</a></p>
+        <h4>Réutilisation</h4>
+        <p>Ce jeu est en licence libre, ce qui signifie que le code source, les dessins et les sons originaux (hors extraits radiophoniques) peuvent être réutilisés.
         <a target="_blank" href="https://github.com/IMI-initiative/quatre-apparts-et-un-confinement">En savoir plus</a></p>
         <h4>Organisation et soutien</h4>
         <p><a target="_blank" href="https://www.media-initiative.ch">Initiative pour l’innovation dans les médias (IMI)</a><br>
         <a target="_blank" href="https://www.letemps.ch">Le Temps</a><br>
         <a target="_blank" href="https://www.epfl.ch/schools/cdh/fr/">Collège des humanités (CDH), EPFL</a>
         <a target="_blank" href="https://wp.unil.ch/gamelab/">UNIL Gamelab</a></p>
-
-        <h4>Un grand merci à nos testeurs</h4>
-        <p>Lesli__e, Vincent, Sashiro, Sarah, Philippe, Dr. Game, et toutes les autres personnes qui nous ont aidé par leurs retours à construire cette expérience.</p>
         `;
 
+        divRepo.classList.add('repo');
+        
         this.divRepo = this.add.dom(0, -2600, divRepo);
         this.divRepo.setOrigin(0.5, 0.5);
 
+        // Thanks
+
+        let divThanks = document.createElement('div');
+
+        divThanks.innerHTML = `
+        <p>Merci à la RTS ainsi qu'à SRF Zwei am Morge pour l'utilisation d'extraits de leurs émissions.</p>
+        <h4>Un grand merci à nos testeurs et testeuses</h4>
+        <p>Lesli__e, Vincent, Sashiro, Sarah, Philippe, Dr. Game, et toutes les autres personnes qui nous ont aidé par leurs retours à construire cette expérience.</p>
+        `;
+
+        divThanks.classList.add('thanks')
+
+        this.divThanks = this.add.dom(0, -2600, divThanks);
+        this.divThanks.setOrigin(0.5, 0.5);
+
         divTeam.addEventListener('click', () => this.nextCard(), this);
         divRepo.addEventListener('click', () => this.nextCard(), this);
+        divThanks.addEventListener('click', () => this.nextCard(), this);
+
         document.querySelectorAll('a').forEach((a, idx) => {
             a.addEventListener('click', function (e) {
                 e.stopPropagation();
@@ -102,7 +127,7 @@ export class EndScene extends Phaser.Scene {
         });
 
         this.input.on('pointerdown', () => this.nextCard(), this);
-        this.divTeam.on('pointerdown', () => this.nextCard(), this);
+        this.divThanks.on('pointerdown', () => this.nextCard(), this);
     }
 
     nextCard() {
@@ -118,6 +143,14 @@ export class EndScene extends Phaser.Scene {
             });
             this.tweens.add({
                 targets: [this.firstScreenContainer, this.divRepo],
+                y: 0,
+                duration: 500,
+                ease: 'Quadratic',
+                yoyo: false,
+                loop: 0
+            });
+            this.tweens.add({
+                targets: [this.firstScreenContainer, this.divThanks],
                 y: 0,
                 duration: 500,
                 ease: 'Quadratic',
@@ -161,6 +194,7 @@ export class EndScene extends Phaser.Scene {
     destroy() {
         this.divRepo.destroy();
         this.divTeam.destroy();
+        this.divThanks.destroy();
     }
 
 }
