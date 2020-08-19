@@ -37,6 +37,8 @@ const plugins = [{
     mapping: 'rexUI'
 }];
 
+window.gameDebug = /labs\.letemps/.test(window.location.hostname) ? false : true;
+
 // const OBJECT_DEBUG = false;
 //
 // if(OBJECT_DEBUG === true) {
@@ -168,8 +170,10 @@ document.getElementById('stickyYes').addEventListener("click", () => handleStick
 document.getElementById('stickyNo').addEventListener("click", () => handleSticky(false) );
 
 window.addEventListener('beforeunload', (e) => {
-    // Mozzilla’s example https://developer.mozilla.org/en-US/docs/Web/API/Window/beforeunload_event
-    var confirmationMessage = "\o/";
-    e.returnValue = confirmationMessage;
-    return confirmationMessage;
+    if(window.gameDebug === false) {
+        // Mozzilla’s example https://developer.mozilla.org/en-US/docs/Web/API/Window/beforeunload_event
+        var confirmationMessage = "\o/";
+        e.returnValue = confirmationMessage;
+        return confirmationMessage;
+    }
 });
