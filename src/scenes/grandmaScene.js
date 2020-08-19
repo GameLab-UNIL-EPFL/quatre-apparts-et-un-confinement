@@ -132,6 +132,8 @@ export class GrandmaScene extends Phaser.Scene {
         this.load.audio("radioSound_" + this.month, "sounds/grandma/" + this.month + "_radio.mp3");
         this.load.audio("radioSound02_" + this.month, "sounds/grandma/" + this.month + "2_radio.mp3");
         this.load.audio("radioMusic_"  + this.month, "sounds/grandma/" + this.month + "_music.mp3");
+
+        this.highlight_group = this.add.group();
     }
 
     /**
@@ -159,6 +161,8 @@ export class GrandmaScene extends Phaser.Scene {
 
         //Show the radio dialogue
         this.dialogue.display("news");
+        console.log('set alpha to 0')
+        this.highlight_group.setAlpha(0);
 
         //Save the new game state
         player.setData({ cardIdx: GrandmaCards.LIVING_ROOM, month: this.month });
