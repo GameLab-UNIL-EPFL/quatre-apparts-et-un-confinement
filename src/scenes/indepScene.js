@@ -186,7 +186,14 @@ export class IndepScene extends Phaser.Scene {
         //Toggle the guy idle sprite
         this.current_card.children[4].sprite.setActive(!this.onPhone).setVisible(!this.onPhone);
         this.current_card.children[7].sprite.setActive(!this.onPhone).setVisible(!this.onPhone);
+
+        //WIP - we actually want to toggle ALL highlights when no phone.
         this.current_card.children[7].highlight_sprite.setActive(!this.onPhone).setVisible(!this.onPhone);
+        if(this.onPhone) {
+            this.highlight_group.setAlpha(0);
+        }else{
+            this.highlight_group.setAlpha(1);
+        }
     }
 
     /**
@@ -199,6 +206,8 @@ export class IndepScene extends Phaser.Scene {
 
         this.idle_card.preload();
         this.tv_card.preload();
+
+        this.highlight_group = this.add.group();
     }
 
     /**
@@ -206,7 +215,6 @@ export class IndepScene extends Phaser.Scene {
      * in the scene.
      */
     create() {
-
         this.cameras.main.centerOn(0, 0);
         this.cameras.main.fadeIn(1000);
 
@@ -217,6 +225,8 @@ export class IndepScene extends Phaser.Scene {
             this.changeIndep();
             this.dialogue.display("hint");
         }
+
+        this.highlight_group.setAlpha(0);
 
         //Update the saved data
         player.cur_scene = Scenes.INDEP;
@@ -277,6 +287,8 @@ export class IndepScene extends Phaser.Scene {
      * @brief Notifies the current card that the dialogue has ended
      */
     notifyDialogueEnd() {
+        this.highlight_group.setAlpha(1);
+
         //Notify the current card if it is interested
         if(this.onPhone) {
             //Only show the arrow if we spoke to Nathan
@@ -378,6 +390,8 @@ export class IndepScene extends Phaser.Scene {
     destroy() {
         this.current_card.destroy();
 
+        // doesn't exist?
+        console.log('Does this sprite exist?', this.dvd_h);
         this.dvd_h.destroy();
     }
 }
