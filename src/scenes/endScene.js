@@ -1,6 +1,7 @@
 import Phaser from "phaser";
 import { Scenes } from "../core/player.js";
 import { WindowState, Months } from "./buildingScene.js";
+import { Arrow } from "./objects/arrow.js"
 
 export const EndCards = {
     FIRST_SCREEN: 0,
@@ -11,6 +12,7 @@ export const EndCards = {
 export class EndScene extends Phaser.Scene {
     constructor() {
         super({ key: Scenes.END_SCENE });
+        this.nextSceneArrow = new Arrow(this, {x: 300, y: 0});
         this.title = 'Merci d’avoir joué!';
     }
 
@@ -35,6 +37,7 @@ export class EndScene extends Phaser.Scene {
         this.cameras.main.centerOn(0, 0);
         this.cameras.main.fadeIn(1000);
         this.cameras.main.setBackgroundColor("#f4e1c5");
+        this.nextSceneArrow.show(null);
 
         this.thank_you = this.add.text(
             0,
