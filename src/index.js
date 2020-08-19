@@ -48,10 +48,10 @@ const plugins = [{
 // }
 
 /*
-  What we want:
-  * target ratio of ~0.75 (iPad Pro 3rd gen)
-  * scene height controls width
-  * BUT: scene width shouldn't be cropped beyond a 0.45 ratio
+What we want:
+* target ratio of ~0.75 (iPad Pro 3rd gen)
+* scene height controls width
+* BUT: scene width shouldn't be cropped beyond a 0.45 ratio
 */
 
 function getScale(innerWidth, innerHeight) {
@@ -138,9 +138,9 @@ window.horizontalRatio = scale.width / maxPictureWidth;
 function resizeGame() {
     console.log('Resize (wip)');
     /*let newScale = getScale(window.innerWidth, window.innerHeight);
-    game.scale.resize(newScale.width, newScale.height);
-    window.horizontalOffset = (maxPictureWidth - newScale.width) / 2;
-    window.horizontalRatio = newScale.width / maxPictureWidth;*/
+  game.scale.resize(newScale.width, newScale.height);
+  window.horizontalOffset = (maxPictureWidth - newScale.width) / 2;
+  window.horizontalRatio = newScale.width / maxPictureWidth;*/
 }
 
 // This resize implies we also resize scene sprites, or they’d stretch.
@@ -166,3 +166,10 @@ function handleSticky(agree) {
 // document.getElementById('sticky-container').classList.add('closed');
 document.getElementById('stickyYes').addEventListener("click", () => handleSticky(true) );
 document.getElementById('stickyNo').addEventListener("click", () => handleSticky(false) );
+
+window.addEventListener('beforeunload', (e) => {
+    // Mozzilla’s example https://developer.mozilla.org/en-US/docs/Web/API/Window/beforeunload_event
+    var confirmationMessage = "\o/";
+    e.returnValue = confirmationMessage;
+    return confirmationMessage;
+});
