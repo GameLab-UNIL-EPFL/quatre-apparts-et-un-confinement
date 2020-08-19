@@ -138,20 +138,23 @@ window.horizontalOffset = (maxPictureWidth - scale.width) / 2;
 window.horizontalRatio = scale.width / maxPictureWidth;
 
 function resizeGame() {
-    console.log('Resize (wip)');
-    /*let newScale = getScale(window.innerWidth, window.innerHeight);
-  game.scale.resize(newScale.width, newScale.height);
-  window.horizontalOffset = (maxPictureWidth - newScale.width) / 2;
-  window.horizontalRatio = newScale.width / maxPictureWidth;*/
+    let newScale = getScale(window.innerWidth, window.innerHeight);
+    let newRatio =  newScale.width / maxPictureWidth;
+    if(Math.abs(window.horizontalRatio - newRatio > 0.2)) {
+        console.warn('Game should be resized.');
+    }
+    /*
+    TODO - This requires an implementation in scenes.
+    game.scale.resize(newScale.width, newScale.height);
+    window.horizontalOffset = (maxPictureWidth - newScale.width) / 2;
+    window.horizontalRatio = newScale.width / maxPictureWidth;
+    */
 }
 
-// This resize implies we also resize scene sprites, or they’d stretch.
-// As we lack of time, the fastest workaround could be to instantiate the game again, or even worse...
 window.addEventListener(
     'resize',
     (_) => {
         clearTimeout(resizeTimeout);
-        // todo: new function – change game width and compute a better ratio
         resizeTimeout = setTimeout(() => resizeGame(), 200);
     },
     false
@@ -162,9 +165,9 @@ function handleSticky(agree) {
         player.enableStats();
     }
     document.getElementById('sticky-container').classList.add('closed');
-    setTimeout(() => document.getElementById('sticky-container').remove(), 600);
+    setTimeout(() => document.getElementById('sticky-container').remove(), 200);
 }
-// if sticky already clicked:
+// TODO if sticky already clicked:
 // document.getElementById('sticky-container').classList.add('closed');
 document.getElementById('stickyYes').addEventListener("click", () => handleSticky(true) );
 document.getElementById('stickyNo').addEventListener("click", () => handleSticky(false) );
