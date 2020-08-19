@@ -322,6 +322,16 @@ export class MotherKitchenScene extends Phaser.Scene {
 
             console.log(targets);
 
+            if (name === 'carafe') {
+                this.bottleSound.play();
+            } else if (name === 'bread') {
+                this.breadSound.play();
+            } else if (name === 'girl' || name === 'boy') {
+                this.plateSound.play();
+            } else if (name === 'toy') {
+                this.toySound.play();
+            }
+
             this.tweens.add({
                 targets: targets,
                 x: new_sprite.pos.x,

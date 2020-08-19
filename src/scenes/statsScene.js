@@ -345,6 +345,8 @@ export class StatsScene extends Phaser.Scene {
         this.cameras.main.centerOn(0, 0);
         this.cameras.main.flash(1000);
 
+        this.sound.stopByKey('endTheme');
+
         //save the fact that the game was completed
         player.completed = true;
 
