@@ -103,8 +103,8 @@ export class EndScene extends Phaser.Scene {
         divThanks.innerHTML = `
         <p>Merci à la <a target="_blank" href="https://www.rts.ch/">RTS</a> ainsi qu’à <a target="_blank" href="https://www.srf.ch/play/tv/sendung/zwei-am-morge-tv?id=79fe1336-b513-4342-b389-001bf89b8ea2">SRF Zwei am Morge</a> pour l’utilisation d’extraits de leurs émissions.</p>
         <h4>Un grand merci à nos soutiens et testeurs</h4>
-        <p>Mounir Krichane (IMI), Gaël Hürlimann (</i>Le Temps</i>)</p>
-        <p>Lesli__e, Vincent, Sashiro, Sarah, Philippe, Dr. Game, et toutes les autres personnes qui nous ont aidé par leurs retours à construire cette expérience.</p>
+        <p>Lesli__e, Vincent, Sashiro, Sarah, Philippe, Dr. Game, Antoine Débois, et toutes les autres personnes qui nous ont aidé par leurs retours à construire cette expérience.</p>
+        <p>Remerciements particuliers à Mounir Krichane (IMI) et Gaël Hürlimann (</i>Le Temps</i>).</p>
         `;
         divThanks.classList.add('thanks');
         this.thirdCardDiv = this.add.dom(0, 0, divThanks); // previously: y = -2600
