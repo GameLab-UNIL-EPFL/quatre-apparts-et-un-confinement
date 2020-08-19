@@ -1,7 +1,7 @@
 import Phaser from "phaser";
 import { Scenes } from "../core/player.js";
 import { WindowState, Months } from "./buildingScene.js";
-import { Arrow } from "./objects/arrow.js"
+import { Arrow } from "./objects/arrow.js";
 
 export const EndCards = {
     FIRST_SCREEN: 0,
@@ -12,7 +12,7 @@ export const EndCards = {
 export class EndScene extends Phaser.Scene {
     constructor() {
         super({ key: Scenes.END_SCENE });
-        this.nextSceneArrow = new Arrow(this, {x: 300, y: 0});
+        this.nextCardArrow = new Arrow(this);
         this.title = 'Merci d’avoir joué!';
     }
 
@@ -23,6 +23,8 @@ export class EndScene extends Phaser.Scene {
     }
 
     preload() {
+        this.nextCardArrow.preload();
+
         //Load the cat animation spritesheet
         this.load.spritesheet(
             'cat',
@@ -37,7 +39,9 @@ export class EndScene extends Phaser.Scene {
         this.cameras.main.centerOn(0, 0);
         this.cameras.main.fadeIn(1000);
         this.cameras.main.setBackgroundColor("#f4e1c5");
-        this.nextSceneArrow.show(null);
+
+        this.nextCardArrow.createAtPosition(this.cameras.main.width * 0.39, 0);
+        this.nextCardArrow.show();
 
         this.thank_you = this.add.text(
             0,
@@ -63,28 +67,18 @@ export class EndScene extends Phaser.Scene {
         ).play('cat-tail');
 
         // Team
-
         let divTeam = document.createElement('div');
-
         divTeam.innerHTML =  `
         <h4>Programmation</h4>Andrew Dobis, Paul Ronga
         <h4>Graphisme</h4>Mathias Hängärtner
         <h4>Récit, Conception sonore</h4>Saara Jones
         <h4>Gestion de projet</h4>Yannick Rochat, Paul Ronga
         `;
-
         divTeam.classList.add('team');
-
         this.divTeam = this.add.dom(0, 200, divTeam);
         this.divTeam.setOrigin(0.5, 0.5);
 
-        this.firstScreenContainer = this.add.container();
-        this.firstScreenContainer.add(this.cat_anim);
-        this.firstScreenContainer.add(this.divTeam);
-        this.firstScreenContainer.add(this.thank_you);
-
         // Comments are welcome, repo, and partners
-
         let divRepo = document.createElement('div');
 
         divRepo.innerHTML = `
@@ -100,24 +94,21 @@ export class EndScene extends Phaser.Scene {
         `;
 
         divRepo.classList.add('repo');
-        
-        this.divRepo = this.add.dom(0, -2600, divRepo);
-        this.divRepo.setOrigin(0.5, 0.5);
+        this.secondCardDiv = this.add.dom(0, 0, divRepo);
+        this.secondCardDiv.setAlpha(0);
+        this.secondCardDiv.setOrigin(0.5, 0.5);
 
         // Thanks
-
         let divThanks = document.createElement('div');
-
         divThanks.innerHTML = `
         <p>Merci à la RTS ainsi qu'à SRF Zwei am Morge pour l'utilisation d'extraits de leurs émissions.</p>
         <h4>Un grand merci à nos testeurs et testeuses</h4>
         <p>Lesli__e, Vincent, Sashiro, Sarah, Philippe, Dr. Game, et toutes les autres personnes qui nous ont aidé par leurs retours à construire cette expérience.</p>
         `;
-
-        divThanks.classList.add('thanks')
-
-        this.divThanks = this.add.dom(0, -2600, divThanks);
-        this.divThanks.setOrigin(0.5, 0.5);
+        divThanks.classList.add('thanks');
+        this.thirdCardDiv = this.add.dom(0, 0, divThanks); // previously: y = -2600
+        this.thirdCardDiv.setAlpha(0);
+        this.thirdCardDiv.setOrigin(0.5, 0.5);
 
         divTeam.addEventListener('click', () => this.nextCard(), this);
         divRepo.addEventListener('click', () => this.nextCard(), this);
@@ -129,37 +120,45 @@ export class EndScene extends Phaser.Scene {
             });
         });
 
-        this.input.on('pointerdown', () => this.nextCard(), this);
-        this.divThanks.on('pointerdown', () => this.nextCard(), this);
+        this.firstScreenContainer = this.add.container();
+        this.firstScreenContainer.add(this.cat_anim);
+        this.firstScreenContainer.add(this.divTeam);
+        this.firstScreenContainer.add(this.thank_you);
+
+
+        this.nextCardArrow.sprite.on('pointerdown', () => this.nextCard(), this);
+/*        this.input.on('pointerdown', () => this.nextCard(), this);
+        this.secondCardDiv.on('pointerdown', () => this.nextCard(), this);
+        this.thirdCardDiv.on('pointerdown', () => this.nextCard(), this);*/
+
+
     }
 
     nextCard() {
-        console.log('nextCard()');
+        let target_a, target_b;
         if(this.cardIdx === EndCards.FIRST_SCREEN) {
-            this.tweens.add({
-                targets: [this.firstScreenContainer],
-                x: -1200,
-                duration: 500,
-                ease: 'Quadratic',
-                yoyo: false,
-                loop: 0
+            target_a = this.firstScreenContainer;
+            target_b = this.secondCardDiv;
+        } else {
+            target_a = this.secondCardDiv;
+            target_b = this.thirdCardDiv;
+        }
+        if(this.cardIdx < 2) {
+            let timeline = this.tweens.createTimeline();
+            let fadeDuration = 500;
+            timeline.add({
+                targets: target_a,
+                alpha: 0,
+                duration: fadeDuration
             });
-            this.tweens.add({
-                targets: [this.firstScreenContainer, this.divRepo],
-                y: 0,
-                duration: 500,
-                ease: 'Quadratic',
-                yoyo: false,
-                loop: 0
-            });
-            this.tweens.add({
-                targets: [this.firstScreenContainer, this.divThanks],
-                y: 0,
-                duration: 500,
-                ease: 'Quadratic',
-                yoyo: false,
-                loop: 0
-            });
+            timeline.add({
+                  targets: target_b,
+                  alpha: 1,
+                  duration: fadeDuration
+              });
+
+            timeline.play();
+
             this.cardIdx++;
         } else {
             this.nextScene();
@@ -195,9 +194,9 @@ export class EndScene extends Phaser.Scene {
     }
 
     destroy() {
-        this.divRepo.destroy();
-        this.divTeam.destroy();
-        this.divThanks.destroy();
+        this.firstScreenContainer.destroy();
+        this.secondCardDiv.destroy();
+        this.thirdCardDiv.destroy();
     }
 
 }
