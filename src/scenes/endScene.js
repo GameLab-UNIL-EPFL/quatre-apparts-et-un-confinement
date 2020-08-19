@@ -132,7 +132,6 @@ export class EndScene extends Phaser.Scene {
                 this.nextCard();
                 this.nextCardArrow.animate();
             }, this);
-
     }
 
     nextCard() {
