@@ -576,15 +576,15 @@ export class ZoomMiniGameCard extends Card {
             -700,
             'exit_minigame'
         ).play('exit_minigame-anim')
-        .setInteractive().on(
-            'pointerdown',
-            () => {
-                this.exit.destroy();
-                this.endMiniGame(this, true);
-                this.music.stop(); // if fadeout doesnt complete
-            },
-            this
-        );
+            .setInteractive().on(
+                'pointerdown',
+                () => {
+                    this.exit.destroy();
+                    this.endMiniGame(this, true);
+                    this.music.stop(); // if fadeout doesnt complete
+                },
+                this
+            );
         this.exit.setDepth(20);
 
         //starts the song at the beginning of the scene
