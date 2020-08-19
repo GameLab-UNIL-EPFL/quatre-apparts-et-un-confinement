@@ -216,7 +216,7 @@ export class LivingRoomCard extends Card {
             -121,
             'books_h'
         ).play('books_h_anim');
-
+        this.parent_scene.highlight_group.add(this.books_h);
 
         //Update the phone's onclickcallback
         this.children[7].updateOnClickCallback(
@@ -279,6 +279,7 @@ export class LivingRoomCard extends Card {
     notifyDialogueEnd() {
         switch(this.grandma_state) {
         case GRANDMA_STATES.IDLE:
+            this.parent_scene.highlight_group.setAlpha(1);
             break;
 
         case GRANDMA_STATES.BOOK_1:
@@ -297,8 +298,8 @@ export class LivingRoomCard extends Card {
             break;
 
         case GRANDMA_STATES.PHONE:
-
             console.log("PHONE_DIALOGUE_END");
+            this.parent_scene.highlight_group.setAlpha(1);
 
             //show the phone
             this.children[7].sprite.setActive(true).setVisible(true);
@@ -337,8 +338,7 @@ export class LivingRoomCard extends Card {
         if(status === true) {
             player.suzanne_hair = +status;
             player.saveGame();
-            console.log('Hairdresser status:', status);
-            
+
             //Send new information to the DB
             player.sendChoices({ player_id: player.id, grandma_hairdresser: +status });
         }
@@ -352,6 +352,7 @@ export class LivingRoomCard extends Card {
 
             switch(state) {
             case GRANDMA_STATES.IDLE:
+                this.parent_scene.highlight_group.setAlpha(1);
                 this.grandma_sprite = this.parent_scene.add.image(
                     GRANDMA_POS.x,
                     GRANDMA_POS.y,
@@ -369,6 +370,7 @@ export class LivingRoomCard extends Card {
                 this.pageSound.play();
 
                 //Trigger the book's dialogue
+                this.parent_scene.highlight_group.setAlpha(0);
                 this.parent_scene.dialogue.display("livre1");
                 break;
 
@@ -382,6 +384,7 @@ export class LivingRoomCard extends Card {
                 this.pageSound.play();
 
                 //Trigger the book's dialogue
+                this.parent_scene.highlight_group.setAlpha(0);
                 this.parent_scene.dialogue.display("livre2");
                 break;
 
@@ -395,6 +398,7 @@ export class LivingRoomCard extends Card {
                 this.pageSound.play();
 
                 //Trigger the book's dialogue
+                this.parent_scene.highlight_group.setAlpha(0);
                 this.parent_scene.dialogue.display("livre3");
                 break;
 
@@ -406,6 +410,7 @@ export class LivingRoomCard extends Card {
                 );
 
                 //Trigger the phone's dialogue
+                this.parent_scene.highlight_group.setAlpha(0);
                 this.parent_scene.dialogue.display("telephone");
                 break;
 

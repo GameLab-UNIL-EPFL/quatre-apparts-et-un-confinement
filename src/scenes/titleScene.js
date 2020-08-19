@@ -7,7 +7,8 @@ export class TitleScene extends Phaser.Scene {
     }
 
     preload() {
-        this.load.spritesheet('title', 'sprites/TitleScene/01-Accueil-Intro-Spritesheet_700x500.jpg', {frameWidth: 700, frameHeight: 500});
+        // this.load.spritesheet('title', 'sprites/TitleScene/01-Accueil-Intro-Spritesheet_700x500.jpg', {frameWidth: 700, frameHeight: 500});
+        this.load.image('title', 'sprites/TitleScene/UI-Intro-texte.jpg');
         this.load.spritesheet('start', 'sprites/TitleScene/01-Accueil-Demarrer-Spritesheet_260x85.png', {frameWidth: 260, frameHeight: 85});
     }
 
@@ -15,8 +16,12 @@ export class TitleScene extends Phaser.Scene {
         this.cameras.main.centerOn(0, 0);
         this.cameras.main.setBackgroundColor('#f4e1c5');
 
-        // let title = this.add.sprite(0, -200, 'title');
-
+        let title = this.add.sprite(0, -200, 'title');
+        console.log(window.horizontalRatio);
+        if(window.horizontalRatio < 1) {
+            title.setScale(window.horizontalRatio + 0.1);
+        }
+        /*
         this.anims.create({
             key: 'title-anim',
             frameRate: 7,
@@ -29,6 +34,7 @@ export class TitleScene extends Phaser.Scene {
             -300,
             'title'
         ).play('title-anim');
+        */
 
         this.anims.create({
             key: 'start-anim',

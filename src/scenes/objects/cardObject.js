@@ -66,7 +66,6 @@ export class CardObject {
 
         //Create the highlight and animation if needed
         if(this.highlight) {
-
             this.parent_scene.anims.create({
                 key: this.highlight.name + "_anim",
                 frameRate: 7,
@@ -81,13 +80,17 @@ export class CardObject {
             ).play(this.highlight.name + "_anim");
 
             this.highlight_sprite.setDepth(4);
+
+            if(this.parent_scene.highlight_group) {
+                this.parent_scene.highlight_group.add(this.highlight_sprite);
+            }
         }
 
         //Add a choice if needed
         if(this.choice !== -1 || this.onClickCallback !== null) {
 
             const interaction = () => {
-                
+
                 //Only trigger interaction if the dialogue is done (when dialogue exists)
                 if(this.parent_scene.dialogue ? this.parent_scene.dialogue.isDone() : true) {
                     //Check if the callback exists

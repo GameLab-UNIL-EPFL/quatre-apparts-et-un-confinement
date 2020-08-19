@@ -166,7 +166,7 @@
         "text": ["Moi aussi, les discussions commençaient à tourner en rond avec mes petites plantes."],
         "choices":[
 			{
-				"text": ["Hahaha, Caramel avait l'air inquiet quand je suis sortie la première fois"],
+				"text": ["Hahaha, Caramel avait l'air inquiet quand je suis sortie la première fois."],
 				"preview": "Oui",
 				"goto": "oui"
 			}
@@ -315,9 +315,7 @@
 		"choices": [
 			{
 				"text": [
-					"Allo Marc?", 
-					"Comment s’est passé votre mariage finalement?", 
-					"Toutes mes Felicitations!"
+					"Allo Marc? Comment s’est passé votre mariage finalement? Felicitations!"
 				],
 				"preview": "Allo?",
 				"goto": "desole"

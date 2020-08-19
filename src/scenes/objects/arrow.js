@@ -32,12 +32,12 @@ export class Arrow {
     animate() {
         // TODO activate when arrows are unified
         this.parent_scene.tweens.add({
-          targets: this.sprite,
-          alpha: { from: 1, to: 0.2 },
-          ease: 'Bounce',
-          duration: 300,
-          repeat: 0,
-          yoyo: true
+            targets: this.sprite,
+            alpha: { from: 1, to: 0.2 },
+            ease: 'Bounce',
+            duration: 300,
+            repeat: 0,
+            yoyo: true
         });
     }
     create() {

@@ -82,6 +82,7 @@ export class IndepSadHomeScene extends Phaser.Scene {
      */
     preload() {
         this.current_card.preload();
+        this.load.audio('endTheme', 'sounds/building/endTheme.mp3');
     }
 
     /**
@@ -97,6 +98,8 @@ export class IndepSadHomeScene extends Phaser.Scene {
             this.current_card.create();
 
             this.dialogue.display("telephone");
+
+            this.endTheme = this.sound.add('endTheme').play({loop: true});
         }
 
         //Update the saved data

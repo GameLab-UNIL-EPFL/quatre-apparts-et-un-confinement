@@ -128,11 +128,10 @@ export class EndScene extends Phaser.Scene {
 
 
         this.nextCardArrow.sprite.on('pointerdown',
-          () => {
-            this.nextCard();
-            this.nextCardArrow.animate();
-          }, this);
-
+            () => {
+                this.nextCard();
+                this.nextCardArrow.animate();
+            }, this);
     }
 
     nextCard() {
@@ -153,10 +152,10 @@ export class EndScene extends Phaser.Scene {
                 duration: fadeDuration
             });
             timeline.add({
-                  targets: target_b,
-                  alpha: 1,
-                  duration: fadeDuration
-              });
+                targets: target_b,
+                alpha: 1,
+                duration: fadeDuration
+            });
 
             timeline.play();
 

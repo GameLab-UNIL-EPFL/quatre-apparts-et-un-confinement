@@ -417,9 +417,9 @@ export class BuildingScene extends Phaser.Scene {
 
         setTimeout(() => {
             if (this.cameras.main) {
-                this.cameras.main.pan(0, 0, 3500, 'Cubic');
+                this.cameras.main.pan(0, 0, 2000, 'Cubic');
             }
-        }, 2000, this);
+        }, 1500, this);
     }
 
     /**
@@ -750,11 +750,12 @@ export class BuildingScene extends Phaser.Scene {
 
         //Add menu buttons if needed
         if(this.info.mainMenu) {
-            // Title and pan effect
+            // Main Title
             this.title_logo = this.add.image(0, -2000, 'title-logo');
             this.cameras.main.centerOn(0, -2000);
             this.cameras.main.setBackgroundColor('#f5e5cc');
 
+            // Title pan effect
             setTimeout(() => {
                 if (this.cameras.main) {
                     this.cameras.main.pan(0, 0, 3500, 'Cubic');

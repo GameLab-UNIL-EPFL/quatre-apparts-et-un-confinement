@@ -278,6 +278,8 @@ export class DialogueController {
      * @param {boolean} up_down true if the dialogue will be placed on the top, false if on the bottom
      */
     display(id, dontEnd=false, toMessage=false, up_down=true) {
+        console.log('display!');
+
         this.dialogue_pos = up_down ? UP_POS : DOWN_POS;
 
         this.current_conv_id = id;
@@ -397,10 +399,6 @@ export class DialogueController {
             }
         };
 
-        //Make the text interactive
-        this.content.setInteractive().on('pointerdown', interaction, this);
-        this.background.setInteractive().on('pointerdown', interaction, this);
-
         //Prompt user if necessary
         if(this.requestDialogue(id).goto.length !== 0 && this.textIdx === this.text.length - 1) {
             if(Object.keys(this.requestDialogue(id).choices).length !== 0) {
@@ -409,7 +407,19 @@ export class DialogueController {
                 this.display(this.requestDialogue(id).goto[0], false);
                 return;
             }
+            this.background.setInteractive();
+        } else {
+            console.log('No prompt: let’s take the full screen');
+            this.background.setInteractive(
+                new Phaser.Geom.Rectangle(0, -50, 1200, 1650), Phaser.Geom.Rectangle.Contains
+            );
+            // For debug
+            // this.parent_scene.input.enableDebug(this.background);
         }
+
+        //Make the text interactive
+        this.content.setInteractive().on('pointerdown', interaction, this);
+        this.background.on('pointerdown', interaction, this);
     }
 
     /**
