@@ -94,6 +94,7 @@ const config = {
         scene: plugins
     },
     scene: [
+        EndScene,
         TitleScene,
         BuildingScene,
         SelectScene,
@@ -117,7 +118,7 @@ const config = {
         MotherScene,
         MotherKitchenScene,
         MotherCouchScene,
-        EndScene,
+        // EndScene,
         StatsScene
     ],
     physics: {

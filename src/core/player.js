@@ -1,6 +1,6 @@
 import { game } from "..";
 
-const endpoint = location.hostname === "localhost"
+const endpoint = location.hostname === "localhost";
 
 export const Scenes = {
     INTRO: 'TitleScene',
@@ -266,9 +266,9 @@ export class Player {
                 }).catch( (e) => console.warn(e) );
 
                 if(rawResponse) {
-                  const content = await rawResponse.json();
-                  // Tells if database was successfully updated
-                  console.log(content);
+                    const content = await rawResponse.json();
+                    // Tells if database was successfully updated
+                    console.log(content);
                 }
             })();
         } else {
