@@ -92,6 +92,10 @@ export class GrandmaScene extends Phaser.Scene {
 
         this.month = data.month;
         console.log('Current month:', this.month);
+        if(typeof(this.month) === 'undefined') {
+            console.warn('Month is undefined: defaulting to march!');
+            this.month = Months.MARCH;
+        }
 
         if(data.month === Months.MARCH) {
             //Create the scene's dialogue controller

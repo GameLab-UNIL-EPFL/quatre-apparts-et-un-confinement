@@ -158,12 +158,16 @@ export class LivingRoomCard extends Card {
     create() {
         super.create();
 
+        this.highlight_group = this.parent_scene.add.group();
+
         this.children.forEach(child => {
             child.sprite.setActive(true).setVisible(true);
 
             //Make sure that all of the highlights are shown
+            //NB: books_h is missing here
             if(child.highlight_sprite) {
                 child.highlight_sprite.setActive(true).setVisible(true);
+                this.highlight_group.add(child.highlight_sprite);
             }
         });
 
@@ -216,7 +220,8 @@ export class LivingRoomCard extends Card {
             -121,
             'books_h'
         ).play('books_h_anim');
-
+        this.highlight_group.add(this.books_h);
+        this.highlight_group.setAlpha(0);
 
         //Update the phone's onclickcallback
         this.children[7].updateOnClickCallback(
@@ -279,6 +284,7 @@ export class LivingRoomCard extends Card {
     notifyDialogueEnd() {
         switch(this.grandma_state) {
         case GRANDMA_STATES.IDLE:
+            this.highlight_group.setAlpha(1);
             break;
 
         case GRANDMA_STATES.BOOK_1:
@@ -297,8 +303,8 @@ export class LivingRoomCard extends Card {
             break;
 
         case GRANDMA_STATES.PHONE:
-
             console.log("PHONE_DIALOGUE_END");
+            this.highlight_group.setAlpha(1);
 
             //show the phone
             this.children[7].sprite.setActive(true).setVisible(true);
@@ -338,7 +344,7 @@ export class LivingRoomCard extends Card {
             player.suzanne_hair = +status;
             player.saveGame();
             console.log('Hairdresser status:', status);
-            
+
             //Send new information to the DB
             player.sendChoices({ player_id: player.id, grandma_hairdresser: +status });
         }
@@ -406,6 +412,7 @@ export class LivingRoomCard extends Card {
                 );
 
                 //Trigger the phone's dialogue
+                this.highlight_group.setAlpha(0);
                 this.parent_scene.dialogue.display("telephone");
                 break;
 
