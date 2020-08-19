@@ -110,7 +110,7 @@ export class TVCard extends Card {
             frames: this.parent_scene.anims.generateFrameNames('graph_up'),
             repeat: -1
         });
-        
+
         this.parent_scene.anims.create({
             key: 'graph_flat-anim',
             frameRate: 7,
@@ -146,7 +146,7 @@ export class TVCard extends Card {
             -4,
             -1,
             'conseil'
-        ).play('conseil-anim'); 
+        ).play('conseil-anim');
 
         this.showArrow();
     }
@@ -209,5 +209,3 @@ export class TVCard extends Card {
         this.arrow.destroy();
     }
 }
-
-
