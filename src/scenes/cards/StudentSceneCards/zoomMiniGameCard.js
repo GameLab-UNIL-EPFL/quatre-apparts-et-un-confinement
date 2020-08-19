@@ -349,10 +349,26 @@ export class ZoomMiniGameCard extends Card {
             const end_y = this.scene_key === Scenes.INDEP_COMPUTER ? 590 : 800;
 
             //Animate the msg
-            this.parent_scene.tweens.add({
+            let timeline = this.parent_scene.tweens.createTimeline();
+
+            //1) Move to clickable area
+            timeline.add({
+                targets: sprite,
+                y: end_y - 220,
+                duration: duration * 0.89
+            });
+
+            timeline.add({
+                targets: sprite,
+                scale: 1.1,
+                duration: duration * 0.01,
+                yoyo: true
+            });
+
+            timeline.add({
                 targets: sprite,
                 y: end_y,
-                duration: duration,
+                duration: duration * 0.1,
                 hideOnComplete: true,
                 onComplete: () => {
                     if(!elem.isDestroyed) {
@@ -385,6 +401,8 @@ export class ZoomMiniGameCard extends Card {
                 },
                 onCompleteScope: this
             });
+
+            timeline.play();
 
             //Activate interactivity
             sprite.setInteractive().on(
