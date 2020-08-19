@@ -151,8 +151,8 @@ export class BusScene extends Phaser.Scene {
         } else {
             this.load.spritesheet(
                 'bus_city_june',
-                'sprites/BusScene/Bus02/Bus02-00-spirtesheet-BKG-1200x595.jpg',
-                { frameWidth: 1200, frameHeight: 595 }
+                'sprites/BusScene/Bus02/Bus02-00-spritesheet-BKG-600x298.jpg',
+                { frameWidth: 600, frameHeight: 298 }
             );
         }
 
