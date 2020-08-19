@@ -69,7 +69,7 @@ export class EndScene extends Phaser.Scene {
         // Team
         let divTeam = document.createElement('div');
         divTeam.innerHTML =  `
-        <h4>Programmation</h4>Andrew Dobis, Paul Ronga
+        <h4>Programmation</h4>Andrew Dobis
         <h4>Graphisme</h4>Mathias Hängärtner
         <h4>Récit, Conception sonore</h4>Saara Jones
         <h4>Gestion de projet</h4>Yannick Rochat, Paul Ronga
@@ -126,11 +126,11 @@ export class EndScene extends Phaser.Scene {
         this.firstScreenContainer.add(this.thank_you);
 
 
-        this.nextCardArrow.sprite.on('pointerdown', () => this.nextCard(), this);
-/*        this.input.on('pointerdown', () => this.nextCard(), this);
-        this.secondCardDiv.on('pointerdown', () => this.nextCard(), this);
-        this.thirdCardDiv.on('pointerdown', () => this.nextCard(), this);*/
-
+        this.nextCardArrow.sprite.on('pointerdown',
+          () => {
+            this.nextCard();
+            this.nextCardArrow.animate();
+          }, this);
 
     }
 

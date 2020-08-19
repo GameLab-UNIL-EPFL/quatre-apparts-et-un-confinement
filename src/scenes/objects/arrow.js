@@ -29,6 +29,17 @@ export class Arrow {
     /**
    * @brief Creates and places the arrow image in the scene
    */
+    animate() {
+        // TODO activate when arrows are unified
+        this.parent_scene.tweens.add({
+          targets: this.sprite,
+          alpha: { from: 1, to: 0.2 },
+          ease: 'Bounce',
+          duration: 300,
+          repeat: 0,
+          yoyo: true
+        });
+    }
     create() {
         this.parent_scene.anims.create({
             key: 'arrow-anim',
@@ -58,5 +69,9 @@ export class Arrow {
         this.sprite.visible = true;
         this.sprite.setInteractive();
         this.sprite.depth = 30;
+    }
+
+    destroy() {
+        this.sprite.destroy();
     }
 }
