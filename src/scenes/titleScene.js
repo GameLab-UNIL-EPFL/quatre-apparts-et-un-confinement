@@ -17,7 +17,10 @@ export class TitleScene extends Phaser.Scene {
         this.cameras.main.setBackgroundColor('#f4e1c5');
 
         let title = this.add.sprite(0, -200, 'title');
-
+        console.log(window.horizontalRatio);
+        if(window.horizontalRatio < 1) {
+            title.setScale(window.horizontalRatio + 0.1);
+        }
         /*
         this.anims.create({
             key: 'title-anim',
@@ -32,7 +35,7 @@ export class TitleScene extends Phaser.Scene {
             'title'
         ).play('title-anim');
         */
-        
+
         this.anims.create({
             key: 'start-anim',
             frameRate: 7,
