@@ -205,6 +205,11 @@ export class MotherKitchenScene extends Phaser.Scene {
         //Preload all of the cards
         this.current_card.preload();
 
+        this.load.audio('bottle', 'sounds/kitchen/bottle.wav');
+        this.load.audio('bread', 'sounds/kitchen/bread.wav');
+        this.load.audio('plates', 'sounds/kitchen/plates.wav');
+        this.load.audio('toy', 'sounds/room/toys.wav');
+
         //Load in all clean sprites
         for(const clean_sprite_name in this.clean_sprites) {
             const clean_sprite = this.clean_sprites[clean_sprite_name];
@@ -230,6 +235,11 @@ export class MotherKitchenScene extends Phaser.Scene {
 
         this.cameras.main.centerOn(0, 0);
         this.cameras.main.fadeIn(1000);
+
+        this.bottleSound = this.sound.add('bottle');
+        this.breadSound = this.sound.add('bread');
+        this.plateSound = this.sound.add('plates');
+        this.toySound = this.sound.add('toy');
 
         if(this.current_card.isLoaded()) {
             this.current_card.create();
@@ -311,6 +321,16 @@ export class MotherKitchenScene extends Phaser.Scene {
             });
 
             console.log(targets);
+
+            if (name === 'carafe') {
+                this.bottleSound.play();
+            } else if (name === 'bread') {
+                this.breadSound.play();
+            } else if (name === 'girl' || name === 'boy') {
+                this.plateSound.play();
+            } else if (name === 'toy') {
+                this.toySound.play();
+            }
 
             this.tweens.add({
                 targets: targets,
