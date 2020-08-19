@@ -161,7 +161,7 @@ export class GrandmaScene extends Phaser.Scene {
 
         //Show the radio dialogue
         this.dialogue.display("news");
-        console.log('set alpha to 0')
+        console.log('set alpha to 0');
         this.highlight_group.setAlpha(0);
 
         //Save the new game state
