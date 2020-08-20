@@ -13,6 +13,7 @@ export class Arrow {
         this.sprite = null;
         this.parent_scene = parent_scene;
         this.position = position;
+        this.active = true;
     }
 
     /**
@@ -29,15 +30,28 @@ export class Arrow {
     /**
    * @brief Creates and places the arrow image in the scene
    */
+    enableInteraction() {
+
+    }
+    disableInteraction() {
+        this.parent_scene
+        disableInteraction
+    }
+    isActive() {
+        return this.active;
+    }
     animate() {
-        // TODO activate when arrows are unified
+        this.active = false;
+
         this.parent_scene.tweens.add({
             targets: this.sprite,
             alpha: { from: 1, to: 0.2 },
             ease: 'Bounce',
             duration: 300,
             repeat: 0,
-            yoyo: true
+            yoyo: true,
+            onComplete: () => this.active = true,
+            onCompleteScope: this
         });
     }
     create() {

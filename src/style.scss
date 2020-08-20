@@ -84,6 +84,9 @@ div.repo {
 	background: #fff;
 	&.closed {
 		display: none;
+		div, button {
+			display: none;
+		}
 	}
 	div {
 		max-width: 60vh;

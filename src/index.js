@@ -164,6 +164,8 @@ function handleSticky(agree) {
     if(agree === true) {
         player.enableStats();
     }
+    // for iOS
+    document.activeElement.blur();
     document.getElementById('sticky-container').classList.add('closed');
     setTimeout(() => document.getElementById('sticky-container').remove(), 200);
 }
