@@ -34,8 +34,8 @@ export class Arrow {
 
     }
     disableInteraction() {
-        this.parent_scene
-        disableInteraction
+        this.parent_scene;
+        disableInteraction;
     }
     isActive() {
         return this.active;
