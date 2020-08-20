@@ -130,8 +130,11 @@ export class EndScene extends Phaser.Scene {
         this.nextCardArrow.sprite.on('pointerdown',
             () => {
                 if(this.nextCardArrow.isActive()){
+                    if(this.cardIdx < EndCards.THIRD_SCREEN) {
+                        this.nextCardArrow.disable();
+                    }
                     this.nextCard();
-                    this.nextCardArrow.animate();
+                    console.log(this.cardIdx);
                 }
             }, this);
     }

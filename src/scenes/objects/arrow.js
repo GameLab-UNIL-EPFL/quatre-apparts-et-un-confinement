@@ -40,7 +40,7 @@ export class Arrow {
     isActive() {
         return this.active;
     }
-    animate() {
+    disable() {
         this.active = false;
 
         this.parent_scene.tweens.add({
