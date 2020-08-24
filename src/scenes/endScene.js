@@ -40,7 +40,7 @@ export class EndScene extends Phaser.Scene {
         this.cameras.main.fadeIn(1000);
         this.cameras.main.setBackgroundColor("#f4e1c5");
 
-        this.nextCardArrow.createAtPosition(this.cameras.main.width * 0.39, 0);
+        this.nextCardArrow.createAtPosition(this.cameras.main.width * 0.4, 0);
         this.nextCardArrow.show();
 
         this.thank_you = this.add.text(
@@ -111,9 +111,9 @@ export class EndScene extends Phaser.Scene {
         this.thirdCardDiv.setAlpha(0);
         this.thirdCardDiv.setOrigin(0.5, 0.5);
 
-        divTeam.addEventListener('click', () => this.nextCard(), this);
-        divRepo.addEventListener('click', () => this.nextCard(), this);
-        divThanks.addEventListener('click', () => this.nextCard(), this);
+        // divTeam.addEventListener('click', () => this.nextCard(), this);
+        // divRepo.addEventListener('click', () => this.nextCard(), this);
+        // divThanks.addEventListener('click', () => this.nextCard(), this);
 
         document.querySelectorAll('a').forEach((a, idx) => {
             a.addEventListener('click', function (e) {
@@ -129,8 +129,13 @@ export class EndScene extends Phaser.Scene {
 
         this.nextCardArrow.sprite.on('pointerdown',
             () => {
-                this.nextCard();
-                this.nextCardArrow.animate();
+                if(this.nextCardArrow.isActive()) {
+                    if(this.cardIdx < EndCards.THIRD_SCREEN) {
+                        this.nextCardArrow.disable();
+                    }
+                    this.nextCard();
+                    console.log(this.cardIdx);
+                }
             }, this);
     }
 

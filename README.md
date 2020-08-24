@@ -1,4 +1,4 @@
-# “Quatre Apparts et un Confinement” (Four Flats and a Lockdown)
+# “Quatre Apparts et un Confinement” (Four Condos and a Containment)
 
 Free Open-Source Web-based mobile interactive story based around people's different experiences of being quarantined in Switzerland.
 
@@ -20,10 +20,8 @@ Free Open-Source Web-based mobile interactive story based around people's differ
 | Sound Excerpts | See below |
 
 The Swiss public broadcasting services RTS and SRF kindly provided us some radio excerpts. Following use their material and are NOT available under a creative commons license:
-* april_music.mp3
 * april_radio.mp3
 * april2_radio.mp3
-* june_music.mp3
 * june_radio.mp3
 * june2_radio.mp3
 * march_music.mp3

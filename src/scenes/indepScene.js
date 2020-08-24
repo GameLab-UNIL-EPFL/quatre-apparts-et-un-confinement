@@ -187,7 +187,7 @@ export class IndepScene extends Phaser.Scene {
         this.current_card.children[4].sprite.setActive(!this.onPhone).setVisible(!this.onPhone);
         this.current_card.children[7].sprite.setActive(!this.onPhone).setVisible(!this.onPhone);
 
-        //WIP - we actually want to toggle ALL highlights when no phone.
+        // Needs a test before we put in prod: following line should be deleted
         this.current_card.children[7].highlight_sprite.setActive(!this.onPhone).setVisible(!this.onPhone);
         if(this.onPhone) {
             this.highlight_group.setAlpha(0);
@@ -226,7 +226,9 @@ export class IndepScene extends Phaser.Scene {
             this.dialogue.display("hint");
         }
 
-        this.highlight_group.setAlpha(0);
+        // if(this.Months !== Months.APRIL) {
+        //     this.highlight_group.setAlpha(0);
+        // }
 
         //Update the saved data
         player.cur_scene = Scenes.INDEP;
@@ -287,6 +289,7 @@ export class IndepScene extends Phaser.Scene {
      * @brief Notifies the current card that the dialogue has ended
      */
     notifyDialogueEnd() {
+        // problem: not called after "hint" in April
         this.highlight_group.setAlpha(1);
 
         //Notify the current card if it is interested

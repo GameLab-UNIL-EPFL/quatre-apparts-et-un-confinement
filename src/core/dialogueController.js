@@ -278,8 +278,6 @@ export class DialogueController {
      * @param {boolean} up_down true if the dialogue will be placed on the top, false if on the bottom
      */
     display(id, dontEnd=false, toMessage=false, up_down=true) {
-        console.log('display!');
-
         this.dialogue_pos = up_down ? UP_POS : DOWN_POS;
 
         this.current_conv_id = id;
@@ -409,7 +407,6 @@ export class DialogueController {
             }
             this.background.setInteractive();
         } else {
-            console.log('No prompt: let’s take the full screen');
             this.background.setInteractive(
                 new Phaser.Geom.Rectangle(0, -50, 1200, 1650), Phaser.Geom.Rectangle.Contains
             );

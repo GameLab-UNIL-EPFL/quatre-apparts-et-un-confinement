@@ -76,7 +76,14 @@ export class IndepComputerScene extends Phaser.Scene {
                             scene.dialogue.display("telephoneMauvais");
                         }
                     },
-                    this
+                    this,
+                    -1,
+                    {
+                        name: 'indep_idle_phone_h',
+                        url: "sprites/UI/01_Interactions/04_Independant/02_Spritesheets/01-Independant-Telephone-Spritesheet_280x160.png",
+                        size: { frameWidth: 280, frameHeight: 160 },
+                        pos: new Phaser.Math.Vector2(336, 325)
+                    }
                 ),
                 new CardObject(
                     this,
@@ -194,6 +201,8 @@ export class IndepComputerScene extends Phaser.Scene {
         this.dialogue.preload();
 
         this.cards.forEach(card => card.preload());
+
+        this.highlight_group = this.add.group();
     }
 
     /**
@@ -253,6 +262,12 @@ export class IndepComputerScene extends Phaser.Scene {
         //Toggle the guy idle sprite
         this.current_card.children[4].sprite.setActive(!this.onPhone).setVisible(!this.onPhone);
         this.current_card.children[7].sprite.setActive(!this.onPhone).setVisible(!this.onPhone);
+
+        if(this.onPhone) {
+            this.highlight_group.setAlpha(0);
+        }else{
+            this.highlight_group.setAlpha(1);
+        }
     }
 
     /**
@@ -395,7 +410,7 @@ export class IndepComputerScene extends Phaser.Scene {
         this.cameras.main.fadeOut(3000, 0, 0, 0,
             () => this.scene.start(Scenes.DAMIEN_NO_FOOD),
             this
-        );        
+        );
     }
 
     /**

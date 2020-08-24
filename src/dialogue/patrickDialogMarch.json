@@ -161,12 +161,12 @@
 		],
 		"choices": [
 			{
-				"text": ["Attends un peu, ça passera tout seul, tout le monde est un peu nerveux en ce moment."],
+				"text": ["Je pense que tu dois juste être plus attentionné. Concentre-toi là-dessus."],
 				"preview": "ça passera",
 				"goto": "finBon"
             },
 			{
-				"text": ["Je pense que vous devez juste prendre un peu de temps pour vous et en discuter."],
+				"text": ["Attends un peu, ça passera tout seul, tout le monde est un peu nerveux en ce moment."],
 				"preview": "Prendre du temps pour vous.",
 				"goto": "finMauvais"
 			}

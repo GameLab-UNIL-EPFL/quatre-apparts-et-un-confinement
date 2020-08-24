@@ -1,6 +1,6 @@
 import { game } from "..";
 
-const endpoint = location.hostname === "localhost";
+const endpoint = /labs\.letemps/.test(window.location.hostname) ? 'https://labs.letemps.ch/interactive/2020/quatre-apparts-un-confinement/server/': 'https://labs.letemps.ch/interactive/2020/quatre-apparts-un-confinement/server-dev/';
 
 export const Scenes = {
     INTRO: 'TitleScene',
@@ -223,7 +223,7 @@ export class Player {
     checkPlayerId(iteration = 0) {
         if (this.statsEnabled === true) {
             (async () => {
-                const rawResponse = await fetch('https://labs.letemps.ch/interactive/2020/quatre-apparts-un-confinement/server/check_player_id.php', {
+                const rawResponse = await fetch(endpoint + 'check_player_id.php', {
                     method: 'POST',
                     headers: {
                         'Accept': 'application/json',
@@ -256,7 +256,7 @@ export class Player {
         */
         if (this.statsEnabled) {
             (async () => {
-                const rawResponse = await fetch('https://labs.letemps.ch/interactive/2020/quatre-apparts-un-confinement/server/add_choices.php', {
+                const rawResponse = await fetch(endpoint + 'add_choices.php', {
                     method: 'POST',
                     headers: {
                         'Accept': 'application/json',
@@ -277,7 +277,7 @@ export class Player {
     }
 
     async getStats() {
-        const rawResponse = await fetch('https://labs.letemps.ch/interactive/2020/quatre-apparts-un-confinement/server/get_choice_stats.php', {
+        const rawResponse = await fetch(endpoint + 'get_choice_stats.php', {
             method: 'GET'
         }).catch( (e) => console.warn(e) );
 
