@@ -763,7 +763,7 @@ export class StoreScene extends Phaser.Scene {
 
         //Load in the music
         this.load.audio('bg_music', 'sounds/supermarket/Supermarket.mp3');
-        this.load.audio('pickup', 'sounds/supermarket/pickup.wav');
+        this.load.audio('pickup', ['sounds/supermarket/pickup.wav', 'sounds/supermarket/pickup.mp3']);
         this.load.audio('cashier', 'sounds/supermarket/cashier.mp3');
 
         this.nextCardArrow = this.load.spritesheet(
