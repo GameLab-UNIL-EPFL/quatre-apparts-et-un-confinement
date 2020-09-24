@@ -205,9 +205,9 @@ export class DamienKitchenClothesScene extends Phaser.Scene {
         this.current_card.preload();
 
         //load sounds
-        this.load.audio("toast",["sounds/kitchen/toasterPop.wav", "sounds/kitchen/toasterPop.mp3"]);
-        this.load.audio("fridge",["sounds/kitchen/fridge.wav", "sounds/kitchen/fridge.mp3"]);
-        this.load.audio("glass",["sounds/kitchen/glass.wav", "sounds/kitchen/glass.mp3"]);
+        this.load.audio("toast", ["sounds/kitchen/toasterPop.wav", "sounds/kitchen/toasterPop.mp3"]);
+        this.load.audio("fridge", ["sounds/kitchen/fridge.wav", "sounds/kitchen/fridge.mp3"]);
+        this.load.audio("glass", ["sounds/kitchen/glass.wav", "sounds/kitchen/glass.mp3"]);
 
         if(this.cardIdx === StudentCards.CLOTHES) {
             this.load.spritesheet(

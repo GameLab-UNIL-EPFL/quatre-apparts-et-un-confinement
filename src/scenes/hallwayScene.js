@@ -243,8 +243,8 @@ export class HallwayScene extends Phaser.Scene {
         //Preload all of the cards
         this.cards.forEach(card => card.preload());
 
-        this.load.audio("door",["sounds/hallway/door.wav", "sounds/hallway/door.mp3"]);
-        this.load.audio("doorBell",["sounds/hallway/doorBell.wav", "sounds/hallway/doorBell.mp3"]);
+        this.load.audio("door", ["sounds/hallway/door.wav", "sounds/hallway/door.mp3"]);
+        this.load.audio("doorBell", ["sounds/hallway/doorBell.wav", "sounds/hallway/doorBell.mp3"]);
     }
 
     /**
