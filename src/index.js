@@ -78,7 +78,7 @@ export const scale = getScale(window.innerWidth, window.innerHeight);
 
 // Game Config reference: https://photonstorm.github.io/phaser3-docs/Phaser.Types.Core.html#.GameConfig
 const config = {
-    type: Phaser.WEBGL,
+    type: Phaser.AUTO,
     width: window.innerWidth,
     height: window.innerHeight,
     resolution: 1, // we could use 2 for Retina

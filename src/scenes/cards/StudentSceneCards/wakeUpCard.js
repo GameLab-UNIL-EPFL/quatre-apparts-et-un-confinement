@@ -43,9 +43,9 @@ export class WakeUpCard extends Card {
         super.preload();
 
         //Load the sounds
-        //this.parent_scene.load.audio("alarm", "sounds/damien/alarmClock.wav");
-        //this.parent_scene.load.audio("vibrate", "sounds/damien/vibration.wav");
-        this.parent_scene.load.audio("click", "sounds/UI/click01.wav");
+        //this.parent_scene.load.audio("alarm",["sounds/damien/alarmClock.wav", "sounds/damien/alarmClock.mp3"]);
+        //this.parent_scene.load.audio("vibrate",["sounds/damien/vibration.wav", "sounds/damien/vibration.mp3"]);
+        this.parent_scene.load.audio("click",["sounds/UI/click01.wav", "sounds/UI/click01.mp3"]);
 
         //Load the ring animation spritesheet
         this.parent_scene.load.spritesheet(

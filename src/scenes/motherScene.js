@@ -181,11 +181,11 @@ export class MotherScene extends Phaser.Scene {
         this.load.image("motherSceneGlobe_c", "sprites/MotherScene/01_Chambre-Enfants/globe_c.png");
 
         //Load in the sounds
-        this.load.audio("clothes", "sounds/room/clothes.wav");
-        this.load.audio("toys", "sounds/room/toys.wav");
-        this.load.audio("paper", "sounds/grandma/pageTurn.wav");
-        this.load.audio("cupboard", "sounds/room/cupboard.wav");
-        this.load.audio("click", "sounds/UI/click01.wav");
+        this.load.audio("clothes", ["sounds/room/clothes.wav", "sounds/room/clothes.mp3"]);
+        this.load.audio("toys", ["sounds/room/toys.wav", "sounds/room/toys.mp3"]);
+        this.load.audio("paper", ["sounds/grandma/pageTurn.wav", "sounds/grandma/pageTurn.mp3"]);
+        this.load.audio("cupboard", ["sounds/room/cupboard.wav", "sounds/room/cupboard.mp3"]);
+        this.load.audio("click", ["sounds/UI/click01.wav", "sounds/UI/click01.mp3"]);
 
         //Load the arrow animation spritesheet
         this.load.spritesheet(

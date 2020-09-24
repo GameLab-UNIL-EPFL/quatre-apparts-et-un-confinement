@@ -66,7 +66,7 @@ export class HallwayScene extends Phaser.Scene {
         );
 
         this.damien_open_card = new Card(
-            this, 
+            this,
             [
                 new Background(
                     this,
@@ -84,12 +84,12 @@ export class HallwayScene extends Phaser.Scene {
                     new Phaser.Math.Vector2(101, 132)
                 )
             ],
-            null, 
+            null,
             true
         );
 
         this.indep_closed_card = new Card(
-            this, 
+            this,
             [
                 new Background(
                     this,
@@ -119,7 +119,7 @@ export class HallwayScene extends Phaser.Scene {
         );
 
         this.indep_open_card = new Card(
-            this, 
+            this,
             [
                 new Background(
                     this,
@@ -137,12 +137,12 @@ export class HallwayScene extends Phaser.Scene {
                     new Phaser.Math.Vector2(-123, 185)
                 )
             ],
-            null, 
+            null,
             true
         );
 
         this.indep_grandma_card = new Card(
-            this, 
+            this,
             [
                 new Background(
                     this,
@@ -160,7 +160,7 @@ export class HallwayScene extends Phaser.Scene {
                     new Phaser.Math.Vector2(-110, 114)
                 )
             ],
-            null, 
+            null,
             true
         );
 
@@ -243,8 +243,8 @@ export class HallwayScene extends Phaser.Scene {
         //Preload all of the cards
         this.cards.forEach(card => card.preload());
 
-        this.load.audio("door", "sounds/hallway/door.wav");
-        this.load.audio("doorBell", "sounds/hallway/doorBell.wav");
+        this.load.audio("door",["sounds/hallway/door.wav", "sounds/hallway/door.mp3"]);
+        this.load.audio("doorBell",["sounds/hallway/doorBell.wav", "sounds/hallway/doorBell.mp3"]);
     }
 
     /**
@@ -335,7 +335,7 @@ export class HallwayScene extends Phaser.Scene {
                 //Load the next card
                 this.current_card.create();
                 callback();
-                    
+
                 break;
 
             case HallwayCards.DAMIEN_OPEN:
@@ -374,7 +374,7 @@ export class HallwayScene extends Phaser.Scene {
 
     /**
      * @brief Triggers the next scene
-     * @param {HallwayCards} cardIdx 
+     * @param {HallwayCards} cardIdx
      */
     nextScene(cardIdx) {
         switch(cardIdx) {
@@ -385,10 +385,10 @@ export class HallwayScene extends Phaser.Scene {
         case HallwayCards.INDEP_GRANDMA:
             this.scene.start(Scenes.MOTHER_KITCHEN);
             break;
-            
+
         default:
             break;
-        }      
+        }
     }
 
     /**

@@ -194,7 +194,7 @@ export class ProtoGuy {
         }
 
         //Load the sounds
-        this.parent_scene.load.audio("zipper", "sounds/damien/zipper.wav");
+        this.parent_scene.load.audio("zipper", ["sounds/damien/zipper.wav", "sounds/damien/zipper.mp3"]);
     }
 
     /**

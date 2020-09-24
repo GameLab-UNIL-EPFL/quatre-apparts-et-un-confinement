@@ -127,8 +127,8 @@ export class LivingRoomCard extends Card {
         this.parent_scene.load.image("grandma_book3", "sprites/GrandmaScene/grandma_book_03.png");
 
         // Load sounds
-        this.parent_scene.load.audio("pageTurn", "sounds/grandma/pageTurn.wav");
-        this.parent_scene.load.audio("meow", "sounds/grandma/meow.wav");
+        this.parent_scene.load.audio("pageTurn",["sounds/grandma/pageTurn.wav", "sounds/grandma/pageTurn.mp3"]);
+        this.parent_scene.load.audio("meow",["sounds/grandma/meow.wav", "sounds/grandma/meow.mp3"]);
 
         //Load in the phone highlight
         this.parent_scene.load.spritesheet(

@@ -159,8 +159,8 @@ export class DialogueController {
 
     preloadMessages() {
         //Load in message audio
-        this.parent_scene.load.audio("newMessage", "sounds/textMessages/newMessage.wav");
-        this.parent_scene.load.audio("sent", "sounds/textMessages/sentMessage.wav");
+        this.parent_scene.load.audio("newMessage",["sounds/textMessages/newMessage.wav", "sounds/textMessages/newMessage.mp3"]);
+        this.parent_scene.load.audio("sent",["sounds/textMessages/sentMessage.wav", "sounds/textMessages/sentMessage.mp3"]);
 
         //Load in the phone message sprites
         this.parent_scene.load.image("promptBox1", "sprites/UI/Messages/SelectionMessage_01.png");

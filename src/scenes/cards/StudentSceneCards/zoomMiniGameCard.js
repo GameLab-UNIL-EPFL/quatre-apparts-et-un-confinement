@@ -238,9 +238,9 @@ export class ZoomMiniGameCard extends Card {
 
         //Load sounds
         this.parent_scene.load.audio("music" + this.scene_key, "sounds/ZoomMiniGame/ZoomGame_" + this.scene_key + ".mp3");
-        this.parent_scene.load.audio("wrong", "sounds/ZoomMiniGame/wrong.wav");
-        this.parent_scene.load.audio("right", "sounds/ZoomMiniGame/right.wav");
-        this.parent_scene.load.audio("lose", "sounds/ZoomMiniGame/Lose.wav");
+        this.parent_scene.load.audio("wrong", ["sounds/ZoomMiniGame/wrong.wav", "sounds/ZoomMiniGame/wrong.mp3"]);
+        this.parent_scene.load.audio("right", ["sounds/ZoomMiniGame/right.wav", "sounds/ZoomMiniGame/right.mp3"]);
+        this.parent_scene.load.audio("lose", ["sounds/ZoomMiniGame/Lose.wav", "sounds/ZoomMiniGame/Lose.mp3"]);
 
         //Load all of the messages in
         this.messages_stack_1.forEach(msg => {
