@@ -1,0 +1,26 @@
+{
+    "texto": {
+        "name": "Girlfriend",
+        "text": "Hey! How are you? :)",
+        "choices": [{
+                "text": "Meh, I'm having trouble concentrating...",
+                "goto": "repBof"
+            },
+            {
+                "text": "Nice, how about you?",
+                "goto": "repTrql"
+            },
+            {
+                "text": "I'm still in my PJs lol",
+                "goto": "repPyjama"
+            }
+        ],
+        "goto": ["repBof", "repTrql", "repPyjama"]
+    },
+    "repBof": {
+        "name": "Girlfriend",
+        "text": "Don't worry, I can't either ^^\"",
+        "choices": [],
+        "goto": [".."]
+    }
+}

@@ -1,0 +1,341 @@
+{
+	"init": {
+		"name": "Damien",
+		"text": [
+			"Les cours étaient sympas aujourd'hui.",
+			"Je me demande s'ils vont être données encore longtemps.",
+			"Allez, j'ai encore des devoirs à finir…"
+		],
+		"choices": [],
+		"goto": []
+	},
+	"reveil": {
+		"name": "Damien",
+		"text": [
+			"Ah, purée! J’ai oublié de désactiver mon réveil hier soir.",
+			"Pourtant, je n'ai plus besoin de me préparer. C'est fini, le bus à prendre le matin."
+		],
+		"choices": [],
+		"goto": []
+	},
+	"habit": {
+		"name": "Damien",
+		"text": [
+			"Est-ce qu'il faut vraiment que je m’habille?",
+			"* bâille *"
+		],
+		"choices": [],
+		"goto": []
+	},
+	"frigo": {
+		"name": "Damien",
+		"text": [
+			"J'ai enfin le temps de bien commencer la journée.",
+			"Que vais-je me préparer pour le déjeuner?"
+		],
+		"choices": [],
+		"goto": []
+	},
+	"dodo": {
+		"name": "Damien",
+		"text": [
+			"Mince, déjà midi! J’ai loupé mon premier cours…",
+			"Ok, pas grave. Je rattraperai avec les notes de Julie."
+		],
+		"choices": [],
+		"goto": []
+	},
+	"bureau": {
+		"name": "Damien",
+		"text": ["Oh! Le cours va commencer."],
+		"choices": [],
+		"goto": []
+	},
+	"zoom": {
+		"name": "Prof",
+		"text": ["Merci d'éteindre vos micros."],
+		"choices": [],
+		"goto": []
+	},
+	"endZoom": {
+		"name": "Prof",
+		"text": ["Merci pour votre attention et bonne journée!"],
+		"choices": [],
+		"goto": []
+	},
+	"endHomework": {
+		"name": "Damien",
+		"text": ["Chouette! Enfin fini!"],
+		"choices": [],
+		"goto": []
+	},
+	"loseHomework": {
+		"name": "Damien",
+		"text": ["Mince... Je n'arrive pas à me concentrer..."],
+		"choices": [],
+		"goto": []
+	},
+	"loseZoom": {
+		"name": "Prof",
+		"text": [
+			"Damien, pouvez-vous me dire quels chapitres sont à lire pour la semaine prochaine?"
+		],
+		"choices": [
+			{
+				"text": "11 et 12",
+				"goto": "repJuste"
+			}, {
+				"text": "12 et 13",
+				"goto": "repFausse"
+			}, {
+				"text": "13 et 14",
+				"goto": "repFausse"
+			}
+		],
+		"goto": ["repJuste", "repFausse"]
+	},
+	"repFausse": {
+		"name": "Prof",
+		"text": [
+			"Non! Il s'agissait des chapitres 11 et 12.",
+			"J’espère que vous ferez l'effort d'éteindre Netflix dorénavant."
+		],
+		"choices": {},
+		"goto": []
+	},
+	"repJuste": {
+		"name": "Prof",
+		"text": ["C'est juste, Damien. Toutes mes félicitations pour votre concentration exemplaire."],
+		"choices": {},
+		"goto": []
+	},
+	"hello": {
+		"name": "Copine",
+		"text": ["Coucou!"],
+		"choices":{
+			"hello": {
+				"text": ["Hello!"],
+				"preview": "Hello!",
+				"goto": "texto"
+			}
+		},
+		"goto": ["texto"]
+	},
+	"texto": {
+		"name": "Copine",
+		"text": ["Ça va? 😊"],
+		"choices": {
+			"bof": {
+				"text": ["Bof, je m'ennuie là."],
+				"preview": "Bof",
+				"goto": "repBof"
+			},
+			"trql": {
+				"text": ["Tranquille, et toi?"],
+				"preview": "Tranquille",
+				"goto": "repTrql"
+			},
+			"pyjama": {
+				"text": ["Difficile de quitter mon pyjama lol"],
+				"preview": "La vie en pyjama",
+				"goto": "repPyjama"
+			}
+		},
+		"goto": ["repBof", "repTrql", "repPyjama"]
+	},
+	"repBof": {
+		"name": "Copine",
+		"text": ["Ouais, moi aussi"],
+		"choices":{
+			"rep": {
+				"text": ["😩"],
+				"preview": "😩",
+				"goto": "cours"
+			},
+			"rep2": {
+				"text": ["😖"],
+				"preview": "😖",
+				"goto": "cours"
+			}
+		},
+		"goto": ["cours"]
+	},
+	"repTrql": {
+		"name": "Copine",
+		"text": ["Ouais, pareil!"],
+		"choices":{
+			"rep": {
+				"text": ["Top 😊"],
+				"preview": "Top 😊",
+				"goto": "cours"
+			},
+			"rep2": {
+				"text": ["Nice 😁"],
+				"preview": "Nice 😁",
+				"goto": "cours"
+			}
+		},
+		"goto": ["cours"]
+	},
+	"repPyjama": {
+		"name": "Copine",
+		"text": ["Haha tu pourrais faire un effort quand même 😜"],
+		"choices":{
+			"rep": {
+				"text": ["😜"],
+				"preview": "😜",
+				"goto": "cours"
+			},
+			"rep2": {
+				"text": ["😂"],
+				"preview": "😂",
+				"goto": "cours"
+			}
+		},
+		"goto": ["cours"]
+	},
+	"cours": {
+		"name": "Copine",
+		"text": ["Tu penses quoi des cours en ligne?"],
+		"choices": {
+			"bof": {
+				"text": ["Je n'aime pas du tout!"],
+				"preview": "J'aime pas.",
+				"goto": "aimePas"
+			},
+			"trql": {
+				"text": ["J'adore! C'est tellement plus pratique."],
+				"preview": "J'adore!",
+				"goto": "aime"
+			}
+		},
+		"goto": ["aimePas", "aime"]
+	},
+	"aimePas": {
+		"name": "Copine",
+		"text": ["Je comprends… C'est pas facile de rester concentré."],
+		"choices": {
+			"bof": {
+				"text": ["Ouais vraiment. Et j'en ai marre de ce défilé de visages sur mon écran."],
+				"preview": "Marre de l'écran",
+				"goto": "sortir"
+			},
+			"trql": {
+				"text": ["Hé hé au moins on n'a plus de bus à prendre!"],
+				"preview": "Fini les bus à prendre",
+				"goto": "sortir"
+			}
+		},
+		"goto": ["sortir"]
+	},
+	"aime": {
+		"name": "Copine",
+		"text": ["C'est vrai! Plus besoin d'enfiler son pantalon… ni de prendre le bus."],
+		"choices": {
+			"bof": {
+				"text": ["Ha ha ouais, le bus me manque pas du tout!"],
+				"preview": "Marre du bus",
+				"goto": "sortir"
+			},
+			"trql": {
+				"text": ["Hi hi des pantalons? Je ne sais même plus de quoi ça a l'air."],
+				"preview": "Plus besoin de pantalon",
+				"goto": "sortir"
+			}
+		},
+		"goto": ["sortir"]
+	},
+	"sortir": {
+		"name": "Copine",
+		"text": ["Tu viens chez moi après?"],
+		"choices": {
+			"risque": {
+				"text": ["Ton père était pas une personne à risque ?"],
+				"preview": "Mais ton père est à risque?",
+				"goto": "sortir1"
+			}
+		},
+		"goto": ["sortir1"]
+	},
+	"sortir1": {
+		"name": "Copine",
+		"text": ["Si si mais t’inquiète. Si tu restes à 2 mètres c’est bon."],
+		"choices": {
+			"bosser": {
+				"text": ["Mais il continue à bosser en plus, non?"],
+				"preview": "Il bosse encore?",
+				"goto": "sortir2"
+			}
+		},
+		"goto": ["sortir2"]
+	},
+	"sortir2": {
+		"name": "Copine",
+		"text": ["Euh… ouais 😕 mais c’est calme là. Plus personne ne prend le taxi."],
+		"choices": {
+			"chaud": {
+				"text": ["Du coup c’est chaud financièrement?"],
+				"preview": "C’est chaud financièrement?",
+				"goto": "sortir3"
+			}
+		},
+		"goto": ["sortir3"]
+	},
+	"sortir3": {
+		"name": "Copine",
+		"text": ["Ouais on sait pas trop encore… Bon, tu viens? T’as promis de m’aider à étudier!"],
+		"choices": {
+			"oui": {
+				"text": ["Oui oui, à toute!"],
+				"preview": "Oui",
+				"goto": "repOui"
+			},
+			"maybe": {
+				"text": ["Je ne sais pas. T’es sûre que c’est ok pour tes parents?"],
+				"preview": "J'hésite",
+				"goto": "repMaybe"
+			},
+			"non": {
+				"text": ["Mmm je ferais peut-être mieux de rester à la maison."],
+				"preview": "Non",
+				"goto": "repNon"
+			}
+		},
+		"goto": ["repOui", "repMaybe", "repNon"]
+	},
+	"repOui": {
+		"name": "Copine",
+		"text": ["Cool! À tout! 😘"],
+		"choices":{},
+		"goto": [],
+		"objective": {
+			"status": true
+		}
+	},
+	"repMaybe": {
+		"name": "Copine",
+		"text": ["Mais oui, c’est bon! Sinon tu vas devoir m’expliquer en ligne et c’est plus compliqué."],
+		"choices":{
+			"oui": {
+				"text": ["Bon, ok"],
+				"preview": "Ok",
+				"goto": "repOui"
+			},
+			"non": {
+				"text": ["Non je ne préfère pas risquer. Désolé 😔"],
+				"preview": "Non désolé",
+				"goto": "repNon"
+			}
+		},
+		"goto": ["repOui", "repNon"]
+	},
+	"repNon": {
+		"name": "Copine",
+		"text": ["Rhoo 💔"],
+		"choices":{},
+		"goto": [],
+		"objective": {
+			"status": false
+		}
+	}
+}

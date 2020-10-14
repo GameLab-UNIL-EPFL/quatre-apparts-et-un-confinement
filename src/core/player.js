@@ -30,6 +30,11 @@ export const Scenes = {
     STATS: 'Stats'
 };
 
+export const LANGUAGES = {
+    FR: 'fr',
+    EN: 'en'
+};
+
 /**
  * @brief Class used to store the data related to the current player
  */
@@ -50,6 +55,7 @@ export class Player {
         this.suzanne_hair = false;      //Whether or not Suzanne chose to go to the hair-dresser
         this.indep_shopping_basket = [];
         this.completed = false;         //Whether or not the game was ever completed
+        this.language = LANGUAGES.FR;
     }
 
     /**

@@ -1,0 +1,245 @@
+{
+	"frigo": {
+		"name": "Damien",
+		"text": [
+			"I don't have anything left to eat, I really need to go grocery shopping.",
+			"I really hope that the shelves aren't all empty."
+		],
+		"choices": [],
+		"goto": []
+	},
+    "Natel": {
+		"name": "Damien",
+		"text": ["Oh, I have three missed calls."],
+		"choices": [],
+		"goto": []
+	},
+	"sorti": {
+		"name": "Girlfriend",
+		"text": ["Damien!? Why aren't you answering?"],
+		"choices": {
+            "rep":
+			{
+				"text": ["Sorry, I was grocery shopping. What's up?"],
+				"preview": "I was grocery shopping",
+				"goto": "covid"
+            },
+            "rep2":
+			{
+				"text": ["Sorry, I didn't hear my phone ring."],
+				"preview": "I didn't hear.",
+				"goto": "covid"
+			}
+        },
+		"goto": ["covid"]
+	},
+	"covid": {
+		"name": "Girlfriend",
+		"text": ["My dad caught covid..."],
+		"choices": {
+            "rep":
+			{
+				"text": ["What do you mean??"],
+				"preview": "What do you mean?",
+				"goto": "toi"
+            },
+            "rep2":
+			{
+				"text": ["What??? How is that possible?"],
+				"preview": "What?",
+				"goto": "toi"
+			}
+        },
+		"goto": ["toi"]
+	},
+	"toi": {
+		"name": "Girlfriend",
+        "text": [
+            "Well, we don't know. I could have come from anyone."
+        ],
+		"choices": {
+            "rep":
+			{
+				"text": ["But... he was wearing a face-mask at work, wasn't he?"],
+				"preview": "He was wearing a mask",
+				"goto": "masque"
+            },
+            "rep2":
+			{
+				"text": ["I couldn't have come from us, we aren't sick."],
+				"preview": "We aren't sick.",
+				"goto": "malade"
+            }
+        },
+		"goto": ["masque", "malade"]
+    },
+    "masque": {
+		"name": "Girlfriend",
+        "text": [
+			"Well, from what we've heard, masks don't always protect us, and..."
+        ],
+		"choices": {
+            "rep":
+			{
+				"text": ["And… ?"],
+				"preview": "And… ?",
+				"goto": "masque_suite"
+            }
+        },
+		"goto": ["masque_suite"]
+	},
+	"masque_suite": {
+		"name": "Girlfriend",
+        "text": [
+			"I shouldn't have invited you. I took useless risks."
+        ],
+		"choices": {
+            "rep":
+			{
+				"text": ["Sorry, you're right, I never should have come over. I really hope he'll make it out of this!"],
+				"preview": "I never should have.",
+				"goto": "merci"
+            },
+            "rep2":
+			{
+				"text": ["I hope that it will be ok and that he'll make it."],
+				"preview": "I hope that it will be ok.",
+				"goto": "merci"
+            }
+        },
+		"goto": ["merci"]
+    },
+    "malade": {
+		"name": "Girlfriend",
+        "text": [
+			"Who knows, maybe we were asymptomatic..."
+        ],
+		"choices": {
+            "rep":
+			{
+				"text": ["It's possible... In the meantime that's not an excuse to take risks like that."],
+				"preview": "It's possible…",
+				"goto": "malade_suite"
+            }
+        },
+        "goto": ["malade_suite"]
+	},
+	"malade_suite": {
+		"name": "Girlfriend",
+        "text": [
+			"But I shouldn't have invited you over. I took useless risks."
+        ],
+		"choices": {
+            "rep":
+			{
+				"text": ["I'm really sorry. You're right, I shouldn't have come over."],
+				"preview": "I shouldn't have.",
+				"goto": "merci"
+            },
+            "rep2":
+			{
+				"text": ["I hope that it will be ok and that he'll make it."],
+				"preview": "I hope that it will be ok.",
+				"goto": "merci"
+            }
+        },
+        "goto": ["merci"]
+    },
+    "pasSorti": {
+		"name": "Girlfriend",
+		"text": ["Damien!? Why don't you answer?"],
+		"choices": {
+            "rep":
+			{
+				"text": ["Sorry, I was grocery shopping. What's up?"],
+				"preview": "Grocery shopping",
+				"goto": "pere"
+            },
+            "rep2":
+			{
+				"text": ["Sorry, I didn't hear my phone wring."],
+				"preview": "Didn't hear",
+				"goto": "pere"
+			}
+        },
+		"goto": ["pere"]
+	},
+	"pere": {
+		"name": "Girlfriend",
+		"text": ["My dad has covid..."],
+		"choices": {
+            "rep":
+			{
+				"text": ["What do you mean???"],
+				"preview": "What do you mean?",
+				"goto": "client"
+            },
+            "rep2":
+			{
+				"text": ["What??? But how is that possible?"],
+				"preview": "What?",
+				"goto": "client"
+			}
+        },
+		"goto": ["client"]
+	},
+	"client": {
+		"name": "Girlfriend",
+        "text": [
+            "We don't know and it's hard to tell. Maybe it was one of his clients."
+        ],
+		"choices": {
+            "rep":
+			{
+				"text": ["But wasn't he wearing a mask at work?"],
+				"preview": "He was wearing a mask.",
+				"goto": "leMasque"
+            }
+        },
+		"goto": ["leMasque"]
+    },
+    "leMasque": {
+		"name": "Girlfriend",
+        "text": [
+            "Well a mask doesn't allways protect us."
+        ],
+		"choices": {
+            "rep":
+			{
+				"text": ["I can't believe it. What about you, are you ok?"],
+				"preview": "Are you ok?",
+				"goto": "asymp"
+            },
+            "rep2":
+			{
+				"text": ["That's horrible. Are you sure you're ok?"],
+				"preview": "That's horrible.",
+				"goto": "asymp"
+            }
+        },
+		"goto": ["asymp"]
+    },
+    "asymp": {
+		"name": "Girlfriend",
+        "text": [
+            "Yeah, I'm ok. But I don't want to risk contaminating anyone else."
+        ],
+		"choices": {
+            "rep":
+			{
+				"text": ["Ok. I hope that it'll be ok and that he'll get better soon."],
+				"preview": "I hope it'll be ok.",
+				"goto": "merci"
+            }
+        },
+        "goto": ["merci"]
+	},
+	"merci": {
+		"name": "Girlfriend",
+		"text": [
+			"Thanks, I hope so too."
+		],
+		"choices": {},
+		"goto": []
+	}
+}
