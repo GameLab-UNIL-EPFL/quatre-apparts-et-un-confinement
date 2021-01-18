@@ -205,10 +205,10 @@ export class MotherKitchenScene extends Phaser.Scene {
         //Preload all of the cards
         this.current_card.preload();
 
-        this.load.audio('bottle', 'sounds/kitchen/bottle.wav');
-        this.load.audio('bread', 'sounds/kitchen/bread.wav');
-        this.load.audio('plates', 'sounds/kitchen/plates.wav');
-        this.load.audio('toy', 'sounds/room/toys.wav');
+        this.load.audio('bottle', ['sounds/kitchen/bottle.wav', 'sounds/kitchen/bottle.mp3']);
+        this.load.audio('bread', ['sounds/kitchen/bread.wav', 'sounds/kitchen/bread.mp3']);
+        this.load.audio('plates', ['sounds/kitchen/plates.wav', 'sounds/kitchen/plates.mp3']);
+        this.load.audio('toy', ['sounds/room/toys.wav', 'sounds/room/toys.mp3']);
 
         //Load in all clean sprites
         for(const clean_sprite_name in this.clean_sprites) {
