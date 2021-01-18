@@ -102,7 +102,7 @@ export class DialogueController {
      */
     constructor(parent_scene, dialogue_name="example") {
         this.parent_scene = parent_scene;
-        this.dialogueJSON = require("../dialogue/" + dialogue_name + ".json");
+        this.dialogueJSON = require("../dialogue/" + player.language + "/" + dialogue_name + ".json");
 
         this.phone_dialogue_done = {};
         for (let telephone_key of ["telephone", "telephoneMauvais", "telephoneBon"]) {

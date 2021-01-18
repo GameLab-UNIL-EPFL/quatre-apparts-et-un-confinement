@@ -1,0 +1,79 @@
+{
+    "copine": {
+		"name": "Copine",
+		"text": ["Hey, ça va?"],
+		"choices": {
+            "rep":
+			{
+				"text": ["Oui, et toi? Ton père va mieux?"],
+				"preview": "Ton père va mieux?",
+				"goto": "mieux"
+            }
+        },
+		"goto": ["mieux"]
+	},
+	"mieux": {
+		"name": "Copine",
+		"text": ["Mon père va beaucoup mieux, merci ! Mais il s'essouffle encore très vite 😟"],
+		"choices": {
+            "rep":
+			{
+				"text": ["Ah ouais, je vois."],
+				"preview": "Je vois.",
+				"goto": "toi"
+            },
+            "rep2":
+			{
+				"text": ["Purée… en tout cas c'est génial qu'il s'en soit sorti!"],
+				"preview": "Il s'en est sorti.",
+				"goto": "toi"
+			}
+        },
+		"goto": ["toi"]
+    },
+    "toi": {
+		"name": "Copine",
+		"text": ["Ça va prendre un moment avant qu’il s’en remette complètement…"],
+		"choices": {
+            "rep":
+			{
+				"text": ["C'est sûr."],
+				"preview": "C'est sûr.",
+				"goto": "merci"
+            },
+            "rep2":
+			{
+				"text": ["C'est violent."],
+				"preview": "C'est violent.",
+				"goto": "merci"
+			}
+        },
+		"goto": ["merci"]
+    },
+    "merci": {
+		"name": "Copine",
+		"text": ["Merci d’avoir été là pour moi! Je sais pas comment j’aurais fait sans toi ❤️️"],
+		"choices": {
+            "rep":
+			{
+				"text": ["❤️"],
+				"preview": "❤️",
+				"goto": "keur"
+            },
+            "rep2":
+			{
+				"text": ["💗"],
+				"preview": "💗",
+				"goto": "keur"
+			}
+        },
+		"goto": ["keur"]
+	},
+	"keur": {
+		"name": "Copine",
+		"text": ["💗"],
+		"choices": {
+        },
+		"goto": []
+	}
+}

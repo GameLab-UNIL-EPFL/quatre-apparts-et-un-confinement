@@ -1,5 +1,5 @@
 import Phaser from "phaser";
-import { Scenes } from "../core/player";
+import { LANGUAGES, Scenes } from "../core/player";
 import { DIALOGUE_BOX_KEY, D_BOX_ANIMATION_KEY, DIALOGUE_BOX_SPRITE_SIZE } from "../core/dialogueController";
 import { player } from "..";
 import { GrandmaCards } from "./grandmaScene";
@@ -15,6 +15,19 @@ export const Months = {
 export const WindowState = {
     OFF: 0,
     ON: 1
+};
+
+const MenuText = {
+    'en': {
+        Credits: "Credits",
+        NewGame: "New Game",
+        Continue: "Continue"
+    },
+    'fr': {
+        Credits: "À Propos",
+        NewGame: "Nouvelle Partie",
+        Continue: "Continuer"
+    }
 };
 
 /**
@@ -234,7 +247,7 @@ export class BuildingScene extends Phaser.Scene {
         this.sprites['continue_text'] = this.add.text(
             0,
             this.sprites['menu_continue'].y,
-            "Continuer",
+            MenuText[player.language].Continue,
             {font: "54px OpenSans", fill: "black"}
         );
         this.sprites['continue_text'].setOrigin(0.5, 0.5);
@@ -296,7 +309,7 @@ export class BuildingScene extends Phaser.Scene {
         this.sprites['new_game_text'] = this.add.text(
             0,
             this.sprites['menu_new_game'].y,
-            "Nouvelle partie",
+            MenuText[player.language].NewGame,
             {font: "54px OpenSans", fill: "black"}
         );
 
@@ -332,7 +345,7 @@ export class BuildingScene extends Phaser.Scene {
         this.sprites['credits_text'] = this.add.text(
             0,
             this.sprites['menu_credits'].y,
-            "À propos",
+            MenuText[player.language].Credits,
             {font: "54px OpenSans", fill: "black"}
         );
         this.sprites['credits_text'].setOrigin(0.5, 0.5);
@@ -349,6 +362,48 @@ export class BuildingScene extends Phaser.Scene {
         //Make new game button start a new game
         this.sprites['credits_text'].setInteractive().on('pointerdown', openCredits, this);
         this.sprites['menu_credits'].setInteractive().on('pointerdown', openCredits, this);
+
+        //Create the language box
+        this.sprites['language'] = this.add.sprite(
+            0,
+            player.saveExists() ? -245 : -305,
+            'BuildingDialogBox'
+        ).play(D_BOX_ANIMATION_KEY);
+
+        //Resize the box
+        this.sprites['language'].displayWidth *= .5;
+        this.sprites['language'].displayHeight *= .5;
+
+        //Add language text
+        this.sprites['language_text'] = this.add.text(
+            0,
+            this.sprites['language'].y,
+            player.languageToText(),
+            {font: "54px OpenSans", fill: "black"}
+        );
+        this.sprites['language_text'].setOrigin(0.5, 0.5);
+
+        //Update the player's language
+        const changeLanguage = () => {
+            console.log('Language = ' + player.language);
+            this.clickSound.play();
+            player.toggleLanguage();
+
+            //Update language text
+            this.sprites['language_text'].text = player.languageToText();
+
+            //Update other texts
+            this.sprites['credits_text'].text = MenuText[player.language].Credits;
+            this.sprites['new_game_text'].text = MenuText[player.language].NewGame;
+
+            if(player.saveExists()) {
+                this.sprites['continue_text'].text = MenuText[player.language].Continue;
+            }
+        };
+
+        //Make new game button start a new game
+        this.sprites['language_text'].setInteractive().on('pointerdown', changeLanguage, this);
+        this.sprites['language'].setInteractive().on('pointerdown', changeLanguage, this);
     }
 
     /**

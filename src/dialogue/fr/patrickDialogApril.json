@@ -1,0 +1,281 @@
+{
+	"debut": {
+		"name": "Patrick",
+		"text": [
+			"Ça m’a fait plaisir de pouvoir aider la voisine.", 
+			"Il faudrait peut-être que j’appelle ma mère pour voir si tout va bien.",
+			"Et je me demande si Nathan et Élise ont tenu le coup."
+		],
+		"choices": [],
+		"goto": []
+	},
+    "dvd1": {
+		"name": "",
+		"text": [
+            "Intouchables (2011)",
+            "Pas de bras, pas de corona!"
+		],
+		"choices": [],
+		"goto": []
+	},
+	"dvd2": {
+		"name": "",
+        "text": [
+            "The Shining (1980)",
+            "All work and no Play makes Jack a dull boy\nAll work and no play mmakes Jack a dull boy…",
+            "Heureusement, je n'en suis pas encore là."
+		],
+        "choices": [],
+		"goto": []
+	},
+    "telephoneMauvais": {
+		"name": "Patrick",
+		"text": ["Qui pourrais-je bien appeler?"],
+		"choices":[
+			{
+				"text": ["Nathan (ami)"],
+				"preview": "Nathan",
+				"goto": "nathanMauvais"
+            },
+            {
+				"text": ["Sandrine (amie)"],
+				"preview": "Sandrine",
+				"goto": "sandrine"
+            },
+            {
+				"text": ["Maman"],
+				"preview": "Maman",
+				"goto": "maman"
+            }
+		],
+		"goto": ["nathan", "sandrine", "maman"]
+    },
+    "nathanMauvais": {
+		"name": "Nathan",
+		"text": ["Hello! Comment vas-tu?"],
+		"choices": [
+			{
+				"text": ["Pas trop mal! et toi?"],
+				"preview": "Bien!",
+				"goto": "mauvais"
+            },
+			{
+				"text": ["Pas top et toi?"],
+				"preview": "Je me sens seul",
+				"goto": "mauvais"
+			}
+        ],
+		"goto": ["mauvais"]
+    },
+    "telephoneBon": {
+		"name": "Patrick",
+		"text": ["Qui pourrais-je bien appeler?"],
+		"choices":[
+			{
+				"text": ["Nathan"],
+				"preview": "Nathan",
+				"goto": "nathanBon"
+            },
+            {
+				"text": ["Sandrine"],
+				"preview": "Sandrine",
+				"goto": "sandrine"
+            },
+            {
+				"text": ["Maman"],
+				"preview": "Maman",
+				"goto": "maman"
+            }
+		],
+		"goto": ["nathan", "sandrine", "maman"]
+    },
+    "nathanBon": {
+		"name": "Nathan",
+		"text": ["Hello! Comment vas-tu?"],
+		"choices": [
+			{
+				"text": ["Pas trop mal! et toi?"],
+				"preview": "Bien!",
+				"goto": "bon"
+            },
+			{
+				"text": ["Pas top et toi?"],
+				"preview": "Je me sens seul",
+				"goto": "bon"
+			}
+        ],
+		"goto": ["bon"]
+	},
+	"mauvais": {
+		"name": "Nathan",
+		"text": ["Pas très bien... Élise m'a quitté."],
+		"choices": [
+			{
+				"text": ["Quoi? Mais non!"],
+				"preview": "Quoi? Mais non!",
+				"goto": "couple"
+            }
+        ],
+		"goto": ["couple"]
+	},
+	"couple": {
+		"name": "Nathan",
+		"text": ["J'ai suivi ton conseil à deux balles, merci hein!"],
+		"choices": [
+			{
+				"text": ["Peut-être que tu l'as mal suivi..."],
+				"preview": "Peut-être que tu l'as mal suivi...",
+				"goto": "suivi"
+            },
+			{
+				"text": ["Ah merde, je suis désolé."],
+				"preview": "Ah merde, je suis désolé.",
+				"goto": "suivi"
+			}
+        ],
+		"goto": ["suivi"]
+	},
+	"suivi": {
+		"name": "Nathan",
+		"text": ["J'aurais pas dû t'écouter... Bon tcho, je te laisse."],
+		"choices": [],
+		"goto": []
+    },
+    "bon": {
+		"name": "Nathan",
+		"text": ["Oui, super! Ça se passe beaucoup mieux avec Élise."],
+		"choices": [
+			{
+				"text": ["Ah trop bien!"],
+				"preview": "Ah trop bien!",
+				"goto": "bien"
+            }
+        ],
+		"goto": ["bien"]
+	},
+	"bien": {
+		"name": "Nathan",
+		"text": ["Ouais, j'ai bien fait de suivre ton conseil."],
+		"choices": [
+			{
+				"text": ["Tant mieux!"],
+				"preview": "Tant mieux!",
+				"goto": "super"
+            },
+			{
+				"text": ["Je suis content pour vous!"],
+				"preview": "Je suis content pour vous",
+				"goto": "super"
+			}
+        ],
+		"goto": ["super"]
+	},
+	"super": {
+		"name": "Nathan",
+		"text": ["On s'organise un truc quand ça se sera calmé?"],
+		"choices": [
+			{
+				"text": ["Ouais à fond!"],
+				"preview": "Ouais à fond!",
+				"goto": "finBonNathan"
+            }
+        ],
+		"goto": ["finBonNathan"]
+	},
+	"finBonNathan": {
+		"name": "Nathan",
+		"text": ["Cool à bientôt alors!"],
+		"choices": [],
+		"goto": []
+	},
+    "sandrine": {
+        "name": "Sandrine",
+		"text": ["Coucou, ça va? T'as pu reprendre le travail?"],
+		"choices": [
+			{
+				"text": ["Hello! Ça va et toi? Non pas encore."],
+				"preview": "Hello!",
+				"goto": "hello"
+			}
+        ],
+		"goto": ["hello"]
+    },
+    "hello": {
+        "name": "Sandrine",
+		"text": ["Ah mince, bon j'ai pas retrouvé de travail non plus si ça peut te rassurer."],
+		"choices": [
+			{
+				"text": ["..."],
+				"preview": "...",
+				"goto": "independant"
+			}
+        ],
+		"goto": ["independant"]
+    },
+    "independant": {
+        "name": "Sandrine",
+        "text": [
+			"Oups désolé, sujet sensible.", 
+			"J'ai une bonne nouvelle par contre, on organise une petite soirée chez Carlos.",
+            "Tu veux venir?"
+    	],
+		"choices": [
+			{
+				"text": ["Non, c'est encore trop risqué."],
+				"preview": "Non, c'est encore trop risqué.",
+				"goto": "non"
+            },
+            {
+				"text": ["Oui, il faut abolument que je sorte et pense à autre chose!"],
+				"preview": "Oui, il faut abolument que je sorte et pense à autre chose!",
+				"goto": "oui"
+			}
+		],
+		"goto": ["aide"]
+    },
+    "oui": {
+        "name": "Sandrine",
+		"text": ["Cool! Je t'envoie les détails par message! Salut!"],
+		"choices": [],
+		"goto": []
+    },
+    "non": {
+        "name": "Sandrine",
+		"text": ["Pas de souci! Salut!"],
+		"choices": [],
+		"goto": []
+    },
+    "maman": {
+		"name": "Patrick",
+		"text": ["... Pas de réponse, c'est bizarre."],
+		"choices": [],
+		"goto": [],
+		"objective": {
+			"status": true
+		}
+	},
+	"patrick_computer": {
+		"name": "Patrick",
+		"text": [
+			"J'ai beaucoup trop de factures à régler..."
+		],
+		"choices": [],
+		"goto": []
+	},
+	"patrick_mini_lose": {
+		"name": "Patrick",
+		"text": [
+			"Je ne vais jamais y arriver, je ne suis pas du tout concentré."
+		],
+		"choices": [],
+		"goto": []
+	},
+	"patrick_mini_win": {
+		"name": "Patrick",
+		"text": [
+			"Oh wow, je ne pensais vraiment jamais réussir cette tâche qui était censée être impossible!"
+		],
+		"choices": [],
+		"goto": []
+	}
+}

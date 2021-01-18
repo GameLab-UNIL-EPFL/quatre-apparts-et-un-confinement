@@ -30,6 +30,11 @@ export const Scenes = {
     STATS: 'Stats'
 };
 
+export const LANGUAGES = {
+    FR: 'fr',
+    EN: 'en'
+};
+
 /**
  * @brief Class used to store the data related to the current player
  */
@@ -50,6 +55,29 @@ export class Player {
         this.suzanne_hair = false;      //Whether or not Suzanne chose to go to the hair-dresser
         this.indep_shopping_basket = [];
         this.completed = false;         //Whether or not the game was ever completed
+        this.language = LANGUAGES.FR;
+    }
+
+    /**
+     * Toggles the current language stored in the player
+     */
+    toggleLanguage() {
+        if(this.language === LANGUAGES.EN) {
+            this.language = LANGUAGES.FR;
+        } else {
+            this.language = LANGUAGES.EN;
+        }
+    }
+
+    languageToText() {
+        switch(this.language) {
+            case LANGUAGES.EN:
+                return "English";
+            case LANGUAGES.FR:
+                return "Français";
+            default:
+                return "";
+        }
     }
 
     /**
@@ -63,16 +91,19 @@ export class Player {
         this.statsEnabled = true;
 
         // analytics setup - experimental
-        (function(w,d,s,l,i) {w[l]=w[l]||[];w[l].push({'gtm.start':
-        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-            j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-        })(window,document,'script','dataLayer','GTM-TQ2B8Q');
+        (function(w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({
+                'gtm.start': new Date().getTime(), event:'gtm.js'
+            });
+            var f = d.getElementsByTagName(s)[0], j = d.createElement(s), dl = l != 'dataLayer'?'&l='+l:'';
+            j.async = true;
+            j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j,f);
+        })(window, document, 'script', 'dataLayer', 'GTM-TQ2B8Q');
 
         console.log('Stats enabled');
     }
-
-
 
     generateId() {
         return Math.random().toString(36).substr(2, 9) + ((new Date()).getTime()).toString(36);
@@ -142,6 +173,7 @@ export class Player {
             this.suzanne_hair = game_data.suzanne_hair;
             this.indep_shopping_basket = game_data.indep_shopping_basket;
             this.completed = game_data.completed;
+            this.language = game_data.language;
         }
     }
 
@@ -161,7 +193,8 @@ export class Player {
             kids_park: this.kids_park,
             suzanne_hair: this.suzanne_hair,
             indep_shopping_basket: this.indep_shopping_basket,
-            completed: this.completed
+            completed: this.completed,
+            language: this.language
         };
 
         //Encode the data in base 64 before saving it
@@ -201,6 +234,7 @@ export class Player {
                 this.suzanne_hair = game_data.suzanne_hair;
                 this.indep_shopping_basket = game_data.indep_shopping_basket;
                 this.completed = game_data.completed;
+                this.language = game_data.language;
 
                 //Start the loaded scene
                 game.scene.start(game_data.scene, game_data.data);

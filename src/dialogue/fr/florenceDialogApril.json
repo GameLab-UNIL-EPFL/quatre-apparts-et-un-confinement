@@ -1,0 +1,36 @@
+{
+  "florence": {
+    "name": "Florence",
+    "text": [
+      "Heureusement que l'école reprend bientôt!",
+      "Je n'en peux plus de ce rythme infernal!",
+      "Vous aussi, vous vous réjouissez de revoir vos camarades, hein?"
+    ],
+    "choices": [],
+    "goto": ["kids"]
+  },
+  "kids": {
+    "name": "Maurice et Léa",
+    "text": [
+      "Ouiiiii!"
+    ],
+    "choices": [],
+    "goto": []
+  },
+  "ranger": {
+    "name": "Florence",
+    "text": [
+      "Mais aujourd'hui vous devez m'aider à ranger."
+    ],
+    "choices": [],
+    "goto": []
+  },
+  "non": {
+    "name": "Maurice et Léa",
+    "text": [
+      "Nooooon!"
+    ],
+    "choices": [],
+    "goto": []
+  }
+}

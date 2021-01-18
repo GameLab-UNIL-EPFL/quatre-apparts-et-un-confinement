@@ -1,0 +1,11 @@
+{
+    "florence": {
+		"name": "Florence",
+		"text": [
+			"Aaaaaah, le silence!",
+			"Comme ça m'avait manqué."
+		],
+		"choices": [],
+		"goto": []
+    }
+}
