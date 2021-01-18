@@ -17,19 +17,17 @@ export const WindowState = {
     ON: 1
 };
 
-const Credits = {
-    EN: "Credits",
-    FR: "À Propos"
-};
-
-const NewGame = {
-    EN: "New Game",
-    FR: "Nouvelle Partie"
-};
-
-const Continue = {
-    EN: "Continue",
-    FR: "Continuer"
+const MenuText = {
+    'en': {
+        Credits: "Credits",
+        NewGame: "New Game",
+        Continue: "Continue"
+    },
+    'fr': {
+        Credits: "À Propos",
+        NewGame: "Nouvelle Partie",
+        Continue: "Continuer"
+    }
 };
 
 /**
@@ -249,7 +247,7 @@ export class BuildingScene extends Phaser.Scene {
         this.sprites['continue_text'] = this.add.text(
             0,
             this.sprites['menu_continue'].y,
-            player.language === LANGUAGES.EN ? Continue.EN : Continue.FR,
+            MenuText[player.language].Continue,
             {font: "54px OpenSans", fill: "black"}
         );
         this.sprites['continue_text'].setOrigin(0.5, 0.5);
@@ -311,7 +309,7 @@ export class BuildingScene extends Phaser.Scene {
         this.sprites['new_game_text'] = this.add.text(
             0,
             this.sprites['menu_new_game'].y,
-            player.language === LANGUAGES.EN ? NewGame.EN : NewGame.FR,
+            MenuText[player.language].NewGame,
             {font: "54px OpenSans", fill: "black"}
         );
 
@@ -347,7 +345,7 @@ export class BuildingScene extends Phaser.Scene {
         this.sprites['credits_text'] = this.add.text(
             0,
             this.sprites['menu_credits'].y,
-            player.language === LANGUAGES.EN ? Credits.EN : Credits.FR,
+            MenuText[player.language].Credits,
             {font: "54px OpenSans", fill: "black"}
         );
         this.sprites['credits_text'].setOrigin(0.5, 0.5);
@@ -395,11 +393,11 @@ export class BuildingScene extends Phaser.Scene {
             this.sprites['language_text'].text = player.languageToText();
 
             //Update other texts
-            this.sprites['credits_text'].text = player.language === LANGUAGES.EN ? Credits.EN : Credits.FR;
-            this.sprites['new_game_text'].text = player.language === LANGUAGES.EN ? NewGame.EN : NewGame.FR;
+            this.sprites['credits_text'].text = MenuText[player.language].Credits;
+            this.sprites['new_game_text'].text = MenuText[player.language].NewGame;
 
             if(player.saveExists()) {
-                this.sprites['continue_text'].text = player.language === LANGUAGES.EN ? Continue.EN : Continue.FR;
+                this.sprites['continue_text'].text = MenuText[player.language].Continue;
             }
         };
 

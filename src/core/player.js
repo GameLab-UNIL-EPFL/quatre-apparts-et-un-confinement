@@ -70,7 +70,14 @@ export class Player {
     }
 
     languageToText() {
-        return this.language === LANGUAGES.EN ? "English" : "Français";
+        switch(this.language) {
+            case LANGUAGES.EN:
+                return "English";
+            case LANGUAGES.FR:
+                return "Français";
+            default:
+                return "";
+        }
     }
 
     /**
@@ -166,6 +173,7 @@ export class Player {
             this.suzanne_hair = game_data.suzanne_hair;
             this.indep_shopping_basket = game_data.indep_shopping_basket;
             this.completed = game_data.completed;
+            this.language = game_data.language;
         }
     }
 
@@ -185,7 +193,8 @@ export class Player {
             kids_park: this.kids_park,
             suzanne_hair: this.suzanne_hair,
             indep_shopping_basket: this.indep_shopping_basket,
-            completed: this.completed
+            completed: this.completed,
+            language: this.language
         };
 
         //Encode the data in base 64 before saving it
@@ -225,6 +234,7 @@ export class Player {
                 this.suzanne_hair = game_data.suzanne_hair;
                 this.indep_shopping_basket = game_data.indep_shopping_basket;
                 this.completed = game_data.completed;
+                this.language = game_data.language;
 
                 //Start the loaded scene
                 game.scene.start(game_data.scene, game_data.data);
