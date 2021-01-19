@@ -71,12 +71,12 @@ export class Player {
 
     languageToText() {
         switch(this.language) {
-            case LANGUAGES.EN:
-                return "English";
-            case LANGUAGES.FR:
-                return "Français";
-            default:
-                return "";
+        case LANGUAGES.EN:
+            return "English";
+        case LANGUAGES.FR:
+            return "Français";
+        default:
+            return "";
         }
     }
 
