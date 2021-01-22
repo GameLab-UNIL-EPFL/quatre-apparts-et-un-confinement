@@ -2,36 +2,36 @@
 	"florence": {
 		"name": "Florence",
 		"text": [
-			"Ok, vous n'avez plus l'école, mais…",
-			"Ça ne veut pas dire que vous êtes en vacances!",
-			"La maîtresse m'a écrit.\nVous avez reçu des devoirs à faire."
+			"Ok, you guys don't have school any more, but…",
+			"That doesn't mean that you're on vacation!",
+			"Your teacher wrote me.\nYou have some homework to do."
 		],
 		"choices": [],
 		"goto": ["kids"]
 	},
 	"kids": {
-		"name": "Maurice et Léa",
+		"name": "Maurice and Lea",
 		"text": [
-			"Mais Maman, ça fait trop longtemps qu'on n'est pas sortis!",
-			"On peut aller jouer au parc avant, s'il te plaît? Alleeeeeeeez.",
+			"But Mom, it's been so long since we've gone outside!",
+			"Can we go play in the park before, come on please? Pretty Pleeeeaaaaase.",
 			"On fera attention, promis!"
 		],
 		"choices": [
 			{
-				"text": "Bon, d'accord!",
+				"text": "Fine, OK we can go.",
 				"goto": "merci"
 			},
 			{
-				"text": "Non, je vous ai déjà expliqué pourquoi.",
+				"text": "No, I already told you why we can't.",
 				"goto": "oh"
 			}
 		],
 		"goto": ["merci", "oh"]
 	},
 	"merci": {
-		"name": "Maurice et Léa",
+		"name": "Maurice and Lea",
 		"text": [
-			"Youpiiii!", "Merci Maman!"
+			"Youpiiii!", "Thanks Mom!"
 		],
 		"choices": [],
 		"goto": ["oui-rangez"],
@@ -40,9 +40,9 @@
 		}
 	},
 	"oh": {
-		"name": "Maurice et Léa",
+		"name": "Maurice and Lea",
 		"text": [
-			"Mais rhooo!", "Maman, t'es pas gentille."
+			"Ooohhh", "You're not very nice Mom."
 		],
 		"choices": [],
 		"goto": ["non-rangez"],
@@ -53,7 +53,7 @@
 	"non-rangez": {
 		"name": "Florence",
 		"text": [
-			 "Et vous devez ranger votre chambre!"
+			 "And you have to clean your room!"
 		],
 		"choices": [],
 		"goto": []
@@ -61,7 +61,7 @@
 	"oui-rangez": {
 		"name": "Florence",
 		"text": [
-			 "Mais vous devez d'abord ranger votre chambre."
+			 "But you first have to clean up your room."
 		],
 		"choices": [],
 		"goto": []

@@ -2,17 +2,17 @@
   "florence": {
     "name": "Florence",
     "text": [
-      "Heureusement que l'école reprend bientôt!",
-      "Je n'en peux plus de ce rythme infernal!",
-      "Vous aussi, vous vous réjouissez de revoir vos camarades, hein?"
+      "Thank god that school's are opening again soon!",
+      "I can't handle this anymore!",
+      "You guys are also looking forward to seeing your friends again, right?"
     ],
     "choices": [],
     "goto": ["kids"]
   },
   "kids": {
-    "name": "Maurice et Léa",
+    "name": "Maurice and Lea",
     "text": [
-      "Ouiiiii!"
+      "Yeaaaaaah!"
     ],
     "choices": [],
     "goto": []
@@ -20,15 +20,15 @@
   "ranger": {
     "name": "Florence",
     "text": [
-      "Mais aujourd'hui vous devez m'aider à ranger."
+      "But today you're going to have to help me clean up a bit."
     ],
     "choices": [],
     "goto": []
   },
   "non": {
-    "name": "Maurice et Léa",
+    "name": "Maurice and Lea",
     "text": [
-      "Nooooon!"
+      "Oh Nooooo!"
     ],
     "choices": [],
     "goto": []
