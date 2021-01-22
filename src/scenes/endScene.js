@@ -1,5 +1,6 @@
 import Phaser from "phaser";
 import { Scenes } from "../core/player.js";
+import { player } from "../index.js";
 import { WindowState, Months } from "./buildingScene.js";
 import { Arrow } from "./objects/arrow.js";
 
@@ -7,6 +8,59 @@ export const EndCards = {
     FIRST_SCREEN: 0,
     SECOND_SCREEN: 1,
     THIRD_SCREEN: 2
+};
+
+const CREDITS_TEXT = {
+    'en': {
+        TEAM: `
+        <h4>Programming</h4>Andrew Dobis
+        <h4>Graphics</h4>Mathias Hängärtner
+        <h4>Story, Sound desing</h4>Saara Jones
+        <h4>Project Management</h4>Yannick Rochat, Paul Ronga
+        `,
+        REPO: `
+        <p>Your comments are always welcome at the following address: <a target="_blank" href="mailto:data@letemps.ch">data@letemps.ch</a></p>
+        <h4>Reuse</h4>
+        <p>This game is under a free and open-source license, which means that the source code, the designs and the sounds are original (appart from the radio extracts) and can be reused.
+        <a target="_blank" href="https://github.com/IMI-initiative/quatre-apparts-et-un-confinement">Learn more about it</a></p>
+        <h4>Organization and help</h4>
+        <p><a target="_blank" href="https://www.media-initiative.ch">Initiative pour l’innovation dans les médias (IMI)</a><br>
+        <a target="_blank" href="https://www.letemps.ch">Le Temps</a><br>
+        <a target="_blank" href="https://www.epfl.ch/schools/cdh/fr/">Collège des humanités (CDH), EPFL</a>
+        <a target="_blank" href="https://wp.unil.ch/gamelab/">UNIL Gamelab</a></p>
+        `,
+        THANKS: `
+        <p>Thanks to the <a target="_blank" href="https://www.rts.ch/">RTS</a> as well as the <a target="_blank" href="https://www.srf.ch/play/tv/sendung/zwei-am-morge-tv?id=79fe1336-b513-4342-b389-001bf89b8ea2">SRF Zwei am Morge</a> for the use of extracts from their shows.</p>
+        <h4>Big thanks to our supporters and testers</h4>
+        <p>Lesli__e, Vincent, Sashiro, Sarah, Philippe, Dr. Game, Antoine Débois, and every other person who helped us build this experience through their reviews and comments.</p>
+        <p>Special thanks to Mounir Krichane (IMI) and Gaël Hürlimann (</i>Le Temps</i>).</p>
+        `
+    },
+    'fr': {
+        TEAM: `
+        <h4>Programmation</h4>Andrew Dobis
+        <h4>Graphisme</h4>Mathias Hängärtner
+        <h4>Récit, Conception sonore</h4>Saara Jones
+        <h4>Gestion de projet</h4>Yannick Rochat, Paul Ronga
+        `,
+        REPO: `
+        <p>Vos commentaires sont les bienvenus à l’adresse: <a target="_blank" href="mailto:data@letemps.ch">data@letemps.ch</a></p>
+        <h4>Réutilisation</h4>
+        <p>Ce jeu est en licence libre, ce qui signifie que le code source, les dessins et les sons originaux (hors extraits radiophoniques) peuvent être réutilisés.
+        <a target="_blank" href="https://github.com/IMI-initiative/quatre-apparts-et-un-confinement">En savoir plus</a></p>
+        <h4>Organisation et soutien</h4>
+        <p><a target="_blank" href="https://www.media-initiative.ch">Initiative pour l’innovation dans les médias (IMI)</a><br>
+        <a target="_blank" href="https://www.letemps.ch">Le Temps</a><br>
+        <a target="_blank" href="https://www.epfl.ch/schools/cdh/fr/">Collège des humanités (CDH), EPFL</a>
+        <a target="_blank" href="https://wp.unil.ch/gamelab/">UNIL Gamelab</a></p>
+        `,
+        THANKS: `
+        <p>Merci à la <a target="_blank" href="https://www.rts.ch/">RTS</a> ainsi qu’à <a target="_blank" href="https://www.srf.ch/play/tv/sendung/zwei-am-morge-tv?id=79fe1336-b513-4342-b389-001bf89b8ea2">SRF Zwei am Morge</a> pour l’utilisation d’extraits de leurs émissions.</p>
+        <h4>Un grand merci à nos soutiens et testeurs</h4>
+        <p>Lesli__e, Vincent, Sashiro, Sarah, Philippe, Dr. Game, Antoine Débois, et toutes les autres personnes qui nous ont aidé par leurs retours à construire cette expérience.</p>
+        <p>Remerciements particuliers à Mounir Krichane (IMI) et Gaël Hürlimann (</i>Le Temps</i>).</p>
+        `
+    }
 };
 
 export class EndScene extends Phaser.Scene {
@@ -68,12 +122,7 @@ export class EndScene extends Phaser.Scene {
 
         // Team
         let divTeam = document.createElement('div');
-        divTeam.innerHTML =  `
-        <h4>Programmation</h4>Andrew Dobis
-        <h4>Graphisme</h4>Mathias Hängärtner
-        <h4>Récit, Conception sonore</h4>Saara Jones
-        <h4>Gestion de projet</h4>Yannick Rochat, Paul Ronga
-        `;
+        divTeam.innerHTML = CREDITS_TEXT[player.language].TEAM;
         divTeam.classList.add('team');
         this.divTeam = this.add.dom(0, 200, divTeam);
         this.divTeam.setOrigin(0.5, 0.5);
@@ -81,17 +130,7 @@ export class EndScene extends Phaser.Scene {
         // Comments are welcome, repo, and partners
         let divRepo = document.createElement('div');
 
-        divRepo.innerHTML = `
-        <p>Vos commentaires sont les bienvenus à l’adresse: <a target="_blank" href="mailto:data@letemps.ch">data@letemps.ch</a></p>
-        <h4>Réutilisation</h4>
-        <p>Ce jeu est en licence libre, ce qui signifie que le code source, les dessins et les sons originaux (hors extraits radiophoniques) peuvent être réutilisés.
-        <a target="_blank" href="https://github.com/IMI-initiative/quatre-apparts-et-un-confinement">En savoir plus</a></p>
-        <h4>Organisation et soutien</h4>
-        <p><a target="_blank" href="https://www.media-initiative.ch">Initiative pour l’innovation dans les médias (IMI)</a><br>
-        <a target="_blank" href="https://www.letemps.ch">Le Temps</a><br>
-        <a target="_blank" href="https://www.epfl.ch/schools/cdh/fr/">Collège des humanités (CDH), EPFL</a>
-        <a target="_blank" href="https://wp.unil.ch/gamelab/">UNIL Gamelab</a></p>
-        `;
+        divRepo.innerHTML = CREDITS_TEXT[player.language].REPO;
 
         divRepo.classList.add('repo');
         this.secondCardDiv = this.add.dom(0, 0, divRepo);
@@ -100,12 +139,7 @@ export class EndScene extends Phaser.Scene {
 
         // Thanks
         let divThanks = document.createElement('div');
-        divThanks.innerHTML = `
-        <p>Merci à la <a target="_blank" href="https://www.rts.ch/">RTS</a> ainsi qu’à <a target="_blank" href="https://www.srf.ch/play/tv/sendung/zwei-am-morge-tv?id=79fe1336-b513-4342-b389-001bf89b8ea2">SRF Zwei am Morge</a> pour l’utilisation d’extraits de leurs émissions.</p>
-        <h4>Un grand merci à nos soutiens et testeurs</h4>
-        <p>Lesli__e, Vincent, Sashiro, Sarah, Philippe, Dr. Game, Antoine Débois, et toutes les autres personnes qui nous ont aidé par leurs retours à construire cette expérience.</p>
-        <p>Remerciements particuliers à Mounir Krichane (IMI) et Gaël Hürlimann (</i>Le Temps</i>).</p>
-        `;
+        divThanks.innerHTML = CREDITS_TEXT[player.language].THANKS;
         divThanks.classList.add('thanks');
         this.thirdCardDiv = this.add.dom(0, 0, divThanks); // previously: y = -2600
         this.thirdCardDiv.setAlpha(0);
