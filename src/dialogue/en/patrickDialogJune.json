@@ -2,8 +2,8 @@
     "telephone": {
 		"name": "Patrick",
         "text": [
-            "Bonjour, Patrick D. à l'appareil.",
-            "Je suis bien aux pompes funèbres?"
+            "Hello, this is Patrick D..",
+            "Is this the funeral home?"
 		],
         "choices": [],
 		"goto": []
