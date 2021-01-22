@@ -71,7 +71,7 @@ If users agree to anonymously share their choices, they get saved in a SQLite da
 ### Local game state saves
 Game states gets regularly saved in localStorage (see [player.js](src/core/player.js)). This allows players to resume an interrupted game.
   
--- 
+-----
 
 ## Translations  
 If you're interested in participating in the translation of the game's text into your language of choice, now you can using our language control system.   
@@ -202,6 +202,7 @@ Let's say that I want to translate the game in German, then I must proceed as fo
             `,
             THANKS: `
             ... //And here
+            `
         }
     };
 
