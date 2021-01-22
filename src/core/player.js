@@ -71,12 +71,12 @@ export class Player {
 
     languageToText() {
         switch(this.language) {
-            case LANGUAGES.EN:
-                return "English";
-            case LANGUAGES.FR:
-                return "Français";
-            default:
-                return "";
+        case LANGUAGES.EN:
+            return "English";
+        case LANGUAGES.FR:
+            return "Français";
+        default:
+            return "";
         }
     }
 
@@ -173,7 +173,7 @@ export class Player {
             this.suzanne_hair = game_data.suzanne_hair;
             this.indep_shopping_basket = game_data.indep_shopping_basket;
             this.completed = game_data.completed;
-            this.language = game_data.language;
+            this.language = game_data.language ? game_data.language : LANGUAGES.FR;
         }
     }
 
@@ -234,7 +234,7 @@ export class Player {
                 this.suzanne_hair = game_data.suzanne_hair;
                 this.indep_shopping_basket = game_data.indep_shopping_basket;
                 this.completed = game_data.completed;
-                this.language = game_data.language;
+                this.language = game_data.language ? game_data.language : LANGUAGES.FR;
 
                 //Start the loaded scene
                 game.scene.start(game_data.scene, game_data.data);

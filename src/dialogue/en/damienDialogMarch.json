@@ -2,9 +2,9 @@
 	"init": {
 		"name": "Damien",
 		"text": [
-			"Les cours étaient sympas aujourd'hui.",
-			"Je me demande s'ils vont être données encore longtemps.",
-			"Allez, j'ai encore des devoirs à finir…"
+			"Classes were nice today.",
+			"I wonder how long there going to be given like this.",
+			"Come on, I still have homework to finish…"
 		],
 		"choices": [],
 		"goto": []
@@ -12,8 +12,8 @@
 	"reveil": {
 		"name": "Damien",
 		"text": [
-			"Ah, purée! J’ai oublié de désactiver mon réveil hier soir.",
-			"Pourtant, je n'ai plus besoin de me préparer. C'est fini, le bus à prendre le matin."
+			"Ah, darn! I forgot to turn my alarm off last night.",
+			"I don't really need to get ready for anything. No more morning bus to take."
 		],
 		"choices": [],
 		"goto": []
@@ -21,8 +21,8 @@
 	"habit": {
 		"name": "Damien",
 		"text": [
-			"Est-ce qu'il faut vraiment que je m’habille?",
-			"* bâille *"
+			"Do I really need to get dressed?",
+			"* yawn *"
 		],
 		"choices": [],
 		"goto": []
@@ -30,8 +30,8 @@
 	"frigo": {
 		"name": "Damien",
 		"text": [
-			"J'ai enfin le temps de bien commencer la journée.",
-			"Que vais-je me préparer pour le déjeuner?"
+			"I finally have the time to start my day off well.",
+			"What shall I have for breakfast?"
 		],
 		"choices": [],
 		"goto": []
@@ -39,78 +39,78 @@
 	"dodo": {
 		"name": "Damien",
 		"text": [
-			"Mince, déjà midi! J’ai loupé mon premier cours…",
-			"Ok, pas grave. Je rattraperai avec les notes de Julie."
+			"Damn, it's already noon! I missed my first class of the day…",
+			"Ok, there's no need to worry about it. I'll use Julies notes to catch up."
 		],
 		"choices": [],
 		"goto": []
 	},
 	"bureau": {
 		"name": "Damien",
-		"text": ["Oh! Le cours va commencer."],
+		"text": ["Oh! The class is about to start."],
 		"choices": [],
 		"goto": []
 	},
 	"zoom": {
-		"name": "Prof",
-		"text": ["Merci d'éteindre vos micros."],
+		"name": "Teacher",
+		"text": ["Please turn all of your microphones off, thank you."],
 		"choices": [],
 		"goto": []
 	},
 	"endZoom": {
-		"name": "Prof",
-		"text": ["Merci pour votre attention et bonne journée!"],
+		"name": "Teacher",
+		"text": ["Thank you for your attention and have a nice day!"],
 		"choices": [],
 		"goto": []
 	},
 	"endHomework": {
 		"name": "Damien",
-		"text": ["Chouette! Enfin fini!"],
+		"text": ["Nice! Finally finished!"],
 		"choices": [],
 		"goto": []
 	},
 	"loseHomework": {
 		"name": "Damien",
-		"text": ["Mince... Je n'arrive pas à me concentrer..."],
+		"text": ["Damn... I can't seem to focus..."],
 		"choices": [],
 		"goto": []
 	},
 	"loseZoom": {
-		"name": "Prof",
+		"name": "Teacher",
 		"text": [
-			"Damien, pouvez-vous me dire quels chapitres sont à lire pour la semaine prochaine?"
+			"Damien, can you tell us what chapter readings are due for next week?"
 		],
 		"choices": [
 			{
-				"text": "11 et 12",
+				"text": "11 and 12",
 				"goto": "repJuste"
 			}, {
-				"text": "12 et 13",
+				"text": "12 and 13",
 				"goto": "repFausse"
 			}, {
-				"text": "13 et 14",
+				"text": "13 and 14",
 				"goto": "repFausse"
 			}
 		],
 		"goto": ["repJuste", "repFausse"]
 	},
 	"repFausse": {
-		"name": "Prof",
+		"name": "Teacher",
 		"text": [
-			"Non! Il s'agissait des chapitres 11 et 12.",
-			"J’espère que vous ferez l'effort d'éteindre Netflix dorénavant."
+			"No! I asked you to read chapters 11 and 12.",
+			"I hope that you will make the effort to turn off Netflix and focus from now on."
 		],
 		"choices": {},
 		"goto": []
 	},
 	"repJuste": {
-		"name": "Prof",
-		"text": ["C'est juste, Damien. Toutes mes félicitations pour votre concentration exemplaire."],
+		"name": "Teacher",
+		"text": ["That's correct, Damien. Congratulations for your exemplarary behaviour..."],
 		"choices": {},
 		"goto": []
 	},
 	"hello": {
-		"name": "Copine",
+		"name": "Girlfriend",
 		"text": ["Coucou!"],
 		"choices":{
 			"hello": {
@@ -122,30 +122,30 @@
 		"goto": ["texto"]
 	},
 	"texto": {
-		"name": "Copine",
-		"text": ["Ça va? 😊"],
+		"name": "Girlfriend",
+		"text": ["How's it going? 😊"],
 		"choices": {
 			"bof": {
-				"text": ["Bof, je m'ennuie là."],
-				"preview": "Bof",
+				"text": ["Meh, I'm bored out of my mind here."],
+				"preview": "Meh",
 				"goto": "repBof"
 			},
 			"trql": {
-				"text": ["Tranquille, et toi?"],
-				"preview": "Tranquille",
+				"text": ["Chill, how about you?"],
+				"preview": "Chill",
 				"goto": "repTrql"
 			},
 			"pyjama": {
-				"text": ["Difficile de quitter mon pyjama lol"],
-				"preview": "La vie en pyjama",
+				"text": ["Having a hard time getting out of my PJs lol"],
+				"preview": "That PJ life",
 				"goto": "repPyjama"
 			}
 		},
 		"goto": ["repBof", "repTrql", "repPyjama"]
 	},
 	"repBof": {
-		"name": "Copine",
-		"text": ["Ouais, moi aussi"],
+		"name": "Girlfriend",
+		"text": ["Yeah, me too"],
 		"choices":{
 			"rep": {
 				"text": ["😩"],
@@ -161,12 +161,12 @@
 		"goto": ["cours"]
 	},
 	"repTrql": {
-		"name": "Copine",
-		"text": ["Ouais, pareil!"],
+		"name": "Girlfriend",
+		"text": ["Same here!"],
 		"choices":{
 			"rep": {
-				"text": ["Top 😊"],
-				"preview": "Top 😊",
+				"text": ["Great 😊"],
+				"preview": "Great 😊",
 				"goto": "cours"
 			},
 			"rep2": {
@@ -178,8 +178,8 @@
 		"goto": ["cours"]
 	},
 	"repPyjama": {
-		"name": "Copine",
-		"text": ["Haha tu pourrais faire un effort quand même 😜"],
+		"name": "Girlfriend",
+		"text": ["Haha you can at least make SOME effort 😜"],
 		"choices":{
 			"rep": {
 				"text": ["😜"],
@@ -195,117 +195,117 @@
 		"goto": ["cours"]
 	},
 	"cours": {
-		"name": "Copine",
-		"text": ["Tu penses quoi des cours en ligne?"],
+		"name": "Girlfriend",
+		"text": ["What do you think of the online classes?"],
 		"choices": {
 			"bof": {
-				"text": ["Je n'aime pas du tout!"],
-				"preview": "J'aime pas.",
+				"text": ["Not a big fan honestly!"],
+				"preview": "Not a fan",
 				"goto": "aimePas"
 			},
 			"trql": {
-				"text": ["J'adore! C'est tellement plus pratique."],
-				"preview": "J'adore!",
+				"text": ["Amating! They're so much more practical."],
+				"preview": "Amazing!",
 				"goto": "aime"
 			}
 		},
 		"goto": ["aimePas", "aime"]
 	},
 	"aimePas": {
-		"name": "Copine",
-		"text": ["Je comprends… C'est pas facile de rester concentré."],
+		"name": "Girlfriend",
+		"text": ["Yeah… It's not that easy to stay focused."],
 		"choices": {
 			"bof": {
-				"text": ["Ouais vraiment. Et j'en ai marre de ce défilé de visages sur mon écran."],
-				"preview": "Marre de l'écran",
+				"text": ["I know right? I can't stand staring at all of these virtual faces anymore."],
+				"preview": "Gosh darn screens",
 				"goto": "sortir"
 			},
 			"trql": {
-				"text": ["Hé hé au moins on n'a plus de bus à prendre!"],
-				"preview": "Fini les bus à prendre",
+				"text": ["Hehe at least you never have a bus to catch anymore!"],
+				"preview": "Done with the buses",
 				"goto": "sortir"
 			}
 		},
 		"goto": ["sortir"]
 	},
 	"aime": {
-		"name": "Copine",
-		"text": ["C'est vrai! Plus besoin d'enfiler son pantalon… ni de prendre le bus."],
+		"name": "Girlfriend",
+		"text": ["True that! Our pants wearing day are over… so is taking the bus."],
 		"choices": {
 			"bof": {
-				"text": ["Ha ha ouais, le bus me manque pas du tout!"],
-				"preview": "Marre du bus",
+				"text": ["Ha ha yeah, not missing the bus!"],
+				"preview": "Tired of busses",
 				"goto": "sortir"
 			},
 			"trql": {
-				"text": ["Hi hi des pantalons? Je ne sais même plus de quoi ça a l'air."],
-				"preview": "Plus besoin de pantalon",
+				"text": ["Hi hi pants? What are those?"],
+				"preview": "Pants?",
 				"goto": "sortir"
 			}
 		},
 		"goto": ["sortir"]
 	},
 	"sortir": {
-		"name": "Copine",
-		"text": ["Tu viens chez moi après?"],
+		"name": "Girlfriend",
+		"text": ["Are you coming over later?"],
 		"choices": {
 			"risque": {
-				"text": ["Ton père était pas une personne à risque ?"],
-				"preview": "Mais ton père est à risque?",
+				"text": ["Isn't your dad in a high risk group?"],
+				"preview": "Dad at risk?",
 				"goto": "sortir1"
 			}
 		},
 		"goto": ["sortir1"]
 	},
 	"sortir1": {
-		"name": "Copine",
-		"text": ["Si si mais t’inquiète. Si tu restes à 2 mètres c’est bon."],
+		"name": "Girlfriend",
+		"text": ["Yeah but don't worry about it. As long as we keep our distance, everything should be fine."],
 		"choices": {
 			"bosser": {
-				"text": ["Mais il continue à bosser en plus, non?"],
-				"preview": "Il bosse encore?",
+				"text": ["But isn't he still working?"],
+				"preview": "Dad still working?",
 				"goto": "sortir2"
 			}
 		},
 		"goto": ["sortir2"]
 	},
 	"sortir2": {
-		"name": "Copine",
-		"text": ["Euh… ouais 😕 mais c’est calme là. Plus personne ne prend le taxi."],
+		"name": "Girlfriend",
+		"text": ["Eeh… Yeah 😕 but it's quiet nowadays. No one's taking taxis anymore."],
 		"choices": {
 			"chaud": {
-				"text": ["Du coup c’est chaud financièrement?"],
-				"preview": "C’est chaud financièrement?",
+				"text": ["Are you still holding up money-wise?"],
+				"preview": "No more money?",
 				"goto": "sortir3"
 			}
 		},
 		"goto": ["sortir3"]
 	},
 	"sortir3": {
-		"name": "Copine",
-		"text": ["Ouais on sait pas trop encore… Bon, tu viens? T’as promis de m’aider à étudier!"],
+		"name": "Girlfriend",
+		"text": ["Yeah, not really sure yet… Anyway, are you comming? You promised you'd help me study!"],
 		"choices": {
 			"oui": {
-				"text": ["Oui oui, à toute!"],
-				"preview": "Oui",
+				"text": ["Yeah yeah, see you soon!"],
+				"preview": "Yes",
 				"goto": "repOui"
 			},
 			"maybe": {
-				"text": ["Je ne sais pas. T’es sûre que c’est ok pour tes parents?"],
-				"preview": "J'hésite",
+				"text": ["I don't know. Are you sure your parents are ok with it?"],
+				"preview": "I don't know",
 				"goto": "repMaybe"
 			},
 			"non": {
-				"text": ["Mmm je ferais peut-être mieux de rester à la maison."],
-				"preview": "Non",
+				"text": ["Hmmm I think it's best that I stay home."],
+				"preview": "No",
 				"goto": "repNon"
 			}
 		},
 		"goto": ["repOui", "repMaybe", "repNon"]
 	},
 	"repOui": {
-		"name": "Copine",
-		"text": ["Cool! À tout! 😘"],
+		"name": "Girlfriend",
+		"text": ["Cool! See you soon! 😘"],
 		"choices":{},
 		"goto": [],
 		"objective": {
@@ -313,24 +313,24 @@
 		}
 	},
 	"repMaybe": {
-		"name": "Copine",
-		"text": ["Mais oui, c’est bon! Sinon tu vas devoir m’expliquer en ligne et c’est plus compliqué."],
+		"name": "Girlfriend",
+		"text": ["Don't worry, it's fine! Otherwise you'll have to help me online which complicates things too much."],
 		"choices":{
 			"oui": {
-				"text": ["Bon, ok"],
+				"text": ["Well, ok"],
 				"preview": "Ok",
 				"goto": "repOui"
 			},
 			"non": {
-				"text": ["Non je ne préfère pas risquer. Désolé 😔"],
-				"preview": "Non désolé",
+				"text": ["No I'd rather not risk it. Sorry 😔"],
+				"preview": "No sorry",
 				"goto": "repNon"
 			}
 		},
 		"goto": ["repOui", "repNon"]
 	},
 	"repNon": {
-		"name": "Copine",
+		"name": "Girlfriend",
 		"text": ["Rhoo 💔"],
 		"choices":{},
 		"goto": [],

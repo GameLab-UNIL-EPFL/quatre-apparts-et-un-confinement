@@ -1,58 +1,58 @@
 {
     "copine": {
-		"name": "Copine",
-		"text": ["Hey, ça va?"],
+		"name": "Girlfriend",
+		"text": ["Hey, how's it going?"],
 		"choices": {
             "rep":
 			{
-				"text": ["Oui, et toi? Ton père va mieux?"],
-				"preview": "Ton père va mieux?",
+				"text": ["Good, how about you? How's your father doing?"],
+				"preview": "How's your father?",
 				"goto": "mieux"
             }
         },
 		"goto": ["mieux"]
 	},
 	"mieux": {
-		"name": "Copine",
-		"text": ["Mon père va beaucoup mieux, merci ! Mais il s'essouffle encore très vite 😟"],
+		"name": "Girlfriend",
+		"text": ["Ma dad's doing a lot better, thanks! But he's still constantly out of breath tho 😟"],
 		"choices": {
             "rep":
 			{
-				"text": ["Ah ouais, je vois."],
-				"preview": "Je vois.",
+				"text": ["Ah yeah I see."],
+				"preview": "I see.",
 				"goto": "toi"
             },
             "rep2":
 			{
-				"text": ["Purée… en tout cas c'est génial qu'il s'en soit sorti!"],
-				"preview": "Il s'en est sorti.",
+				"text": ["Darn… Anyway it's great that he got out of it!"],
+				"preview": "He got out of it.",
 				"goto": "toi"
 			}
         },
 		"goto": ["toi"]
     },
     "toi": {
-		"name": "Copine",
-		"text": ["Ça va prendre un moment avant qu’il s’en remette complètement…"],
+		"name": "Girlfriend",
+		"text": ["It's going to take a while for him to completely recover…"],
 		"choices": {
             "rep":
 			{
-				"text": ["C'est sûr."],
-				"preview": "C'est sûr.",
+				"text": ["For sure."],
+				"preview": "For sure.",
 				"goto": "merci"
             },
             "rep2":
 			{
-				"text": ["C'est violent."],
-				"preview": "C'est violent.",
+				"text": ["Ouch, sounds harsh."],
+				"preview": "Sounds harsh.",
 				"goto": "merci"
 			}
         },
 		"goto": ["merci"]
     },
     "merci": {
-		"name": "Copine",
-		"text": ["Merci d’avoir été là pour moi! Je sais pas comment j’aurais fait sans toi ❤️️"],
+		"name": "Girlfriend",
+		"text": ["Thanks for being there for me! I don't know what I would have done without you ❤️️"],
 		"choices": {
             "rep":
 			{
@@ -70,7 +70,7 @@
 		"goto": ["keur"]
 	},
 	"keur": {
-		"name": "Copine",
+		"name": "Girlfriend",
 		"text": ["💗"],
 		"choices": {
         },

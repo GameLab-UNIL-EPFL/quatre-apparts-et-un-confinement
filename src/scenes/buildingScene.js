@@ -385,9 +385,9 @@ export class BuildingScene extends Phaser.Scene {
 
         //Update the player's language
         const changeLanguage = () => {
-            console.log('Language = ' + player.language);
             this.clickSound.play();
             player.toggleLanguage();
+            console.log('New language set = ' + player.language);
 
             //Update language text
             this.sprites['language_text'].text = player.languageToText();
