@@ -2,9 +2,9 @@
     "calendrier": {
       "name": "Suzanne",
       "text": [
-          "Toujours rien de prévu.",
-          "On dirait bien que je vais fêter Pâques toute seule…",
-          "Ou peut-être en ligne sur Zoom."
+          "I still have nothing planned.",
+          "Looks like I'm going to celebrate Easter alone this year…",
+          "Or maybe even online via video-chat."
       ],
       "choices": [],
       "goto": []
@@ -12,10 +12,10 @@
     "livre1": {
         "name": "La Covédie humaine - Honoré de Balzac",
         "text": [
-            "« Ces débris jetaient dans le tableau des effets d'une poésie ravissante,",
-            "et des idées rêveuses dans l'âme du spectateur.",
-            "Un poète serait resté là plongé dans une longue mélancolie,",
-            "en admirant ce désordre plein d'harmonies, cette destruction qui n'était pas sans grâce. »"
+            "« These debris threw a ravishing poetic effect on the canvas,",
+            "and dreamy ideas on the spectator's soul.",
+            "A poet would have remained here deep in a long melancholy,",
+            "admiring chaos filled with harmony, this destruction that was not without grace. »"
         ],
         "choices": [],
         "goto": []
@@ -23,10 +23,10 @@
     "livre2": {
         "name": "Les Misérables - Victor Hugo",
         "text": [
-            "« Rien n'est stupide comme vaincre; la vraie gloire est convaincre.",
-            "La vie, le malheur, l'isolement, l'abandon, la pauvreté",
-            "sont des champs de bataille qui ont leurs héros;",
-            "héros obscurs plus grands parfois que les héros illustres. »"
+            "« Noble and mysterious triumphs which no eye beholds,",
+            "which are requited with no renown, which are saluted with no trumpet blast.",
+            "Life, misfortune, isolation, abandonment, poverty, are the fields of battle which have their heroes;",
+            "obscure heroes, who are, sometimes, grander than the heroes who win renown. »"
         ],
         "choices": [],
         "goto": []
@@ -34,24 +34,24 @@
     "livre3": {
         "name": "Les Métamorphoses - Covide",
         "text": [
-            "« Je vous dirai que, dans l'univers entier, il n'est rien qui dure.",
-            "Tout s'écoule, et les êtres ne revêtent qu'une forme fugitive. »"
+            "« I would tell you that, in the entire universe, nothing lasts.",
+            "Everything crumbles, and beings only take on a fleeting form. »"
         ],
         "choices": [],
         "goto": []
     },
     "radio": {
         "name": "Radio",
-        "text": ["Que faire?"],
+        "text": ["What should I do?"],
         "choices": [
             {
-                "text": ["Écouter de la musique."],
-                "preview": "Musique",
+                "text": ["Listen to music"],
+                "preview": "Music",
                 "goto": "bleiben"
             },
             {
-                "text": ["Écouter les nouvelles."],
-                "preview": "Nouvelles",
+                "text": ["Listen to the news"],
+                "preview": "News",
                 "goto": "news"
             }
         ],
@@ -60,7 +60,7 @@
     "news": {
         "name": "Radio",
         "text": [
-            "🔈 27 avril - Réouverture des salons de coiffure,", "des magasins de bricolage et des jardineries."
+            "🔈 27th april - Reopening of hair salons,", "hardware and gardining stores."
         ],
         "choices": [],
         "goto": ["hint"],
@@ -70,7 +70,7 @@
     },
     "bleiben": {
         "name": "Radio",
-        "text": ["🎶 Radio Jazz spécial confinement 🎶"],
+        "text": ["🎶 Jazz Radio, confinement edition 🎶"],
         "choices": [],
         "goto": [],
         "objective": {
@@ -80,24 +80,24 @@
     "hint": {
 		"name": "Suzanne",
 		"text": [
-			"Ah tiens, je me demande si Gertrude a entendu les nouvelles.",
-            "Elle attend ça depuis longtemps!",
-            "Et il faudrait que j'appelle ma fille pour voir si elle m'a commandé à manger."
+			"Ah, I wonder if Gertrude heard the news.",
+            "She's been waiting for that for quite some time now!",
+            "And I should call my daughter to see if she ordered me some food."
 		],
 		"choices": [],
 		"goto": []
 	},
     "telephone": {
         "name": "Suzanne",
-        "text": ["Bon, qui est-ce que je pourrais appeler?"],
+        "text": ["Hmmm, who could I call?"],
         "choices":[
             {
-                "text": ["Françoise (amie)"],
+                "text": ["Françoise (friend)"],
                 "preview": "Françoise",
                 "goto": "francoise"
             },
             {
-                "text": ["Sophie (fille)"],
+                "text": ["Sophie (daughter)"],
                 "preview": "Sophie",
                 "goto": "sophie"
             },
@@ -111,21 +111,21 @@
     },
     "francoise": {
         "name": "Françoise",
-        "text": ["Allo? Ah, salut Suzanne! Comment vas-tu?"],
+        "text": ["Hello? A, hi Suzanne! How are you?"],
         "choices": [
             {
-                "text": ["Toujours pareil."],
-                "preview": "Toujours pareil",
+                "text": ["Still the same."],
+                "preview": "Still the sam",
                 "goto": "cava"
             },
             {
-                "text": ["Rien de nouveau."],
-                "preview": "Rien de nouveau",
+                "text": ["Nothing new."],
+                "preview": "Nothing new",
                 "goto": "ennuie"
             },
             {
-                "text": ["T’as écouté les nouvelles?"],
-                "preview": "T’as écouté les nouvelles?",
+                "text": ["Have you heard the news?"],
+                "preview": "Have you heard the news?",
                 "goto": "nouvelles"
             }
         ],
@@ -133,21 +133,21 @@
     },
     "cava": {
         "name": "Françoise",
-        "text": ["Tu fais quoi pour t’occuper ces temps?"],
+        "text": ["What have you been doing to pass the time lately"],
         "choices": [
             {
-                "text": ["Je lis."],
-                "preview": "Je lis",
+                "text": ["Reading mostly."],
+                "preview": "Reading",
                 "goto": "lire"
             },
             {
-                "text": ["J’écoute la radio."],
-                "preview": "J’écoute la radio",
+                "text": ["I've been listening to the radio."],
+                "preview": "I listen to the radio",
                 "goto": "nouvelles"
             },
             {
-                "text": ["Je passe des coups de fil."],
-                "preview": "Je passe des appels",
+                "text": ["I've been makin a lot of phone calls."],
+                "preview": "I call people",
                 "goto": "appel"
             }
         ],
@@ -155,21 +155,21 @@
     },
     "lire": {
         "name": "Françoise",
-        "text": ["Qu’est-ce que tu lis?"],
+        "text": ["What are you reading?"],
         "choices":[
             {
-                "text": ["La Comédie Humaine de Balzac"],
-                "preview": "La Comédie Humaine de Balzac",
+                "text": ["La Comédie Humaine by Balzac"],
+                "preview": "La Comédie Humaine, Balzac",
                 "goto": "oui"
             },
             {
-                "text": ["Les Misérables de Hugo"],
-                "preview": "Les Misérables de Hugo",
+                "text": ["Les Misérables by Victor Hugo"],
+                "preview": "Les Misérables, Hugo",
                 "goto": "oui"
             },
             {
-                "text": ["Les Métamorphose d'Ovide"],
-                "preview": "Les Métamorphose d'Ovide",
+                "text": ["Les Métamorphose by Ovide"],
+                "preview": "Les Métamorphose, Ovide",
                 "goto": "oui"
             }
         ],
@@ -177,11 +177,11 @@
     },
     "appel": {
         "name": "Françoise",
-        "text": ["Hahaha, je devrais faire pareil."],
+        "text": ["Hahaha, I should be doing the same."],
         "choices":[
             {
-                "text": ["Oui!"],
-                "preview": "Oui",
+                "text": ["Yes!"],
+                "preview": "Yes",
                 "goto": "oui"
             }
         ],
@@ -190,19 +190,19 @@
     "ennuie": {
         "name": "Françoise",
         "text": [
-            "De même. J'ai fini de relire tous mes livres!",
-            "Je m'ennuie tellement que je commence à parler à mes plantes.",
-            "Heureusement que tu m'as appelée!"
+            "Likewise. I've been rereading all of my books!",
+            "I'm so bored that I've started talking to my plants.",
+            "Thankefully you called!"
         ],
         "choices":[
             {
-                "text": ["Ah oui je comprends complètement! Moi je discute avec mon chat Caramel."],
-                "preview": "Ah oui je comprends complètement! Moi je discute avec mon chat Caramel.",
+                "text": ["Ah yes, I completely understand! I've been chatting a lot with my cat, Caramel."],
+                "preview": "Ah yes, I completely understand! I chat with my cat, Caramel.",
                 "goto": "oui"
             },
             {
-                "text": ["Ah oui, j'ai besoin de nouveaux livres aussi."],
-                "preview": "Ah oui, j'ai besoin de nouveaux livres aussi.",
+                "text": ["Ah yes, I need some new books as well."],
+                "preview": "Ah yes, I need some new books as well.",
                 "goto": "oui"
             }
         ],
@@ -211,18 +211,18 @@
     "nouvelles": {
         "name": "Françoise",
         "text": [
-            "Ah oui, ils ouvrent enfin les magasins de jardinage.",
-            "J'avais besoin de fertilisant."
+            "Ah yes, they are finally reonping the gardening stores.",
+            "I really need some fertilizer."
         ],
         "choices": [
             {
-                "text": ["Et les salons de coiffures aussi!"],
-                "preview": "Et les salons de coiffures",
+                "text": ["And the hair salons too!"],
+                "preview": "And the hair salons too!",
                 "goto": "oui"
             },
             {
-                "text": ["T'habiteras bientôt dans la jungle avec toutes tes plantes!"],
-                "preview": "T'habiteras bientôt dans une jungle avec toutes ces plantes!",
+                "text": ["You'll soon be living in a jungle with all of those plants!"],
+                "preview": "You'll soon be living in a jungle with all of those plants!",
                 "goto": "pandemie"
             }
         ],
@@ -230,7 +230,7 @@
     },
     "pandemie": {
         "name": "Françoise",
-        "text": ["C'est ma solution pour amener l'extérieur à l'intérieur!"],
+        "text": ["I my solution tp bring the outdoors into my home!"],
         "choices": [
             {
                 "text": ["Oui oui"],
@@ -243,18 +243,18 @@
     "oui": {
         "name": "Françoise",
         "text": [
-            "Je suis bientôt à bout.",
-            "J’en peux plus de rester à la maison."
+            "I've honestly almost had it with all of this.",
+            "I can't stand staying at home all of the time."
         ],
         "choices":[
             {
-                "text": ["On peut aller se promener si tu en as envie"],
-                "preview": "On peut aller se promener.",
+                "text": ["We could always go on a walk if you want."],
+                "preview": "We could go walk.",
                 "goto": "malade"
             },
             {
-                "text": ["Souhaiterais-tu passer à la maison boire une tisane?"],
-                "preview": "Tu peux venir chez moi boire un thé.",
+                "text": ["Would you like to stop by my house for a cup of tea?"],
+                "preview": "Would you like to come have tea?",
                 "goto": "malade"
             }
         ],
@@ -262,16 +262,16 @@
     },
     "malade": {
         "name": "Françoise",
-        "text": ["Oui, ça me fera du bien!"],
+        "text": ["Yes, that would do me a great deal of good!"],
         "choices": [
             {
-                "text": "A toute à l'heure!",
-                "preview": "A toute à l'heure!",
+                "text": "See you later then!",
+                "preview": "See you !",
                 "goto": ""
             },
             {
-                "text": ["Oui, à moi aussi! À plus tard!"],
-                "preview": "Oui à moi aussi! A plus tard!",
+                "text": ["Yes me too! See you later!"],
+                "preview": "Yes me too! See you later!",
                 "goto": ""
             }
         ],
@@ -279,16 +279,16 @@
     },
     "sophie": {
         "name": "Sophie",
-        "text": ["Allo maman?"],
+        "text": ["Hello Mom?"],
         "choices": [
             {
-                "text": ["Hello!"],
-                "preview": "Hello!",
+                "text": ["Hi!"],
+                "preview": "Hi!",
                 "goto": "zoom"
             },
             {
-                "text": ["Salut Sophie!"],
-                "preview": "Salut Sophie!",
+                "text": ["Hi Sophie!"],
+                "preview": "Hi Sophie!",
                 "goto": "zoom"
             }
         ],
@@ -299,16 +299,16 @@
     },
     "zoom": {
         "name": "Sophie",
-        "text": ["Tu sais pas ce que Maxime a fait l'autre jour!"],
+        "text": ["You wouldn't believe what Max did the other day!"],
         "choices": [
             {
-                "text": ["Je crains le pire..."],
-                "preview": "Je crains le pire...",
+                "text": ["That doesn't sound good..."],
+                "preview": "That sound's bad",
                 "goto": "conference"
             },
             {
-                "text": ["Qu'est-ce qu'il a encore fait?"],
-                "preview": "Qu'est-ce qu'il a encore fait?",
+                "text": ["Oh dear, what has he done this time?"],
+                "preview": "What has he done this time?",
                 "goto": "conference"
             }
         ],
@@ -317,22 +317,22 @@
     "conference": {
         "name": "Sophie",
         "text": [
-            "Il est entré tout nu dans le bureau de son père, alors qu'il était en pleine conférence Zoom!"
+            "He came into his fathers office completely naked, while his father was in the middle of a conference call!"
         ],
         "choices": [
             {
-                "text": ["Il est incroyable cet enfant!"],
-                "preview": "Il est incroyable cet enfant!",
+                "text": ["Oh, that child is unbelievable!"],
+                "preview": "He's unbelievable!",
                 "goto": "manque"
             },
             {
-                "text": ["Ça ne m'étonne pas de lui!"],
-                "preview": "Ça ne m'étonne pas de lui!",
+                "text": ["That doesn't suprise me coming from him!"],
+                "preview": "Doesn't surprise me!",
                 "goto": "manque"
             },
             {
-                "text": ["Oh non!"],
-                "preview": "Oh non!",
+                "text": ["Oh no!"],
+                "preview": "Oh no!",
                 "goto": "manque"
             }
         ],
@@ -340,14 +340,14 @@
     },
     "manque": {
         "name": "Sophie",
-        "text": ["Ils ne savent plus quoi inventer...",
-            "Ils arrêtent pas de me demander quand ils pourront te revoir.",
-            "Tu leur manques beaucoup."
+        "text": ["They don't know what to make up anymore...",
+            "They can't stop asking when they'll be able to see you again.",
+            "They miss you a lot."
         ],
         "choices": [
             {
-                "text": ["Ils me manquent aussi. Fais-leur plein de bisous de ma part!"],
-                "preview": "Ils me manquent aussi. Fais-leur plein de bisous de ma part!",
+                "text": ["I miss them too. Let them know I said hi!"],
+                "preview": "I miss them too. Let them know I said hi!",
                 "goto": "bisous"
             }
         ],
