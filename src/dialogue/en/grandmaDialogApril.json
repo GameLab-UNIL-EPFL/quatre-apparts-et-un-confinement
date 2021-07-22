@@ -12,7 +12,7 @@
     "livre1": {
         "name": "La Covédie humaine - Honoré de Balzac",
         "text": [
-            "« These debris threw a ravishing poetic effect on the canvas,",
+            "« These debris threw a ravishing poetic effect on the canvas,",
             "and dreamy ideas on the spectator's soul.",
             "A poet would have remained here deep in a long melancholy,",
             "admiring chaos filled with harmony, this destruction that was not without grace. »"
@@ -111,7 +111,7 @@
     },
     "francoise": {
         "name": "Françoise",
-        "text": ["Hello? A, hi Suzanne! How are you?"],
+        "text": ["Hello? Ah, hi Suzanne! How are you?"],
         "choices": [
             {
                 "text": ["Still the same."],
@@ -364,8 +364,8 @@
         ],
         "choices": [
             {
-                "text": ["D'accord, je vais demander au voisin alors."],
-                "preview": "D'accord, je vais demander au voisin alors.",
+                "text": ["OK, I'll go ask the neighbor then."],
+                "preview": "OK, I'll go ask the neighbor then.",
                 "goto": "fin"
             }
         ],
@@ -374,12 +374,12 @@
     "fin": {
         "name": "Sophie",
         "text": [
-            "Super! Bon, faut que je te laisse, j'entends plus les loulous.",
-            "Je pense qu'ils sont en train de faire des bêtises."],
+            "Great! Well, I have to go, the little ones are being a bit TOO quiet.",
+            "I think that they're up to something."],
         "choices": [
             {
-                "text": ["Ok, bisous à toute la famille!"],
-                "preview": "Ok, bisous à toute la famille!",
+                "text": ["Ok, say hi to the whole family for me!"],
+                "preview": "Ok, say hi to the whole family for me!",
                 "goto": ""
             }
         ],
@@ -387,11 +387,11 @@
     },
     "gertrude": {
         "name": "Gertrude",
-        "text": ["Allo?"],
+        "text": ["Hello?"],
         "choices": [
             {
-                "text": ["Hello Gertrude! Comment vas-tu?"],
-                "preview": "Hello Gertrude! Comment vas-tu?",
+                "text": ["Hey Gertrude! How are you?"],
+                "preview": "Hey Gertrude! How are you?",
                 "goto": "coiffeur"
             }
         ],
@@ -400,22 +400,22 @@
     "coiffeur": {
         "name": "Gertrude",
         "text": [
-            "Oui, t'as vu que les coiffeurs allaient rouvrir le 27 avril?"
+            "Yes, did you hear that the hairdressors are going to reopen on the 27th of April?"
         ],
         "choices": [
             {
-                "text": ["T'en as déjà marre de tes racines blanches?"],
-                "preview": "T'en as déjà marre de tes racines blanches?",
+                "text": ["Already sick of your grey roots?"],
+                "preview": "Already sick of your grey roots?",
                 "goto": "racine"
             },
             {
-                "text": ["Oui j'ai vu, mais j'aime bien avoir les cheveux plus longs finalement."],
-                "preview": "Oui j'ai vu, mais j'aime bien avoir les cheveux plus longs finalement.",
+                "text": ["Yes I heard, but I actually enjoy having longer hair in the end."],
+                "preview": "Yes I heard, but I actually enjoy having longer hair in the end.",
                 "goto": "long"
             },
             {
-                "text": ["Enfin! Je n'en peux plus de ma coupe déformée!"],
-                "preview": "Enfin! Je n'en peux plus de ma coupe déformée!",
+                "text": ["Finally! I can't stand my deformed hair-cut!"],
+                "preview": "Finally! I can't stand my deformed hair-cut!",
                 "goto": "enfin"
             }
         ],
@@ -424,17 +424,17 @@
     "racine": {
         "name": "Gertrude",
         "text": [
-            "Ah! J'aurai bientôt la même coupe que toi!"
+            "Ah! I'll soon have the same hair-cut as you!"
         ],
         "choices": [
             {
-                "text": ["Moi au moins j'assume, ma chère!"],
-                "preview": "Moi au moins j'assume!",
+                "text": ["I at least own up to mine my dear!"],
+                "preview": "I at least own it!",
                 "goto": "coupe"
             },
             {
-                "text": ["Je suis sûr que ça t'irait à merveille, en plus!"],
-                "preview": "Je suis sûr que ça t'irait à merveille, en plus!",
+                "text": ["I'm sure that it will look marvellous on you!"],
+                "preview": "I'm sure that it will look marvellous on you!",
                 "goto": "coupe"
             }
         ],
@@ -443,17 +443,17 @@
     "long": {
         "name": "Gertrude",
         "text": [
-            "Moi, je n'en peux plus! Il faut vraiment que j'y retourne!"
+            "I, personally, can't stand it! I really need to go back!"
         ],
         "choices": [
             {
-                "text": ["N'oublie pas de prendre un masque, c'est obligatoire."],
-                "preview": "N'oublie pas de prendre un masque, c'est obligatoire.",
+                "text": ["Don't forget to bring a face-mask, it's mandatory."],
+                "preview": "Don't forget to bring a face-mask, it's mandatory.",
                 "goto": "coupe"
             },
             {
-                "text": ["N'oublie pas de tousser dans ton coude, hein!"],
-                "preview": "N'oublie pas de tousser dans ton coude, hein!",
+                "text": ["Don't forget to cough in your elbow!"],
+                "preview": "Don't forget to cough in your elbow!",
                 "goto": "coupe"
             }
         ],
@@ -462,17 +462,17 @@
     "enfin": {
         "name": "Gertrude",
         "text": [
-            "Haha, tu m'enverras une photo!"
+            "Haha, don't forget to send me a pic!"
         ],
         "choices": [
             {
-                "text": ["Dans tes rêves!"],
-                "preview": "Dans tes rêves!",
+                "text": ["In your dreams!"],
+                "preview": "In your dreams!",
                 "goto": "coupe"
             },
             {
-                "text": ["Jamais!"],
-                "preview": "Jamais!",
+                "text": ["Never!"],
+                "preview": "Never!",
                 "goto": "coupe"
             }
         ],
@@ -481,17 +481,17 @@
     "coupe": {
         "name": "Gertrude",
         "text": [
-            "Tu vas y aller du coup?"
+            "I'm guessing that you're going on your own?"
         ],
         "choices": [
             {
-                "text": ["Oui, j'ai déplacé mon rendez-vous annulé."],
-                "preview": "Oui, j'ai déplacé mon rendez-vous annulé.",
+                "text": ["Yes, I rescheduled my previous appointment."],
+                "preview": "Yes, I rescheduled my previous appointment.",
                 "goto": "byeYes"
             },
             {
-                "text": ["Non, c'est encore trop risqué."],
-                "preview": "Non, c'est encore trop risqué.",
+                "text": ["No, it's still too risky."],
+                "preview": "No, it's still too risky.",
                 "goto": "byeNo"
             }
         ],
@@ -500,7 +500,7 @@
     "byeYes": {
         "name": "Gertrude",
         "text": [
-            "Ok, prends soin de toi! Je dois y aller! A bientôt!"
+            "Ok, take care of yourself! I have to go! See you soon!"
         ],
         "choices": [],
         "goto": [],
@@ -511,7 +511,7 @@
     "byeNo": {
         "name": "Gertrude",
         "text": [
-            "Ok, prends soin de toi! Je dois y aller! A bientôt!"
+            "Ok, take care of yourself! I have to go! See you soon!"
         ],
         "choices": [],
         "goto": [],
