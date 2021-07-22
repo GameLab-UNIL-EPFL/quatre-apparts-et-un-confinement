@@ -356,11 +356,11 @@
     "bisous": {
         "name": "Sophie",
         "text": [
-            "Oui, et on peut refaire un Zoom bientôt!",
-            "Sinon, j'arrive pas à te commander de la nourriture cette semaine.",
-            "Le temps d'attente pour la livraison est trop long.",
-            "Est-ce que t'arriverais à demander à quelqu'un? Un voisin peut-être?",
-            "Je veux surtout pas que tu ailles faire les courses toi-même!"
+            "Yeas, and we can do another video call soon!",
+            "On an other note, I don't think that I'll be able to order your groceries this week.",
+            "The delivery waiting line is just too long.",
+            "Do you think you can ask someone to go grocery shooping for you? Maybe a neighbour or something?",
+            "I really don't want you grocery shopping yourself, it's too dangerous!"
         ],
         "choices": [
             {
