@@ -66,7 +66,7 @@
             },
             "rep2":
 			{
-				"text": ["I couldn't have come from us, we aren't sick."],
+				"text": ["It couldn't have come from us, we aren't sick."],
 				"preview": "We aren't sick.",
 				"goto": "malade"
             }
@@ -157,7 +157,7 @@
             },
             "rep2":
 			{
-				"text": ["Sorry, I didn't hear my phone wring."],
+				"text": ["Sorry, I didn't hear my phone ring."],
 				"preview": "Didn't hear",
 				"goto": "pere"
 			}
@@ -201,7 +201,7 @@
     "leMasque": {
 		"name": "Girlfriend",
         "text": [
-            "Well a mask doesn't allways protect us."
+            "Well a mask doesn't always protect us."
         ],
 		"choices": {
             "rep":

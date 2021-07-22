@@ -1,25 +1,25 @@
 {
     "texto": {
-        "name": "Copine",
-        "text": "Hello! Ca va? :)",
+        "name": "Girlfriend",
+        "text": "Hey! How are you? :)",
         "choices": [{
-                "text": "Bof, j'arrive pas à me concentrer là...",
+                "text": "Meh, I'm having trouble concentrating...",
                 "goto": "repBof"
             },
             {
-                "text": "Tranquille et toi?",
+                "text": "Nice, how about you?",
                 "goto": "repTrql"
             },
             {
-                "text": "Je suis encore en pyjama lol",
+                "text": "I'm still in my PJs lol",
                 "goto": "repPyjama"
             }
         ],
         "goto": ["repBof", "repTrql", "repPyjama"]
     },
     "repBof": {
-        "name": "Copine",
-        "text": "T'inquiète, moi non plus",
+        "name": "Girlfriend",
+        "text": "Don't worry, I can't either ^^\"",
         "choices": [],
         "goto": [".."]
     }

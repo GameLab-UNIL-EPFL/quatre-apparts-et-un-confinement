@@ -2,8 +2,8 @@
     "florence": {
 		"name": "Florence",
 		"text": [
-			"Aaaaaah, le silence!",
-			"Comme ça m'avait manqué."
+			"Aaaaaah, silence at last!",
+			"Oh how I missed it."
 		],
 		"choices": [],
 		"goto": []

@@ -62,13 +62,21 @@ export class Player {
      * Toggles the current language stored in the player
      */
     toggleLanguage() {
-        if(this.language === LANGUAGES.EN) {
+        switch(this.language) {
+        case LANGUAGES.EN:
             this.language = LANGUAGES.FR;
-        } else {
+            break;
+        case LANGUAGES.FR:
             this.language = LANGUAGES.EN;
+            break;
+        default:
+            break;
         }
     }
 
+    /**
+     * Converts a language into a readable form
+     */
     languageToText() {
         switch(this.language) {
         case LANGUAGES.EN:
