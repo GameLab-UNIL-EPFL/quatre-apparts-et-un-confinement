@@ -3,7 +3,7 @@
 		"name": "",
 		"text": [
             "I am Legend (2007)",
-            "Pas besoin qu'on me rappelle ma solitude."
+            "I don't need to be reminded I am lonely."
 		],
 		"choices": [],
 		"goto": []
@@ -12,7 +12,7 @@
 		"name": "",
         "text": [
             "The Mask (1994)",
-            "Du bon Jim Carrey, ça!"
+            "One of the good Jim Carrey movies!"
 		],
         "choices": [],
 		"goto": []
@@ -20,23 +20,23 @@
 	"hint": {
 		"name": "Patrick",
 		"text": [
-			"Plus de boulot, plus de sorties et plus rien à la télé...",
-			"Je m'ennuie... Peut-être que je pourrais appeler Nathan."
+			"No more work, no more going out, and nothing special on TV...",
+			"I'm bored... It would be nice to call Nathan."
 		],
 		"choices": [],
 		"goto": []
 	},
     "telephone": {
 		"name": "Patrick",
-		"text": ["Qui pourrais-je bien contacter?"],
+		"text": ["Who should I call?"],
 		"choices": [
 			{
-				"text": ["Nathan (ami)"],
+				"text": ["Nathan (friend)"],
 				"preview": "Nathan",
 				"goto": "nathan"
             },
             {
-				"text": ["Sandrine (amie)"],
+				"text": ["Sandrine (friend)"],
 				"preview": "Sandrine",
 				"goto": "sandrine"
             },
@@ -50,16 +50,16 @@
     },
     "nathan": {
 		"name": "Nathan",
-		"text": ["Salut! Comment vas-tu?"],
+		"text": ["Hello! How are you?"],
 		"choices": [
 			{
-				"text": ["Bien! Je suis en vacances forcées."],
-				"preview": "Bien!",
+				"text": ["I'm fine! I'm on forced holidays."],
+				"preview": "Fine!",
 				"goto": "bien"
             },
 			{
-				"text": ["Ben je me sens un peu seul."],
-				"preview": "Je me sens seul",
+				"text": ["Well, I'm feeling lonely."],
+				"preview": "I'm feeling lonely",
 				"goto": "seul"
 			}
 		],
@@ -67,16 +67,16 @@
 	},
 	"bien": {
 		"name": "Nathan",
-		"text": ["Ouais, t'as trop de la chance!"],
+		"text": ["Nice, you're the lucky one!"],
 		"choices": [
 			{
-				"text": ["Ouais ouais, enfin… c'est des vacances à la maison."],
-				"preview": "vacances à la maison...",
+				"text": ["Hmmmm OK, but... these holidays at home."],
+				"preview": "holidays at home...",
 				"goto": "couple"
             },
 			{
-				"text": ["Ouais, enfin… c'est des vacances non payées…"],
-				"preview": "vacances non payées...",
+				"text": ["Hmmmm OK, but... these are unpaid holidays."],
+				"preview": "unpaid holidays...",
 				"goto": "couple"
 			}
 		],
@@ -84,16 +84,16 @@
 	},
 	"seul": {
 		"name": "Nathan",
-		"text": ["Dis pas ça... Tu ne sais pas comme j'aimerais être à ta place!"],
+		"text": ["Don't say that... You cannot guess how much I want to be in your shoes!"],
 		"choices": [
 			{
-				"text": ["Comment ça? Je ne vois plus personne!"],
-				"preview": "Comment ça?",
+				"text": ["How come? I don't meet anybody!"],
+				"preview": "How come?",
 				"goto": "personne"
             },
 			{
-				"text": ["Quoi? Ça ne se passe pas bien avec Élise?"],
-				"preview": "Quoi?",
+				"text": ["What? Things ain't well with Élise?"],
+				"preview": "What?",
 				"goto": "elise"
 			}
 		],
@@ -101,16 +101,16 @@
 	},
 	"personne": {
 		"name": "Nathan",
-		"text": ["Je dis juste que t'as de la chance de ne pas être coincé", "avec la même personne tous les jours."],
+		"text": ["I'm just saying that you're lucky not to be stuck", "with the same person everyday."],
 		"choices": [
 			{
-				"text": ["C'est le pire moment pour être célibataire! Je préférerais être confiné avec quelqu'un."],
-				"preview": "C'est le pire",
+				"text": ["This it the worst time to be a bachelor! I'd prefer being with someone during the lockdown."],
+				"preview": "This is the worst",
 				"goto": "elise"
 			},
 			{
-				"text": ["On veut toujours ce qu'on a pas hein?"],
-				"preview": "On veut toujours ce qu'on a pas hein?",
+				"text": ["We always want what we don't have, do we?"],
+				"preview": "We always want what we don't have?",
 				"goto": "elise"
 			}
 		],
@@ -119,14 +119,14 @@
 	"couple": {
 		"name": "Nathan",
         "text": [
-            "Moi, je continue à travailler depuis la maison et Élise aussi…",
-            "Donc autant te dire que c'est loin d'être des vacances.",
-            "Il y a parfois des moments tendus entre nous."
+            "I keep working. From Home. And Élise too...",
+            "So... let's face it, it's far from being holidays.",
+            "Sometimes, there is a tense atmosphere between us."
         ],
 		"choices": [
 			{
-				"text": ["Quoi? Ça ne se passe pas bien avec Élise?"],
-				"preview": "Quoi?",
+				"text": ["Huh? Things are not going well with Élise?"],
+				"preview": "What?",
 				"goto": "elise"
 			}
 		],
@@ -135,19 +135,19 @@
 	"elise": {
 		"name": "Nathan",
 		"text": [
-			"Écoute, c'est pas facile.",
-			"On est presque 24h sur 24 ensemble dans le même petit appart.",
-			"Au bout d'un moment, on se prend la tête pour un rien."
+			"Listen. It's not easy.",
+			"We are more or less 24 hours a day stuck together in this tiny flat.",
+			"After a while, After a while, we argue over nothing."
 		],
 		"choices": [
 			{
-				"text": ["Oh non!"],
-				"preview": "Oh non!",
+				"text": ["Oh no!"],
+				"preview": "Oh no!",
 				"goto": "conseil"
             },
 			{
-				"text": ["Ça pourrait être pire! On échange si tu veux."],
-				"preview": "Ça pourrait être pire!",
+				"text": ["It could be worse. We can switch if you want."],
+				"preview": "It could be worse!",
 				"goto": "conseil"
 			}
 		],
@@ -156,18 +156,18 @@
 	"conseil": {
 		"name": "Nathan",
 		"text": [
-			"Je ne sais vraiment pas quoi faire.",
-			"Si on ne trouve pas une solution, on ne va pas tenir jusqu'au déconfinement."
+			"I really don't know what to do.",
+			"If we don't find a solution, I'll be single vefore the end of the lockdown.."
 		],
 		"choices": [
 			{
-				"text": ["Je pense que tu dois juste être plus attentionné. Concentre-toi là-dessus."],
-				"preview": "ça passera",
+				"text": ["I think you need to care more about her. You should think about it."],
+				"preview": "It will pass",
 				"goto": "finBon"
             },
 			{
-				"text": ["Attends un peu, ça passera tout seul, tout le monde est un peu nerveux en ce moment."],
-				"preview": "Prendre du temps pour vous.",
+				"text": ["Wait and it'll pass. Everybody's a bit tense nowadays."],
+				"preview": "Wait and it'll pass",
 				"goto": "finMauvais"
 			}
 		],
@@ -175,11 +175,11 @@
 	},
 	"finMauvais": {
 		"name": "Nathan",
-		"text": ["Ah merci! Je vais suivre ton conseil alors! J'y vais, salut!"],
+		"text": ["Ok fine! I'll follow your advice then. I need to go, bye!"],
 		"choices": [
 			{
-				"text": ["Ouais! Tu me tiens au courant! A bientôt!"],
-				"preview": "Ouais!",
+				"text": ["Ok, just keep me informed. Talk to you soon!"],
+				"preview": "Ok!",
 				"goto": ""
 			}
 		],
@@ -190,11 +190,11 @@
 	},
 	"finBon": {
 		"name": "Nathan",
-		"text": ["Ah merci! Je vais suivre ton conseil alors! J'y vais, salut!"],
+		"text": ["Oh thank you! I'll follow your advice then. I need to go, bye!"],
 		"choices": [
 			{
-				"text": ["Ouais! Tu me tiens au courant! A bientôt!"],
-				"preview": "Ouais!",
+				"text": ["Ok, just keep me informer. Talk to you soon!"],
+				"preview": "Ok!",
 				"goto": ""
 			}
 		],
@@ -205,11 +205,11 @@
     },
     "sandrine": {
         "name": "Sandrine",
-		"text": ["Coucou, ça va? Ça fait longtemps!"],
+		"text": ["Hi, how are you? It's been a long time!"],
 		"choices": [
 			{
-				"text": ["Hello! Ouais, c'est clair! Tu deviens quoi?"],
-				"preview": "Hello!",
+				"text": ["Hi! You're right, it's been so long. What are you up to nowadays?"],
+				"preview": "Hi!",
 				"goto": "hello"
 			}
 		],
@@ -218,13 +218,13 @@
     "hello": {
         "name": "Sandrine",
 		"text": [
-			"Comment dire… pas grand-chose, là.",
-			"Ce n'est pas vraiment le meilleur moment pour être au chômage…"
+			"What can I say… not much.",
+			"This is not the right time to be unemployed."
 		],
 		"choices": [
 			{
-				"text": ["Je comprends… Ce n'est pas le meilleur moment pour être indépendant non plus…"],
-				"preview": "Je comprends...",
+				"text": ["I understand. This is not the right time to be independant either..."],
+				"preview": "I understand...",
 				"goto": "independant"
 			}
 		],
@@ -232,16 +232,16 @@
     },
     "independant": {
         "name": "Sandrine",
-		"text": ["Ah oui, juste! Tu bosses plus du tout?"],
+		"text": ["Yes, that's right. You don't have work anymore?"],
 		"choices": [
 			{
-				"text": ["Non, et je n'ai pas le droit au chômage moi…"],
-				"preview": "pas le droit au chômage",
+				"text": ["No, and I cannot claim unemployment benefit..."],
+				"preview": "No claim to compensation",
 				"goto": "aide"
             },
             {
-				"text": ["Non, vacances forcées mais non payées…"],
-				"preview": "vacances non payées...",
+				"text": ["No. Forced unpaid holidays..."],
+				"preview": "Unpaid holidays...",
 				"goto": "aide"
 			}
 		],
@@ -250,18 +250,18 @@
     "aide": {
         "name": "Sandrine",
 		"text": [
-			"Oh non! Je suis vraiment désolée.",
-			"N'hésite pas si t'as besoin d'aide avec quoi que ce soit!"
+			"Oh no! I am so sorry.",
+			"Let me know if you need help for anything!"
 		],
 		"choices": [
 			{
-				"text": ["Merci, c'est super sympa!"],
-				"preview": "Merci c'est sympa!",
+				"text": ["Thank you, this is very nice of you!"],
+				"preview": "That's very nice of you!",
 				"goto": "apero"
             },
             {
-				"text": ["Merci, je te tiens au courant alors!"],
-				"preview": "Merci je te redis!",
+				"text": ["Thank you, I'll let you know then!"],
+				"preview": "I'll let you know!",
 				"goto": "apero"
 			}
 		],
@@ -269,16 +269,16 @@
     },
     "apero": {
         "name": "Sandrine",
-		"text": ["Ok! Sinon, j'organise un Skypéro samedi avec les autres? T'es libre, j'imagine?"],
+		"text": ["Ok! Otherwise, I'll organise a Skype reunion with the others? You're available, I guess?"],
 		"choices": [
 			{
-				"text": ["Oui, compte sur moi!"],
-				"preview": "Oui!",
+				"text": ["Yes, you can count on me!"],
+				"preview": "Yes!",
 				"goto": "oui"
             },
             {
-				"text": ["Non, désolé, je ne suis pas trop fan des soirées en ligne comme ça."],
-				"preview": "Non, désolé",
+				"text": ["No, sorry. I am not fond of these online gatherings."],
+				"preview": "No, sorry",
 				"goto": "non"
 			}
 		],
@@ -286,23 +286,23 @@
     },
     "oui": {
         "name": "Sandrine",
-		"text": ["Cool! À samedi!"],
+		"text": ["Rad! See you on Saturday!"],
 		"choices": [],
 		"goto": []
     },
     "non": {
         "name": "Sandrine",
-		"text": ["Pas de soucis! On s'appelle alors. Salut!"],
+		"text": ["No worries! Let's talk another time. Bye!"],
 		"choices": [],
 		"goto": []
     },
     "paul": {
 		"name": "Paul",
-		"text": ["Allô?"],
+		"text": ["Hello!"],
 		"choices": [
 			{
-				"text": ["Allô Paul! Tu vas bien?"],
-				"preview": "Allo Paul! Tu vas bien?",
+				"text": ["Hello Paul! How do you do?"],
+				"preview": "Hello Paul! How do you do?",
 				"goto": "desole"
 			}
 		],
@@ -311,9 +311,9 @@
 	"desole": {
 		"name": "Paul",
 		"text": [
-			"Hello Patrick, désolé je n'ai pas beaucoup de temps en ce moment.",
-			"Je travaille sur un nouveau projet en lien avec le Covid.",
-			"Je t'en reparle une prochaine fois! Ciao."
+			"Hello Patrick. I am sorry but I don't have much time right now.",
+			"I am working on a new project. It's about the covid.",
+			"I'll tell you more about it another time! Ciao."
 		],
 		"choices": [],
 		"goto": []
