@@ -63,7 +63,7 @@ Inside Phaser [Scenes](https://photonstorm.github.io/phaser3-docs/Phaser.Scene.h
 
 ### Dialogue  
 All of the dialogue in our game is handled by our custom `DialogueController`. This uses the dialogue tree defined in a JSON file and converts it to displayable text.   
-See [src/dialogue/example.json](src/dialogue/example.json)
+See [src/dialogue/en/exampleDialog.json](src/dialogue/en/exampleDialog.json)
 
 ### Database
 If users agree to anonymously share their choices, they get saved in a SQLite database (see [server](server) folder).
